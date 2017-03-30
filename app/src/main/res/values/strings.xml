@@ -1,0 +1,93 @@
+<resources>
+    <string name="app_name">Chowder</string>
+
+    <!--strings的命名-->
+    <!--类型_{范围_}功能，范围可选。-->
+    <!--以下为几种常用的命名：-->
+    <!--页面标题，命名格式为：title_页面-->
+    <!--按钮文字，命名格式为：btn_按钮事件-->
+    <!--标签文字，命名格式为：label_标签文字-->
+    <!--选项卡文字，命名格式为：tab_选项卡文字-->
+    <!--消息框文字，命名格式为：toast_消息-->
+    <!--编辑框的提示文字，命名格式为：hint_提示信息-->
+    <!--图片的描述文字，命名格式为：desc_图片文字-->
+    <!--对话框的文字，命名格式为：dialog_文字-->
+    <!--menu的item文字，命名格式为：action_文字-->
+
+    <!--页面标题，命名格式为：title_页面-->
+
+    <!--按钮文字，命名格式为：btn_按钮事件-->
+    <!--标签文字，命名格式为：label_标签文字-->
+
+    <!--选项卡文字，命名格式为：tab_选项卡文字-->
+    <!--消息框文字，命名格式为：toast_消息-->
+    <string name="toast_exit">再按一次返回键回到桌面</string>
+
+    <!--编辑框的提示文字，命名格式为：hint_提示信息-->
+    <!--图片的描述文字，命名格式为：desc_图片文字-->
+    <!--对话框的文字，命名格式为：dialog_文字-->
+    <string name="dialog_exit">确定退出应用程序吗?</string>
+
+    <!--menu的item文字，命名格式为：action_文字-->
+    <string name="action_settings">Settings</string>
+
+    <string name="act_01">欢迎页</string>
+    <string name="act_01_des">采用animation编写，延时一秒钟后执行</string>
+    <string name="act_02">卫星式菜单栏</string>
+    <string name="act_02_desc">支持九个方向，采用ObjectAnimator编写</string>
+    <string name="act_03">RecyclerView的运用</string>
+    <string name="act_03_desc">待定</string>
+    <string name="act_04">的运用</string>
+    <string name="act_04_desc">待定</string>
+    <string name="act_05">SpringIndicator的运用</string>
+    <string name="act_05_desc">SpringIndicator的运用</string>
+    <string name="act_06">rxJava</string>
+    <string name="act_06_desc">rxJava</string>
+
+
+    <string name="left_top">left_top</string>
+    <string name="left_bottom">left_bottom</string>
+    <string name="right_top">right_top</string>
+    <string name="right_bottom">right_bottom</string>
+    <string name="center_top">center_top</string>
+    <string name="center_bottom">center_bottom</string>
+    <string name="center">center</string>
+    <string name="center_left">center_left</string>
+    <string name="center_right">center_right</string>
+
+
+    <string name="daodejing">道德经\n\n
+    第一章\n
+    道可道，非常道；名可名，非常名。\n
+    无名，天地之始；有名，万物之母。\n
+    故常无，欲以观其妙；常有，欲以观其徼。\n
+    此两者同出而异名。同谓之玄，玄之又玄，众妙之门。\n\n
+    第二章\n
+    天下皆知美之为美，斯恶已；皆知善之为善，斯不善已。\n
+    故有无相生，难易相成，长短相随，高下相倾，音声相和，前后相随。\n
+    是以圣人处无为之事,行不言之教，万物作焉而不辞。\n
+    生而不有，为而不恃，功成而不居。\n
+    夫唯弗居，是以不去。\n\n
+    第三章\n
+    不尚贤，使民不争；不贵难得之贷，使民不为盗；不见可欲，使民心不乱。\n
+    是以圣人之治，虚其心，实其腹，弱其志，强其骨；\n
+    常使民无知无欲，使夫智者不敢为也。\n
+    为无为，则无不治。\n\n
+    第四章\n
+    道冲而用之，或不盈，渊乎似万物之宗。\n
+    挫其锐，解其纷，和其光，同其尘。\n
+    湛兮，似若存。吾不知谁之子，象帝之先。\n\n
+    第五章\n
+    天地不仁，以万物为刍狗；圣人不仁，以百姓为刍狗。\n
+    天地之间，其犹橐龠乎？\n
+    虚而不屈，动而愈出。\n
+    多言数穷，不如守中。\n\n
+    第六章\n
+    谷神不死，是谓玄牝。\n
+    玄牝之门，是谓天地根。\n
+    绵绵若存，用之不勤。\n\n
+    第七章\n
+    </string>
+
+
+</resources>
