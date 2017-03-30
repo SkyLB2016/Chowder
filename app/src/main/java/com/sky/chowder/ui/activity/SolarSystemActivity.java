@@ -108,26 +108,21 @@ public class SolarSystemActivity extends BaseActivity implements Toolbar.OnMenuI
 
     private void testSP() {
         long time = System.currentTimeMillis();
-        for (int i = 0; i < 10000; i++) {
-            String text = (String) SPUtils.getInstance(SolarSystemActivity.this).get("testsp" + i, "test+" + i);
-//            LogUtils.i("text==" + text);
+        for (int i = 0; i < 10; i++) {
+//            SPUtilsIn.put(SolarSystemActivity.this,"testsp" + i, "test+" + i);
         }
         time=System.currentTimeMillis()-time;
-        LogUtils.i("time=="+time);
+        LogUtils.i("SPUtilsIn=="+time);
 
     }
 
     private void testSPIn() {
         long time = System.currentTimeMillis();
-        for (int i = 0; i < 10000; i++) {
-            SPUtils.getInstance(SolarSystemActivity.this).put("testsp" + i, "test+" + i);
-            if (i == 9999) {
-                showToast("9999");
-            }
-//            LogUtils.i("i==" + i);
+        for (int i = 0; i < 10; i++) {
+            SPUtils.getInstance().put("testsp" + i, "test+" + i);
         }
         time=System.currentTimeMillis()-time;
-        LogUtils.i("time=="+time);
+        LogUtils.i("SPUtils=="+time);
 
     }
 

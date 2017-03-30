@@ -117,11 +117,11 @@ public class BaseActivity extends AppCompatActivity implements IBase {
     }
 
     public <T extends Object> T getObject(String text, T a) {
-        return (T) SPUtils.getInstance(this).get(text, a);
+        return (T) SPUtils.getInstance().get(text, a);
     }
 
     public <T extends Object> void setObject(String text, T a) {
-        SPUtils.getInstance(this).put(text, a);
+        SPUtils.getInstance().put(text, a);
     }
 
     @Override

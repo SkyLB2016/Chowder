@@ -1,5 +1,6 @@
 package com.sky.utils;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -14,28 +15,32 @@ import java.util.Set;
  * SharedPreferences管理类
  */
 public class SPUtils {
-    public SPUtils(Context context) {
-        sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
-        editor = sp.edit();
-    }
-
-
     //保存在手机里面的文件名
     public static final String FILE_NAME = "USER_INFO";
+    private static Context context;
+
     public static SPUtils instance;
     public static SharedPreferences sp;
     public static SharedPreferences.Editor editor;
 
+    public static void init(Application context) {
+        SPUtils.context = context;
+    }
 
-    public static SPUtils getInstance(Context context) {
+    public static SPUtils getInstance() {
         if (instance == null) {
             synchronized (SPUtils.class) {
                 if (instance == null) {
-                    instance = new SPUtils(context);
+                    instance = new SPUtils();
                 }
             }
         }
         return instance;
+    }
+
+    public SPUtils() {
+        sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+        editor = sp.edit();
     }
 
     /**
@@ -125,9 +130,8 @@ public class SPUtils {
     /**
      * 清除所有数据
      *
-     * @param context context
      */
-    public void clear(Context context) {
+    public void clear() {
         editor.clear();
         editor.commit();
     }
@@ -143,10 +147,9 @@ public class SPUtils {
     }
 
     /**
-     * @param context context
      * @return 返回所有的键值对
      */
-    public Map<String, ?> getAll(Context context) {
+    public Map<String, ?> getAll() {
         return sp.getAll();
     }
 

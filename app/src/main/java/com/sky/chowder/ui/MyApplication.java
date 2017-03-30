@@ -5,6 +5,7 @@ import android.app.Application;
 import com.sky.chowder.BuildConfig;
 import com.sky.utils.ActivityLifecycle;
 import com.sky.utils.LogUtils;
+import com.sky.utils.SPUtils;
 import com.sky.utils.ToastUtils;
 
 import im.fir.sdk.FIR;
@@ -25,6 +26,7 @@ public class MyApplication extends Application {
         super.onCreate();
         //bughd
         FIR.init(this);
+        SPUtils.init(this);
         instance = this;
         LogUtils.isDebug = BuildConfig.DEBUG;
         // 初始化自定义Activity管理器
