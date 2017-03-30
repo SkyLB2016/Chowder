@@ -29,7 +29,7 @@ public class WelcomeActivity extends AppCompatActivity {
         view.setBackgroundResource(R.mipmap.guide01);
         setContentView(view);
         //SPUtils.put(WelcomeActivity.this, "isfirst", true);
-        flag = (Boolean) SPUtils.get(this, "isfirst", true);
+        flag = (Boolean) SPUtils.getInstance(this).get("isfirst", true);
         //加载动画
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.alpha);
         view.startAnimation(animation);

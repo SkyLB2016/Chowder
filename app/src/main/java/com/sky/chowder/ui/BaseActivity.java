@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
  * Created by 李彬 on 2017/3/3.
  */
 
-public  class BaseActivity extends AppCompatActivity implements IBase {
+public class BaseActivity extends AppCompatActivity implements IBase {
     protected <T extends View> T getView(int id) {
         return (T) findViewById(id);
     }
@@ -29,10 +29,12 @@ public  class BaseActivity extends AppCompatActivity implements IBase {
     public void showToast(String text) {
         ToastUtils.showShort(this, text);
     }//初始化toast提示
+
     public void setTitle() {
         BaseTitle title = new BaseTitle(this);
         title.setToolbar();
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +70,7 @@ public  class BaseActivity extends AppCompatActivity implements IBase {
     public void initData() {
 
     }
+
     @Override
     public String getUserName() {
         return getObject(Common.USERNAME, "");
@@ -114,16 +117,16 @@ public  class BaseActivity extends AppCompatActivity implements IBase {
     }
 
     public <T extends Object> T getObject(String text, T a) {
-        return (T) SPUtils.get(this, text, a);
+        return (T) SPUtils.getInstance(this).get(text, a);
     }
 
     public <T extends Object> void setObject(String text, T a) {
-        SPUtils.put(this, text, a);
+        SPUtils.getInstance(this).put(text, a);
     }
 
     @Override
     public void onTrimMemory(int level) {
         super.onTrimMemory(level);
-        showToast("level="+level);
+        showToast("level=" + level);
     }
 }

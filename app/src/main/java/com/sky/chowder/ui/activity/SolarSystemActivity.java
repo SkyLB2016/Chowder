@@ -15,6 +15,8 @@ import com.sky.chowder.R;
 import com.sky.chowder.common.Constants;
 import com.sky.chowder.ui.BaseActivity;
 import com.sky.chowder.ui.widget.SolarSystem;
+import com.sky.utils.LogUtils;
+import com.sky.utils.SPUtils;
 import com.sky.utils.ScreenUtils;
 
 import butterknife.BindView;
@@ -79,9 +81,11 @@ public class SolarSystemActivity extends BaseActivity implements Toolbar.OnMenuI
 //                JumpAct.jumpActivity(SolarSystemActivity.this, tag);
                 switch (tag) {
                     case "flow":
+                        testSP();
                         //JumpAct.jumpActivity(SolarSystemActivity.this, CarouselActivity.class);
                         break;
                     case "list":
+                        testSPIn();
 //                    JumpAct.jumpActivity(SolarSystemActivity.this, RefreshListActivity.class);
                         break;
                     case "viewpager":
@@ -101,6 +105,32 @@ public class SolarSystemActivity extends BaseActivity implements Toolbar.OnMenuI
         });
         solarSystem.toggleMenu(300);
     }
+
+    private void testSP() {
+        long time = System.currentTimeMillis();
+        for (int i = 0; i < 10000; i++) {
+            String text = (String) SPUtils.getInstance(SolarSystemActivity.this).get("testsp" + i, "test+" + i);
+//            LogUtils.i("text==" + text);
+        }
+        time=System.currentTimeMillis()-time;
+        LogUtils.i("time=="+time);
+
+    }
+
+    private void testSPIn() {
+        long time = System.currentTimeMillis();
+        for (int i = 0; i < 10000; i++) {
+            SPUtils.getInstance(SolarSystemActivity.this).put("testsp" + i, "test+" + i);
+            if (i == 9999) {
+                showToast("9999");
+            }
+//            LogUtils.i("i==" + i);
+        }
+        time=System.currentTimeMillis()-time;
+        LogUtils.i("time=="+time);
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_solar, menu);

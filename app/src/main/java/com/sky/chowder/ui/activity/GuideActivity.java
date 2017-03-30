@@ -39,7 +39,7 @@ public class GuideActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View arg0) {
-                        SPUtils.put(GuideActivity.this, "isfirst", false);
+                        SPUtils.getInstance(GuideActivity.this).put("isfirst", false);
                         startActivity(new Intent(GuideActivity.this,
                                 MainActivity.class));
                         overridePendingTransition(R.anim.in_from_right,

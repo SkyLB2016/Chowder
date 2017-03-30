@@ -63,8 +63,7 @@ public class ScreenUtils {
         view.buildDrawingCache();
         Bitmap bmp = view.getDrawingCache();
         int[] screen = getWH(activity);
-        Bitmap bp = null;
-        bp = Bitmap.createBitmap(bmp, 0, 0, screen[0], screen[1]);
+        Bitmap bp = Bitmap.createBitmap(bmp, 0, 0, screen[0], screen[1]);
         view.destroyDrawingCache();
         return bp;
     }
