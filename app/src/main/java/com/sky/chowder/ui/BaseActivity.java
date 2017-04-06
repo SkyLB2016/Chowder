@@ -11,6 +11,7 @@ import com.sky.api.IBase;
 import com.sky.chowder.common.Constants;
 import com.sky.chowder.ui.dialog.DialogManager;
 import com.sky.utils.NetworkJudgment;
+import com.sky.utils.RegexUtils;
 import com.sky.utils.SPUtils;
 import com.sky.utils.ToastUtils;
 import com.sky.utils.UIHandler;
@@ -40,6 +41,9 @@ public class BaseActivity extends AppCompatActivity implements IBase {
         super.onCreate(savedInstanceState);
         hasInternetConnected();//判断有无网络
         setHandler();
+        if (RegexUtils.isCarNum("130637199003031538")){
+            showToast("shen");
+        }
     }
 
     //handler部分

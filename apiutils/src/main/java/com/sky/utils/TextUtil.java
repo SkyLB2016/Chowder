@@ -7,14 +7,13 @@ import java.text.DecimalFormat;
 
 /**
  * Created by sky on 16/5/10 下午3:50.
- *
  */
 public class TextUtil {
     /**
      * 获取控件中的内容
      *
      * @param text 控件
-     * @return  控件中的内容
+     * @return 控件中的内容
      */
     public static String getText(TextView text) {
         return text.getText().toString().trim();
@@ -23,13 +22,21 @@ public class TextUtil {
     /**
      * 非空判断,同时提示
      *
-     * @param text 需要判断的文本
+     * @param text  需要判断的文本
      * @param toast 提示内容
      * @return 空为true
      */
     public static boolean notNull(String text, String toast) {
         if (TextUtils.isEmpty(text)) {
             ToastUtils.showShort(ActivityLifecycle.getInstance().getCurrentActivity(), toast + "不能为空");
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean notNull2(String text, String toast) {
+        if (TextUtils.isEmpty(text)) {
+            ToastUtils.showShort(ActivityLifecycle.getInstance().getCurrentActivity(), toast);
             return true;
         }
         return false;
@@ -59,7 +66,7 @@ public class TextUtil {
      * 清除HTML
      *
      * @param content 包含html字符串
-     * @return  纯字符串
+     * @return 纯字符串
      */
     public static String stripHtml(String content) {
         // <p>段落替换为换行

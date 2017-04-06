@@ -38,6 +38,6 @@ public class MyApplication extends Application {
     }
 
     public void showErroe(int code) {
-        ToastUtils.showError(getApplicationContext(), code);
+        ToastUtils.showShort(getApplicationContext(), code);
     }
 }

@@ -32,7 +32,7 @@ public class EditTextDel extends EditText {
     }
 
     private void init(Context context) {
-        image = context.getResources().getDrawable(R.drawable.ic_clear);
+        image = context.getResources().getDrawable(R.mipmap.ic_clear);
 
         addTextChangedListener(new TextWatcher() {
             @Override
