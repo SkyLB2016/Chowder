@@ -28,14 +28,6 @@ public class TextUtil {
      */
     public static boolean notNull(String text, String toast) {
         if (TextUtils.isEmpty(text)) {
-            ToastUtils.showShort(ActivityLifecycle.getInstance().getCurrentActivity(), toast + "不能为空");
-            return true;
-        }
-        return false;
-    }
-
-    public static boolean notNull2(String text, String toast) {
-        if (TextUtils.isEmpty(text)) {
             ToastUtils.showShort(ActivityLifecycle.getInstance().getCurrentActivity(), toast);
             return true;
         }

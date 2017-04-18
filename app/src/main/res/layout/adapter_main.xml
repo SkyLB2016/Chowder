@@ -35,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="calssname"
-                android:textSize="@dimen/medium"
+                android:textSize="@dimen/text_medium"
                 android:textStyle="bold" />
 
             <TextView
@@ -46,7 +46,7 @@
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center_vertical"
                 android:text="描述"
-                android:textSize="@dimen/micro" />
+                android:textSize="@dimen/text_micro" />
 
         </LinearLayout>
     </LinearLayout>

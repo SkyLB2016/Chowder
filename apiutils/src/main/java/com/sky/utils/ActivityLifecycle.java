@@ -11,7 +11,7 @@ import java.util.Stack;
  * activity管理类
  */
 public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks {
-    private  Stack<Activity> activityStack;
+    private Stack<Activity> activityStack;
     private Activity currentActivity;
     private static ActivityLifecycle instance;
 
@@ -72,24 +72,27 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
     }
 
     public void popAllActivity() {
-        while (true) {
-            if (!activityStack.isEmpty()) {
-                activityStack.lastElement().finish();
-                activityStack.remove(activityStack.lastElement());
-            } else return;
+        while (!activityStack.isEmpty()) {
+            activityStack.lastElement().finish();
+            activityStack.remove(activityStack.lastElement());
         }
     }
 
     public void backToAppointActivity(Class cls) {
-        while (true)
-            if (!activityStack.lastElement().getClass().equals(cls)) {
-                activityStack.lastElement().finish();
-                activityStack.remove(activityStack.lastElement());
-            } else return;
+        while (!activityStack.lastElement().getClass().equals(cls)) {
+            activityStack.lastElement().finish();
+            activityStack.remove(activityStack.lastElement());
+        }
+    }
+
+    public void keepCurrentActivity() {
+        while (activityStack.size() != 1) {
+            activityStack.firstElement().finish();
+            activityStack.remove(activityStack.firstElement());
+        }
     }
 
     /**
-     *
      * @return 当前activity的位置
      */
     public int getCurrent() {
@@ -97,8 +100,8 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
     }
 
     /**
-     * @param position  当前activity的位置
-     * @return  获取指定的activity
+     * @param position 当前activity的位置
+     * @return 获取指定的activity
      */
     public Class<? extends Activity> getAppointActivity(int position) {
         return activityStack.get(position).getClass();

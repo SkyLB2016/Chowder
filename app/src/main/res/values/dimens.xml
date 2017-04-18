@@ -20,12 +20,16 @@
 
 
     <!--字体-->
-    <dimen name="micro">12sp</dimen>
-    <dimen name="small">15sp</dimen>
-    <dimen name="medium">18sp</dimen>
-    <dimen name="large">22sp</dimen>
-    <dimen name="Xlarge">26sp</dimen>
-    <dimen name="XXlarge">32sp</dimen>
-    <dimen name="XXXlarge">38sp</dimen>
-    <dimen name="XXXXlarge">50sp</dimen>
+    <!--补充性内容-->
+    <dimen name="text_micro">12sp</dimen>
+    <!--次级正文-->
+    <dimen name="text_small">14sp</dimen>
+    <!--正文-->
+    <dimen name="text_medium">18sp</dimen>
+    <!--导航栏-->
+    <dimen name="text_large">22sp</dimen>
+    <dimen name="text_Xlarge">26sp</dimen>
+    <dimen name="text_XXlarge">32sp</dimen>
+    <dimen name="text_XXXlarge">38sp</dimen>
+    <dimen name="text_XXXXlarge">50sp</dimen>
 </resources>

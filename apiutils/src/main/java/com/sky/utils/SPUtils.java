@@ -39,6 +39,7 @@ public class SPUtils {
     }
 
     public SPUtils() {
+        if (context==null)throw new NullPointerException("SPUtils的context不能为null");
         sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
         editor = sp.edit();
     }
