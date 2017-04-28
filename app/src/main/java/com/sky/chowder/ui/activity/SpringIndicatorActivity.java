@@ -1,7 +1,5 @@
 package com.sky.chowder.ui.activity;
 
-import android.os.Bundle;
-
 import com.google.common.collect.Lists;
 import com.sky.chowder.R;
 import com.sky.chowder.ui.BaseActivity;
@@ -29,16 +27,11 @@ public class SpringIndicatorActivity extends BaseActivity {
     SpringIndicator indicator;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_indicator);
-        setTitle();
-        initView();
+    public int getLayoutResId() {
+        return R.layout.activity_indicator;
     }
-
     @Override
-    public void initView() {
-        super.initView();
+    public void initialize() {
         PagerModelManager manager = new PagerModelManager();
         manager.addCommonFragment(IndicatorFragment.class, getRes(), getList());
         ModelPagerAdapter adapter = new ModelPagerAdapter(getSupportFragmentManager(),manager);

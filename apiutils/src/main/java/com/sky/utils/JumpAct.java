@@ -27,6 +27,15 @@ public class JumpAct {
         jumpActivity(packageContext, new Intent(packageContext, cls));
     }
 
+    public static void jumpActivity(Context packageContext, Class<?> cls, String key,Serializable entity, int... flags) {
+        Intent intent = new Intent(packageContext, cls);
+        intent.putExtra(key,entity);
+        for (int flag : flags) {
+            intent.addFlags(flag);
+        }
+        jumpActivity(packageContext, intent);
+    }
+
     public static void jumpActivity(Context packageContext, Class<?> cls, String name, CharSequence value) {
         jumpActivity(packageContext, new Intent(packageContext, cls).putExtra(name, value));
     }
@@ -60,8 +69,8 @@ public class JumpAct {
         jumpActivity(packageContext, new Intent().setComponent(componentName));
     }
 
-    public static void jumpActivity(Context context,String packageName, String componentName) {
-        jumpActivity(context,new Intent().setClassName(packageName,componentName));
+    public static void jumpActivity(Context context, String packageName, String componentName) {
+        jumpActivity(context, new Intent().setClassName(packageName, componentName));
     }
 
     public static void jumpActivity(Context context, Intent intent) {

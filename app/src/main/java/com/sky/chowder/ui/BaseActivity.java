@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
  * Created by 李彬 on 2017/3/3.
  */
 
-public class BaseActivity extends AppCompatActivity implements IBase {
+public abstract class BaseActivity extends AppCompatActivity implements IBase {
     protected <T extends View> T getView(int id) {
         return (T) findViewById(id);
     }
@@ -39,12 +39,18 @@ public class BaseActivity extends AppCompatActivity implements IBase {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(getLayoutResId());
+        ButterKnife.bind(this);
+        setTitle();
+        initialize();
         hasInternetConnected();//判断有无网络
         setHandler();
-        if (RegexUtils.isCarNum("130637199003031538")){
+        if (RegexUtils.isCarNum("130637199003031538")) {
             showToast("shen");
         }
     }
+
+  public  abstract int getLayoutResId();
 
     //handler部分
     protected UIHandler handler = new UIHandler(Looper.getMainLooper());
@@ -64,16 +70,6 @@ public class BaseActivity extends AppCompatActivity implements IBase {
             showToast(msg.getData().getString("data") + "地势坤，君子以厚德载物。");
     }
     //handler 完
-
-    @Override
-    public void initView() {
-        ButterKnife.bind(this);
-    }
-
-    @Override
-    public void initData() {
-
-    }
 
     @Override
     public String getUserName() {

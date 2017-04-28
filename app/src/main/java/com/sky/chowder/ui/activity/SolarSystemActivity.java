@@ -36,12 +36,16 @@ public class SolarSystemActivity extends BaseActivity implements Toolbar.OnMenuI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_solar);
         setTitle();
-        initView();
+        initialize();
     }
 
     @Override
-    public void initView() {
-        super.initView();
+    public int getLayoutResId() {
+        return 0;
+    }
+
+    @Override
+    public void initialize() {
         RelativeLayout relative = getView(R.id.relative);
         int width = ScreenUtils.getWH(this)[0];
         ViewGroup.LayoutParams lp = relative.getLayoutParams();

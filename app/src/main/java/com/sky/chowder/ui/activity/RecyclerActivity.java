@@ -20,4 +20,15 @@ public class RecyclerActivity extends BaseActivity {
         StringBuffer buffer = new StringBuffer("");
         buffer.append("");
     }
+
+    @Override
+    public int getLayoutResId() {
+        return 0;
+    }
+
+    @Override
+    public void initialize() {
+
+    }
+
 }

@@ -11,7 +11,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.os.BatteryManager;
-import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -44,17 +43,12 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
     private MainAdapter adapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        setTitle();
-        initView();
-        initData();
+    public int getLayoutResId() {
+        return R.layout.activity_main;
     }
 
     @Override
-    public void initView() {
-        super.initView();
+    public void initialize() {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,17 +74,13 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
                 return true;
             }
         });
+        adapter.setDatas(getData());
     }
 
     public void setTitle() {
         BaseTitle title = new BaseTitle(this);
         title.setToolbar();
         title.setLeftButton(-1);
-    }
-
-    @Override
-    public void initData() {
-        adapter.setDatas(getData());
     }
 
     /**
@@ -245,13 +235,13 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
         long freeMemory = rt.freeMemory();
         long totalMemory = rt.totalMemory();
         showToast("maxMemory:" + Double.toString(maxMemory / (1024 * 1024)));
-        showToast("freeMemory:" + Double.toString(freeMemory *1.0d/ (1024 * 1024)));
-        showToast("totalMemory:" + Double.toString(totalMemory*1.0d / (1024 * 1024)));
+        showToast("freeMemory:" + Double.toString(freeMemory * 1.0d / (1024 * 1024)));
+        showToast("totalMemory:" + Double.toString(totalMemory * 1.0d / (1024 * 1024)));
     }
 
     private void getMemory1() {
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        showToast("memory==" + manager.getMemoryClass()+"\n;large=="+manager.getLargeMemoryClass());
+        showToast("memory==" + manager.getMemoryClass() + "\n;large==" + manager.getLargeMemoryClass());
     }
 
     public void getFileSize() {

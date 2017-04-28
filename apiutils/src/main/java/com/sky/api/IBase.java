@@ -6,9 +6,7 @@ package com.sky.api;
 public interface IBase {
 
     //载入View
-    void initView();
-    //载入数据
-    void initData();
+    void initialize();
 
     //判断是否有网络连接,没有返回false
     boolean hasInternetConnected();

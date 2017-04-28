@@ -20,13 +20,12 @@ import com.sky.utils.LogUtils;
 public class ServiceActivity extends BaseActivity implements IService {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        initData();
+    public int getLayoutResId() {
+        return 0;
     }
 
     @Override
-    public void initData() {
+    public void initialize() {
         //startService();//启动服务
         bindService();//启动bind绑定服务
     }

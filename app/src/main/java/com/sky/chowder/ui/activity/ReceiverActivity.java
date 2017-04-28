@@ -20,8 +20,8 @@ import com.sky.utils.ToastUtils;
 public class ReceiverActivity extends BaseActivity {
 
     @Override
-    public void initData() {
-        send();//发送广播
+    public void initialize() {
+
     }
     @Override
     protected void onResume() {
@@ -37,7 +37,7 @@ public class ReceiverActivity extends BaseActivity {
         filter.addAction(Constants.ACTION_MY);//自定义的action
         registerReceiver(receiver, filter);
         //还可能发送统计数据，比如第三方的SDK 做统计需求
-        initData();
+        send();//发送广播
     }
 
     @Override
@@ -84,4 +84,8 @@ public class ReceiverActivity extends BaseActivity {
         sendOrderedBroadcast(broad, "sky.permission.ACTION_MY");
     }
 
+    @Override
+    public int getLayoutResId() {
+        return 0;
+    }
 }
