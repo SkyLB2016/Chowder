@@ -66,7 +66,7 @@ android {
             //加载默认混淆配置文件
             signingConfig signingConfigs.release  //签名
             zipAlignEnabled true //Zipalign优化
-            shrinkResources true // 移除无用的resource文件，依赖于minifyEnabled
+//            shrinkResources true // 移除无用的resource文件，依赖于minifyEnabled
             versionNameSuffix "-sky"//自定义versionname的后缀名
 //            applicationIdSuffix 'sky'//自定义applicationId的后缀名
 //            debuggable false//默认即为false。
