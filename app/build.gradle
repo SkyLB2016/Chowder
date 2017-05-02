@@ -11,7 +11,6 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha4'
     testCompile 'junit:junit:4.12'
 
-    compile project(':electricnetwork')
     compile project(':apiutils')
     //bughd实时监测
     compile 'im.fir:fir-sdk:latest.integration@aar'
