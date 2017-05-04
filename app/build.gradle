@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+
 def reactiveXVersion = '2.0.7'
 def googleVer = '25.2.0'
 def bknifeVer = '8.5.1'
@@ -33,10 +34,10 @@ dependencies {
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion "25.0.3"
     defaultConfig {
         applicationId "com.sky.chowder"
-        minSdkVersion 17
+        minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -215,4 +216,3 @@ makeApk.dependsOn(clearApk, build)
  if (coverageFile.exists()) {coverageFile.delete()}javaexec {main 'emma'
  args 'instr', '-ip', variant.javaCompile.destinationDir, '-m', 'overwrite', '-out', 'out/coverage.em'
  classpath files(new File(getSdkDirectory(), 'tools/lib/emma.jar'))}}}}}dependencies {featureCompile files(new File(android.getSdkDirectory(), 'tools/lib/emma_device.jar'))//版本覆盖率所需jar} */
-

@@ -13,8 +13,8 @@ ext {
     gitUrl = 'https://github.com/SkyLB2016/SuperApp.git'
 
     libraryVersion = '1.2.27'
-
     developerId = 'SkyLB2016'
+
     developerName = 'libin (sky)'
     developerEmail = 'libin@chongxiang.com.cn'
 

@@ -53,7 +53,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
             @Override
             public void onClick(View view) {
                 getMemory();
-//                getMemory1();
+//                getMemory1();·
                 showLoading();
             }
         });
