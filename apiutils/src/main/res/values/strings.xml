@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ApiUtils</string>
+    <string name="toast_isinternet">您的网络未连接</string>
+</resources>

@@ -1,0 +1,196 @@
+IO类
+1.1、Java流的分类
+按流向分:
+输入流: 程序可以从中读取数据的流。
+输出流: 程序能向其中写入数据的流。
+按数据传输单位分:
+字节流: 以字节为单位传输数据的流
+字符流: 以字符为单位传输数据的流
+按功能分:
+节点流: 用于直接操作目标设备的流
+过滤流: 是对一个已存在的流的链接和封装，通过对数据进行处理为程序提供功能强大、灵活的读写功能。
+1.2、java.io常用类
+JDK所提供的所有流类位于java.io包中，都分别继承自以下四种抽象流类：
+InputStream：继承自InputStream的流都是用于向程序中输入数据的，且数据单位都是字节（8位）。
+OutputSteam：继承自OutputStream的流都是程序用于向外输出数据的，且数据单位都是字节（8位）。
+Reader：继承自Reader的流都是用于向程序中输入数据的，且数据单位都是字符（16位）。
+Writer：继承自Writer的流都是程序用于向外输出数据的，且数据单位都是字符（16位）。
+
+1)字节流
+　　表示以字节为单位从stream中读取或往stream中写入信息，即io包中的inputstream类和outputstream类的派生类。通常用来读取二进制数据，如图象和声音。
+2）字符流
+　　以Unicode字符为导向的stream，表示以Unicode字符为单位从stream中读取或往stream中写入信息。
+
+InputStreamReader将InputStream转化成Reader
+OutputStreamWriter将OutputStream转化成Writer
+
+
+HTTP请求类
+http://www.baidu.com/...
+协议       主机地址     资源
+
+GET      请求获取Request-URI所标识的资源
+POST     在Request-URI所标识的资源后附加新的资源
+HEAD     请求获取由Request-URI所标识的资源得响应消息报头
+PUT      请求服务器存储一个资源，并用Request-URI作为其标识
+DELETE   请求服务器删除Request-URI所标识的资源
+TRACE    请求服务器回送收到的请求信息，主要用于测试或诊断
+CONNECT  保留将来使用
+OPTIONS  请求查询服务器的性能，或者查询与资源相关的选项
+
+400 bad Request    客户端请求有语法错误，不能被服务器所理解
+401 unauthorized   请求未经授权，这个状态码必须和WWW-Authenticate报头域一起使用
+403 forbidden      服务器收到请求，但是拒绝提供服务
+404 not found      请求资源不存在，eg：输入了错误的URL
+500 internal server error 服务器发生不可预期的错误
+503 server unavailable 服务器当前不能处理客户端的请求，一段时间后可能恢复
+
+
+File file = new File("/mnt/sdcard/test");
+		if (!file.exists()) {
+			try {
+				file.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}else {
+			Toast.makeText(MainActivity.this, "文件已经存在", 1000);
+		}
+		file.delete();
+
+			File file = this.getFilesDir();//这个目录是当前应用程序默认的数据存储目录
+			Log.i("info", file.toString());
+		File file = this.getCacheDir();//这个目录是当前应用程序默认的缓存文件的存放位置
+		//把一些不是非常重要的文件在此处创建 使用
+		//如果手机的内存不足的时候 系统会自动去删除APP的cache目录的数据
+		Log.i("info", file.toString());
+//		/data/data/<包名>/app_imooc
+		File file = this.getDir("imooc", MODE_PRIVATE);
+		Log.i("info", file.toString());
+		this.getExternalFilesDir(type);
+		//可以得到外部的存储位置 该位置的数据跟内置的使用是一样的
+		//如果APP卸载了 这里面的数据也会自动清除掉
+		File file = this.getExternalCacheDir();
+		Log.i("info", file.toString());
+	//如果说开发者不遵守这样的规则 不把数据放入 data/data/<包名>
+//			/mnt/sdcard/Android/data/<包名>
+//		卸载之后数据将不会自动清除掉 将会造成所谓的数据垃圾
+
+//保存文件内容
+	public void WriteFiles(String content){
+		 try {
+			FileOutputStream fos = openFileOutput("a.txt", MODE_WORLD_READABLE+MODE_WORLD_WRITEABLE);
+			 fos.write(content.getBytes());
+			 fos.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	//读取文件内容
+	public String readFiles(){
+		String content = null;
+		 try {
+			FileInputStream fis= openFileInput("a.txt");
+			 ByteArrayOutputStream baos =  new ByteArrayOutputStream();
+			byte [] buffer =  new byte[1024];
+			int len = 0;
+			while ((len=fis.read(buffer))!=-1) {
+				baos.write(buffer, 0, len);
+			}
+			content = baos.toString();
+			fis.close();
+			baos.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return content;
+	}
+
+	AudioManager mAudioManager= (AudioManager) SystemActivity.this.getSystemService(AUDIO_SERVICE);
+    			 int max = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_SYSTEM);
+    			 int current = mAudioManager.getStreamVolume(AudioManager.STREAM_RING);
+    			 Toast.makeText(SystemActivity.this, "系统的最大音量为："+max+",当前音量是："+current, Toast.LENGTH_SHORT).show();
+    			 break;
+    		case R.id.getPackagename:
+    			ActivityManager activityManager = (ActivityManager) SystemActivity.this.getSystemService(ACTIVITY_SERVICE);
+    			String packageName = activityManager.getRunningTasks(1).get(0).topActivity.getPackageName();
+    			Toast.makeText(SystemActivity.this, "当前运行的Activity包名："+packageName, Toast.LENGTH_SHORT).show();
+    			break;
+    ContentResolver cr = getContentResolver();
+            //向联系人中 插入一行数据
+            ContentValues values = new ContentValues();
+            Uri uri = cr.insert(ContactsContract.RawContacts.CONTENT_URI, values);
+            Long raw_contact_id = ContentUris.parseId(uri);
+            values.clear();
+            //插入人名
+            values.put(ContactsContract.CommonDataKinds.StructuredName.RAW_CONTACT_ID, raw_contact_id);
+            values.put(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME, "张三d三");
+            values.put(ContactsContract.CommonDataKinds.StructuredName.MIMETYPE, ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE);
+            uri = cr.insert(ContactsContract.Data.CONTENT_URI, values);
+            //插入电话信息
+            values.clear();
+            values.put(ContactsContract.CommonDataKinds.Phone.RAW_CONTACT_ID, raw_contact_id);
+            values.put(ContactsContract.CommonDataKinds.Phone.NUMBER, "13422353412");
+            values.put(ContactsContract.CommonDataKinds.Phone.MIMETYPE, ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE);
+            uri = cr.insert(ContactsContract.Data.CONTENT_URI, values);
+
+            Cursor c = cr.query(ContactsContract.Contacts.CONTENT_URI, new String[] { ContactsContract.Contacts._ID,
+                    ContactsContract.Contacts.DISPLAY_NAME }, null, null, null);
+            if (c != null) {
+                while (c.moveToNext()) {
+                    int id = c.getInt(c.getColumnIndex("_id"));
+                    Log.i("info", "_id:" + id);
+                    Log.i("info", "name:" + c.getString(c.getColumnIndex("display_name")));
+                    Cursor c1 = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, new String[] {
+                                    ContactsContract.CommonDataKinds.Phone.NUMBER, ContactsContract.CommonDataKinds.Phone.TYPE },
+                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + id, null, null);
+                    // 根据联系人ID查询出联系人的电话号码
+                    if (c1 != null) {
+                        while (c1.moveToNext()) {
+                            int type = c1.getInt(c1.getColumnIndex(ContactsContract.CommonDataKinds.Phone.TYPE));
+                            if (type == ContactsContract.CommonDataKinds.Phone.TYPE_HOME) {
+                                Log.i("info",
+                                        "家庭电话："
+                                                + c1.getString(c1
+                                                .getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)));
+                            } else if (type == ContactsContract.CommonDataKinds.Phone.TYPE_MOBILE) {
+                                Log.i("info",
+                                        "手机："
+                                                + c1.getString(c1
+                                                .getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)));
+                            }
+                        }
+                        c1.close();
+                    }
+                    // 根据联系人的ID去查询出联系人的邮箱地址
+                    Cursor c2 = cr.query(ContactsContract.CommonDataKinds.Email.CONTENT_URI, new String[] {
+                                    ContactsContract.CommonDataKinds.Email.DATA, ContactsContract.CommonDataKinds.Email.TYPE }, ContactsContract.CommonDataKinds.Email.CONTACT_ID + "=" + id,
+                            null, null);
+                    if (c2 != null) {
+                        while (c2.moveToNext()) {
+                            int type = c2.getInt(c2.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA));
+                            if (type == ContactsContract.CommonDataKinds.Email.TYPE_WORK) {
+                                Log.i("info",
+                                        "工作邮箱："
+                                                + c2.getString(c2
+                                                .getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA)));
+                            }
+                        }
+                        c2.close();
+                    }
+                }
+                c.close();
+            }
+
+            <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
+                <uses-permission android:name="android.permission.READ_CONTACTS"/>
