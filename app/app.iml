@@ -41,13 +41,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/skyDebug/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/skyDebug/rs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/skyDebug/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/androidTest/sky/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/androidTest/sky/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/androidTest/sky/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/androidTest/sky/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/androidTest/sky/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/androidTest/sky/debug" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/androidTest/sky/debug" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/testSkyDebug/res" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/testSkyDebug/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/testSkyDebug/assets" type="java-test-resource" />
@@ -55,6 +48,13 @@
       <sourceFolder url="file://$MODULE_DIR$/src/testSkyDebug/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/testSkyDebug/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/testSkyDebug/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/androidTest/sky/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/androidTest/sky/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/androidTest/sky/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/androidTest/sky/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/androidTest/sky/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/androidTest/sky/debug" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/androidTest/sky/debug" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/sky/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/sky/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/sky/assets" type="java-resource" />
@@ -62,13 +62,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/sky/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/sky/rs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/sky/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testSky/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testSky/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testSky/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testSky/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testSky/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testSky/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testSky/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestSky/res" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestSky/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestSky/assets" type="java-test-resource" />
@@ -76,6 +69,13 @@
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestSky/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestSky/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestSky/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testSky/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testSky/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testSky/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testSky/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testSky/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testSky/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testSky/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/assets" type="java-resource" />
@@ -117,6 +117,7 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-safeguard" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifests" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/res" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/rs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/symbols" />
       <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
       <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
