@@ -39,7 +39,7 @@ public class SPUtils {
     }
 
     public SPUtils() {
-        if (context==null)throw new NullPointerException("SPUtils的context不能为null");
+        if (context == null) throw new NullPointerException("SPUtils的context不能为null");
         sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
         editor = sp.edit();
     }
@@ -130,7 +130,6 @@ public class SPUtils {
 
     /**
      * 清除所有数据
-     *
      */
     public void clear() {
         editor.clear();
@@ -193,6 +192,14 @@ public class SPUtils {
             e.printStackTrace();
         }
         return map;
+    }
+
+    public static <T extends Object> T getObject(String text, T a) {
+        return (T) SPUtils.getInstance().get(text, a);
+    }
+
+    public static <T extends Object> void setObject(String text, T a) {
+        SPUtils.getInstance().put(text, a);
     }
 
 }

@@ -1,11 +1,9 @@
 package com.sky.utils;
 
 import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 
 import com.sky.R;
 
@@ -27,9 +25,9 @@ public class JumpAct {
         jumpActivity(packageContext, new Intent(packageContext, cls));
     }
 
-    public static void jumpActivity(Context packageContext, Class<?> cls, String key,Serializable entity, int... flags) {
+    public static void jumpActivity(Context packageContext, Class<?> cls, String key, Serializable entity, int... flags) {
         Intent intent = new Intent(packageContext, cls);
-        intent.putExtra(key,entity);
+        intent.putExtra(key, entity);
         for (int flag : flags) {
             intent.addFlags(flag);
         }
@@ -74,13 +72,12 @@ public class JumpAct {
     }
 
     public static void jumpActivity(Context context, Intent intent) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-            context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(((Activity) context)).
-                    toBundle());
-        else {
-            context.startActivity(intent);
-            ((Activity) context).overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
-        }
+        //高德不支持
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+//            context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(((Activity) context)).
+//                    toBundle());
+//        else {
+        context.startActivity(intent);
+        ((Activity) context).overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
     }
-
 }

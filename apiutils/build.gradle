@@ -12,7 +12,7 @@ ext {
     siteUrl = 'https://github.com/SkyLB2016/SuperApp'
     gitUrl = 'https://github.com/SkyLB2016/SuperApp.git'
 
-    libraryVersion = '1.2.27'
+    libraryVersion = '1.2.28'
     developerId = 'SkyLB2016'
 
     developerName = 'libin (sky)'
@@ -31,11 +31,9 @@ android {
     defaultConfig {
         minSdkVersion 17
         targetSdkVersion 25
-        versionCode 20170303
+        versionCode 20170510
         versionName libraryVersion
-
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
     buildTypes {
         release {
@@ -43,12 +41,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-//    sourceSets {
-//        main {
-//            jniLibs.srcDirs = ['libs']
-//            java.srcDirs = ['src/main/java', 'src/main/java_compat']
-//        }
-//    }
 }
 
 dependencies {
