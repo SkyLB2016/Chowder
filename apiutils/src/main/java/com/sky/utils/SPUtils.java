@@ -194,12 +194,12 @@ public class SPUtils {
         return map;
     }
 
-    public static <T extends Object> T getObject(String text, T a) {
-        return (T) SPUtils.getInstance().get(text, a);
+    public <T extends Object> T getObject(String text, T a) {
+        return (T) get(text, a);
     }
 
-    public static <T extends Object> void setObject(String text, T a) {
-        SPUtils.getInstance().put(text, a);
+    public <T extends Object> void setObject(String text, T a) {
+        put(text, a);
     }
 
 }
