@@ -24,6 +24,9 @@ allprojects {
 //        maven {
 //            url 'https://dl.bintray.com/skycx/maven'
 //        }
+        flatDir {
+            dirs 'libs'
+        }
     }
 }
 

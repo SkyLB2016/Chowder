@@ -42,8 +42,8 @@ public class GuideActivity extends AppCompatActivity {
                         SPUtils.getInstance().put("isfirst", false);
                         startActivity(new Intent(GuideActivity.this,
                                 MainActivity.class));
-                        overridePendingTransition(R.anim.in_from_right,
-                                R.anim.out_to_left);
+//                        overridePendingTransition(R.anim.in_from_right,
+//                                R.anim.out_to_left);
                         finish();
                     }
                 });
