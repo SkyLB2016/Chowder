@@ -33,7 +33,9 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
 
-    compile project(':apiutils')
+//    compile project(':apiutils')
+    compile 'com.sky:apiutils:1.2.27'
+
     //bughd实时监测
     compile 'im.fir:fir-sdk:latest.integration@aar'
     //Springindicator

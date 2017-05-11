@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 ext {
-    bintrayRepo = 'maven'
+    bintrayRepo = 'skylb'
     bintrayName = 'apiutils'
 
     publishedGroupId = 'com.sky'
@@ -9,14 +9,14 @@ ext {
 
     libraryDescription = 'A wrapper for Facebook Native Like Button (LikeView) on Android'
 
-    siteUrl = 'https://github.com/SkyLB2016/SuperApp'
-    gitUrl = 'https://github.com/SkyLB2016/SuperApp.git'
+    siteUrl = 'https://github.com/SkyLB2016Chowder'
+    gitUrl = 'https://github.com/SkyLB2016/Choder.git'
 
-    libraryVersion = '1.2.28'
+    libraryVersion = '2.2.28'
     developerId = 'SkyLB2016'
 
     developerName = 'libin (sky)'
-    developerEmail = 'libin@chongxiang.com.cn'
+    developerEmail = '1136096189@qq.com'
 
     licenseName = 'The Apache Software License, Version 2.0'
     licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
