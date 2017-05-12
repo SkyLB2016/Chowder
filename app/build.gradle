@@ -19,7 +19,7 @@ android {
     }
 }
 def reactiveXVersion = '2.0.7'
-def googleVer = '25.2.0'
+def googleVer = '25.3.1'
 def bknifeVer = '8.5.1'
 def rxVer = '1.2.7'
 dependencies {
@@ -34,7 +34,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
 //    compile project(':apiutils')
-    compile 'com.sky:apiutils:2.2.30'
+    compile 'com.sky:apiutils:2.2.30@aar'
 
     //bughd实时监测
     compile 'im.fir:fir-sdk:latest.integration@aar'
