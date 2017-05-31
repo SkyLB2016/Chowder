@@ -10,7 +10,7 @@ ext {
     libraryDescription = 'A wrapper for Facebook Native Like Button (LikeView) on Android'
 
     siteUrl = 'https://github.com/SkyLB2016/Chowder'
-    gitUrl = 'https://github.com/SkyLB2016/Choder.git'
+    gitUrl = 'https://github.com/SkyLB2016/Chowder.git'
 
     libraryVersion = '2.2.33'
     developerId = 'SkyLB2016'

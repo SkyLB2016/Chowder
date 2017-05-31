@@ -15,7 +15,6 @@ import im.fir.sdk.FIR;
  */
 public class MyApplication extends Application {
     private static MyApplication instance;
-//    private LockPatternUtils mLockPatternUtils;
 
     public static MyApplication getInstance() {
         return instance;
