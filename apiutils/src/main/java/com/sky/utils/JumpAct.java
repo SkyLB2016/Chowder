@@ -72,7 +72,7 @@ public class JumpAct {
     }
 
     public static void jumpActivity(Context context, Intent intent) {
-        //高德不支持
+        //高德有问题
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
 //            context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(((Activity) context)).
 //                    toBundle());

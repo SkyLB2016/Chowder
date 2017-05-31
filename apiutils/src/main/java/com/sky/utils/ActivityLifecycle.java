@@ -31,10 +31,9 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
 
-        if (activityStack == null) {
-            activityStack = new Stack<>();
-        }
-        activityStack.add(activity);//堆如activitymanager管理栈中
+        if (activityStack == null) activityStack = new Stack<>();
+
+        activityStack.add(activity);//堆入activitymanager管理栈中
     }
 
     @Override

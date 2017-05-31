@@ -5,6 +5,8 @@ package com.sky.api;
  */
 public interface IService {
     void startService();
+
     void bindService();
+
     void stopService();
 }
