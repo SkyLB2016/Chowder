@@ -34,27 +34,24 @@ public interface IBasePresenter {
     /**
      * 获取对应的字段数据
      *
-     * @param text key
-     * @param a    默认的value，同时也是对应类型
-     * @param <T>  对应的何种类型
+     * @param text  key
+     * @param value 默认的value，同时也是对应类型
+     * @param <T>   对应的何种类型
      * @return
      */
-    <T extends Object> T getObject(String text, T a);
+    <T extends Object> T getObject(String text, T value);
 
     /**
      * 写入数据
      *
      * @param text
-     * @param a
+     * @param value
      * @param <T>
      */
-    <T extends Object> void setObject(String text, T a);
+    <T extends Object> void setObject(String text, T value);
 
     //是否在线
     boolean getUsertOnline();
-
-    //获取用户id
-    String getUserId();
 
     //获取手机号
     String getPhone();
@@ -64,6 +61,4 @@ public interface IBasePresenter {
 
     //判断是否有网络连接,没有返回false
     boolean hasInternetConnected();
-
-
 }
