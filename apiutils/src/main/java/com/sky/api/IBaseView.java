@@ -16,6 +16,8 @@ public interface IBaseView {
      */
     void setToolbarTitle(@NonNull String title, @NonNull String rightText);
 
+    void setToolbarTitle(@NonNull String title);
+
     /**
      * 提示语
      *
