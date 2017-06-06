@@ -20,16 +20,11 @@ public interface IBasePresenter {
     /**
      * 发送事件
      *
-     * @param event
+     * @param code
      */
-    void sendEvent(Object event);
+    void sendEvent(int code);
 
-    /**
-     * 处理事件
-     *
-     * @param event
-     */
-    void receiveEvent(Object event);
+    void sendEvent(int code, Object event);
 
     /**
      * 获取对应的字段数据

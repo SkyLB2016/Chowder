@@ -28,7 +28,7 @@ import io.reactivex.subjects.Subject;
 @SuppressWarnings("unused")
 public class RxBus {
     public static final String LOG_BUS = "RXBUS_LOG";
-    private static volatile RxBus defaultInstance;
+    private static volatile RxBus mRxBus;
 
     private Map<Class, List<Disposable>> subscriptionsByEventType = new HashMap<>();
 
@@ -43,17 +43,11 @@ public class RxBus {
     }
 
     public static RxBus getInstance() {
-        RxBus rxBus = defaultInstance;
-        if (defaultInstance == null) {
+        if (mRxBus == null)
             synchronized (RxBus.class) {
-                rxBus = defaultInstance;
-                if (defaultInstance == null) {
-                    rxBus = new RxBus();
-                    defaultInstance = rxBus;
-                }
+                if (mRxBus == null) mRxBus = new RxBus();
             }
-        }
-        return rxBus;
+        return mRxBus;
     }
 
     /**
@@ -115,7 +109,7 @@ public class RxBus {
                     addSubscriber(subscriberMethod);
                 } else if (parameterType == null || parameterType.length == 0) {
 
-                    Class eventType = BusData.class;
+                    Class eventType = DefaultBus.class;
 
                     addEventTypeToMap(subscriber, eventType);
                     Subscribe sub = method.getAnnotation(Subscribe.class);
@@ -313,16 +307,12 @@ public class RxBus {
         }
     }
 
+    public void send(int code) {
+        send(code, new DefaultBus());
+    }
+
     public void send(int code, Object o) {
         bus.onNext(new Message(code, o));
-    }
-
-    public void send(Object o) {
-        bus.onNext(o);
-    }
-
-    public void send(int code) {
-        bus.onNext(new Message(code, new BusData()));
     }
 
     private class Message {
