@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.getkeepsafe.dexcount'
 
 android {
     compileSdkVersion 25
@@ -68,6 +69,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        // 默认是umeng的渠道
+        manifestPlaceholders = [CHANNEL_VALUE: "umeng"]
     }
     signingConfigs {
         debug {
@@ -142,13 +145,12 @@ android {
 //    }
     //渠道Flavors，我这里写了一些常用的
     productFlavors {
-        sky {}
-//        GooglePlay {}
-//        xiaomi {}
-//        umeng {}
+        GooglePlay {}
+        xiaomi {}
+        umeng {}
     }
     productFlavors.all { flavor ->
-        flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+        flavor.manifestPlaceholders = [CHANNEL_VALUE: name]
     }
 //    //修改打包好的apk的名称
 //    applicationVariants.all { variant ->
