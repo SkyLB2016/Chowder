@@ -1,0 +1,124 @@
+apply plugin: 'com.android.application'
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    compile 'com.jakewharton:butterknife:8.6.0'
+    compile project(':apiutils')
+
+    //极光推送
+    compile 'cn.jiguang.sdk:jpush:3.0.6'  // 此处以JPush 3.0.3 版本为例。
+    compile 'cn.jiguang.sdk:jcore:1.1.3'  // 此处以JCore 1.1.1 版本为例。
+    //gif
+    compile 'com.facebook.fresco:fresco:1.3.0'
+    compile 'com.facebook.fresco:animated-gif:1.3.0'
+
+    //bughd实时监测
+    compile 'im.fir:fir-sdk:latest.integration@aar'
+
+}
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
+
+    defaultConfig {
+        applicationId "com.glimmer.carrybport"
+        minSdkVersion 19
+        targetSdkVersion 25
+        versionCode 12
+        versionName "B2.12"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a', 'x86', 'x86_64', 'mips', 'mips64'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+        }
+
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: applicationId,
+                JPUSH_APPKEY : "5264899f174a71e193fdd530", //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
+        ]
+    }
+    signingConfigs {
+        debug {
+            keyAlias 'glimmer'
+            keyPassword '****.wg.com'
+            storeFile file('glimmer.jks')
+            storePassword '****.wg.com'
+        }
+        release {
+            keyAlias 'glimmer'
+            keyPassword '****.wg.com'
+            storeFile file('glimmer.jks')
+            storePassword '****.wg.com'
+        }
+    }
+    buildTypes {
+        debugtrue {
+            minifyEnabled true //是否开启混淆
+            signingConfig signingConfigs.debug
+        }
+        debug {
+            minifyEnabled false //是否开启混淆
+            signingConfig signingConfigs.debug
+            //修改打包好的apk的名称
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    if (output.outputFile != null && output.outputFile.name.endsWith('.apk')
+                            && 'debug'.equals(variant.buildType.name)) {
+//                        def apkFile = new File(output.outputFile.getParent(), "MyDemo_${variant.flavorName}_v${variant.versionName}_${buildTime()}.apk")
+//                        output.outputFile = apkFile
+                        output.outputFile = new File(output.outputFile.getParent(),
+                                output.outputFile.name.replace("app-debug.apk", "司机端debug-v${variant.versionName}-${buildTime()}.apk"))
+                    }
+                }
+            }
+        }
+        release {
+            // 自定义不显示Log,
+            minifyEnabled false //是否开启混淆
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //加载默认混淆配置文件
+            zipAlignEnabled true //Zipalign优化
+            signingConfig signingConfigs.release  //签名
+//            shrinkResources true // 移除无用的resource文件，依赖于minifyEnabled
+            //修改打包好的apk的名称
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    if (output.outputFile != null && output.outputFile.name.endsWith('.apk')
+                            && 'release'.equals(variant.buildType.name)) {
+//                        def apkFile = new File(output.outputFile.getParent(), "MyDemo_${variant.flavorName}_v${variant.versionName}_${buildTime()}.apk")
+//                        output.outputFile = apkFile
+                        output.outputFile = new File(output.outputFile.getParent(),
+                                output.outputFile.name.replace("release.apk", "司机端-v${variant.versionName}-${buildTime()}.apk"))
+                    }
+                }
+            }
+        }
+    }
+    //渠道Flavors，我这里写了一些常用的
+    productFlavors {
+        byb {}
+        jrtt1 {}
+        bd {}
+        yyb {}
+        _360 {}
+    }
+    productFlavors.all { flavor ->
+        flavor.manifestPlaceholders = [CHANNEL_VALUE: name]
+    }
+}
+
+def buildTime() {
+    def date = new Date()
+    def formattedDate = date.format('MM月dd日HH时mm分ss秒')
+    return formattedDate
+}

@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">搬运帮司机端</string>
+    <!--strings的命名-->
+    <!--类型_{范围_}功能，范围可选。-->
+    <!--以下为几种常用的命名：-->
+    <!--页面标题，命名格式为：title_页面-->
+    <string name="title_register">注册</string>
+    <string name="title_fill">认证资料</string>
+    <string name="title_service_item">选择服务项</string>
+    <string name="title_bond">关于保证金</string>
+    <!--按钮文字，命名格式为：btn_按钮事件-->
+    <!--标签文字，命名格式为：label_标签文字-->
+    <string name="lable_bond">保证金</string>
+    <string name="lable_bond1">金额</string>
+    <string name="lable_bond2"> 培训完毕后，需缴纳保证金，才能正常抢单。\n支付方式如下： </string>
+    <string name="lable_thanks">感谢您对搬运帮的支持，祝你生活愉快.</string>
+    <string name="lable_skip">跳过</string>
+    <string name="lable_sure">确认</string>
+    <!--选项卡文字，命名格式为：tab_选项卡文字-->
+    <!--消息框文字，命名格式为：toast_消息-->
+    <string name="toast_exit">再按一次返回键回到桌面</string>
+    <string name="toast_no_more_data">没有更多数据了</string>
+    <!--编辑框的提示文字，命名格式为：hint_提示信息-->
+    <!--图片的描述文字，命名格式为：desc_图片文字-->
+    <!--对话框的文字，命名格式为：dialog_文字-->
+    <!--menu的item文字，命名格式为：action_文字-->
+    <string name="action_settings">Settings</string>
+
+
+    <string name="text_net_work_err">网络异常</string>
+    <string name="text_retry">重试</string>
+    <string name="text_data_empty">什么都没有</string>
+    <string name="worked">已下班</string>
+    <string name="working">上班中</string>
+
+    <string name="status0">待抢单</string>
+    <string name="status1">待核对</string>
+    <string name="status2">待确认</string>
+    <string name="status3_1">装车中</string>
+    <string name="status3">装车完毕</string>
+    <string name="status4"></string>
+    <string name="status5">开始卸车</string>
+    <string name="status5_1">运输中</string>
+    <string name="status6">服务完成</string>
+    <string name="status6_1">卸车中</string>
+    <string name="status7">等待支付</string>
+    <string name="status8">支付完成</string>
+    <string name="status9">已取消</string>
+    <string name="status10">待评价</string>
+    <string name="status11">已评价</string>
+
+
+</resources>
