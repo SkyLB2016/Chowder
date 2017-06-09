@@ -34,6 +34,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
+        Common.DEBUG = BuildConfig.DEBUG;
         SPUtils.init(this);
         LogUtils.isDebug = BuildConfig.DEBUG;
         getDataCacheDir();//缓存目录
@@ -53,22 +54,6 @@ public class MyApplication extends Application {
         TCAgent.init(this.getApplicationContext(), "TD_APP_ID", "");
         TCAgent.setReportUncaughtExceptions(false);
 
-    }
-
-    /**
-     * 退出程序
-     */
-    public void exit() {
-        ActivityLifecycle.getInstance().popAllActivity();
-    }
-
-    /**
-     * 错误提示
-     *
-     * @param code
-     */
-    public void showErroe(int code) {
-        ToastUtils.showShort(getApplicationContext(), code);
     }
 
     /**
@@ -113,6 +98,21 @@ public class MyApplication extends Application {
         return fileCacheDir + File.separator;
     }
 
+    /**
+     * 退出程序
+     */
+    public void exit() {
+        ActivityLifecycle.getInstance().popAllActivity();
+    }
+
+    public void showToast(int code) {
+        ToastUtils.showShort(getApplicationContext(), code);
+    }
+
+    public void showToast(String text) {
+        ToastUtils.showShort(getApplicationContext(), text);
+    }
+
     public <T> T getObject(String text, T value) {
         return (T) SPUtils.getInstance().get(text, value);
     }
@@ -120,6 +120,7 @@ public class MyApplication extends Application {
     public <T> void setObject(String text, T value) {
         SPUtils.getInstance().put(text, value);
     }
+
     public boolean getUsertOnline() {
         return !TextUtils.isEmpty(getObject(Common.TOKEN, ""));
     }

@@ -6,7 +6,6 @@ import com.sky.Common;
 import com.sky.ErrorMes;
 import com.sky.api.OnRequestCallback;
 import com.sky.model.BaseEntity;
-import com.sky.rxbus.RxBus;
 
 import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DefaultObserver;
@@ -23,7 +22,6 @@ public class DefaultSubScriber<T extends BaseEntity> extends DefaultObserver<T> 
 
     @Override
     public void onNext(@NonNull T data) {
-        RxBus.getInstance().send(Common.LOGIN);
         if (request == null) {
 //            mRequestCallback.onFail(new ErrBundle(Constants.NET_REQUEST_ERR, "回调参数不能为空"));
         } else if (data == null) {
@@ -34,13 +32,14 @@ public class DefaultSubScriber<T extends BaseEntity> extends DefaultObserver<T> 
             MyApplication.getInstance().getRxBus().send(Common.LOGIN);
         } else
             request.onFail(new ErrorMes(data.getCode(), data.getMsg()));
+//        cancel();
 
     }
 
     @Override
     public void onError(@NonNull Throwable e) {
-        MyApplication.getInstance().getRxBus().send(Common.LOGIN);
-        if (request != null) request.onFail(new ErrorMes(Common.NET_REQUEST_NOT_FOUND, e.getMessage()));
+        if (request != null)
+            request.onFail(new ErrorMes(Common.NET_REQUEST_NOT_FOUND, e.getMessage()));
     }
 
     @Override

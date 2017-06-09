@@ -9,6 +9,8 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
 
     compile 'com.jakewharton:butterknife:8.6.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+
     compile project(':apiutils')
 
     //极光推送
@@ -31,8 +33,8 @@ android {
         applicationId "com.glimmer.carrybport"
         minSdkVersion 19
         targetSdkVersion 25
-        versionCode 12
-        versionName "B2.12"
+        versionCode 14
+        versionName "B2.14"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {

@@ -9,9 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.glimmer.carrybport.ui.widget.BaseTitle;
-import com.glimmer.carrybport.ui.widget.DialogManager;
 import com.sky.api.IBaseView;
 import com.sky.utils.ToastUtils;
+import com.sky.widget.DialogManager;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -23,6 +23,7 @@ import butterknife.Unbinder;
 public abstract class BaseActivity extends AppCompatActivity implements IBaseView {
 
     protected BaseTitle baseTitle;//公共标题
+    protected DialogManager dialogManager;//公共标题
     protected Unbinder unbinder;
 
     @Override
@@ -31,7 +32,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
         setContentView(getLayoutResId());
         unbinder = ButterKnife.bind(this);
         baseTitle = new BaseTitle(this);
-//        DialogManager.showDialog(this);
     }
 
     /**
@@ -71,6 +71,17 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     }
 
     @Override
+    public void setToolbarRightTitle(@NonNull String rightText) {
+        baseTitle.setRightImgId(rightText);
+        baseTitle.setOnRightClick(new BaseTitle.OnClickListener() {
+            @Override
+            public void OnClick(View v) {
+                onRightTextClick();
+            }
+        });
+    }
+
+    @Override
     public void showToast(@StringRes int resId) {
         ToastUtils.showShort(this, resId);
     }
@@ -82,11 +93,14 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
 
     @Override
     public void showDialog() {
-        DialogManager.showDialog(this);
+        if (dialogManager == null) dialogManager = new DialogManager(this);
+        dialogManager.showDialog(this);
     }
 
     @Override
     public void dismissDialog() {
-        DialogManager.disDialog();
+        if (dialogManager != null)
+            dialogManager.disDialog();
     }
+
 }

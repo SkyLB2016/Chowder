@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_margin="15dp"
+        android:background="@drawable/shape_round"
+        android:drawableLeft="@mipmap/ic_login_tips"
+        android:drawablePadding="@dimen/wh_4"
+        android:drawableStart="@mipmap/ic_login_tips"
+        android:padding="@dimen/wh_4"
+        android:text="司机版"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/text_micro"
+        tools:ignore="HardcodedText" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp"
+        android:contentDescription="@string/app_name"
+        android:src="@mipmap/ic_logo" />
+
+    <include layout="@layout/include_line_hor" />
+
+    <com.sky.widget.EditTextDel
+        android:id="@+id/et_phone"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/wh_48"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@mipmap/ic_login"
+        android:drawablePadding="15dp"
+        android:drawableStart="@mipmap/ic_login"
+        android:gravity="center_vertical|start"
+        android:hint="请输入手机号"
+        android:inputType="phone"
+        android:maxLength="11"
+        android:maxLines="1"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:textColor="@color/text_Color"
+        android:textColorHint="@color/hint_Color"
+        android:textSize="@dimen/text_small"
+        tools:ignore="HardcodedText" />
+
+    <include
+        layout="@layout/include_line_hor"
+        android:layout_width="match_parent"
+        android:layout_height="0.6dp"
+        android:layout_marginLeft="50dp"
+        tools:ignore="RtlHardcoded" />
+
+    <com.sky.widget.EditTextDel
+        android:id="@+id/et_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@mipmap/icon_password"
+        android:drawablePadding="15dp"
+        android:drawableStart="@mipmap/icon_password"
+        android:gravity="center_vertical|start"
+        android:hint="请输入密码6位以上"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:textColor="@color/text_Color"
+        android:textColorHint="@color/hint_Color"
+        android:textSize="@dimen/text_small"
+        tools:ignore="HardcodedText" />
+
+    <include layout="@layout/include_line_hor" />
+
+    <TextView
+        android:id="@+id/tv_login"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_margin="15dp"
+        android:background="@drawable/shape_round_solid"
+        android:gravity="center"
+        android:text="登录"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_small"
+        tools:ignore="HardcodedText" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/wh_8"
+            android:background="@drawable/shape_round"
+            android:gravity="center"
+            android:paddingBottom="@dimen/wh_4"
+            android:paddingLeft="@dimen/wh_8"
+            android:paddingRight="@dimen/wh_8"
+            android:paddingTop="@dimen/wh_4"
+            android:text="立即注册"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/text_small"
+            tools:ignore="HardcodedText,RtlHardcoded" />
+
+        <TextView
+            android:id="@+id/tv_forget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/wh_8"
+            android:background="@drawable/shape_round"
+            android:gravity="center"
+            android:paddingBottom="@dimen/wh_4"
+            android:paddingLeft="@dimen/wh_8"
+            android:paddingRight="@dimen/wh_8"
+            android:paddingTop="@dimen/wh_4"
+            android:text="忘记密码"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/text_small"
+            tools:ignore="HardcodedText,RtlHardcoded" />
+
+    </LinearLayout>
+</LinearLayout>

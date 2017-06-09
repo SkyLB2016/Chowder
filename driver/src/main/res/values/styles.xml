@@ -39,12 +39,4 @@
         <!--<item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>-->
         <!--<item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>-->
     </style>
-
-    <style name="loading_dialog" parent="android:style/Theme.Dialog">
-        <item name="android:windowFrame">@null</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowBackground">@drawable/bg_dialog</item>
-        <item name="android:windowIsFloating">true</item>
-        <item name="android:windowContentOverlay">@null</item>
-    </style>
 </resources>

@@ -5,18 +5,20 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 
-import com.glimmer.carrybport.ui.activity.LoginActivity;
+import com.glimmer.carrybport.MyApplication;
+import com.glimmer.carrybport.R;
 import com.glimmer.carrybport.utils.rox.UseCase;
 import com.sky.Common;
 import com.sky.api.IBasePresenter;
 import com.sky.api.IBaseView;
-import com.sky.rxbus.RxBus;
-import com.sky.rxbus.Subscribe;
-import com.sky.utils.JumpAct;
+import com.sky.rxbus.DefaultBus;
+import com.sky.utils.LogUtils;
 import com.sky.utils.NetworkJudgment;
 import com.sky.utils.SPUtils;
 
 import java.io.Serializable;
+
+import io.reactivex.functions.Consumer;
 
 /**
  * Created by SKY on 2017/5/27.
@@ -29,8 +31,17 @@ public abstract class BasePresenter<V extends IBaseView> implements IBasePresent
     public BasePresenter(Context mContext) {
         this.mContext = mContext;
         mView = (V) mContext;
-        RxBus.getInstance().register(mContext);
+        MyApplication.getInstance().getRxBus().add(this,
+                MyApplication.getInstance().getRxBus().register(DefaultBus.class)
+                        .subscribe(new Consumer<DefaultBus>() {
+                            @Override
+                            public void accept(DefaultBus o) throws Exception {
+                                receiveEvent(o);
+                            }
+                        }));
+        if (!hasInternetConnected()) mView.showToast(mContext.getString(R.string.toast_isinternet));
     }
+
 
     public void onActivityCreated(Bundle savedInstanceState) {
 
@@ -60,8 +71,9 @@ public abstract class BasePresenter<V extends IBaseView> implements IBasePresent
     }
 
     public void onDestroy() {
-        RxBus.getInstance().unRegister(mContext);
+        MyApplication.getInstance().getRxBus().unregister(this);
     }
+
     public void onDetach() {
 
     }
@@ -79,17 +91,17 @@ public abstract class BasePresenter<V extends IBaseView> implements IBasePresent
 
     @Override
     public void sendEvent(int code) {
-        RxBus.getInstance().send(code);
+        MyApplication.getInstance().getRxBus().send(code);
     }
 
     @Override
-    public void sendEvent(int code, Object event) {
-        RxBus.getInstance().send(code, event);
+    public <T> void sendEvent(int code, T event) {
+        MyApplication.getInstance().getRxBus().send(code, event);
     }
 
-    @Subscribe(code = Common.LOGIN)
-    public void receiveToLogin() {
-        JumpAct.jumpActivity(mContext, LoginActivity.class);
+    @Override
+    public void receiveEvent(DefaultBus event) {
+        LogUtils.i("BasePresenter");
     }
 
     @Override
@@ -121,6 +133,5 @@ public abstract class BasePresenter<V extends IBaseView> implements IBasePresent
     public boolean hasInternetConnected() {
         return NetworkJudgment.isConnected(mContext);
     }
-
 
 }

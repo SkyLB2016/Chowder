@@ -22,7 +22,7 @@ public class BaseTitle {
 
     public BaseTitle(AppCompatActivity activity) {
         this.activity = activity;
-        setToolbar("");
+        setToolbar();
     }
 
     /**
@@ -51,7 +51,7 @@ public class BaseTitle {
         toolbar.setTitle("");//默认为居左,所以隐藏
         centerTitle = (TextView) toolbar.findViewById(R.id.tv_center);
         tvRight = (TextView) toolbar.findViewById(R.id.tv_right);
-//        centerTitle.setText(title);//居中的标题
+        centerTitle.setText(title);//居中的标题
         activity.setSupportActionBar(toolbar);
         //toolbar.setBackground(R.);
 //        toolbar.setLogo(R.drawable.div_line_v);

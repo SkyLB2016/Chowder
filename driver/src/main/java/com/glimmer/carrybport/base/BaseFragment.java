@@ -75,6 +75,11 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     }
 
     @Override
+    public void setToolbarRightTitle(@NonNull String rightText) {
+        ((BasePActivity) getActivity()).setToolbarRightTitle(rightText);
+    }
+
+    @Override
     public void showToast(@StringRes int resId) {
         ((BasePActivity) getActivity()).showToast(resId);
     }

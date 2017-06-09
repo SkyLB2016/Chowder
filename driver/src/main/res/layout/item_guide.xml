@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/img_guide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/app_name"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/tvExperienceRightNow"
+        android:layout_width="@dimen/wh_144"
+        android:layout_height="@dimen/wh_48"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/wh_144"
+        android:background="@drawable/shape_round_solid"
+        android:gravity="center"
+        android:text="立即体验"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_large"
+        tools:ignore="HardcodedText" />
+
+</RelativeLayout>

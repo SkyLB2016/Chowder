@@ -1,13 +1,17 @@
 package com.glimmer.carrybport.utils.rox;
 
+import com.glimmer.carrybport.model.LoginEntity;
+import com.glimmer.carrybport.model.requestparams.LoginParams;
 import com.sky.BuildConfig;
 import com.sky.Common;
+import com.sky.model.ObjectEntity;
 
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Observable;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -133,4 +137,7 @@ public class HttpUtils {
         }
     };
 
+    public Observable<ObjectEntity<LoginEntity>> login(LoginParams params) {
+        return retrofit.create(IHttpUrl.class).login(params);
+    }
 }

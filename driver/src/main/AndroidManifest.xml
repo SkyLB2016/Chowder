@@ -68,7 +68,7 @@
             android:name="TD_CHANNEL_ID"
             android:value="${CHANNEL_VALUE}" />
 
-        <activity android:name=".ui.activity.MainActivity">
+        <activity android:name=".ui.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -90,8 +90,16 @@
                 <category android:name="com.glimmer.carrybport" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name=".ui.activity.GuideActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.LoginActivity"
+            android:label="@string/act_login"
             android:screenOrientation="portrait" />
     </application>
 

@@ -15,7 +15,7 @@ public abstract class UseCase<T> {
 
     public  void  subscribe(OnRequestCallback<T> request){
         observable= buildObservable().subscribeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread());
+                .observeOn(AndroidSchedulers.mainThread());
         observable.subscribe(new DefaultSubScriber(request));
     }
     public void unSubscirbe(){
