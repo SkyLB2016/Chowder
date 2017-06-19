@@ -19,4 +19,21 @@
     <color name="indicator_3">#66D7B9</color>
     <color name="indicator_4">#FDBC7D</color>
 
+    <color name="main_color">#ffd000</color>
+
+    <color name="bg_color">#eeeeee</color>
+
+    <color name="text_color">#333333</color>
+    <color name="text_color1">#0d233f</color>
+    <color name="hint_color">#666666</color>
+    <color name="hint_color1">#c29f07</color>
+
+    <color name="color_99">#999999</color>
+    <color name="color_66">#666666</color>
+    <color name="color_cc">#cccccc</color>
+
+    <color name="alpha_99">#99000000</color>
+    <color name="red">#f12b2a</color>
+    <color name="light_orange">#ffefab</color>
+    <color name="dark_orange">#fff6d0</color>
 </resources>

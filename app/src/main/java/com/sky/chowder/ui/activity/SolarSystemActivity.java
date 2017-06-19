@@ -35,7 +35,6 @@ public class SolarSystemActivity extends BaseActivity implements Toolbar.OnMenuI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_solar);
-        setTitle();
         initialize();
     }
 

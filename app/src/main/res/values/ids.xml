@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="recycle" type="id" />
     <item name="appbar" type="id" />
-    <item name="image" type="id" />
     <item name="toolbar" type="id" />
-    <item name="center_title" type="id" />
+    <item name="img_back" type="id" />
+    <item name="tv_center" type="id" />
+    <item name="tv_right" type="id" />
+    <item name="recycle" type="id" />
 </resources>

@@ -18,9 +18,11 @@ public class BaseTitle {
     //定义toolbar
     private Toolbar toolbar;
     private TextView centerTitle;
+    private TextView tvRight;
 
     public BaseTitle(AppCompatActivity activity) {
         this.activity = activity;
+        setToolbar();
     }
 
     /**
@@ -47,7 +49,8 @@ public class BaseTitle {
         toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         if (toolbar == null) return;
         toolbar.setTitle("");//默认为居左,所以隐藏
-        centerTitle = (TextView) toolbar.findViewById(R.id.center_title);
+        centerTitle = (TextView) toolbar.findViewById(R.id.tv_center);
+        tvRight = (TextView) toolbar.findViewById(R.id.tv_right);
         centerTitle.setText(title);//居中的标题
         activity.setSupportActionBar(toolbar);
         //toolbar.setBackground(R.);
@@ -69,13 +72,33 @@ public class BaseTitle {
      * @param title
      */
     public void setCenterTitle(String title) {
-        toolbar.setTitle("");
+//        toolbar.setTitle("");
         centerTitle.setText(title);
     }
 
     public void setLeftTitle(String title) {
         toolbar.setTitle(title);
         centerTitle.setText("");
+    }
+
+    public void setRightImgId(String text) {
+        tvRight.setText(text);
+        tvRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onRightClick != null) onRightClick.OnClick(v);
+            }
+        });
+    }
+
+    public void setRightImgId(int imgId) {
+        tvRight.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, imgId, 0);
+        tvRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onRightClick != null) onRightClick.OnClick(v);
+            }
+        });
     }
 
     /**
@@ -92,21 +115,27 @@ public class BaseTitle {
     }
 
 
-    public interface OnLeftClick {
-        void OnLeftClick(View v);
+    public interface OnClickListener {
+        void OnClick(View v);
     }
 
-    public OnLeftClick onLeftClick = null;
+    public OnClickListener onLeftClick = null;
+    public OnClickListener onRightClick = null;
 
-    public void setOnLeftClick(OnLeftClick onLeftClick) {
-        this.onLeftClick = onLeftClick;
+    public void setOnLeftClick(OnClickListener onClick) {
+        this.onLeftClick = onClick;
     }
+
+    public void setOnRightClick(OnClickListener onClick) {
+        this.onRightClick = onClick;
+    }
+
     /**
      * 左侧按钮的点击事件，默认关闭，如需重写，把继承的super删掉
      */
     public void leftOnClick(View v) {
         if (onLeftClick != null) {
-            onLeftClick.OnLeftClick(v);
+            onLeftClick.OnClick(v);
         } else
             activity.finish();
     }

@@ -1,56 +1,116 @@
 package com.sky.chowder.ui;
 
+
 import android.os.Bundle;
 import android.os.Looper;
 import android.os.Message;
+import android.support.annotation.CheckResult;
+import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.sky.Common;
-import com.sky.api.IBase;
+import com.sky.api.IBaseView;
 import com.sky.chowder.common.Constants;
-import com.sky.chowder.ui.dialog.DialogManager;
-import com.sky.utils.NetworkJudgment;
-import com.sky.utils.RegexUtils;
-import com.sky.utils.SPUtils;
 import com.sky.utils.ToastUtils;
 import com.sky.utils.UIHandler;
+import com.sky.widget.DialogManager;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
- * Created by 李彬 on 2017/3/3.
+ * activity 的基类
+ * Created by SKY on 2017/5/27.
  */
+public abstract class BaseActivity extends AppCompatActivity implements IBaseView {
 
-public abstract class BaseActivity extends AppCompatActivity implements IBase {
     protected <T extends View> T getView(int id) {
         return (T) findViewById(id);
     }
 
-    public void showToast(String text) {
-        ToastUtils.showShort(this, text);
-    }//初始化toast提示
-
-    public void setTitle() {
-        BaseTitle title = new BaseTitle(this);
-        title.setToolbar();
-    }
+    protected BaseTitle baseTitle;//公共标题
+    protected DialogManager dialogManager;//公共标题
+    protected Unbinder unbinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResId());
-        ButterKnife.bind(this);
-        setTitle();
-        initialize();
-        hasInternetConnected();//判断有无网络
-        setHandler();
-        if (RegexUtils.isCarNum("130637199003031538")) {
-            showToast("shen");
-        }
+        unbinder = ButterKnife.bind(this);
+        baseTitle = new BaseTitle(this);
     }
 
-  public  abstract int getLayoutResId();
+    /**
+     * 获取布局的resId
+     */
+    @CheckResult
+    protected abstract int getLayoutResId();
+
+    /**
+     * 初始化
+     */
+    protected abstract void initialize();
+
+    protected void onRightTextClick() {
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbinder.unbind();
+    }
+
+    @Override
+    public void setToolbarTitle(@NonNull String title, @NonNull String rightText) {
+        baseTitle.setCenterTitle(title);
+        baseTitle.setRightImgId(rightText);
+        baseTitle.setOnRightClick(new BaseTitle.OnClickListener() {
+            @Override
+            public void OnClick(View v) {
+                onRightTextClick();
+            }
+        });
+    }
+
+    public void setToolbarTitle(@NonNull String title) {
+        baseTitle.setCenterTitle(title);
+    }
+
+    @Override
+    public void setToolbarRightTitle(@NonNull String rightText) {
+        baseTitle.setRightImgId(rightText);
+        baseTitle.setOnRightClick(new BaseTitle.OnClickListener() {
+            @Override
+            public void OnClick(View v) {
+                onRightTextClick();
+            }
+        });
+    }
+
+    @Override
+    public void showToast(@StringRes int resId) {
+        ToastUtils.showShort(this, resId);
+    }
+
+    @Override
+    public void showToast(@NonNull String text) {
+        ToastUtils.showShort(this, text);
+    }
+
+    @Override
+    public void showLoading() {
+        if (dialogManager == null) dialogManager = new DialogManager(this);
+        dialogManager.showDialog(this);
+    }
+
+    @Override
+    public void disLoading() {
+        if (dialogManager != null)
+            dialogManager.disDialog();
+    }
+
+
 
     //handler部分
     protected UIHandler handler = new UIHandler(Looper.getMainLooper());
@@ -71,62 +131,4 @@ public abstract class BaseActivity extends AppCompatActivity implements IBase {
     }
     //handler 完
 
-    @Override
-    public String getUserName() {
-        return getObject(Common.USERNAME, "");
-    }
-
-    @Override
-    public String getUserId() {
-        return getObject(Common.USERID, "");
-    }
-
-    @Override
-    public String getPhone() {
-        return getObject(Common.PHONE, "");
-    }
-
-    @Override
-    public String getToken() {
-        return getObject(Common.TOKEN, "");
-    }
-
-    @Override
-    public void showLoading() {
-        DialogManager.showDialog(this);
-    }
-
-    @Override
-    public void hideLoading() {
-        DialogManager.disDialog();
-    }
-
-    @Override
-    public boolean getUserOnlineState() {
-        return getObject(Common.ISONLINE, false);
-    }
-
-    @Override
-    public void setUserOnlineState(boolean isOnline) {
-        setObject(Common.ISONLINE, true);
-    }
-
-    @Override
-    public boolean hasInternetConnected() {
-        return NetworkJudgment.isConnected(this);
-    }
-
-    public <T extends Object> T getObject(String text, T a) {
-        return (T) SPUtils.getInstance().get(text, a);
-    }
-
-    public <T extends Object> void setObject(String text, T a) {
-        SPUtils.getInstance().put(text, a);
-    }
-
-    @Override
-    public void onTrimMemory(int level) {
-        super.onTrimMemory(level);
-        showToast("level=" + level);
-    }
 }

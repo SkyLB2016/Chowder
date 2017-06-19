@@ -4,20 +4,21 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.sky.Common;
 import com.sky.chowder.R;
+import com.sky.chowder.MyApplication;
 import com.sky.utils.JumpAct;
-import com.sky.utils.SPUtils;
 
 /**
  * Created by 李彬 on 2017/3/6.
  */
 
 public class WelcomeActivity extends AppCompatActivity {
-    public Boolean flag;//是否首次运行，true代表首次
+    //    public Boolean flag;//是否首次运行，true代表首次
     private int TIME = 1000;//handler延迟时间
 
     @Override
@@ -29,9 +30,10 @@ public class WelcomeActivity extends AppCompatActivity {
         view.setBackgroundResource(R.mipmap.guide01);
         setContentView(view);
         //SPUtils.put(WelcomeActivity.this, "isfirst", true);
-        flag = (Boolean) SPUtils.getInstance().get("isfirst", true);
+//        flag = (Boolean) SPUtils.getInstance().get(Common.ISFIRST, true);
         //加载动画
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.alpha);
+        AlphaAnimation animation = new AlphaAnimation(0.5f, 1f);
+        animation.setDuration(TIME);
         view.startAnimation(animation);
         animation.setAnimationListener(new Animation.AnimationListener() {
 
@@ -50,16 +52,21 @@ public class WelcomeActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         // 判断程序与第几次运行，如果是第一次运行引导页面
-                        if (flag) {
-                            JumpAct.jumpActivity(WelcomeActivity.this, GuideActivity.class);
-                            finish();
-                        } else {
-                            JumpAct.jumpActivity(WelcomeActivity.this, MainActivity.class);
-                            finish();
-                        }
+                        JumpAct();
                     }
                 }, TIME);
             }
         });
+    }
+
+    private void JumpAct() {
+        if (MyApplication.getInstance().getObject(Common.ISFIRST, true)) {
+            JumpAct.jumpActivity(this, GuideActivity.class);
+        } else if (MyApplication.getInstance().getUsertOnline()){
+            JumpAct.jumpActivity(this, MainActivity.class);
+        } else {
+            JumpAct.jumpActivity(this, LoginActivity.class);
+        }
+        finish();
     }
 }

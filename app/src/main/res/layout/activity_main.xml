@@ -7,7 +7,7 @@
     tools:context="com.sky.chowder.ui.activity.MainActivity">
 
 
-    <include layout="@layout/toolbar" />
+    <include layout="@layout/include_toolbar" />
 
     <include layout="@layout/content_main" />
 
