@@ -18,10 +18,12 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.sky.chowder.R;
+import com.sky.chowder.api.view.IMainView;
 import com.sky.chowder.model.ActivityModel;
-import com.sky.chowder.ui.BaseActivity;
+import com.sky.chowder.ui.BasePActivity;
 import com.sky.chowder.ui.BaseTitle;
 import com.sky.chowder.ui.adapter.MainAdapter;
+import com.sky.chowder.ui.presenter.MainPresenter;
 import com.sky.chowder.utils.FileSizeUtil;
 import com.sky.utils.JumpAct;
 import com.sky.widget.MyRecyclerView;
@@ -34,7 +36,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClickListener {
+public class MainActivity extends BasePActivity<MainPresenter> implements Toolbar.OnMenuItemClickListener, IMainView {
 
     @BindView(R.id.recycle)
     MyRecyclerView recycle;
@@ -49,6 +51,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
 
     @Override
     public void initialize() {
+        baseTitle.setLeftButton(-1);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,6 +78,11 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
             }
         });
         adapter.setDatas(getData());
+    }
+
+    @Override
+    protected void creatPresenter() {
+        presenter = new MainPresenter(this);
     }
 
     public void setTitle() {
@@ -155,6 +163,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
         return false;
     }
 
+
     private void startOther(String packageName, String componentName) {
         try {
             JumpAct.jumpActivity(MainActivity.this, packageName, componentName);
@@ -162,7 +171,6 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
             showToast("程序未安装");
         }
     }
-
 
     private long lastBack;
 
@@ -176,6 +184,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
             super.onBackPressed();
         }
     }
+
 
     private void progressDialog() {
         ProgressDialog progressDialog = new ProgressDialog(this);
@@ -201,7 +210,6 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
         progressDialog.setCancelable(true);
         progressDialog.show();
     }
-
 
     private Bitmap getViewBitmap(View addViewContent) {
 

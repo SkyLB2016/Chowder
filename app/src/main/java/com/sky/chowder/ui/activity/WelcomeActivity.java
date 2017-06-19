@@ -62,10 +62,8 @@ public class WelcomeActivity extends AppCompatActivity {
     private void JumpAct() {
         if (MyApplication.getInstance().getObject(Common.ISFIRST, true)) {
             JumpAct.jumpActivity(this, GuideActivity.class);
-        } else if (MyApplication.getInstance().getUsertOnline()){
-            JumpAct.jumpActivity(this, MainActivity.class);
         } else {
-            JumpAct.jumpActivity(this, LoginActivity.class);
+            JumpAct.jumpActivity(this, MainActivity.class);
         }
         finish();
     }

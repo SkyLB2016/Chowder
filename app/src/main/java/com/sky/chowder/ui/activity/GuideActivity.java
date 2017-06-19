@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.sky.Common;
 import com.sky.chowder.R;
 import com.sky.chowder.ui.adapter.GuideContoler;
 import com.sky.utils.SPUtils;
@@ -39,7 +40,7 @@ public class GuideActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View arg0) {
-                        SPUtils.getInstance().put("isfirst", false);
+                        SPUtils.getInstance().put(Common.ISFIRST, false);
                         startActivity(new Intent(GuideActivity.this,
                                 MainActivity.class));
 //                        overridePendingTransition(R.anim.in_from_right,
