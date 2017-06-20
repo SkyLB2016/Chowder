@@ -11,7 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.sky.api.IBaseView;
-import com.sky.chowder.common.Constants;
+import com.sky.chowder.C;
 import com.sky.utils.ToastUtils;
 import com.sky.utils.UIHandler;
 import com.sky.widget.DialogManager;
@@ -126,7 +126,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
 
     //让子类处理消息
     protected void handler(Message msg) {
-        if (msg.what == Constants.handler_0x001)
+        if (msg.what == C.handler_0x001)
             showToast(msg.getData().getString("data") + "地势坤，君子以厚德载物。");
     }
     //handler 完

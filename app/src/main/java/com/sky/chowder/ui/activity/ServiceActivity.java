@@ -9,7 +9,7 @@ import android.os.IBinder;
 import android.os.Message;
 
 import com.sky.api.IService;
-import com.sky.chowder.common.Constants;
+import com.sky.chowder.C;
 import com.sky.chowder.ui.BaseActivity;
 import com.sky.utils.LogUtils;
 
@@ -44,7 +44,7 @@ public class ServiceActivity extends BaseActivity implements IService {
         public void onServiceConnected(ComponentName name, IBinder service) {
             LogUtils.i("onServiceConnected");
             Message msg = new Message();
-            msg.what = Constants.handler_0x001;
+            msg.what = C.handler_0x001;
             Bundle bundle = new Bundle();
             bundle.putString("data", "天行健，君子以自强不息；");
             msg.setData(bundle);

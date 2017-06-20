@@ -11,7 +11,7 @@ import com.sky.api.IBaseView;
 import com.sky.chowder.MyApplication;
 import com.sky.chowder.R;
 import com.sky.chowder.utils.ActJump;
-import com.sky.chowder.utils.rox.UseCase;
+import com.sky.chowder.utils.http.UseCase;
 import com.sky.rxbus.DefaultBus;
 import com.sky.utils.NetworkJudgment;
 import com.sky.utils.SPUtils;

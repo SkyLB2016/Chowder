@@ -24,8 +24,8 @@
 
         <!-- 与build.gradle相呼应 -->
         <meta-data
-        android:name="UMENG_CHANNEL"
-        android:value="${CHANNEL_VALUE}" />
+            android:name="UMENG_CHANNEL"
+            android:value="${CHANNEL_VALUE}" />
         <meta-data
             android:name="BUG_HD_SDK_GENERAL_KEY"
             android:value="279dc3c61d77f5b08b4970a31db93c62" />
@@ -91,20 +91,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.SpringIndicatorActivity"
-            android:description="@string/act_05_desc"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/act_05"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.sky.coustom" />
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.SAMPLE_CODE" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".ui.activity.RxJAVAActivity"
             android:description="@string/act_06_desc"
             android:icon="@mipmap/ic_launcher"
@@ -117,6 +103,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.SAMPLE_CODE" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.LoginActivity"
+            android:description="@string/act_06_desc"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/act_06"
+            android:screenOrientation="portrait">
         </activity>
 
     </application>

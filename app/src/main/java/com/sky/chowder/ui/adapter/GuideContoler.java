@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.sky.chowder.R;
-import com.sky.chowder.ui.DepthPageTransformer;
+import com.sky.chowder.utils.DepthPageTransformer;
 
 import java.util.ArrayList;
 import java.util.List;

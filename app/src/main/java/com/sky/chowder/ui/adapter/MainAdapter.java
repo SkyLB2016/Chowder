@@ -7,6 +7,8 @@ import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 
+import com.sky.adapter.RecyclerAdapter;
+import com.sky.adapter.RecyclerHolder;
 import com.sky.chowder.R;
 import com.sky.chowder.model.ActivityModel;
 
@@ -21,12 +23,6 @@ public class MainAdapter extends RecyclerAdapter<ActivityModel, RecyclerHolder> 
     }
 
 
-    @Override
-    protected RecyclerHolder onCreateBodyHolder(View view) {
-        return new RecyclerHolder(view);
-    }
-
-    @Override
     protected void onAchieveHolder(RecyclerHolder holder, int position) {
         holder.setText(R.id.tv_name, position + 1 + "." + datas.get(position).getClassName());
         holder.setText(R.id.tv_describe, datas.get(position).getDescribe());

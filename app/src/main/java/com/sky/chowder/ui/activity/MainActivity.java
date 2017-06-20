@@ -21,7 +21,6 @@ import com.sky.chowder.R;
 import com.sky.chowder.api.view.IMainView;
 import com.sky.chowder.model.ActivityModel;
 import com.sky.chowder.ui.BasePActivity;
-import com.sky.chowder.ui.BaseTitle;
 import com.sky.chowder.ui.adapter.MainAdapter;
 import com.sky.chowder.ui.presenter.MainPresenter;
 import com.sky.chowder.utils.FileSizeUtil;
@@ -35,6 +34,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class MainActivity extends BasePActivity<MainPresenter> implements Toolbar.OnMenuItemClickListener, IMainView {
 
@@ -52,22 +52,14 @@ public class MainActivity extends BasePActivity<MainPresenter> implements Toolba
     @Override
     public void initialize() {
         baseTitle.setLeftButton(-1);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getMemory();
-//                getMemory1();·
-                showLoading();
-            }
-        });
         recycle.setHasFixedSize(true);
         adapter = new MainAdapter(R.layout.adapter_main);
         recycle.setAdapter(adapter);
+
         adapter.setOnItemClickListener(new MainAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                JumpAct.jumpActivity(MainActivity.this,
-                        adapter.getDatas().get(position).getComponentName());
+                JumpAct.jumpActivity(MainActivity.this, adapter.getDatas().get(position).getComponentName());
             }
         });
         adapter.setOnItemLongClickListener(new MainAdapter.OnItemLongClickListener() {
@@ -85,12 +77,12 @@ public class MainActivity extends BasePActivity<MainPresenter> implements Toolba
         presenter = new MainPresenter(this);
     }
 
-    public void setTitle() {
-        BaseTitle title = new BaseTitle(this);
-        title.setToolbar();
-        title.setLeftButton(-1);
+    @OnClick(R.id.fab)
+    private void fabOnclick(){
+        getMemory();
+      //getMemory1();·
+        showLoading();
     }
-
     /**
      * 从manifest中获取activity的信息
      *

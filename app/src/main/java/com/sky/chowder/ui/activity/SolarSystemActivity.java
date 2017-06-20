@@ -12,7 +12,7 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import com.sky.chowder.R;
-import com.sky.chowder.common.Constants;
+import com.sky.chowder.C;
 import com.sky.chowder.ui.BaseActivity;
 import com.sky.chowder.ui.widget.SolarSystem;
 import com.sky.utils.LogUtils;
@@ -67,13 +67,13 @@ public class SolarSystemActivity extends BaseActivity implements Toolbar.OnMenuI
             @Override
             public void openMenu() {
                 layoutDraw.start();
-                handler.sendEmptyMessageDelayed(Constants.handler_0x002, 600);
+                handler.sendEmptyMessageDelayed(C.handler_0x002, 600);
             }
 
             @Override
             public void closeMenu() {
                 layoutDraw.start();
-                handler.sendEmptyMessageDelayed(Constants.handler_0x002, 600);
+                handler.sendEmptyMessageDelayed(C.handler_0x002, 600);
             }
         });
         solarSystem.setOnMenuItemClickListener(new SolarSystem.onMenuItemClickListener() {
@@ -172,7 +172,7 @@ public class SolarSystemActivity extends BaseActivity implements Toolbar.OnMenuI
     @Override
     protected void handler(Message msg) {
         super.handler(msg);
-        if (msg.what == Constants.handler_0x002)
+        if (msg.what == C.handler_0x002)
             layoutDraw.stop();
     }
 }

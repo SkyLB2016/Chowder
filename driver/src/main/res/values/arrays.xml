@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="cars">
-        <item>面包车</item>
-        <item>金杯</item>
-        <item>厢货</item>
-    </string-array>
-</resources>

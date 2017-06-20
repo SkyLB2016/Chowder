@@ -8,7 +8,7 @@ import android.net.ConnectivityManager;
 import android.os.BatteryManager;
 import android.os.Bundle;
 
-import com.sky.chowder.common.Constants;
+import com.sky.chowder.C;
 import com.sky.chowder.ui.BaseActivity;
 import com.sky.utils.NetworkJudgment;
 import com.sky.utils.ToastUtils;
@@ -32,9 +32,9 @@ public class ReceiverActivity extends BaseActivity {
         filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);//网络变化监听
         filter.addAction(Intent.ACTION_BATTERY_CHANGED);//电量变化监听
         filter.addAction(Intent.ACTION_BATTERY_LOW);//电量过低监听
-        filter.addAction(Constants.ACTION_PUSH_DATA);//自定义的action
-        filter.addAction(Constants.ACTION_NEW_VERSION);//自定义的action
-        filter.addAction(Constants.ACTION_MY);//自定义的action
+        filter.addAction(C.ACTION_PUSH_DATA);//自定义的action
+        filter.addAction(C.ACTION_NEW_VERSION);//自定义的action
+        filter.addAction(C.ACTION_MY);//自定义的action
         registerReceiver(receiver, filter);
         //还可能发送统计数据，比如第三方的SDK 做统计需求
         send();//发送广播
@@ -61,12 +61,12 @@ public class ReceiverActivity extends BaseActivity {
                 if (currLevel * 100 / total < 10) {
                     ToastUtils.showShort(context, "电量过低");
                 }
-            } else if (Constants.ACTION_PUSH_DATA.equals(action)) { // 可能有新数据
+            } else if (C.ACTION_PUSH_DATA.equals(action)) { // 可能有新数据
                 Bundle b = intent.getExtras();
                 b.get("data");
-            } else if (Constants.ACTION_NEW_VERSION.equals(action)) { // 可能发现新版本
+            } else if (C.ACTION_NEW_VERSION.equals(action)) { // 可能发现新版本
 //                 VersionDialog 可能是版本提示是否需要下载的对话框
-            } else if (Constants.ACTION_MY.equals(action)) {
+            } else if (C.ACTION_MY.equals(action)) {
                 showToast("actionmy");
                 abortBroadcast();//终止传递
             }
@@ -78,7 +78,7 @@ public class ReceiverActivity extends BaseActivity {
     };
 
     public void send() {
-        Intent broad = new Intent(Constants.ACTION_MY);
+        Intent broad = new Intent(C.ACTION_MY);
         broad.putExtra("msg", "baseactivity");
 //        sendBroadcast(broad);
         sendOrderedBroadcast(broad, "sky.permission.ACTION_MY");
