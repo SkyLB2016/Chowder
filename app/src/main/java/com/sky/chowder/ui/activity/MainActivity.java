@@ -78,7 +78,7 @@ public class MainActivity extends BasePActivity<MainPresenter> implements Toolba
     }
 
     @OnClick(R.id.fab)
-    private void fabOnclick(){
+    protected void fabOnclick(){
         getMemory();
       //getMemory1();·
         showLoading();
