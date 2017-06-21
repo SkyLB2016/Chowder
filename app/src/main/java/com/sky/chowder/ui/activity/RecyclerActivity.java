@@ -1,34 +1,26 @@
 package com.sky.chowder.ui.activity;
 
-import android.os.Bundle;
-
-import com.sky.chowder.ui.BaseActivity;
+import com.sky.chowder.ui.BaseNoPActivity;
 
 /**
  * Created by 李彬 on 2017/3/6.
  */
 
-public class RecyclerActivity extends BaseActivity {
+public class RecyclerActivity extends BaseNoPActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_recycler);
-        Boolean.valueOf(true);
-        Boolean.valueOf("");
-        StringBuffer buffer = new StringBuffer("");
-        buffer.append("");
-    }
-
-    @Override
-    public int getLayoutResId() {
+    protected int getLayoutResId() {
         return 0;
     }
 
     @Override
-    public void initialize() {
+    protected void initialize() {
 
     }
 
+    @Override
+    public void loadData() {
+
+    }
 }

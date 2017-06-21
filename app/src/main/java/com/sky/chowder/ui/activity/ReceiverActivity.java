@@ -9,7 +9,8 @@ import android.os.BatteryManager;
 import android.os.Bundle;
 
 import com.sky.chowder.C;
-import com.sky.chowder.ui.BaseActivity;
+import com.sky.chowder.R;
+import com.sky.chowder.ui.BaseNoPActivity;
 import com.sky.utils.NetworkJudgment;
 import com.sky.utils.ToastUtils;
 
@@ -17,12 +18,23 @@ import com.sky.utils.ToastUtils;
  * Created by 李彬 on 2017/3/3.
  */
 
-public class ReceiverActivity extends BaseActivity {
+public class ReceiverActivity extends BaseNoPActivity {
 
     @Override
-    public void initialize() {
+    public int getLayoutResId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    protected void initialize() {
 
     }
+
+    @Override
+    public void loadData() {
+
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -84,8 +96,4 @@ public class ReceiverActivity extends BaseActivity {
         sendOrderedBroadcast(broad, "sky.permission.ACTION_MY");
     }
 
-    @Override
-    public int getLayoutResId() {
-        return 0;
-    }
 }

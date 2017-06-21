@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Chowder</string>
+    <string name="app_name">SKY</string>
 
     <!--strings的命名-->
     <!--类型_{范围_}功能，范围可选。-->
@@ -35,14 +35,16 @@
     <string name="act_01_des">采用animation编写，延时一秒钟后执行</string>
     <string name="act_02">卫星式菜单栏</string>
     <string name="act_02_desc">支持九个方向，采用ObjectAnimator编写</string>
-    <string name="act_03">RecyclerView的运用</string>
-    <string name="act_03_desc">待定</string>
-    <string name="act_04">的运用</string>
+    <string name="act_03">Recycler</string>
+    <string name="act_03_desc">recyclerView+recycleAdapter的使用</string>
+    <string name="act_04">自定义贝塞尔曲线</string>
     <string name="act_04_desc">待定</string>
-    <string name="act_05"></string>
-    <string name="act_05_desc"></string>
-    <string name="act_06">rxJava</string>
-    <string name="act_06_desc">rxJava</string>
+    <string name="act_05">登录</string>
+    <string name="act_05_desc">登录</string>
+    <string name="act_06">receive</string>
+    <string name="act_06_desc">receive</string>
+    <string name="act_07">service</string>
+    <string name="act_07_desc">service</string>
 
 
     <string name="left_top">left_top</string>

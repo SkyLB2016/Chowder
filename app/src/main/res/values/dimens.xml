@@ -35,4 +35,5 @@
     <dimen name="text_XXlarge">32sp</dimen>
     <dimen name="text_XXXlarge">38sp</dimen>
     <dimen name="text_XXXXlarge">50sp</dimen>
+
 </resources>

@@ -11,9 +11,7 @@ import com.sky.chowder.api.presenter.ILoginP;
 import com.sky.chowder.model.LoginEntity;
 import com.sky.chowder.model.requestparams.LoginParams;
 import com.sky.chowder.ui.BasePresenter;
-import com.sky.chowder.ui.activity.ForgetPwdActivity;
 import com.sky.chowder.ui.activity.MainActivity;
-import com.sky.chowder.ui.activity.RegisterActivity;
 import com.sky.chowder.utils.http.HttpUtils;
 import com.sky.chowder.utils.http.UseCase;
 import com.sky.model.ObjectEntity;
@@ -37,7 +35,7 @@ public class LoginPresenter extends BasePresenter<IBaseView> implements ILoginP 
 
     @Override
     public void login(final String phone, final String pwd) {
-        if (TextUtils.isEmpty(phone) || !RegexUtils.isPhone(phone)) {
+        if (!RegexUtils.isPhone(phone)){
             mView.showToast("请输入正确的电话号码");
             return;
         }
@@ -65,8 +63,6 @@ public class LoginPresenter extends BasePresenter<IBaseView> implements ILoginP 
                 setObject(Common.PHONE, phone);
                 setObject(Common.PWD, pwd);
                 setObject(Common.TOKEN, data.getResult().getToken());
-                sendEvent(Common.LOGIN, "aejflk");
-                sendEvent(Common.LOGIN);
                 JumpAct.jumpActivity(context, MainActivity.class);
                 mView.finish();
             }
@@ -77,11 +73,9 @@ public class LoginPresenter extends BasePresenter<IBaseView> implements ILoginP 
 
     @Override
     public void register() {
-        JumpAct.jumpActivity(context, RegisterActivity.class);
     }
 
     @Override
     public void forget() {
-        JumpAct.jumpActivity(context, ForgetPwdActivity.class);
     }
 }

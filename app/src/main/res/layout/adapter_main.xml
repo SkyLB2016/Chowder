@@ -6,16 +6,14 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/wh_8"
     android:elevation="@dimen/wh_48"
-    app:cardBackgroundColor="@android:color/holo_blue_bright"
+    app:cardBackgroundColor="@android:color/background_light"
     app:cardCornerRadius="@dimen/wh_8">
     <!--android:stateListAnimator="@state_list_animator/state_list_animator"-->
 
-    <LinearLayout
-        android:id="@+id/cardView_layout"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/wh_8"
-        android:orientation="horizontal">
+        android:layout_margin="@dimen/wh_8">
 
         <ImageView
             android:id="@+id/img_describe"
@@ -24,30 +22,26 @@
             android:background="@mipmap/ic_launcher"
             android:scaleType="fitXY" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/wh_16"
-            android:orientation="vertical">
+            android:layout_toRightOf="@id/img_describe"
+            android:text="calssname"
+            android:textSize="@dimen/text_medium"
+            android:textStyle="italic" />
 
-            <TextView
-                android:id="@+id/tv_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="calssname"
-                android:textSize="@dimen/text_medium"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tv_describe"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/wh_4"
-                android:fontFamily="sans-serif-condensed"
-                android:gravity="center_vertical"
-                android:text="描述"
-                android:textSize="@dimen/text_micro" />
-
-        </LinearLayout>
-    </LinearLayout>
+        <TextView
+            android:id="@+id/tv_describe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_name"
+            android:layout_marginLeft="@dimen/wh_16"
+            android:layout_marginTop="@dimen/wh_4"
+            android:layout_toRightOf="@id/img_describe"
+            android:fontFamily="sans-serif-condensed"
+            android:text="描述"
+            android:textSize="@dimen/text_micro" />
+    </RelativeLayout>
 </android.support.v7.widget.CardView>

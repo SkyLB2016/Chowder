@@ -1,4 +1,4 @@
-package com.sky.chowder.ui.activity;
+package com.sky.chowder.ui.service;
 
 import android.app.Service;
 import android.content.Intent;
@@ -11,8 +11,8 @@ import com.sky.utils.LogUtils;
 
 /**
  * Created by 李彬 on 2017/3/3.
+ * 写成守护线程的服务
  */
-
 public class MyService extends Service {
     @Override
     public void onCreate() {

@@ -52,7 +52,6 @@ public abstract class BasePresenter<V extends IBaseView> implements IBasePresent
     }
 
     public void onCreateView(Bundle savedInstanceState) {
-        loadData();
     }
 
     public void onStart() {
@@ -101,7 +100,7 @@ public abstract class BasePresenter<V extends IBaseView> implements IBasePresent
 
     @Override
     public void onReceiveEvent(DefaultBus event) {
-        if (event.getCode()==Common.LOGIN)  toLoginActivity();
+        if (event.getCode() == Common.LOGIN) toLoginActivity();
     }
 
     @Override

@@ -56,10 +56,6 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.sky.coustom" />
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.SAMPLE_CODE" />
             </intent-filter>
         </activity>
         <activity
@@ -70,46 +66,46 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.sky.coustom" />
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.SAMPLE_CODE" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.CustomActivity"
+            android:name=".ui.activity.other.CustomActivity"
             android:description="@string/act_04_desc"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_04"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.sky.coustom" />
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.SAMPLE_CODE" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.RxJAVAActivity"
+            android:name=".ui.activity.LoginActivity"
+            android:description="@string/act_05_desc"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/act_05"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.sky.coustom" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.ReceiverActivity"
             android:description="@string/act_06_desc"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_06"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.sky.coustom" />
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.SAMPLE_CODE" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.activity.LoginActivity"
-            android:description="@string/act_06_desc"
+        </activity><activity
+            android:name=".ui.activity.ServiceActivity"
+            android:description="@string/act_07_desc"
             android:icon="@mipmap/ic_launcher"
-            android:label="@string/act_06"
+            android:label="@string/act_07"
             android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.sky.coustom" />
+            </intent-filter>
         </activity>
 
     </application>

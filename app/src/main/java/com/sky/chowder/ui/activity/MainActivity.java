@@ -1,15 +1,10 @@
 package com.sky.chowder.ui.activity;
 
 import android.app.ActivityManager;
-import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.graphics.Bitmap;
 import android.os.BatteryManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
@@ -23,14 +18,9 @@ import com.sky.chowder.model.ActivityModel;
 import com.sky.chowder.ui.BasePActivity;
 import com.sky.chowder.ui.adapter.MainAdapter;
 import com.sky.chowder.ui.presenter.MainPresenter;
-import com.sky.chowder.utils.FileSizeUtil;
 import com.sky.utils.JumpAct;
 import com.sky.widget.MyRecyclerView;
 
-import java.text.Collator;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import butterknife.BindView;
@@ -52,6 +42,7 @@ public class MainActivity extends BasePActivity<MainPresenter> implements Toolba
     @Override
     public void initialize() {
         baseTitle.setLeftButton(-1);
+
         recycle.setHasFixedSize(true);
         adapter = new MainAdapter(R.layout.adapter_main);
         recycle.setAdapter(adapter);
@@ -69,7 +60,6 @@ public class MainActivity extends BasePActivity<MainPresenter> implements Toolba
                 return true;
             }
         });
-        adapter.setDatas(getData());
     }
 
     @Override
@@ -78,61 +68,11 @@ public class MainActivity extends BasePActivity<MainPresenter> implements Toolba
     }
 
     @OnClick(R.id.fab)
-    protected void fabOnclick(){
+    protected void fabOnclick() {
         getMemory();
-      //getMemory1();·
-        showLoading();
-    }
-    /**
-     * 从manifest中获取activity的信息
-     *
-     * @return
-     */
-    protected List<ActivityModel> getData() {
-        List<ActivityModel> activityInfos = new ArrayList<>();
-
-        //Intent mainIntent = new Intent(Intent.ACTION_MAIN);//获取action为ACTION_MAIN的activity
-        //mainIntent.addCategory(Intent.CATEGORY_SAMPLE_CODE);//筛选category为sample code的act
-        //mainIntent.setPackage(getPackageName());//只选出自己应用的act
-        Intent mainIntent = new Intent("com.sky.coustom");//自定义的action
-        PackageManager pm = getPackageManager();
-        List<ResolveInfo> resolveInfos = pm.queryIntentActivities(mainIntent, 0);
-
-        if (null == resolveInfos)
-            return activityInfos;
-
-        int len = resolveInfos.size();
-        for (int i = 0; i < len; i++) {
-            ResolveInfo info = resolveInfos.get(i);
-            //获取label,activity中未设置的话返回程序名称
-            CharSequence labelSeq = info.loadLabel(pm);
-            String label = labelSeq != null ? labelSeq.toString() : info.activityInfo.name;
-            //获取说明
-            int descriptionRes = info.activityInfo.descriptionRes;
-            String describe = descriptionRes == 0 ? "未添加" : getResources().getString(descriptionRes);
-            //获取icon  Drawable icon = info.loadIcon(pm);
-            int iconRes = info.activityInfo.icon;
-            int icon = iconRes == 0 ? R.mipmap.ic_launcher : iconRes;
-            activityInfos.add(new ActivityModel(label, describe, icon, info.activityInfo.name));
-        }
-        //排序
-        Collections.sort(activityInfos, sDisplayNameComparator);
-//        Collections.sort(activityInfos);//使用activityModel中的compareTo进行排序
-        return activityInfos;
+        getMemory1();
     }
 
-    /**
-     * 为筛选出的act进行排序
-     */
-    private final static Comparator<ActivityModel> sDisplayNameComparator =
-            new Comparator<ActivityModel>() {
-                private final Collator collator = Collator.getInstance();
-
-                @Override
-                public int compare(ActivityModel lhs, ActivityModel rhs) {
-                    return collator.compare(lhs.getClassName(), rhs.getClassName());
-                }
-            };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -177,48 +117,9 @@ public class MainActivity extends BasePActivity<MainPresenter> implements Toolba
         }
     }
 
-
-    private void progressDialog() {
-        ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDialog.setTitle("main");
-        progressDialog.setMessage("main");
-        progressDialog.setIcon(R.mipmap.ic_launcher);
-        progressDialog.setMax(100);
-        progressDialog.incrementProgressBy(50);
-        progressDialog.setIndeterminate(false);
-        progressDialog.setButton(DialogInterface.BUTTON_POSITIVE, "ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                showLoading();
-            }
-        });
-        progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                showLoading();
-            }
-        });
-        progressDialog.setCancelable(true);
-        progressDialog.show();
-    }
-
-    private Bitmap getViewBitmap(View addViewContent) {
-
-        addViewContent.setDrawingCacheEnabled(true);
-
-        addViewContent.measure(
-                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
-                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-        addViewContent.layout(0, 0,
-                addViewContent.getMeasuredWidth(),
-                addViewContent.getMeasuredHeight());
-
-        addViewContent.buildDrawingCache();
-        Bitmap cacheBitmap = addViewContent.getDrawingCache();
-        Bitmap bitmap = Bitmap.createBitmap(cacheBitmap);
-
-        return bitmap;
+    @Override
+    public void setData(List<ActivityModel> data) {
+        adapter.setDatas(data);
     }
 
     //获取电量百分比
@@ -242,38 +143,6 @@ public class MainActivity extends BasePActivity<MainPresenter> implements Toolba
     private void getMemory1() {
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         showToast("memory==" + manager.getMemoryClass() + "\n;large==" + manager.getLargeMemoryClass());
-    }
-
-    public void getFileSize() {
-        long sdTotal = FileSizeUtil.getTotalExternalMemorySize();
-        String sdTotal1 = FileSizeUtil.formatFileSize(sdTotal, false);
-
-        long sdshengyu = FileSizeUtil.getAvailableExternalMemorySize();
-        String sdshengyu1 = FileSizeUtil.formatFileSize(sdshengyu, false);
-
-        boolean sdFlag = FileSizeUtil.externalMemoryAvailable();
-        long total = FileSizeUtil.getTotalInternalMemorySize();
-        String total1 = FileSizeUtil.formatFileSize(total, false);
-
-        long neibushengyu = FileSizeUtil.getAvailableInternalMemorySize();
-        String neibushengyu1 = FileSizeUtil.formatFileSize(neibushengyu, false);
-
-        long neicun = FileSizeUtil.getTotalMemorySize(this);
-        String neicun1 = FileSizeUtil.formatFileSize(neicun, false);
-
-        long neic = FileSizeUtil.getAvailableMemory(this);
-        String neic1 = FileSizeUtil.formatFileSize(neic, false);
-
-
-        FileSizeUtil.formatFileSize(9, false);
-
-//        tv.append("sd卡总容量=" + sdTotal1 + "\n" +
-//                "sd卡剩余容量=" + sdshengyu1 + "\n" +
-//                "内部存储总容量=" + total1 + "\n" +
-//                "内部存储剩余容量=" + neibushengyu1 + "\n" +
-//                "内存总容量=" + neicun1 + "\n" +
-//                "内存2剩余容量=" + neic1
-//        );
     }
 }
 

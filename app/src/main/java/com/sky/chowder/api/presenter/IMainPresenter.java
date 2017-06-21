@@ -7,7 +7,4 @@ import com.sky.api.IBasePresenter;
  */
 public interface IMainPresenter extends IBasePresenter {
 
-    void test();
-
-    void test1();
 }

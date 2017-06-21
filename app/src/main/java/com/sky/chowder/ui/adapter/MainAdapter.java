@@ -18,10 +18,10 @@ import com.sky.chowder.model.ActivityModel;
  * @date 15/12/9 下午8:52
  */
 public class MainAdapter extends RecyclerAdapter<ActivityModel, RecyclerHolder> {
+
     public MainAdapter(int layoutId) {
         super(layoutId);
     }
-
 
     protected void onAchieveHolder(RecyclerHolder holder, int position) {
         holder.setText(R.id.tv_name, position + 1 + "." + datas.get(position).getClassName());
@@ -35,7 +35,8 @@ public class MainAdapter extends RecyclerAdapter<ActivityModel, RecyclerHolder> 
             //点击效果，阴影效果
             //((CardView) holder.getView(R.id.cardView)).setCardElevation(new Random().nextInt(100));
             holder.getView(R.id.cardView).setStateListAnimator(
-                    AnimatorInflater.loadStateListAnimator(context, R.drawable.state_list_animator));
+                    AnimatorInflater.loadStateListAnimator(context, R.drawable.state_list_animator)
+            );
             //视图裁剪
             holder.getView(R.id.img_describe).setClipToOutline(true);
             holder.getView(R.id.img_describe).setOutlineProvider(new ViewOutlineProvider() {
@@ -46,6 +47,8 @@ public class MainAdapter extends RecyclerAdapter<ActivityModel, RecyclerHolder> 
                             view.getRight(), view.getBottom(), 60);
                 }
             });
+        } else{
+            holder.getView(R.id.cardView).setBackground(context.getResources().getDrawable(R.drawable.bg_card));
         }
     }
 
