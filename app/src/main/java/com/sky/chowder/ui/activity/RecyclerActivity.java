@@ -1,5 +1,6 @@
 package com.sky.chowder.ui.activity;
 
+import com.sky.chowder.R;
 import com.sky.chowder.ui.BaseNoPActivity;
 
 /**
@@ -11,7 +12,7 @@ public class RecyclerActivity extends BaseNoPActivity {
 
     @Override
     protected int getLayoutResId() {
-        return 0;
+        return R.layout.activity_main;
     }
 
     @Override

@@ -34,7 +34,7 @@
         <activity
             android:name=".ui.activity.WelcomeActivity"
             android:description="@string/act_01_des"
-            android:label="@string/app_name">
+            android:label="@string/act_01">
             <intent-filter>
                 <action android:name="com.sky.coustom" />
                 <action android:name="android.intent.action.MAIN" />
@@ -93,20 +93,13 @@
             android:description="@string/act_06_desc"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_06"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.sky.coustom" />
-            </intent-filter>
-        </activity><activity
+            android:screenOrientation="portrait"></activity>
+        <activity
             android:name=".ui.activity.ServiceActivity"
             android:description="@string/act_07_desc"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_07"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.sky.coustom" />
-            </intent-filter>
-        </activity>
+            android:screenOrientation="portrait"></activity>
 
     </application>
 

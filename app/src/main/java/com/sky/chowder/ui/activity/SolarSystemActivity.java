@@ -1,7 +1,6 @@
 package com.sky.chowder.ui.activity;
 
 import android.graphics.drawable.AnimationDrawable;
-import android.os.Bundle;
 import android.os.Message;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -11,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
-import com.sky.chowder.R;
 import com.sky.chowder.C;
+import com.sky.chowder.R;
 import com.sky.chowder.ui.BaseActivity;
 import com.sky.chowder.ui.widget.SolarSystem;
 import com.sky.utils.LogUtils;
@@ -32,15 +31,8 @@ public class SolarSystemActivity extends BaseActivity implements Toolbar.OnMenuI
     private AnimationDrawable layoutDraw;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_solar);
-        initialize();
-    }
-
-    @Override
     public int getLayoutResId() {
-        return 0;
+        return R.layout.activity_solar;
     }
 
     @Override

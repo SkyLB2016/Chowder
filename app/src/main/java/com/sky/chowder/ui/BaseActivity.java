@@ -130,5 +130,4 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
             showToast(msg.getData().getString("data") + "地势坤，君子以厚德载物。");
     }
     //handler 完
-
 }
