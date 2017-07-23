@@ -32,7 +32,8 @@
 
         <activity android:name=".ui.activity.GuideActivity" />
         <activity
-            android:name=".ui.activity.WelcomeActivity">
+            android:name=".ui.activity.WelcomeActivity"
+            android:description="@string/act_01_des">
             <intent-filter>
                 <action android:name="com.sky.coustom" />
                 <action android:name="android.intent.action.MAIN" />
