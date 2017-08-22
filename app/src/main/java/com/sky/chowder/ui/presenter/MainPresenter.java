@@ -46,8 +46,7 @@ public class MainPresenter extends BasePresenter<IMainView> implements IMainPres
         PackageManager pm = context.getPackageManager();
         List<ResolveInfo> resolveInfos = pm.queryIntentActivities(mainIntent, 0);
 
-        if (null == resolveInfos)
-            return activityInfos;
+        if (null == resolveInfos) return activityInfos;
 
         int len = resolveInfos.size();
         for (int i = 0; i < len; i++) {
