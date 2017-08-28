@@ -16,7 +16,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
 //    compile project(':apiutils')
-    compile 'com.sky:apiutils:2.2.38'
+    compile 'com.sky:apiutils:2.2.41'
     //butterknife
     compile "com.jakewharton:butterknife:$bknifeVer"
     annotationProcessor "com.jakewharton:butterknife-compiler:$bknifeVer"
