@@ -112,9 +112,9 @@ android {
 //    }
     //渠道Flavors，我这里写了一些常用的
     productFlavors {
-        GooglePlay {}
-        xiaomi {}
-        umeng {}
+//        GooglePlay {}
+//        xiaomi {}
+//        umeng {}
     }
     productFlavors.all { flavor ->
         flavor.manifestPlaceholders = [CHANNEL_VALUE: name]

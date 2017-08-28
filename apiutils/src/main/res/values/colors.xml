@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/main_color</color>
+    <color name="colorPrimaryDark">@color/color_66</color>
+    <color name="colorAccent">@color/main_color</color>
+
+    <color name="main_color">#ffd000</color>
+    <color name="main_color_80">#ccffd000</color>
+
+
+    <color name="text_color">#333333</color>
+    <color name="text_color1">#0d233f</color>
+    <color name="text_color1_80">#cc0d233f</color>
+    <color name="hint_color1">#c29f07</color>
+
+    <color name="color_66">#666666</color>
+    <color name="color_99">#999999</color>
+    <color name="color_cc">#cccccc</color>
+    <color name="color_ee">#eeeeee</color>
+
+    <color name="red">#f12b2a</color>
+    <color name="green">#00ae21</color>
+
+    <color name="light_orange">#ffefab</color>
+    <color name="light_orange1">#fffef7</color>
+    <color name="dark_orange">#fff6d0</color>
+
+
+
+    <color name="bg_color">#F7F7F7</color>
+    <color name="line_color">#EBEBEB</color>
+</resources>
