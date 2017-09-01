@@ -1,7 +1,7 @@
 package com.sky.chowder.ui.activity;
 
+import com.sky.base.BaseNoPActivity;
 import com.sky.chowder.R;
-import com.sky.chowder.ui.BaseNoPActivity;
 
 /**
  * Created by 李彬 on 2017/3/6.

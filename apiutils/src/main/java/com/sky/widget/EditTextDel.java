@@ -32,7 +32,7 @@ public class EditTextDel extends AppCompatEditText {
     }
 
     private void init(Context context) {
-        image = context.getResources().getDrawable(R.mipmap.ic_clear);
+        image = context.getResources().getDrawable(R.mipmap.ic_close);
         final Drawable[] drawables = getCompoundDrawables();
 
         addTextChangedListener(new TextWatcher() {
@@ -46,7 +46,6 @@ public class EditTextDel extends AppCompatEditText {
 
             @Override
             public void afterTextChanged(Editable s) {
-
                 if (length() > 0) {
                     setCompoundDrawablesWithIntrinsicBounds(drawables[0], drawables[1], image, drawables[3]);
                 } else

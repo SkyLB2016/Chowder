@@ -81,6 +81,13 @@ public class AppUtils {
      * @param permissions
      * @param requestCode
      */
+    public static void requestPermission(Activity activity, String[] permissions, int[] requestCode) {
+        for (int i = 0; i < permissions.length; i++) {
+            if (ContextCompat.checkSelfPermission(activity, permissions[i]) == PackageManager.PERMISSION_GRANTED)
+                ActivityCompat.requestPermissions(activity, new String[]{permissions[i]}, requestCode[i]);
+        }
+    }
+
     public static void requestPermission(Activity activity, String[] permissions, int requestCode) {
         ActivityCompat.requestPermissions(activity, permissions, requestCode);
     }

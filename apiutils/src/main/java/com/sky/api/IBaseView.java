@@ -48,6 +48,4 @@ public interface IBaseView {
      * 关闭页面
      */
     void finish();
-
-    void sendMainMessage(int mainhandler);//待删除
 }

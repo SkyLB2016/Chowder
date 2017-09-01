@@ -159,7 +159,7 @@ public class FileUtils {
             input.close();
             baos.close();
             // 返回字符串
-             result = new String(baos.toByteArray());
+            result = new String(baos.toByteArray());
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -375,6 +375,7 @@ public class FileUtils {
 
         return false;
     }
+
     /**
      * 获取或创建Cache目录
      *
@@ -449,13 +450,14 @@ public class FileUtils {
 
         void success(String path);
     }
-    public static boolean savefile(Context context,String usernaem,String pass){
+
+    public static boolean savefile(Context context, String usernaem, String pass) {
 
         try {
 //			File filesDir = context.getFilesDir();
-            File file = new File(context.getFilesDir(),"info.txt");
+            File file = new File(context.getFilesDir(), "info.txt");
             FileOutputStream fos = new FileOutputStream(file);
-            fos.write((usernaem+"##"+pass).getBytes());
+            fos.write((usernaem + "##" + pass).getBytes());
             fos.close();
             return true;
         } catch (IOException e) {
@@ -464,14 +466,15 @@ public class FileUtils {
         }
 
     }
-    public static Map<String, String > get(Context context){
-        File file = new File(context.getFilesDir(),"info.txt");
+
+    public static Map<String, String> get(Context context) {
+        File file = new File(context.getFilesDir(), "info.txt");
         try {
-            FileInputStream fis  = new FileInputStream(file);
+            FileInputStream fis = new FileInputStream(file);
             BufferedReader br = new BufferedReader(new InputStreamReader(fis));
             String str = br.readLine();
             String[] infos = str.split("##");
-            Map<String , String > map = new HashMap<>();
+            Map<String, String> map = new HashMap<>();
             map.put("username", infos[0]);
             map.put("pass", infos[0]);
             return map;
@@ -483,13 +486,12 @@ public class FileUtils {
 
     public static String saveFile(String dir, String file, String content) {
         try {
-            String e = getFile(dir, file);
-            FileWriter writer = new FileWriter(e, true);
+            String path = getFile(dir, file);
+            FileWriter writer = new FileWriter(path, true);
             writer.write(content);
             writer.close();
-            return e;
+            return path;
         } catch (IOException var5) {
-            var5.printStackTrace();
             return null;
         }
     }
@@ -503,41 +505,39 @@ public class FileUtils {
     }
 
     //序列化record
-    public static <T> void serializeToFile(String dir, String id, T object) {
-        File sdFile = new File(dir, id + ".serial");
+    public static <T> void serializeToFile(String dir, String name, T object) {
+        File sdFile = new File(dir, name + "ser.serial");
         try {
             FileOutputStream fos = new FileOutputStream(sdFile);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(object);// 写入
             fos.close(); // 关闭输出流
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            LogUtils.i(e.getMessage());
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            LogUtils.i(e.getMessage());
         }
     }
 
     //反序列化
     public static <T> T getSerializeObj(String dir, String id) {
         T object = null;//需要保存的记录
-        File sdFile = new File(dir, id + ".serial");
+        File sdFile = new File(dir, id + "ser.serial");
         try {
             FileInputStream fis = new FileInputStream(sdFile);   //获得输入流
             ObjectInputStream ois = new ObjectInputStream(fis);
             object = (T) ois.readObject();
             ois.close();
         } catch (StreamCorruptedException e) {
-            e.printStackTrace();
+            LogUtils.i(e.getMessage());
         } catch (OptionalDataException e) {
-            e.printStackTrace();
+            LogUtils.i(e.getMessage());
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            LogUtils.i(e.getMessage());
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.i(e.getMessage());
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            LogUtils.i(e.getMessage());
         }
         return object;
     }

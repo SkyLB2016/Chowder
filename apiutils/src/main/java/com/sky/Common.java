@@ -30,7 +30,7 @@ public class Common {
     public static final String SERVICETEL = "4000914113";//客服电话
 
     public static final String CITY = "city";
-    public static final String CITY_DEFAULT = "北京";
+    public static final String CITY_DEFAULT = "北京市";
 
 
     //0."待抢单";1:"已经抢单";2:"到达目的地";3:"暂无此状态";4:"开始装车";5:"装车完成";6:"开始卸车"；7：卸车完成；8支付完成；

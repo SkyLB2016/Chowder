@@ -4,8 +4,8 @@ import android.view.View;
 
 import com.sky.Common;
 import com.sky.api.IBaseView;
+import com.sky.base.BasePActivity;
 import com.sky.chowder.R;
-import com.sky.chowder.ui.BasePActivity;
 import com.sky.chowder.ui.presenter.LoginPresenter;
 import com.sky.utils.TextUtil;
 import com.sky.widget.EditTextDel;

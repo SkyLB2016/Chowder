@@ -93,10 +93,4 @@ public abstract class SkyActivity extends AppCompatActivity implements IBaseView
         if (dialogManager != null)
             dialogManager.disDialog();
     }
-
-    @Override
-    public void sendMainMessage(int mainhandler) {
-
-    }
-
 }

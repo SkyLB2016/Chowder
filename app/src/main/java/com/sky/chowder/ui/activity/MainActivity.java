@@ -12,10 +12,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.sky.base.BasePActivity;
 import com.sky.chowder.R;
 import com.sky.chowder.api.view.IMainView;
 import com.sky.chowder.model.ActivityModel;
-import com.sky.chowder.ui.BasePActivity;
 import com.sky.chowder.ui.adapter.MainAdapter;
 import com.sky.chowder.ui.presenter.MainPresenter;
 import com.sky.utils.JumpAct;

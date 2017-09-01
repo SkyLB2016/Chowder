@@ -8,9 +8,9 @@ import android.net.ConnectivityManager;
 import android.os.BatteryManager;
 import android.os.Bundle;
 
+import com.sky.base.BaseNoPActivity;
 import com.sky.chowder.C;
 import com.sky.chowder.R;
-import com.sky.chowder.ui.BaseNoPActivity;
 import com.sky.utils.NetworkJudgment;
 import com.sky.utils.ToastUtils;
 

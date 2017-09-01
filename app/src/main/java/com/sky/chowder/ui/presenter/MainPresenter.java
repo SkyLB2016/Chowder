@@ -5,11 +5,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 
+import com.sky.base.BasePresenter;
 import com.sky.chowder.R;
 import com.sky.chowder.api.presenter.IMainPresenter;
 import com.sky.chowder.api.view.IMainView;
 import com.sky.chowder.model.ActivityModel;
-import com.sky.chowder.ui.BasePresenter;
 
 import java.text.Collator;
 import java.util.ArrayList;

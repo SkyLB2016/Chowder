@@ -11,7 +11,6 @@ import android.os.Message;
 import com.sky.api.IService;
 import com.sky.chowder.C;
 import com.sky.chowder.R;
-import com.sky.chowder.ui.BaseActivity;
 import com.sky.chowder.ui.service.MyService;
 import com.sky.utils.LogUtils;
 

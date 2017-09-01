@@ -12,7 +12,6 @@ import android.widget.RelativeLayout;
 
 import com.sky.chowder.C;
 import com.sky.chowder.R;
-import com.sky.chowder.ui.BaseActivity;
 import com.sky.chowder.ui.widget.SolarSystem;
 import com.sky.utils.LogUtils;
 import com.sky.utils.SPUtils;

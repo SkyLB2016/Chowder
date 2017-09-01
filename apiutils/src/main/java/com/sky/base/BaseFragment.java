@@ -161,9 +161,4 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
         if (getActivity() != null)
             getActivity().finish();
     }
-
-    @Override
-    public void sendMainMessage(int mainhandler) {
-
-    }
 }

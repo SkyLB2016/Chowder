@@ -17,7 +17,7 @@ import com.sky.chowder.model.ActivityModel;
  * @Description:
  * @date 15/12/9 下午8:52
  */
-public class MainAdapter extends RecyclerAdapter<ActivityModel, RecyclerHolder> {
+public class MainAdapter extends RecyclerAdapter<ActivityModel> {
 
     public MainAdapter(int layoutId) {
         super(layoutId);

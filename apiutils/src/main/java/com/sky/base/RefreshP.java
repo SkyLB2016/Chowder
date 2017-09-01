@@ -23,6 +23,7 @@ public abstract class RefreshP<V extends IRefreshV> extends BasePresenter<V> imp
 
     @Override
     public void loadData() {
+        page = 1;
         getPutExtra();
         getDataList();
     }
