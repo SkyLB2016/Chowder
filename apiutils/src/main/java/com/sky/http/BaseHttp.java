@@ -26,19 +26,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * 网络请求类
  */
 public class BaseHttp {
+
     private static final Charset UTF8 = Charset.forName("UTF-8");
 
     private final static int REQUEST_TIME_OUT = 15; // 请求超时
     private final static int RESPONSE_TIME_OUT = 15; // 响应超时
 
-    protected static BaseHttp utils;
-    protected static Retrofit retrofit;
-    protected static OkHttpClient client;
+    protected Retrofit retrofit;
+    protected OkHttpClient client;
 
     /**
      * 获取retrofit
      */
-    protected static void initRetrofit() {
+    protected void initRetrofit() {
         if (retrofit != null) return;
         retrofit = new Retrofit.Builder()
                 .baseUrl(Common.getUrl())
@@ -51,7 +51,7 @@ public class BaseHttp {
     /**
      * 初始化OkHttpClient
      */
-    protected static void initClient() {
+    protected void initClient() {
         if (client != null) return;
         client = new OkHttpClient.Builder()
                 .connectTimeout(REQUEST_TIME_OUT, TimeUnit.SECONDS)

@@ -4,12 +4,10 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.os.Bundle;
 import android.os.IBinder;
-import android.os.Message;
 
 import com.sky.api.IService;
-import com.sky.chowder.C;
+import com.sky.base.BaseNoPActivity;
 import com.sky.chowder.R;
 import com.sky.chowder.ui.service.MyService;
 import com.sky.utils.LogUtils;
@@ -17,8 +15,7 @@ import com.sky.utils.LogUtils;
 /**
  * Created by 李彬 on 2017/3/3.
  */
-
-public class ServiceActivity extends BaseActivity implements IService {
+public class ServiceActivity extends BaseNoPActivity implements IService {
 
     @Override
     public int getLayoutResId() {
@@ -44,12 +41,12 @@ public class ServiceActivity extends BaseActivity implements IService {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             LogUtils.i("onServiceConnected");
-            Message msg = new Message();
-            msg.what = C.handler_0x001;
-            Bundle bundle = new Bundle();
-            bundle.putString("data", "天行健，君子以自强不息；");
-            msg.setData(bundle);
-            handler.sendMessage(msg);
+//            Message msg = new Message();
+//            msg.what = C.handler_0x001;
+//            Bundle bundle = new Bundle();
+//            bundle.putString("data", "天行健，君子以自强不息；");
+//            msg.setData(bundle);
+//            handler.sendMessage(msg);
             MyService.MyBinder binder = (MyService.MyBinder) service;
             binder.greet("天行健，君子以自强不息；");
         }

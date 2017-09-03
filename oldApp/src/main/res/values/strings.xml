@@ -1,0 +1,164 @@
+<resources>
+    <string name="app_name">MyDemo</string>
+
+    <!--strings的命名-->
+    <!--类型_{范围_}功能，范围可选。-->
+    <!--以下为几种常用的命名：-->
+    <!--页面标题，命名格式为：title_页面-->
+    <!--按钮文字，命名格式为：btn_按钮事件-->
+    <!--标签文字，命名格式为：label_标签文字-->
+    <!--选项卡文字，命名格式为：tab_选项卡文字-->
+    <!--消息框文字，命名格式为：toast_消息-->
+    <!--编辑框的提示文字，命名格式为：hint_提示信息-->
+    <!--图片的描述文字，命名格式为：desc_图片文字-->
+    <!--对话框的文字，命名格式为：dialog_文字-->
+    <!--menu的item文字，命名格式为：action_文字-->
+
+    <!--页面标题，命名格式为：title_页面-->
+    <string name="title_main">首页</string>
+    <string name="title_refresh">refresh</string>
+
+    <!--按钮文字，命名格式为：btn_按钮事件-->
+    <!--标签文字，命名格式为：label_标签文字-->
+    <string name="act_solar_desc">卫星菜单栏,目前完美</string>
+    <string name="act_list_desc">listview刷新，已开始淘汰</string>
+    <string name="act_bottom_desc">底部自定义Tab栏</string>
+    <string name="act_carousel_desc">viewpager轮播图，也可以用ViewFlipper，待修改</string>
+    <string name="act_ImageUri_desc">载入本地图片</string>
+    <string name="act_imageUrl_desc">网络图片加载与缓存</string>
+    <string name="act_sliding_desc">仿QQ侧滑栏，目前完美；以及流式布局dialog应用，自定义的actionbar</string>
+    <string name="act_toptab_desc">顶部Tab栏，仿5.0微信</string>
+    <string name="act_tablayout_desc">toolbar的Tab栏应用</string>
+    <string name="act_tree_desc">树形结构,XML文件解析</string>
+    <string name="act_waterfall_desc">recycle的瀑布流</string>
+    <string name="act_CircleProgress_desc">自定义的环形进度条，内有字体颜色大小等的局部修改</string>
+    <string name="act_pulldown_desc">下拉缩放的动画效果，不知道该如何形容，具体的自己看</string>
+    <string name="act_jsgsaw_desc">拼图小游戏</string>
+    <string name="act_memory_desc">内存管理</string>
+    <string name="act_myheart">道德经</string>
+
+    <!--选项卡文字，命名格式为：tab_选项卡文字-->
+    <!--消息框文字，命名格式为：toast_消息-->
+    <string name="toast_exit">再按一次返回键回到桌面</string>
+
+    <!--编辑框的提示文字，命名格式为：hint_提示信息-->
+    <!--图片的描述文字，命名格式为：desc_图片文字-->
+    <!--对话框的文字，命名格式为：dialog_文字-->
+    <string name="dialog_exit">确定退出应用程序吗?</string>
+
+    <!--menu的item文字，命名格式为：action_文字-->
+    <string name="action_settings">Settings</string>
+
+    <string name="lockscreen_access_pattern_start">"开始绘制图案"</string>
+    <string name="lockscreen_access_pattern_cleared">"图案已清除"</string>
+    <string name="lockscreen_access_pattern_cell_added">"已添加单元格"</string>
+    <string name="lockscreen_access_pattern_detected">"图案绘制完成"</string>
+    <string name="lockpattern_retry_button_text">"重试"</string>
+    <string name="lockpattern_continue_button_text">"继续"</string>
+    <string name="lockpattern_confirm_button_text">"确认"</string>
+    <string name="lockpattern_recording_intro_header">"绘制解锁图案"</string>
+    <string name="lockpattern_settings_help_how_to_record">"如何绘制解锁图案"</string>
+    <string name="lockpattern_recording_incorrect_too_short">"至少连接4个点，请重试"</string>
+    <string name="lockpattern_pattern_entered_header">"图案已记录"</string>
+    <string name="lockpattern_need_to_confirm">"请再次绘制解锁图案"</string>
+    <string name="lockpattern_need_to_unlock_wrong">"与上次输入不一致，请重试"</string>
+    <string name="lockpattern_pattern_confirmed_header">"确认保存新解锁图案"</string>
+    <string name="lockpattern_recording_inprogress">"完成后松开手指"</string>
+    <string name="gesture_password_guide_text">你可以创建一个解锁图案，这样他人在借用你的手机时，将无法打开应用。</string>
+    <string name="gesture_password_guide_creat_btn">创建手势密码</string>
+
+    <string name="left_top">left_top</string>
+    <string name="left_bottom">left_bottom</string>
+    <string name="right_top">right_top</string>
+    <string name="right_bottom">right_bottom</string>
+    <string name="center_top">center_top</string>
+    <string name="center_bottom">center_bottom</string>
+    <string name="center">center</string>
+    <string name="center_left">center_left</string>
+    <string name="center_right">center_right</string>
+
+
+    <string name="horizontal">HORIZONTAL</string>
+    <string name="vertical">VERTICAL</string>
+    <string name="Add">Add</string>
+    <string name="Delete">Delete</string>
+    <string name="listview">listview</string>
+    <string name="gridview">gridview</string>
+    <string name="horizontalGridView">horizontalGridView</string>
+    <string name="stagger">stagger</string>
+    <string name="itemanimator_left">itemanimator_left</string>
+    <string name="itemanimator_right">itemanimator_right</string>
+    <string name="itemanimator_top">itemanimator_top</string>
+    <string name="itemanimator_bottom">itemanimator_bottom</string>
+    <string name="itemanimator_scale">itemanimator_scale</string>
+    <string name="itemanimator_scaleRight">itemanimator_scaleRight</string>
+
+    <string name="header_hint_refresh_normal">下拉刷新</string>
+    <string name="header_hint_refresh_ready">释放更新</string>
+    <string name="header_hint_refresh_loading">Refreshing&#8230;</string>
+    <string name="header_hint_refresh_time">时间：</string>
+    <string name="footer_hint_load_normal">载入更多</string>
+    <string name="footer_hint_load_ready">释放载入更多</string>
+
+    <string name="login_forget_passwd">忘记密码</string>
+    <string name="login_show_passwd">显示密码</string>
+    <string name="login">登录</string>
+    <string name="username">请输入用户名</string>
+    <string name="userpass">请输入密码</string>
+    <string name="http_failed">数据请求失败</string>
+
+    <string name="qq_menu01">Login</string>
+    <string name="qq_menu02">Battery</string>
+    <string name="qq_menu03">Broadcast</string>
+    <string name="qq_menu04">TreeActivity</string>
+    <string name="qq_menu05">PullLayout</string>
+
+    <string name="actionbar_activity_not_found">Failed to open intent...</string>
+    <string name="title_activity_memory">Memory</string>
+    <string name="title_activity_jsgsaw">jsgsaw</string>
+    <string name="daodejing">道德经\n\n
+    第一章\n
+    道可道，非常道；名可名，非常名。\n
+    无名，天地之始；有名，万物之母。\n
+    故常无，欲以观其妙；常有，欲以观其徼。\n
+    此两者同出而异名。同谓之玄，玄之又玄，众妙之门。\n\n
+    第二章\n
+    天下皆知美之为美，斯恶已；皆知善之为善，斯不善已。\n
+    故有无相生，难易相成，长短相随，高下相倾，音声相和，前后相随。\n
+    是以圣人处无为之事,行不言之教，万物作焉而不辞。\n
+    生而不有，为而不恃，功成而不居。\n
+    夫唯弗居，是以不去。\n\n
+    第三章\n
+    不尚贤，使民不争；不贵难得之贷，使民不为盗；不见可欲，使民心不乱。\n
+    是以圣人之治，虚其心，实其腹，弱其志，强其骨；\n
+    常使民无知无欲，使夫智者不敢为也。\n
+    为无为，则无不治。\n\n
+    第四章\n
+    道冲而用之，或不盈，渊乎似万物之宗。\n
+    挫其锐，解其纷，和其光，同其尘。\n
+    湛兮，似若存。吾不知谁之子，象帝之先。\n\n
+    第五章\n
+    天地不仁，以万物为刍狗；圣人不仁，以百姓为刍狗。\n
+    天地之间，其犹橐龠乎？\n
+    虚而不屈，动而愈出。\n
+    多言数穷，不如守中。\n\n
+    第六章\n
+    谷神不死，是谓玄牝。\n
+    玄牝之门，是谓天地根。\n
+    绵绵若存，用之不勤。\n\n
+    第七章\n
+    </string>
+    <string name="act_name01">SolarSystem</string>
+    <string name="act_name02">Carousel</string>
+    <string name="act_name03">RefreshList</string>
+    <string name="act_name04">SlidingMenu</string>
+    <string name="act_name05">PullDown</string>
+    <string name="act_name06">TabLayout</string>
+    <string name="act_name07">BottomTabBar</string>
+    <string name="act_name08">CircleProgress</string>
+    <string name="act_stock">股票手续费</string>
+    <string name="act_SVG">SVG演示</string>
+    <string name="act_video">视频播放</string>
+    <string name="act_draw">双缓冲画图板</string>
+
+</resources>

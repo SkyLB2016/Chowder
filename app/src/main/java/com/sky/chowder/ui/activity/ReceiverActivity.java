@@ -32,7 +32,6 @@ public class ReceiverActivity extends BaseNoPActivity {
 
     @Override
     public void loadData() {
-
     }
 
     @Override
@@ -95,5 +94,4 @@ public class ReceiverActivity extends BaseNoPActivity {
 //        sendBroadcast(broad);
         sendOrderedBroadcast(broad, "sky.permission.ACTION_MY");
     }
-
 }

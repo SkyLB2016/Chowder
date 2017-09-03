@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--recycleview的id-->
+    <item name="recycle" type="id"/>
+    <item name="swipe" type="id"/>
+
+
+    <item name="toolbar" type="id"/>
+    <item name="appbar" type="id"/>
+</resources>

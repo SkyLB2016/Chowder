@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:sky="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    sky:divider="@drawable/divider"
+    sky:showDividers="middle">
+
+    <include layout="@layout/activity_toolbar" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/id_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0" />
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:orientation="horizontal"
+        sky:divider="@drawable/divider"
+        sky:showDividers="middle">
+
+        <com.sky.demo.ui.widget.TabTextView
+            android:id="@+id/id_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:padding="@dimen/padding_4"
+            sky:tab_color="@color/green"
+            sky:tab_icon="@mipmap/eye"
+            sky:tab_text="首页"
+            sky:tab_textsize="@dimen/small" />
+
+        <com.sky.demo.ui.widget.TabTextView
+            android:id="@+id/id_two"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:padding="@dimen/padding_4"
+            sky:tab_color="@color/green"
+            sky:tab_icon="@mipmap/eye"
+            sky:tab_text="理财"
+            sky:tab_textsize="@dimen/small" />
+
+        <com.sky.demo.ui.widget.TabTextView
+            android:id="@+id/id_three"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:padding="@dimen/padding_4"
+            sky:tab_color="@color/green"
+            sky:tab_icon="@mipmap/eye"
+            sky:tab_text="借贷"
+            sky:tab_textsize="@dimen/small" />
+
+        <com.sky.demo.ui.widget.TabTextView
+            android:id="@+id/id_four"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:padding="@dimen/padding_4"
+            sky:tab_color="@color/green"
+            sky:tab_icon="@mipmap/eye"
+            sky:tab_text="个人"
+            sky:tab_textsize="@dimen/small" />
+    </android.support.v7.widget.LinearLayoutCompat>
+</android.support.v7.widget.LinearLayoutCompat>

@@ -9,7 +9,6 @@ import com.sky.chowder.R;
 
 public class RecyclerActivity extends BaseNoPActivity {
 
-
     @Override
     protected int getLayoutResId() {
         return R.layout.activity_main;
@@ -17,11 +16,9 @@ public class RecyclerActivity extends BaseNoPActivity {
 
     @Override
     protected void initialize() {
-
     }
 
     @Override
     public void loadData() {
-
     }
 }

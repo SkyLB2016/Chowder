@@ -16,7 +16,6 @@ import com.sky.utils.SPUtils;
  * Created by 李彬 on 2017/3/6.
  * 引导页面
  */
-
 public class GuideActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {

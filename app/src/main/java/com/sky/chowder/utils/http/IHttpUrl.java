@@ -2,7 +2,7 @@ package com.sky.chowder.utils.http;
 
 
 import com.sky.chowder.model.LoginEntity;
-import com.sky.chowder.model.requestparams.LoginParams;
+import com.sky.chowder.model.params.LoginParams;
 import com.sky.model.ObjectEntity;
 
 import io.reactivex.Observable;

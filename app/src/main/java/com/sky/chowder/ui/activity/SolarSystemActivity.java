@@ -1,6 +1,7 @@
 package com.sky.chowder.ui.activity;
 
 import android.graphics.drawable.AnimationDrawable;
+import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -10,8 +11,10 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
+import com.sky.base.BasePActivity;
 import com.sky.chowder.C;
 import com.sky.chowder.R;
+import com.sky.chowder.ui.presenter.SolarP;
 import com.sky.chowder.ui.widget.SolarSystem;
 import com.sky.utils.LogUtils;
 import com.sky.utils.SPUtils;
@@ -23,11 +26,19 @@ import butterknife.BindView;
  * Created by sky on 15/12/9 下午8:54.
  * 卫星菜单栏
  */
-public class SolarSystemActivity extends BaseActivity implements Toolbar.OnMenuItemClickListener {
+public class SolarSystemActivity extends BasePActivity<SolarP> implements Toolbar.OnMenuItemClickListener {
 
     @BindView(R.id.solar)
     SolarSystem solarSystem;
     private AnimationDrawable layoutDraw;
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == C.handler_0x002)
+                layoutDraw.stop();
+        }
+    };
 
     @Override
     public int getLayoutResId() {
@@ -58,6 +69,7 @@ public class SolarSystemActivity extends BaseActivity implements Toolbar.OnMenuI
             @Override
             public void openMenu() {
                 layoutDraw.start();
+                presenter.sendEvent(2001);
                 handler.sendEmptyMessageDelayed(C.handler_0x002, 600);
             }
 
@@ -105,8 +117,8 @@ public class SolarSystemActivity extends BaseActivity implements Toolbar.OnMenuI
         for (int i = 0; i < 10; i++) {
 //            SPUtilsIn.put(SolarSystemActivity.this,"testsp" + i, "test+" + i);
         }
-        time=System.currentTimeMillis()-time;
-        LogUtils.i("SPUtilsIn=="+time);
+        time = System.currentTimeMillis() - time;
+        LogUtils.i("SPUtilsIn==" + time);
 
     }
 
@@ -115,8 +127,8 @@ public class SolarSystemActivity extends BaseActivity implements Toolbar.OnMenuI
         for (int i = 0; i < 10; i++) {
             SPUtils.getInstance().put("testsp" + i, "test+" + i);
         }
-        time=System.currentTimeMillis()-time;
-        LogUtils.i("SPUtils=="+time);
+        time = System.currentTimeMillis() - time;
+        LogUtils.i("SPUtils==" + time);
 
     }
 
@@ -161,9 +173,7 @@ public class SolarSystemActivity extends BaseActivity implements Toolbar.OnMenuI
     }
 
     @Override
-    protected void handler(Message msg) {
-        super.handler(msg);
-        if (msg.what == C.handler_0x002)
-            layoutDraw.stop();
+    protected void creatPresenter() {
+        presenter = new SolarP(this);
     }
 }
