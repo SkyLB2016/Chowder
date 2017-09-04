@@ -9,14 +9,11 @@ dependencies {
     //三方
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'org.xutils:xutils:3.3.42'
-    compile 'com.sky:apiutils:2.2.30'
+    compile 'com.sky:apiutils:2.2.43'
     compile 'com.jakewharton:butterknife:8.5.1'
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
 //    compile 'org.roboguice:roboguice:4.0.0'
 //    compile 'com.google.dagger:dagger:2.10-rc1'
-
-    //bughd实时监测
-//    compile 'im.fir:fir-sdk:latest.integration@aar'
 
     //leakCanary
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'

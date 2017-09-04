@@ -24,6 +24,15 @@ public class Common {
 
     public static final String EXTRA = "extra";//默认的传输字段
 
+    /**
+     * 事件总线
+     *
+     * @return
+     */
+    public static RxBus getRxBus() {
+        return RxBus.getInstance();
+    }
+
     public static final String PIC_IMG = "pic.jpg";
 
     public static final String SERVICETEL = "4000914113";//客服电话
@@ -50,14 +59,5 @@ public class Common {
 
     public static String getImageUrl() {
         return DEBUG ? TEST_IMAGE_URL : IMAGE_URL;
-    }
-
-    /**
-     * 事件总线
-     *
-     * @return
-     */
-    public static RxBus getRxBus() {
-        return RxBus.getInstance();
     }
 }
