@@ -26,7 +26,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * 网络请求类
  */
 public class BaseHttp {
-
     private static final Charset UTF8 = Charset.forName("UTF-8");
 
     private final static int REQUEST_TIME_OUT = 15; // 请求超时
@@ -63,7 +62,7 @@ public class BaseHttp {
     /**
      * 打印请求信息
      */
-    protected static Interceptor mLoggingInterceptor = new Interceptor() {
+    protected Interceptor mLoggingInterceptor = new Interceptor() {
         @Override
         public Response intercept(Chain chain) throws IOException {
             Request request = chain.request();

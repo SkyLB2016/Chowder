@@ -16,7 +16,7 @@ dependencies {
 //    compile 'com.google.dagger:dagger:2.10-rc1'
 
     //bughd实时监测
-    compile 'im.fir:fir-sdk:latest.integration@aar'
+//    compile 'im.fir:fir-sdk:latest.integration@aar'
 
     //leakCanary
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'

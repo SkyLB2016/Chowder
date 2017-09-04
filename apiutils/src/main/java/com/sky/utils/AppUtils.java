@@ -2,13 +2,16 @@ package com.sky.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -92,6 +95,11 @@ public class AppUtils {
         ActivityCompat.requestPermissions(activity, permissions, requestCode);
     }
 
+    public static void installApp( Context context,File file) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+        context.startActivity(intent);
+    }
     /**
      * @return 打印系统信息
      */
