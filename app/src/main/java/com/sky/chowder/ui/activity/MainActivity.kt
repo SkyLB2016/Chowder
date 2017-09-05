@@ -76,7 +76,28 @@ class MainActivity : BasePActivity<MainPresenter>(), Toolbar.OnMenuItemClickList
         vars(1, 2, 3, 4, 5)//输出12345
         findFixPoint(9.0)
         val files = File("Test").listFiles()
-        LogUtils.i(files?.size.toString())
+        LogUtils.i(files?.size
+                ?.toString()
+                ?: "empty")
+        LogUtils.i((5 == 5)?.let { LogUtils.i("HAKJSDFHKJKJHKJFSDASHK") }.toString() ?: "nidayede")
+        fun foo(param: Int) {
+            val result =
+                    when (param) {
+                        1 -> "one"
+                        2 -> "two"
+                        else -> "three"
+                    }
+        }
+
+    }
+
+    fun arrayOfMinusOnes(size: Int): IntArray {
+        return IntArray(size).apply {
+            fill(-1)
+        }
+    }
+
+    fun arrayOfMinusOness(size: Int) : Unit {
     }
 
     infix fun Int.shl(x: Int): Int {
