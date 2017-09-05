@@ -78,17 +78,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.LoginActivity"
-            android:description="@string/act_05_desc"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/act_05"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.sky.coustom" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.activity.ReceiverActivity"
+            android:name=".ui.activity.BroadActivity"
             android:description="@string/act_06_desc"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_06"

@@ -39,8 +39,6 @@
     <string name="act_03_desc">recyclerView+recycleAdapter的使用</string>
     <string name="act_04">自定义贝塞尔曲线</string>
     <string name="act_04_desc">待定</string>
-    <string name="act_05">登录</string>
-    <string name="act_05_desc">登录</string>
     <string name="act_06">receive</string>
     <string name="act_06_desc">receive</string>
     <string name="act_07">service</string>

@@ -18,7 +18,7 @@ import com.sky.utils.ToastUtils;
  * Created by 李彬 on 2017/3/3.
  */
 
-public class ReceiverActivity extends BaseNoPActivity {
+public class BroadActivity extends BaseNoPActivity {
 
     @Override
     public int getLayoutResId() {

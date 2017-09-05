@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 
 import com.sky.Common;
-import com.sky.chowder.ui.activity.LoginActivity;
 import com.sky.utils.JumpAct;
 
 import java.io.Serializable;
@@ -27,9 +26,5 @@ public class ActJump {
 //        JumpAct.jumpActivity(context, WebActivity.class,
 //                Common.EXTRA, new Extra(title, url));
 //        JumpAct.jumpActivity(context, WebActivity.class, "url", url, "title", title);
-    }
-
-    public static void toLoginActivity(Context context) {
-        toActivity(context, LoginActivity.class);
     }
 }

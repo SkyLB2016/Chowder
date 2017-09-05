@@ -20,10 +20,14 @@ import java.util.List;
 /**
  * Created by SKY on 2017/5/29.
  */
-public class MainPresenter extends BasePresenter<IMainView> implements IMainPresenter {
+public class MainPresenter1 extends BasePresenter<IMainView> implements IMainPresenter {
 
-    public MainPresenter(Context mContext) {
+    public MainPresenter1(Context mContext) {
         super(mContext);
+    }
+
+    public MainPresenter1(Context context, IMainView view) {
+        super(context, view);
     }
 
     @Override
@@ -33,15 +37,15 @@ public class MainPresenter extends BasePresenter<IMainView> implements IMainPres
 
     /**
      * 从manifest中获取activity的信息
+     * //Intent mainIntent = new Intent(Intent.ACTION_MAIN);//获取action为ACTION_MAIN的activity
+     * //mainIntent.addCategory(Intent.CATEGORY_SAMPLE_CODE);//筛选category为sample code的act
+     * //mainIntent.setPackage(getPackageName());//只选出自己应用的act
      *
      * @return
      */
-    protected List<ActivityModel> getData() {
+    List<ActivityModel> getData() {
         List<ActivityModel> activityInfos = new ArrayList<>();
 
-        //Intent mainIntent = new Intent(Intent.ACTION_MAIN);//获取action为ACTION_MAIN的activity
-        //mainIntent.addCategory(Intent.CATEGORY_SAMPLE_CODE);//筛选category为sample code的act
-        //mainIntent.setPackage(getPackageName());//只选出自己应用的act
         Intent mainIntent = new Intent("com.sky.coustom");//自定义的action
         PackageManager pm = context.getPackageManager();
         List<ResolveInfo> resolveInfos = pm.queryIntentActivities(mainIntent, 0);
