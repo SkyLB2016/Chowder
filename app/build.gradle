@@ -18,8 +18,8 @@ dependencies {
 
     compile project(':apiutils')
     //butterknife
-    compile "com.jakewharton:butterknife:$bknifeVer"
     annotationProcessor "com.jakewharton:butterknife-compiler:$bknifeVer"
+    kapt "com.jakewharton:butterknife-compiler:$bknifeVer"
 
 //    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"

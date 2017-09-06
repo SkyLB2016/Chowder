@@ -8,5 +8,4 @@ import com.sky.chowder.model.ActivityModel
  */
 interface IMainView : IBaseView {
     fun setData(data: List<ActivityModel>)
-
 }
