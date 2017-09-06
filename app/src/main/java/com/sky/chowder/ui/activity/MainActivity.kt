@@ -9,6 +9,7 @@ import android.os.BatteryManager
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import butterknife.OnClick
 import com.sky.base.BasePActivity
 import com.sky.chowder.R
 import com.sky.chowder.api.view.IMainView
@@ -16,10 +17,8 @@ import com.sky.chowder.model.ActivityModel
 import com.sky.chowder.ui.adapter.MainAdapter
 import com.sky.chowder.ui.presenter.MainPresenter
 import com.sky.utils.JumpAct
-import com.sky.utils.LogUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
-import java.io.File
 
 class MainActivity : BasePActivity<MainPresenter>(), Toolbar.OnMenuItemClickListener, IMainView {
 
@@ -43,117 +42,10 @@ class MainActivity : BasePActivity<MainPresenter>(), Toolbar.OnMenuItemClickList
             showToast("长按监听已处理")
             true
         }
-        fab!!.setOnClickListener { v ->
+        fab!!.setOnClickListener {
             getMemory()
             getMemory1()
         }
-
-        val s = "abc"
-        val str = "$s.length is ${s.length}"
-//结果为 abc.length is 3
-        LogUtils.i(str)
-        val i = 10
-        val ss = "i = ${i + 1}"
-        LogUtils.i(ss)
-        val pow = pow1(3);
-
-        val age = 99
-        val typeOfPerson = when (age) {
-            0 -> "New born"
-            in 1..12 step 2 -> "hello"
-            in 139 downTo 19 -> LogUtils.i("Teenager")
-            else -> "Adult"
-        }
-        cases(typeOfPerson)
-        loop@ for (i in 1..10) {
-            for (j in 1..10) {
-                if (i == 5) {
-                    continue@loop
-                }
-                LogUtils.i("Teenager==" + j)
-            }
-        }
-        vars(1, 2, 3, 4, 5)//输出12345
-        findFixPoint(9.0)
-        val files = File("Test").listFiles()
-        LogUtils.i(files?.size
-                ?.toString()
-                ?: "empty")
-        LogUtils.i((5 == 5)?.let { LogUtils.i("HAKJSDFHKJKJHKJFSDASHK") }.toString() ?: "nidayede")
-        fun foo(param: Int) {
-            val result =
-                    when (param) {
-                        1 -> "one"
-                        2 -> "two"
-                        else -> "three"
-                    }
-        }
-
-    }
-
-    fun arrayOfMinusOnes(size: Int): IntArray {
-        return IntArray(size).apply {
-            fill(-1)
-        }
-    }
-
-    fun arrayOfMinusOness(size: Int) : Unit {
-    }
-
-    infix fun Int.shl(x: Int): Int {
-        return 3
-    }
-
-    tailrec fun findFixPoint(x: Double = 1.0): Double = if (x == Math.cos(x)) x else findFixPoint(Math.cos(x))
-    //等效于下面的代码:
-//    private fun findFixPoint(): Double {
-//        var x = 1.0
-//        while (true) {
-//            val y = Math.cos(x)
-//            if (x == y) return y
-//            x = y
-//        }
-//    }
-    private fun cases(obj: Any) {
-        when (obj) {
-            1 -> print("one")
-            "hello" -> LogUtils.i("Teenager")
-            is Long -> LogUtils.i("Long")
-            !is Long -> LogUtils.i("Not a string")
-            else -> LogUtils.i("Unknown")
-        }
-    }
-
-    fun max(a: Int, b: Int): Int {
-        return if (a > b) a else b
-    }
-
-    //第一种形态
-    fun pow(a: Int): Double {
-        return Math.pow(a.toDouble(), 2.toDouble());
-    }
-
-    // 第二种形态，一个表达式函数体和一个可推断类型
-    fun pow1(a: Int) = Math.pow(a.toDouble(), 2.toDouble())
-
-    fun double(x: Int) = x * 2
-
-    private fun vars(vararg v: Int) {
-        for (vt in v) {
-            print(vt)
-        }
-    }
-
-    fun List<Int>.varss(vararg v: Int) {
-        for (vt in v) {
-            print(vt)
-        }
-    }
-
-    fun MutableList<Int>.swap(x: Int, y: Int) {
-        val temp = this[x] // this 对应 list
-        this[x] = this[y]
-        this[y] = temp
     }
 
     override fun creatPresenter() {
@@ -210,6 +102,12 @@ class MainActivity : BasePActivity<MainPresenter>(), Toolbar.OnMenuItemClickList
             val total = battery.getIntExtra(BatteryManager.EXTRA_SCALE, 1)
             return currLevel * 100 / total
         }
+
+    @OnClick(R.id.fab)
+    fun obnClick() {
+        getMemory()
+        getMemory1()
+    }
 
     private fun getMemory() {
         val rt = Runtime.getRuntime()
