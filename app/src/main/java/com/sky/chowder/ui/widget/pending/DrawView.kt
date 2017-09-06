@@ -145,29 +145,24 @@ class DrawView(context: Context) : View(context) {
             control.add(Point(conX2, conY2))
         }
         for (i in 0 until list.size - 1) {
-
-            if (i == 0) {
-                path2.quadTo(control[i].x.toFloat(), control[i].y.toFloat(),
-                        list.get(i + 1).x.toFloat(), list.get(i + 1).y.toFloat())
-            } else if (i == list.size - 2) {
-                path2.quadTo(control[i * 2 - 1].x.toFloat(), control[i * 2 - 1].y.toFloat(),
-                        list.get(i + 1).x.toFloat(), list.get(i + 1).y.toFloat())
-
-                canvas.drawCircle(list.get(i + 1).x.toFloat(), list.get(i + 1).y.toFloat(), 10f, point)// 小圆
-                canvas.drawText("" + (i + 1), list.get(i + 1).x.toFloat(), list.get(i + 1).y.toFloat(), point)
-            } else {
-                path2.cubicTo(control[i * 2 - 1].x.toFloat(), control[i * 2 - 1].y.toFloat(),
+            when (i) {
+                0 -> path2.quadTo(control[i].x.toFloat(), control[i].y.toFloat(), list[i + 1].x.toFloat(), list[i + 1].y.toFloat())
+                list.size - 2 -> {
+                    path2.quadTo(control[i * 2 - 1].x.toFloat(), control[i * 2 - 1].y.toFloat(), list[i + 1].x.toFloat(), list[i + 1].y.toFloat())
+                    canvas.drawCircle(list[i + 1].x.toFloat(), list[i + 1].y.toFloat(), 10f, point)// 小圆
+                    canvas.drawText("" + (i + 1), list[i + 1].x.toFloat(), list[i + 1].y.toFloat(), point)
+                }
+                else -> path2.cubicTo(control[i * 2 - 1].x.toFloat(), control[i * 2 - 1].y.toFloat(),
                         control[i * 2].x.toFloat(), control[i * 2].y.toFloat(),
-                        list.get(i + 1).x.toFloat(), list.get(i + 1).y.toFloat())
-
+                        list[i + 1].x.toFloat(), list[i + 1].y.toFloat())
             }
 
-            canvas.drawCircle(list.get(i).x.toFloat(), list.get(i).y.toFloat(), 10f, point)// 小圆
-            canvas.drawText("" + i, list.get(i).x.toFloat(), list.get(i).y.toFloat(), point)
+            canvas.drawCircle(list[i].x.toFloat(), list[i].y.toFloat(), 10f, point)// 小圆
+            canvas.drawText("" + i, list[i].x.toFloat(), list[i].y.toFloat(), point)
         }
         canvas.drawPath(path2, p)//画出贝塞尔曲线
         p.style = Paint.Style.FILL
-        canvas.drawCircle(list.get(0).x.toFloat(), list.get(0).y.toFloat(), 22f, p)// 小圆
+        canvas.drawCircle(list[0].x.toFloat(), list[0].y.toFloat(), 22f, p)// 小圆
 
 
         //画点

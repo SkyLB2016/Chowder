@@ -8,7 +8,7 @@ import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.widget.ImageView
 import com.sky.Common
-import com.sky.chowder.MyApplication
+import com.sky.SkyApp
 import com.sky.chowder.R
 import com.sky.utils.JumpAct
 
@@ -51,7 +51,7 @@ class WelcomeActivity : AppCompatActivity() {
     }
 
     private fun JumpAct() {
-        if (MyApplication.instance.getObject(Common.ISFIRST, true)) {
+        if (SkyApp.getInstance().getObject(Common.ISFIRST, true)) {
             JumpAct.jumpActivity(this, GuideActivity::class.java)
         } else {
             JumpAct.jumpActivity(this, MainActivity::class.java)
