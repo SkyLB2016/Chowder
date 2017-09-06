@@ -12,7 +12,7 @@ import butterknife.BindView
 import com.sky.base.BasePActivity
 import com.sky.chowder.C
 import com.sky.chowder.R
-import com.sky.chowder.ui.presenter.SolarP
+import com.sky.chowder.ui.presenter.SolarPresenter
 import com.sky.chowder.ui.widget.SolarSystem
 import com.sky.utils.LogUtils
 import com.sky.utils.SPUtils
@@ -22,7 +22,7 @@ import com.sky.utils.ScreenUtils
  * Created by sky on 15/12/9 下午8:54.
  * 卫星菜单栏
  */
-class SolarSystemActivity : BasePActivity<SolarP>(), Toolbar.OnMenuItemClickListener {
+class SolarSystemActivity : BasePActivity<SolarPresenter>(), Toolbar.OnMenuItemClickListener {
 
     @BindView(R.id.solar)
     internal var solarSystem: SolarSystem? = null
@@ -137,6 +137,6 @@ class SolarSystemActivity : BasePActivity<SolarP>(), Toolbar.OnMenuItemClickList
     }
 
     override fun creatPresenter() {
-        presenter = SolarP(this)
+        presenter = SolarPresenter(this)
     }
 }
