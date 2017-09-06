@@ -6,11 +6,9 @@ import android.support.v4.view.ViewPager
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
-
 import com.sky.chowder.R
 import com.sky.chowder.utils.DepthPageTransformer
-
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Created by 李彬 on 2017/3/6.
@@ -22,7 +20,7 @@ class GuideContoler(private val mContext: Context) {
 
     //点的集合
     private var pointGroup: LinearLayout? = null
-    private var points: Array<View>? = null
+    private var points: Array<View?>? = null
     //点的宽高
     private var pointW: Int = 0
     private var pointH: Int = 0
@@ -61,9 +59,9 @@ class GuideContoler(private val mContext: Context) {
             override fun onPageSelected(position: Int) {
                 for (i in points!!.indices) {
                     if (i == position) {
-                        points!![i].setBackgroundResource(pointSelect)
+                        points!![i]!!.setBackgroundResource(pointSelect)
                     } else {
-                        points!![i].setBackgroundResource(unPointSelect)
+                        points!![i]!!.setBackgroundResource(unPointSelect)
                     }
                 }
             }
@@ -84,13 +82,13 @@ class GuideContoler(private val mContext: Context) {
         val params = LinearLayout.LayoutParams(pointW, pointH)
         params.setMargins(0, 0, 15, 0)
         for (i in points!!.indices) {
-            points[i] = View(mContext)
+            points!![i] = View(mContext)
             if (i == 0) {
-                points!![i].setBackgroundResource(pointSelect)
+                points!![i]!!.setBackgroundResource(pointSelect)
             } else {
-                points!![i].setBackgroundResource(unPointSelect)
+                points!![i]!!.setBackgroundResource(unPointSelect)
             }
-            points!![i].layoutParams = params
+            points!![i]!!.layoutParams = params
             pointGroup!!.addView(points!![i])
         }
     }

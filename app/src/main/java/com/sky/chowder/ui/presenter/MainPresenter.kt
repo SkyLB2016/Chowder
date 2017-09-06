@@ -19,8 +19,6 @@ class MainPresenter(context: Context) : BasePresenter<IMainView>(context), IMain
     init {
       LogUtils.i("mainpresenter")
     }
-    constructor(context: Context, view: IMainView) : this(context) {}
-
     override fun loadData() {
         mView.setData(data)
     }
@@ -40,7 +38,7 @@ class MainPresenter(context: Context) : BasePresenter<IMainView>(context), IMain
             val pm = context.packageManager
             val resolveInfos = pm.queryIntentActivities(mainIntent, 0) ?: return activityInfos
 
-            val len = resolveInfos.size
+//            val len = resolveInfos.size
 //            for (i in 0..(len-1) step 2){
 //            for (i in resolveInfos) {foreach
 

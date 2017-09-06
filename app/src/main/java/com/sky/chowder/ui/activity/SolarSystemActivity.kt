@@ -8,7 +8,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.FrameLayout
 import android.widget.RelativeLayout
-import butterknife.BindView
 import com.sky.base.BasePActivity
 import com.sky.chowder.C
 import com.sky.chowder.R
@@ -17,6 +16,7 @@ import com.sky.chowder.ui.widget.SolarSystem
 import com.sky.utils.LogUtils
 import com.sky.utils.SPUtils
 import com.sky.utils.ScreenUtils
+import kotlinx.android.synthetic.main.activity_solar.*
 
 /**
  * Created by sky on 15/12/9 下午8:54.
@@ -24,8 +24,6 @@ import com.sky.utils.ScreenUtils
  */
 class SolarSystemActivity : BasePActivity<SolarPresenter>(), Toolbar.OnMenuItemClickListener {
 
-    @BindView(R.id.solar)
-    internal var solarSystem: SolarSystem? = null
     private var layoutDraw: AnimationDrawable? = null
     internal var handler: Handler = object : Handler() {
         override fun handleMessage(msg: Message) {
