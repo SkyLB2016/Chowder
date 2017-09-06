@@ -112,31 +112,29 @@ class DrawView(context: Context) : View(context) {
         p.color = Color.GREEN
         p.strokeWidth = 10f
 
-        val list = ArrayList()
         val random = Random()
-        for (i in 0..30) {
-            list.add(Point(100 + i * 30, random.nextInt(500) + 500))
-        }
+        val list = (0..30).mapTo(ArrayList()) { Point(100 + it * 30, random.nextInt(500) + 500) }
+
         val path2 = Path()
-        path2.moveTo(list.get(0).x.toFloat(), list.get(0).y.toFloat())//设置Path的起点
+        path2.moveTo(list[0].x.toFloat(), list[0].y.toFloat())//设置Path的起点
         val point = Paint()
         point.color = Color.RED
         point.style = Paint.Style.FILL
         point.strokeWidth = 10f
         point.textSize = 40f
         val control = ArrayList<Point>()
-        for (i in 0..list.size - 2 - 1) {
-            val centerX = (list.get(i).x + list.get(i + 1).x) / 2
-            val centerY = (list.get(i).y + list.get(i + 1).y) / 2
-            val centerX1 = (list.get(i + 1).x + list.get(i + 2).x) / 2
-            val centerY1 = (list.get(i + 1).y + list.get(i + 2).y) / 2
+        for (i in 0 until list.size - 2) {
+            val centerX = (list[i].x + list[i + 1].x) / 2
+            val centerY = (list[i].y + list[i + 1].y) / 2
+            val centerX1 = (list[i + 1].x + list[i + 2].x) / 2
+            val centerY1 = (list[i + 1].y + list[i + 2].y) / 2
 
             val centerX2 = (centerX + centerX1) / 2
             val centerY2 = (centerY + centerY1) / 2
 
 
-            val tranX = centerX2 - list.get(i + 1).x
-            val tranY = centerY2 - list.get(i + 1).y
+            val tranX = centerX2 - list[i + 1].x
+            val tranY = centerY2 - list[i + 1].y
 
             val conX1 = centerX - tranX
             val conY1 = centerY - tranY
@@ -146,7 +144,7 @@ class DrawView(context: Context) : View(context) {
             control.add(Point(conX1, conY1))
             control.add(Point(conX2, conY2))
         }
-        for (i in 0..list.size - 1 - 1) {
+        for (i in 0 until list.size - 1) {
 
             if (i == 0) {
                 path2.quadTo(control[i].x.toFloat(), control[i].y.toFloat(),
