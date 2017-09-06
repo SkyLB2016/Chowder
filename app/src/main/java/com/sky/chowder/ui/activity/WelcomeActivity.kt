@@ -51,7 +51,7 @@ class WelcomeActivity : AppCompatActivity() {
     }
 
     private fun JumpAct() {
-        if (MyApplication.getInstance().getObject(Common.ISFIRST, true)) {
+        if (MyApplication.instance.getObject(Common.ISFIRST, true)) {
             JumpAct.jumpActivity(this, GuideActivity::class.java)
         } else {
             JumpAct.jumpActivity(this, MainActivity::class.java)

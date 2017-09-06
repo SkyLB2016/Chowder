@@ -16,9 +16,9 @@ import java.io.File;
 public class SkyApp extends Application {
     protected static SkyApp instance;
 
-    private String cacheDir;//缓存目录 /storage/emulated/0/Android/data/com.glimmer.carrycport/cache
-    private String fileCacheDir;//文件日志缓存文件夹目录 /storage/emulated/0/Android/data/com.glimmer.carrycport/files/Documents
-    private String picCacheDir;//图片文件夹目录 /storage/emulated/0/Android/data/com.glimmer.carrycport/files/Pictures
+    private String cacheDir;//缓存目录 /storage/emulated/0/Android/data/包名/cache
+    private String fileCacheDir;//文件日志缓存文件夹目录 /storage/emulated/0/Android/data/包名/files/Documents
+    private String picCacheDir;//图片文件夹目录 /storage/emulated/0/Android/data/包名/files/Pictures
 
     public static SkyApp getInstance() {
         return instance;
