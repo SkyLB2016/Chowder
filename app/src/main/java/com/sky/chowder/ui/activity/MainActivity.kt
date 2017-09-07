@@ -17,7 +17,6 @@ import com.sky.chowder.model.ActivityModel
 import com.sky.chowder.ui.adapter.MainAdapter
 import com.sky.chowder.ui.presenter.MainPresenter
 import com.sky.utils.JumpAct
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : BasePActivity<MainPresenter>(), Toolbar.OnMenuItemClickListener, IMainView {
@@ -34,24 +33,25 @@ class MainActivity : BasePActivity<MainPresenter>(), Toolbar.OnMenuItemClickList
 
     public override fun initialize() {
         baseTitle.setLeftButton(-1)
-        recycle!!.setHasFixedSize(true)
+        recycle?.setHasFixedSize(true)
         adapter = MainAdapter(R.layout.adapter_main)
-        recycle!!.adapter = adapter
+        recycle?.adapter = adapter
 
-        adapter!!.setOnItemClickListener { _, position -> JumpAct.jumpActivity(this, adapter!!.datas[position].componentName) }
-        adapter!!.setOnItemLongClickListener { _, _ ->
+        adapter?.setOnItemClickListener { _, position -> JumpAct.jumpActivity(this, adapter!!.datas[position].componentName) }
+        adapter?.setOnItemLongClickListener { _, _ ->
             showToast("长按监听已处理")
             true
         }
-        fab!!.setOnClickListener {
-            getMemory()
-            getMemory1()
-        }
+    }
+
+    @OnClick(R.id.fab)
+    fun obnClick() {
+        getMemory()
+        getMemory1()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        //        menu.add(Menu.NONE,Menu.FIRST+1,1000,"dd").setIcon(R.mipmap.back).
-        //                setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+//        menu.add(Menu.NONE, Menu.FIRST + 1, 1000, "dd").setIcon(R.mipmap.back).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         menuInflater.inflate(R.menu.menu_main, menu)
         return super.onCreateOptionsMenu(menu)
     }
@@ -72,7 +72,6 @@ class MainActivity : BasePActivity<MainPresenter>(), Toolbar.OnMenuItemClickList
         } catch (e: ActivityNotFoundException) {
             showToast("程序未安装")
         }
-
     }
 
     private var lastBack: Long = 0
@@ -88,37 +87,31 @@ class MainActivity : BasePActivity<MainPresenter>(), Toolbar.OnMenuItemClickList
     }
 
     override fun setData(data: List<ActivityModel>) {
-        adapter!!.datas = data
+        adapter?.datas = data
     }
 
     //获取电量百分比
     val battery: Int
         get() {
-            val battery = applicationContext.registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+            val battery = registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
             val currLevel = battery!!.getIntExtra(BatteryManager.EXTRA_LEVEL, 0)
             val total = battery.getIntExtra(BatteryManager.EXTRA_SCALE, 1)
             return currLevel * 100 / total
         }
-
-    @OnClick(R.id.fab)
-    fun obnClick() {
-        getMemory()
-        getMemory1()
-    }
 
     private fun getMemory() {
         val rt = Runtime.getRuntime()
         val maxMemory = rt.maxMemory()
         val freeMemory = rt.freeMemory()
         val totalMemory = rt.totalMemory()
-        showToast("maxMemory:" + java.lang.Double.toString((maxMemory / (1024 * 1024)).toDouble()))
-        showToast("freeMemory:" + java.lang.Double.toString(freeMemory * 1.0 / (1024 * 1024)))
-        showToast("totalMemory:" + java.lang.Double.toString(totalMemory * 1.0 / (1024 * 1024)))
+        showToast("maxMemory: ${maxMemory / (1024 * 1024)}")
+        showToast("freeMemory: ${freeMemory * 1.0 / (1024 * 1024)}")
+        showToast("totalMemory: ${totalMemory * 1.0 / (1024 * 1024)}")
     }
 
     private fun getMemory1() {
         val manager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-        showToast("memory==" + manager.memoryClass + "\n;large==" + manager.largeMemoryClass)
+        showToast("memory==${manager.memoryClass};large==${manager.largeMemoryClass}")
     }
 }
 

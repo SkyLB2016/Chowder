@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sky.chowder">
-    <!-- 自定义权限 -->
-    <!--<permission-->
-    <!--android:name="sky.permission.ACTION_MY"-->
-    <!--android:protectionLevel="normal" />-->
 
-    <!--<uses-permission android:name="sky.permission.ACTION_MY" />-->
+    <!-- 自定义权限 -->
+    <!-- <permission -->
+    <!-- android:name="sky.permission.ACTION_MY" -->
+    <!-- android:protectionLevel="normal" /> -->
+
+
+    <!-- <uses-permission android:name="sky.permission.ACTION_MY" /> -->
     <uses-permission android:name="com.sky.coustom" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -19,8 +21,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <!--申请大内存-->
-        <!--android:largeHeap="true"-->
+
+        <!-- 申请大内存 -->
+        <!-- android:largeHeap="true" -->
+
 
         <!-- 与build.gradle相呼应 -->
         <meta-data
@@ -41,7 +45,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.activity.MainActivity"
             android:label="@string/app_name"
@@ -82,14 +85,13 @@
             android:description="@string/act_06_desc"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_06"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.ServiceActivity"
             android:description="@string/act_07_desc"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_07"
-            android:screenOrientation="portrait"></activity>
-
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
