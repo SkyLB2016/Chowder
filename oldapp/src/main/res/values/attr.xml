@@ -23,10 +23,6 @@
         <attr name="border_color" format="color"/>
     </declare-styleable>
 
-    <declare-styleable name="ActionBar">
-        <attr name="title" format="string" localization="suggested"/>
-    </declare-styleable>
-
     <declare-styleable name="TabTextView">
         <attr name="tab_icon" format="reference"/>
         <attr name="tab_color" format="color"/>

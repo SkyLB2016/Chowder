@@ -34,7 +34,7 @@ class ServiceActivity : BaseNoPActivity(), IService {
     //bind 与 普通service 设定
     private var normalService = false//监听service是否启动
     private var bindService = false//监听bindservice是否启动
-    internal var Connection: ServiceConnection = object : ServiceConnection {
+    private var Connection: ServiceConnection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName, service: IBinder) {
             LogUtils.i("onServiceConnected")
             //            Message msg = new Message();

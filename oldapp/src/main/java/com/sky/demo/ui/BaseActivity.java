@@ -21,7 +21,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.sky.Common;
-import com.sky.api.IBase;
 import com.sky.api.IService;
 import com.sky.demo.api.IDataCallback;
 import com.sky.demo.R;

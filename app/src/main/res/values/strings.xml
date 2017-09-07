@@ -55,6 +55,12 @@
     <string name="center_left">center_left</string>
     <string name="center_right">center_right</string>
 
+    <string name="qq_menu01">Login</string>
+    <string name="qq_menu02">Battery</string>
+    <string name="qq_menu03">Broadcast</string>
+    <string name="qq_menu04">TreeActivity</string>
+    <string name="qq_menu05">PullLayout</string>
+
 
     <string name="daodejing">道德经\n\n
     第一章\n
@@ -88,6 +94,7 @@
     绵绵若存，用之不勤。\n\n
     第七章\n
     </string>
+    <string name="act_05">侧滑栏</string>
 
 
 </resources>

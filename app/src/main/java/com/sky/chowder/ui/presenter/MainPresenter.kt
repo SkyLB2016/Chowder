@@ -17,18 +17,17 @@ import java.util.*
 class MainPresenter(context: Context) : BasePresenter<IMainView>(context), IMainPresenter {
 
     init {
-      LogUtils.i("mainpresenter")
+        LogUtils.i("mainpresenter")
     }
+
     override fun loadData() {
-        mView.setData(data)
+        mView.setData(activities)
     }
 
     /**
-     * 从manifest中获取activity的信息
-     *
-     * @return
+     * @return 从manifest中获取activity的信息
      */
-    val data: List<ActivityModel>
+    private val activities: List<ActivityModel>
         get() {
             val activityInfos = ArrayList<ActivityModel>()
             //Intent mainIntent = new Intent(Intent.ACTION_MAIN);//获取action为ACTION_MAIN的activity
@@ -38,10 +37,6 @@ class MainPresenter(context: Context) : BasePresenter<IMainView>(context), IMain
             val pm = context.packageManager
             val resolveInfos = pm.queryIntentActivities(mainIntent, 0) ?: return activityInfos
 
-//            val len = resolveInfos.size
-//            for (i in 0..(len-1) step 2){
-//            for (i in resolveInfos) {foreach
-
             for (i in resolveInfos.indices) {
                 val info = resolveInfos[i]
                 //获取label,activity中未设置的话返回程序名称
@@ -49,7 +44,7 @@ class MainPresenter(context: Context) : BasePresenter<IMainView>(context), IMain
                 val label = labelSeq?.toString() ?: info.activityInfo.name
                 //获取说明
                 val descriptionRes = info.activityInfo.descriptionRes
-                val describe = if (descriptionRes == 0) "未添加" else context.resources.getString(descriptionRes)
+                val describe = if (descriptionRes == 0) "未添加" else getString(descriptionRes)
                 //获取icon  Drawable icon = info.loadIcon(pm);
                 val iconRes = info.activityInfo.icon
                 val icon = if (iconRes == 0) R.mipmap.ic_launcher else iconRes

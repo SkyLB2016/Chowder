@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.sky.demo.ui.widget.SlidingMenu
+<com.sky.chowder.ui.widget.SlidingMenu
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,10 +18,6 @@
             android:background="@mipmap/sliding_content"
             android:orientation="vertical">
 
-            <com.sky.demo.ui.widget.ActionBar
-                android:id="@+id/actionbar"
-                style="@style/ActionBar"/>
-
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -32,8 +28,8 @@
                     android:layout_marginTop="20dp"
                     android:orientation="vertical">
 
-                    <com.sky.demo.ui.widget.FlowLayout
-                        android:id="@+id/id_flowlayout"
+                    <com.sky.chowder.ui.widget.FlowLayout
+                        android:id="@+id/flowlayout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="10dp"/>
@@ -41,4 +37,4 @@
             </ScrollView>
         </LinearLayout>
     </LinearLayout>
-</com.sky.demo.ui.widget.SlidingMenu>
+</com.sky.chowder.ui.widget.SlidingMenu>

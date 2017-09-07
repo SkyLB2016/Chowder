@@ -8,4 +8,4 @@
     android:background="@drawable/sel_shape_red"
     android:text="Helloworld"
     android:textColor="@color/white"
-    android:textSize="@dimen/small"/>
+    android:textSize="@dimen/text_small"/>

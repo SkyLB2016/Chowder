@@ -12,9 +12,7 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 
-import com.sky.demo.R;
 import com.sky.demo.utils.ImageUtils;
 
 /**
@@ -22,7 +20,7 @@ import com.sky.demo.utils.ImageUtils;
  * @Description: TODO 圆形图片
  * @date 2015/8/17 15:30
  */
-public class CircleImageView extends ImageView {
+public class CircleImageView extends android.support.v7.widget.AppCompatImageView {
     private static final ScaleType SCALE_TYPE = ScaleType.CENTER_CROP;
     private static final Bitmap.Config BITMAP_CONFIG = Bitmap.Config.ARGB_8888;
     private static final int DEFAULT_BORDER_WIDTH = 0;

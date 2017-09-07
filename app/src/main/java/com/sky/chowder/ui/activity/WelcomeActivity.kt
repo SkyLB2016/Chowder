@@ -18,7 +18,7 @@ import com.sky.utils.JumpAct
 
 class WelcomeActivity : AppCompatActivity() {
     //    public Boolean flag;//是否首次运行，true代表首次
-    private val TIME = 1000//handler延迟时间
+    private val TIME = 1000L//handler延迟时间
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //requestWindowFeature(Window.FEATURE_NO_TITLE);//去掉标题栏,在v7中AppCompatActivity下无用
@@ -31,7 +31,7 @@ class WelcomeActivity : AppCompatActivity() {
         //        flag = (Boolean) SPUtils.getInstance().get(Common.ISFIRST, true);
         //加载动画
         val animation = AlphaAnimation(0.5f, 1f)
-        animation.duration = TIME.toLong()
+        animation.duration = TIME
         view.startAnimation(animation)
         animation.setAnimationListener(object : Animation.AnimationListener {
 
@@ -45,7 +45,7 @@ class WelcomeActivity : AppCompatActivity() {
                 Handler().postDelayed({
                     // 判断程序与第几次运行，如果是第一次运行引导页面
                     JumpAct()
-                }, TIME.toLong())
+                }, TIME)
             }
         })
     }

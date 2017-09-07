@@ -51,35 +51,34 @@ class BroadActivity : BaseNoPActivity() {
     }
 
     //broadcast广播
-    internal var receiver: BroadcastReceiver = object : BroadcastReceiver() {
+    private var receiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             val action = intent.action
-            if (ConnectivityManager.CONNECTIVITY_ACTION == action) { // 网络发生变化
-                if (!NetworkJudgment.isConnected(context))
-                    ToastUtils.showShort(context, "网络已断开")
-            } else if (Intent.ACTION_BATTERY_CHANGED == action) {
-                val currLevel = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0)    //当前电量
-                val total = intent.getIntExtra(BatteryManager.EXTRA_SCALE, 1)        //总电量
-                if (currLevel * 100 / total < 10) {
-                    ToastUtils.showShort(context, "电量过低")
+            when (action) {
+                ConnectivityManager.CONNECTIVITY_ACTION ->// 网络发生变化
+                    if (!NetworkJudgment.isConnected(context)) ToastUtils.showShort(context, "网络已断开")
+                Intent.ACTION_BATTERY_CHANGED -> {
+                    val currLevel = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0)    //当前电量
+                    val total = intent.getIntExtra(BatteryManager.EXTRA_SCALE, 1)        //总电量
+                    if (currLevel * 100 / total < 10) ToastUtils.showShort(context, "电量过低")
                 }
-            } else if (C.ACTION_PUSH_DATA == action) { // 可能有新数据
-                val b = intent.extras
-                b.get("data")
-            } else if (C.ACTION_NEW_VERSION == action) { // 可能发现新版本
-                //                 VersionDialog 可能是版本提示是否需要下载的对话框
-            } else if (C.ACTION_MY == action) {
-                showToast("actionmy")
-                abortBroadcast()//终止传递
+                C.ACTION_PUSH_DATA -> { // 可能有新数据
+                    val b = intent.extras
+                    b.get("data")
+                }
+                C.ACTION_NEW_VERSION -> {
+                    // 可能发现新版本
+                    // VersionDialog 可能是版本提示是否需要下载的对话框
+                }
+                C.ACTION_MY -> {
+                    showToast("actionmy")
+                    abortBroadcast()//终止传递
+                }
             }
-            //            String msg = intent.getStringExtra("msg");
-            //            Bundle bundle = new Bundle();
-            //            bundle.putString("msg", msg + "@FirstReceiver");
-            //            setResultExtras(bundle);//传递给下一个广播
         }
     }
 
-    fun send() {
+    private fun send() {
         val broad = Intent(C.ACTION_MY)
         broad.putExtra("msg", "baseactivity")
         //        sendBroadcast(broad);

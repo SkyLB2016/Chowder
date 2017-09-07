@@ -6,55 +6,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingLeft="@dimen/wh_64"
+    android:paddingRight="@dimen/wh_64"
     app:divider="@drawable/divider"
     app:showDividers="middle">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/padding_4"
-        android:layout_marginTop="@dimen/padding_8"
+        android:layout_marginBottom="@dimen/wh_4"
+        android:layout_marginTop="@dimen/wh_8"
         android:layout_weight="1.0"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <com.sky.demo.ui.widget.CircleImageView
+        <com.sky.chowder.ui.widget.CircleImageView
             android:id="@+id/civ_head"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_hua"
-            app:border_color="@color/green"
-            app:border_width="@dimen/padding_4"/>
+            android:src="@mipmap/ic_launcher"
+            app:borderColor="@color/green"
+            app:borderWidth="@dimen/wh_4"/>
 
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/civ_head"
-            android:layout_marginLeft="@dimen/padding_4"
+            android:layout_marginLeft="@dimen/wh_4"
             android:layout_toRightOf="@id/civ_head"
             android:text="sky"
             android:textColor="@color/white"
-            android:textSize="@dimen/medium"/>
+            android:textSize="@dimen/text_medium"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/civ_head"
             android:layout_below="@id/tv_name"
-            android:layout_marginLeft="@dimen/padding_4"
+            android:layout_marginLeft="@dimen/wh_4"
             android:layout_toRightOf="@id/civ_head"
             android:text="等级"
             android:textColor="@color/white"
-            android:textSize="@dimen/medium"/>
+            android:textSize="@dimen/text_medium"/>
     </RelativeLayout>
 
     <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/padding_8"
+        android:layout_marginTop="@dimen/wh_8"
         android:orientation="vertical"
         app:divider="@drawable/divider"
         app:showDividers="middle">
@@ -62,143 +62,144 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/padding_4"
+            android:layout_marginBottom="@dimen/wh_4"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:tag="@string/qq_menu01">
 
-            <com.sky.demo.ui.widget.CircleImageView
+            <!--<android.support.v4.widget.CircleImageView-->
+            <com.sky.chowder.ui.widget.CircleImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/menu_01"
-                app:border_color="@color/green"
-                app:border_width="@dimen/padding_4"/>
+                android:src="@mipmap/ic_launcher"
+                app:borderColor="@color/green"
+                app:borderWidth="@dimen/wh_4"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:drawableRight="@mipmap/arrow_right"
+                android:drawableRight="@mipmap/ic_right"
                 android:text="@string/qq_menu01"
                 android:textColor="@color/white"
-                android:textSize="@dimen/medium"/>
+                android:textSize="@dimen/text_medium"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/padding_4"
-            android:layout_marginTop="@dimen/padding_4"
+            android:layout_marginBottom="@dimen/wh_4"
+            android:layout_marginTop="@dimen/wh_4"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:tag="@string/qq_menu02">
 
-            <com.sky.demo.ui.widget.CircleImageView
+            <com.sky.chowder.ui.widget.CircleImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/menu_02"
-                app:border_color="@color/green"
-                app:border_width="@dimen/padding_4"/>
+                android:src="@mipmap/ic_launcher"
+                app:borderColor="@color/green"
+                app:borderWidth="@dimen/wh_4"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:drawableRight="@mipmap/arrow_right"
+                android:drawableRight="@mipmap/ic_right"
                 android:text="@string/qq_menu02"
                 android:textColor="@color/white"
-                android:textSize="@dimen/medium"/>
+                android:textSize="@dimen/text_medium"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/padding_4"
-            android:layout_marginTop="@dimen/padding_4"
+            android:layout_marginBottom="@dimen/wh_4"
+            android:layout_marginTop="@dimen/wh_4"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:tag="@string/qq_menu03">
 
-            <com.sky.demo.ui.widget.CircleImageView
+            <com.sky.chowder.ui.widget.CircleImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/menu_03"
-                app:border_color="@color/green"
-                app:border_width="@dimen/padding_4"/>
+                android:src="@mipmap/ic_launcher"
+                app:borderColor="@color/green"
+                app:borderWidth="@dimen/wh_4"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:drawableRight="@mipmap/arrow_right"
+                android:drawableRight="@mipmap/ic_right"
                 android:text="@string/qq_menu03"
                 android:textColor="@color/white"
-                android:textSize="@dimen/medium"/>
+                android:textSize="@dimen/text_medium"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/padding_4"
-            android:layout_marginTop="@dimen/padding_4"
+            android:layout_marginBottom="@dimen/wh_4"
+            android:layout_marginTop="@dimen/wh_4"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:tag="@string/qq_menu04">
 
-            <com.sky.demo.ui.widget.CircleImageView
+            <com.sky.chowder.ui.widget.CircleImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/menu_04"
-                app:border_color="@color/green"
-                app:border_width="@dimen/padding_4"/>
+                android:src="@mipmap/ic_launcher"
+                app:borderColor="@color/green"
+                app:borderWidth="@dimen/wh_4"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:drawableRight="@mipmap/arrow_right"
+                android:drawableRight="@mipmap/ic_right"
                 android:text="@string/qq_menu04"
                 android:textColor="@color/white"
-                android:textSize="@dimen/medium"/>
+                android:textSize="@dimen/text_medium"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/padding_4"
-            android:layout_marginTop="@dimen/padding_4"
+            android:layout_marginBottom="@dimen/wh_4"
+            android:layout_marginTop="@dimen/wh_4"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:tag="@string/qq_menu05">
 
-            <com.sky.demo.ui.widget.CircleImageView
+            <com.sky.chowder.ui.widget.CircleImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/menu_05"
-                app:border_color="@color/green"
-                app:border_width="@dimen/padding_4"/>
+                android:src="@mipmap/ic_launcher"
+                app:borderColor="@color/green"
+                app:borderWidth="@dimen/wh_4"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:drawableRight="@mipmap/arrow_right"
+                android:drawableRight="@mipmap/ic_right"
                 android:text="@string/qq_menu05"
                 android:textColor="@color/white"
-                android:textSize="@dimen/medium"/>
+                android:textSize="@dimen/text_medium"/>
         </LinearLayout>
     </android.support.v7.widget.LinearLayoutCompat>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/padding_8"
-        android:layout_marginTop="@dimen/padding_8"
+        android:layout_marginBottom="@dimen/wh_8"
+        android:layout_marginTop="@dimen/wh_8"
         android:layout_weight="1.0"
         android:gravity="center"
         android:orientation="horizontal">
@@ -207,17 +208,17 @@
             android:id="@+id/tv_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/padding_4"
+            android:layout_marginLeft="@dimen/wh_4"
             android:text="设置"
             android:textColor="@color/white"
-            android:textSize="@dimen/medium"/>
+            android:textSize="@dimen/text_medium"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/padding_4"
+            android:layout_marginLeft="@dimen/wh_4"
             android:text="退出"
             android:textColor="@color/white"
-            android:textSize="@dimen/medium"/>
+            android:textSize="@dimen/text_medium"/>
     </LinearLayout>
 </android.support.v7.widget.LinearLayoutCompat>

@@ -1,24 +1,4 @@
 <resources>
-    <!--卫星菜单栏-->
-    <attr name="position">
-        <enum name="left_top" value="0" />
-        <enum name="left_bottom" value="1" />
-        <enum name="right_top" value="2" />
-        <enum name="right_bottom" value="3" />
-        <enum name="center_top" value="4" />
-        <enum name="center_bottom" value="5" />
-        <enum name="center" value="6" />
-        <enum name="center_left" value="7" />
-        <enum name="center_right" value="8" />
-    </attr>
-    <attr name="radius" format="dimension"/>
-
-    <declare-styleable name="SolarSystem">
-        <attr name="position" />
-        <attr name="radius" />
-    </declare-styleable>
-
-
     <declare-styleable name="TabTextView">
         <attr name="tab_icon" format="reference" />
         <attr name="tab_color" format="color" />
@@ -27,22 +7,22 @@
         <attr name="tab_textcolor" format="color" />
     </declare-styleable>
 
-    <declare-styleable name="CircleProgress">
-        <!--圆的半径-->
-        <attr name="radius" />
-        <!--总进度条颜色-->
-        <attr name="total_color" format="color" />
-        <!--进度条颜色-->
-        <attr name="pro_color" format="color" />
-        <!--进度条宽度-->
-        <attr name="pro_width" format="dimension" />
-        <!--字体内容-->
-        <attr name="text" format="string" />
-        <!--字体颜色-->
-        <attr name="textcolor" format="color" />
-        <!--字体颜色-->
-        <attr name="textsize" format="dimension" />
-        <!--字体背景-->
-        <attr name="text_background" format="color|reference" />
-    </declare-styleable>
+    <!--<declare-styleable name="CircleProgress">-->
+        <!--&lt;!&ndash;圆的半径&ndash;&gt;-->
+        <!--<attr name="radius" />-->
+        <!--&lt;!&ndash;总进度条颜色&ndash;&gt;-->
+        <!--<attr name="total_color" format="color" />-->
+        <!--&lt;!&ndash;进度条颜色&ndash;&gt;-->
+        <!--<attr name="pro_color" format="color" />-->
+        <!--&lt;!&ndash;进度条宽度&ndash;&gt;-->
+        <!--<attr name="pro_width" format="dimension" />-->
+        <!--&lt;!&ndash;字体内容&ndash;&gt;-->
+        <!--<attr name="text" format="string" />-->
+        <!--&lt;!&ndash;字体颜色&ndash;&gt;-->
+        <!--<attr name="textcolor" format="color" />-->
+        <!--&lt;!&ndash;字体颜色&ndash;&gt;-->
+        <!--<attr name="textsize" format="dimension" />-->
+        <!--&lt;!&ndash;字体背景&ndash;&gt;-->
+        <!--<attr name="text_background" format="color|reference" />-->
+    <!--</declare-styleable>-->
 </resources>

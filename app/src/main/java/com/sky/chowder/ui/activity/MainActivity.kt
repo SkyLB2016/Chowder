@@ -19,6 +19,10 @@ import com.sky.chowder.ui.presenter.MainPresenter
 import com.sky.utils.JumpAct
 import kotlinx.android.synthetic.main.content_main.*
 
+/**
+ * Created by 李彬 on 2015/12/6.
+ * 主页
+ */
 class MainActivity : BasePActivity<MainPresenter>(), Toolbar.OnMenuItemClickListener, IMainView {
 
     private var adapter: MainAdapter? = null
@@ -57,9 +61,8 @@ class MainActivity : BasePActivity<MainPresenter>(), Toolbar.OnMenuItemClickList
     }
 
     override fun onMenuItemClick(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_01//跳转到指定的别的APP的activity
-            -> startOther("com.cx.architecture", "com.cx.architecture.ui.activity.LoginActivity")
+        when (item.itemId) {//跳转到指定的别的APP的activity
+            R.id.action_01 -> startOther("com.cx.architecture", "com.cx.architecture.ui.activity.LoginActivity")
             R.id.action_02 -> startOther("com.gc.materialdesigndemo", "com.gc.materialdesigndemo.ui.MainActivity")
         }
         return false

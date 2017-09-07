@@ -32,6 +32,7 @@ class SolarSystemActivity : BasePActivity<SolarPresenter>(), Toolbar.OnMenuItemC
     override fun getLayoutResId(): Int {
         return R.layout.activity_solar
     }
+
     override fun creatPresenter() {
         presenter = SolarPresenter(this)
     }
@@ -45,17 +46,16 @@ class SolarSystemActivity : BasePActivity<SolarPresenter>(), Toolbar.OnMenuItemC
         relative.setBackgroundResource(R.drawable.solar_rect_list)
         layoutDraw = relative.background as AnimationDrawable
 
-        val childCount = solarSystem!!.childCount
+        val childCount = solar!!.childCount
         val childParams = FrameLayout.LayoutParams(width / 5, width / 5)
-        for (i in 0 until childCount - 1) {
-            solarSystem!!.getChildAt(i).layoutParams = childParams
-        }
+        for (i in 0 until childCount - 1) solar!!.getChildAt(i).layoutParams = childParams
+
         //solarSystem.setPosition(SolarSystem.CENTER_BOTTOM);
-        solarSystem?.setRadius(width / 3)
-        solarSystem?.setRotaMenu(true)//按钮是否旋转
-        solarSystem?.setIsRotate(true)//混合还是单次执行
-        solarSystem?.isRecoverChildView = false
-        solarSystem?.setOnMenuState(object : SolarSystem.MenuState {
+        solar?.setRadius(width / 3)
+        solar?.setRotaMenu(true)//按钮是否旋转
+        solar?.setIsRotate(true)//混合还是单次执行
+        solar?.isRecoverChildView = false
+        solar?.setOnMenuState(object : SolarSystem.MenuState {
             override fun openMenu() {
                 layoutDraw?.start()
                 handler.sendEmptyMessageDelayed(C.handler_0x002, 600)
@@ -66,7 +66,7 @@ class SolarSystemActivity : BasePActivity<SolarPresenter>(), Toolbar.OnMenuItemC
                 handler.sendEmptyMessageDelayed(C.handler_0x002, 600)
             }
         })
-        solarSystem?.setOnMenuItemClickListener { view, position ->
+        solar?.setOnMenuItemClickListener { view, position ->
             //可以把所需要跳转的activity的全称写在tag里
             //JumpAct.jumpActivity(SolarSystemActivity.this, tag);
             when (view.tag) {
@@ -78,7 +78,7 @@ class SolarSystemActivity : BasePActivity<SolarPresenter>(), Toolbar.OnMenuItemC
                 "slidingmenu" -> showToast("position==$position")
             }
         }
-        solarSystem?.toggleMenu(300)
+        solar?.toggleMenu(300)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -88,15 +88,15 @@ class SolarSystemActivity : BasePActivity<SolarPresenter>(), Toolbar.OnMenuItemC
 
     override fun onMenuItemClick(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_center -> solarSystem?.setPosition(SolarSystem.CENTER)
-            R.id.action_left_top -> solarSystem?.setPosition(SolarSystem.LEFT_TOP)
-            R.id.action_left_bottom -> solarSystem?.setPosition(SolarSystem.LEFT_BOTTOM)
-            R.id.action_right_top -> solarSystem?.setPosition(SolarSystem.RIGHT_TOP)
-            R.id.action_right_bottom -> solarSystem?.setPosition(SolarSystem.RIGHT_BOTTOM)
-            R.id.action_center_top -> solarSystem?.setPosition(SolarSystem.CENTER_TOP)
-            R.id.action_center_bottom -> solarSystem?.setPosition(SolarSystem.CENTER_BOTTOM)
-            R.id.action_center_left -> solarSystem?.setPosition(SolarSystem.CENTER_LEFT)
-            R.id.action_center_right -> solarSystem?.setPosition(SolarSystem.CENTER_RIGHT)
+            R.id.action_center -> solar?.setPosition(SolarSystem.CENTER)
+            R.id.action_left_top -> solar?.setPosition(SolarSystem.LEFT_TOP)
+            R.id.action_left_bottom -> solar?.setPosition(SolarSystem.LEFT_BOTTOM)
+            R.id.action_right_top -> solar?.setPosition(SolarSystem.RIGHT_TOP)
+            R.id.action_right_bottom -> solar?.setPosition(SolarSystem.RIGHT_BOTTOM)
+            R.id.action_center_top -> solar?.setPosition(SolarSystem.CENTER_TOP)
+            R.id.action_center_bottom -> solar?.setPosition(SolarSystem.CENTER_BOTTOM)
+            R.id.action_center_left -> solar?.setPosition(SolarSystem.CENTER_LEFT)
+            R.id.action_center_right -> solar?.setPosition(SolarSystem.CENTER_RIGHT)
         }
         return false
     }

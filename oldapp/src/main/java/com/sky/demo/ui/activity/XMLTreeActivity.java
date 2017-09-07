@@ -57,7 +57,6 @@ public class XMLTreeActivity extends BaseActivity implements SwipeRefreshLayout.
                 case 0:
                     Toast.makeText(XMLTreeActivity.this, "DOWN", Toast.LENGTH_SHORT).show();
                     swipe.setRefreshing(false);
-
                     break;
                 case 1:
                     Snackbar.make(recyclerView, "Snackbar comes out",
@@ -86,7 +85,7 @@ public class XMLTreeActivity extends BaseActivity implements SwipeRefreshLayout.
         swipe.setProgressViewOffset(false, 0, (int) TypedValue
                 .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 80, getResources()
                         .getDisplayMetrics()));
-        swipe.setColorSchemeColors(R.color.red, R.color.white, R.color.black, R.color.white, R.color.black);
+        swipe.setColorSchemeResources(R.color.red, R.color.white, R.color.black, R.color.white, R.color.black);
         swipe.setOnRefreshListener(this);
 
         recyclerView.setHasFixedSize(true);

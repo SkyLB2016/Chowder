@@ -15,6 +15,7 @@ import com.sky.utils.SPUtils
  * 引导页面
  */
 class GuideActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)//去掉信息栏
         super.onCreate(savedInstanceState)
@@ -32,11 +33,9 @@ class GuideActivity : AppCompatActivity() {
         val view = inflater.inflate(R.layout.pager_end, null)
         contoler.init(imgIds, view)
         view.findViewById(R.id.bt_begin).setOnClickListener {
-            SPUtils.getInstance().put(Common.ISFIRST, false)
-            startActivity(Intent(this@GuideActivity,
-                    MainActivity::class.java))
-            //                        overridePendingTransition(R.anim.in_from_right,
-            //                                R.anim.out_to_left);
+            SPUtils.getInstance(Common.ISFIRST).put(Common.ISFIRST, false)
+            startActivity(Intent(this@GuideActivity, MainActivity::class.java))
+//            overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
             finish()
         }
     }
