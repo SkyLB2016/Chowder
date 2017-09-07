@@ -22,17 +22,18 @@ import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : BasePActivity<MainPresenter>(), Toolbar.OnMenuItemClickListener, IMainView {
 
-    //        private val recycle: MyRecyclerView by bindView(R.id.recycle)
-//    val fab: FloatingActionButton by bindView(R.id.fab)
     private var adapter: MainAdapter? = null
 
     public override fun getLayoutResId(): Int {
         return R.layout.activity_main
     }
 
+    override fun creatPresenter() {
+        presenter = MainPresenter(this)
+    }
+
     public override fun initialize() {
         baseTitle.setLeftButton(-1)
-
         recycle!!.setHasFixedSize(true)
         adapter = MainAdapter(R.layout.adapter_main)
         recycle!!.adapter = adapter
@@ -46,10 +47,6 @@ class MainActivity : BasePActivity<MainPresenter>(), Toolbar.OnMenuItemClickList
             getMemory()
             getMemory1()
         }
-    }
-
-    override fun creatPresenter() {
-        presenter = MainPresenter(this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
