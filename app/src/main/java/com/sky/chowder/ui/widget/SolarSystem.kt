@@ -282,7 +282,7 @@ class SolarSystem @JvmOverloads constructor(context: Context, attrs: AttributeSe
         var iy = 0f
         var childAt: View
 
-        for (i in 0..childCount - 1 - 1) {
+        for (i in 0 until childCount - 1) {
             childAt = getChildAt(i)
             //开始计算每个view的弹出位置
             when (position) {
