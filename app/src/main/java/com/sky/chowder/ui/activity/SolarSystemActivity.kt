@@ -26,9 +26,7 @@ class SolarSystemActivity : BasePActivity<SolarPresenter>(), Toolbar.OnMenuItemC
 
     internal var handler: Handler = object : Handler() {
         override fun handleMessage(msg: Message) {
-            super.handleMessage(msg)
-            if (msg.what == C.handler_0x002)
-                layoutDraw?.stop()
+            if (msg.what == C.handler_0x002) layoutDraw?.stop()
         }
     }
 
