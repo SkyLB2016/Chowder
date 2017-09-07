@@ -7,7 +7,6 @@ import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.FrameLayout
-import android.widget.RelativeLayout
 import com.sky.base.BasePActivity
 import com.sky.chowder.C
 import com.sky.chowder.R
@@ -38,7 +37,6 @@ class SolarSystemActivity : BasePActivity<SolarPresenter>(), Toolbar.OnMenuItemC
     }
 
     override fun initialize() {
-        val relative = getView<RelativeLayout>(R.id.relative)
         val width = ScreenUtils.getWH(this)[0]
         val lp = relative.layoutParams
         lp.height = width / 3
