@@ -22,7 +22,7 @@ import com.sky.chowder.R;
  * @Description: TODO 卫星式菜单
  * @date 2015年4月9日 下午9:10:39
  */
-public class SolarSystem extends FrameLayout implements OnClickListener {
+public class SolarSystemjava extends FrameLayout implements OnClickListener {
 
     // 九个位置定义
     public static final int LEFT_TOP = 0;
@@ -128,15 +128,15 @@ public class SolarSystem extends FrameLayout implements OnClickListener {
         this.menuState = MenuState;
     }
 
-    public SolarSystem(Context context) {
+    public SolarSystemjava(Context context) {
         this(context, null);
     }
 
-    public SolarSystem(Context context, AttributeSet attrs) {
+    public SolarSystemjava(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public SolarSystem(Context context, AttributeSet attrs, int defStyleAttr) {
+    public SolarSystemjava(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         // 半径默认值
         radius = (int) TypedValue.applyDimension(

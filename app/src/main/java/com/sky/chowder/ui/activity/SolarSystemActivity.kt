@@ -49,7 +49,7 @@ class SolarSystemActivity : BasePActivity<SolarPresenter>(), Toolbar.OnMenuItemC
 
         val childCount = solarSystem!!.childCount
         val childParams = FrameLayout.LayoutParams(width / 5, width / 5)
-        for (i in 0..childCount - 1 - 1) {
+        for (i in 0 until childCount - 1) {
             solarSystem!!.getChildAt(i).layoutParams = childParams
         }
         //solarSystem.setPosition(SolarSystem.CENTER_BOTTOM);
@@ -70,38 +70,25 @@ class SolarSystemActivity : BasePActivity<SolarPresenter>(), Toolbar.OnMenuItemC
             }
         })
         solarSystem!!.setOnMenuItemClickListener { view, position ->
+            var time = System.currentTimeMillis()
             val tag = view.tag as String
             //可以把所需要跳转的activity的全称写在tag里
             //                JumpAct.jumpActivity(SolarSystemActivity.this, tag);
             when (tag) {
-                "flow" -> testSP()
+                "flow" -> testSP(time)
                 "list" -> testSPIn()
-                "viewpager" -> {
-                }
-                "recyclerview" -> {
-                }
-                "bitmap" -> {
-                }
-                "slidingmenu" -> {
-                }
-            }//JumpAct.jumpActivity(SolarSystemActivity.this, CarouselActivity.class);
-            //                    JumpAct.jumpActivity(SolarSystemActivity.this, RefreshListActivity.class);
-            //                    JumpAct.jumpActivity(SolarSystemActivity.this, TabLayoutActivity.class);
-            //                    JumpAct.jumpActivity(SolarSystemActivity.this, ImageUriActivity.class);
-            //                    JumpAct.jumpActivity(SolarSystemActivity.this, BottomTabBarActivity.class);
-            //                    JumpAct.jumpActivity(SolarSystemActivity.this, SlidingMenuActivity.class);
+                "viewpager" -> showToast("position==$position")
+                "recyclerview" -> showToast("position==$position")
+                "bitmap" -> showToast("position==$position")
+                "slidingmenu" -> showToast("position==$position")
+            }
         }
         solarSystem!!.toggleMenu(300)
     }
 
-    private fun testSP() {
-        var time = System.currentTimeMillis()
-        for (i in 0..9) {
-            //            SPUtilsIn.put(SolarSystemActivity.this,"testsp" + i, "test+" + i);
-        }
-        time = System.currentTimeMillis() - time
-        LogUtils.i("SPUtilsIn==" + time)
-
+    private fun testSP(time: Long) {
+        var time = System.currentTimeMillis() - time
+        showToast("time==$time")
     }
 
     private fun testSPIn() {
