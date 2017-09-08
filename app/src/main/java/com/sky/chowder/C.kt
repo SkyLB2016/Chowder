@@ -6,9 +6,10 @@ package com.sky.chowder
 
 object C {
     const val handler_0x002 = 0x002
+    const val handler_0x003 = 0x003
 
     val BASE_URL = "http://uat.b.quancome.com/platform/api"
     val ACTION_PUSH_DATA = "fm.data.push.action"
     val ACTION_NEW_VERSION = "apk.update.action"
-    val ACTION_MY = "android.intent.action.MYBROADCAST"
+    const val ACTION_MY = "android.intent.action.MYBROADCAST"
 }

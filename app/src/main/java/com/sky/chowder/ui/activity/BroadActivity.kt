@@ -22,12 +22,6 @@ class BroadActivity : BaseNoPActivity() {
         return R.layout.activity_main
     }
 
-    override fun initialize() {
-
-    }
-
-    override fun loadData() {}
-
     override fun onResume() {
         super.onResume()
         // 动态注册reciver

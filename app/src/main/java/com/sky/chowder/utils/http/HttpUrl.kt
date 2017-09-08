@@ -9,5 +9,6 @@ object HttpUrl {
     // 上传图片
     const val URL_UPLOAD_PIC = "uploadImg.ashx"
     // 用户登录
-    const val  URL_LOGIN = Common.VERSION + "/Driver/Login"
+    const val URL_LOGIN = Common.VERSION + "/Driver/Login"
+    const val URL_MUKE = "http://www.imooc.com/api/teacher?type=4&num=30"
 }

@@ -17,6 +17,7 @@ import com.sky.chowder.model.ActivityModel
 import com.sky.chowder.ui.adapter.MainAdapter
 import com.sky.chowder.ui.presenter.MainPresenter
 import com.sky.utils.JumpAct
+import com.sky.utils.ScreenUtils
 import kotlinx.android.synthetic.main.content_main.*
 
 /**
@@ -37,9 +38,9 @@ class MainActivity : BasePActivity<MainPresenter>(), Toolbar.OnMenuItemClickList
 
     public override fun initialize() {
         baseTitle.setLeftButton(-1)
-        recycle?.setHasFixedSize(true)
+        recycler?.setHasFixedSize(true)
         adapter = MainAdapter(R.layout.adapter_main)
-        recycle?.adapter = adapter
+        recycler?.adapter = adapter
 
         adapter?.setOnItemClickListener { _, position -> JumpAct.jumpActivity(this, adapter!!.datas[position].componentName) }
         adapter?.setOnItemLongClickListener { _, _ ->
@@ -50,8 +51,9 @@ class MainActivity : BasePActivity<MainPresenter>(), Toolbar.OnMenuItemClickList
 
     @OnClick(R.id.fab)
     fun obnClick() {
-        getMemory()
-        getMemory1()
+//        getMemory()
+//        getMemory1()
+        showToast("width==${ScreenUtils.getHeightPX(this)}")
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

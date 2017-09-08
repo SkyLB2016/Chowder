@@ -1,8 +1,10 @@
 package com.sky.chowder.utils.http
 
 
+import com.sky.chowder.model.CourseEntity
 import com.sky.chowder.model.LoginEntity
 import com.sky.chowder.model.params.LoginParams
+import com.sky.model.ArrayEntity
 import com.sky.model.ObjectEntity
 
 import io.reactivex.Observable
@@ -18,6 +20,9 @@ interface IHttpUrl {
     @Streaming
     @POST(HttpUrl.URL_LOGIN)
     fun login(@Body loginParams: LoginParams): Observable<ObjectEntity<LoginEntity>>
+
+    @POST(HttpUrl.URL_MUKE)
+    fun getMuKe(): Observable<ArrayEntity<CourseEntity>>
 
     //    @GET(HttpUrl.checkUpload)
     //    Observable<ObjectEntity<Object>> checkUpload();

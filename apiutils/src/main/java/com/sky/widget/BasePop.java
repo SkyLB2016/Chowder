@@ -70,7 +70,7 @@ public abstract class BasePop<T> extends PopupWindow {
     protected abstract void initDatas();
 
     public interface OnItemClickListener {
-        void onItemClick(View v);
+        void onItemClick(View v,int position);
     }
 
     public OnItemClickListener itemClickListener;

@@ -38,7 +38,7 @@ class SolarSystemActivity : BasePActivity<SolarPresenter>(), Toolbar.OnMenuItemC
     }
 
     override fun initialize() {
-        val width = ScreenUtils.getWH(this)[0]
+        val width = ScreenUtils.getWidthPX(this)
         val lp = relative.layoutParams
         lp.height = width / 3
         lp.width = lp.height

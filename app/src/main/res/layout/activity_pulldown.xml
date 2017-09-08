@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.sky.chowder.ui.widget.PullLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/rl_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/weather_bg_rain"/>
+
+            <com.sky.chowder.ui.widget.EyeView
+                android:id="@+id/ev"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/sel_shape_rect"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_eye"/>
+            </com.sky.chowder.ui.widget.EyeView>
+
+            <LinearLayout
+                android:id="@+id/ll_weather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="30dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@mipmap/weather_mostly_cloudy"
+                    android:gravity="center"
+                    android:text="10°~17°\n星期三"
+                    android:textColor="@android:color/white"
+                    android:textSize="12.0sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:drawableTop="@mipmap/weather_drizzle"
+                    android:gravity="center"
+                    android:text="11°~18°\n星期四"
+                    android:textColor="@android:color/white"
+                    android:textSize="12.0sp"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rl_menu"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/guide01"/>
+
+            <ImageView
+                android:layout_width="360dp"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/guide02"
+                android:paddingBottom="50dp"/>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/titlebar"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/dark_orange">
+
+            <Button
+                android:id="@+id/action_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:drawableLeft="@mipmap/ic_back"
+                android:gravity="center_vertical"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_small"/>
+
+            <TextView
+                android:id="@+id/action_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="mydemo"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_medium"/>
+
+            <Button
+                android:id="@+id/action_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:paddingRight="5dp"
+                android:text="立即登录"
+                android:textColor="@color/gray_dark"
+                android:textSize="@dimen/text_small"
+                android:visibility="visible"/>
+        </RelativeLayout>
+    </RelativeLayout>
+</com.sky.chowder.ui.widget.PullLayout>

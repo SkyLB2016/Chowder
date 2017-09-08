@@ -37,7 +37,7 @@ class CircleImageView : android.support.v7.widget.AppCompatImageView {
     private val mReady: Boolean = true
     private var mSetupPending: Boolean = false
 
-    constructor(context: Context) : super(context) {}
+    constructor(context: Context) : super(context)
 
     @JvmOverloads constructor(context: Context, attrs: AttributeSet, defStyle: Int = 0) : super(context, attrs, defStyle) {
         super.setScaleType(SCALE_TYPE)
@@ -60,9 +60,7 @@ class CircleImageView : android.support.v7.widget.AppCompatImageView {
     }
 
     override fun setScaleType(scaleType: ImageView.ScaleType) {
-        if (scaleType != SCALE_TYPE) {
-            throw IllegalArgumentException(String.format("ScaleType %s not supported.", scaleType))
-        }
+        if (scaleType != SCALE_TYPE) throw IllegalArgumentException(String.format("ScaleType %s not supported.", scaleType))
     }
 
     override fun onDraw(canvas: Canvas) {

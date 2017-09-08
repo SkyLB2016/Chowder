@@ -1,8 +1,10 @@
 package com.sky.chowder.utils.http
 
+import com.sky.chowder.model.CourseEntity
 import com.sky.chowder.model.LoginEntity
 import com.sky.chowder.model.params.LoginParams
 import com.sky.http.BaseHttp
+import com.sky.model.ArrayEntity
 import com.sky.model.ObjectEntity
 
 import io.reactivex.Observable
@@ -20,6 +22,10 @@ class HttpUtils private constructor() : BaseHttp() {
 
     fun login(params: LoginParams): Observable<ObjectEntity<LoginEntity>> {
         return retrofit.create(IHttpUrl::class.java).login(params)
+    }
+
+    fun getMuke(): Observable<ArrayEntity<CourseEntity>> {
+        return retrofit.create(IHttpUrl::class.java).getMuKe()
     }
 
     companion object {

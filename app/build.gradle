@@ -37,6 +37,8 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
+        // dex突破65535的限制
+//        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         // 默认是umeng的渠道
         manifestPlaceholders = [CHANNEL_VALUE: "umeng"]
@@ -114,6 +116,7 @@ android {
 //    }
     //渠道Flavors，我这里写了一些常用的
     productFlavors {
+        sky {}
 //        GooglePlay {}
 //        xiaomi {}
 //        umeng {}

@@ -63,7 +63,7 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.6.0'
 
     //工具类
-    compile 'com.blankj:utilcode:1.6.3'
+//    compile 'com.blankj:utilcode:1.6.3'
 
 }
 //apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'

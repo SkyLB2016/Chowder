@@ -71,7 +71,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.other.CustomActivity"
+            android:name=".ui.activity.BezierActivity"
             android:description="@string/act_04_desc"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_04"
@@ -90,6 +90,58 @@
                 <action android:name="com.sky.coustom" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.activity.CircleProgressActivity"
+            android:description="@string/act_CircleProgress_desc"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/act_08"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.sky.coustom" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.DrawerActivity"
+            android:description="@string/act_09"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/act_09"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.sky.coustom" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.JsgsawActivity"
+            android:description="@string/act_10"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/act_10"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.sky.coustom" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.ImageUrlActivity"
+            android:description="@string/act_11"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/act_11"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.sky.coustom" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.ImageUriActivity"
+            android:description="@string/act_12"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/act_12"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.sky.coustom" />
+            </intent-filter>
+        </activity>
+
+
         <activity
             android:name=".ui.activity.BroadActivity"
             android:description="@string/act_06_desc"
