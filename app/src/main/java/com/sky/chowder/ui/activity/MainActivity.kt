@@ -70,7 +70,6 @@ class MainActivity : BasePActivity<MainPresenter>(), Toolbar.OnMenuItemClickList
         return false
     }
 
-
     private fun startOther(packageName: String, componentName: String) {
         try {
             JumpAct.jumpActivity(this@MainActivity, packageName, componentName)
@@ -86,9 +85,7 @@ class MainActivity : BasePActivity<MainPresenter>(), Toolbar.OnMenuItemClickList
         if (nowCurrent - lastBack > 3000) {
             showToast(resources.getString(R.string.toast_exit))
             lastBack = nowCurrent
-        } else {
-            super.onBackPressed()
-        }
+        } else super.onBackPressed()
     }
 
     override fun setData(data: List<ActivityModel>) {
