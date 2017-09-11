@@ -23,9 +23,8 @@ import butterknife.BindView;
 import io.reactivex.Observable;
 
 /**
- * @author sky QQ:1136096189
- * @Description: 加载网络图片
- * @date 15/11/28 下午12:38
+ * Created by SKY on 2015/11/28.
+ * 加载网络图片
  */
 public class ImageUrlActivity extends BaseNoPActivity {
 

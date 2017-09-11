@@ -19,9 +19,7 @@ import com.sky.chowder.utils.ImageLoaderAsync;
 import java.util.List;
 
 /**
- * @author sky QQ:1136096189
- * @Description:
- * @date 15/12/9 下午8:52
+ * Created by SKY on 2015/12/9 20:52.
  */
 public class LoaderURLAdapter extends RecyclerAdapter<CourseEntity> {
     private ImageLoaderAsync imageLoader;

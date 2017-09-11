@@ -23,9 +23,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
 /**
- * @author sky QQ:1136096189
- * @Description: TODO 线程池的使用
- * @date 16/1/6 下午5:21
+ * Created by SKY on 2015/1/6 17:21.
+ * 线程池的使用
  */
 public class ImageLoaderExecutors {
 

@@ -19,7 +19,7 @@ import android.view.View;
 import com.sky.R;
 
 /**
- * Created by sky on 15/3/26 下午3:50.
+ * Created by SKY on 15/3/26 下午3:50.
  * 自定义选项卡标签
  */
 public class TabTextView extends View {

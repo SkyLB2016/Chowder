@@ -10,7 +10,7 @@ import android.util.AttributeSet;
 import com.sky.R;
 
 /**
- * Created by sky on 15/3/26 下午3:50.
+ * Created by SKY on 15/3/26 下午3:50.
  * 密码输入框
  */
 public class PassWordView extends android.support.v7.widget.AppCompatEditText {

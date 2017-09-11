@@ -14,7 +14,7 @@ import com.sky.utils.LogUtils
 import kotlinx.android.synthetic.main.adapter_main.view.*
 
 /**
- * Created by 李彬 on 2015/12/6.
+ * Created by SKY on 2015/12/6.
  * 主页
  */
 class MainAdapter(layoutId: Int) : RecyclerAdapter<ActivityModel>(layoutId) {

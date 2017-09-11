@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by sky on 2017/6/15.
+ * Created by SKY on 2017/6/15.
  * 默认的bundle传输类
  */
 public class Extra<T> implements Serializable {

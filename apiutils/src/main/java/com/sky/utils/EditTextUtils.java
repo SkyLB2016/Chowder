@@ -7,9 +7,7 @@ import android.widget.EditText;
 import com.sky.R;
 
 /**
- * author ShenZhenWei
- * time   15/11/25.
- * email  826337999@qq.com
+ * Created by SKY on 2015/11/28.
  */
 public class EditTextUtils {
     //EditText获取焦点

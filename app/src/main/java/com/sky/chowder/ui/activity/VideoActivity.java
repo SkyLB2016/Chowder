@@ -11,9 +11,8 @@ import com.sky.chowder.R;
 import java.io.File;
 
 /**
- * Created by 李彬 on 2016/8/28.
+ * Created by SKY on 2016/8/28.
  */
-
 public class VideoActivity extends AppCompatActivity {
     VideoView video;
 

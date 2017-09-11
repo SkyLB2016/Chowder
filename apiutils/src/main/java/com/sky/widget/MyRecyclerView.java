@@ -5,7 +5,9 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-
+/**
+ * Created by SKY on 16/5/10 下午3:50.
+ */
 public class MyRecyclerView extends RecyclerView {
 
     public MyRecyclerView(Context context) {

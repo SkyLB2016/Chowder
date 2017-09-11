@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.sky.R;
 
 /**
- * Created by 李彬 on 2016/9/21.
+ * Created by SKY on 2016/9/21.
  */
 public class BaseTitle {
     public AppCompatActivity activity;

@@ -21,6 +21,7 @@ import java.io.File;
 
 /**
  * Created by SKY on 2017/8/18.
+ * 照片选择器
  */
 public class PhotoUtils {
     private AppCompatActivity activity;

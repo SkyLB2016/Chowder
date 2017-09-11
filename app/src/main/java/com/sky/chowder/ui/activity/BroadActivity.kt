@@ -13,14 +13,11 @@ import com.sky.utils.NetworkJudgment
 import com.sky.utils.ToastUtils
 
 /**
- * Created by 李彬 on 2017/3/3.
+ * Created by SKY on 2017/3/3.
  */
 
 class BroadActivity : BaseNoPActivity() {
-
-    public override fun getLayoutResId(): Int {
-        return R.layout.activity_main
-    }
+    override fun getLayoutResId(): Int = R.layout.tv
 
     override fun onResume() {
         super.onResume()

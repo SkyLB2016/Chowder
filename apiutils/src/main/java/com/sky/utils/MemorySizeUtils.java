@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 
 /**
+ * Created by SKY on 2015/4/12.
  * 获取空间大小
  */
 public class MemorySizeUtils {

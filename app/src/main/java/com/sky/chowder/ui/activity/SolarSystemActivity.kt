@@ -16,7 +16,7 @@ import com.sky.utils.ScreenUtils
 import kotlinx.android.synthetic.main.activity_solar.*
 
 /**
- * Created by sky on 15/12/9 下午8:54.
+ * Created by SKY on 15/12/9 下午8:54.
  * 卫星菜单栏
  */
 class SolarSystemActivity : BasePActivity<SolarPresenter>(), Toolbar.OnMenuItemClickListener {
@@ -29,9 +29,8 @@ class SolarSystemActivity : BasePActivity<SolarPresenter>(), Toolbar.OnMenuItemC
         }
     }
 
-    override fun getLayoutResId(): Int {
-        return R.layout.activity_solar
-    }
+    override fun getLayoutResId(): Int =
+            R.layout.activity_solar
 
     override fun creatPresenter() {
         presenter = SolarPresenter(this)

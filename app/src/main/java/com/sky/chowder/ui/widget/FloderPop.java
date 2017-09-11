@@ -11,9 +11,8 @@ import com.sky.utils.ImageUtils;
 import com.sky.widget.BasePop;
 
 /**
- * @author sky QQ:1136096189
- * @Description: TODO
- * @date 16/1/11 下午1:14
+ * Created by SKY on 2016/1/11 13:14.
+ * 文件夹pop
  */
 public class FloderPop extends BasePop<ImageFloder> {
     //看看pageradapter，FragmentStatePagerAdapter等三个的源码

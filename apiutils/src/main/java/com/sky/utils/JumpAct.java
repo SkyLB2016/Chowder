@@ -10,7 +10,7 @@ import com.sky.R;
 import java.io.Serializable;
 
 /**
- * Created by sky on 16/5/10 下午3:50.
+ * Created by SKY on 16/5/10 下午3:50.
  * activity跳转
  */
 public class JumpAct {

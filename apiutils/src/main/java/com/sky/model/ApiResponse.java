@@ -16,7 +16,7 @@
 package com.sky.model;
 
 /**
- * Created by sky on 15/12/9 下午8:54.
+ * Created by SKY on 15/12/9 下午8:54.
  * Api响应结果的封装类.
  */
 public class ApiResponse<T> {

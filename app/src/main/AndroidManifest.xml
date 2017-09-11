@@ -39,7 +39,6 @@
             android:name=".ui.activity.WelcomeActivity"
             android:description="@string/act_01_des">
             <intent-filter>
-                <action android:name="com.sky.coustom" />
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -61,7 +60,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.RecyclerActivity"
+            android:name=".ui.activity.StockActivity"
             android:description="@string/act_03_desc"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_03"
@@ -111,7 +110,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.JsgsawActivity"
+            android:name=".ui.activity.PuzzleActivity"
             android:description="@string/act_10"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_10"
@@ -135,6 +134,57 @@
             android:description="@string/act_12"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_12"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.sky.coustom" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.PullDownActivity"
+            android:description="@string/act_13"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/act_13"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.sky.coustom" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.DetailActivity"
+            android:description="@string/act_14"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/act_14"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.sky.coustom" />
+                <action android:name="com.sky.caction.detail" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.DrawActivity"
+            android:description="@string/act_15"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/act_15"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.sky.coustom" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.FactoryActivity"
+            android:description="@string/act_16"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/act_16"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.sky.coustom" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.SVGActivity"
+            android:description="@string/act_17"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/act_17"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.sky.coustom" />

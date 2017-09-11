@@ -9,9 +9,8 @@ import android.view.SurfaceHolder
 import android.view.SurfaceView
 
 /**
- * Created by 李彬 on 2017/3/6.
+ * Created by SKY on 2017/3/6.
  */
-
 class AnimationSurfaceView(context: Context) : SurfaceView(context), SurfaceHolder.Callback, Runnable {
 
     // 用于控制SurfaceView

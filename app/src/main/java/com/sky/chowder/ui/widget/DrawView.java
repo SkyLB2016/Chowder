@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 /**
  *  采用双缓冲实现画图板
- * Created by 李彬 on 2016/9/5.
+ * Created by SKY on 2016/9/5.
  */
 
 public class DrawView extends View {

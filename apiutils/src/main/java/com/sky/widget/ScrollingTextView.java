@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 /**
- * Created by sky on 16/5/10 下午3:50.
+ * Created by SKY on 16/5/10 下午3:50.
  * 滑动的textview
  */
 public class ScrollingTextView extends TextView {

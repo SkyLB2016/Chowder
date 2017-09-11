@@ -10,12 +10,10 @@ import com.sky.adapter.RecyclerAdapter;
 import com.sky.adapter.RecyclerHolder;
 
 /**
- * @author sky QQ:1136096189
- * @Description:
- * @date 15/11/28 下午2:07
+ * Created by SKY on 2015/11/28 14:07.
  */
-public class RecyclerViewAdapter extends RecyclerAdapter<Void> {
-    public RecyclerViewAdapter(int layoutId) {
+public class CollapsingAdapter extends RecyclerAdapter<Void> {
+    public CollapsingAdapter(int layoutId) {
         super(layoutId);
     }
 

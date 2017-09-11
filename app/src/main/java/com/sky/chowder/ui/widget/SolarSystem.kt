@@ -14,7 +14,7 @@ import android.widget.FrameLayout
 import com.sky.chowder.R
 
 /**
- * Created by sky on 2015/4/9 21:10:39.
+ * Created by SKY on 2015/4/9 21:10:39.
  * 卫星式菜单
  */
 class SolarSystem @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : FrameLayout(context, attrs, defStyleAttr) {

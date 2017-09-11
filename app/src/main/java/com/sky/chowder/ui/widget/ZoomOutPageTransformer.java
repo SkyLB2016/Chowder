@@ -3,6 +3,10 @@ package com.sky.chowder.ui.widget;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
+/**
+ * Created by SKY on 2015/3/26 17:41.
+ * 引导页动画
+ */
 public class ZoomOutPageTransformer implements ViewPager.PageTransformer {
     private static float MIN_SCALE = 0.85f;
     private static float MIN_ALPHA = 0.5f;

@@ -15,9 +15,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * @author sky QQ:1136096189
- * @Description: TODO 图片预加载缓存类，async的实现
- * @date 15/12/16 下午1:45
+ * Created by SKY on 2015/12/16 13:45.
+ * 图片预加载缓存类，async的实现
  */
 public class ImageLoaderAsync {
     Handler handler = new Handler() {

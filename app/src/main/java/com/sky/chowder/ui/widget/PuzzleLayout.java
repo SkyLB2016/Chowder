@@ -24,20 +24,19 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * @author sky QQ:1136096189
- * @Description: TODO
- * @date 15/12/24 上午10:58
+ * Created by SKY on 2015/12/24 10:58.
+ * 拼图游戏
  */
-public class PinTuLayout extends RelativeLayout implements View.OnClickListener {
-    public PinTuLayout(Context context) {
+public class PuzzleLayout extends RelativeLayout implements View.OnClickListener {
+    public PuzzleLayout(Context context) {
         this(context, null);
     }
 
-    public PinTuLayout(Context context, AttributeSet attrs) {
+    public PuzzleLayout(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public PinTuLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public PuzzleLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView();
     }

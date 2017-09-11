@@ -9,7 +9,7 @@ import com.sky.utils.LogUtils
 
 
 /**
- * Created by 李彬 on 2017/3/3.
+ * Created by SKY on 2017/3/3.
  * 写成守护线程的服务
  */
 class MyService : Service() {

@@ -4,10 +4,8 @@ import android.content.Context;
 import android.util.TypedValue;
 
 /**
- * @author sky
- * @ClassName: DensityUtils
- * @Description:  px与dp，sp间的转换
- * @date 2015年4月12日 下午1:33:47
+ * Created by SKY on 2015/4/12.
+ * px与dp，sp间的转换
  */
 public class DensityUtils {
     private DensityUtils() {

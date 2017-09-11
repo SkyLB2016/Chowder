@@ -1,5 +1,8 @@
 package com.sky.chowder.ui.widget;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
@@ -10,17 +13,12 @@ import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.nineoldandroids.animation.Animator;
-import com.nineoldandroids.animation.AnimatorListenerAdapter;
-import com.nineoldandroids.animation.ObjectAnimator;
-import com.nineoldandroids.view.ViewHelper;
 import com.sky.chowder.R;
 import com.sky.utils.ScreenUtils;
 
 /**
- * @author 彬 QQ 1136096189
- * @Description: TODO 下拉菜单，待调整
- * @date 2015/8/19 16:56
+ * Created by SKY on 2015/8/19.
+ * 下拉菜单，待调整
  */
 public class PullLayout extends ScrollView {
 
@@ -140,7 +138,7 @@ public class PullLayout extends ScrollView {
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
         super.onScrollChanged(l, t, oldl, oldt);
         if (t > menuHeight) {
-            ViewHelper.setTranslationY(titleBar, t);
+            ObjectAnimator.ofFloat(titleBar,"translationY",t);
             return;
         } else {
             animateScroll(t);
@@ -157,13 +155,19 @@ public class PullLayout extends ScrollView {
 
     private void animateScroll(int t) {
         float percent = (float) t / menuHeight;
-        ViewHelper.setTranslationY(mMenu, t);
-        ViewHelper.setTranslationY(mContent, titleBar.getHeight() * percent);
-        ViewHelper.setTranslationY(ev, -t / 2);
-        ViewHelper.setTranslationY(ll_weather, -t / 2);
+        ObjectAnimator.ofFloat(mMenu,"translationY",t);
+        ObjectAnimator.ofFloat(mContent,"translationY", titleBar.getHeight() * percent);
+        ObjectAnimator.ofFloat(ev,"translationY",-t / 2);
+        ObjectAnimator.ofFloat(ll_weather,"translationY",-t / 2);
+
+//        ViewHelper.setTranslationY(mMenu, t);
+//        ViewHelper.setTranslationY(mContent, titleBar.getHeight() * percent);
+//        ViewHelper.setTranslationY(ev, -t / 2);
+//        ViewHelper.setTranslationY(ll_weather, -t / 2);
         ev.setRadius((int) (menuHeight * 0.25f * (1 - percent)));
         action_title.setTextColor(evaluate(percent, Color.WHITE, Color.BLACK));
-        ViewHelper.setTranslationY(titleBar, t);
+        ObjectAnimator.ofFloat(titleBar,"translationY",t);
+//        ViewHelper.setTranslationY(titleBar, t);
         titleBar.setBackgroundColor(evaluate(percent, Color.argb(00, 255, 255, 255), Color.argb(255, 255, 255, 255)));
         if (percent == 1) {
             back.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.mipmap.ic_back), null, null, null);
@@ -175,12 +179,16 @@ public class PullLayout extends ScrollView {
     private void animatePull(int t) {
         mMenu.getLayoutParams().height = menuHeight - t;
         mMenu.requestLayout();
-        ViewHelper.setTranslationY(mContent, -t);
+        ObjectAnimator.ofFloat(mContent,"translationY",-t);
+//        ViewHelper.setTranslationY(mContent, -t);
 
         float percent = (float) t / menuHeight;
-        ViewHelper.setScaleX(ev, 1 - percent);
-        ViewHelper.setScaleY(ev, 1 - percent);
-        ViewHelper.setTranslationY(ll_weather, -t / 2);
+        ev.setScaleX(1-percent);
+        ev.setScaleY(1-percent);
+        ObjectAnimator.ofFloat(ll_weather,"translationY", -t / 2);
+//        ViewHelper.setScaleX(ev, 1 - percent);
+//        ViewHelper.setScaleY(ev, 1 - percent);
+//        ViewHelper.setTranslationY(ll_weather, -t / 2);
 
     }
 
@@ -190,15 +198,15 @@ public class PullLayout extends ScrollView {
         int startR = (startInt >> 16) & 0xff;
         int startG = (startInt >> 8) & 0xff;
         int startB = startInt & 0xff;
-        int endInt = (Integer) endValue;
+        int endInt = endValue;
         int endA = (endInt >> 24) & 0xff;
         int endR = (endInt >> 16) & 0xff;
         int endG = (endInt >> 8) & 0xff;
         int endB = endInt & 0xff;
-        return (int) ((startA + (int) (fraction * (endA - startA))) << 24)
-                | (int) ((startR + (int) (fraction * (endR - startR))) << 16)
-                | (int) ((startG + (int) (fraction * (endG - startG))) << 8)
-                | (int) ((startB + (int) (fraction * (endB - startB))));
+        return  (startA + (int) (fraction * (endA - startA))) << 24
+                | (startR + (int) (fraction * (endR - startR))) << 16
+                |  (startG + (int) (fraction * (endG - startG))) << 8
+                |  (startB + (int) (fraction * (endB - startB)));
     }
 
     public Boolean isOpen() {

@@ -35,8 +35,8 @@
     <string name="act_01_des">采用animation编写，延时一秒钟后执行</string>
     <string name="act_02">卫星式菜单栏</string>
     <string name="act_02_desc">支持九个方向，采用ObjectAnimator编写</string>
-    <string name="act_03">Recycler</string>
-    <string name="act_03_desc">recyclerView+recycleAdapter的使用</string>
+    <string name="act_03">股票计算</string>
+    <string name="act_03_desc">股票计算</string>
     <string name="act_04">自定义贝塞尔曲线</string>
     <string name="act_04_desc">待定</string>
     <string name="act_06">receive</string>
@@ -101,6 +101,11 @@
     <string name="act_10">拼图</string>
     <string name="act_11">网络图片加载与缓存</string>
     <string name="act_12">载入本地图片</string>
+    <string name="act_13">下拉动画</string>
+    <string name="act_14">collapsing</string>
+    <string name="act_15">双缓冲实验</string>
+    <string name="act_16">工厂模式实验</string>
+    <string name="act_17">SVG</string>
 
 
 </resources>

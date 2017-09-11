@@ -7,7 +7,7 @@ import android.graphics.Rect;
 import android.view.View;
 
 /**
- * Created by sky on 2015/8/10 10:30
+ * Created by SKY on 2015/8/10 10:30
  * 屏幕相关辅助类
  */
 public class ScreenUtils {

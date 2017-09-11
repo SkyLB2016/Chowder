@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 
 /**
- * Created by 李彬 on 2017/3/6.
+ * Created by SKY on 2017/3/6.
  */
 internal class GuideAdapter(private val views: List<View>) : PagerAdapter() {
 

@@ -5,7 +5,7 @@ import android.os.Looper;
 import android.os.Message;
 
 /**
- * Created by sky on 16/5/10 下午3:50.
+ * Created by SKY on 16/5/10 下午3:50.
  * 自定义的handler
  */
 public class UIHandler extends Handler {

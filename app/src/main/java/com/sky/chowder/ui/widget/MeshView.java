@@ -10,9 +10,8 @@ import android.widget.ImageView;
 import com.sky.utils.ImageUtils;
 
 /**
- * @author 彬 QQ 1136096189
- * @Description: TODO drawbitmapmesh应用
- * @date 2015/8/14 15:27
+ * Created by SKY on 2015/8/14 15:27.
+ * drawbitmapmesh应用
  */
 public class MeshView extends ImageView {
 

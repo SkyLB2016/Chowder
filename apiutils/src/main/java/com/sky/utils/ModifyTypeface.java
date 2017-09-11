@@ -1,4 +1,4 @@
-package com.sky.chowder.utils;
+package com.sky.utils;
 
 import android.app.Activity;
 import android.graphics.Typeface;
@@ -9,10 +9,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 /**
- * @author sky
- * @ClassName: ActivityLifecycle
- * @Description: TODO 修改字体
- * @date 2015年4月12日 下午1:33:47
+ * Created by SKY on 2015/4/12 13:41.
+ * 修改字体
  */
 public class ModifyTypeface {
     public static void changeFonts(ViewGroup root, String path, Activity act) {

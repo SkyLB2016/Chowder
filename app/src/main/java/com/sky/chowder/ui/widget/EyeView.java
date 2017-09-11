@@ -9,7 +9,9 @@ import android.graphics.PorterDuffXfermode;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
-
+/**
+ * Created by SKY on 2015/8/17 15:30.
+ */
 public class EyeView extends FrameLayout {
 
     private Paint paint;

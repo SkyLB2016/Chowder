@@ -34,7 +34,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- * Created by sky on 2017/6/6.
+ * Created by SKY on 2017/6/6.
  * bitmap工具类
  */
 public class ImageUtils {

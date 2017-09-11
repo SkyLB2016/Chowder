@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sky.chowder.utils;
+package com.sky.utils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedWriter;

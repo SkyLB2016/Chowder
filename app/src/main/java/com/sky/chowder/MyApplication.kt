@@ -5,7 +5,7 @@ import com.sky.SkyApp
 import com.sky.utils.LogUtils
 
 /**
- * Created by 李彬 on 2017/3/3.
+ * Created by SKY on 2017/3/3.
  */
 class MyApplication : SkyApp() {
 

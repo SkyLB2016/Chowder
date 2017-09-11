@@ -7,7 +7,7 @@ import android.content.DialogInterface
 import com.sky.chowder.R
 
 /**
- * Created by sky on 2017/6/21.
+ * Created by SKY on 2017/6/21.
  */
 class ProgressManager {
     private fun progressDialog(context: Context) {

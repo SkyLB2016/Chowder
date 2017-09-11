@@ -13,13 +13,11 @@ import com.sky.chowder.ui.service.MyService
 import com.sky.utils.LogUtils
 
 /**
- * Created by 李彬 on 2017/3/3.
+ * Created by SKY on 2017/3/3.
  */
 class ServiceActivity : BaseNoPActivity(), IService {
 
-    public override fun getLayoutResId(): Int {
-        return R.layout.activity_main
-    }
+    public override fun getLayoutResId() = R.layout.activity_main
 
     public override fun initialize() {
         //startService();//启动服务

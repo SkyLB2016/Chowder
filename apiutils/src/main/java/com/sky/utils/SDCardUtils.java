@@ -6,7 +6,7 @@ import android.os.StatFs;
 import java.io.File;
 
 /**
- * Created by sky on 2015/8/17 10:15
+ * Created by SKY on 2015/8/17 10:15
  * sd卡工具类
  */
 public class SDCardUtils {

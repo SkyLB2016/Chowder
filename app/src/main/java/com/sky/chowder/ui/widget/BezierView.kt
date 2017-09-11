@@ -5,7 +5,9 @@ import android.graphics.*
 import android.view.View
 import com.sky.chowder.R
 import java.util.*
-
+/**
+ * Created by SKY on 2017/3/9 20:52.
+ */
 class BezierView(context: Context) : View(context) {
 
     override fun onDraw(canvas: Canvas) {

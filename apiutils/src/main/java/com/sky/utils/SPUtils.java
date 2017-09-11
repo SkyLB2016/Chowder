@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * Created by sky on 16/5/10 下午3:50.
+ * Created by SKY on 16/5/10 下午3:50.
  * SharedPreferences管理类
  */
 public class SPUtils {

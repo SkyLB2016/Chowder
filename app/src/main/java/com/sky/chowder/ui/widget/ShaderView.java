@@ -16,9 +16,8 @@ import android.view.View;
 import com.sky.chowder.R;
 
 /**
- * @author 彬 QQ 1136096189
- * @Description: TODO shader应用，倒影效果
- * @date 2015/8/14 14:21
+ * Created by SKY on 2015/8/14 14:21.
+ * shader应用，倒影效果
  */
 public class ShaderView extends View {
 

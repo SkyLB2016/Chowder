@@ -12,7 +12,7 @@ import com.sky.widget.MyRecyclerView;
 import java.util.List;
 
 /**
- * Created by sky on 2017/6/15.
+ * Created by SKY on 2017/6/15.
  */
 public abstract class RecyclerPActivity<T, P extends RefreshP> extends BasePActivity<P> implements IRefreshV<T>, SwipeRefreshLayout.OnRefreshListener {
     MyRecyclerView recycler;

@@ -15,9 +15,7 @@ import com.sky.chowder.R;
 import com.sky.chowder.utils.ImageLoaderExecutors;
 
 /**
- * @author sky QQ:1136096189
- * @Description:
- * @date 15/12/9 下午8:52
+ * Created by SKY on 2015/12/9.
  */
 public class LoaderURIAdapter extends RecyclerAdapter<String> {
     private ImageLoaderExecutors imageLoader;

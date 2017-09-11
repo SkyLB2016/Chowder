@@ -17,7 +17,9 @@ import android.widget.TextView;
 
 import com.sky.utils.LogUtils;
 
-//待修改
+/**
+ * Created by SKY on 2015/12/9 20:52.
+ */
 public class BadgeView extends TextView {
 
     private boolean mHideOnNull = true;

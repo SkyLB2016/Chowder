@@ -27,9 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * author sky QQ:1136096189
- * Description:  文件类,待修改
- * date 15/11/28 下午12:38
+ * Created by SKY on 2015/11/28.
  */
 public class FileUtils {
     // 从路径获取文件名
@@ -511,6 +509,7 @@ public class FileUtils {
             FileOutputStream fos = new FileOutputStream(sdFile);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(object);// 写入
+            fos.flush(); // 关闭输出流
             fos.close(); // 关闭输出流
         } catch (FileNotFoundException e) {
             LogUtils.i(e.getMessage());

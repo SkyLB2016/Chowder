@@ -8,10 +8,8 @@ import android.widget.FrameLayout
 import java.util.*
 
 /**
- * @author sky
- * @ClassName: FlowLayout
- * @Description: TODO  流式布局
- * @date 2015年4月2日 下午8:43:43
+ * Created by SKY on 2015/4/2 20:43:43.
+ * 流式布局
  */
 class FlowLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : FrameLayout(context, attrs, defStyleAttr) {
 
@@ -35,13 +33,10 @@ class FlowLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
             measureChild(view, widthMeasureSpec, widthMeasureSpec)// 测量子view
 
             val lp = view.layoutParams as ViewGroup.MarginLayoutParams
-            val childWidth = view.measuredWidth + lp.leftMargin
-            +lp.rightMargin
-            val childHeight = view.measuredHeight + lp.topMargin
-            +lp.bottomMargin
+            val childWidth = view.measuredWidth + lp.leftMargin + lp.rightMargin
+            val childHeight = view.measuredHeight + lp.topMargin + lp.bottomMargin
 
-            if (lineWidth + childWidth > layoutWidth - paddingLeft
-                    - paddingRight) {
+            if (lineWidth + childWidth > layoutWidth - paddingLeft - paddingRight) {
                 width = Math.max(width, lineWidth)
                 lineWidth = childWidth
 
@@ -58,15 +53,10 @@ class FlowLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
             }
         }
         // 为框架父控件写入宽高
-        setMeasuredDimension(if (widthMode == View.MeasureSpec.EXACTLY)
-            layoutWidth
-        else
-            width + paddingLeft + paddingRight,
-                if (heightMode == View.MeasureSpec.EXACTLY)
-                    layoutHeight
-                else
-                    height
-                            + paddingTop + paddingBottom)
+        setMeasuredDimension(
+                if (widthMode == View.MeasureSpec.EXACTLY) layoutWidth else width + paddingLeft + paddingRight,
+                if (heightMode == View.MeasureSpec.EXACTLY) layoutHeight else height + paddingTop + paddingBottom
+        )
     }
 
     // 所有控件，分行排列
@@ -87,13 +77,10 @@ class FlowLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
         for (i in 0 until childCount) {
             val view = getChildAt(i)
             val lp = view.layoutParams as ViewGroup.MarginLayoutParams
-            val childWidth = view.measuredWidth + lp.leftMargin
-            +lp.rightMargin
-            val childHeight = view.measuredHeight + lp.topMargin
-            +lp.bottomMargin
+            val childWidth = view.measuredWidth + lp.leftMargin + lp.rightMargin
+            val childHeight = view.measuredHeight + lp.topMargin + lp.bottomMargin
 
-            if (childWidth + lineWidth > width - paddingLeft
-                    - paddingRight) {
+            if (childWidth + lineWidth > width - paddingLeft - paddingRight) {
                 allViews.add(lineViews)
                 mLineHeight.add(lineHeight)
 
@@ -117,11 +104,8 @@ class FlowLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
             lineHeight = mLineHeight[i]
             for (j in lineViews.indices) {
                 val child = lineViews[j]
-                if (child.visibility == View.GONE) {
-                    continue
-                }
-                val lp = child
-                        .layoutParams as ViewGroup.MarginLayoutParams
+                if (child.visibility == View.GONE) continue
+                val lp = child.layoutParams as ViewGroup.MarginLayoutParams
 
                 val leftChild = left + lp.leftMargin
                 val topChild = top + lp.topMargin
@@ -130,8 +114,7 @@ class FlowLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
 
                 child.layout(leftChild, topChild, rightChild, bottomChild)
 
-                left += lp.leftMargin + lp.rightMargin
-                +child.measuredWidth
+                left += lp.leftMargin + lp.rightMargin + child.measuredWidth
             }
             left = paddingLeft
             top += lineHeight

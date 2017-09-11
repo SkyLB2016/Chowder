@@ -12,7 +12,7 @@ import android.view.MotionEvent;
 import com.sky.R;
 
 /**
- * Created by sky on 16/5/10 下午3:50.
+ * Created by SKY on 16/5/10 下午3:50.
  * 带删除按钮的edittext
  */
 public class EditTextDel extends AppCompatEditText {

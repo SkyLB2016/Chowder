@@ -8,9 +8,7 @@ import com.sky.chowder.ui.adapter.PopPagerAdapter;
 import com.sky.widget.BasePop;
 
 /**
- * @author sky QQ:1136096189
- * @Description: TODO
- * @date 16/1/11 下午1:14
+ * Created by SKY on 2016/1/11 13:14.
  */
 public class URIPop extends BasePop<String> {
 

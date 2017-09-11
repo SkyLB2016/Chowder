@@ -1,4 +1,4 @@
-package com.sky.chowder.utils;
+package com.sky.utils;
 
 import android.content.Context;
 import android.os.Environment;
@@ -6,10 +6,8 @@ import android.os.Environment;
 import java.io.File;
 
 /**
- * @author libin
- * @ClassName: DataCleanManager
- * @Description: 本地数据清除，主要功能有清除内/外缓存，清除数据库，清除sP，清除files和清除自定义目录
- * @date 2014年12月19日 上午11:37:25
+ * Created by SKY on 2015/3/26 17:41.
+ * 本地数据清除，主要功能有清除内/外缓存，清除数据库，清除sP，清除files和清除自定义目录
  */
 public class DataCleanManager {
     /**

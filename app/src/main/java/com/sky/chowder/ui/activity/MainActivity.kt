@@ -21,16 +21,14 @@ import com.sky.utils.ScreenUtils
 import kotlinx.android.synthetic.main.content_main.*
 
 /**
- * Created by 李彬 on 2015/12/6.
+ * Created by SKY on 2015/12/6.
  * 主页
  */
 class MainActivity : BasePActivity<MainPresenter>(), Toolbar.OnMenuItemClickListener, IMainView {
 
     private var adapter: MainAdapter? = null
 
-    public override fun getLayoutResId(): Int {
-        return R.layout.activity_main
-    }
+    public override fun getLayoutResId(): Int = R.layout.activity_main
 
     override fun creatPresenter() {
         presenter = MainPresenter(this)
@@ -50,7 +48,7 @@ class MainActivity : BasePActivity<MainPresenter>(), Toolbar.OnMenuItemClickList
     }
 
     @OnClick(R.id.fab)
-    fun obnClick() {
+    fun fabOnClick() {
 //        getMemory()
 //        getMemory1()
         showToast("width==${ScreenUtils.getHeightPX(this)}")

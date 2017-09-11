@@ -11,7 +11,7 @@ import com.sky.chowder.ui.adapter.GuideContoler
 import com.sky.utils.SPUtils
 
 /**
- * Created by 李彬 on 2017/3/6.
+ * Created by SKY on 2017/3/6.
  * 引导页面
  */
 class GuideActivity : AppCompatActivity() {

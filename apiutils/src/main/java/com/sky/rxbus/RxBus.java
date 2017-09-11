@@ -12,7 +12,7 @@ import io.reactivex.processors.FlowableProcessor;
 import io.reactivex.processors.PublishProcessor;
 
 /**
- * Created by sky on 2017/6/9.
+ * Created by SKY on 2017/6/9.
  */
 public class RxBus {
     private final FlowableProcessor<Object> mBus;

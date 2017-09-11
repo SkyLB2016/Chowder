@@ -11,7 +11,7 @@ import com.sky.utils.ToastUtils;
 import java.io.File;
 
 /**
- * Created by 李彬 on 2017/3/3.
+ * Created by SKY on 2017/3/3.
  */
 public class SkyApp extends Application {
     protected static SkyApp instance;

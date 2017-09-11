@@ -34,14 +34,13 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * @author sky QQ:1136096189
- * @Description: 加载本地图片
- * @date 15/11/28 下午12:38
+ * Created by SKY on 2015/11/28.
+ * 加载本地图片
  */
 public class ImageUriActivity extends BaseNoPActivity {
 
     @BindView(R.id.recycler)
-    RecyclerView recyclerView;
+    RecyclerView recycler;
     @BindView(R.id.layout)
     RelativeLayout layout;
     @BindView(R.id.flodername)
@@ -142,27 +141,27 @@ public class ImageUriActivity extends BaseNoPActivity {
     }
 
     public void initView() {
-        recyclerView.setHasFixedSize(true);
+        recycler.setHasFixedSize(true);
         //瀑布流布局
         layoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
-//        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(this,null,0,0));
-//        recyclerView.setLayoutManager(new GridLayoutManager(this,3));
+        recycler.setLayoutManager(layoutManager);
+//        recycler.setLayoutManager(new StaggeredGridLayoutManager(this,null,0,0));
+//        recycler.setLayoutManager(new GridLayoutManager(this,3));
         adapter = new LoaderURIAdapter(R.layout.adapter_uri);
-        recyclerView.setAdapter(adapter);
+        recycler.setAdapter(adapter);
 
         adapter.setOnItemClickListener(new LoaderURIAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 createPopShowImage(position, parent);
                 if (!imagePop.isShowing())
-                    imagePop.showAtLocation(recyclerView, Gravity.CENTER, 0, 0);
+                    imagePop.showAtLocation(recycler, Gravity.CENTER, 0, 0);
             }
         });
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        recycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
+            public void onScrolled(RecyclerView recycler, int dx, int dy) {
+                super.onScrolled(recycler, dx, dy);
                 //获取可见的第一个与最后一个item
                 int[] firstPositions = layoutManager.findFirstVisibleItemPositions(new int[layoutManager.getSpanCount()]);
                 firstVisibleItem = getMinPositions(firstPositions);
@@ -171,7 +170,7 @@ public class ImageUriActivity extends BaseNoPActivity {
                 //首次加载执行
                 if (lastVisibleItem > 0 && first) {
                     first = false;
-                    adapter.setImageLoader(firstVisibleItem, lastVisibleItem, recyclerView);
+                    adapter.setImageLoader(firstVisibleItem, lastVisibleItem, recycler);
                 }
             }
 

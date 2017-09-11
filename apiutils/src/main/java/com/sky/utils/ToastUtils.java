@@ -8,7 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * Created by sky on 16/5/10 下午3:50.
+ * Created by SKY on 16/5/10 下午3:50.
  * Toast统一管理类
  */
 public class ToastUtils {

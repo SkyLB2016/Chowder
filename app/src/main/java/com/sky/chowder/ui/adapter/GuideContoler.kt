@@ -11,7 +11,7 @@ import com.sky.chowder.ui.widget.DepthPageTransformer
 import java.util.*
 
 /**
- * Created by 李彬 on 2017/3/6.
+ * Created by SKY on 2017/3/6.
  */
 class GuideContoler(private val mContext: Context) {
     private var mViewPager: ViewPager? = null

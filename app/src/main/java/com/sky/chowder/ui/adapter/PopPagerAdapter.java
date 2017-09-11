@@ -13,9 +13,7 @@ import com.sky.chowder.utils.ImageLoaderExecutors;
 import java.util.List;
 
 /**
- * @author sky QQ:1136096189
- * @Description: TODO 会有oom异常，待处理
- * @date 16/1/13 下午2:09
+ * Created by SKY on 2016/1/13 14:09.
  */
 public class PopPagerAdapter extends PagerAdapter {
     private List<String> strings;

@@ -7,7 +7,7 @@ import android.os.Bundle;
 import java.util.Stack;
 
 /**
- * Created by sky on 16/5/10 下午3:50.
+ * Created by SKY on 16/5/10 下午3:50.
  * activity管理类
  */
 public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks {

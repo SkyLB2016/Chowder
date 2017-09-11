@@ -6,9 +6,8 @@ import android.os.Bundle
 import com.sky.chowder.ui.widget.BezierView
 
 /**
- * Created by 李彬 on 2017/3/10.
+ * Created by SKY on 2017/3/10.
  */
-
 class BezierActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

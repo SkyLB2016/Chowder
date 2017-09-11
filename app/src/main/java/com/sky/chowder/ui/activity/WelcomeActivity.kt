@@ -13,12 +13,11 @@ import com.sky.chowder.R
 import com.sky.utils.JumpAct
 
 /**
- * Created by 李彬 on 2017/3/6.
+ * Created by SKY on 2017/3/6.
+ * 欢迎页
  */
-
 class WelcomeActivity : AppCompatActivity() {
-    //    public Boolean flag;//是否首次运行，true代表首次
-    private val TIME = 1000L//handler延迟时间
+    private val TIME = 1000L//运行时间
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //requestWindowFeature(Window.FEATURE_NO_TITLE);//去掉标题栏,在v7中AppCompatActivity下无用
@@ -37,9 +36,7 @@ class WelcomeActivity : AppCompatActivity() {
 
             override fun onAnimationStart(animation: Animation) {}
 
-            override fun onAnimationRepeat(animation: Animation) {
-
-            }
+            override fun onAnimationRepeat(animation: Animation) {}
 
             override fun onAnimationEnd(animation: Animation) {
                 Handler().postDelayed({

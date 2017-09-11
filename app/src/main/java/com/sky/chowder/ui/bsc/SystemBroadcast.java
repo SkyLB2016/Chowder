@@ -12,9 +12,8 @@ import com.sky.utils.NetworkJudgment;
 import com.sky.utils.ToastUtils;
 
 /**
- * @author LiBin
- * @Description:  系统广播监听，manifest中静态注册
- * @date 2015/9/18 9:23
+ * Created by SKY on 2015/9/18 9:23.
+ * 系统广播监听，manifest中静态注册
  */
 public class SystemBroadcast extends BroadcastReceiver {
 

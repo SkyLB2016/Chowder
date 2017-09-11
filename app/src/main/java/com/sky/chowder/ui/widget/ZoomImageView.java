@@ -16,9 +16,8 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 
 /**
- * @author 彬 QQ 1136096189
- * @Description: TODO 图片缩放
- * @date 2015/8/17 15:30
+ * Created by SKY on 2015/8/17 15:30.
+ * 图片缩放
  */
 public class ZoomImageView extends ImageView implements ViewTreeObserver.OnGlobalLayoutListener, View.OnTouchListener, ScaleGestureDetector.OnScaleGestureListener {
 

@@ -4,7 +4,7 @@ import java.security.MessageDigest;
 
 /**
  * MD5加密工具类
- * Created by 李彬 on 2017/4/18.
+ * Created by SKY on 2017/4/18.
  */
 public class MD5Utils {
 

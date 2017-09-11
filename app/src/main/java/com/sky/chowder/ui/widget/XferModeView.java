@@ -15,9 +15,7 @@ import android.view.View;
 import com.sky.chowder.R;
 
 /**
- * @author sky
- * @Description: TODO Xfermode应用
- * @date 2015/8/7 17:45
+ * Created by SKY on 2015/8/7 17:45.
  */
 public class XferModeView extends View {
 
@@ -49,7 +47,7 @@ public class XferModeView extends View {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             canvas.drawRoundRect(0, 0, mBitmap.getWidth(), mBitmap.getHeight(), 50, 50, paint);
         else
-            canvas.drawCircle(mBitmap.getWidth() /2, mBitmap.getHeight() / 2, mBitmap.getHeight() / 2, paint);
+            canvas.drawCircle(mBitmap.getWidth() / 2, mBitmap.getHeight() / 2, mBitmap.getHeight() / 2, paint);
 //        RectF rectF = new RectF(0, 0, mBitmap.getWidth(), mBitmap.getHeight());
 //        canvas.drawRoundRect(rectF,50,50,paint);
 //        canvas.drawOval(rectF,paint);

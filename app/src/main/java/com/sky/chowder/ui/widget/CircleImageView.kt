@@ -9,11 +9,11 @@ import com.sky.chowder.R
 import com.sky.utils.ImageUtils
 
 /**
- * @author 彬 QQ 1136096189
- * @Description: TODO 圆形图片
- * @date 2015/8/17 15:30
+ * Created by SKY on 2015/8/17 15:30.
+ * 圆形图片
  */
 class CircleImageView : android.support.v7.widget.AppCompatImageView {
+
 
     private val mDrawableRect = RectF()
     private val mBorderRect = RectF()

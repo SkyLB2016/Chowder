@@ -1,12 +1,11 @@
-package com.sky.chowder.utils;
+package com.sky.utils;
 
 import android.content.Context;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 /**
- * @author 彬 QQ 1136096189
- * @Description:  打开或关闭软键盘，待修改
- * @date 2015/8/17 15:30
+ * Created by SKY on 2015/8/17 15:30.
+ * 打开或关闭软键盘，待修改
  */
 public class KeyBoardUtils {
 	/**

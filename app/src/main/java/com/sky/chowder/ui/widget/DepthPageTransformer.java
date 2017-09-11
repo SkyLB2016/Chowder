@@ -5,13 +5,10 @@ import android.os.Build;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
-/** 
-* @ClassName: DepthPageTransformer 
-* @Description: TODO 引导页动画
-* @author LiBin
-* @date 2015年3月26日 下午5:41:53 
-*  
-*/
+/**
+ * Created by SKY on 2015/3/26 17:41.
+ * 引导页动画
+ */
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class DepthPageTransformer implements ViewPager.PageTransformer {
     private static float MIN_SCALE = 0.75f;

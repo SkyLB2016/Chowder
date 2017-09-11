@@ -3,7 +3,7 @@ package com.sky;
 import com.sky.rxbus.RxBus;
 
 /**
- * Created by sky on 16/5/10 下午3:50.
+ * Created by SKY on 16/5/10 下午3:50.
  * 公共的常量
  */
 public class Common {

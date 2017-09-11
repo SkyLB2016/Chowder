@@ -13,7 +13,7 @@
             android:text="印花税:" />
 
         <TextView
-            android:id="@+id/tv_stamp_duty"
+            android:id="@+id/tvStampDuty"
             style="@style/stock_ed_style"
             android:hint="股票总价" />
 
@@ -28,10 +28,9 @@
             android:text="过户税:" />
 
         <TextView
-            android:id="@+id/tv_real_estate_transfer_tax"
+            android:id="@+id/tvRealEstateTransferTax"
             style="@style/stock_ed_style"
             android:hint="过户税" />
-
     </LinearLayout>
 
     <View style="@style/all_line_style" />
@@ -43,7 +42,7 @@
             android:text="券商佣金:" />
 
         <TextView
-            android:id="@+id/tv_brokerage_commission"
+            android:id="@+id/tvBrokerageCommission"
             style="@style/stock_ed_style"
             android:hint="券商佣金" />
 
@@ -59,19 +58,19 @@
             android:text="总手续费:" />
 
         <TextView
-            android:id="@+id/tv_total_counter_fee"
+            android:id="@+id/tvTotalCounterFee"
             style="@style/stock_ed_style"
             android:layout_weight="1"
             android:hint="总手续费" />
 
         <TextView
-            android:id="@+id/tv_total_buyOrSell"
+            android:id="@+id/totalBuyOrSell"
             style="@style/stock_tv_style"
             android:layout_weight="1"
             android:text="成交金额:" />
 
         <TextView
-            android:id="@+id/tv_total_bs"
+            android:id="@+id/totalBS"
             style="@style/stock_ed_style"
             android:layout_weight="1"
             android:hint="成交金额" />
@@ -88,7 +87,7 @@
         android:paddingLeft="0dp">
 
         <Button
-            android:id="@+id/btn_buy"
+            android:id="@+id/btnBuy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/wh_8"
@@ -99,7 +98,7 @@
             android:textSize="@dimen/text_small" />
 
         <Button
-            android:id="@+id/btn_sell"
+            android:id="@+id/btnSell"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/wh_8"
@@ -120,7 +119,7 @@
             android:text="总价:" />
 
         <EditText
-            android:id="@+id/et_total"
+            android:id="@+id/etTotal"
             style="@style/stock_ed_style"
             android:hint="股票总价"
             android:inputType="numberDecimal"
@@ -130,7 +129,6 @@
 
     <View style="@style/all_line_style" />
 
-
     <LinearLayout style="@style/stock_layout_style">
 
         <TextView
@@ -138,50 +136,24 @@
             android:text="单价:" />
 
         <EditText
-            android:id="@+id/et_unit"
+            android:id="@+id/etUnit"
             style="@style/stock_ed_style"
             android:layout_weight="1"
             android:hint="股票价格"
             android:inputType="numberDecimal"
             android:lines="1" />
 
-
         <TextView
             style="@style/stock_tv_style"
             android:text="*数量:" />
 
         <EditText
-            android:id="@+id/et_num"
+            android:id="@+id/etNum"
             style="@style/stock_ed_style"
             android:layout_weight="1"
             android:hint="股票数量"
             android:inputType="number"
             android:lines="1" />
-
     </LinearLayout>
-
-
-    <View style="@style/all_line_style" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/wh_4"
-        android:background="@color/white"
-        android:visibility="gone">
-
-        <Button
-            android:id="@+id/btn_ok"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/wh_32"
-            android:layout_marginRight="@dimen/wh_32"
-            android:background="@drawable/sel_shape_red"
-            android:text="确定"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_small" />
-
-    </LinearLayout>
-
 
 </LinearLayout>
