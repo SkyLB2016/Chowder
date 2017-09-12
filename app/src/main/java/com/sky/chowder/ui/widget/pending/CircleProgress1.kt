@@ -1,4 +1,4 @@
-package com.sky.chowder.ui.widget
+package com.sky.chowder.ui.widget.pending
 
 import android.content.Context
 import android.graphics.*
@@ -9,39 +9,40 @@ import android.view.View
 import com.sky.chowder.R
 
 /**
- * Created by SKY on 2015/12/3 11:24.
+ * @author sky QQ:1136096189
+ * @Description:  融资进度
+ * @date 15/12/3 上午11:24
  */
-class CircleProgress @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : View(context, attrs, defStyleAttr) {
-
+class CircleProgress1 @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : View(context, attrs, defStyleAttr) {
     private var area: RectF? = null//控件所占矩形
-    var radius = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100f, resources.displayMetrics).toInt()
+    var radius = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100f, resources.displayMetrics).toInt()//
 
     private var totalPaint: Paint? = null//总进度条画笔
     private var progressPaint: Paint? = null//进度条画笔
-    private var totalColor = Color.BLACK//总进度条颜色
-    private var progressColor = Color.RED//进度条颜色
-    private var progressWidth = 5//进度条宽度
+    var totalColor = Color.BLACK//总进度条颜色
+    var progressColor = Color.RED//进度条颜色
+    var progressWidth = 5//进度条宽度
 
     private var textPaint: Paint? = null//字体画笔
     private var textBound: Rect? = null//字体所占空间
     private var _mText: String? = null
-    private var mText: String? = ""
+    private var mText: String?
+        get() = _mText
         set(value) {
-            field = value
+            _mText = value
         }
     var textColor = Color.BLACK//字体颜色
     var textSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14f, resources.displayMetrics).toInt()//字体大小
-    private var textbackground: Drawable? = null//文字的背景
+    var textbackground: Drawable? = null//文字的背景
 
     /**
      * 按百分比计算
      */
-    private var value = 50f //进度条所占百分比
+    var value = 50f
         set(value) {
             field = value
             invalidate()
-        }
-
+        }//进度条所占百分比
     var startAngle = 140f//起始角度
     var sweepAngle = 260f//旋转角度
 
@@ -79,7 +80,8 @@ class CircleProgress @JvmOverloads constructor(context: Context, attrs: Attribut
         progressPaint!!.strokeWidth = progressWidth.toFloat()
         progressPaint!!.style = Paint.Style.STROKE
         progressPaint!!.isAntiAlias = true
-        progressPaint!!.shader = LinearGradient(0f, 0f, 400f, 0f, intArrayOf(progressColor, Color.WHITE), null, Shader.TileMode.CLAMP)
+        val shader = LinearGradient(0f, 0f, 400f, 0f, intArrayOf(progressColor, Color.WHITE), null, Shader.TileMode.CLAMP)
+        progressPaint!!.shader = shader
     }
 
     /**
@@ -103,6 +105,12 @@ class CircleProgress @JvmOverloads constructor(context: Context, attrs: Attribut
         val left = measuredWidth / 2 - radius
         val top = measuredHeight / 2 - radius
         area = RectF(left.toFloat(), top.toFloat(), (left + areaWidth).toFloat(), (top + areaWidth).toFloat())
+    }
+
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        super.onLayout(changed, left, top, right, bottom)
+
+
     }
 
     override fun onDraw(canvas: Canvas) {
