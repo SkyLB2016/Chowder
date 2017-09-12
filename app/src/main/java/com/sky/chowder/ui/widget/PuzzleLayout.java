@@ -75,8 +75,7 @@ public class PuzzleLayout extends RelativeLayout implements View.OnClickListener
 
     private void setView() {
         imageViews = new ImageView[piece * piece];
-        imagePieces = jigsaw(
-                BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher), piece);
+        imagePieces = jigsaw(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher), piece);
         //随机打乱数组排序
         Collections.sort(imagePieces, new Comparator<ImagePiece>() {
             @Override
@@ -100,12 +99,12 @@ public class PuzzleLayout extends RelativeLayout implements View.OnClickListener
         }
     }
 
-    public static List<ImagePiece> jigsaw(Bitmap bitmap, int piece) {
+    public List<ImagePiece> jigsaw(Bitmap bitmap, int piece) {
         List<ImagePiece> imagePieces = new ArrayList<>();
 
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
-        int pieceWidth=Math.min(width, height)/piece;
+        int pieceWidth = Math.min(width, height) / piece;
 //        int pieceWidth = width / piece;
 //        int pieceHeight = height / piece;
 //        int index = 0;
@@ -123,6 +122,7 @@ public class PuzzleLayout extends RelativeLayout implements View.OnClickListener
         }
         return imagePieces;
     }
+
     private ImageView firstImg;
     private ImageView secondImg;
     private boolean isAniming = false;
@@ -235,6 +235,7 @@ public class PuzzleLayout extends RelativeLayout implements View.OnClickListener
         }
     }
 }
+
 class ImagePiece {
     private Bitmap bitmap;
     private int number;

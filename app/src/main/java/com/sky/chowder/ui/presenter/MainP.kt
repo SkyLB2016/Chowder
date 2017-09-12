@@ -14,7 +14,7 @@ import java.util.*
 /**
  * Created by SKY on 2017/5/29.
  */
-class MainPresenter(context: Context) : BasePresenter<IMainView>(context), IMainPresenter {
+class MainP(context: Context) : BasePresenter<IMainView>(context), IMainPresenter {
 
     init {
         LogUtils.i("mainpresenter")

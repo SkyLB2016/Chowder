@@ -15,7 +15,7 @@ import com.sky.chowder.R
 import com.sky.chowder.api.view.IMainView
 import com.sky.chowder.model.ActivityModel
 import com.sky.chowder.ui.adapter.MainAdapter
-import com.sky.chowder.ui.presenter.MainPresenter
+import com.sky.chowder.ui.presenter.MainP
 import com.sky.utils.JumpAct
 import com.sky.utils.ScreenUtils
 import kotlinx.android.synthetic.main.content_main.*
@@ -24,14 +24,14 @@ import kotlinx.android.synthetic.main.content_main.*
  * Created by SKY on 2015/12/6.
  * 主页
  */
-class MainActivity : BasePActivity<MainPresenter>(), Toolbar.OnMenuItemClickListener, IMainView {
+class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IMainView {
 
     private var adapter: MainAdapter? = null
 
     public override fun getLayoutResId(): Int = R.layout.activity_main
 
     override fun creatPresenter() {
-        presenter = MainPresenter(this)
+        presenter = MainP(this)
     }
 
     public override fun initialize() {

@@ -10,7 +10,7 @@ import android.widget.FrameLayout
 import com.sky.base.BasePActivity
 import com.sky.chowder.C
 import com.sky.chowder.R
-import com.sky.chowder.ui.presenter.SolarPresenter
+import com.sky.chowder.ui.presenter.SolarP
 import com.sky.chowder.ui.widget.SolarSystem
 import com.sky.utils.ScreenUtils
 import kotlinx.android.synthetic.main.activity_solar.*
@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_solar.*
  * Created by SKY on 15/12/9 下午8:54.
  * 卫星菜单栏
  */
-class SolarSystemActivity : BasePActivity<SolarPresenter>(), Toolbar.OnMenuItemClickListener {
+class SolarSystemActivity : BasePActivity<SolarP>(), Toolbar.OnMenuItemClickListener {
 
     private var layoutDraw: AnimationDrawable? = null
 
@@ -29,11 +29,10 @@ class SolarSystemActivity : BasePActivity<SolarPresenter>(), Toolbar.OnMenuItemC
         }
     }
 
-    override fun getLayoutResId(): Int =
-            R.layout.activity_solar
+    override fun getLayoutResId(): Int = R.layout.activity_solar
 
     override fun creatPresenter() {
-        presenter = SolarPresenter(this)
+        presenter = SolarP(this)
     }
 
     override fun initialize() {

@@ -1,4 +1,4 @@
-package com.sky.chowder.ui.widget
+package com.sky.chowder.ui.pop
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
