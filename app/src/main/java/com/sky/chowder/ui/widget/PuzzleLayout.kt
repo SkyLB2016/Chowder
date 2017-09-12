@@ -197,12 +197,13 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
     }
 
     private fun checkSuccess() {
-        var isSuccess = true
-        for (i in imagePieces!!.indices) {
-            if (getViewIndexByTag(imageViews!![i]) != "" + i) {
-                isSuccess = false
-            }
-        }
+        val isSuccess = imagePieces!!.indices.none { getViewIndexByTag(imageViews!![it]!!) != "" + it }
+        //上下两种写法效果一致
+//        for (i in imagePieces!!.indices) {
+//            if (getViewIndexByTag(imageViews!![i]!!) != "" + i) {
+//                isSuccess = false
+//            }
+//        }
         if (isSuccess) {
             Toast.makeText(context, "success", Toast.LENGTH_LONG).show()
             removeAllViews()
