@@ -24,7 +24,6 @@ class CircleProgress @JvmOverloads constructor(context: Context, attrs: Attribut
 
     private var textPaint: Paint? = null//字体画笔
     private var textBound: Rect? = null//字体所占空间
-    private var _mText: String? = null
     private var mText: String? = ""
         set(value) {
             field = value
