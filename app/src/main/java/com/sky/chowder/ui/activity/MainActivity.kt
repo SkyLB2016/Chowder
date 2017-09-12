@@ -1,5 +1,6 @@
 package com.sky.chowder.ui.activity
 
+import android.Manifest
 import android.app.ActivityManager
 import android.content.ActivityNotFoundException
 import android.content.Context
@@ -16,6 +17,7 @@ import com.sky.chowder.api.view.IMainView
 import com.sky.chowder.model.ActivityModel
 import com.sky.chowder.ui.adapter.MainAdapter
 import com.sky.chowder.ui.presenter.MainP
+import com.sky.utils.AppUtils
 import com.sky.utils.JumpAct
 import com.sky.utils.ScreenUtils
 import kotlinx.android.synthetic.main.content_main.*
@@ -45,6 +47,8 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
             showToast("长按监听已处理")
             true
         }
+        if (AppUtils.isPermission(this,Manifest.permission.READ_EXTERNAL_STORAGE))
+            AppUtils.requestPermission(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),0)
     }
 
     @OnClick(R.id.fab)

@@ -15,13 +15,9 @@ import android.view.animation.BounceInterpolator
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.Toast
-
 import com.sky.chowder.R
 import com.sky.chowder.model.ImagePiece
-
-import java.util.ArrayList
-import java.util.Collections
-import java.util.Comparator
+import java.util.*
 
 /**
  * Created by SKY on 2015/12/24 10:58.
@@ -82,7 +78,7 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
         }
     }
 
-    fun jigsaw(bitmap: Bitmap, piece: Int): List<ImagePiece> {
+    internal fun jigsaw(bitmap: Bitmap, piece: Int): List<ImagePiece> {
         val imagePieces = ArrayList<ImagePiece>()
 
         val width = bitmap.width

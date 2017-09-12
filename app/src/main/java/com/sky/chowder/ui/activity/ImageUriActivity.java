@@ -4,6 +4,8 @@ import android.content.ContentResolver;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -91,7 +93,7 @@ public class ImageUriActivity extends BaseNoPActivity {
             public void run() {
                 super.run();
                 checkDiskImage();
-//                handler.sendEmptyMessage(0x99);
+                handler.sendEmptyMessage(0x99);
             }
         }.start();
     }
@@ -214,10 +216,10 @@ public class ImageUriActivity extends BaseNoPActivity {
         floderPop.setDatas(floders);
         floderPop.setOnItemClickListener(new BasePop.OnItemClickListener() {
             @Override
-            public void onItemClick(View v,int position) {
+            public void onItemClick(View v, int position) {
                 ImageFloder floder = floders.get(position);
                 parent = new File(floder.getDirPath());
-//                handler.sendEmptyMessage(0x99);
+                handler.sendEmptyMessage(0x99);
 
                 floderPop.dismiss();
             }
@@ -233,15 +235,17 @@ public class ImageUriActivity extends BaseNoPActivity {
         imagePop.setCurrentItem(position);
     }
 
-//    @Override
-//    protected void handler(Message msg) {
-//        super.handler(msg);
-//        switch (msg.what) {
-//            case 0x99:
-//                setAdapterData();
-//                break;
-//        }
-//    }
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 0x99:
+                    setAdapterData();
+                    break;
+            }
+        }
+    };
 
     private void setAdapterData() {
         List<String> imageNames = Arrays.asList(parent.list(filter));
