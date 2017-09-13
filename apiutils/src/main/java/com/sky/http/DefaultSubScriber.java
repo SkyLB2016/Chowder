@@ -29,6 +29,8 @@ public class DefaultSubScriber<T extends BaseEntity> extends DefaultObserver<T> 
             request.onFail(new ErrorMes(Common.NET_NULL, Common.NET_EMPTY));
         } else if (data.isSuccess()) {
             request.onSuccess(data);
+        }else if (data.getStatus()==1) {
+            request.onSuccess(data);
         } else if (Common.LOGIN == data.getCode()) {
             Common.getRxBus().send(Common.LOGIN);
         } else {

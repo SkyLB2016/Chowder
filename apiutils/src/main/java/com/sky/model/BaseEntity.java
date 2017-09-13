@@ -9,6 +9,7 @@ public class BaseEntity implements Serializable {
     private boolean success;
     private String msg;
     private int code;
+    private int status;
 
     public boolean isSuccess() {
         return success;
@@ -20,5 +21,9 @@ public class BaseEntity implements Serializable {
 
     public int getCode() {
         return code;
+    }
+
+    public int getStatus() {
+        return status;
     }
 }

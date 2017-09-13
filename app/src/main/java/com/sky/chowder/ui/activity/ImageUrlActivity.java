@@ -14,10 +14,11 @@ import com.sky.api.OnRequestCallback;
 import com.sky.base.BaseNoPActivity;
 import com.sky.chowder.R;
 import com.sky.chowder.model.CourseEntity;
+import com.sky.chowder.model.DataEntity;
 import com.sky.chowder.ui.adapter.LoaderURLAdapter;
 import com.sky.chowder.utils.http.HttpUtils;
 import com.sky.http.UseCase;
-import com.sky.model.ArrayEntity;
+import com.sky.utils.LogUtils;
 
 import butterknife.BindView;
 import io.reactivex.Observable;
@@ -31,7 +32,7 @@ public class ImageUrlActivity extends BaseNoPActivity {
     @BindView(R.id.swipe)
     SwipeRefreshLayout swipe;
     @BindView(R.id.recycler)
-    RecyclerView recyclerView;
+    RecyclerView recycler;
     private LinearLayoutManager mLayoutManager;
     private LoaderURLAdapter adapter;
 
@@ -78,18 +79,18 @@ public class ImageUrlActivity extends BaseNoPActivity {
         swipe.setColorSchemeResources(R.color.red, R.color.white, R.color.black);
 //        swipe.setOnRefreshListener(this);//监听
 
-        recyclerView.setHasFixedSize(true);
+        recycler.setHasFixedSize(true);
         adapter = new LoaderURLAdapter(R.layout.adapter_main);
-        recyclerView.setAdapter(adapter);
+        recycler.setAdapter(adapter);
 
 
-        mLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+        mLayoutManager = (LinearLayoutManager) recycler.getLayoutManager();
         adapter.setOnItemClickListener(new LoaderURLAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
             }
         });
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        recycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -121,20 +122,20 @@ public class ImageUrlActivity extends BaseNoPActivity {
                 }
             }
         });
-        new UseCase<ArrayEntity<CourseEntity>>() {
+        new UseCase<DataEntity<CourseEntity>>() {
             @Override
-            protected Observable<ArrayEntity<CourseEntity>> buildObservable() {
+            protected Observable<DataEntity<CourseEntity>> buildObservable() {
                 return HttpUtils.Companion.getInstance().getMuke();
             }
-        }.subscribe(new OnRequestCallback<ArrayEntity<CourseEntity>>() {
+        }.subscribe(new OnRequestCallback<DataEntity<CourseEntity>>() {
             @Override
             public void onFail(ErrorMes error) {
-
+                LogUtils.i(error.getMessage());
             }
 
             @Override
-            public void onSuccess(ArrayEntity<CourseEntity> data) {
-                adapter.setDatas(data.getResult());
+            public void onSuccess(DataEntity<CourseEntity> data) {
+                adapter.setDatas(data.getData());
             }
         });
     }
