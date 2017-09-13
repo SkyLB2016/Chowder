@@ -50,7 +50,7 @@ class GuideContoler(private val mContext: Context) {
      * 设置ViewPager
      */
     private fun setViewPager() {
-        mViewPager = (mContext as Activity).findViewById(R.id.viewpager) as ViewPager
+        mViewPager = (mContext as Activity).findViewById<ViewPager>(R.id.viewpager)
         mViewPager!!.setPageTransformer(true, DepthPageTransformer())
         mViewPager!!.adapter = GuideAdapter(mViews!!)
         mViewPager!!.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
@@ -77,7 +77,7 @@ class GuideContoler(private val mContext: Context) {
      */
     private fun setPoints() {
         setPointWH()
-        pointGroup = (mContext as Activity).findViewById(R.id.layout_group) as LinearLayout
+        pointGroup = (mContext as Activity).findViewById<LinearLayout>(R.id.layout_group)
         points = arrayOfNulls(mViews!!.size)
         val params = LinearLayout.LayoutParams(pointW, pointH)
         params.setMargins(0, 0, 15, 0)

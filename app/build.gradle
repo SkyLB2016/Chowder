@@ -22,9 +22,7 @@ dependencies {
     kapt "com.jakewharton:butterknife-compiler:$bknifeVer"
 
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-//    compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
 //    compile(name:'apiutils-release', ext:'aar')
-
 }
 
 android {

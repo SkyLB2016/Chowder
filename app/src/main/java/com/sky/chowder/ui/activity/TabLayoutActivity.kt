@@ -20,17 +20,16 @@ import java.util.*
  * 标签栏
  */
 class TabLayoutActivity : BaseNoPActivity() {
-    var tabs: TabLayout? = null
-    var toolbar: Toolbar? = null
-    var appbar: AppBarLayout? = null
+    private var tabs: TabLayout? = null
+    private var toolbar: Toolbar? = null
+    private var appbar: AppBarLayout? = null
 
     override fun getLayoutResId(): Int = R.layout.activity_tab_vp
 
-
     override fun initialize() {
-        tabs = findViewById(R.id.tabs) as TabLayout?
-        toolbar = findViewById(R.id.toolbar) as Toolbar?
-        appbar = findViewById(R.id.appbar) as AppBarLayout?
+        tabs = findViewById<TabLayout>(R.id.tabs)
+        toolbar = findViewById<Toolbar>(R.id.toolbar)
+        appbar = findViewById<AppBarLayout>(R.id.appbar)
 
         setUpViewPager()
         val mParams = appbar!!.getChildAt(0).layoutParams as AppBarLayout.LayoutParams
@@ -54,17 +53,11 @@ class TabLayoutActivity : BaseNoPActivity() {
         fragments.add(Two())
         fragments.add(Three())
         val adapter = object : FragmentPagerAdapter(supportFragmentManager) {
-            override fun getCount(): Int {
-                return fragments.size
-            }
+            override fun getCount(): Int = fragments.size
 
-            override fun getItem(position: Int): Fragment {
-                return fragments[position]
-            }
+            override fun getItem(position: Int): Fragment = fragments[position]
 
-            override fun getPageTitle(position: Int): CharSequence {
-                return titles[position]
-            }
+            override fun getPageTitle(position: Int): CharSequence = titles[position]
         }
         viewPager!!.adapter = adapter
         tabs!!.setupWithViewPager(viewPager)
@@ -72,17 +65,13 @@ class TabLayoutActivity : BaseNoPActivity() {
         tabs!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 showToast(tab.text!!.toString())
-                //                tab.select();
+//                tab.select();
             }
 
-            override fun onTabUnselected(tab: TabLayout.Tab) {
+            override fun onTabUnselected(tab: TabLayout.Tab) {}
 
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab) {
-
-            }
+            override fun onTabReselected(tab: TabLayout.Tab) {}
         })
-        //        tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
+//        tabs.tabMode = TabLayout.MODE_SCROLLABLE;
     }
 }

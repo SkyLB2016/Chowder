@@ -13,13 +13,13 @@ import java.io.File
  * Created by SKY on 2016/8/28.
  */
 class VideoActivity : AppCompatActivity() {
-    var video: VideoView? = null
+    private var video: VideoView? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video)
-        video = findViewById(R.id.video) as VideoView
+        video = findViewById<VideoView>(R.id.video)
         val mediaController = MediaController(this)
         val file = File("/storage/emulated/0/QQBrowser/视频/隐世小龙女，她用颜值与功夫惊艳了时光.mp4")
         if (file.exists()) {
@@ -29,6 +29,5 @@ class VideoActivity : AppCompatActivity() {
             video?.requestFocus()
             video?.start()
         }
-
     }
 }

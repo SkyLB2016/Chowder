@@ -7,29 +7,16 @@ import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
 import android.view.MotionEvent
-import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ScrollView
-import android.widget.TextView
 import com.sky.chowder.R
 import com.sky.utils.ScreenUtils
+import kotlinx.android.synthetic.main.activity_pulldown.view.*
 
 /**
  * Created by SKY on 2015/8/19.
  * 下拉菜单，待调整
  */
 class PullLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : ScrollView(context, attrs, defStyleAttr) {
-
-    //private ViewGroup wallPaper;
-    private var mMenu: ViewGroup? = null
-    private var mContent: ViewGroup? = null
-    private var titleBar: ViewGroup? = null
-    private var back: Button? = null//返回键
-    private var right: Button? = null
-    private var action_title: TextView? = null//标题
-
-    private var ll_weather: ViewGroup? = null
-    private var ev: EyeView? = null
 
     private var animator: ObjectAnimator? = null
 
@@ -45,25 +32,15 @@ class PullLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
     override fun onFinishInflate() {
         super.onFinishInflate()
         isVerticalScrollBarEnabled = false
-        titleBar = findViewById(R.id.titlebar) as ViewGroup
-        action_title = findViewById(R.id.action_title) as TextView
-        back = findViewById(R.id.action_back) as Button
-        right = findViewById(R.id.action_menu) as Button
         setTitleBar(R.mipmap.ic_back, R.color.white)
-
-        mMenu = findViewById(R.id.rl_menu) as ViewGroup
-        ev = findViewById(R.id.ev) as EyeView
-        ll_weather = findViewById(R.id.ll_weather) as ViewGroup
-        ev!!.setOnClickListener { close() }
-
-        mContent = findViewById(R.id.ll_content) as ViewGroup
+        eyeView!!.setOnClickListener { close() }
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         if (once!!) {
-            mMenu!!.layoutParams.height = screenHeight / 4 * 3
-            menuHeight = mMenu!!.layoutParams.height
+            rlMenu!!.layoutParams.height = screenHeight / 4 * 3
+            menuHeight = rlMenu!!.layoutParams.height
             once = false
         }
     }
@@ -71,7 +48,7 @@ class PullLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
         super.onLayout(changed, l, t, r, b)
         titleBar!!.layout(0, 0, titleBar!!.width, titleBar!!.height)
-        mContent!!.layout(0, menuHeight, mContent!!.width, mContent!!.height + menuHeight)
+        llContent!!.layout(0, menuHeight, llContent!!.width, llContent!!.height + menuHeight)
     }
 
     override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
@@ -130,36 +107,33 @@ class PullLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
 
     private fun animateScroll(t: Float) {
         val percent = t.toFloat() / menuHeight
-        ObjectAnimator.ofFloat(mMenu, "translationY", t)
-        ObjectAnimator.ofFloat(mContent, "translationY", titleBar!!.height * percent)
-        ObjectAnimator.ofFloat(ev, "translationY", -t / 2)
+        ObjectAnimator.ofFloat(rlMenu, "translationY", t)
+        ObjectAnimator.ofFloat(llContent, "translationY", titleBar!!.height * percent)
+        ObjectAnimator.ofFloat(eyeView, "translationY", -t / 2)
         ObjectAnimator.ofFloat(ll_weather, "translationY", -t / 2)
 
-        //        ViewHelper.setTranslationY(mMenu, t);
-        //        ViewHelper.setTranslationY(mContent, titleBar.getHeight() * percent);
+        //        ViewHelper.setTranslationY(rlMenu, t);
+        //        ViewHelper.setTranslationY(llContent, titleBar.getHeight() * percent);
         //        ViewHelper.setTranslationY(ev, -t / 2);
         //        ViewHelper.setTranslationY(ll_weather, -t / 2);
-        ev!!.setRadius((menuHeight.toFloat() * 0.25f * (1 - percent)).toInt())
+        eyeView!!.setRadius((menuHeight.toFloat() * 0.25f * (1 - percent)).toInt())
         action_title!!.setTextColor(evaluate(percent, Color.WHITE, Color.BLACK))
         ObjectAnimator.ofFloat(titleBar, "translationY", t)
         //        ViewHelper.setTranslationY(titleBar, t);
         titleBar!!.setBackgroundColor(evaluate(percent, Color.argb(0, 255, 255, 255), Color.argb(255, 255, 255, 255)))
-        if (percent == 1f) {
-            back!!.setCompoundDrawablesWithIntrinsicBounds(resources.getDrawable(R.mipmap.ic_back), null, null, null)
-        } else if (percent == 0f) {
-            back!!.setCompoundDrawablesWithIntrinsicBounds(resources.getDrawable(R.mipmap.ic_done), null, null, null)
-        }
+        if (percent == 1f) actionBack!!.setCompoundDrawablesWithIntrinsicBounds(resources.getDrawable(R.mipmap.ic_back), null, null, null)
+        else if (percent == 0f) actionBack!!.setCompoundDrawablesWithIntrinsicBounds(resources.getDrawable(R.mipmap.ic_done), null, null, null)
     }
 
     private fun animatePull(t: Float) {
-        mMenu!!.layoutParams.height = menuHeight - t.toInt()
-        mMenu!!.requestLayout()
-        ObjectAnimator.ofFloat(mContent, "translationY", -t)
-        //        ViewHelper.setTranslationY(mContent, -t);
+        rlMenu!!.layoutParams.height = menuHeight - t.toInt()
+        rlMenu!!.requestLayout()
+        ObjectAnimator.ofFloat(llContent, "translationY", -t)
+        //        ViewHelper.setTranslationY(llContent, -t);
 
         val percent = t.toFloat() / menuHeight
-        ev!!.scaleX = 1 - percent
-        ev!!.scaleY = 1 - percent
+        eyeView!!.scaleX = 1 - percent
+        eyeView!!.scaleY = 1 - percent
         ObjectAnimator.ofFloat(ll_weather, "translationY", -t / 2)
         //        ViewHelper.setScaleX(ev, 1 - percent);
         //        ViewHelper.setScaleY(ev, 1 - percent);
@@ -181,7 +155,7 @@ class PullLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
         return startA + (fraction * (endA - startA)).toInt() shl 24 or (startR + (fraction * (endR - startR)).toInt() shl 16) or (startG + (fraction * (endG - startG)).toInt() shl 8) or startB + (fraction * (endB - startB)).toInt()
     }
 
-    val isOpen: Boolean?
+    private val isOpen: Boolean?
         get() = mState === State.OPEN
 
     fun toggleMenu() {
@@ -209,7 +183,7 @@ class PullLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
         animator!!.start()
     }
 
-    fun open() {
+    private fun open() {
         if (animator != null && animator!!.isRunning) {
             return
         }
@@ -231,7 +205,7 @@ class PullLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
      * 设置titlebar
      */
     private fun setTitleBar(backImgId: Int, titleColorId: Int) {
-        back!!.setCompoundDrawablesWithIntrinsicBounds(resources.getDrawable(backImgId), null, null, null)
+        actionBack!!.setCompoundDrawablesWithIntrinsicBounds(resources.getDrawable(backImgId), null, null, null)
         titleBar!!.setBackgroundResource(R.color.dark_orange)
         action_title!!.setTextColor(resources.getColor(titleColorId))
     }

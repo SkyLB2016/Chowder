@@ -19,7 +19,6 @@ import com.sky.chowder.ui.adapter.MainAdapter
 import com.sky.chowder.ui.presenter.MainP
 import com.sky.utils.AppUtils
 import com.sky.utils.JumpAct
-import com.sky.utils.ScreenUtils
 import kotlinx.android.synthetic.main.content_main.*
 
 /**
@@ -32,9 +31,7 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 
     public override fun getLayoutResId(): Int = R.layout.activity_main
 
-    override fun creatPresenter() {
-        presenter = MainP(this)
-    }
+    override fun creatPresenter() = MainP(this)
 
     public override fun initialize() {
         baseTitle.setLeftButton(-1)
@@ -55,7 +52,8 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
     fun fabOnClick() {
 //        getMemory()
 //        getMemory1()
-        showToast("width==${ScreenUtils.getHeightPX(this)}")
+//        showToast("width==${ScreenUtils.getHeightPX(this)}")
+        presenter.showToast("测试消息")
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

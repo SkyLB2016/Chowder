@@ -9,6 +9,7 @@ import com.sky.Common
 import com.sky.chowder.R
 import com.sky.chowder.ui.adapter.GuideContoler
 import com.sky.utils.SPUtils
+import kotlinx.android.synthetic.main.pager_end.*
 
 /**
  * Created by SKY on 2017/3/6.
@@ -32,7 +33,7 @@ class GuideActivity : AppCompatActivity() {
         val inflater = LayoutInflater.from(this)
         val view = inflater.inflate(R.layout.pager_end, null)
         contoler.init(imgIds, view)
-        view.findViewById(R.id.bt_begin).setOnClickListener {
+        bt_begin.setOnClickListener {
             SPUtils.getInstance(Common.ISFIRST).put(Common.ISFIRST, false)
             startActivity(Intent(this@GuideActivity, MainActivity::class.java))
 //            overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);

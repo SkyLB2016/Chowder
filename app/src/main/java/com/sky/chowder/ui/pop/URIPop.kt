@@ -17,7 +17,7 @@ class URIPop(contentView: View) : BasePop<String>(contentView) {
     private var adapter: PopPagerAdapter? = null
 
     override fun initEvent() {
-        viewPager = view.findViewById(R.id.id_viewpager) as ViewPager
+        viewPager = view.findViewById<ViewPager>(R.id.id_viewpager)
         adapter = PopPagerAdapter()
         viewPager!!.adapter = adapter
     }

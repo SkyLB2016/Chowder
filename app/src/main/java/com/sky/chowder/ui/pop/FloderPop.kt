@@ -25,7 +25,7 @@ class FloderPop(view: View, width: Int, height: Int) : BasePop<ImageFloder>(view
 
     override fun initView() {
         super.initView()
-        recycle = view.findViewById(R.id.recycler) as RecyclerView
+        recycle = view.findViewById<RecyclerView>(R.id.recycler)
         adapter = object : RecyclerAdapter<ImageFloder>(R.layout.pop_uri_item) {
             override fun onAchieveHolder(holder: RecyclerHolder, position: Int) {
                 holder.setImageBitmap(R.id.image, ImageUtils.getBitmapFromPath(datas[position].firstImagePath, 100, 100))

@@ -5,4 +5,6 @@ import com.sky.api.IBasePresenter
 /**
  * Created by SKY on 2017/5/31.
  */
-interface IMainPresenter : IBasePresenter
+interface IMainPresenter : IBasePresenter {
+    fun showToast(toast: String)
+}

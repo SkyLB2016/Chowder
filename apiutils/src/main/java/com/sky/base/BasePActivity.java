@@ -11,7 +11,7 @@ public abstract class BasePActivity<P extends BasePresenter> extends SkyActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (presenter == null) creatPresenter();
+        if (presenter == null) presenter =creatPresenter();
         initialize();
         presenter.onCreate(savedInstanceState);
     }
@@ -46,5 +46,5 @@ public abstract class BasePActivity<P extends BasePresenter> extends SkyActivity
         presenter.onDestroy();
     }
 
-    protected abstract void creatPresenter();
+    protected abstract P creatPresenter();
 }

@@ -1,4 +1,7 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+//增加这句
+apply plugin: 'kotlin-android-extensions'
 ext {
     bintrayRepo = 'skylb'
     bintrayName = 'apiutils'

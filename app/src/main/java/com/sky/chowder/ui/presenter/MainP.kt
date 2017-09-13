@@ -15,6 +15,9 @@ import java.util.*
  * Created by SKY on 2017/5/29.
  */
 class MainP(context: Context) : BasePresenter<IMainView>(context), IMainPresenter {
+    override fun showToast(toast: String) {
+        mView.showToast(toast)
+    }
 
     init {
         LogUtils.i("mainpresenter")
