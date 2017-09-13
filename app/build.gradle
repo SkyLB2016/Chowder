@@ -3,11 +3,11 @@ apply plugin: 'kotlin-android'
 //增加这句
 apply plugin: 'kotlin-android-extensions'
 
-def googleVer = '25.3.1'
+def googleVer = '26.0.2'
 def bknifeVer = '8.6.0'
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    androidTestCompile('com.android.support.test.espresso:espresso-core:3.0.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -28,12 +28,12 @@ dependencies {
 }
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 26
     buildToolsVersion "26.0.0"
     defaultConfig {
         applicationId "com.sky.chowder"
         minSdkVersion 19
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         // dex突破65535的限制
@@ -73,17 +73,19 @@ android {
 //            renderscriptDebuggable false//渲染脚本调试
 //            renderscriptOptimLevel 5//渲染脚本优化水平
             //修改打包好的apk的名称
-            applicationVariants.all { variant ->
-                variant.outputs.each { output ->
-                    if (output.outputFile != null && output.outputFile.name.endsWith('.apk')
-                            && 'release'.equals(variant.buildType.name)) {
-//                        def apkFile = new File(output.outputFile.getParent(), "MyDemo_${variant.flavorName}_v${variant.versionName}_${buildTime()}.apk")
-//                        output.outputFile = apkFile
-                        output.outputFile = new File(output.outputFile.getParent(),
-                                output.outputFile.name.replace(".apk", "-v${variant.versionName}-${buildTime()}.apk"))
-                    }
-                }
-            }
+//            applicationVariants.all { variant ->
+//                variant.outputs.each { output ->
+//                    if (output.outputFile != null && output.outputFile.name.endsWith('.apk') && 'release' == variant.buildType.name) {
+////                        def apkFile = new File(output.outputFile.getParent(), "MyDemo_${variant.flavorName}_v${variant.versionName}_${buildTime()}.apk")
+////                        def apkFile = new File(output.outputFile.getParent(), output.outputFile.name.replace(".apk", "-v${variant.versionName}-${buildTime()}.apk"))
+////                        def out = output.outputFile
+////                        out.outputFile = apkFile
+////                        output.outputFile.name= output.outputFile.name.replace(".apk", "-v${variant.versionName}-${buildTime()}.apk")
+////                        output.outputFile = new File(output.outputFile.name)
+////                        output.outputFile = new File(output.outputFile.getParent(), output.outputFile.name.replace(".apk", "-v${variant.versionName}-${buildTime()}.apk"))
+//                    }
+//                }
+//            }
         }
         debug {
             // 自定义Log
@@ -91,11 +93,11 @@ android {
             versionNameSuffix "-sky"
             signingConfig signingConfigs.debug
         }
-        jnidebug.initWith(buildTypes.debug)
-        jnidebug {
-            jniDebuggable true//开启jni
-            versionNameSuffix '.jnidebug'
-        }
+//        jnidebug.initWith(buildTypes.debug)
+//        jnidebug {
+//            jniDebuggable true//开启jni
+//            versionNameSuffix '.jnidebug'
+//        }
     }
     //执行lint检查，有任何的错误或者警告提示，都会终止构建，我们可以将其关掉。
     lintOptions {
@@ -115,7 +117,7 @@ android {
 //    }
     //渠道Flavors，我这里写了一些常用的
     productFlavors {
-        sky {}
+//        sky {}
 //        GooglePlay {}
 //        xiaomi {}
 //        umeng {}
