@@ -37,6 +37,5 @@ public class RecyclerHolder extends RecyclerView.ViewHolder {
 
     public void setImageBitmap(int id, Bitmap bm) {
         ((ImageView) getView(id)).setImageBitmap(bm);
-
     }
 }

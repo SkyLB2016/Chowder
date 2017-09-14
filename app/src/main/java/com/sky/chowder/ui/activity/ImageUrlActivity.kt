@@ -32,10 +32,7 @@ class ImageUrlActivity : RecyclerPActivity<CourseEntity, ImageUrlP>() {
         first = true
         imageLoader = ImageLoaderAsync()
         super.initialize()
-
-        fab.setOnClickListener { v ->
-            Snackbar.make(v, "正在加载，请稍后", Snackbar.LENGTH_LONG).setAction("cancel") { showToast("已取消") }.show()
-        }
+        fab.setOnClickListener { v -> Snackbar.make(v, "正在加载，请稍后", Snackbar.LENGTH_LONG).setAction("cancel") { showToast("已取消") }.show() }
     }
 
     override fun creatAdapter() = LoaderURLAdapter(R.layout.adapter_main)
