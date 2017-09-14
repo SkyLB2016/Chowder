@@ -22,9 +22,7 @@ class One : BaseFragment<SolarP>() {
         return R.layout.fragment_first
     }
 
-    override fun initPresenter() {
-        presenter = SolarP(activity)
-    }
+    override fun creatPresenter(): SolarP? = SolarP(activity)
 
     override fun initialize() {
 

@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.sky.base.BaseFragment;
+import com.sky.base.BasePresenter;
 import com.sky.chowder.R;
 import com.sky.chowder.ui.adapter.CollapsingAdapter;
 
@@ -23,8 +24,8 @@ public class RecycleFragment extends BaseFragment {
     }
 
     @Override
-    protected void initPresenter() {
-
+    protected BasePresenter creatPresenter() {
+        return null;
     }
 
     @Override

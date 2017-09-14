@@ -15,7 +15,7 @@ import com.sky.base.BaseNoPActivity;
 import com.sky.chowder.R;
 import com.sky.chowder.model.CourseEntity;
 import com.sky.chowder.ui.adapter.LoaderURLAdapter;
-import com.sky.chowder.utils.UseCase;
+import com.sky.chowder.utils.http.UseCase;
 import com.sky.chowder.utils.http.HttpUtils;
 import com.sky.model.ApiResponse;
 import com.sky.utils.LogUtils;

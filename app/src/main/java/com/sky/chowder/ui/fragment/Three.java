@@ -6,6 +6,7 @@ import android.os.Message;
 import android.view.View;
 
 import com.sky.base.BaseFragment;
+import com.sky.base.BasePresenter;
 import com.sky.chowder.R;
 import com.sky.utils.LogUtils;
 /**
@@ -55,8 +56,8 @@ public class Three extends BaseFragment {
     }
 
     @Override
-    protected void initPresenter() {
-
+    protected BasePresenter creatPresenter() {
+        return null;
     }
 
     @Override
