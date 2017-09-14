@@ -180,6 +180,25 @@
                 <action android:name="com.sky.coustom" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.activity.TabLayoutActivity"
+            android:description="@string/act_18"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/act_18"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.sky.coustom" />
+            </intent-filter>
+        </activity><activity
+            android:name=".ui.activity.VideoActivity"
+            android:description="@string/act_19"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/act_19"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.sky.coustom" />
+            </intent-filter>
+        </activity>
 
 
         <activity

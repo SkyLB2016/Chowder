@@ -4,7 +4,6 @@ import android.support.design.widget.AppBarLayout
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentPagerAdapter
-import android.support.v7.widget.Toolbar
 import android.view.View
 import com.sky.base.BaseNoPActivity
 import com.sky.chowder.R
@@ -13,6 +12,7 @@ import com.sky.chowder.ui.fragment.RecycleFragment
 import com.sky.chowder.ui.fragment.Three
 import com.sky.chowder.ui.fragment.Two
 import kotlinx.android.synthetic.main.activity_tab_vp.*
+import kotlinx.android.synthetic.main.include_toolbar.*
 import java.util.*
 
 /**
@@ -20,17 +20,9 @@ import java.util.*
  * 标签栏
  */
 class TabLayoutActivity : BaseNoPActivity() {
-    private var tabs: TabLayout? = null
-    private var toolbar: Toolbar? = null
-    private var appbar: AppBarLayout? = null
-
     override fun getLayoutResId(): Int = R.layout.activity_tab_vp
 
     override fun initialize() {
-        tabs = findViewById<TabLayout>(R.id.tabs)
-        toolbar = findViewById<Toolbar>(R.id.toolbar)
-        appbar = findViewById<AppBarLayout>(R.id.appbar)
-
         setUpViewPager()
         val mParams = appbar!!.getChildAt(0).layoutParams as AppBarLayout.LayoutParams
         mParams.scrollFlags = 0//的时候AppBarLayout下的toolbar就不会随着滚动条折叠

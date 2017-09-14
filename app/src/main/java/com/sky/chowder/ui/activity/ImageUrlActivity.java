@@ -14,10 +14,10 @@ import com.sky.api.OnRequestCallback;
 import com.sky.base.BaseNoPActivity;
 import com.sky.chowder.R;
 import com.sky.chowder.model.CourseEntity;
-import com.sky.chowder.model.DataEntity;
 import com.sky.chowder.ui.adapter.LoaderURLAdapter;
+import com.sky.chowder.utils.UseCase;
 import com.sky.chowder.utils.http.HttpUtils;
-import com.sky.http.UseCase;
+import com.sky.model.ApiResponse;
 import com.sky.utils.LogUtils;
 
 import butterknife.BindView;
@@ -122,19 +122,19 @@ public class ImageUrlActivity extends BaseNoPActivity {
                 }
             }
         });
-        new UseCase<DataEntity<CourseEntity>>() {
+        new UseCase<ApiResponse<CourseEntity>>() {
             @Override
-            protected Observable<DataEntity<CourseEntity>> buildObservable() {
+            protected Observable<ApiResponse<CourseEntity>> buildObservable() {
                 return HttpUtils.Companion.getInstance().getMuke();
             }
-        }.subscribe(new OnRequestCallback<DataEntity<CourseEntity>>() {
+        }.subscribe(new OnRequestCallback<ApiResponse<CourseEntity>>() {
             @Override
             public void onFail(ErrorMes error) {
                 LogUtils.i(error.getMessage());
             }
 
             @Override
-            public void onSuccess(DataEntity<CourseEntity> data) {
+            public void onSuccess(ApiResponse<CourseEntity> data) {
                 adapter.setDatas(data.getData());
             }
         });

@@ -106,6 +106,8 @@
     <string name="act_15">双缓冲实验</string>
     <string name="act_16">工厂模式实验</string>
     <string name="act_17">SVG</string>
+    <string name="act_18">TabLayoutActivity</string>
+    <string name="act_19">VideoActivity</string>
 
 
 </resources>
