@@ -1,10 +1,8 @@
 package com.sky.chowder.utils
 
 import android.content.Context
-
 import com.sky.Common
 import com.sky.utils.JumpAct
-
 import java.io.Serializable
 
 /**
