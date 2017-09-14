@@ -36,7 +36,7 @@ public abstract class RecyclerPActivity<T, P extends RefreshP> extends BasePActi
         //设置swipe的开始位置与结束位置
         swipe.setProgressViewOffset(false, 0, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 80, getResources().getDisplayMetrics()));
         //为进度圈设置颜色
-        swipe.setColorSchemeResources(R.color.red, R.color.main_color, R.color.color_ee);
+        swipe.setColorSchemeResources(android.R.color.black,android.R.color.holo_green_dark,android.R.color.white);
         swipe.setOnRefreshListener(this);//监听
         recycler.setHasFixedSize(true);
 

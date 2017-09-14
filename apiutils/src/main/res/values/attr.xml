@@ -7,22 +7,4 @@
         <attr name="tab_textcolor" format="color" />
     </declare-styleable>
 
-    <!--<declare-styleable name="CircleProgress">-->
-        <!--&lt;!&ndash;圆的半径&ndash;&gt;-->
-        <!--<attr name="radius" />-->
-        <!--&lt;!&ndash;总进度条颜色&ndash;&gt;-->
-        <!--<attr name="total_color" format="color" />-->
-        <!--&lt;!&ndash;进度条颜色&ndash;&gt;-->
-        <!--<attr name="pro_color" format="color" />-->
-        <!--&lt;!&ndash;进度条宽度&ndash;&gt;-->
-        <!--<attr name="pro_width" format="dimension" />-->
-        <!--&lt;!&ndash;字体内容&ndash;&gt;-->
-        <!--<attr name="text" format="string" />-->
-        <!--&lt;!&ndash;字体颜色&ndash;&gt;-->
-        <!--<attr name="textcolor" format="color" />-->
-        <!--&lt;!&ndash;字体颜色&ndash;&gt;-->
-        <!--<attr name="textsize" format="dimension" />-->
-        <!--&lt;!&ndash;字体背景&ndash;&gt;-->
-        <!--<attr name="text_background" format="color|reference" />-->
-    <!--</declare-styleable>-->
 </resources>

@@ -15,13 +15,15 @@
  */
 package com.sky.model;
 
+import java.util.List;
+
 /**
  * Created by SKY on 15/12/9 下午8:54.
  * Api响应结果的封装类.
  */
 public class ApiResponse<T> {
-    private String event;    // 返回状态码,"0"代表成功
-    private String message;  // 返回信息
+    private int code;    // 返回状态码,"0"代表成功
+    private String msg;  // 返回信息
     private T obj;           // 单个对象
     private T objList;       // 数组对象
     private int currentPage; // 当前页数
@@ -29,77 +31,55 @@ public class ApiResponse<T> {
     private int maxCount;    // 总条数
     private int maxPage;     // 总页数
 
+    private List<T> data;
+    private int status;    // 返回状态码,"1"代表成功
 
-    public ApiResponse(String event, String message) {
-        this.event = event;
-        this.message = message;
+    public ApiResponse(int code, String msg) {
+        this.code = code;
+        this.msg = msg;
+    }
+
+    public List<T> getData() {
+        return data;
+    }
+
+    public boolean getStatus() {
+        return status == 1;
     }
 
     public boolean isSuccess() {
-        return event.equals("0");
+        return code == 0;
     }
 
-    public String getEvent() {
-        return event;
+    public int getCode() {
+        return code;
     }
 
-    public void setEvent(String event) {
-        this.event = event;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
+    public String getMsg() {
+        return msg;
     }
 
     public T getObj() {
         return obj;
     }
 
-    public void setObj(T obj) {
-        this.obj = obj;
-    }
-
     public T getObjList() {
         return objList;
-    }
-
-    public void setObjList(T objList) {
-        this.objList = objList;
     }
 
     public int getCurrentPage() {
         return currentPage;
     }
 
-    public void setCurrentPage(int currentPage) {
-        this.currentPage = currentPage;
-    }
-
     public int getPageSize() {
         return pageSize;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
     }
 
     public int getMaxCount() {
         return maxCount;
     }
 
-    public void setMaxCount(int maxCount) {
-        this.maxCount = maxCount;
-    }
-
     public int getMaxPage() {
         return maxPage;
-    }
-
-    public void setMaxPage(int maxPage) {
-        this.maxPage = maxPage;
     }
 }

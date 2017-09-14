@@ -31,7 +31,7 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
         view = inflater.inflate(getLayoutResId(), container, false);
         context = getActivity();
         unbinder = ButterKnife.bind(this, view);
-        if (presenter == null) initPresenter();
+        if (presenter == null) presenter = creatPresenter();
         checkPresenterIsNull();
         initialize();
         presenter.onCreateView(savedInstanceState);
@@ -47,7 +47,7 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     /**
      * 初始化presenter
      */
-    protected abstract void initPresenter();
+    protected abstract P creatPresenter();
 
     /**
      * 初始化
@@ -59,14 +59,13 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
      */
     protected void checkPresenterIsNull() {
         if (presenter == null) {
-            throw new IllegalStateException("please init presenter at initPresenter() method...");
+            throw new IllegalStateException("please init presenter at creatPresenter() method...");
         }
     }
 
     @Override
     public void setToolbarTitle(@NonNull String title, @NonNull String rightText) {
         ((SkyActivity) getActivity()).setToolbarTitle(title, rightText);
-
     }
 
     @Override
@@ -97,7 +96,6 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     @Override
     public void showLoading() {
         ((SkyActivity) getActivity()).showLoading();
-//        DialogManager.showLoading(context);
     }
 
     @Override
@@ -109,8 +107,7 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (presenter != null)
-            presenter.onActivityCreated(savedInstanceState);
+        presenter.onActivityCreated(savedInstanceState);
     }
 
     @Override
