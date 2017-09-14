@@ -5,7 +5,6 @@ import android.graphics.Outline;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 import android.widget.ImageView;
@@ -14,25 +13,13 @@ import com.sky.adapter.RecyclerAdapter;
 import com.sky.adapter.RecyclerHolder;
 import com.sky.chowder.R;
 import com.sky.chowder.model.CourseEntity;
-import com.sky.chowder.utils.ImageLoaderAsync;
-
-import java.util.List;
 
 /**
  * Created by SKY on 2015/12/9 20:52.
  */
 public class LoaderURLAdapter extends RecyclerAdapter<CourseEntity> {
-    private ImageLoaderAsync imageLoader;
-
     public LoaderURLAdapter(int layoutId) {
         super(layoutId);
-        imageLoader = new ImageLoaderAsync();
-    }
-
-    @Override
-    public void setDatas(List<CourseEntity> datas) {
-        super.setDatas(datas);
-
     }
 
     @Override
@@ -64,16 +51,5 @@ public class LoaderURLAdapter extends RecyclerAdapter<CourseEntity> {
                 }
             });
         }
-    }
-
-    public void setImageLoader(int start, int last, RecyclerView recycle) {
-
-        for (int i = start; i <= last; i++) {
-            imageLoader.showAsyncImage((ImageView) recycle.findViewWithTag(datas.get(i).getPicBig()), datas.get(i).getPicBig());
-        }
-    }
-
-    public void cancelAlltasks() {
-        imageLoader.cancelAlltasks();
     }
 }

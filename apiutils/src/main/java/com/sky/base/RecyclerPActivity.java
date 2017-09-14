@@ -28,7 +28,7 @@ public abstract class RecyclerPActivity<T, P extends RefreshP> extends BasePActi
     protected void initialize() {
         recycler = getView(R.id.recycler);
         swipe = getView(R.id.swipe);
-        creatAdapter();
+        adapter= creatAdapter();
         setRecycle();
     }
 
@@ -36,7 +36,7 @@ public abstract class RecyclerPActivity<T, P extends RefreshP> extends BasePActi
         //设置swipe的开始位置与结束位置
         swipe.setProgressViewOffset(false, 0, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 80, getResources().getDisplayMetrics()));
         //为进度圈设置颜色
-        swipe.setColorSchemeResources(android.R.color.black,android.R.color.holo_green_dark,android.R.color.white);
+        swipe.setColorSchemeResources(android.R.color.black, android.R.color.holo_green_dark, android.R.color.white);
         swipe.setOnRefreshListener(this);//监听
         recycler.setHasFixedSize(true);
 
@@ -45,6 +45,7 @@ public abstract class RecyclerPActivity<T, P extends RefreshP> extends BasePActi
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
+                onRecyclerScrollStateChanged(recyclerView, newState);
                 //SCROLL_STATE_SETTLING惯性，SCROLL_STATE_DRAGGING拖拽，SCROLL_STATE_IDLE停止、
                 if (recyclerView.canScrollVertically(1)) {
                     firstTail = false;
@@ -59,6 +60,7 @@ public abstract class RecyclerPActivity<T, P extends RefreshP> extends BasePActi
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
+                onRecyclerScrolled(recyclerView, dx, dy);
                 //  dx：大于0，向右滚动    小于0，向左滚动
                 //  dy：小于0，向上滚动    大于0，向下滚动
                 if (dy < -1) firstTail = false;
@@ -84,7 +86,13 @@ public abstract class RecyclerPActivity<T, P extends RefreshP> extends BasePActi
 //        return position;
 //    }
 
-    protected abstract void creatAdapter();
+    protected abstract RecyclerAdapter<T> creatAdapter();
+
+    public void onRecyclerScrollStateChanged(RecyclerView recyclerView, int newState) {
+    }
+
+    public void onRecyclerScrolled(RecyclerView recyclerView, int dx, int dy) {
+    }
 
     public void setRefreshing(boolean isrefresh) {
         if (swipe == null) return;
