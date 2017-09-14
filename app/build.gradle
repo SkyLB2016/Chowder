@@ -70,20 +70,6 @@ android {
 //            jniDebuggable false//默认即为false。
 //            renderscriptDebuggable false//渲染脚本调试
 //            renderscriptOptimLevel 5//渲染脚本优化水平
-            //修改打包好的apk的名称
-//            applicationVariants.all { variant ->
-//                variant.outputs.each { output ->
-//                    if (output.outputFile != null && output.outputFile.name.endsWith('.apk') && 'release' == variant.buildType.name) {
-////                        def apkFile = new File(output.outputFile.getParent(), "MyDemo_${variant.flavorName}_v${variant.versionName}_${buildTime()}.apk")
-////                        def apkFile = new File(output.outputFile.getParent(), output.outputFile.name.replace(".apk", "-v${variant.versionName}-${buildTime()}.apk"))
-////                        def out = output.outputFile
-////                        out.outputFile = apkFile
-////                        output.outputFile.name= output.outputFile.name.replace(".apk", "-v${variant.versionName}-${buildTime()}.apk")
-////                        output.outputFile = new File(output.outputFile.name)
-////                        output.outputFile = new File(output.outputFile.getParent(), output.outputFile.name.replace(".apk", "-v${variant.versionName}-${buildTime()}.apk"))
-//                    }
-//                }
-//            }
         }
         debug {
             // 自定义Log
@@ -91,11 +77,6 @@ android {
             versionNameSuffix "-sky"
             signingConfig signingConfigs.debug
         }
-//        jnidebug.initWith(buildTypes.debug)
-//        jnidebug {
-//            jniDebuggable true//开启jni
-//            versionNameSuffix '.jnidebug'
-//        }
     }
     //执行lint检查，有任何的错误或者警告提示，都会终止构建，我们可以将其关掉。
     lintOptions {
@@ -113,9 +94,12 @@ android {
 //        sourceCompatibility JavaVersion.VERSION_1_7
 //        targetCompatibility JavaVersion.VERSION_1_7
 //    }
-    //渠道Flavors，我这里写了一些常用的
+    flavorDimensions "sky"
+
     productFlavors {
-//        sky {}
+        sky {
+            dimension "sky"
+        }
 //        GooglePlay {}
 //        xiaomi {}
 //        umeng {}

@@ -28,8 +28,9 @@
 
         <!-- 与build.gradle相呼应 -->
         <meta-data
-            android:name="UMENG_CHANNEL"
+            android:name="CHANNEL"
             android:value="${CHANNEL_VALUE}" />
+        <!-- 与build.gradle相呼应完-->
         <meta-data
             android:name="BUG_HD_SDK_GENERAL_KEY"
             android:value="279dc3c61d77f5b08b4970a31db93c62" />
@@ -189,7 +190,8 @@
             <intent-filter>
                 <action android:name="com.sky.coustom" />
             </intent-filter>
-        </activity><activity
+        </activity>
+        <activity
             android:name=".ui.activity.VideoActivity"
             android:description="@string/act_19"
             android:icon="@mipmap/ic_launcher"
