@@ -56,7 +56,8 @@ class ImageUrlActivity : RecyclerPActivity<CourseEntity, ImageUrlP>() {
 
     private fun setImageLoader(start: Int, last: Int, recycle: RecyclerView) {
         for (i in start..last) {
-            imageLoader.showAsyncImage(recycle.findViewWithTag<View>(adapter.datas[i].picBig) as ImageView, adapter.datas[i].picBig)
+            imageLoader.showAsyncImage(recycle.findViewWithTag<View>(getAdapter<LoaderURLAdapter>().datas[i].picBig) as ImageView, getAdapter<LoaderURLAdapter>().datas[i].picBig)
+//            imageLoader.showAsyncImage(image, adapter.datas[i].picBig);
         }
     }
 

@@ -16,7 +16,7 @@
         android:layout_margin="@dimen/wh_8">
 
         <ImageView
-            android:id="@+id/img_describe"
+            android:id="@+id/image"
             android:layout_width="@dimen/wh_72"
             android:layout_height="@dimen/wh_72"
             android:background="@mipmap/ic_launcher"
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/wh_16"
-            android:layout_toRightOf="@id/img_describe"
+            android:layout_toRightOf="@id/image"
             android:text="calssname"
             android:textSize="@dimen/text_medium"
             android:textStyle="italic" />
@@ -39,7 +39,7 @@
             android:layout_below="@id/tv_name"
             android:layout_marginLeft="@dimen/wh_16"
             android:layout_marginTop="@dimen/wh_4"
-            android:layout_toRightOf="@id/img_describe"
+            android:layout_toRightOf="@id/image"
             android:fontFamily="sans-serif-condensed"
             android:text="描述"
             android:textSize="@dimen/text_micro" />

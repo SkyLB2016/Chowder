@@ -7,11 +7,12 @@
     <!-- android:name="sky.permission.ACTION_MY" -->
     <!-- android:protectionLevel="normal" /> -->
 
-
     <!-- <uses-permission android:name="sky.permission.ACTION_MY" /> -->
     <uses-permission android:name="com.sky.coustom" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".MyApplication"

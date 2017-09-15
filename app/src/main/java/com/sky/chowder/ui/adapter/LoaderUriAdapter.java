@@ -17,17 +17,17 @@ import com.sky.chowder.utils.ImageLoaderExecutors;
 /**
  * Created by SKY on 2015/12/9.
  */
-public class LoaderURIAdapter extends RecyclerAdapter<String> {
+public class LoaderUriAdapter extends RecyclerAdapter<String> {
     private ImageLoaderExecutors imageLoader;
     public String parentPath;
 
-    public LoaderURIAdapter(int layoutId, String parentPath) {
+    public LoaderUriAdapter(int layoutId, String parentPath) {
         super(layoutId);
         this.parentPath = parentPath;
         imageLoader = new ImageLoaderExecutors();
     }
 
-    public LoaderURIAdapter(int layoutId) {
+    public LoaderUriAdapter(int layoutId) {
         super(layoutId);
         imageLoader = new ImageLoaderExecutors();
     }
@@ -54,15 +54,13 @@ public class LoaderURIAdapter extends RecyclerAdapter<String> {
             //使用ripple
             cardView.setBackground(context.getDrawable(R.drawable.ripple));
             //点击效果，阴影效果
-            cardView.setStateListAnimator(
-                    AnimatorInflater.loadStateListAnimator(context, R.drawable.state_list_animator));
+            cardView.setStateListAnimator(AnimatorInflater.loadStateListAnimator(context, R.drawable.state_list_animator));
             //视图裁剪
             img.setClipToOutline(true);
             img.setOutlineProvider(new ViewOutlineProvider() {
                 @Override
                 public void getOutline(View view, Outline outline) {
-                    outline.setRoundRect(view.getLeft(), view.getTop(),
-                            view.getRight(), view.getBottom(), 30);
+                    outline.setRoundRect(view.getLeft(), view.getTop(), view.getRight(), view.getBottom(), 30);
                 }
             });
         }

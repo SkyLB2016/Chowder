@@ -5,11 +5,11 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.WindowManager
+import android.widget.Button
 import com.sky.Common
 import com.sky.chowder.R
 import com.sky.chowder.ui.adapter.GuideContoler
 import com.sky.utils.SPUtils
-import kotlinx.android.synthetic.main.pager_end.*
 
 /**
  * Created by SKY on 2017/3/6.
@@ -30,10 +30,9 @@ class GuideActivity : AppCompatActivity() {
     private fun initData() {
         val contoler = GuideContoler(this)
         val imgIds = intArrayOf(R.mipmap.guide01, R.mipmap.guide02, R.mipmap.guide03)
-        val inflater = LayoutInflater.from(this)
-        val view = inflater.inflate(R.layout.pager_end, null)
+        val view = LayoutInflater.from(this).inflate(R.layout.pager_end, null)
         contoler.init(imgIds, view)
-        bt_begin.setOnClickListener {
+        view.findViewById<Button>(R.id.btBegin).setOnClickListener {
             SPUtils.getInstance(Common.ISFIRST).put(Common.ISFIRST, false)
             startActivity(Intent(this@GuideActivity, MainActivity::class.java))
 //            overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);

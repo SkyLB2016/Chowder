@@ -23,7 +23,7 @@ class MainAdapter(layoutId: Int) : RecyclerAdapter<ActivityModel>(layoutId) {
         with(holder!!.itemView) {
             tv_name.text = "${position + 1}.${datas[position].className}"
             tv_describe.text = datas[position].describe
-            img_describe.background = resources.getDrawable(datas[position].img)
+            image.background = resources.getDrawable(datas[position].img)
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
                 //使用ripple
                 //((CardView) holder.getView(R.id.cardView)).setRadius(new Random().nextInt(50));
@@ -33,8 +33,8 @@ class MainAdapter(layoutId: Int) : RecyclerAdapter<ActivityModel>(layoutId) {
                 //((CardView) holder.getView(R.id.cardView)).setCardElevation(new Random().nextInt(100));
                 cardView.stateListAnimator = AnimatorInflater.loadStateListAnimator(context, R.drawable.state_list_animator)
                 //视图裁剪
-                img_describe.clipToOutline = true
-                img_describe.outlineProvider = object : ViewOutlineProvider() {
+                image.clipToOutline = true
+                image.outlineProvider = object : ViewOutlineProvider() {
                     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                     override fun getOutline(view: View, outline: Outline) {
                         outline.setRoundRect(view.left, view.top, view.right, view.bottom, 60f)

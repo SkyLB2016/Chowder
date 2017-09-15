@@ -44,7 +44,7 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
             showToast("长按监听已处理")
             true
         }
-        if (AppUtils.isPermission(this,Manifest.permission.READ_EXTERNAL_STORAGE))
+        if (!AppUtils.isPermission(this,Manifest.permission.READ_EXTERNAL_STORAGE))
             AppUtils.requestPermission(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),0)
     }
 

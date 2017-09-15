@@ -8,7 +8,7 @@ import java.util.List;
 public interface IRefreshV<T> extends IBaseView {
     void setRefreshing(boolean isrefresh);
 
-    void setEnable(boolean isrefresh);
+    void setSwipeEnable(boolean isrefresh);
 
     void setAdapterList(List<T> entities);
 

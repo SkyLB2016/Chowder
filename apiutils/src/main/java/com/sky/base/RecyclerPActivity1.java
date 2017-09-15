@@ -14,10 +14,10 @@ import java.util.List;
 /**
  * Created by SKY on 2017/6/15.
  */
-public abstract class RecyclerPActivity<T, P extends RefreshP> extends BasePActivity<P> implements IRefreshV<T>, SwipeRefreshLayout.OnRefreshListener {
+public abstract class RecyclerPActivity1<T, P extends RefreshP> extends BasePActivity<P> implements IRefreshV<T>, SwipeRefreshLayout.OnRefreshListener {
     MyRecyclerView recycler;
     SwipeRefreshLayout swipe;
-//    protected RecyclerAdapter<T> adapter;
+    protected RecyclerAdapter<T> adapter;
 
 //    protected int firstVisibleItem;
 //    protected int lastVisibleItem;
@@ -28,6 +28,11 @@ public abstract class RecyclerPActivity<T, P extends RefreshP> extends BasePActi
     protected void initialize() {
         recycler = getView(R.id.recycler);
         swipe = getView(R.id.swipe);
+        adapter= creatAdapter();
+        setRecycle();
+    }
+
+    private void setRecycle() {
         //设置swipe的开始位置与结束位置
         swipe.setProgressViewOffset(false, 0, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 80, getResources().getDisplayMetrics()));
         //为进度圈设置颜色
@@ -42,11 +47,14 @@ public abstract class RecyclerPActivity<T, P extends RefreshP> extends BasePActi
                 super.onScrollStateChanged(recyclerView, newState);
                 onRecyclerScrollStateChanged(recyclerView, newState);
                 //SCROLL_STATE_SETTLING惯性，SCROLL_STATE_DRAGGING拖拽，SCROLL_STATE_IDLE停止、
-                if (recyclerView.canScrollVertically(1)) firstTail = false;
-
+                if (recyclerView.canScrollVertically(1)) {
+                    firstTail = false;
+                }
                 if (newState == RecyclerView.SCROLL_STATE_IDLE && firstTail) loadMore();
 
-                if (!recyclerView.canScrollVertically(1)) firstTail = true;
+                if (!recyclerView.canScrollVertically(1)) {
+                    firstTail = true;
+                }
             }
 
             @Override
@@ -67,7 +75,7 @@ public abstract class RecyclerPActivity<T, P extends RefreshP> extends BasePActi
 //                }
             }
         });
-        recycler.setAdapter(creatAdapter());
+        recycler.setAdapter(adapter);
     }
 
 //    private int findMax(int[] positions) {
@@ -97,16 +105,12 @@ public abstract class RecyclerPActivity<T, P extends RefreshP> extends BasePActi
 
     @Override
     public void setAdapterList(List<T> entities) {
-        getAdapter().setDatas(entities);
-    }
-
-    public <E extends RecyclerAdapter> E getAdapter() {
-        return (E) recycler.getAdapter();
+        adapter.setDatas(entities);
     }
 
     @Override
     public void addAdapterList(List<T> entities) {
-        getAdapter().addDatas(entities);
+        adapter.addDatas(entities);
     }
 
     public void setRecyclerLayout(RecyclerView.LayoutManager manager) {
@@ -119,7 +123,7 @@ public abstract class RecyclerPActivity<T, P extends RefreshP> extends BasePActi
     }
 
     public void loadMore() {
-        if (getAdapter().getDatas() == null || getAdapter().getDatas().isEmpty()) return;
-        presenter.onLoadMore(getAdapter().getDatas().size());
+        if (adapter.getDatas() == null || adapter.getDatas().isEmpty()) return;
+        presenter.onLoadMore(adapter.getDatas().size());
     }
 }

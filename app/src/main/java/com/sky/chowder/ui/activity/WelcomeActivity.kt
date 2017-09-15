@@ -8,9 +8,9 @@ import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.widget.ImageView
 import com.sky.Common
-import com.sky.SkyApp
 import com.sky.chowder.R
 import com.sky.utils.JumpAct
+import com.sky.utils.SPUtils
 
 /**
  * Created by SKY on 2017/3/6.
@@ -48,7 +48,7 @@ class WelcomeActivity : AppCompatActivity() {
     }
 
     private fun JumpAct() {
-        if (SkyApp.getInstance().getObject(Common.ISFIRST, true)) {
+        if (SPUtils.getInstance(Common.ISFIRST).getObject(Common.ISFIRST, true)) {
             JumpAct.jumpActivity(this, GuideActivity::class.java)
         } else {
             JumpAct.jumpActivity(this, MainActivity::class.java)
