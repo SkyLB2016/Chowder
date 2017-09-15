@@ -48,10 +48,12 @@ public class ImageLoaderExecutors {
                             Bitmap bitmap = holder.bitmap;
                             ImageView view = (ImageView) holder.view;
 
-//                            ViewGroup.LayoutParams params = view.getLayoutParams();
-//                            //params.width = bitmap.getWidth();
-//                            params.height = bitmap.getHeight();
-//                            view.setLayoutParams(params);
+                            {
+                                ViewGroup.LayoutParams params = view.getLayoutParams();
+                                params.width = bitmap.getWidth();
+                                params.height = bitmap.getHeight();
+                                view.setLayoutParams(params);
+                            }
                             view.setImageBitmap(bitmap);
 //                            holder.bitmap=bitmap=null;
                         } else {
@@ -327,7 +329,7 @@ public class ImageLoaderExecutors {
     public void closeExecutors() {
         executors.shutdown();//结束空闲的线程interrupt
 //        executors.shutdownNow();//中断部分未在执行的线程
-        executors=null;
+        executors = null;
     }
 
     private class ImageHolder {

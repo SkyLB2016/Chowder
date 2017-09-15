@@ -35,6 +35,7 @@ class ImageUriActivity : RecyclerPActivity<String, ImageUriP>(), ImageUriV<Strin
     private var first = true
 
     var adapter: LoaderUriAdapter? = null
+    private var floderPop: BasePop<*>? = null
 
     override fun getLayoutResId(): Int = R.layout.activity_uri
 
@@ -54,7 +55,7 @@ class ImageUriActivity : RecyclerPActivity<String, ImageUriP>(), ImageUriV<Strin
 
     private fun ShowImagePop(position: Int) {
         val imagePop = URIPop(LayoutInflater.from(this).inflate(R.layout.viewpager, null))
-        imagePop!!.parentPath = adapter?.getParentPath()
+        imagePop!!.parentPath = adapter?.parentPath
         imagePop!!.datas = adapter?.datas
         imagePop!!.setCurrentItem(position)
         if (!imagePop!!.isShowing) imagePop!!.showAtLocation(recycler, Gravity.CENTER, 0, 0)
@@ -63,13 +64,11 @@ class ImageUriActivity : RecyclerPActivity<String, ImageUriP>(), ImageUriV<Strin
     override fun creatAdapter() = LoaderUriAdapter(R.layout.adapter_uri)
 
     override fun onRecyclerScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
-        super.onRecyclerScrollStateChanged(recyclerView, newState)
         if (newState == RecyclerView.SCROLL_STATE_IDLE)
-            adapter?.setImageLoader(firstVisibleItem, lastVisibleItem, recyclerView)
+            adapter?.setImageLoader(firstVisibleItem, lastVisibleItem, recyclerView!!)
     }
 
     override fun onRecyclerScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
-        super.onRecyclerScrolled(recyclerView, dx, dy)
         //获取可见的第一个与最后一个item
         val firstPositions = layoutManager!!.findFirstVisibleItemPositions(IntArray(layoutManager!!.spanCount))
         firstVisibleItem = getMinPositions(firstPositions)
@@ -101,8 +100,6 @@ class ImageUriActivity : RecyclerPActivity<String, ImageUriP>(), ImageUriV<Strin
         if (!floderPop!!.isShowing) floderPop!!.showAtLocation(window.decorView, Gravity.BOTTOM, 0, 0)
     }
 
-    private var floderPop: BasePop<*>? = null
-
     override fun showFloderPop(floders: List<ImageFloder>) {
         floderPop = FloderPop(LayoutInflater.from(this).inflate(R.layout.include_recycler, null),
                 ScreenUtils.getWidthPX(this), (ScreenUtils.getHeightPX(this) * 0.7).toInt())
@@ -115,7 +112,7 @@ class ImageUriActivity : RecyclerPActivity<String, ImageUriP>(), ImageUriV<Strin
 
     override fun setAdapterData(parent: File?) {
         val imageNames = Arrays.asList(*parent!!.list(filter))
-        adapter!!.setParentPath(parent!!.absolutePath)
+        adapter!!.parentPath = parent!!.absolutePath
         adapter!!.datas = imageNames
 
         flodername!!.text = parent?.name
