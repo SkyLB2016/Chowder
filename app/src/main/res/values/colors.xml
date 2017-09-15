@@ -33,6 +33,7 @@
     <color name="color_66">#666666</color>
     <color name="color_cc">#cccccc</color>
 
+    <color name="alpha_00">#00000000</color>
     <color name="alpha_99">#99000000</color>
     <color name="red">#f12b2a</color>
     <color name="light_orange">#ffefab</color>
