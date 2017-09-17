@@ -26,7 +26,7 @@ import java.util.concurrent.Semaphore;
  * Created by SKY on 2015/1/6 17:21.
  * 线程池的使用
  */
-public class ImageLoaderExecutors {
+public class ImageLoaderExecutors1 {
 
     private LruCache<String, Bitmap> lruCache;//内存缓存
 
@@ -73,11 +73,11 @@ public class ImageLoaderExecutors {
     //因为异步线程与主线程是并行的，所以为防止threadHandler未创建，用信号量做一个限制
     private Semaphore semaphore = new Semaphore(0);
 
-    public ImageLoaderExecutors() {
+    public ImageLoaderExecutors1() {
         this(FileType.LIFO, 3);
     }
 
-    public ImageLoaderExecutors(FileType type, int count) {
+    public ImageLoaderExecutors1(FileType type, int count) {
         this.type = type;
         if (count > MAXCOUNT)
             count = MAXCOUNT;

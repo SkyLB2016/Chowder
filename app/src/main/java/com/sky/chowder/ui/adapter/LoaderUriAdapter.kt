@@ -26,7 +26,7 @@ class LoaderUriAdapter(layoutId: Int) : RecyclerAdapter<String>(layoutId) {
             image.setBackgroundResource(R.mipmap.ic_launcher)
             image.maxWidth = 300
             image.minimumWidth = 300
-            imageLoader.loadImage(image, "$parentPath/${datas[position]}")
+//            imageLoader.loadImage(image, "$parentPath/${datas[position]}")
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
                 //使用ripple
                 cardView.background = context.getDrawable(R.drawable.ripple)
