@@ -5,9 +5,7 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Color
+import android.graphics.*
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
@@ -44,7 +42,8 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        width = Math.min(measuredHeight, measuredWidth)
+//        width = Math.min(measuredHeight, measuredWidth)
+        width = 1080
 
         setMeasuredDimension(width!!, width!!)
     }
@@ -52,14 +51,23 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
         super.onLayout(changed, l, t, r, b)
         if (once) {
-            setView()
+//            setView()
             once = false
         }
     }
 
+    override fun onDraw(canvas: Canvas?) {
+        super.onDraw(canvas)
+        val paint = Paint()
+        paint.color = Color.BLACK
+        paint.strokeWidth = 200f
+        paint.style = Paint.Style.STROKE
+        canvas?.drawLine(0f, 0f, 900f, 450f, paint)
+    }
+
     private fun setView() {
         imageViews = arrayOfNulls<ImageView>(piece * piece)
-        imagePieces = jigsaw(BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher), piece)
+        imagePieces = jigsaw(BitmapFactory.decodeResource(resources, R.mipmap.ic_banner), piece)
         //随机打乱数组排序
         Collections.sort(imagePieces!!) { _, _ -> if (Math.random() > 0.5) 1 else -1 }
         pieceWidth = (width!! - margin * (piece + 1)) / piece
