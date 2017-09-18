@@ -1,4 +1,4 @@
-package com.sky.chowder.other.factory.abstractfactory;
+package com.sky.chowder.other.factory.abstractfactory.api;
 
 /**
  * 人物的实现接口

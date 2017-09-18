@@ -1,5 +1,11 @@
 package com.sky.chowder.other.factory.abstractfactory;
 
+import com.sky.chowder.other.factory.abstractfactory.api.Boy;
+import com.sky.chowder.other.factory.abstractfactory.api.Girl;
+import com.sky.chowder.other.factory.abstractfactory.api.PersonFactory;
+import com.sky.chowder.other.factory.abstractfactory.mc.MCBoy;
+import com.sky.chowder.other.factory.abstractfactory.mc.MCGirl;
+
 /**
  * 圣诞系列加工厂
  *

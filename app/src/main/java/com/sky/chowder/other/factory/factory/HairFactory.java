@@ -1,5 +1,9 @@
 package com.sky.chowder.other.factory.factory;
 
+import com.sky.chowder.other.factory.factory.api.HairInterface;
+import com.sky.chowder.other.factory.factory.hair.LeftHair;
+import com.sky.chowder.other.factory.factory.hair.RightHair;
+
 import java.util.Map;
 
 /**
@@ -16,11 +20,8 @@ public class HairFactory {
      * @return
      */
     public HairInterface getHair(String key) {
-        if ("left".equals(key)) {
-            return new LeftHair();
-        } else if ("right".equals(key)) {
-            return new RightHair();
-        }
+        if ("left".equals(key)) return new LeftHair();
+        else if ("right".equals(key)) return new RightHair();
         return null;
     }
 
@@ -33,8 +34,7 @@ public class HairFactory {
     public HairInterface getHairByClass(String className) {
 
         try {
-            HairInterface hair = (HairInterface) Class.forName(className).newInstance();
-            return hair;
+            return (HairInterface) Class.forName(className).newInstance();
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {

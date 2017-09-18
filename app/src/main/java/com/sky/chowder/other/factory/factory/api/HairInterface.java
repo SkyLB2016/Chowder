@@ -1,4 +1,4 @@
-package com.sky.chowder.other.factory.factory;
+package com.sky.chowder.other.factory.factory.api;
 
 /**
  * 发型接口

@@ -1,5 +1,6 @@
-package com.sky.chowder.other.factory.factory;
+package com.sky.chowder.other.factory.factory.hair;
 
+import com.sky.chowder.other.factory.factory.api.HairInterface;
 import com.sky.utils.LogUtils;
 
 /**

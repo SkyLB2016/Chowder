@@ -5,7 +5,7 @@ import com.sky.chowder.R
 import com.sky.chowder.other.factory.abstractfactory.HNFactory
 import com.sky.chowder.other.factory.abstractfactory.MCFctory
 import com.sky.chowder.other.factory.factory.HairFactory
-import com.sky.chowder.other.factory.factory.LeftHair
+import com.sky.chowder.other.factory.factory.hair.LeftHair
 
 /**
  * Created by SKY on 16/5/11 下午8:26.
@@ -28,7 +28,7 @@ class FactoryActivity : BaseNoPActivity() {
         val factory = HairFactory()
         val right = factory.getHair("right")
         right?.draw()
-        val left = factory.getHairByClass("com.sky.demo.other.factory.factory.LeftHair")
+        val left = factory.getHairByClass("com.sky.chowder.other.factory.factory.hair.LeftHair")
         left?.draw()
         val hair = factory.getHairByClassKey("in")
         hair?.draw()

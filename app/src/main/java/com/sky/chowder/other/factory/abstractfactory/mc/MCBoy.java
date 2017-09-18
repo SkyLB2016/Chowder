@@ -1,5 +1,6 @@
-package com.sky.chowder.other.factory.abstractfactory;
+package com.sky.chowder.other.factory.abstractfactory.mc;
 
+import com.sky.chowder.other.factory.abstractfactory.api.Boy;
 import com.sky.utils.LogUtils;
 
 /**
