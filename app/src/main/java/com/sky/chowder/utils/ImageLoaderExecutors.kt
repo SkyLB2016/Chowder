@@ -45,10 +45,8 @@ class ImageLoaderExecutors @JvmOverloads constructor(type: FileType = FileType.L
 //                                view.layoutParams = params
 //                            }
                             view!!.setImageBitmap(bitmap)
-                            //                            holder.bitmap=bitmap=null;
                         } else {
                             imageHolder.view!!.background = ImageUtils.getDrawableFromBitmap(imageHolder.view!!.context, imageHolder.bitmap)
-                            //                            holder.bitmap=null;
                         }
                 }
             }

@@ -55,7 +55,7 @@ public class ImageLoaderExecutors1 {
                                 view.setLayoutParams(params);
                             }
                             view.setImageBitmap(bitmap);
-//                            holder.bitmap=bitmap=null;
+                            holder.bitmap=null;
                         } else {
                             holder.view.setBackground(ImageUtils.getDrawableFromBitmap(holder.view.getContext(), holder.bitmap));
 //                            holder.bitmap=null;
