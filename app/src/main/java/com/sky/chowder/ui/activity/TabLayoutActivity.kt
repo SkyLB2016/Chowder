@@ -20,6 +20,7 @@ import java.util.*
  * 标签栏
  */
 class TabLayoutActivity : BaseNoPActivity() {
+
     override fun getLayoutResId(): Int = R.layout.activity_tab_vp
 
     override fun initialize() {
@@ -36,8 +37,8 @@ class TabLayoutActivity : BaseNoPActivity() {
         titles.add("MeshView")
         titles.add("倒影")
         titles.add("shape")
-        for (i in titles.indices) {
-            tabs!!.addTab(tabs!!.newTab().setText(titles[i]))
+        for (i in titles) {
+            tabs!!.addTab(tabs!!.newTab().setText(i))
         }
         val fragments = ArrayList<Fragment>()
         fragments.add(RecycleFragment())
