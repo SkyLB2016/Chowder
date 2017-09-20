@@ -1,6 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+def googleVer = '26.0.2'
+
 ext {
     bintrayRepo = 'skylb'
     bintrayName = 'apiutils'
@@ -50,9 +52,9 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:26.0.2'
-    compile 'com.android.support:recyclerview-v7:26.0.2'
-    compile 'com.android.support:design:26.0.2'
+    compile "com.android.support:appcompat-v7:$googleVer"
+    compile "com.android.support:recyclerview-v7:$googleVer"
+    compile "com.android.support:design:$googleVer"
     testCompile 'junit:junit:4.12'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 

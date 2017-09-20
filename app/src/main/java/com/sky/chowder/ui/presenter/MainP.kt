@@ -37,13 +37,13 @@ class MainP(context: Context) : BasePresenter<IMainView>(context), IMainPresente
             //mainIntent.addCategory(Intent.CATEGORY_SAMPLE_CODE);//筛选category为sample code的act
             //mainIntent.setPackage(getPackageName());//只选出自己应用的act
             val mainIntent = Intent("com.sky.coustom") //自定义的action
-            val pm = context.packageManager
-            val resolveInfos = pm.queryIntentActivities(mainIntent, 0) ?: return activityInfos
+            val manager = context.packageManager
+            val resolveInfos = manager.queryIntentActivities(mainIntent, 0) ?: return activityInfos
 
             for (i in resolveInfos.indices) {
                 val info = resolveInfos[i]
                 //获取label,activity中未设置的话返回程序名称
-                val labelSeq = info.loadLabel(pm)
+                val labelSeq = info.loadLabel(manager)
                 val label = labelSeq?.toString() ?: info.activityInfo.name
                 //获取说明
                 val descriptionRes = info.activityInfo.descriptionRes
@@ -54,7 +54,7 @@ class MainP(context: Context) : BasePresenter<IMainView>(context), IMainPresente
                 activityInfos.add(ActivityModel(label, describe, icon, info.activityInfo.name))
             }
             //排序
-            Collections.sort(activityInfos, sDisplayNameComparator)
+//            Collections.sort(activityInfos, sDisplayNameComparator)
 //            Collections.sort(activityInfos);//使用activityModel中的compareTo进行排序
             return activityInfos
         }

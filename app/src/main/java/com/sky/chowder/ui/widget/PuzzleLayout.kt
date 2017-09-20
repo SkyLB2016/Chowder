@@ -131,8 +131,8 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
 
             aniLayout.addView(aniFirst)
             aniLayout.addView(aniSec)
-            //            firstImg.setLayoutParams(secLP);
-            //            secondImg.setLayoutParams(firstlp);
+            //firstImg.setLayoutParams(secLP);
+            //secondImg.setLayoutParams(firstlp);
             val firstX = ObjectAnimator.ofFloat(aniFirst, "translationX", 0f, (secLeft - firstLeft).toFloat())
             val firstY = ObjectAnimator.ofFloat(aniFirst, "translationY", 0f, (secTop - firstTop).toFloat())
             val secX = ObjectAnimator.ofFloat(aniSec, "translationX", 0f, (firstLeft - secLeft).toFloat())
