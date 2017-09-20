@@ -5,7 +5,9 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Context
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
@@ -23,16 +25,12 @@ import java.util.*
  */
 class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : RelativeLayout(context, attrs, defStyleAttr), View.OnClickListener {
 
-    init {
-        initView()
-    }
-
     private var imageViews: Array<ImageView?>? = null
     private var imagePieces: List<ImagePiece>? = null
     private var margin = 2
     private var piece = 3
 
-    private fun initView() {
+    init {
         margin = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, margin.toFloat(), resources.displayMetrics).toInt()
     }
 
@@ -42,27 +40,16 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-//        width = Math.min(measuredHeight, measuredWidth)
-        width = 1080
-
+        width = Math.min(measuredHeight, measuredWidth)
         setMeasuredDimension(width!!, width!!)
     }
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
         super.onLayout(changed, l, t, r, b)
         if (once) {
-//            setView()
+            setView()
             once = false
         }
-    }
-
-    override fun onDraw(canvas: Canvas?) {
-        super.onDraw(canvas)
-        val paint = Paint()
-        paint.color = Color.BLACK
-        paint.strokeWidth = 200f
-        paint.style = Paint.Style.STROKE
-        canvas?.drawLine(0f, 0f, 900f, 450f, paint)
     }
 
     private fun setView() {
@@ -83,12 +70,12 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
             val topMargin = i / piece * pieceWidth + (i / piece + 1) * margin
             lp.setMargins(leftMargin, topMargin, 0, 0)
             addView(imageView, lp)
+            imageView.layoutParams = lp
         }
     }
 
-    internal fun jigsaw(bitmap: Bitmap, piece: Int): List<ImagePiece> {
+    private fun jigsaw(bitmap: Bitmap, piece: Int): List<ImagePiece> {
         val imagePieces = ArrayList<ImagePiece>()
-
         val width = bitmap.width
         val height = bitmap.height
         val pieceWidth = Math.min(width, height) / piece
@@ -109,18 +96,15 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
     private var isAniming = false
 
     override fun onClick(v: View) {
-        if (isAniming)
-            return
+        if (isAniming) return
         if (firstImg === v) {
             firstImg!!.colorFilter = null
             firstImg = null
             return
-
         }
         if (firstImg == null) {
             firstImg = v as ImageView
             firstImg!!.setColorFilter(Color.parseColor("#66ff0000"))
-
         } else {
             isAniming = true
             secondImg = v as ImageView
@@ -131,7 +115,6 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
 
             val aniLayout = RelativeLayout(context)
             addView(aniLayout)
-
 
             val firstlp = firstImg!!.layoutParams as RelativeLayout.LayoutParams
             val firstLeft = firstlp.leftMargin
@@ -158,7 +141,7 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
             val set = AnimatorSet()
             set.interpolator = BounceInterpolator()
             set.playTogether(firstX, firstY, secX, secY)
-            set.duration = 1000
+            set.duration = 100
             set.start()
             set.addListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
@@ -174,14 +157,13 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
                     firstImg!!.visibility = View.VISIBLE
                     secondImg!!.visibility = View.VISIBLE
 
-                    //                    secondImg
+                    //secondImg
                     aniLayout.removeAllViews()
                     firstImg!!.colorFilter = null
                     secondImg = null
                     firstImg = secondImg
                     isAniming = false
                     checkSuccess()
-
                 }
             })
         }
