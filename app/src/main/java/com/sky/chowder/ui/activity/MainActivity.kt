@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.BatteryManager
+import android.provider.ContactsContract
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
@@ -20,6 +21,7 @@ import com.sky.chowder.ui.presenter.MainP
 import com.sky.utils.AppUtils
 import com.sky.utils.JumpAct
 import kotlinx.android.synthetic.main.content_main.*
+
 
 /**
  * Created by SKY on 2015/12/6.
@@ -44,8 +46,12 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
             showToast("长按监听已处理")
             true
         }
-        if (!AppUtils.isPermission(this,Manifest.permission.READ_EXTERNAL_STORAGE))
-            AppUtils.requestPermission(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),0)
+        if (!AppUtils.isPermission(this, Manifest.permission.WRITE_CONTACTS))
+            AppUtils.requestPermission(this, arrayOf(Manifest.permission.WRITE_CONTACTS), 0)
+        if (!AppUtils.isPermission(this, Manifest.permission.READ_CONTACTS))
+            AppUtils.requestPermission(this, arrayOf(Manifest.permission.READ_CONTACTS), 0)
+        if (!AppUtils.isPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE))
+            AppUtils.requestPermission(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 0)
     }
 
     @OnClick(R.id.fab)
@@ -54,6 +60,49 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 //        getMemory1()
 //        showToast("width==${ScreenUtils.getHeightPX(this)}")
         presenter.showToast("测试消息")
+//        val intent = Intent(AlarmClock.ACTION_SET_ALARM)
+//        intent.putExtra(AlarmClock.EXTRA_HOUR, 15)
+//        intent.putExtra(AlarmClock.EXTRA_MINUTES, 24)
+//        intent.putExtra(AlarmClock.EXTRA_MESSAGE, "测试")
+//        val intent = Intent(AlarmClock.ACTION_SET_TIMER)
+//                .putExtra(AlarmClock.EXTRA_MESSAGE, "测试")
+//                .putExtra(AlarmClock.EXTRA_LENGTH, 10)
+//                .putExtra(AlarmClock.EXTRA_SKIP_UI, true)
+//        val intent = Intent(MediaStore.INTENT_ACTION_VIDEO_CAMERA)
+//
+//        if (intent.resolveActivity(packageManager) != null) {
+//            startActivity(intent);
+//        }
+
+        val intent = Intent(Intent.ACTION_PICK)
+//        intent.type = ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE;
+//        intent.type = ContactsContract.Contacts.CONTENT_TYPE
+//        val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
+        intent.data = ContactsContract.Contacts.CONTENT_URI
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivityForResult(intent, 101)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 101 && resultCode == RESULT_OK) {
+            val uri = data?.data
+//            val projection = arrayOf(ContactsContract.CommonDataKinds.Phone.NUMBER)
+            val projection = arrayOf(ContactsContract.Contacts.DISPLAY_NAME)
+//            val projection = arrayOf(ContactsContract.Contacts.IS_USER_PROFILE)
+            val cursor = contentResolver.query(uri, projection, null, null, null);
+            // If the cursor returned is valid, get the phone number
+            if (cursor != null && cursor.moveToFirst()) {
+//                val numberIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
+                val numberIndex = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
+//                val numberIndex = cursor.getColumnIndex(ContactsContract.Contacts.IS_USER_PROFILE);
+                val number = cursor.getString(numberIndex);
+                showToast(number)
+            }
+
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -7,10 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter
 import android.view.View
 import com.sky.base.BaseNoPActivity
 import com.sky.chowder.R
-import com.sky.chowder.ui.fragment.One
-import com.sky.chowder.ui.fragment.RecycleFragment
-import com.sky.chowder.ui.fragment.Three
-import com.sky.chowder.ui.fragment.Two
+import com.sky.chowder.ui.fragment.*
 import kotlinx.android.synthetic.main.activity_tab_vp.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 import java.util.*
@@ -37,6 +34,7 @@ class TabLayoutActivity : BaseNoPActivity() {
         titles.add("MeshView")
         titles.add("倒影")
         titles.add("shape")
+        titles.add("通讯录")
         for (i in titles) {
             tabs!!.addTab(tabs!!.newTab().setText(i))
         }
@@ -45,6 +43,7 @@ class TabLayoutActivity : BaseNoPActivity() {
         fragments.add(One())
         fragments.add(Two())
         fragments.add(Three())
+        fragments.add(CursorLoaderListFragment())
         val adapter = object : FragmentPagerAdapter(supportFragmentManager) {
             override fun getCount(): Int = fragments.size
 
