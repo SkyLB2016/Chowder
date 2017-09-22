@@ -83,10 +83,8 @@ File file = new File("/mnt/sdcard/test");
 			 fos.write(content.getBytes());
 			 fos.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -106,10 +104,8 @@ File file = new File("/mnt/sdcard/test");
 			fis.close();
 			baos.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

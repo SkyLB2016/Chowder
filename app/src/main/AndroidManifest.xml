@@ -221,6 +221,8 @@
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_07"
             android:screenOrientation="portrait" />
+
+        <service android:name=".ui.service.IntentTest" />
     </application>
 
 </manifest>

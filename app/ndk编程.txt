@@ -26,34 +26,3 @@
 
 第四步
     编译程序,完事
-
-
-
-//    private BasePop cunPop;
-//
-//    private void setPop() {
-//        createCunzhuangShowFloder();
-//        int[] location = new int[2];
-//        layout.getLocationOnScreen(location);
-////        showToast(location[0]+"xy"+location[1]);
-//        if (!cunPop.isShowing())
-//            cunPop.showAtLocation(layout,Gravity.RIGHT|Gravity.TOP,location[0],location[1]);
-//    }
-//
-//    private void createCunzhuangShowFloder() {
-//
-//        if (cunPop == null) {
-//            int[] wh = ScreenUtils.getWidthAndHeight(this);
-//            cunPop = new TypePop(LayoutInflater.from(this).inflate(R.layout.activity_content, null),
-//                    WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT) {
-//            };
-//            cunPop.setOnItemClickListener(new BasePop.OnItemClickListener() {
-//                @Override
-//                public void onItemClick(int position) {
-//                    type1 = position + "";
-//                    getData();
-//                    cunPop.dismiss();
-//                }
-//            });
-//        }
-//    }

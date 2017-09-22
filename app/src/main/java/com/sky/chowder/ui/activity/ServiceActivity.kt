@@ -33,7 +33,7 @@ class ServiceActivity : BaseNoPActivity(), IService {
     private var normalService = false//监听service是否启动
     private var bindService = false//监听bindservice是否启动
     private var Connection: ServiceConnection = object : ServiceConnection {
-        override fun onServiceConnected(name: ComponentName, service: IBinder) {
+        override fun onServiceConnected(name: ComponentName, iBinder: IBinder) {
             LogUtils.i("onServiceConnected")
             //            Message msg = new Message();
             //            msg.what = C.handler_0x001;
@@ -41,7 +41,7 @@ class ServiceActivity : BaseNoPActivity(), IService {
             //            bundle.putString("data", "天行健，君子以自强不息；");
             //            msg.setData(bundle);
             //            handler.sendMessage(msg);
-            val binder = service as MyService.MyBinder
+            val binder = iBinder as MyService.MyBinder
             binder.greet("天行健，君子以自强不息；")
         }
 

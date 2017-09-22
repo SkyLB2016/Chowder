@@ -18,6 +18,8 @@ import com.sky.chowder.api.view.IMainView
 import com.sky.chowder.model.ActivityModel
 import com.sky.chowder.ui.adapter.MainAdapter
 import com.sky.chowder.ui.presenter.MainP
+import com.sky.chowder.ui.service.IntentTest
+import com.sky.model.Extra
 import com.sky.utils.AppUtils
 import com.sky.utils.JumpAct
 import kotlinx.android.synthetic.main.content_main.*
@@ -59,6 +61,7 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 //        getMemory()
 //        getMemory1()
 //        showToast("width==${ScreenUtils.getHeightPX(this)}")
+        IntentTest.startIntent(this, Extra<String>(),"com.sky.action")
         presenter.showToast("测试消息")
 //        val intent = Intent(AlarmClock.ACTION_SET_ALARM)
 //        intent.putExtra(AlarmClock.EXTRA_HOUR, 15)
