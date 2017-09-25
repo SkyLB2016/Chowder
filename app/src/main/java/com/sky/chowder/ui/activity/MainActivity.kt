@@ -7,7 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.BatteryManager
-import android.provider.ContactsContract
+import android.provider.ContactsContract.CommonDataKinds.Phone
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
@@ -78,10 +78,10 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 //        }
 
         val intent = Intent(Intent.ACTION_PICK)
-//        intent.type = ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE;
+        intent.type = Phone.CONTENT_TYPE;
 //        intent.type = ContactsContract.Contacts.CONTENT_TYPE
 //        val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
-        intent.data = ContactsContract.Contacts.CONTENT_URI
+//        intent.data = ContactsContract.Contacts.CONTENT_URI
         if (intent.resolveActivity(packageManager) != null) {
             startActivityForResult(intent, 101)
         }
@@ -91,14 +91,14 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 101 && resultCode == RESULT_OK) {
             val uri = data?.data
-//            val projection = arrayOf(ContactsContract.CommonDataKinds.Phone.NUMBER)
-            val projection = arrayOf(ContactsContract.Contacts.DISPLAY_NAME)
+            val projection = arrayOf(Phone.NUMBER,Phone._ID)
+//            val projection = arrayOf(ContactsContract.Contacts.DISPLAY_NAME)
 //            val projection = arrayOf(ContactsContract.Contacts.IS_USER_PROFILE)
             val cursor = contentResolver.query(uri, projection, null, null, null);
             // If the cursor returned is valid, get the phone number
             if (cursor != null && cursor.moveToFirst()) {
-//                val numberIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
-                val numberIndex = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
+                val numberIndex = cursor.getColumnIndex(Phone.NUMBER);
+//                val numberIndex = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
 //                val numberIndex = cursor.getColumnIndex(ContactsContract.Contacts.IS_USER_PROFILE);
                 val number = cursor.getString(numberIndex);
                 showToast(number)
