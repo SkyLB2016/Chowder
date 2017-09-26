@@ -18,8 +18,6 @@ import com.sky.chowder.api.view.IMainView
 import com.sky.chowder.model.ActivityModel
 import com.sky.chowder.ui.adapter.MainAdapter
 import com.sky.chowder.ui.presenter.MainP
-import com.sky.chowder.ui.service.IntentTest
-import com.sky.model.Extra
 import com.sky.utils.AppUtils
 import com.sky.utils.JumpAct
 import kotlinx.android.synthetic.main.content_main.*
@@ -61,8 +59,8 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 //        getMemory()
 //        getMemory1()
 //        showToast("width==${ScreenUtils.getHeightPX(this)}")
-        IntentTest.startIntent(this, Extra<String>(),"com.sky.action")
-        presenter.showToast("测试消息")
+//        IntentTest.startIntent(this, Extra<String>(),"com.sky.action")
+//        presenter.showToast("测试消息")
 //        val intent = Intent(AlarmClock.ACTION_SET_ALARM)
 //        intent.putExtra(AlarmClock.EXTRA_HOUR, 15)
 //        intent.putExtra(AlarmClock.EXTRA_MINUTES, 24)
@@ -77,39 +75,30 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 //            startActivity(intent);
 //        }
 
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = Phone.CONTENT_TYPE;
-//        intent.type = ContactsContract.Contacts.CONTENT_TYPE
-//        val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
-//        intent.data = ContactsContract.Contacts.CONTENT_URI
-        if (intent.resolveActivity(packageManager) != null) {
-            startActivityForResult(intent, 101)
+//        val intent = Intent(Intent.ACTION_PICK)
+//        intent.type = Phone.CONTENT_TYPE
+//        startActivityForResult(intent, 101)
+        val flag = resources.getBoolean(R.bool.flag)
+        if (flag) {
+            showToast(getString(R.string.app_name))
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 101 && resultCode == RESULT_OK) {
-            val uri = data?.data
-            val projection = arrayOf(Phone.NUMBER,Phone._ID)
-//            val projection = arrayOf(ContactsContract.Contacts.DISPLAY_NAME)
-//            val projection = arrayOf(ContactsContract.Contacts.IS_USER_PROFILE)
-            val cursor = contentResolver.query(uri, projection, null, null, null);
-            // If the cursor returned is valid, get the phone number
+            val projection = arrayOf(Phone.NUMBER, Phone._ID, Phone.DISPLAY_NAME)
+            val cursor = contentResolver.query(data?.data, projection, null, null, null);
             if (cursor != null && cursor.moveToFirst()) {
-                val numberIndex = cursor.getColumnIndex(Phone.NUMBER);
-//                val numberIndex = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
-//                val numberIndex = cursor.getColumnIndex(ContactsContract.Contacts.IS_USER_PROFILE);
+                val numberIndex = cursor.getColumnIndex(Phone.DISPLAY_NAME);
                 val number = cursor.getString(numberIndex);
                 showToast(number)
             }
-
+            cursor.close()
         }
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-//        menu.add(Menu.NONE, Menu.FIRST + 1, 1000, "dd").setIcon(R.mipmap.back).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         menuInflater.inflate(R.menu.menu_main, menu)
         return super.onCreateOptionsMenu(menu)
     }

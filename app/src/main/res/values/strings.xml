@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">SKY</string>
+    <bool name="flag">true</bool>
 
     <!--strings的命名-->
     <!--类型_{范围_}功能，范围可选。-->
