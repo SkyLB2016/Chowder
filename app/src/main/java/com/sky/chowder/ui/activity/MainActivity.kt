@@ -20,7 +20,6 @@ import com.sky.chowder.ui.adapter.MainAdapter
 import com.sky.chowder.ui.presenter.MainP
 import com.sky.utils.AppUtils
 import com.sky.utils.JumpAct
-import com.sky.utils.LogUtils
 import kotlinx.android.synthetic.main.content_main.*
 
 
@@ -77,18 +76,10 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 //        val intent = Intent(Intent.ACTION_PICK)
 //        intent.type = Phone.CONTENT_TYPE
 //        startActivityForResult(intent, 101)
-        val time = System.currentTimeMillis()
-        LogUtils.i("当前时间=$time")
         val flag = resources.getBoolean(R.bool.flag)
         if (flag) {
             showToast(getString(R.string.app_name))
         }
-        LogUtils.i("dp的密度=${resources.displayMetrics.density}")
-        LogUtils.i("sp的密度=${resources.displayMetrics.scaledDensity}")
-        LogUtils.i("dpi的密度=${resources.displayMetrics.densityDpi}")
-        LogUtils.i("x的密度=${resources.displayMetrics.xdpi}")
-        LogUtils.i("y的密度=${resources.displayMetrics.ydpi}")
-        LogUtils.i("当前时间=${System.currentTimeMillis() - time}")
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
