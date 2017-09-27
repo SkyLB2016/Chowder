@@ -12,14 +12,19 @@ import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import butterknife.OnClick
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.sky.base.BasePActivity
 import com.sky.chowder.R
 import com.sky.chowder.api.view.IMainView
 import com.sky.chowder.model.ActivityModel
 import com.sky.chowder.ui.adapter.MainAdapter
 import com.sky.chowder.ui.presenter.MainP
+import com.sky.model.ApiResponse
 import com.sky.utils.AppUtils
+import com.sky.utils.GsonUtils
 import com.sky.utils.JumpAct
+import com.sky.utils.LogUtils
 import kotlinx.android.synthetic.main.content_main.*
 
 
@@ -54,8 +59,6 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 
     @OnClick(R.id.fab)
     fun fabOnClick() {
-//        getMemory()
-//        getMemory1()
 //        showToast("width==${ScreenUtils.getHeightPX(this)}")
 //        IntentTest.startIntent(this, Extra<String>(),"com.sky.action")
 //        presenter.showToast("测试消息")
@@ -72,14 +75,26 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 //        if (intent.resolveActivity(packageManager) != null) {
 //            startActivity(intent);
 //        }
-
 //        val intent = Intent(Intent.ACTION_PICK)
 //        intent.type = Phone.CONTENT_TYPE
 //        startActivityForResult(intent, 101)
-        val flag = resources.getBoolean(R.bool.flag)
-        if (flag) {
-            showToast(getString(R.string.app_name))
-        }
+
+//        val flag = resources.getBoolean(R.bool.flag)
+//        if (flag) showToast(getString(R.string.app_name))
+        //            GsonUtils.json2Obj(context.getString(R.string.jsonobj), new TypeToken<ApiResponse<List<ActivityModel>>>(){}.getType());
+        val model = GsonUtils.json2Obj(getString(R.string.jsonobj), ActivityModel::class.java)
+        LogUtils.i(model.className)
+        val type = object : TypeToken<ApiResponse<List<ActivityModel>>>() {}
+
+//        val entities = GsonUtils.json2Obj(getString(R.string.jsonlist), type!!.type as Class<ApiResponse<List<ActivityModel>>>?)
+//        LogUtils.i(entities.objList[1].className)
+        val entitie = Gson().fromJson<ApiResponse<List<ActivityModel>>>(getString(R.string.jsonlist),
+                type.type)
+        LogUtils.i(entitie.objList[2].className)
+
+//        val entities = JsonUtils.jsonObj2Array(getString(R.string.jsonlist), ActivityModel::class.java)
+//        LogUtils.i(entities.objList[1].className)
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

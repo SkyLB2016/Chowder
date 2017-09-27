@@ -4,16 +4,11 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
-import com.google.gson.JsonSyntaxException;
-
-import org.json.JSONArray;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -32,38 +27,8 @@ public class JsonUtils {
     }
 
     static Gson getGson() {
-        if (gson == null) {
-            gson = new Gson();
-        }
+        if (gson == null) gson = new Gson();
         return gson;
-    }
-
-    /**
-     * 解析json
-     *
-     * @param <T>      泛型
-     * @param jsonData json字符串
-     * @param cls      对象
-     * @return 对象
-     */
-    public static <T> T json2Obj(@NonNull String jsonData, Class<T> cls) {
-        if (TextUtils.isEmpty(jsonData)) {
-            return null;
-        }
-        T t;
-        try {
-            t = getGson().fromJson(jsonData, cls);
-        } catch (JsonSyntaxException e) {
-            e.printStackTrace();
-            return null;
-        } catch (JsonParseException e) {
-            e.printStackTrace();
-            return null;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-        return t;
     }
 
     /**
@@ -76,9 +41,6 @@ public class JsonUtils {
      */
     @Nullable
     public static <T> List<T> jsonObj2Array(@NonNull String jsonArray, Class<T> clazz) {
-        if (TextUtils.isEmpty(jsonArray)) {
-            return null;
-        }
         List<T> lists = new ArrayList<T>();
         JsonParser parser = new JsonParser();
         JsonArray array = parser.parse(jsonArray).getAsJsonArray();
@@ -87,19 +49,6 @@ public class JsonUtils {
             lists.add(t);
         }
         return lists;
-    }
-
-    /**
-     * 解析jsonArray
-     *
-     * @param <T>       泛型
-     * @param jsonArray json数组
-     * @param clazz     对象
-     * @return 对象
-     */
-    public static <T> List<T> jsonObj2Array(@NonNull JSONArray jsonArray, Class<T> clazz) {
-        return jsonObj2Array(jsonArray.toString(), clazz);
-
     }
 
     /**
