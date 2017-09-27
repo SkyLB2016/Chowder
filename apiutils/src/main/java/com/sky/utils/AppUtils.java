@@ -78,28 +78,34 @@ public class AppUtils {
     }
 
     /**
-     * 请求权限
+     * 检查权限，未通过的自动向系统请求权限
      *
-     * @param activity
-     * @param permissions
-     * @param requestCode
+     * @param permissions 需要请求的权限数组
+     * @param requestCode 权限请求成功后的请求码
      */
-    public static void requestPermission(Activity activity, String[] permissions, int[] requestCode) {
+    public static void isPermissions(Activity activity, String[] permissions, int[] requestCode) {
         for (int i = 0; i < permissions.length; i++) {
-            if (ContextCompat.checkSelfPermission(activity, permissions[i]) == PackageManager.PERMISSION_GRANTED)
-                ActivityCompat.requestPermissions(activity, new String[]{permissions[i]}, requestCode[i]);
+            if (!isPermission(activity, permissions[i]))
+                requestPermission(activity, new String[]{permissions[i]}, requestCode[i]);
         }
     }
 
+    /**
+     * 请求权限
+     *
+     * @param permissions 需要请求的权限数组
+     * @param requestCode 权限请求成功后的请求码
+     */
     public static void requestPermission(Activity activity, String[] permissions, int requestCode) {
         ActivityCompat.requestPermissions(activity, permissions, requestCode);
     }
 
-    public static void installApp( Context context,File file) {
+    public static void installApp(Context context, File file) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
         context.startActivity(intent);
     }
+
     /**
      * @return 打印系统信息
      */

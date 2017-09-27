@@ -116,7 +116,7 @@
         </activity>
         <activity
             android:name=".ui.activity.ImageUrlActivity"
-            android:description="@string/act_11"
+            android:description="@string/act_11_des"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_11"
             android:screenOrientation="portrait">
@@ -153,6 +153,7 @@
             <intent-filter>
                 <action android:name="com.sky.coustom" />
                 <action android:name="android.intent.action.SET_TIMER" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <action android:name="com.sky.action.detail" />
             </intent-filter>

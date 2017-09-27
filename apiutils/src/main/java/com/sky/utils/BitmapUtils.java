@@ -35,7 +35,6 @@ import java.io.IOException;
  * BitmapUtils
  * Created by keweiquan on 16/3/14.
  */
-@SuppressWarnings("ALL")
 public class BitmapUtils {
 
     private static int count = 0;
@@ -50,7 +49,6 @@ public class BitmapUtils {
         if (!adjustOritation) {
             return loadBitmap(context, imgpath, width, height);
         } else {
-
             Bitmap bitmap = loadBitmap(context, imgpath, width, height);
             int rotate = 0;
             ExifInterface exif = null;

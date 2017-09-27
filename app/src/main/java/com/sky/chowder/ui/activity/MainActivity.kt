@@ -20,6 +20,7 @@ import com.sky.chowder.ui.adapter.MainAdapter
 import com.sky.chowder.ui.presenter.MainP
 import com.sky.utils.AppUtils
 import com.sky.utils.JumpAct
+import com.sky.utils.LogUtils
 import kotlinx.android.synthetic.main.content_main.*
 
 
@@ -46,12 +47,10 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
             showToast("长按监听已处理")
             true
         }
-        if (!AppUtils.isPermission(this, Manifest.permission.WRITE_CONTACTS))
-            AppUtils.requestPermission(this, arrayOf(Manifest.permission.WRITE_CONTACTS), 0)
-        if (!AppUtils.isPermission(this, Manifest.permission.READ_CONTACTS))
-            AppUtils.requestPermission(this, arrayOf(Manifest.permission.READ_CONTACTS), 0)
-        if (!AppUtils.isPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE))
-            AppUtils.requestPermission(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 0)
+        AppUtils.isPermissions(this,
+                arrayOf(Manifest.permission.WRITE_CONTACTS, Manifest.permission.READ_CONTACTS, Manifest.permission.READ_EXTERNAL_STORAGE),
+                intArrayOf(0, 0, 0)
+        )
     }
 
     @OnClick(R.id.fab)
@@ -78,10 +77,18 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 //        val intent = Intent(Intent.ACTION_PICK)
 //        intent.type = Phone.CONTENT_TYPE
 //        startActivityForResult(intent, 101)
+        val time = System.currentTimeMillis()
+        LogUtils.i("当前时间=$time")
         val flag = resources.getBoolean(R.bool.flag)
         if (flag) {
             showToast(getString(R.string.app_name))
         }
+        LogUtils.i("dp的密度=${resources.displayMetrics.density}")
+        LogUtils.i("sp的密度=${resources.displayMetrics.scaledDensity}")
+        LogUtils.i("dpi的密度=${resources.displayMetrics.densityDpi}")
+        LogUtils.i("x的密度=${resources.displayMetrics.xdpi}")
+        LogUtils.i("y的密度=${resources.displayMetrics.ydpi}")
+        LogUtils.i("当前时间=${System.currentTimeMillis() - time}")
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

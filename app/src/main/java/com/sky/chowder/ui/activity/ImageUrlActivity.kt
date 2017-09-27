@@ -12,6 +12,7 @@ import com.sky.chowder.ui.adapter.LoaderURLAdapter
 import com.sky.chowder.ui.presenter.ImageUrlP
 import com.sky.chowder.utils.ImageLoaderAsync
 import kotlinx.android.synthetic.main.navigation_content.*
+import java.util.*
 
 /**
  * Created by SKY on 2015/11/28.
@@ -27,15 +28,19 @@ class ImageUrlActivity : RecyclerPActivity<CourseEntity, ImageUrlP>() {
     override fun creatPresenter() = ImageUrlP(this)
 
     private lateinit var imageLoader: ImageLoaderAsync
+    private val layoutIds = ArrayList<Int>()//主体布局
 
     override fun initialize() {
         first = true
         imageLoader = ImageLoaderAsync()
+        layoutIds.add(R.layout.adapter_main)
+        layoutIds.add(R.layout.adapter_main)
+        layoutIds.add(R.layout.adapter_main)
+        layoutIds.add(R.layout.adapter_main)
         super.initialize()
         fab.setOnClickListener { v -> Snackbar.make(v, "正在加载，请稍后", Snackbar.LENGTH_LONG).setAction("cancel") { showToast("已取消") }.show() }
     }
-
-    override fun creatAdapter() = LoaderURLAdapter(R.layout.adapter_main)
+    override fun creatAdapter()= LoaderURLAdapter(layoutIds)
 
     override fun onRecyclerScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
         super.onRecyclerScrollStateChanged(recyclerView, newState)

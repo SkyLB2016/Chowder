@@ -101,6 +101,7 @@
     <string name="act_09">drawer</string>
     <string name="act_10">拼图</string>
     <string name="act_11">网络图片加载与缓存</string>
+    <string name="act_11_des">网络图片加载与缓存，多种布局加载</string>
     <string name="act_12">载入本地图片</string>
     <string name="act_13">下拉动画</string>
     <string name="act_14">collapsing</string>

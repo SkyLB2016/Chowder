@@ -11,21 +11,21 @@ import java.io.File;
  */
 public class DataCleanManager {
     /**
-     * 清除本应用内部缓存(/data/data/com.xxx.xxx/cache)
+     * 清除本应用内部缓存(/data/data/包名/cache)
      */
     public static void cleanInternalCache(Context context) {
         deleteFilesByDirectory(context.getCacheDir());
     }
 
     /**
-     * 清除本应用所有数据库(/data/data/com.xxx.xxx/databases)
+     * 清除本应用所有数据库(/data/data/包名/databases)
      */
     public static void cleanDatabases(Context context) {
         deleteFilesByDirectory(new File("/data/data/" + context.getPackageName() + "/databases"));
     }
 
     /**
-     * 清除本应用SharedPreference(/data/data/com.xxx.xxx/shared_prefs)
+     * 清除本应用SharedPreference(/data/data/包名/shared_prefs)
      */
     public static void cleanSharedPreference(Context context) {
         deleteFilesByDirectory(new File("/data/data/" + context.getPackageName() + "/shared_prefs"));
@@ -41,14 +41,14 @@ public class DataCleanManager {
     }
 
     /**
-     * 清除/data/data/com.xxx.xxx/files下的内容
+     * 清除/data/data/包名/files下的内容
      */
     public static void cleanFiles(Context context) {
         deleteFilesByDirectory(context.getFilesDir());
     }
 
     /**
-     * 清除外部cache下的内容(/mnt/sdcard/android/data/com.xxx.xxx/cache)
+     * 清除外部cache下的内容(/mnt/sdcard/android/data/包名/cache)
      */
     public static void cleanExternalCache(Context context) {
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {

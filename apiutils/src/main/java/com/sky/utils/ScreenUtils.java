@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
+import android.util.TypedValue;
 import android.view.View;
 
 /**
@@ -35,6 +36,36 @@ public class ScreenUtils {
      */
     public static int getHeightPX(Context context) {
         return context.getResources().getDisplayMetrics().heightPixels;
+    }
+
+    /**
+     * dp转px
+     */
+    public static int dpToPx(Context context, float dp) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
+                context.getResources().getDisplayMetrics());
+    }
+
+    /**
+     * sp转px
+     */
+    public static int spTopx(Context context, float sp) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp,
+                context.getResources().getDisplayMetrics());
+    }
+
+    /**
+     * px转dp
+     */
+    public static float pxTodp(Context context, float px) {
+        return px / getDensity(context);
+    }
+
+    /**
+     * px转sp
+     */
+    public static float pxTosp(Context context, float px) {
+        return px / context.getResources().getDisplayMetrics().scaledDensity;
     }
 
     /**

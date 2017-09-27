@@ -18,7 +18,7 @@ import java.util.Locale;
  * Created by SKY on 2017/8/22.
  * 日期工具
  */
-public class DateTools {
+public class DateUtil {
     public static String YM = "yyyy-MM";
     public static String YMD = "yyyy-MM-dd";
     public static String YMDHM = "yyyy-MM-dd HH:mm";
@@ -85,24 +85,24 @@ public class DateTools {
     }
 
     /**
-     * 时间戳转换成具体的时间
+     * 时间戳转换成具体的时间日期
      *
      * @param time
-     * @param type 索要转换成的格式
+     * @param type 所要转换成的格式
      * @return
      */
-    public String stampToTime(long time, String type) {
+    public static String stampToTime(long time, String type) {
         return new SimpleDateFormat(type, Locale.CHINA).format(new Date(time));
     }
 
     /**
-     * 具体时间转换成时间戳
+     * 具体时间转换成时间戳毫秒值
      *
      * @param time
-     * @param type
-     * @return
+     * @param type time的格式
+     * @return 时间戳毫秒值
      */
-    public long dateToStamp(String time, String type) {
+    public static long dateToStamp(String time, String type) {
         try {
             return new SimpleDateFormat(type, Locale.CHINA).parse(time).getTime();
         } catch (ParseException e) {
