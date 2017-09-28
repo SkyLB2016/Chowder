@@ -1,9 +1,7 @@
 package com.sky.chowder.ui.activity
 
 import android.Manifest
-import android.app.ActivityManager
 import android.content.ActivityNotFoundException
-import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.BatteryManager
@@ -145,20 +143,5 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
             val total = battery.getIntExtra(BatteryManager.EXTRA_SCALE, 1)
             return currLevel * 100 / total
         }
-
-    private fun getMemory() {
-        val rt = Runtime.getRuntime()
-        val maxMemory = rt.maxMemory()
-        val freeMemory = rt.freeMemory()
-        val totalMemory = rt.totalMemory()
-        showToast("maxMemory: ${maxMemory / (1024 * 1024)}")
-        showToast("freeMemory: ${freeMemory * 1.0 / (1024 * 1024)}")
-        showToast("totalMemory: ${totalMemory * 1.0 / (1024 * 1024)}")
-    }
-
-    private fun getMemory1() {
-        val manager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-        showToast("memory==${manager.memoryClass};large==${manager.largeMemoryClass}")
-    }
 }
 

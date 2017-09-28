@@ -59,7 +59,7 @@ public class TextUtil {
      * @return 返回格式化成两位小数的数字
      */
     public static String formatDou(double number) {
-        return new DecimalFormat("#0.00").format(number);
+        return new DecimalFormat("#0.##").format(number);
     }
 
     /**
@@ -80,5 +80,22 @@ public class TextUtil {
         // 还原HTML
         // content = HTMLDecoder.decode(content);
         return content;
+    }
+
+    /**
+     * 单位换算
+     *
+     * @param size 单位为B
+     * @return 转换后的单位
+     */
+    public static String formatSize(long size) {
+        if (size < 1024 && size > 0)
+            return size + "B";
+        else if (size < 1024 * 1024)
+            return formatDou((double) size / 1024) + "K";
+        else if (size < 1024 * 1024 * 1024)
+            return formatDou((double) size / (1024 * 1024)) + "M";
+        else
+            return formatDou((double) size / (1024 * 1024 * 1024)) + "G";
     }
 }

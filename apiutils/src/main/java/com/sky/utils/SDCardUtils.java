@@ -14,9 +14,17 @@ public class SDCardUtils {
         /* cannot be instantiated */
         throw new UnsupportedOperationException("cannot be instantiated");
     }
+//    getBlockCountLong() 文件系统中总的存储区块的数量
+//    getBlockSizeLong() 文件系统中每个存储区块的字节数
+//    getAvailableBlocksLong()  文件系统中可被应用程序使用的空闲存储区块的数量
+//    getAvailableBytes()  文件系统中可被应用程序使用的空闲字节数
+//    getFreeBlocksLong() 文件系统中总的空闲存储区块的数量，包括保留的存储区块（不能被普通应用程序使用）
+//    getFreeBytes() 文件系统中总的空闲字节数，包括保留的存储区块（不能被普通应用程序使用）
+//    getTotalBytes() 文件系统支持的总的存储字节数
+//
 
     /**
-     * 判断SDCard是否可用
+     * 判断SDCard是否可读写
      *
      * @return true;false
      */
@@ -32,59 +40,26 @@ public class SDCardUtils {
     }
 
     /**
-     * @return 获取SD卡的剩余容量 单位byte
-     */
-    public static long getSDCardAllSize() {
-        if (isSDCardEnable()) {
-            StatFs stat = new StatFs(getSDCardPath());
-            // 获取空闲的数据块的数量
-            long availableBlocks = (long) stat.getAvailableBlocks() - 4;
-            // 获取单个数据块的大小（byte）
-            long freeBlocks = stat.getAvailableBlocks();
-            return freeBlocks * availableBlocks;
-        }
-        return 0;
-    }
-
-    /**
-     * 获取指定路径所在空间的剩余可用容量字节数，单位byte,不是sd卡，就是系统内存
-     *
-     * @param filePath 指定路径
-     * @return 容量字节 SDCard可用空间，内部存储可用空间
-     */
-    public static long getFreeBytes(String filePath) {
-        // 如果是sd卡的下的路径，则获取sd卡可用容量
-        if (filePath.startsWith(getSDCardPath())) filePath = getSDCardPath();
-            // 如果是内部存储的路径，则获取内存存储的可用容量
-        else filePath = Environment.getDataDirectory().getAbsolutePath();
-        StatFs stat = new StatFs(filePath);
-        long availableBlocks = (long) stat.getAvailableBlocks() - 4;
-        return stat.getBlockSize() * availableBlocks;
-    }
-
-    /**
      * @return 获取系统存储路径 '/system'
      */
     public static String getRootDirectoryPath() {
         return Environment.getRootDirectory().getAbsolutePath();
     }
 
-    /* Checks if external storage is available for read and write */
-    public boolean isExternalStorageWritable() {
-        String state = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(state)) {
-            return true;
-        }
-        return false;
+    /**
+     * @return 获取SD卡总量 单位byte
+     */
+    public static long getTotalBytes() {
+        if (!isSDCardEnable()) return 0;
+        return new StatFs(getSDCardPath()).getTotalBytes();
     }
 
-    /* Checks if external storage is available to at least read */
-    public boolean isExternalStorageReadable() {
-        String state = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(state) ||
-                Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
-            return true;
-        }
-        return false;
+    /**
+     * @return 获取SD卡的剩余容量 单位byte
+     */
+    public static long getFreeBytes() {
+        if (!isSDCardEnable()) return 0;
+        return new StatFs(getSDCardPath()).getFreeBytes();
     }
+
 }
