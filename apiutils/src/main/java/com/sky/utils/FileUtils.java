@@ -30,6 +30,8 @@ import java.util.Map;
  * Created by SKY on 2015/11/28.
  */
 public class FileUtils {
+
+
     // 从路径获取文件名
     public static String getFileName(String pathandname) {
         int start = pathandname.lastIndexOf("/");
@@ -130,24 +132,21 @@ public class FileUtils {
     /**
      * 读取assest文件
      *
-     * @param context
-     * @param fileName
-     * @return
+     * @return 返回字符串
      */
-    public static String readAssest(Context context, String fileName) {
+    public static String readAssestToStr(Context context, String fileName) {
         String result = "";
         InputStream input = null;
         try {
             input = context.getAssets().open(fileName);
-            int length = input.available();
-//            input.read(buffer);
+//            int length = input.available();//输入流的总长度
             // 创建字节输出流对象
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             // 定义读取的长度
             int len = 0;
             // 定义缓冲区
-            byte[] buffer = new byte[length];
-//            byte buffer[] = new byte[1024];
+//            byte[] buffer = new byte[length];
+            byte buffer[] = new byte[1024];
             // 按照缓冲区的大小，循环读取
             while ((len = input.read(buffer)) != -1) {
                 // 根据读取的长度写入到os对象中
@@ -163,13 +162,11 @@ public class FileUtils {
             e.printStackTrace();
         } finally {
             try {
-                if (input != null)
-                    input.close();
+                if (input != null) input.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-
         return result;
     }
 

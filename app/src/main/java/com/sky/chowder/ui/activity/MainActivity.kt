@@ -12,7 +12,6 @@ import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import butterknife.OnClick
-import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.sky.base.BasePActivity
 import com.sky.chowder.R
@@ -21,10 +20,7 @@ import com.sky.chowder.model.ActivityModel
 import com.sky.chowder.ui.adapter.MainAdapter
 import com.sky.chowder.ui.presenter.MainP
 import com.sky.model.ApiResponse
-import com.sky.utils.AppUtils
-import com.sky.utils.GsonUtils
-import com.sky.utils.JumpAct
-import com.sky.utils.LogUtils
+import com.sky.utils.*
 import kotlinx.android.synthetic.main.content_main.*
 
 
@@ -81,20 +77,11 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 
 //        val flag = resources.getBoolean(R.bool.flag)
 //        if (flag) showToast(getString(R.string.app_name))
-        //            GsonUtils.json2Obj(context.getString(R.string.jsonobj), new TypeToken<ApiResponse<List<ActivityModel>>>(){}.getType());
-        val model = GsonUtils.json2Obj(getString(R.string.jsonobj), ActivityModel::class.java)
-        LogUtils.i(model.className)
-        val type = object : TypeToken<ApiResponse<List<ActivityModel>>>() {}
 
-//        val entities = GsonUtils.json2Obj(getString(R.string.jsonlist), type!!.type as Class<ApiResponse<List<ActivityModel>>>?)
-//        LogUtils.i(entities.objList[1].className)
-        val entitie = Gson().fromJson<ApiResponse<List<ActivityModel>>>(getString(R.string.jsonlist),
-                type.type)
-        LogUtils.i(entitie.objList[2].className)
-
-//        val entities = JsonUtils.jsonObj2Array(getString(R.string.jsonlist), ActivityModel::class.java)
-//        LogUtils.i(entities.objList[1].className)
-
+        val model = GsonUtils.jsonToEntity(getString(R.string.jsonobj), ActivityModel::class.java)
+        val model2 = GsonUtils.jsonToList(getString(R.string.jsonarray), Array<ActivityModel>::class.java)
+        val model3 = GsonUtils.jsonToEntity<ApiResponse<List<ActivityModel>>>(getString(R.string.jsonlist), object : TypeToken<ApiResponse<List<ActivityModel>>>() {}.type)
+        LogUtils.d("FileUtils==${FileUtils.readAssestToStr(this, "address.json")}")
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
