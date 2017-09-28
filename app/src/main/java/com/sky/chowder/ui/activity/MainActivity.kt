@@ -20,7 +20,9 @@ import com.sky.chowder.model.ActivityModel
 import com.sky.chowder.ui.adapter.MainAdapter
 import com.sky.chowder.ui.presenter.MainP
 import com.sky.model.ApiResponse
-import com.sky.utils.*
+import com.sky.utils.AppUtils
+import com.sky.utils.GsonUtils
+import com.sky.utils.JumpAct
 import kotlinx.android.synthetic.main.content_main.*
 
 
@@ -81,7 +83,9 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
         val model = GsonUtils.jsonToEntity(getString(R.string.jsonobj), ActivityModel::class.java)
         val model2 = GsonUtils.jsonToList(getString(R.string.jsonarray), Array<ActivityModel>::class.java)
         val model3 = GsonUtils.jsonToEntity<ApiResponse<List<ActivityModel>>>(getString(R.string.jsonlist), object : TypeToken<ApiResponse<List<ActivityModel>>>() {}.type)
-        LogUtils.d("FileUtils==${FileUtils.readAssestToStr(this, "address.json")}")
+//        FileUtils.serialToFile(SkyApp.getInstance().fileCacheDir, "model", model)
+//        val model4 = FileUtils.getFileToSerialObj<ActivityModel>(SkyApp.getInstance().fileCacheDir, "model")
+//        LogUtils.i(model4.className);
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

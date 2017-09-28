@@ -1,92 +1,191 @@
 package com.sky.utils;
 
 import android.content.Context;
-import android.os.Environment;
+import android.support.annotation.NonNull;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OptionalDataException;
 import java.io.StreamCorruptedException;
 import java.nio.channels.FileChannel;
-import java.text.DecimalFormat;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by SKY on 2015/11/28.
  */
 public class FileUtils {
 
+    /**
+     * 从路径中获取最后一个斜杠/之后的名称
+     */
+    public static String getFileName(String path) {
+        int start = path.lastIndexOf(File.separator);
+        if (start != -1) return path.substring(start + 1, path.length());
+        else return null;
+    }
 
-    // 从路径获取文件名
-    public static String getFileName(String pathandname) {
-        int start = pathandname.lastIndexOf("/");
-        int end = pathandname.lastIndexOf("");
-        if (start != -1 && end != -1) {
-            return pathandname.substring(start + 1, end);
-        } else {
-            return null;
+    /**
+     * 读取文件中的内容
+     *
+     * @param path
+     * @param filename
+     * @return
+     */
+    public static String readSdFile(String path, String filename) {
+        return readSdFile(new File(path, filename));
+    }
+
+    @NonNull
+    private static String readSdFile(File file) {
+        StringBuilder result = new StringBuilder();
+        FileInputStream fileIn = null;
+        BufferedInputStream bufferedIn = null;
+        try {
+            fileIn = new FileInputStream(file);
+            bufferedIn = new BufferedInputStream(fileIn);
+            byte[] buffer = new byte[1024];
+            int len;
+            while ((len = bufferedIn.read(buffer)) > -1) {
+                result.append(new String(buffer, 0, len));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (bufferedIn != null) bufferedIn.close();
+                if (fileIn != null) fileIn.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return result.toString();
+    }
+
+    /**
+     * @return 读取assest文件，并返回字符串
+     */
+    public static String readAssestToStr(Context context, String fileName) {
+        //先初始化输入输出流。防止处理失败，不能关闭
+        InputStream input = null;
+        ByteArrayOutputStream byteArrayOut = null;
+        try {
+            input = context.getAssets().open(fileName);
+            //int length = input.available();//输入流的总长度
+            byteArrayOut = new ByteArrayOutputStream();// 创建字节输出流对象
+            int len;//每次读取到的长度
+            byte buffer[] = new byte[1024];//定义缓冲区
+            // 按照缓冲区的大小，循环读取，
+            while ((len = input.read(buffer)) != -1) {
+                byteArrayOut.write(buffer, 0, len);//根据读取的长度写入到os对象中
+            }
+            return new String(byteArrayOut.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (byteArrayOut != null) byteArrayOut.close();
+                if (input != null) input.close();
+            } catch (IOException e) {
+            }
+        }
+        return "";
+    }
+
+    /**
+     * 删除文件 或者文件夹下所有文件
+     */
+    public static boolean deleteFile(File dirOrFile) {
+        if (dirOrFile == null || !dirOrFile.exists()) return false;
+        if (dirOrFile.isFile()) dirOrFile.delete();
+        else if (dirOrFile.isDirectory())
+            for (File file : dirOrFile.listFiles()) {
+                deleteFile(file);// 递归
+            }
+        dirOrFile.delete();
+        return true;
+    }
+
+    /**
+     * 把序列化的对象保存到本地
+     *
+     * @param dir    文件夹带斜杠的
+     * @param name   文件名，后边会自动拼接“ser.serial”
+     * @param object 要保存的对象
+     */
+    public static <T> void serialToFile(String dir, String name, T object) {
+        ObjectOutputStream objectOut = null;
+        try {
+            objectOut = new ObjectOutputStream(new FileOutputStream(new File(dir, name + "ser.serial")));
+            objectOut.writeObject(object);// 写入到本地
+        } catch (FileNotFoundException e) {
+//            LogUtils.i(e.getMessage());
+        } catch (IOException e) {
+//            LogUtils.i(e.getMessage());
+        } finally {
+            try {
+                if (objectOut != null) objectOut.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     /**
-     * 获取文件夹大小 **
+     * 反序列化
+     *
+     * @param dir  文件夹带斜杠的
+     * @param name 文件名，后边会自动拼接“ser.serial”
+     * @return 解析好的数据对象
      */
-    public static long getDirSize(File f) throws Exception {
-        long size = 0;
-        File[] flist = f.listFiles();
-        if (flist != null)
-            for (int i = 0; i < flist.length; i++) {
-                if (flist[i].isDirectory()) {
-                    size = size + getDirSize(flist[i]);
-                } else {
-                    size = size + flist[i].length();
-                }
+    public static <T> T getFileToSerialObj(String dir, String name) {
+        ObjectInputStream objectIn = null;
+        try {
+            objectIn = new ObjectInputStream(new FileInputStream(new File(dir, name + "ser.serial")));
+            return (T) objectIn.readObject();//从本地获取数据并返回
+        } catch (StreamCorruptedException e) {
+//            LogUtils.i(e.getMessage());
+        } catch (OptionalDataException e) {
+        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
+        } catch (ClassNotFoundException e) {
+        } finally {
+            try {
+                if (objectIn != null) objectIn.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+        }
+        return null;
+    }
+
+    /**
+     * 获取文件夹所占空间大小,字节byte
+     */
+    public static long getDirSize(File dir) {
+        long size = 0;
+        File[] flist = dir.listFiles();//获取当前文件夹下的文件
+        if (flist == null) return size;
+        for (int i = 0; i < flist.length; i++) {
+            if (flist[i].isDirectory()) //是文件夹，搜索文件夹内的问价
+                size = size + getDirSize(flist[i]);
+            else size = size + flist[i].length();
+        }
         return size;
     }
 
     /**
-     * 转换文件大小单位(b/kb/mb/gb) **
+     * 获取文件个数
      */
-    public String formetFileSize(long fileS) {// 转换文件大小
-        if (fileS == 0)
-            return "0KB";
-        DecimalFormat df = new DecimalFormat("#.00");
-        String fileSizeString = "";
-        if (fileS < 1024) {
-            fileSizeString = df.format((double) fileS) + "Bytes";
-        } else if (fileS < 1048576) {
-            fileSizeString = df.format((double) fileS / 1024) + "KB";
-        } else if (fileS < 1073741824) {
-            fileSizeString = df.format((double) fileS / 1048576) + "MB";
-        } else {
-            fileSizeString = df.format((double) fileS / 1073741824) + "GB";
-        }
-        return fileSizeString;
-    }
-
-    /**
-     * 获取文件个数 **
-     */
-    public static long getlistSize(File f) {// 递归求取目录文件个数
-        long size = 0;
+    public static long getlistSize(File f) {
         File flist[] = f.listFiles();
-        size = flist.length;
+        long size = flist.length;
         for (int i = 0; i < flist.length; i++) {
             if (flist[i].isDirectory()) {
                 size = size + getlistSize(flist[i]);
@@ -97,220 +196,13 @@ public class FileUtils {
     }
 
     /**
-     * 从 sdcard/linked-runner/file/filename 读取字符串内容
-     */
-    public static String readFromSdFile(String bucket, String filename) {
-        String path = getMyCacheDir(bucket);
-        File file = new File(path, filename);
-
-        StringBuilder result = new StringBuilder();
-
-        try {
-            FileInputStream fin = new FileInputStream(file);
-            BufferedInputStream bin = new BufferedInputStream(fin);
-            byte[] buffer = new byte[1024];
-            int hasRead;
-
-            while ((hasRead = bin.read(buffer)) > -1) {
-                result.append(new String(buffer, 0, hasRead));
-            }
-
-            bin.close();
-            fin.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return result.toString();
-    }
-
-    public static String readFromSdFile(String filename) {
-        return readFromSdFile("file", filename);
-    }
-
-    /**
-     * 读取assest文件
-     *
-     * @return 返回字符串
-     */
-    public static String readAssestToStr(Context context, String fileName) {
-        String result = "";
-        InputStream input = null;
-        try {
-            input = context.getAssets().open(fileName);
-//            int length = input.available();//输入流的总长度
-            // 创建字节输出流对象
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            // 定义读取的长度
-            int len = 0;
-            // 定义缓冲区
-//            byte[] buffer = new byte[length];
-            byte buffer[] = new byte[1024];
-            // 按照缓冲区的大小，循环读取
-            while ((len = input.read(buffer)) != -1) {
-                // 根据读取的长度写入到os对象中
-                baos.write(buffer, 0, len);
-            }
-            // 释放资源
-            input.close();
-            baos.close();
-            // 返回字符串
-            result = new String(baos.toByteArray());
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (input != null) input.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return result;
-    }
-
-    /**
-     * 删除 文件夹 以及 目录下所有文件
-     */
-    public static void deleteFile(File file) {
-        try {
-            if (file.exists()) {
-                if (file.isFile()) {
-
-                    final File to = new File(file.getAbsolutePath() + System.currentTimeMillis());
-                    file.renameTo(to);
-                    to.delete();
-
-                } else if (file.isDirectory()) {
-                    File files[] = file.listFiles();
-                    for (int i = 0; i < files.length; i++) {
-                        deleteFile(files[i]);// 递归
-                    }
-                }
-                // file.delete();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 删除指定文件夹下所有文件
+     * 删除文件 或者文件夹下所有文件
      *
      * @param path 文件夹完整绝对路径
      * @return
      */
-    public static boolean delAllFile(String path) {
-        boolean flag = false;
-        File file = new File(path);
-        if (!file.exists()) {
-            return flag;
-        }
-        if (!file.isDirectory()) {
-            return flag;
-        }
-        String[] tempList = file.list();
-        File temp = null;
-        for (int i = 0; i < tempList.length; i++) {
-            if (path.endsWith(File.separator)) {
-                temp = new File(path + tempList[i]);
-            } else {
-                temp = new File(path + File.separator + tempList[i]);
-            }
-            if (temp.isFile()) {
-                temp.delete();
-            }
-            if (temp.isDirectory()) {
-                delAllFile(path + "/" + tempList[i]);// 先删除文件夹里面的文件
-                delFolder(path + "/" + tempList[i]);// 再删除空文件夹
-                flag = true;
-            }
-        }
-        return flag;
-    }
-
-    /**
-     * 删除文件夹
-     *
-     * @param folderPath 文件夹完整绝对路径
-     */
-    public static void delFolder(String folderPath) {
-        try {
-            delAllFile(folderPath); // 删除完里面所有内容
-            String filePath = folderPath;
-            filePath = filePath.toString();
-            File myFilePath = new File(filePath);
-            myFilePath.delete(); // 删除空文件夹
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 删除文件夹file中的文件
-     *
-     * @param filename
-     * @return
-     */
-    public static boolean deleteSdFile(String filename) {
-        if (!isSDCardExist())
-            return false;
-        String path = getMyCacheDir("file");
-        File file = new File(path, filename);
-        file.delete();
-        return true;
-    }
-
-    /**
-     * 删除文件夹bucket中的文件filename
-     *
-     * @param bucket
-     * @param filename
-     * @return
-     */
-    public static boolean deleteSdFile(String bucket, String filename) {
-        if (!isSDCardExist())
-            return false;
-        String path = getMyCacheDir(bucket);
-        File file = new File(path, filename);
-        file.delete();
-        return true;
-    }
-
-    public static boolean appendToSdFile(String string, String filename) {
-        return appendToSdFile(string, "file", filename);
-    }
-
-    /**
-     * 从文件尾部追加内容
-     *
-     * @param string
-     * @param filename
-     * @param bucket   根目录下的子目录
-     * @return
-     */
-    public static boolean appendToSdFile(String string, String bucket, String filename) {
-
-        String path = getMyCacheDir(bucket);
-        File file = new File(path, filename);
-
-        boolean success = false;
-        try {
-            FileOutputStream fos = new FileOutputStream(file, true);
-            BufferedOutputStream bout = new BufferedOutputStream(fos);
-            bout.write(string.getBytes());
-            bout.flush();
-
-            success = true;
-
-            bout.close();
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return success;
+    public static boolean deleteFile(String path) {
+        return deleteFile(new File(path));
     }
 
     /**
@@ -321,36 +213,28 @@ public class FileUtils {
      * @param newFileName 新文件名
      * @return 实际复制的字节数，如果文件、目录不存在、文件为null或者发生IO异常，返回-1
      */
-    @SuppressWarnings("resource")
     public static long copyFile(File srcFile, File destDir, String newFileName, CopyFileListener listener) {
         long copySizes = 0;
         if (!srcFile.exists()) {
-            if (listener != null)
-                listener.exception("源文件不存在");
+            if (listener != null) listener.onFail("源文件不存在");
             copySizes = -1;
         } else if (!destDir.exists()) {
-            if (listener != null)
-                listener.exception("目标目录不存在");
+            if (listener != null) listener.onFail("目标目录不存在");
             copySizes = -1;
         } else if (newFileName == null) {
-            if (listener != null)
-                listener.exception("文件名为null");
+            if (listener != null) listener.onFail("文件名为null");
             copySizes = -1;
         } else {
             try {
-                File dstFile = new File(destDir, newFileName);
-
+                File dstFile = new File(destDir, newFileName);//目标文件
                 FileChannel fcin = new FileInputStream(srcFile).getChannel();
                 FileChannel fcout = new FileOutputStream(dstFile).getChannel();
                 long size = fcin.size();
-                fcin.transferTo(0, fcin.size(), fcout);
+                fcin.transferTo(0, size, fcout);
                 fcin.close();
                 fcout.close();
                 copySizes = size;
-
-                if (listener != null)
-                    listener.success(dstFile.getPath());
-
+                if (listener != null) listener.success(dstFile.getPath());
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -360,182 +244,9 @@ public class FileUtils {
         return copySizes;
     }
 
-    public static boolean isFileExist(String bucket, String filename) {
-        String path = getMyCacheDir(bucket);
-        File file = new File(path, filename);
-
-        if (file.exists()) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * 获取或创建Cache目录
-     *
-     * @param bucket 临时文件目录，bucket = "/cache/" ，则放在"sdcard/linked-joyrun/cache"; 如果bucket=""或null,则放在"sdcard/linked-joyrun/"
-     */
-    public static String getMyCacheDir(String bucket) {
-        String dir;
-
-        // 保证目录名称正确
-        if (bucket != null) {
-            if (!bucket.equals("")) {
-                if (!bucket.endsWith("/")) {
-                    bucket = bucket + "/";
-                }
-            }
-        } else bucket = "";
-
-        String joyrun_default = "/html/";
-
-        if (FileUtils.isSDCardExist()) {
-            dir = Environment.getExternalStorageDirectory().toString() + joyrun_default + bucket;
-        } else {
-            dir = Environment.getDownloadCacheDirectory().toString() + joyrun_default + bucket;
-        }
-
-        File f = new File(dir);
-        if (!f.exists()) {
-            f.mkdirs();
-        }
-        return dir;
-    }
-
-    public static boolean isSDCardExist() {
-        return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
-    }
-
-    public static String readString(String path) {
-        String result = "";
-        File file = new File(path);
-        if (!file.exists()) {
-            return null;
-        }
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(file));// 构造一个BufferedReader类来读取文件
-            String s = "";
-            while ((s = br.readLine()) != null) {// 使用readLine方法，一次读一行
-                result = result + s + "\n";
-            }
-            br.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-    public static void writeString(String filePath, String content) {
-        try {
-            File file = new File(filePath);
-            if (!file.exists()) {
-                file.createNewFile();// 不存在则创建
-            }
-            BufferedWriter output = new BufferedWriter(new FileWriter(file));
-            output.write(content);
-            output.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public interface CopyFileListener {
-        void exception(String msg);
+        void onFail(String msg);
 
         void success(String path);
     }
-
-    public static boolean savefile(Context context, String usernaem, String pass) {
-
-        try {
-//			File filesDir = context.getFilesDir();
-            File file = new File(context.getFilesDir(), "info.txt");
-            FileOutputStream fos = new FileOutputStream(file);
-            fos.write((usernaem + "##" + pass).getBytes());
-            fos.close();
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-
-    }
-
-    public static Map<String, String> get(Context context) {
-        File file = new File(context.getFilesDir(), "info.txt");
-        try {
-            FileInputStream fis = new FileInputStream(file);
-            BufferedReader br = new BufferedReader(new InputStreamReader(fis));
-            String str = br.readLine();
-            String[] infos = str.split("##");
-            Map<String, String> map = new HashMap<>();
-            map.put("username", infos[0]);
-            map.put("pass", infos[0]);
-            return map;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public static String saveFile(String dir, String file, String content) {
-        try {
-            String path = getFile(dir, file);
-            FileWriter writer = new FileWriter(path, true);
-            writer.write(content);
-            writer.close();
-            return path;
-        } catch (IOException var5) {
-            return null;
-        }
-    }
-
-    public static String getFile(String dir, String file) {
-        File cacheDir = new File(dir);
-        if (!cacheDir.exists()) cacheDir.mkdir();
-        File filePath = new File(cacheDir + File.separator + file);
-        if (filePath.exists()) filePath.delete();
-        return filePath.toString();
-    }
-
-    //序列化record
-    public static <T> void serializeToFile(String dir, String name, T object) {
-        File sdFile = new File(dir, name + "ser.serial");
-        try {
-            FileOutputStream fos = new FileOutputStream(sdFile);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(object);// 写入
-            fos.flush(); // 关闭输出流
-            fos.close(); // 关闭输出流
-        } catch (FileNotFoundException e) {
-            LogUtils.i(e.getMessage());
-        } catch (IOException e) {
-            LogUtils.i(e.getMessage());
-        }
-    }
-
-    //反序列化
-    public static <T> T getSerializeObj(String dir, String id) {
-        T object = null;//需要保存的记录
-        File sdFile = new File(dir, id + "ser.serial");
-        try {
-            FileInputStream fis = new FileInputStream(sdFile);   //获得输入流
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            object = (T) ois.readObject();
-            ois.close();
-        } catch (StreamCorruptedException e) {
-            LogUtils.i(e.getMessage());
-        } catch (OptionalDataException e) {
-            LogUtils.i(e.getMessage());
-        } catch (FileNotFoundException e) {
-            LogUtils.i(e.getMessage());
-        } catch (IOException e) {
-            LogUtils.i(e.getMessage());
-        } catch (ClassNotFoundException e) {
-            LogUtils.i(e.getMessage());
-        }
-        return object;
-    }
-
 }
