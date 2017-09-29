@@ -16,7 +16,7 @@ public class RegexUtils {
     private static final String InternetURL = "[a-zA-z]+://[^\\s]*";
     private static final String InternetURL2 = "^http://([\\w-]+\\.)+[\\w-]+(/[\\w-./?%&=]*)?$";
     //4.手机号码
-    private static final String PHONE = "^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|17[0|1|3|5|6|7|8]|18[0|1|2|3|4|5|6|7|8|9])\\d{8}$";
+    private static final String PHONE = "^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|17[0|1|2|3|5|6|7|8]|18[0|1|2|3|4|5|6|7|8|9])\\d{8}$";
     //5.电话号码("XXX-XXXXXXX"、"XXXX-XXXXXXXX"、"XXX-XXXXXXX"、"XXX-XXXXXXXX"、"XXXXXXX"和"XXXXXXXX)：
     private static final String TELPHONE = "^(\\(\\d{3,4}-)|\\d{3.4}-)?\\d{7,8}$";
     //6.国内电话号码(0511-4405222、021-87888822)：\d{3}-\d{8}|\d{4}-\d{7}

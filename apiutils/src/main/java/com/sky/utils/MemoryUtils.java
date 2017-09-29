@@ -12,7 +12,9 @@ import java.io.IOException;
  * 获取空间大小
  */
 public class MemoryUtils {
-
+    /**
+     * @return 手机总内存，读取手机配置文件获取
+     */
     public static long getTotalBytes() {
         String dir = "/proc/meminfo";
         try {
@@ -28,6 +30,9 @@ public class MemoryUtils {
         return 0;
     }
 
+    /**
+     * @return 手机总内存
+     */
     public static long getTotalBytes(Context context) {
         ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
@@ -35,6 +40,9 @@ public class MemoryUtils {
         return memoryInfo.totalMem;
     }
 
+    /**
+     * @return 手机剩余可用的内存
+     */
     public static long getFreeBytes(Context context) {
         ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
@@ -43,23 +51,23 @@ public class MemoryUtils {
     }
 
     /**
-     * App运行所能获取的最大内存，超过择崩溃，即OOM
+     * App运行所能获取的最大内存，超过则崩溃，即OOM
      */
-    public static long getAppRunMaxBytes(Context context) {
+    public static long getAppRunMaxBytes() {
         return Runtime.getRuntime().maxMemory();
     }
 
     /**
      * App当前运行中用到的总内存，随时变化，最多到MAX
      */
-    public static long getAppRunTotalBytes(Context context) {
+    public static long getAppRunTotalBytes() {
         return Runtime.getRuntime().totalMemory();
     }
 
     /**
      * App运行总内存中尚未用到的部分，随时变化
      */
-    public static long getAppRunFreeBytes(Context context) {
+    public static long getAppRunFreeBytes() {
         return Runtime.getRuntime().freeMemory();
     }
 

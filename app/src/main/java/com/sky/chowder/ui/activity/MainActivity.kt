@@ -21,6 +21,7 @@ import com.sky.model.ApiResponse
 import com.sky.utils.AppUtils
 import com.sky.utils.GsonUtils
 import com.sky.utils.JumpAct
+import com.sky.utils.LogUtils
 import kotlinx.android.synthetic.main.content_main.*
 
 
@@ -84,6 +85,7 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 //        FileUtils.serialToFile(SkyApp.getInstance().fileCacheDir, "model", model)
 //        val model4 = FileUtils.getFileToSerialObj<ActivityModel>(SkyApp.getInstance().fileCacheDir, "model")
 //        LogUtils.i(model4.className);
+        LogUtils.i("${AppUtils.getVersionCode(this)}")
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

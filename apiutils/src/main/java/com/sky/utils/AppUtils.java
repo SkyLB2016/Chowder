@@ -7,14 +7,10 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
-import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 /**
  * Created by SKY on 2017/8/22.
@@ -28,42 +24,24 @@ public class AppUtils {
     }
 
     /**
-     * @param context
-     * @return 获取应用程序版本名称信息
+     * 获取应用程序版本名称信息
      */
-    public static String getVersionName(Context context) {
-        try {
-            return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
-        } catch (NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
+    public static String getVersionName(Context context) throws NameNotFoundException {
+        return getPackageInfo(context).versionName;
     }
 
     /**
-     * @param context
-     * @return 获取应用程序版本号
+     * 获取应用程序版本号
      */
-    public static int getVersionCode(Context context) {
-        try {
-            return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionCode;
-        } catch (NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return 0;
+    public static int getVersionCode(Context context) throws NameNotFoundException {
+        return getPackageInfo(context).versionCode;
     }
 
     /**
-     * @param context 上下文
-     * @return 获取App包版本信息
+     * 获取App包版本信息
      */
-    public static PackageInfo getPackageInfo(Context context) {
-        try {
-            return context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
-        } catch (NameNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
+    public static PackageInfo getPackageInfo(Context context) throws NameNotFoundException {
+        return context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
     }
 
     /**
@@ -100,56 +78,14 @@ public class AppUtils {
         ActivityCompat.requestPermissions(activity, permissions, requestCode);
     }
 
-    public static void installApp(Context context, File file) {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
-        context.startActivity(intent);
-    }
-
     /**
-     * @return 打印系统信息
+     * 下载完成后 安装App
+     *
+     * @param file 要安装的文件
      */
-    public static String printSystemInfo() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
-        String time = dateFormat.format(new Date(System.currentTimeMillis()));
-        StringBuilder sb = new StringBuilder();
-        sb.append("_______  系统信息  ").append(time).append(" ______________");
-        sb.append("\nID                 :").append(Build.ID);
-        sb.append("\nBRAND              :").append(Build.BRAND);
-        sb.append("\nMODEL              :").append(Build.MODEL);
-        sb.append("\nRELEASE            :").append(Build.VERSION.RELEASE);
-
-        sb.append("\n_______ OTHER _______");
-        sb.append("\nBOARD              :").append(Build.BOARD);
-        sb.append("\nPRODUCT            :").append(Build.PRODUCT);
-        sb.append("\nDEVICE             :").append(Build.DEVICE);
-        sb.append("\nFINGERPRINT        :").append(Build.FINGERPRINT);
-        sb.append("\nHOST               :").append(Build.HOST);
-        sb.append("\nTAGS               :").append(Build.TAGS);
-        sb.append("\nTYPE               :").append(Build.TYPE);
-        sb.append("\nTIME               :").append(Build.TIME);
-        sb.append("\nINCREMENTAL        :").append(Build.VERSION.INCREMENTAL);
-
-        sb.append("\n_______ CUPCAKE-3 _______");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CUPCAKE) {
-            sb.append("\nDISPLAY            :").append(Build.DISPLAY);
-        }
-
-        sb.append("\n_______ DONUT-4 _______");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.DONUT) {
-            sb.append("\nSDK_INT            :").append(Build.VERSION.SDK_INT);
-            sb.append("\nMANUFACTURER       :").append(Build.MANUFACTURER);
-            sb.append("\nBOOTLOADER         :").append(Build.BOOTLOADER);
-            sb.append("\nHARDWARE           :").append(Build.HARDWARE);
-            sb.append("\nUNKNOWN            :").append(Build.UNKNOWN);
-            sb.append("\nCODENAME           :").append(Build.VERSION.CODENAME);
-        }
-
-        sb.append("\n_______ GINGERBREAD-9 _______");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
-            sb.append("\nSERIAL             :").append(Build.SERIAL);
-        }
-        return sb.toString();
+    public static void installApp(Context context, File file) {
+        Intent install = new Intent(Intent.ACTION_VIEW);
+        install.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+        context.startActivity(install);
     }
-
 }
