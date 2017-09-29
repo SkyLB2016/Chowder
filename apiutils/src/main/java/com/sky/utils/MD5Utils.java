@@ -15,8 +15,7 @@ public class MD5Utils {
      * @return ciphertext 密文
      */
     public final static String encrypt(String plaintext) {
-        char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-                'a', 'b', 'c', 'd', 'e', 'f'};
+        char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
         try {
             byte[] btInput = plaintext.getBytes();
             // 获得MD5摘要算法的 MessageDigest 对象

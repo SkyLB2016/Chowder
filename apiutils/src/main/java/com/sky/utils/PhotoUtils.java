@@ -1,6 +1,7 @@
 package com.sky.utils;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ContextThemeWrapper;
 
 import com.sky.R;
+import com.sky.utils.pending.BitmapUtils;
 
 import java.io.File;
 
@@ -27,11 +29,12 @@ public class PhotoUtils {
     private AppCompatActivity activity;
     private String photoName;
 
-    private static final int PHOTO = 10; // 拍照
-    private static final int PHOTO_PERMISSIONS = 11; // 拍照权限请求
-    private static final int LOCAL_PHOTO = 20; // 图库
-    private static final int LOCAL_PHOTO_PERMISSIONS = 21; // 图库相册权限
+    private static final int PHOTO = 1501; // 拍照
+    private static final int PHOTO_PERMISSIONS = 1502; // 拍照权限请求
+    private static final int LOCAL_PHOTO = 1503; // 图库
+    private static final int LOCAL_PHOTO_PERMISSIONS = 1504; // 图库相册权限
 
+    @SuppressLint("RestrictedApi")
     public PhotoUtils(AppCompatActivity context, String photoName) {
         this.activity = context;
         this.photoName = photoName;
@@ -47,23 +50,22 @@ public class PhotoUtils {
                 .show();
     }
 
-    //检测
+    //打开相机
     private void checkCamera() {
         //检测是否有相机和读写文件权限
         if (AppUtils.isPermission(activity, Manifest.permission.CAMERA)) startCamera();
-        else
-            AppUtils.requestPermission(activity,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA},
-                    PHOTO_PERMISSIONS);
+        else AppUtils.requestPermission(activity,
+                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA},
+                PHOTO_PERMISSIONS);
     }
 
+    //打开本地图库
     private void checkAlbum() {
         if (AppUtils.isPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE))
             openAlbum();
-        else
-            AppUtils.requestPermission(activity,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    LOCAL_PHOTO_PERMISSIONS);
+        else AppUtils.requestPermission(activity,
+                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                LOCAL_PHOTO_PERMISSIONS);
     }
 
     //打开相机
@@ -93,47 +95,38 @@ public class PhotoUtils {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case LOCAL_PHOTO_PERMISSIONS:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
                     openAlbum();
-                } else {
-                    showToast("选择相册需要读写文件权限");
-                }
+                else showToast("选择相册需要读写文件权限");
                 break;
             case PHOTO_PERMISSIONS:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
                     startCamera();
-                } else {
-                    showToast("拍照功能需要相机和读写文件权限");
-                }
+                else showToast("拍照功能需要相机和读写文件权限");
                 break;
         }
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != Activity.RESULT_OK) return;
-
-        if (TextUtil.notNull(photoName, "获取图片失败")) return;
+        String error = activity.getString(R.string.photo_fail);
+        if (TextUtil.notNull(photoName, error)) return;
         Bitmap bitmap = null;
         switch (requestCode) {
             case PHOTO: // 拍照
                 bitmap = BitmapUtils.loadBitmap(activity, photoName);
-                if (bitmap == null) showToast("加载图片失败");
-                else BitmapUtils.saveBitmap(photoName, bitmap);
+                if (TextUtil.notNullObj(bitmap, error)) return;
+                BitmapUtils.saveBitmap(photoName, bitmap);
                 break;
             case LOCAL_PHOTO: // 图库选择
                 if (data == null) return;
                 Uri uri = data.getData(); // 获得图片的uri
-                if (uri == null) {
-                    showToast("读取图片失败");
-                    return;
-                }
-
+                if (TextUtil.notNullObj(uri, error)) return;
                 String imgPath = BitmapUtils.getRealPathFromURI(activity, uri);
-                if (TextUtil.notNull(imgPath, "获取图片失败")) return;
-
+                if (TextUtil.notNull(imgPath, error)) return;
                 bitmap = BitmapUtils.loadBitmap(activity, imgPath);
-                if (bitmap == null) showToast("加载图片失败");
-                else BitmapUtils.saveBitmap(photoName, bitmap);//
+                if (TextUtil.notNullObj(bitmap, error)) return;
+                BitmapUtils.saveBitmap(photoName, bitmap);
                 break;
         }
         uploadPicture.UpLoadPicture(photoName, bitmap);
@@ -152,5 +145,4 @@ public class PhotoUtils {
     public interface UploadPictureListener {
         void UpLoadPicture(String photo, Bitmap bitmap);
     }
-
 }

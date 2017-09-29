@@ -11,6 +11,7 @@ import android.view.Menu
 import android.view.MenuItem
 import butterknife.OnClick
 import com.google.gson.reflect.TypeToken
+import com.sky.SkyApp
 import com.sky.base.BasePActivity
 import com.sky.chowder.R
 import com.sky.chowder.api.view.IMainView
@@ -18,10 +19,7 @@ import com.sky.chowder.model.ActivityModel
 import com.sky.chowder.ui.adapter.MainAdapter
 import com.sky.chowder.ui.presenter.MainP
 import com.sky.model.ApiResponse
-import com.sky.utils.AppUtils
-import com.sky.utils.GsonUtils
-import com.sky.utils.JumpAct
-import com.sky.utils.LogUtils
+import com.sky.utils.*
 import kotlinx.android.synthetic.main.content_main.*
 
 
@@ -78,14 +76,23 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 
 //        val flag = resources.getBoolean(R.bool.flag)
 //        if (flag) showToast(getString(R.string.app_name))
-
-        val model = GsonUtils.jsonToEntity(getString(R.string.jsonobj), ActivityModel::class.java)
-        val model2 = GsonUtils.jsonToList(getString(R.string.jsonarray), Array<ActivityModel>::class.java)
-        val model3 = GsonUtils.jsonToEntity<ApiResponse<List<ActivityModel>>>(getString(R.string.jsonlist), object : TypeToken<ApiResponse<List<ActivityModel>>>() {}.type)
-//        FileUtils.serialToFile(SkyApp.getInstance().fileCacheDir, "model", model)
-//        val model4 = FileUtils.getFileToSerialObj<ActivityModel>(SkyApp.getInstance().fileCacheDir, "model")
-//        LogUtils.i(model4.className);
-        LogUtils.i("${AppUtils.getVersionCode(this)}")
+        LogUtils.i(TextUtil.formatSize(1))
+        LogUtils.i(TextUtil.formatSize(1234))
+        LogUtils.i(TextUtil.formatSize(12345))
+        LogUtils.i(TextUtil.formatSize(123456))
+        LogUtils.i(TextUtil.formatSize(1234567))
+        LogUtils.i(TextUtil.formatSize(12345678))
+        LogUtils.i(TextUtil.formatSize(123456789))
+        LogUtils.i(TextUtil.formatSize(1234567890))
+        LogUtils.i(TextUtil.formatSize(12345678901))
+        LogUtils.i(TextUtil.formatSize(123456789012))
+        LogUtils.i(TextUtil.formatSize(1234567890123))
+        LogUtils.i(TextUtil.formatSize(12345678901234))
+        LogUtils.i(TextUtil.formatSize(123456789012345))
+        LogUtils.i(TextUtil.formatSize(1234567890123456))
+        LogUtils.i(TextUtil.formatSize(12345678901234567))
+        LogUtils.i(TextUtil.formatSize(123456789012345678))
+        LogUtils.i(TextUtil.formatSize(1234567890123456789))
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -145,5 +152,17 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
             val total = battery.getIntExtra(BatteryManager.EXTRA_SCALE, 1)
             return currLevel * 100 / total
         }
+
+    private fun testGson() {
+        val model = GsonUtils.jsonToEntity(getString(R.string.jsonobj), ActivityModel::class.java)
+        val model2 = GsonUtils.jsonToList(getString(R.string.jsonarray), Array<ActivityModel>::class.java)
+        val model3 = GsonUtils.jsonToEntity<ApiResponse<List<ActivityModel>>>(getString(R.string.jsonlist), object : TypeToken<ApiResponse<List<ActivityModel>>>() {}.type)
+        LogUtils.i(model.className);
+        LogUtils.i(model2[1].className);
+        LogUtils.i(model3.objList[2].className);
+        FileUtils.serialToFile(SkyApp.getInstance().fileCacheDir, "model", model)
+        val model4 = FileUtils.fileToSerialObj<ActivityModel>(SkyApp.getInstance().fileCacheDir, "model")
+        LogUtils.i(model4.className);
+    }
 }
 

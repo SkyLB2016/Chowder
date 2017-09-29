@@ -11,7 +11,6 @@ import java.io.File;
  */
 public class SDCardUtils {
     private SDCardUtils() {
-        /* cannot be instantiated */
         throw new UnsupportedOperationException("cannot be instantiated");
     }
 //    getBlockCountLong() 文件系统中总的存储区块的数量
@@ -21,33 +20,30 @@ public class SDCardUtils {
 //    getFreeBlocksLong() 文件系统中总的空闲存储区块的数量，包括保留的存储区块（不能被普通应用程序使用）
 //    getFreeBytes() 文件系统中总的空闲字节数，包括保留的存储区块（不能被普通应用程序使用）
 //    getTotalBytes() 文件系统支持的总的存储字节数
-//
 
     /**
-     * 判断SDCard是否可读写
-     *
-     * @return true;false
+     * 判断SDCard是否可读写,true可读
      */
     public static boolean isSDCardEnable() {
         return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
     }
 
     /**
-     * @return 获取SD卡路径'/storage/emulated/0/'
+     * 获取SD卡路径'/storage/emulated/0/'
      */
     public static String getSDCardPath() {
         return Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator;
     }
 
     /**
-     * @return 获取系统存储路径 '/system'
+     * 获取系统存储路径 '/system'
      */
     public static String getRootDirectoryPath() {
         return Environment.getRootDirectory().getAbsolutePath();
     }
 
     /**
-     * @return 获取SD卡总量 单位byte
+     * 获取SD卡总量 单位byte
      */
     public static long getTotalBytes() {
         if (!isSDCardEnable()) return 0;
@@ -55,7 +51,7 @@ public class SDCardUtils {
     }
 
     /**
-     * @return 获取SD卡的剩余容量 单位byte
+     * 获取SD卡的剩余容量 单位byte
      */
     public static long getFreeBytes() {
         if (!isSDCardEnable()) return 0;

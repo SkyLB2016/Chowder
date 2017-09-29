@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import com.sky.chowder.R
 import com.sky.chowder.ui.widget.ZoomImageView
-import com.sky.utils.ImageUtils
+import com.sky.utils.pending.ImageUtils
 import com.sky.utils.LogUtils
 import com.sky.utils.SDCardUtils
 import java.util.*

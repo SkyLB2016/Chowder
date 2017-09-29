@@ -11,7 +11,7 @@ import com.sky.R;
 import com.sky.api.IBasePresenter;
 import com.sky.api.IBaseView;
 import com.sky.rxbus.DefaultBus;
-import com.sky.utils.NetworkJudgment;
+import com.sky.utils.NetworkUtils;
 import com.sky.utils.SPUtils;
 
 import java.io.Serializable;
@@ -131,7 +131,7 @@ public abstract class BasePresenter<V extends IBaseView> implements IBasePresent
 
     @Override
     public boolean hasInternetConnected() {
-        return NetworkJudgment.isConnected(context);
+        return NetworkUtils.isConnected(context);
     }
 
     @Override

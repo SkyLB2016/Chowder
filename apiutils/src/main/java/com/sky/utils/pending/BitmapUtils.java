@@ -1,4 +1,4 @@
-package com.sky.utils;
+package com.sky.utils.pending;
 
 import android.annotation.TargetApi;
 import android.content.ContentUris;
@@ -24,6 +24,8 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.sky.utils.ScreenUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

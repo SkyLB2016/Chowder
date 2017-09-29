@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
 
@@ -13,45 +14,42 @@ import android.view.View;
  */
 public class ScreenUtils {
     private ScreenUtils() {
-        /* cannot be instantiated */
         throw new UnsupportedOperationException("cannot be instantiated");
     }
 
     /**
-     * @return 获取屏幕密度
+     * 获取屏幕密度
      */
     public static float getDensity(Context context) {
-        return context.getResources().getDisplayMetrics().density;
+        return getDisplayMetrics(context).density;
     }
 
     /**
-     * @return 获取屏幕宽度
+     * 获取屏幕宽度
      */
     public static int getWidthPX(Context context) {
-        return context.getResources().getDisplayMetrics().widthPixels;
+        return getDisplayMetrics(context).widthPixels;
     }
 
     /**
-     * @return 获取屏幕高度
+     * 获取屏幕高度
      */
     public static int getHeightPX(Context context) {
-        return context.getResources().getDisplayMetrics().heightPixels;
+        return getDisplayMetrics(context).heightPixels;
     }
 
     /**
      * dp转px
      */
     public static int dpToPx(Context context, float dp) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
-                context.getResources().getDisplayMetrics());
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getDisplayMetrics(context));
     }
 
     /**
      * sp转px
      */
     public static int spTopx(Context context, float sp) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp,
-                context.getResources().getDisplayMetrics());
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, getDisplayMetrics(context));
     }
 
     /**
@@ -65,33 +63,30 @@ public class ScreenUtils {
      * px转sp
      */
     public static float pxTosp(Context context, float px) {
-        return px / context.getResources().getDisplayMetrics().scaledDensity;
+        return px / getDisplayMetrics(context).scaledDensity;
+    }
+
+    private static DisplayMetrics getDisplayMetrics(Context context) {
+        return context.getResources().getDisplayMetrics();
     }
 
     /**
      * 获得状态栏的高度
-     *
-     * @param context context
-     * @return 状态栏的高度
      */
     public static int getStatusHeight(Context context) {
-        int statusHeight = -1;
         try {
             Class<?> clazz = Class.forName("com.android.internal.R$dimen");
             Object object = clazz.newInstance();
             int height = Integer.parseInt(clazz.getField("status_bar_height").get(object).toString());
-            statusHeight = context.getResources().getDimensionPixelSize(height);
+            return context.getResources().getDimensionPixelSize(height);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return statusHeight;
+        return 0;
     }
 
     /**
      * 获取当前屏幕截图，包含状态栏
-     *
-     * @param activity activity
-     * @return 获取当前屏幕截图，包含状态栏
      */
     public static Bitmap snapShotWithStatusBar(Activity activity) {
         View view = activity.getWindow().getDecorView();
@@ -105,9 +100,6 @@ public class ScreenUtils {
 
     /**
      * 获取当前屏幕截图，不包含状态栏
-     *
-     * @param activity activity
-     * @return 获取当前屏幕截图，不包含状态栏
      */
     public static Bitmap snapShotWithoutStatusBar(Activity activity) {
         View view = activity.getWindow().getDecorView();

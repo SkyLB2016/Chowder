@@ -9,7 +9,7 @@ import android.os.BatteryManager
 import com.sky.base.BaseNoPActivity
 import com.sky.chowder.C
 import com.sky.chowder.R
-import com.sky.utils.NetworkJudgment
+import com.sky.utils.NetworkUtils
 import com.sky.utils.ToastUtils
 
 /**
@@ -47,7 +47,7 @@ class BroadActivity : BaseNoPActivity() {
             val action = intent.action
             when (action) {
                 ConnectivityManager.CONNECTIVITY_ACTION ->// 网络发生变化
-                    if (!NetworkJudgment.isConnected(context)) ToastUtils.showShort(context, "网络已断开")
+                    if (!NetworkUtils.isConnected(context)) ToastUtils.showShort(context, "网络已断开")
                 Intent.ACTION_BATTERY_CHANGED -> {
                     val currLevel = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0)    //当前电量
                     val total = intent.getIntExtra(BatteryManager.EXTRA_SCALE, 1)        //总电量

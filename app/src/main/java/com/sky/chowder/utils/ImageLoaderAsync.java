@@ -9,7 +9,7 @@ import android.util.LruCache;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.sky.utils.ImageUtils;
+import com.sky.utils.pending.ImageUtils;
 
 import java.util.HashSet;
 import java.util.Set;

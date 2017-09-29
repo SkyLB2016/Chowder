@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.widget.ImageView
 import com.sky.chowder.R
-import com.sky.utils.ImageUtils
+import com.sky.utils.pending.ImageUtils
 
 /**
  * Created by SKY on 2015/8/17 15:30.

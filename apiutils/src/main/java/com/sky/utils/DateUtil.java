@@ -79,9 +79,14 @@ public class DateUtil {
     private static String fromatDateTime(Context context, int flags) {
         return DateUtils.formatDateTime(context, System.currentTimeMillis(), flags);
     }
-
+    /**
+     * 时间戳转换成具体的时间日期
+     *
+     * @param time
+     * @return
+     */
     public static String stampToTime(long time) {
-        return new SimpleDateFormat(YMDHM, Locale.CHINA).format(new Date(time));
+        return stampToTime(time,YMDHM);
     }
 
     /**

@@ -80,8 +80,14 @@ public class GsonUtils {
         return null;
     }
 
+    /**
+     * 转换成json对象
+     *
+     * @param object 需要转换的对象
+     * @return
+     */
     @NotNull
-    public static <T> String toJson(@NotNull T json) {
-        return getGson().toJson(json);
+    public static <T> String toJson(@NotNull T object) {
+        return getGson().toJson(object);
     }
 }

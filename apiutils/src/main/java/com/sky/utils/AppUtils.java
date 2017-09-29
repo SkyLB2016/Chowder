@@ -26,22 +26,27 @@ public class AppUtils {
     /**
      * 获取应用程序版本名称信息
      */
-    public static String getVersionName(Context context) throws NameNotFoundException {
+    public static String getVersionName(Context context) {
         return getPackageInfo(context).versionName;
     }
 
     /**
      * 获取应用程序版本号
      */
-    public static int getVersionCode(Context context) throws NameNotFoundException {
+    public static int getVersionCode(Context context) {
         return getPackageInfo(context).versionCode;
     }
 
     /**
      * 获取App包版本信息
      */
-    public static PackageInfo getPackageInfo(Context context) throws NameNotFoundException {
-        return context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+    public static PackageInfo getPackageInfo(Context context) {
+        try {
+            return context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+        } catch (NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**

@@ -14,8 +14,7 @@ import java.util.Map;
  * SharedPreferences管理类
  */
 public class SPUtils {
-    //保存在手机里面的默认文件名
-    public static final String FILE_NAME = "USER_INFO";
+    public static final String FILE_NAME = "USER_INFO";//默认文件名
     private static Context context;
 
     public static SPUtils instance;
@@ -37,7 +36,6 @@ public class SPUtils {
             instance = new SPUtils(fileName);
             SPMaps.put(fileName, sp);
         }
-//        if (instance == null) instance = new SPUtils(fileName);
         return instance;
     }
 
@@ -47,10 +45,7 @@ public class SPUtils {
     }
 
     /**
-     * 保存数据，我们需要拿到保存数据的具体类型，然后根据类型调用不同的保存方法
-     *
-     * @param key    key
-     * @param object value
+     * 保存数据
      */
     public void put(String key, Object object) {
         if (object instanceof String) sp.edit().putString(key, (String) object).apply();
@@ -63,9 +58,7 @@ public class SPUtils {
     }
 
     /**
-     * 保存数据的方法，我们需要拿到保存数据的具体类型，然后根据类型调用不同的保存方法
-     *
-     * @param map map集合
+     * @param map map集合拆分保存
      */
     public void put(Map<String, Object> map) {
         for (Iterator iter = map.keySet().iterator(); iter.hasNext(); ) {
@@ -75,11 +68,9 @@ public class SPUtils {
     }
 
     /**
-     * 得到保存数据的方法，我们根据默认值得到保存的数据的具体类型，然后调用相对于的方法获取值
+     * 读取数据
      *
-     * @param key   key
      * @param value 读取失败时，返回的数据
-     * @return value
      */
     public Object get(String key, Object value) {
         if (value instanceof String) return sp.getString(key, (String) value);
@@ -87,12 +78,11 @@ public class SPUtils {
         else if (value instanceof Boolean) return sp.getBoolean(key, (Boolean) value);
         else if (value instanceof Float) return sp.getFloat(key, (Float) value);
         else if (value instanceof Long) return sp.getLong(key, (Long) value);
-
-        return "";
+        return value;
     }
 
     /**
-     * 移除某个key值已经对应的值
+     * 移除某个key值对应的值
      *
      * @param key key
      */
@@ -101,7 +91,7 @@ public class SPUtils {
     }
 
     /**
-     * 清除所有数据
+     * 清除当前sp内的所有数据
      */
     public void clear() {
         sp.edit().clear().apply();
@@ -116,7 +106,7 @@ public class SPUtils {
     }
 
     /**
-     * @return 返回所有的键值对
+     * 返回所有的键值对
      */
     public Map<String, ?> getAll() {
         return sp.getAll();

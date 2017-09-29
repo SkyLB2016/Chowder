@@ -19,6 +19,7 @@
     <string name="text_net_work_err">网络异常</string>
     <string name="text_retry">重试</string>
     <string name="text_data_empty">什么都没有</string>
+    <string name="photo_fail">加载图片失败</string>
 
     <!--编辑框的提示文字，命名格式为：hint_提示信息-->
     <!--图片的描述文字，命名格式为：desc_图片文字-->

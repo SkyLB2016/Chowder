@@ -10,7 +10,6 @@ import android.util.Log;
 public class LogUtils {
 
     private LogUtils() {
-        /* cannot be instantiated 不能被实例化*/
         throw new UnsupportedOperationException("cannot be instantiated");
     }
 
@@ -31,46 +30,38 @@ public class LogUtils {
     // 下面四个是默认tag的函数
     public static void i(String msg) {
         if (!isDebug) return;
-        String TAG = generateTag();
-        Log.i(TAG, msg);
+        Log.i(generateTag(), msg);
     }
 
     public static void d(String msg) {
         if (!isDebug) return;
-        String TAG = generateTag();
-        Log.d(TAG, msg);
+        Log.d(generateTag(), msg);
     }
 
     public static void e(String msg) {
         if (!isDebug) return;
-        String TAG = generateTag();
-        Log.e(TAG, msg);
+        Log.e(generateTag(), msg);
     }
 
     public static void v(String msg) {
         if (!isDebug) return;
-        String TAG = generateTag();
-        Log.v(TAG, msg);
+        Log.v(generateTag(), msg);
     }
 
     // 下面是传入自定义tag的函数
     public static void i(String tag, String msg) {
-        if (isDebug)
-            Log.i(tag, msg);
+        if (isDebug) Log.i(tag, msg);
     }
 
     public static void d(String tag, String msg) {
-        if (isDebug)
-            Log.i(tag, msg);
+        if (isDebug) Log.i(tag, msg);
     }
 
     public static void e(String tag, String msg) {
-        if (isDebug)
-            Log.i(tag, msg);
+        if (isDebug) Log.i(tag, msg);
     }
 
     public static void v(String tag, String msg) {
-        if (isDebug)
-            Log.i(tag, msg);
+        if (isDebug) Log.i(tag, msg);
     }
 }

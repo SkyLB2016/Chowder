@@ -99,20 +99,6 @@ public class FileUtils {
     }
 
     /**
-     * 删除文件 或者文件夹下所有文件
-     */
-    public static boolean deleteFile(File dirOrFile) {
-        if (dirOrFile == null || !dirOrFile.exists()) return false;
-        if (dirOrFile.isFile()) dirOrFile.delete();
-        else if (dirOrFile.isDirectory())
-            for (File file : dirOrFile.listFiles()) {
-                deleteFile(file);// 递归
-            }
-        dirOrFile.delete();
-        return true;
-    }
-
-    /**
      * 把序列化的对象保存到本地
      *
      * @param dir    文件夹带斜杠的
@@ -144,7 +130,7 @@ public class FileUtils {
      * @param name 文件名，后边会自动拼接“ser.serial”
      * @return 解析好的数据对象
      */
-    public static <T> T getFileToSerialObj(String dir, String name) {
+    public static <T> T fileToSerialObj(String dir, String name) {
         ObjectInputStream objectIn = null;
         try {
             objectIn = new ObjectInputStream(new FileInputStream(new File(dir, name + "ser.serial")));
@@ -163,6 +149,30 @@ public class FileUtils {
             }
         }
         return null;
+    }
+
+    /**
+     * 删除文件 或者文件夹下所有文件
+     *
+     * @param path 文件夹完整绝对路径
+     * @return
+     */
+    public static boolean deleteFile(String path) {
+        return deleteFile(new File(path));
+    }
+
+    /**
+     * 删除文件 或者文件夹下所有文件
+     */
+    public static boolean deleteFile(File dirOrFile) {
+        if (dirOrFile == null || !dirOrFile.exists()) return false;
+        if (dirOrFile.isFile()) dirOrFile.delete();
+        else if (dirOrFile.isDirectory())
+            for (File file : dirOrFile.listFiles()) {
+                deleteFile(file);// 递归
+            }
+        dirOrFile.delete();
+        return true;
     }
 
     /**
@@ -193,16 +203,6 @@ public class FileUtils {
             }
         }
         return size;
-    }
-
-    /**
-     * 删除文件 或者文件夹下所有文件
-     *
-     * @param path 文件夹完整绝对路径
-     * @return
-     */
-    public static boolean deleteFile(String path) {
-        return deleteFile(new File(path));
     }
 
     /**

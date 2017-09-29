@@ -9,7 +9,7 @@ import android.os.BatteryManager
 import com.sky.chowder.C
 import com.sky.chowder.ui.activity.PullDownActivity
 import com.sky.chowder.ui.service.MyService
-import com.sky.utils.NetworkJudgment
+import com.sky.utils.NetworkUtils
 import com.sky.utils.ToastUtils
 
 /**
@@ -30,7 +30,7 @@ class SystemBroadcast : BroadcastReceiver() {
                 ToastUtils.showShort(context, "电量过低")
             }
         } else if (action == ConnectivityManager.CONNECTIVITY_ACTION) {//网络变化时，动态注册中为时时监控
-            if (!NetworkJudgment.isConnected(context)) {
+            if (!NetworkUtils.isConnected(context)) {
                 ToastUtils.showShort(context, "网络已断开broadcast")
                 val ac = Intent(context, PullDownActivity::class.java)
                 ac.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

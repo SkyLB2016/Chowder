@@ -7,7 +7,7 @@ import com.sky.adapter.RecyclerAdapter
 import com.sky.adapter.RecyclerHolder
 import com.sky.chowder.R
 import com.sky.chowder.model.ImageFloder
-import com.sky.utils.ImageUtils
+import com.sky.utils.pending.ImageUtils
 import com.sky.widget.BasePop
 
 /**

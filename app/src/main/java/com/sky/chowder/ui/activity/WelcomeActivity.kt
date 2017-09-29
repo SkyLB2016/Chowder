@@ -41,18 +41,16 @@ class WelcomeActivity : AppCompatActivity() {
             override fun onAnimationEnd(animation: Animation) {
                 Handler().postDelayed({
                     // 判断程序与第几次运行，如果是第一次运行引导页面
-                    JumpAct()
+                    jumpAct()
                 }, TIME)
             }
         })
     }
 
-    private fun JumpAct() {
-        if (SPUtils.getInstance(Common.ISFIRST).getObject(Common.ISFIRST, true)) {
+    private fun jumpAct() {
+        if (SPUtils.getInstance(Common.ISFIRST).getObject(Common.ISFIRST, true))
             JumpAct.jumpActivity(this, GuideActivity::class.java)
-        } else {
-            JumpAct.jumpActivity(this, MainActivity::class.java)
-        }
+        else JumpAct.jumpActivity(this, MainActivity::class.java)
         finish()
     }
 }

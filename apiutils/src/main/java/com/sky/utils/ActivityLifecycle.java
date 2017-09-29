@@ -92,8 +92,6 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
 
     /**
      * 返回到指定的activity
-     *
-     * @param cls
      */
     public void backToAppointActivity(Class cls) {
         while (!activityStack.lastElement().getClass().equals(cls)) {

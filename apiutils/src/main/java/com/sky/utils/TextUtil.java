@@ -23,43 +23,48 @@ public class TextUtil {
      * @return 空为true
      */
     public static boolean notNull(String text, String toast) {
-        if (TextUtils.isEmpty(text)) {
-            ToastUtils.showShort(ActivityLifecycle.getInstance().getCurrentAct(), toast);
-            return true;
-        } else
-            return false;
+        if (!TextUtils.isEmpty(text)) return false;
+        ToastUtils.showShort(ActivityLifecycle.getInstance().getCurrentAct(), toast);
+        return true;
     }
 
     public static boolean notNullObj(Object obj, String toast) {
-        if (null == obj) {
-            ToastUtils.showShort(ActivityLifecycle.getInstance().getCurrentAct(), toast);
-            return true;
-        }
-        return false;
-    }
-
-    public static String formatInt(String number) {
-        return new DecimalFormat("#0").format(number);
-    }
-
-    public static String formatInt(double number) {
-        return new DecimalFormat("#0").format(number);
+        if (null != obj) return false;
+        ToastUtils.showShort(ActivityLifecycle.getInstance().getCurrentAct(), toast);
+        return true;
     }
 
     /**
-     * @param number 需要格式化的字符串数字
-     * @return 返回格式化成两位小数的数字
+     * 返回格式化成整数的数字
      */
-    public static String formatDou(String number) {
-        return formatDou(Double.parseDouble(number));
+    public static DecimalFormat formatInt() {
+        return new DecimalFormat("#0");
     }
 
     /**
-     * @param number 需要格式化的数字
-     * @return 返回格式化成两位小数的数字
+     * 格式化成两位小数的数字
      */
-    public static String formatDou(double number) {
-        return new DecimalFormat("#0.##").format(number);
+    public static DecimalFormat formatDou() {
+        return new DecimalFormat("#0.00");
+    }
+
+    /**
+     * 单位换算
+     *
+     * @param size 单位为B
+     * @return 转换后的单位
+     */
+    public static String formatSize(long size) {
+        if (size < 1024 && size > 0)
+            return size + "B";
+        else if (size < 1024 * 1024)
+            return formatDou().format(size / 1024d) + "K";
+        else if (size < 1024 * 1024 * 1024)
+            return formatDou().format(size / (1024 * 1024d)) + "M";
+        else if (size < 1024 * 1024 * 1024 * 1024)
+            return formatDou().format(size / (1024 * 1024 * 1024d)) + "G";
+        else
+            return formatDou().format(size / (1024 * 1024 * 1024 * 1024d)) + "T";
     }
 
     /**
@@ -80,22 +85,5 @@ public class TextUtil {
         // 还原HTML
         // content = HTMLDecoder.decode(content);
         return content;
-    }
-
-    /**
-     * 单位换算
-     *
-     * @param size 单位为B
-     * @return 转换后的单位
-     */
-    public static String formatSize(long size) {
-        if (size < 1024 && size > 0)
-            return size + "B";
-        else if (size < 1024 * 1024)
-            return formatDou((double) size / 1024) + "K";
-        else if (size < 1024 * 1024 * 1024)
-            return formatDou((double) size / (1024 * 1024)) + "M";
-        else
-            return formatDou((double) size / (1024 * 1024 * 1024)) + "G";
     }
 }
