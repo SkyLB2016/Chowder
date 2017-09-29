@@ -150,4 +150,3 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
         LogUtils.i(model4.className);
     }
 }
-
