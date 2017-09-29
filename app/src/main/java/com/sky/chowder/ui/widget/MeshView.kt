@@ -7,7 +7,7 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.widget.ImageView
 
-import com.sky.utils.pending.ImageUtils
+import com.sky.utils.BitmapUtils
 
 /**
  * Created by SKY on 2015/8/14 15:27.
@@ -34,12 +34,12 @@ class MeshView @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
 
     override fun setImageDrawable(drawable: Drawable?) {
         super.setImageDrawable(drawable)
-        mBitmap = ImageUtils.getBitmapFromDrawable(drawable)
+        mBitmap = BitmapUtils.getBitmapFromDrawable(drawable)
     }
 
     override fun setImageResource(resId: Int) {
         super.setImageResource(resId)
-        mBitmap = ImageUtils.getBitmapFromDrawable(drawable)
+        mBitmap = BitmapUtils.getBitmapFromDrawable(drawable)
     }
 
     private fun initView() {

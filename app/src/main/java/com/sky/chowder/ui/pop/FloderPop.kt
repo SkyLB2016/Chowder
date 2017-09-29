@@ -7,7 +7,7 @@ import com.sky.adapter.RecyclerAdapter
 import com.sky.adapter.RecyclerHolder
 import com.sky.chowder.R
 import com.sky.chowder.model.ImageFloder
-import com.sky.utils.pending.ImageUtils
+import com.sky.utils.BitmapUtils
 import com.sky.widget.BasePop
 
 /**
@@ -28,7 +28,7 @@ class FloderPop(view: View, width: Int, height: Int) : BasePop<ImageFloder>(view
         recycle = view.findViewById<RecyclerView>(R.id.recycler)
         adapter = object : RecyclerAdapter<ImageFloder>(R.layout.pop_uri_item) {
             override fun onAchieveHolder(holder: RecyclerHolder, position: Int) {
-                holder.setImageBitmap(R.id.image, ImageUtils.getBitmapFromPath(datas[position].firstImagePath, 100, 100))
+                holder.setImageBitmap(R.id.image, BitmapUtils.getBitmapFromPath(datas[position].firstImagePath, 100, 100))
                 holder.setText(R.id.tv_name, datas[position].name)
                 holder.setText(R.id.tv_count, datas[position].count.toString() + "个")
             }

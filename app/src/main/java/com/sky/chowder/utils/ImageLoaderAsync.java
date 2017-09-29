@@ -9,7 +9,7 @@ import android.util.LruCache;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.sky.utils.pending.ImageUtils;
+import com.sky.utils.BitmapUtils;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -34,7 +34,7 @@ public class ImageLoaderAsync {
 //                    view.setLayoutParams(params);
                     view.setImageBitmap(bitmap);
                 } else {
-                    holder.view.setBackground(ImageUtils.getDrawableFromBitmap(holder.view.getContext(), holder.bitmap));
+                    holder.view.setBackground(BitmapUtils.getDrawableFromBitmap(holder.view.getContext(), holder.bitmap));
                 }
         }
     };
@@ -116,7 +116,7 @@ public class ImageLoaderAsync {
                 return null;
             url = params[0];
 //            publishProgress();
-            Bitmap bitmap = ImageUtils.getBitmapFromUrl(params[0]);
+            Bitmap bitmap = BitmapUtils.getBitmapFromUrl(params[0]);
             addBitmapToCache(url, bitmap);
             return bitmap;
         }

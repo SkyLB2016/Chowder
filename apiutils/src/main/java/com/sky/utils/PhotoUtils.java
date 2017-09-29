@@ -17,7 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ContextThemeWrapper;
 
 import com.sky.R;
-import com.sky.utils.pending.BitmapUtils;
+import com.sky.utils.pending.BitUtils;
 
 import java.io.File;
 
@@ -114,19 +114,19 @@ public class PhotoUtils {
         Bitmap bitmap = null;
         switch (requestCode) {
             case PHOTO: // 拍照
-                bitmap = BitmapUtils.loadBitmap(activity, photoName);
+                bitmap = BitUtils.loadBitmap(activity, photoName);
                 if (TextUtil.notNullObj(bitmap, error)) return;
-                BitmapUtils.saveBitmap(photoName, bitmap);
+                BitUtils.saveBitmap(photoName, bitmap);
                 break;
             case LOCAL_PHOTO: // 图库选择
                 if (data == null) return;
                 Uri uri = data.getData(); // 获得图片的uri
                 if (TextUtil.notNullObj(uri, error)) return;
-                String imgPath = BitmapUtils.getRealPathFromURI(activity, uri);
+                String imgPath = BitUtils.getRealPathFromURI(activity, uri);
                 if (TextUtil.notNull(imgPath, error)) return;
-                bitmap = BitmapUtils.loadBitmap(activity, imgPath);
+                bitmap = BitUtils.loadBitmap(activity, imgPath);
                 if (TextUtil.notNullObj(bitmap, error)) return;
-                BitmapUtils.saveBitmap(photoName, bitmap);
+                BitUtils.saveBitmap(photoName, bitmap);
                 break;
         }
         uploadPicture.UpLoadPicture(photoName, bitmap);

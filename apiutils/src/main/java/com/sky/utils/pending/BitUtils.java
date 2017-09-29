@@ -34,10 +34,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
- * BitmapUtils
+ * BitUtils
  * Created by keweiquan on 16/3/14.
  */
-public class BitmapUtils {
+public class BitUtils {
 
     private static int count = 0;
 
@@ -597,7 +597,7 @@ public class BitmapUtils {
             paint.setFlags(Paint.FILTER_BITMAP_FLAG);
             canvas.drawBitmap(bitmap, 0, 0, paint);
 
-            overlay = BitmapUtils.doBlur(overlay, (int) radius, true);
+            overlay = BitUtils.doBlur(overlay, (int) radius, true);
             view.setImageBitmap(overlay);
         }
     }
@@ -622,7 +622,7 @@ public class BitmapUtils {
             paint.setFlags(Paint.FILTER_BITMAP_FLAG);
             canvas.drawBitmap(bitmap, 0, 0, paint);
 
-            overlay = BitmapUtils.doBlur(overlay, (int) radius, true);
+            overlay = BitUtils.doBlur(overlay, (int) radius, true);
             BitmapDrawable bitmapDrawable = new BitmapDrawable(context.getResources(), overlay);
             view.setBackground(bitmapDrawable);
             return overlay;

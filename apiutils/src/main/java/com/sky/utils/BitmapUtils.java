@@ -1,4 +1,4 @@
-package com.sky.utils.pending;
+package com.sky.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -21,8 +21,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.Base64;
 
-import com.sky.utils.LogUtils;
-
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
@@ -39,95 +37,41 @@ import java.net.URL;
  * Created by SKY on 2017/6/6.
  * bitmap工具类
  */
-public class ImageUtils {
+public class BitmapUtils {
 
     /**
      * 从资源中获取Bitmap
-     *
-     * @param context
-     * @param id
-     * @return
      */
-    public static Bitmap getBitmapFromId(Context context, int id) {
-        return BitmapFactory.decodeResource(context.getResources(), id);
+    public static Bitmap getBitmapFromId(Context context, int resId) {
+        return BitmapFactory.decodeResource(context.getResources(), resId);
     }
 
     /**
-     * 获取最小资源的bitmap，参考一下就行，一般用不着
-     *
-     * @param context
-     * @param resId
-     * @return
-     */
-    public static Bitmap getBitmapFromRes(Context context, int resId) {
-        BitmapFactory.Options opt = new BitmapFactory.Options();
-        opt.inPreferredConfig = Bitmap.Config.RGB_565;
-        opt.inPurgeable = true;
-        opt.inInputShareable = true;
-        // 获取资源图片
-        InputStream is = context.getResources().openRawResource(resId);
-        Bitmap bitmap = BitmapFactory.decodeStream(is, null, opt);
-        return bitmap;
-    }
-
-    /**
-     * 从文件路径获取bitmap,BitmapFactory.Options
-     *
-     * @param path
-     * @param newWidth
-     * @param newHeight
-     * @return
+     * 从文件路径中获取bitmap,并进行裁剪
      */
     public static Bitmap getBitmapFromPath(String path, int newWidth, int newHeight) {
-        // 第一次解析将inJustDecodeBounds设置为true，来获取图片大小
         BitmapFactory.Options opts = new BitmapFactory.Options();
-        // 设置为ture只获取图片大小
-        opts.inJustDecodeBounds = true;
-        //默认就是ARGB_8888
-        opts.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        opts.inJustDecodeBounds = true;//设置为ture只获取图片大小
         BitmapFactory.decodeFile(path, opts);
-        // 调用上面定义的方法计算inSampleSize值
+        //计算inSampleSize,缩放图片
         opts.inSampleSize = getInSampleSize(opts, newWidth, newHeight);
-        opts.inJustDecodeBounds = false;
-        //节省内存
-        opts.inPurgeable = true;
-        opts.inInputShareable = true;
-//        opts.inTempStorage = new byte[5 * 1024 * 1024];
-
-        LogUtils.i("应用空闲的内存==" + Runtime.getRuntime().freeMemory() / 1024 + "KB");
-        LogUtils.i("应用可用最大内存==" + Runtime.getRuntime().maxMemory() / 1024 / 1024 + "MB");
-        LogUtils.i("应用当前总内存==" + Runtime.getRuntime().totalMemory() / 1024 / 1024 + "MB");
-
-        try {
-            return BitmapFactory.decodeFile(path, opts);
-        } catch (OutOfMemoryError error) {
-            System.gc();
-            LogUtils.i("OutOfMemoryError");
-        }
-        return null;
+        opts.inJustDecodeBounds = false;//至为false
+//        opts.outWidth = newWidth;
+//        opts.outHeight = newHeight;
+        return BitmapFactory.decodeFile(path, opts);
     }
 
 
     /**
-     * 计算InSampleSize的值==old/new
-     *
-     * @param newWidth
-     * @param newHeight
-     * @param opts
-     * @return
+     * 计算InSampleSize大于1的整数时是缩小原图
      */
     private static int getInSampleSize(BitmapFactory.Options opts, int newWidth, int newHeight) {
-        //oldWidth/oldHeight==newWidth/newHeight
-        int width = opts.outWidth;
-        int height = opts.outHeight;
-        float scaleWidth = 0.f, scaleHeight = 0.f;
-//            newHeight = newWidth*height/width;
-        if (width > newWidth || height > newHeight) {
-            // 缩放
-            scaleWidth = ((float) width) / newWidth;
-            scaleHeight = ((float) height) / newHeight;
+        int outWidth = opts.outWidth;
+        int outHeight = opts.outHeight;
+        if (outWidth > newWidth || outHeight > newHeight) {
+            return (int) Math.ceil(Math.max(outWidth * 1d / newWidth, outHeight * 1d / newHeight));
         }
-        return (int) Math.ceil(Math.max(scaleWidth, scaleHeight));
+        return 1;
     }
 
     /**
@@ -143,11 +87,11 @@ public class ImageUtils {
         int width = bm.getWidth();
         int height = bm.getHeight();
         // 计算缩放比例；缩放率X*width =newWidth；
-        float scaleWidth = ((float) newWidth) / width;
-        float scaleHeight = ((float) newHeight) / height;
+        float scaleW = ((float) newWidth) / width;
+        float scaleH = ((float) newHeight) / height;
         // 取得想要缩放的matrix参数
         Matrix matrix = new Matrix();
-        matrix.postScale(scaleWidth, scaleHeight);
+        matrix.postScale(scaleW, scaleH);
         // 得到新的图片
         return Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true);
     }
@@ -523,6 +467,7 @@ public class ImageUtils {
     public static void recyleBitmap(Bitmap bitmap) {
         if (bitmap != null && !bitmap.isRecycled()) bitmap.recycle();
     }
+
     public static byte[] decodeBitmap(String path) {
         BitmapFactory.Options opts = new BitmapFactory.Options();
         opts.inJustDecodeBounds = true;// 设置成了true,不占用内存，只获取bitmap宽高

@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.widget.ImageView
 import com.sky.chowder.R
-import com.sky.utils.pending.ImageUtils
+import com.sky.utils.BitmapUtils
 
 /**
  * Created by SKY on 2015/8/17 15:30.
@@ -107,13 +107,13 @@ class CircleImageView : android.support.v7.widget.AppCompatImageView {
 
     override fun setImageDrawable(drawable: Drawable?) {
         super.setImageDrawable(drawable)
-        mBitmap = ImageUtils.getBitmapFromDrawable(drawable)
+        mBitmap = BitmapUtils.getBitmapFromDrawable(drawable)
         setup()
     }
 
     override fun setImageResource(resId: Int) {
         super.setImageResource(resId)
-        mBitmap = ImageUtils.getBitmapFromDrawable(drawable)
+        mBitmap = BitmapUtils.getBitmapFromDrawable(drawable)
         setup()
     }
 

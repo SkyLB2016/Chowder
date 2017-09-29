@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import com.sky.chowder.R
 import com.sky.chowder.ui.widget.ZoomImageView
-import com.sky.utils.pending.ImageUtils
+import com.sky.utils.BitmapUtils
 import com.sky.utils.LogUtils
 import com.sky.utils.SDCardUtils
 import java.util.*
@@ -46,7 +46,7 @@ class ImageLoaderExecutors @JvmOverloads constructor(type: FileType = FileType.L
 //                            }
                             view!!.setImageBitmap(bitmap)
                         } else {
-                            imageHolder.view!!.background = ImageUtils.getDrawableFromBitmap(imageHolder.view!!.context, imageHolder.bitmap)
+                            imageHolder.view!!.background = BitmapUtils.getDrawableFromBitmap(imageHolder.view!!.context, imageHolder.bitmap)
                         }
                 }
             }
@@ -69,7 +69,7 @@ class ImageLoaderExecutors @JvmOverloads constructor(type: FileType = FileType.L
         threads = LinkedList()
         lruCache = object : LruCache<String, Bitmap>((Runtime.getRuntime().maxMemory() / 4).toInt()) {
             override fun sizeOf(key: String, value: Bitmap): Int {
-                return ImageUtils.getBitmapSize(value)
+                return BitmapUtils.getBitmapSize(value)
             }
         }
         executors = Executors.newFixedThreadPool(count)
@@ -130,7 +130,7 @@ class ImageLoaderExecutors @JvmOverloads constructor(type: FileType = FileType.L
         if (getBitmapFromLruCache(path) == null) {
             if (view is ImageView) {
                 if (view !is ZoomImageView)
-                    view.setImageBitmap(ImageUtils.getBitmapFromId(view.getContext(), R.mipmap.ic_launcher))
+                    view.setImageBitmap(BitmapUtils.getBitmapFromId(view.getContext(), R.mipmap.ic_launcher))
             } else
                 view.setBackgroundResource(R.mipmap.ic_launcher)
             //开启异步任务加载图片
@@ -187,9 +187,9 @@ class ImageLoaderExecutors @JvmOverloads constructor(type: FileType = FileType.L
      */
     private fun getBitmap(path: String, size: ImageSize): Bitmap? {
         if (path.startsWith("http"))
-            return ImageUtils.scaleBitmap(ImageUtils.getBitmapFromUrl(path), size.width, size.height)
+            return BitmapUtils.scaleBitmap(BitmapUtils.getBitmapFromUrl(path), size.width, size.height)
         else if (path.startsWith(SDCardUtils.getSDCardPath())) {
-            return ImageUtils.getBitmapFromPath(path, size.width, size.height)
+            return BitmapUtils.getBitmapFromPath(path, size.width, size.height)
         }
         throw NullPointerException("图片的路径应该是全路径")
     }
