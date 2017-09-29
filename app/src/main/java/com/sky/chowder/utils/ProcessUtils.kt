@@ -7,7 +7,7 @@ import com.sky.utils.LogUtils
 import java.io.Serializable
 import java.util.*
 
-class MemoryUtils {
+class ProcessUtils {
 
     private lateinit var processEntities: MutableList<ProcessEntity>
 

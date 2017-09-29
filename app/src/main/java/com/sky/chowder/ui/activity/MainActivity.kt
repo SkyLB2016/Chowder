@@ -77,22 +77,7 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 //        val flag = resources.getBoolean(R.bool.flag)
 //        if (flag) showToast(getString(R.string.app_name))
         LogUtils.i(TextUtil.formatSize(1))
-        LogUtils.i(TextUtil.formatSize(1234))
-        LogUtils.i(TextUtil.formatSize(12345))
-        LogUtils.i(TextUtil.formatSize(123456))
-        LogUtils.i(TextUtil.formatSize(1234567))
-        LogUtils.i(TextUtil.formatSize(12345678))
-        LogUtils.i(TextUtil.formatSize(123456789))
-        LogUtils.i(TextUtil.formatSize(1234567890))
-        LogUtils.i(TextUtil.formatSize(12345678901))
-        LogUtils.i(TextUtil.formatSize(123456789012))
-        LogUtils.i(TextUtil.formatSize(1234567890123))
-        LogUtils.i(TextUtil.formatSize(12345678901234))
-        LogUtils.i(TextUtil.formatSize(123456789012345))
-        LogUtils.i(TextUtil.formatSize(1234567890123456))
-        LogUtils.i(TextUtil.formatSize(12345678901234567))
-        LogUtils.i(TextUtil.formatSize(123456789012345678))
-        LogUtils.i(TextUtil.formatSize(1234567890123456789))
+//        ProcessUtils().getRunningAppProcessInfo(this)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

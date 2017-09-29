@@ -55,7 +55,7 @@ public class TextUtil {
      * @return 转换后的单位
      */
     public static String formatSize(long size) {
-        if (size < 1024 && size > 0)
+        if (size < 1024)
             return size + "B";
         else if (size < 1024 * 1024)
             return formatDou().format(size / 1024d) + "K";
