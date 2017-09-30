@@ -3,6 +3,7 @@ package com.sky.chowder.ui.widget
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.widget.ImageView
@@ -34,12 +35,12 @@ class MeshView @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
 
     override fun setImageDrawable(drawable: Drawable?) {
         super.setImageDrawable(drawable)
-        mBitmap = BitmapUtils.getBitmapFromDrawable(drawable)
+        mBitmap = (drawable as BitmapDrawable).bitmap
     }
 
     override fun setImageResource(resId: Int) {
         super.setImageResource(resId)
-        mBitmap = BitmapUtils.getBitmapFromDrawable(drawable)
+        mBitmap = BitmapUtils.getBitmapFromId(context,resId)
     }
 
     private fun initView() {
@@ -47,7 +48,7 @@ class MeshView @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
         val bitHeight = mBitmap!!.height.toFloat()
         for (i in 0..MESHHEIGHT) {
             val bitY = bitHeight * i / MESHHEIGHT
-            for (j in 0..MESHHEIGHT + 1 - 1) {
+            for (j in 0..MESHHEIGHT) {
                 val bitX = bitWidth * j / MESHWIDTH
                 oldPoint[(i * (MESHHEIGHT + 1) + j) * 2 + 0] = bitX
                 newPoint[(i * (MESHHEIGHT + 1) + j) * 2 + 0] = oldPoint[(i * (MESHHEIGHT + 1) + j) * 2 + 0]
@@ -62,7 +63,7 @@ class MeshView @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
 
     override fun onDraw(canvas: Canvas) {
         for (i in 0..MESHHEIGHT) {
-            for (j in 0..MESHWIDTH + 1 - 1) {
+            for (j in 0..MESHWIDTH) {
                 val offSetY = Math.sin((j.toFloat() / MESHWIDTH).toDouble() * 2.0 * Math.PI + k.toDouble() * 2.0 * Math.PI).toFloat()
                 newPoint[(i * (MESHHEIGHT + 1) + j) * 2 + 0] = oldPoint[(i * (MESHHEIGHT + 1) + j) * 2 + 0] + offSetY * 100 + 200f
                 newPoint[(i * (MESHHEIGHT + 1) + j) * 2 + 1] = oldPoint[(i * (MESHHEIGHT + 1) + j) * 2 + 1] + offSetY * 50 + 400f

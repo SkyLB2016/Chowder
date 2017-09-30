@@ -76,8 +76,8 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 
 //        val flag = resources.getBoolean(R.bool.flag)
 //        if (flag) showToast(getString(R.string.app_name))
-        LogUtils.i("desityDpi==${resources.displayMetrics.densityDpi}")
-        LogUtils.i("desity==${resources.displayMetrics.density}")
+        val draw = resources.getDrawable(R.drawable.main_flow);
+//        var bitmap = (resources.getDrawable(R.drawable.main_flow) as BitmapDrawable).bitmap
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

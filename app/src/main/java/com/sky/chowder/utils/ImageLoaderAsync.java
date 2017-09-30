@@ -9,6 +9,7 @@ import android.util.LruCache;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.sky.chowder.MyApplication;
 import com.sky.utils.BitmapUtils;
 
 import java.util.HashSet;
@@ -118,6 +119,7 @@ public class ImageLoaderAsync {
 //            publishProgress();
             Bitmap bitmap = BitmapUtils.getBitmapFromUrl(params[0]);
             addBitmapToCache(url, bitmap);
+            BitmapUtils.saveBitmapToFile(bitmap, MyApplication.getInstance().getPicCacheDir() + url.substring(url.lastIndexOf("/")));
             return bitmap;
         }
 

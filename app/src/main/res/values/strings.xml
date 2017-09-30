@@ -138,6 +138,7 @@
         { "className":"mmmmmm", "describe":"nnnnnn", "img":5, "componentName":"oooooo"}
         ]
     </string>
+    <string name="act_20">PhotoActivity</string>
 
 
 </resources>

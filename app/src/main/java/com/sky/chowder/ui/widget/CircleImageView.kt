@@ -2,6 +2,7 @@ package com.sky.chowder.ui.widget
 
 import android.content.Context
 import android.graphics.*
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.widget.ImageView
@@ -107,13 +108,13 @@ class CircleImageView : android.support.v7.widget.AppCompatImageView {
 
     override fun setImageDrawable(drawable: Drawable?) {
         super.setImageDrawable(drawable)
-        mBitmap = BitmapUtils.getBitmapFromDrawable(drawable)
+        mBitmap = (drawable as BitmapDrawable).bitmap
         setup()
     }
 
     override fun setImageResource(resId: Int) {
         super.setImageResource(resId)
-        mBitmap = BitmapUtils.getBitmapFromDrawable(drawable)
+        mBitmap = BitmapUtils.getBitmapFromId(context,resId)
         setup()
     }
 

@@ -122,11 +122,11 @@ public class PhotoUtils {
                 if (data == null) return;
                 Uri uri = data.getData(); // 获得图片的uri
                 if (TextUtil.notNullObj(uri, error)) return;
-                String imgPath = BitUtils.getRealPathFromURI(activity, uri);
-                if (TextUtil.notNull(imgPath, error)) return;
-                bitmap = BitUtils.loadBitmap(activity, imgPath);
+                photoName = BitUtils.getRealPathFromURI(activity, uri);
+                if (TextUtil.notNull(photoName, error)) return;
+                bitmap = BitUtils.loadBitmap(activity, photoName);
                 if (TextUtil.notNullObj(bitmap, error)) return;
-                BitUtils.saveBitmap(photoName, bitmap);
+//                BitUtils.saveBitmap(photoName, bitmap);
                 break;
         }
         uploadPicture.UpLoadPicture(photoName, bitmap);
@@ -143,6 +143,6 @@ public class PhotoUtils {
     }
 
     public interface UploadPictureListener {
-        void UpLoadPicture(String photo, Bitmap bitmap);
+        void UpLoadPicture(String photoName, Bitmap bitmap);
     }
 }
