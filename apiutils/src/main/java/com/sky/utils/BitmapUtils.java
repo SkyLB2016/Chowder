@@ -78,6 +78,10 @@ public class BitmapUtils {
         return null;
     }
 
+    public static Bitmap getBitmapFromPath(String path) {
+        return BitmapFactory.decodeFile(path);
+    }
+
     /**
      * 从文件路径中获取bitmap,并进行裁剪
      */
@@ -89,10 +93,6 @@ public class BitmapUtils {
         opts.inSampleSize = getInSampleSize(opts, newWidth, newHeight);//计算缩放率，缩放图片
         opts.inJustDecodeBounds = false;//至为false
         return BitmapFactory.decodeFile(path, opts);
-    }
-
-    public static Bitmap getBitmapFromPath(String path) {
-        return BitmapFactory.decodeFile(path);
     }
 
     /**
@@ -209,5 +209,4 @@ public class BitmapUtils {
         canvas.drawBitmap(bitmap, rect, rect, paint);
         return corner;
     }
-
 }

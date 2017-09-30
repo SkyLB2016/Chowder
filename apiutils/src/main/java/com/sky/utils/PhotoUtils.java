@@ -27,7 +27,7 @@ import java.io.File;
  */
 public class PhotoUtils {
     private AppCompatActivity activity;
-    private String photoName;
+    private String photoName;//图片所在的位置
 
     private static final int PHOTO = 1501; // 拍照
     private static final int PHOTO_PERMISSIONS = 1502; // 拍照权限请求
@@ -116,7 +116,7 @@ public class PhotoUtils {
             case PHOTO: // 拍照
                 bitmap = BitUtils.loadBitmap(activity, photoName);
                 if (TextUtil.notNullObj(bitmap, error)) return;
-                BitUtils.saveBitmap(photoName, bitmap);
+                BitUtils.saveBitmap(photoName, bitmap);//保存照片到应用缓存文件目录下
                 break;
             case LOCAL_PHOTO: // 图库选择
                 if (data == null) return;
@@ -124,9 +124,7 @@ public class PhotoUtils {
                 if (TextUtil.notNullObj(uri, error)) return;
                 photoName = BitUtils.getRealPathFromURI(activity, uri);
                 if (TextUtil.notNull(photoName, error)) return;
-                bitmap = BitUtils.loadBitmap(activity, photoName);
-                if (TextUtil.notNullObj(bitmap, error)) return;
-//                BitUtils.saveBitmap(photoName, bitmap);
+                bitmap = BitUtils.loadBitmap(activity, photoName);//获取bitmap
                 break;
         }
         uploadPicture.UpLoadPicture(photoName, bitmap);
