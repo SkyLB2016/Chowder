@@ -122,7 +122,8 @@ public class PhotoUtils {
                 if (data == null) return;
                 Uri uri = data.getData(); // 获得图片的uri
                 if (TextUtil.notNullObj(uri, error)) return;
-                photoName = BitUtils.getRealPathFromURI(activity, uri);
+                //content://com.miui.gallery.open/raw/%2Fstorage%2Femulated%2F0%2FDCIM%2FCamera%2FIMG_20170919_101100.jpg
+                photoName = BitmapUtils.getRealPathFromURI(activity, uri);
                 if (TextUtil.notNull(photoName, error)) return;
                 bitmap = BitUtils.loadBitmap(activity, photoName);//获取bitmap
                 break;
