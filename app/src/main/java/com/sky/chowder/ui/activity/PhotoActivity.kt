@@ -31,7 +31,7 @@ class PhotoActivity : BasePActivity<SolarP>() {
     }
 
     private fun getPhoto() {
-       val photoName = SkyApp.getInstance().picCacheDir + System.currentTimeMillis() + ".jpg"
+        val photoName = SkyApp.getInstance().picCacheDir + System.currentTimeMillis() + ".jpg"
         photoUtils = PhotoUtils(this, photoName)
         photoUtils?.setUploadPicture { photo, bitmap ->
             image!!.setImageBitmap(bitmap)

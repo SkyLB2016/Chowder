@@ -27,7 +27,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -43,13 +42,6 @@ public class BitmapUtils {
      */
     public static Bitmap getBitmapFromId(Context context, int resId) {
         return BitmapFactory.decodeResource(context.getResources(), resId);
-    }
-
-    /**
-     * bitmap转换为drawable
-     */
-    public static Drawable getDrawableFromBitmap(Context context, Bitmap bitmap) {
-        return new BitmapDrawable(context.getResources(), bitmap);
     }
 
     /**
@@ -115,6 +107,13 @@ public class BitmapUtils {
     }
 
     /**
+     * bitmap转换为drawable
+     */
+    public static Drawable getDrawableFromBitmap(Context context, Bitmap bitmap) {
+        return new BitmapDrawable(context.getResources(), bitmap);
+    }
+
+    /**
      * matrix 缩放/裁剪图片
      *
      * @return 裁剪后的图片
@@ -131,7 +130,7 @@ public class BitmapUtils {
     }
 
     /**
-     * base64->bitmap
+     * base64转bitmap
      *
      * @param base64 base64 的字符串
      * @return
@@ -149,17 +148,13 @@ public class BitmapUtils {
 
     /**
      * 把bitmap转换成base64
-     *
-     * @param bitmap
-     * @param quality 压缩百分比1-100,100代表不压缩
-     * @return
      */
-    public static String getBase64FromBitmap(Bitmap bitmap, int quality) {
-        return Base64.encodeToString(getBytesFromBitmap(bitmap, quality), Base64.DEFAULT);
+    public static String getBase64FromBitmap(Bitmap bitmap) {
+        return Base64.encodeToString(getBytesFromBitmap(bitmap, 100), Base64.DEFAULT);
     }
 
     /**
-     * bitmap->bytes
+     * bitmap转bytes
      *
      * @param bitmap
      * @param quality 压缩百分比1-100,100代表不压缩
@@ -172,18 +167,31 @@ public class BitmapUtils {
     }
 
     /**
-     * bitmap -> file
+     * 按大小压缩图片
+     *
+     * @param targetKB
+     */
+    public static Bitmap compressBitmap(Bitmap bitmap, int targetKB) {
+        int quality = 100;
+        byte[] target;
+        while ((target = getBytesFromBitmap(bitmap, quality)).length / 1024 > targetKB) {
+            quality -= 10;
+        }
+        return BitmapFactory.decodeByteArray(target, 0, target.length);
+    }
+
+    /**
+     * bitmap 转 file
      *
      * @param bitmap
      * @param absoluteName 绝对路径
      * @return
      */
     public static boolean saveBitmapToFile(Bitmap bitmap, String absoluteName) {
-        int quality = 100;
-        OutputStream out = null;
+        FileOutputStream out = null;
         try {
             out = new FileOutputStream(absoluteName);
-            return bitmap.compress(Bitmap.CompressFormat.JPEG, quality, out);
+            return bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } finally {
@@ -200,8 +208,8 @@ public class BitmapUtils {
      * 获得圆角图片的方法
      */
     public static Bitmap getRoundCornerBitmap(Bitmap bitmap, float round) {
-        Bitmap corner = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(corner);
+        Bitmap outBit = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(outBit);
 
         Paint paint = new Paint();
         paint.setAntiAlias(true);
@@ -214,8 +222,9 @@ public class BitmapUtils {
         canvas.drawRoundRect(rectF, round, round, paint);
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
         canvas.drawBitmap(bitmap, rect, rect, paint);
-        return corner;
+        return outBit;
     }
+
     /**
      * 根据Uri获取图片绝对路径，解决Android4.4以上版本Uri转换
      *
@@ -314,5 +323,4 @@ public class BitmapUtils {
     public static boolean isGooglePhotosUri(Uri uri) {
         return "com.google.android.apps.photos.content".equals(uri.getAuthority());
     }
-
 }

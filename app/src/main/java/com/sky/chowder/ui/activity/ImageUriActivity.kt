@@ -34,7 +34,7 @@ class ImageUriActivity : RecyclerPActivity<String, ImageUriP>(), ImageUriV<Strin
     private var lastVisibleItem: Int = 0//最后一个可见item
     private var first = true
 
-    var adapter: LoaderUriAdapter? = null
+    var loaderAdapter: LoaderUriAdapter? = null
     private var floderPop: BasePop<*>? = null
 
     override fun getLayoutResId(): Int = R.layout.activity_uri
@@ -49,13 +49,13 @@ class ImageUriActivity : RecyclerPActivity<String, ImageUriP>(), ImageUriV<Strin
         setRecyclerLayout(layoutManager)
         //        recycler.setLayoutManager(new StaggeredGridLayoutManager(this,null,0,0));
         //        recycler.setLayoutManager(new GridLayoutManager(this,3));
-        adapter = getAdapter();
+        loaderAdapter = adapter as LoaderUriAdapter
         adapter!!.setOnItemClickListener { view, position -> ShowImagePop(position) }
     }
 
     private fun ShowImagePop(position: Int) {
         val imagePop = URIPop(LayoutInflater.from(this).inflate(R.layout.viewpager, null))
-        imagePop!!.parentPath = adapter?.parentPath
+        imagePop!!.parentPath = loaderAdapter?.parentPath
         imagePop!!.datas = adapter?.datas
         imagePop!!.setCurrentItem(position)
         if (!imagePop!!.isShowing) imagePop!!.showAtLocation(recycler, Gravity.CENTER, 0, 0)
@@ -65,7 +65,7 @@ class ImageUriActivity : RecyclerPActivity<String, ImageUriP>(), ImageUriV<Strin
 
     override fun onRecyclerScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
         if (newState == RecyclerView.SCROLL_STATE_IDLE)
-            adapter?.setImageLoader(firstVisibleItem, lastVisibleItem, recyclerView!!)
+            loaderAdapter?.setImageLoader(firstVisibleItem, lastVisibleItem, recyclerView!!)
     }
 
     override fun onRecyclerScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
@@ -77,7 +77,7 @@ class ImageUriActivity : RecyclerPActivity<String, ImageUriP>(), ImageUriV<Strin
         //首次加载执行
         if (lastVisibleItem > 0 && first) {
             first = false
-            adapter?.setImageLoader(firstVisibleItem, lastVisibleItem, recycler)
+            loaderAdapter?.setImageLoader(firstVisibleItem, lastVisibleItem, recycler)
         }
     }
 
@@ -112,8 +112,8 @@ class ImageUriActivity : RecyclerPActivity<String, ImageUriP>(), ImageUriV<Strin
 
     override fun setAdapterData(parent: File?) {
         val imageNames = Arrays.asList(*parent!!.list(filter))
-        adapter!!.parentPath = parent!!.absolutePath
-        adapter!!.datas = imageNames
+        loaderAdapter!!.parentPath = parent!!.absolutePath
+        loaderAdapter!!.datas = imageNames
 
         flodername!!.text = parent?.name
         number!!.text = "共${imageNames.size}张图片"
@@ -121,7 +121,7 @@ class ImageUriActivity : RecyclerPActivity<String, ImageUriP>(), ImageUriV<Strin
 
     override fun onDestroy() {
         super.onDestroy()
-        adapter!!.interruptExecutors()
+        loaderAdapter!!.interruptExecutors()
     }
 
     private var filter: FilenameFilter = FilenameFilter { _, filename ->

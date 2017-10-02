@@ -17,7 +17,7 @@ import java.util.List;
 public abstract class RecyclerPActivity<T, P extends RefreshP> extends BasePActivity<P> implements IRefreshV<T>, SwipeRefreshLayout.OnRefreshListener {
     MyRecyclerView recycler;
     SwipeRefreshLayout swipe;
-//    protected RecyclerAdapter<T> adapter;
+    protected RecyclerAdapter<T> adapter;
 
 //    protected int firstVisibleItem;
 //    protected int lastVisibleItem;
@@ -67,7 +67,7 @@ public abstract class RecyclerPActivity<T, P extends RefreshP> extends BasePActi
 //                }
             }
         });
-        recycler.setAdapter(creatAdapter());
+        recycler.setAdapter(adapter=creatAdapter());
     }
 
 //    private int findMax(int[] positions) {
@@ -97,16 +97,16 @@ public abstract class RecyclerPActivity<T, P extends RefreshP> extends BasePActi
 
     @Override
     public void setAdapterList(List<T> entities) {
-        getAdapter().setDatas(entities);
+        adapter.setDatas(entities);
     }
 
-    public <E extends RecyclerAdapter> E getAdapter() {
-        return (E) recycler.getAdapter();
-    }
+//    public <E extends RecyclerAdapter> E getAdapter() {
+//        return (E) recycler.getAdapter();
+//    }
 
     @Override
     public void addAdapterList(List<T> entities) {
-        getAdapter().addDatas(entities);
+        adapter.addDatas(entities);
     }
 
     public void setRecyclerLayout(RecyclerView.LayoutManager manager) {
@@ -119,7 +119,7 @@ public abstract class RecyclerPActivity<T, P extends RefreshP> extends BasePActi
     }
 
     public void loadMore() {
-        if (getAdapter().getDatas() == null || getAdapter().getDatas().isEmpty()) return;
-        presenter.onLoadMore(getAdapter().getDatas().size());
+        if (adapter.getDatas() == null || adapter.getDatas().isEmpty()) return;
+        presenter.onLoadMore(adapter.getDatas().size());
     }
 }

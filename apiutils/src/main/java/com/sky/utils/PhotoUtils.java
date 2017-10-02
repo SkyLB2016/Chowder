@@ -17,7 +17,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ContextThemeWrapper;
 
 import com.sky.R;
-import com.sky.utils.pending.BitUtils;
 
 import java.io.File;
 
@@ -114,9 +113,9 @@ public class PhotoUtils {
         Bitmap bitmap = null;
         switch (requestCode) {
             case PHOTO: // 拍照
-                bitmap = BitUtils.loadBitmap(activity, photoName);
+                bitmap = BitmapUtils.getBitmapFromPath(photoName);//获取bitmap
                 if (TextUtil.notNullObj(bitmap, error)) return;
-                BitUtils.saveBitmap(photoName, bitmap);//保存照片到应用缓存文件目录下
+                BitmapUtils.saveBitmapToFile(bitmap,photoName);//保存照片到应用缓存文件目录下
                 break;
             case LOCAL_PHOTO: // 图库选择
                 if (data == null) return;
@@ -125,7 +124,7 @@ public class PhotoUtils {
                 //content://com.miui.gallery.open/raw/%2Fstorage%2Femulated%2F0%2FDCIM%2FCamera%2FIMG_20170919_101100.jpg
                 photoName = BitmapUtils.getRealPathFromURI(activity, uri);
                 if (TextUtil.notNull(photoName, error)) return;
-                bitmap = BitUtils.loadBitmap(activity, photoName);//获取bitmap
+                bitmap = BitmapUtils.getBitmapFromPath(photoName);//获取bitmap
                 break;
         }
         uploadPicture.UpLoadPicture(photoName, bitmap);
