@@ -40,7 +40,10 @@ class ImageUrlActivity : RecyclerPActivity<CourseEntity, ImageUrlP>() {
         super.initialize()
         fab.setOnClickListener { v -> Snackbar.make(v, "正在加载，请稍后", Snackbar.LENGTH_LONG).setAction("cancel") { showToast("已取消") }.show() }
     }
-    override fun creatAdapter()= LoaderURLAdapter(layoutIds)
+
+    override fun creatAdapter() {
+        adapter = LoaderURLAdapter(layoutIds)
+    }
 
     override fun onRecyclerScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
         super.onRecyclerScrollStateChanged(recyclerView, newState)

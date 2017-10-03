@@ -67,7 +67,8 @@ public abstract class RecyclerPActivity<T, P extends RefreshP> extends BasePActi
 //                }
             }
         });
-        recycler.setAdapter(adapter=creatAdapter());
+        creatAdapter();
+        recycler.setAdapter(adapter);
     }
 
 //    private int findMax(int[] positions) {
@@ -78,7 +79,7 @@ public abstract class RecyclerPActivity<T, P extends RefreshP> extends BasePActi
 //        return position;
 //    }
 
-    protected abstract RecyclerAdapter<T> creatAdapter();
+    protected abstract void creatAdapter();
 
     public void onRecyclerScrollStateChanged(RecyclerView recyclerView, int newState) {
     }
@@ -99,10 +100,6 @@ public abstract class RecyclerPActivity<T, P extends RefreshP> extends BasePActi
     public void setAdapterList(List<T> entities) {
         adapter.setDatas(entities);
     }
-
-//    public <E extends RecyclerAdapter> E getAdapter() {
-//        return (E) recycler.getAdapter();
-//    }
 
     @Override
     public void addAdapterList(List<T> entities) {

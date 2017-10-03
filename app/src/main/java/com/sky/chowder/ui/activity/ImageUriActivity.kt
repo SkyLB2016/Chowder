@@ -49,11 +49,9 @@ class ImageUriActivity : RecyclerPActivity<String, ImageUriP>(), ImageUriV<Strin
         setRecyclerLayout(layoutManager)
         //        recycler.setLayoutManager(new StaggeredGridLayoutManager(this,null,0,0));
         //        recycler.setLayoutManager(new GridLayoutManager(this,3));
-        loaderAdapter = adapter as LoaderUriAdapter
-        adapter!!.setOnItemClickListener { view, position -> ShowImagePop(position) }
     }
 
-    private fun ShowImagePop(position: Int) {
+    private fun showImagePop(position: Int) {
         val imagePop = URIPop(LayoutInflater.from(this).inflate(R.layout.viewpager, null))
         imagePop!!.parentPath = loaderAdapter?.parentPath
         imagePop!!.datas = adapter?.datas
@@ -61,7 +59,11 @@ class ImageUriActivity : RecyclerPActivity<String, ImageUriP>(), ImageUriV<Strin
         if (!imagePop!!.isShowing) imagePop!!.showAtLocation(recycler, Gravity.CENTER, 0, 0)
     }
 
-    override fun creatAdapter() = LoaderUriAdapter(R.layout.adapter_uri)
+    override fun creatAdapter() {
+        adapter = LoaderUriAdapter(R.layout.adapter_uri)
+        loaderAdapter = adapter as LoaderUriAdapter
+        adapter!!.setOnItemClickListener { view, position -> showImagePop(position) }
+    }
 
     override fun onRecyclerScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
         if (newState == RecyclerView.SCROLL_STATE_IDLE)
