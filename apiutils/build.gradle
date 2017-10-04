@@ -16,7 +16,7 @@ ext {
     siteUrl = 'https://github.com/SkyLB2016/Chowder'
     gitUrl = 'https://github.com/SkyLB2016/Chowder.git'
 
-    libraryVersion = '2.2.58'
+    libraryVersion = '2.2.60'
     developerId = 'SkyLB2016'
 
     developerName = 'libin (sky)'
@@ -30,7 +30,7 @@ group = publishedGroupId// Maven Group ID for the artifact
 version = libraryVersion
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.0"
+    buildToolsVersion "26.0.2"
 
     defaultConfig {
         minSdkVersion 19

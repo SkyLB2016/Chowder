@@ -9,7 +9,7 @@ import com.google.gson.JsonSyntaxException;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Type;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -69,7 +69,12 @@ public class GsonUtils {
      */
     public static <T> List<T> jsonToList(@NonNull String json, Class<T[]> cls) {
         try {
-            return Arrays.asList(getGson().fromJson(json, cls));
+            List<T> list = new ArrayList<T>();
+            T[] arrays = getGson().fromJson(json, cls);
+            for (int i = 0; i < arrays.length; i++) {
+                list.add(arrays[i]);
+            }
+            return list;
         } catch (JsonSyntaxException e) {
             e.printStackTrace();
         } catch (JsonParseException e) {

@@ -76,8 +76,9 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 
 //        val flag = resources.getBoolean(R.bool.flag)
 //        if (flag) showToast(getString(R.string.app_name))
-        val draw = resources.getDrawable(R.drawable.main_flow);
-//        var bitmap = (resources.getDrawable(R.drawable.main_flow) as BitmapDrawable).bitmap
+//        adapter!!.datas[2].let { LogUtils.i(it.className) }
+//        LogUtils.i(adapter!!.datas[2].let { it.componentName })
+        testGson()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -142,10 +143,24 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
         val model = GsonUtils.jsonToEntity(getString(R.string.jsonobj), ActivityModel::class.java)
         val model2 = GsonUtils.jsonToList(getString(R.string.jsonarray), Array<ActivityModel>::class.java)
         val model3 = GsonUtils.jsonToEntity<ApiResponse<List<ActivityModel>>>(getString(R.string.jsonlist), object : TypeToken<ApiResponse<List<ActivityModel>>>() {}.type)
-        LogUtils.i(model.className);
-        LogUtils.i(model2[1].className);
-        LogUtils.i(model3.objList[2].className);
-        FileUtils.serialToFile(SkyApp.getInstance().fileCacheDir, "model", model)
+        val s: Int? = 30000
+        LogUtils.i("${model2[1].img}")
+        LogUtils.i("${model2[1].img == 2}")
+        LogUtils.i("${model2[1].img === 2}")
+        LogUtils.i("${model2[2].img == s}")
+        LogUtils.i("${model2[2].img === s}")
+
+        val a: Int = 10000
+        LogUtils.i("${a == a}")
+        LogUtils.i("${a === a}")
+        val boxedA: Int? = a
+        val anotherBoxedA: Int? = 10000
+        LogUtils.i("${boxedA === anotherBoxedA}") // ！！！输出“false”！！！
+        LogUtils.i("${boxedA == anotherBoxedA}") // ！！！输出“false”！！！
+//        LogUtils.i(model.className);
+//        LogUtils.i(model2[1].className);
+//        LogUtils.i(model3.objList[2].className);
+//        FileUtils.serialToFile(SkyApp.getInstance().fileCacheDir, "model", model)
         val model4 = FileUtils.fileToSerialObj<ActivityModel>(SkyApp.getInstance().fileCacheDir, "model")
         LogUtils.i(model4.className);
     }
