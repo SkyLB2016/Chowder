@@ -2,6 +2,7 @@ package com.sky.chowder.ui.activity
 
 import android.Manifest
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.BatteryManager
@@ -21,6 +22,7 @@ import com.sky.chowder.ui.presenter.MainP
 import com.sky.model.ApiResponse
 import com.sky.utils.*
 import kotlinx.android.synthetic.main.content_main.*
+import java.io.*
 
 
 /**
@@ -78,7 +80,46 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 //        if (flag) showToast(getString(R.string.app_name))
 //        adapter!!.datas[2].let { LogUtils.i(it.className) }
 //        LogUtils.i(adapter!!.datas[2].let { it.componentName })
-        testGson()
+        FileUtils.saveFile(SkyApp.getInstance().fileCacheDir, "name1.txt", "name")
+        FileUtils.saveFile(SkyApp.getInstance().fileCacheDir + "pass", "pass")
+        FileUtils.saveFile(SkyApp.getInstance().fileCacheDir + "pass.txt", "pass")
+//        val map = FileUtils.get(this);
+//        LogUtils.i(map["pass"])
+
+//        val f = File(SkyApp.getInstance().fileCacheDir + "pass.txt")
+//        System.out.println(f.getParent())//返回此抽象路径名父目录的路径名字符串；如果此路径名没有指定父目录，则返回 null
+//        System.out.println(f.getName())//返回由此抽象路径名表示的文件或目录的名称
+//        System.out.println(f.exists())//测试此抽象路径名表示的文件或目录是否存在
+//        System.out.println(f.getAbsoluteFile())// 返回此抽象路径名的绝对路径名形式
+//        System.out.println(f.getAbsolutePath())//返回此抽象路径名的规范路径名字符串
+//        System.out.println(f.getPath())//将此抽象路径名转换为一个路径名字符串
+//        System.out.println(f.hashCode())//计算此抽象路径名的哈希码
+//        System.out.println(f.length())//返回由此抽象路径名表示的文件的长度
+//        System.out.println(f.list())// 返回一个字符串数组，这些字符串指定此抽象路径名表示的目录中的文件和目录
+//        System.out.println(f.mkdir())//创建此抽象路径名指定的目录
+        LogUtils.i(getDatabasePath("pass.txt").absolutePath)
+        openFileOutput("pass.txt", Context.MODE_PRIVATE);
+        try {
+            // 通过openFileOutput方法得到一个输出流，方法参数为创建的文件名（不能有斜杠），操作模式
+            val fos = this.openFileOutput("pass.txt", Context.MODE_PRIVATE)
+            val oos = ObjectOutputStream(fos)
+            oos.writeObject("adslkjfdlksjlgdjlfjlk")// 写入
+            fos.close() // 关闭输出流
+            //Toast.makeText(WebviewTencentActivity.this, "保存oAuth_1成功",Toast.LENGTH_LONG).show();
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+            //Toast.makeText(WebviewTencentActivity.this, "出现异常1",Toast.LENGTH_LONG).show();
+        } catch (e: IOException) {
+            e.printStackTrace()
+            //Toast.makeText(WebviewTencentActivity.this, "出现异常2",Toast.LENGTH_LONG).show();
+        }
+        val file = File("$filesDir${File.separator}pass.txt")
+        val fileIn = FileInputStream(file)
+//        val bufferedIn = BufferedInputStream(fileIn)
+        val buffer = ByteArray(1024)
+        var len: Int = fileIn.read(buffer)
+        LogUtils.i(String(buffer, 0, len))
+        LogUtils.i(file.absolutePath)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

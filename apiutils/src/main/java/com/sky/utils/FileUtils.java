@@ -4,18 +4,24 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OptionalDataException;
 import java.io.StreamCorruptedException;
 import java.nio.channels.FileChannel;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by SKY on 2015/11/28.
@@ -248,5 +254,65 @@ public class FileUtils {
         void onFail(String msg);
 
         void success(String path);
+    }
+
+    /**
+     * @param filePath 绝对路径
+     */
+    public static void saveFile(String filePath, String content) {
+        try {
+            File file = new File(filePath);
+            BufferedWriter output = new BufferedWriter(new FileWriter(file));
+            output.write(content);
+            output.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * @param dir     文件夹所在路径
+     * @param file    文件名称，带后缀
+     * @param content
+     * @return
+     */
+    public static void saveFile(String dir, String file, String content) {
+        try {
+            FileWriter writer = new FileWriter(dir + file, true);
+            writer.write(content);
+            writer.close();
+        } catch (IOException var5) {
+        }
+    }
+
+    public static boolean saveFile1(String filepath, String content) {
+        try {
+            File file = new File(filepath);
+            FileOutputStream fos = new FileOutputStream(file);
+            fos.write((content).getBytes());
+            fos.close();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+    public static Map<String, String> get(Context context) {
+        File file = new File(context.getFilesDir(), "info.txt");
+        try {
+            FileInputStream fis = new FileInputStream(file);
+            BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+            String str = br.readLine();
+            String[] infos = str.split("##");
+            Map<String, String> map = new HashMap<>();
+            map.put("username", infos[0]);
+            map.put("pass", infos[1]);
+            return map;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
