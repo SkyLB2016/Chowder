@@ -40,8 +40,8 @@ public class FileUtils {
     /**
      * 读取文件中的内容
      *
-     * @param path
-     * @param filename
+     * @param path     文件夹所在路径
+     * @param filename 文件名称
      * @return
      */
     public static String readSdFile(String path, String filename) {
@@ -271,10 +271,9 @@ public class FileUtils {
     }
 
     /**
-     * @param dir     文件夹所在路径
+     * @param dir     文件夹所在路径,带斜杠的
      * @param file    文件名称，带后缀
      * @param content
-     * @return
      */
     public static void saveFile(String dir, String file, String content) {
         try {
