@@ -28,14 +28,20 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(getLayoutResId(), container, false);
+        view = inflater.inflate(getLayoutResId(), null, false);
         context = getActivity();
         unbinder = ButterKnife.bind(this, view);
         if (presenter == null) presenter = creatPresenter();
         checkPresenterIsNull();
-        initialize();
         presenter.onCreateView(savedInstanceState);
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initialize();
+        presenter.onViewCreate(savedInstanceState);
     }
 
     /**
