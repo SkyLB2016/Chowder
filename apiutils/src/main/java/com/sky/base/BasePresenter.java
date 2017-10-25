@@ -57,6 +57,9 @@ public abstract class BasePresenter<V extends IBaseView> implements IBasePresent
     }
 
     public void onCreateView(Bundle savedInstanceState) {
+    }
+
+    public void onViewCreate(Bundle savedInstanceState) {
         loadData();
     }
 

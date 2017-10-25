@@ -12,8 +12,8 @@ public abstract class BasePActivity<P extends BasePresenter> extends SkyActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (presenter == null) presenter = creatPresenter();
-        initialize();
-        presenter.onCreate(savedInstanceState);
+        initialize();//需要初始化的成员变量
+        presenter.onCreate(savedInstanceState);//请求数据
     }
 
     @Override

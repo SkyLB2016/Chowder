@@ -112,21 +112,18 @@ public class PhotoUtils {
         if (TextUtil.notNull(photoName, error)) return;
         Bitmap bitmap = null;
         switch (requestCode) {
-            case PHOTO: // 拍照
-                bitmap = BitmapUtils.getBitmapFromPath(photoName);//获取bitmap
-                if (TextUtil.notNullObj(bitmap, error)) return;
-                BitmapUtils.saveBitmapToFile(bitmap,photoName);//保存照片到应用缓存文件目录下
-                break;
-            case LOCAL_PHOTO: // 图库选择
+//            case PHOTO: //拍照
+//                BitmapUtils.saveBitmapToFile(bitmap, photoName);//保存照片到应用缓存文件目录下
+//                break;
+            case LOCAL_PHOTO: //图库选择
                 if (data == null) return;
-                Uri uri = data.getData(); // 获得图片的uri
+                Uri uri = data.getData(); //获得图片的uri
                 if (TextUtil.notNullObj(uri, error)) return;
-                //content://com.miui.gallery.open/raw/%2Fstorage%2Femulated%2F0%2FDCIM%2FCamera%2FIMG_20170919_101100.jpg
-                photoName = BitmapUtils.getRealPathFromURI(activity, uri);
+                photoName = BitmapUtils.getRealPathFromURI(activity, uri);//获取路径
                 if (TextUtil.notNull(photoName, error)) return;
-                bitmap = BitmapUtils.getBitmapFromPath(photoName);//获取bitmap
                 break;
         }
+        bitmap = BitmapUtils.getBitmapFromPath(photoName);//获取bitmap
         uploadPicture.UpLoadPicture(photoName, bitmap);
     }
 

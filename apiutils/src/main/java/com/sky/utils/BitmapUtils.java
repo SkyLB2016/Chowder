@@ -161,9 +161,21 @@ public class BitmapUtils {
      * @return
      */
     public static byte[] getBytesFromBitmap(Bitmap bitmap, int quality) {
-        ByteArrayOutputStream byteArrayout = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, quality, byteArrayout);
-        return byteArrayout.toByteArray();
+        ByteArrayOutputStream byteArrayout = null;
+        try {
+            byteArrayout = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, byteArrayout);
+            return byteArrayout.toByteArray();
+        } catch (Exception e) {
+
+        } finally {
+            try {
+                if (byteArrayout == null) byteArrayout.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
     /**
