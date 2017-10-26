@@ -7,7 +7,6 @@ import android.widget.EditText
 import butterknife.OnClick
 import com.sky.base.BaseNoPActivity
 import com.sky.chowder.R
-import com.sky.utils.RegexUtils
 import com.sky.utils.TextUtil
 import kotlinx.android.synthetic.main.activity_stock.*
 import java.text.DecimalFormat
@@ -67,8 +66,6 @@ class StockActivity : BaseNoPActivity() {
 
     @OnClick(R.id.btnBuy, R.id.btnSell)
     fun onClick(view: View) {
-        if (RegexUtils.isPhone("17191641161")) showToast("成功")
-        else showToast("失败")
         when (view.id) {
             R.id.btnBuy -> buyOrSell = "1"
             R.id.btnSell -> buyOrSell = "2"

@@ -1,8 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-def googleVer = '26.0.2'
-
 ext {
     bintrayRepo = 'skylb'
     bintrayName = 'apiutils'
@@ -16,7 +14,7 @@ ext {
     siteUrl = 'https://github.com/SkyLB2016/Chowder'
     gitUrl = 'https://github.com/SkyLB2016/Chowder.git'
 
-    libraryVersion = '2.2.62'
+    libraryVersion = '2.2.63'
     developerId = 'SkyLB2016'
 
     developerName = 'libin (sky)'
@@ -30,12 +28,10 @@ group = publishedGroupId// Maven Group ID for the artifact
 version = libraryVersion
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.2"
-
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 26
-        versionCode 20170512
+        versionCode 20171026
         versionName libraryVersion
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -49,27 +45,29 @@ android {
         abortOnError false
     }
 }
-
+def retrofit2 = '2.3.0'
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile "com.android.support:appcompat-v7:$googleVer"
-    compile "com.android.support:recyclerview-v7:$googleVer"
-    compile "com.android.support:design:$googleVer"
-    testCompile 'junit:junit:4.12'
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api "com.android.support:appcompat-v7:$googleVer"
+    api "com.android.support:recyclerview-v7:$googleVer"
+    api "com.android.support:design:$googleVer"
+    api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    compile 'io.reactivex.rxjava2:rxjava:2.1.0'
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.0.1'
-    compile 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
-    compile 'com.squareup.okhttp3:okhttp:3.8.0'
-//    compile 'com.jakewharton.rxrelay2:rxrelay:2.0.0'
-    compile 'com.jakewharton:butterknife:8.6.0'
+    //rxjava
+    api 'io.reactivex.rxjava2:rxjava:2.1.5'
+    api 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    //rxjava
 
+    //retrofit2
+    api "com.squareup.retrofit2:retrofit:$retrofit2"
+    api "com.squareup.retrofit2:converter-gson:$retrofit2"
+    api "com.squareup.retrofit2:adapter-rxjava2:$retrofit2"
+    //retrofit2
+
+    api 'com.squareup.okhttp3:okhttp:3.9.0'
+    api 'com.jakewharton:butterknife:8.8.1'
     //工具类
-//    compile 'com.blankj:utilcode:1.6.3'
-
+//    api 'com.blankj:utilcode:1.6.3'
 }
 //apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
 apply plugin: 'com.github.dcendents.android-maven'

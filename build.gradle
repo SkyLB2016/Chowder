@@ -1,7 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.1.51'
     repositories {
         google()
         jcenter()
@@ -14,6 +13,7 @@ buildscript {
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
         //kotlin
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+//        classpath 'com.jakewharton:butterknife-gradle-plugin:8.8.1'
         //方法总数监控
 //        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.6.4'
         // NOTE: Do not place your application dependencies here; they belong
@@ -63,5 +63,5 @@ task makeApk(type: Copy) {
     into('/sky/release/')//从哪到哪
 //    include('app-sky-release.apk')//指定移动这个文件
 //    rename('MyDemo-sky-release-v1.1-20150909.apk', POM_ARTIFACT_ID + '_' + VERSION_NAME + '.apk')
-    rename('app-sky-release.apk',"${buildTime()}.apk")
+    rename('app-sky-release.apk', "${buildTime()}.apk")
 }

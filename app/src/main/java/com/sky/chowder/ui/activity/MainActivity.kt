@@ -58,6 +58,8 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
     val sum2: (Int, Int, Int) -> Int = { x, y, z -> x + y }
     @OnClick(R.id.fab)
     fun fabOnClick() {
+        showToast("code=${AppUtils.getVersionCode(this)}")
+        showToast(AppUtils.getVersionName(this))
         LogUtils.i("${(2).plus(3)}")
 
 //        showToast("width==${ScreenUtils.getHeightPX(this)}")
