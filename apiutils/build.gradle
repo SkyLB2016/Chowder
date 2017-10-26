@@ -65,7 +65,7 @@ dependencies {
     //retrofit2
 
     api 'com.squareup.okhttp3:okhttp:3.9.0'
-    api 'com.jakewharton:butterknife:8.8.1'
+    api "com.jakewharton:butterknife:$bknifeVer"
     //工具类
 //    api 'com.blankj:utilcode:1.6.3'
 }
