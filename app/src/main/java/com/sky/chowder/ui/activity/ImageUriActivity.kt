@@ -53,10 +53,10 @@ class ImageUriActivity : RecyclerPActivity<String, ImageUriP>(), ImageUriV<Strin
 
     private fun showImagePop(position: Int) {
         val imagePop = URIPop(LayoutInflater.from(this).inflate(R.layout.viewpager, null))
-        imagePop!!.parentPath = loaderAdapter?.parentPath
-        imagePop!!.datas = adapter?.datas
-        imagePop!!.setCurrentItem(position)
-        if (!imagePop!!.isShowing) imagePop!!.showAtLocation(recycler, Gravity.CENTER, 0, 0)
+        imagePop.parentPath = loaderAdapter?.parentPath
+        imagePop.datas = adapter?.datas
+        imagePop.setCurrentItem(position)
+        if (!imagePop.isShowing) imagePop.showAtLocation(recycler, Gravity.CENTER, 0, 0)
     }
 
     override fun creatAdapter() {
@@ -114,10 +114,10 @@ class ImageUriActivity : RecyclerPActivity<String, ImageUriP>(), ImageUriV<Strin
 
     override fun setAdapterData(parent: File?) {
         val imageNames = Arrays.asList(*parent!!.list(filter))
-        loaderAdapter!!.parentPath = parent!!.absolutePath
+        loaderAdapter!!.parentPath = parent.absolutePath
         loaderAdapter!!.datas = imageNames
 
-        flodername!!.text = parent?.name
+        flodername!!.text = parent.name
         number!!.text = "共${imageNames.size}张图片"
     }
 

@@ -14,7 +14,7 @@ ext {
     siteUrl = 'https://github.com/SkyLB2016/Chowder'
     gitUrl = 'https://github.com/SkyLB2016/Chowder.git'
 
-    libraryVersion = '2.2.63'
+    libraryVersion = '2.2.66'
     developerId = 'SkyLB2016'
 
     developerName = 'libin (sky)'
@@ -47,25 +47,26 @@ android {
 }
 def retrofit2 = '2.3.0'
 dependencies {
-    api fileTree(include: ['*.jar'], dir: 'libs')
-    api "com.android.support:appcompat-v7:$googleVer"
-    api "com.android.support:recyclerview-v7:$googleVer"
-    api "com.android.support:design:$googleVer"
-    api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile "com.android.support:appcompat-v7:$googleVer"
+    compile "com.android.support:recyclerview-v7:$googleVer"
+    compile "com.android.support:design:$googleVer"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     //rxjava
-    api 'io.reactivex.rxjava2:rxjava:2.1.5'
-    api 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.5'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     //rxjava
 
     //retrofit2
-    api "com.squareup.retrofit2:retrofit:$retrofit2"
-    api "com.squareup.retrofit2:converter-gson:$retrofit2"
-    api "com.squareup.retrofit2:adapter-rxjava2:$retrofit2"
+    compile "com.squareup.retrofit2:retrofit:$retrofit2"
+    compile "com.squareup.retrofit2:converter-gson:$retrofit2"
+    compile "com.squareup.retrofit2:adapter-rxjava2:$retrofit2"
     //retrofit2
 
-    api 'com.squareup.okhttp3:okhttp:3.9.0'
-    api "com.jakewharton:butterknife:$bknifeVer"
+    compile 'com.squareup.okhttp3:okhttp:3.9.0'
+    compile "com.jakewharton:butterknife:$bknifeVer"
     //工具类
 //    api 'com.blankj:utilcode:1.6.3'
 }
