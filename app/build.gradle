@@ -19,7 +19,6 @@ dependencies {
 def keystorePropertiesFile = rootProject.file("keystore.properties")
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -49,10 +48,11 @@ android {
     }
     buildTypes {
         debug {
-            versionNameSuffix "-sky"
+            versionNameSuffix "-debug"
             signingConfig signingConfigs.debug
         }
         release {
+            versionNameSuffix "-release"
             minifyEnabled false //是否开启混淆
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release  //签名

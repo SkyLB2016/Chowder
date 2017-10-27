@@ -60,8 +60,7 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
     fun fabOnClick() {
         showToast("code=${AppUtils.getVersionCode(this)}")
         showToast(AppUtils.getVersionName(this))
-        LogUtils.i("${(2).plus(3)}")
-
+        LogUtils.i("${2.plus(3)}")
 //        showToast("width==${ScreenUtils.getHeightPX(this)}")
 //        IntentTest.startIntent(this, Extra<String>(),"com.sky.action")
 //        presenter.showToast("测试消息")
