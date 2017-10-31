@@ -7,8 +7,10 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
+import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 
 import java.io.File;
 
@@ -88,9 +90,15 @@ public class AppUtils {
      *
      * @param file 要安装的文件
      */
+    //打开相机
     public static void installApp(Context context, File file) {
         Intent install = new Intent(Intent.ACTION_VIEW);
-        install.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+        Uri uri;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+            uri = FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", file);
+        else uri = Uri.fromFile(file);
+        install.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);//添加这一句表示对目标应用临时授权该Uri所代表的文件
+        install.setDataAndType(uri, "application/vnd.android.package-archive");
         context.startActivity(install);
     }
 }

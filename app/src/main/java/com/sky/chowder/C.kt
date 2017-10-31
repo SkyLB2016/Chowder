@@ -9,7 +9,7 @@ object C {
 
     val ACTION_NEW_VERSION = "apk.update.action"
     val ACTION_PUSH_DATA = "fm.data.push.action"
-    const val ACTION_MY = "android.intent.action.MYBROADCAST"
+    val ACTION_MY = "android.intent.action.MYBROADCAST"
 
     //    val BASE_URL = "http://uat.b.quancome.com/platform/api"
     private const val TEST_BASE_URL = "http://test.services.banyunbang.com.cn/"//测试请求地址

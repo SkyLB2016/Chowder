@@ -6,10 +6,23 @@
 
     <!--<external-path name="name" path="path" /> //Environment.getExternalStorageDirectory()-->
 
-    <!--<external-files-path name="name" path="path" />//getExternalFilesDir(String) Context.getExternalFilesDir(null)-->
+    <!--getExternalFilesDir(String) Context.getExternalFilesDir(null)-->
+    <!--<external-files-path name="name" path="path" />-->
 
     <!--<external-cache-path name="name" path="path" /> //Context.getExternalCacheDir()-->
     <external-files-path
-        name="images"
+        name="Pictures"
         path="/" />
+    <external-files-path
+        name="Download"
+        path="/" />
+    <external-files-path
+        name="Documents"
+        path="/" />
+    <external-files-path
+        name="camera_photos"
+        path="/" />
+    <external-path
+        name="external_storage_root"
+        path="." />
 </paths>
