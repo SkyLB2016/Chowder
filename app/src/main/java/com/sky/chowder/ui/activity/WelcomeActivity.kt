@@ -26,8 +26,6 @@ class WelcomeActivity : AppCompatActivity() {
         val view = ImageView(this)
         view.setBackgroundResource(R.mipmap.guide01)
         setContentView(view)
-        //SPUtils.put(WelcomeActivity.this, "isfirst", true);
-        //        flag = (Boolean) SPUtils.getInstance().get(Common.ISFIRST, true);
         //加载动画
         val animation = AlphaAnimation(0.5f, 1f)
         animation.duration = TIME

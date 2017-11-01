@@ -10,10 +10,6 @@ import android.net.NetworkInfo;
  * 网络判断
  */
 public class NetworkUtils {
-    private static NetworkInfo getActiveNetworkInfo(Context context) {
-        return getConnect(context).getActiveNetworkInfo();
-    }
-
     private static ConnectivityManager getConnect(Context context) {
         return (ConnectivityManager) context.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
     }
@@ -22,21 +18,27 @@ public class NetworkUtils {
      * 判断网络是否连接，推荐
      */
     public static boolean isConnected(Context context) {
-        return getActiveNetworkInfo(context).isConnected();
+        NetworkInfo info = getConnect(context).getActiveNetworkInfo();
+        if (info == null) return false;
+        return info.isConnected();
     }
 
     /**
      * 判断是否是gprs网络，即移动网络
      */
     public static boolean isMobile(Context context) {
-        return getActiveNetworkInfo(context).getType() == ConnectivityManager.TYPE_MOBILE;
+        NetworkInfo info = getConnect(context).getActiveNetworkInfo();
+        if (info == null) return false;
+        return info.getType() == ConnectivityManager.TYPE_MOBILE;
     }
 
     /**
      * 判断wifi是否连接
      */
     public static boolean isWifi(Context context) {
-        return getActiveNetworkInfo(context).getType() == ConnectivityManager.TYPE_WIFI;
+        NetworkInfo info = getConnect(context).getActiveNetworkInfo();
+        if (info == null) return false;
+        return info.getType() == ConnectivityManager.TYPE_WIFI;
     }
 
     /**

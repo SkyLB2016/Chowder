@@ -7,9 +7,11 @@ import com.sky.SkyApp
 import com.sky.base.BasePActivity
 import com.sky.chowder.R
 import com.sky.chowder.ui.presenter.SolarP
+import com.sky.utils.BitmapUtils
 import com.sky.utils.LogUtils
 import com.sky.utils.PhotoUtils
 import kotlinx.android.synthetic.main.test_image.*
+import java.io.File
 
 /**
  * Created by SKY on 2017/6/15.
@@ -19,11 +21,8 @@ class PhotoActivity : BasePActivity<SolarP>() {
     private lateinit var photoUtils: PhotoUtils
 
     override fun getLayoutResId(): Int = R.layout.test_image
-
     override fun creatPresenter(): SolarP = SolarP(this)
-
-    override fun initialize() {
-    }
+    override fun initialize() = Unit
 
     @OnClick(R.id.image)
     fun onClick(v: View) {
@@ -31,12 +30,18 @@ class PhotoActivity : BasePActivity<SolarP>() {
     }
 
     private fun getPhoto() {
-        val photoName = SkyApp.getInstance().picCacheDir + System.currentTimeMillis() + ".jpg"
-        photoUtils = PhotoUtils(this, photoName)
+        val photoPath = SkyApp.getInstance().picCacheDir + System.currentTimeMillis() + ".jpg"
+        photoUtils = PhotoUtils(this, photoPath)
         photoUtils?.setUploadPicture { photo, bitmap ->
             image!!.setImageBitmap(bitmap)
             LogUtils.i("photo==$photo")
-            LogUtils.i("bitmapName==${bitmap.allocationByteCount}")
+            LogUtils.i("压缩后所占内存大小==${bitmap.allocationByteCount / 1024}KB")
+            LogUtils.i("原图所占内存大小==${BitmapUtils.getBitmapFromPath(photo).allocationByteCount / 1024 / 1024}MB")
+
+            val compress = SkyApp.getInstance().picCacheDir + System.currentTimeMillis() % 1000 + ".jpg"
+            BitmapUtils.saveBitmapToFile(bitmap, compress)//保存照片到应用缓存文件目录下
+            LogUtils.i("原图文件大小==${File(photo).length() / 1024 / 1024}MB")
+            LogUtils.i("压缩后文件大小==${File(compress).length() / 1024}KB")
         }
     }
 

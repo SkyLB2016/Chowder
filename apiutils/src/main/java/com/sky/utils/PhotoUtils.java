@@ -26,7 +26,7 @@ import java.io.File;
  */
 public class PhotoUtils {
     private AppCompatActivity activity;
-    private String photoName;//图片所在的位置
+    private String photoPath;//图片所在的位置
 
     private static final int PHOTO = 1501; // 拍照
     private static final int PHOTO_PERMISSIONS = 1502; // 拍照权限请求
@@ -34,9 +34,9 @@ public class PhotoUtils {
     private static final int LOCAL_PHOTO_PERMISSIONS = 1504; // 图库相册权限
 
     @SuppressLint("RestrictedApi")
-    public PhotoUtils(AppCompatActivity context, String photoName) {
+    public PhotoUtils(AppCompatActivity context, String photoPath) {
         this.activity = context;
-        this.photoName = photoName;
+        this.photoPath = photoPath;
         new AlertDialog.Builder(new ContextThemeWrapper(context, R.style.AlertDialog))
                 .setItems(new String[]{"拍照", "本地照片"},
                         new DialogInterface.OnClickListener() {
@@ -70,7 +70,7 @@ public class PhotoUtils {
     //打开相机
     private void startCamera() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        File file = new File(photoName);
+        File file = new File(photoPath);
         Uri uri;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             //第二参数是在manifest.xml定义 provider的authorities属性
@@ -109,22 +109,22 @@ public class PhotoUtils {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != Activity.RESULT_OK) return;
         String error = activity.getString(R.string.photo_fail);
-        if (TextUtil.notNull(photoName, error)) return;
+        if (TextUtil.notNull(photoPath, error)) return;
         Bitmap bitmap = null;
         switch (requestCode) {
 //            case PHOTO: //拍照
-//                BitmapUtils.saveBitmapToFile(bitmap, photoName);//保存照片到应用缓存文件目录下
+//                BitmapUtils.saveBitmapToFile(bitmap, photoPath);//保存照片到应用缓存文件目录下
 //                break;
             case LOCAL_PHOTO: //图库选择
                 if (data == null) return;
                 Uri uri = data.getData(); //获得图片的uri
                 if (TextUtil.notNullObj(uri, error)) return;
-                photoName = BitmapUtils.getRealPathFromURI(activity, uri);//获取路径
-                if (TextUtil.notNull(photoName, error)) return;
+                photoPath = BitmapUtils.getRealPathFromURI(activity, uri);//获取路径
+                if (TextUtil.notNull(photoPath, error)) return;
                 break;
         }
-        bitmap = BitmapUtils.getBitmapFromPath(photoName);//获取bitmap
-        uploadPicture.UpLoadPicture(photoName, bitmap);
+        bitmap = BitmapUtils.getBitmapFromPath(photoPath,600,600);//获取bitmap
+        uploadPicture.UpLoadPicture(photoPath, bitmap);
     }
 
     private void showToast(String text) {
