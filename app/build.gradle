@@ -32,6 +32,10 @@ android {
 //        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [CHANNEL_VALUE: "umeng"]//默认是umeng的渠道
+        ndk {
+            //添加对应cpu类型的.so库。
+            abiFilters 'armeabi-v7a', 'armeabi-v8a', 'armeabi'
+        }
     }
     signingConfigs {
         debug {
@@ -51,6 +55,7 @@ android {
         debug {
             versionNameSuffix "-debug"
             signingConfig signingConfigs.debug
+            creatName()
         }
         release {
             versionNameSuffix "-release"
@@ -58,6 +63,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release  //签名
             zipAlignEnabled true //Zipalign优化
+            creatName()
         }
     }
     //执行lint检查，有任何的错误或者警告提示，都会终止构建，我们可以将其关掉。
@@ -76,24 +82,26 @@ android {
     productFlavors.all { flavor ->
         flavor.manifestPlaceholders = [CHANNEL_VALUE: name]
     }
+}
+def creatName(){
     android.applicationVariants.all { variant ->
         variant.outputs.all {
-            outputFileName = "${variant.name}-${variant.versionName}.apk"
+            outputFileName = "${variant.baseName}-${variant.versionName}.apk"
         }
     }
-//    applicationVariants.all { variant ->
-//        variant.outputs.all { output ->
-//            output.processManifest.doLast {
-//                // Stores the path to the maifest.
-//                String manifestPath = "$manifestOutputDirectory/AndroidManifest.xml"
-//                // Stores the contents of the manifest.
-//                def manifestContent = file(manifestPath).getText()
-//                // Changes the version code in the stored text.
-////                manifestContent = manifestContent.replace('android:versionCode="1"', String.format('android:versionCode="%s"', generatedCode))
-//                // Overwrites the manifest with the new text.
-//                file(manifestPath).write(manifestContent)
-//            }
-//
-//        }
-//    }
 }
+//            applicationVariants.all { variant ->
+//                variant.outputs.all { output ->
+//                    output.processManifest.doLast {
+//                        // Stores the path to the maifest.
+//                        String manifestPath = "$manifestOutputDirectory/AndroidManifest.xml"
+//                        // Stores the contents of the manifest.
+//                        def manifestContent = file(manifestPath).getText()
+//                        // Changes the version code in the stored text.
+//                manifestContent = manifestContent.replace('android:versionCode="1"', String.format('android:versionCode="%s"', generatedCode))
+//                        // Overwrites the manifest with the new text.
+//                        file(manifestPath).write(manifestContent)
+//                    }
+//
+//                }
+//            }
