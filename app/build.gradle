@@ -83,10 +83,12 @@ android {
         flavor.manifestPlaceholders = [CHANNEL_VALUE: name]
     }
 }
-def creatName(){
+
+def creatName() {
     android.applicationVariants.all { variant ->
         variant.outputs.all {
-            outputFileName = "${variant.baseName}-${variant.versionName}.apk"
+            if (variant.buildType.name == "debug") outputFileName = "${variant.baseName}-${variant.versionName}.apk"
+            else outputFileName = "${variant.baseName}-${variant.versionName}.apk"
         }
     }
 }
