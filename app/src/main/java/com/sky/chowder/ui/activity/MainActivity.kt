@@ -56,11 +56,22 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
     val sum = { x: Int, y: Int -> x + y }
     val sum1: (Int, Int) -> Int = { x, y -> x + y }
     val sum2: (Int, Int, Int) -> Int = { x, y, z -> x + y }
+    private var test: String? = null
+    private var test1 = ""
+    private var test2 = "22"
+    private var temp = "temp"
+
     @OnClick(R.id.fab)
     fun fabOnClick() {
-        showToast("code=${AppUtils.getVersionCode(this)}")
-        showToast(AppUtils.getVersionName(this))
-        LogUtils.i("${2.plus(3)}")
+        test?.let { temp = it }
+        LogUtils.i("$temp==$test xaing")
+        test1?.let { temp = it }
+        LogUtils.i("$temp==$test1 xaing")
+        test2?.let { temp = it }
+        LogUtils.i("$temp==$test2 xaing")
+        temp = test ?: "KHKJHKJ"
+        LogUtils.i("$temp==$test")
+
 //        showToast("width==${ScreenUtils.getHeightPX(this)}")
 //        IntentTest.startIntent(this, Extra<String>(),"com.sky.action")
 //        presenter.showToast("测试消息")
