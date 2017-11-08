@@ -11,15 +11,22 @@ import android.view.Menu
 import android.view.MenuItem
 import butterknife.OnClick
 import com.google.gson.reflect.TypeToken
+import com.sky.ErrorMes
 import com.sky.SkyApp
+import com.sky.api.OnRequestCallback
 import com.sky.base.BasePActivity
 import com.sky.chowder.R
 import com.sky.chowder.api.view.IMainView
 import com.sky.chowder.model.ActivityModel
+import com.sky.chowder.model.LoginEntity
+import com.sky.chowder.model.params.LoginParams
 import com.sky.chowder.ui.adapter.MainAdapter
 import com.sky.chowder.ui.presenter.MainP
+import com.sky.chowder.utils.http.HttpUtils
+import com.sky.chowder.utils.http.UseCase
 import com.sky.model.ApiResponse
 import com.sky.utils.*
+import io.reactivex.Observable
 import kotlinx.android.synthetic.main.content_main.*
 
 
@@ -59,19 +66,18 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
     private var test: String? = null
     private var test1 = ""
     private var test2 = "22"
-    private var temp = "temp"
+    private var temp: List<String>? = null//计价详细信息
 
     @OnClick(R.id.fab)
     fun fabOnClick() {
-        test?.let { temp = it }
-        LogUtils.i("$temp==$test xaing")
-        test1?.let { temp = it }
-        LogUtils.i("$temp==$test1 xaing")
-        test2?.let { temp = it }
-        LogUtils.i("$temp==$test2 xaing")
-        temp = test ?: "KHKJHKJ"
-        LogUtils.i("$temp==$test")
-
+        test?.let { LogUtils.i("test==$it") }
+        test1?.let { LogUtils.i("test1==$it") }
+        test2?.let { LogUtils.i("test2==$it") }
+        temp?.let { LogUtils.i("temp==$it") }
+        temp?.isEmpty()?.let { LogUtils.i("temp==$it") }
+        test?.isEmpty()?.let { LogUtils.i("test==$it") }
+        test1?.isEmpty()?.let { LogUtils.i("test1==$it") }
+        test2?.isEmpty()?.let { LogUtils.i("test2==$it") }
 //        showToast("width==${ScreenUtils.getHeightPX(this)}")
 //        IntentTest.startIntent(this, Extra<String>(),"com.sky.action")
 //        presenter.showToast("测试消息")

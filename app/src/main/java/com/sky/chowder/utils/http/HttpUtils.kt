@@ -14,6 +14,18 @@ import retrofit2.converter.gson.GsonConverterFactory
  * 网络请求类
  */
 class HttpUtils private constructor() : BaseHttp() {
+    companion object {
+        private var utils: HttpUtils? = null
+
+        val instance: HttpUtils
+            get() {
+                if (utils == null)
+                    synchronized(HttpUtils::class.java) {
+                        if (utils == null) utils = HttpUtils()
+                    }
+                return utils!!
+            }
+    }
 
     init {
         initClient()
@@ -34,19 +46,4 @@ class HttpUtils private constructor() : BaseHttp() {
                 .create(IHttpUrl::class.java)
                 .getMuKe()
     }
-
-    companion object {
-        private var utils: HttpUtils? = null
-
-        val instance: HttpUtils
-            get() {
-                if (utils == null)
-                    synchronized(HttpUtils::class.java) {
-                        if (utils == null) utils = HttpUtils()
-                    }
-                return utils!!
-            }
-    }
-
-
 }
