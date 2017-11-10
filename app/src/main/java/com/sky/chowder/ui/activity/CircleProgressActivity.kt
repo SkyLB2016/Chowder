@@ -52,6 +52,7 @@ class CircleProgressActivity : BaseNoPActivity() {
         tv3.text = span3
 
         //两次缩小字体，设置字体为红色（small可以减小字号）
-        tv4.text = Html.fromHtml("4.天行健，君子以自强不息；<font color='#00ffff'><medium>地势坤，君子以厚德载物。</medium></font>")
+        tv4.text = Html.fromHtml("4.<>天行健，君子以自强不息；<font color='#00ffff'><medium>地势坤，君子以厚德载物。</medium></font>")
+        tv5.setText(R.string.test)
     }
 }

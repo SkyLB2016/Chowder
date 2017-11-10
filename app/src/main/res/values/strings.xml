@@ -45,6 +45,8 @@
     <string name="act_07">service</string>
     <string name="act_07_desc">service</string>
 
+    <string name="test"><i><b><u>service</u></b></i></string>
+
 
     <string name="left_top">left_top</string>
     <string name="left_bottom">left_bottom</string>

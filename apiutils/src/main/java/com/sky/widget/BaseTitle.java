@@ -46,8 +46,8 @@ public class BaseTitle {
         toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         if (toolbar == null) return;
         toolbar.setTitle("");//默认为居左,所以隐藏
-        tvCenter = (TextView) toolbar.findViewById(R.id.tv_center);
-        tvRight = (TextView) toolbar.findViewById(R.id.tv_right);
+        tvCenter = (TextView) toolbar.findViewById(R.id.tvCenter);
+        tvRight = (TextView) toolbar.findViewById(R.id.tvRight);
         tvCenter.setText(title);//居中的标题
         activity.setSupportActionBar(toolbar);
         //toolbar.setBackground(R.);

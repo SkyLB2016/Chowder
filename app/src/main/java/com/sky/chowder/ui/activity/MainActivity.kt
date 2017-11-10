@@ -11,22 +11,15 @@ import android.view.Menu
 import android.view.MenuItem
 import butterknife.OnClick
 import com.google.gson.reflect.TypeToken
-import com.sky.ErrorMes
 import com.sky.SkyApp
-import com.sky.api.OnRequestCallback
 import com.sky.base.BasePActivity
 import com.sky.chowder.R
 import com.sky.chowder.api.view.IMainView
 import com.sky.chowder.model.ActivityModel
-import com.sky.chowder.model.LoginEntity
-import com.sky.chowder.model.params.LoginParams
 import com.sky.chowder.ui.adapter.MainAdapter
 import com.sky.chowder.ui.presenter.MainP
-import com.sky.chowder.utils.http.HttpUtils
-import com.sky.chowder.utils.http.UseCase
 import com.sky.model.ApiResponse
 import com.sky.utils.*
-import io.reactivex.Observable
 import kotlinx.android.synthetic.main.content_main.*
 
 
@@ -70,14 +63,9 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 
     @OnClick(R.id.fab)
     fun fabOnClick() {
-        test?.let { LogUtils.i("test==$it") }
-        test1?.let { LogUtils.i("test1==$it") }
-        test2?.let { LogUtils.i("test2==$it") }
-        temp?.let { LogUtils.i("temp==$it") }
-        temp?.isEmpty()?.let { LogUtils.i("temp==$it") }
-        test?.isEmpty()?.let { LogUtils.i("test==$it") }
-        test1?.isEmpty()?.let { LogUtils.i("test1==$it") }
-        test2?.isEmpty()?.let { LogUtils.i("test2==$it") }
+        LogUtils.i("${resources.getDimension(R.dimen.text_micro)}")
+        LogUtils.i("${resources.getDimensionPixelOffset(R.dimen.text_micro)}")
+        LogUtils.i("${resources.getDimensionPixelSize(R.dimen.text_micro)}")
 //        showToast("width==${ScreenUtils.getHeightPX(this)}")
 //        IntentTest.startIntent(this, Extra<String>(),"com.sky.action")
 //        presenter.showToast("测试消息")
