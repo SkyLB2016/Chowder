@@ -13,4 +13,8 @@ public interface IRefreshV<T> extends IBaseView {
     void setAdapterList(List<T> entities);
 
     void addAdapterList(List<T> entities);
+
+    void addHintView();//无数据时的提示view
+
+    void removeHintView();//移除view
 }

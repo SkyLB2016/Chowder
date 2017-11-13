@@ -106,6 +106,16 @@ public abstract class RecyclerPActivity<T, P extends RefreshP> extends BasePActi
         adapter.addDatas(entities);
     }
 
+    @Override
+    public void addHintView() {
+
+    }
+
+    @Override
+    public void removeHintView() {
+
+    }
+
     public void setRecyclerLayout(RecyclerView.LayoutManager manager) {
         recycler.setLayoutManager(manager);
     }
