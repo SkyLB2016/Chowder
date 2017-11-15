@@ -38,7 +38,7 @@ class MainP(context: Context) : BasePresenter<IMainView>(context), IMainPresente
             //mainIntent.setPackage(getPackageName());//只选出自己应用的act
             val mainIntent = Intent("com.sky.coustom") //自定义的action
             val manager = context.packageManager
-            val resolveInfos = manager.queryIntentActivities(mainIntent, 0) ?: return activityInfos
+            val resolveInfos = manager?.queryIntentActivities(mainIntent, 0) ?: return activityInfos
 
             for (i in resolveInfos.indices) {
                 val info = resolveInfos[i]

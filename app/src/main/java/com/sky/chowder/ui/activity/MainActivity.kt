@@ -66,6 +66,13 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
         LogUtils.i("${resources.getDimension(R.dimen.text_micro)}")
         LogUtils.i("${resources.getDimensionPixelOffset(R.dimen.text_micro)}")
         LogUtils.i("${resources.getDimensionPixelSize(R.dimen.text_micro)}")
+        if (RegexUtils.isEmail("1136096189@qq.m")) {
+            LogUtils.i("1136096189@qq.com")
+        }
+        if (RegexUtils.isEmail("13263172003@163.com")) {
+            LogUtils.i("1136096189@qq.com")
+        }
+
 //        showToast("width==${ScreenUtils.getHeightPX(this)}")
 //        IntentTest.startIntent(this, Extra<String>(),"com.sky.action")
 //        presenter.showToast("测试消息")

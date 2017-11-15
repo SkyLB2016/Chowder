@@ -138,6 +138,6 @@ public class PhotoUtils {
     }
 
     public interface UploadPictureListener {
-        void UpLoadPicture(String photoName, Bitmap bitmap);
+        void UpLoadPicture(String photoPath, Bitmap bitmap);
     }
 }

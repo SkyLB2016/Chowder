@@ -1,5 +1,7 @@
 package com.sky.chowder;
 
+import com.sky.utils.RegexUtils;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,21 +21,24 @@ public class JavaConsole {
         while ((count = reader.read(chars)) != -1) {
             content = new String(chars, 0, count);
             System.out.println(content + "个");
+            if (RegexUtils.isCarNo(content)) {
+                System.out.println("成功");
+            }
         }
         reader.reset();
-        while ((count = reader.read(chars)) != -1) {
-            content = new String(chars, 0, count);
-
-            System.out.println(content + "加");
-        }
-        while ((count = inputStream.read(butes)) != -1) {
-            content = new String(butes, 0, count);
-            content = content.replace('\n', ' ');
-            JavaConsole.id = content;
-            System.out.println("第" + content + "个=");
-            System.out.println("第" + JavaConsole.id + "个=");
-//            System.out.println(f(Integer.parseInt(content.trim())));
-        }
+//        while ((count = reader.read(chars)) != -1) {
+//            content = new String(chars, 0, count);
+//
+//            System.out.println(content + "加");
+//        }
+//        while ((count = inputStream.read(butes)) != -1) {
+//            content = new String(butes, 0, count);
+//            content = content.replace('\n', ' ');
+//            JavaConsole.id = content;
+//            System.out.println("第" + content + "个=");
+//            System.out.println("第" + JavaConsole.id + "个=");
+////            System.out.println(f(Integer.parseInt(content.trim())));
+//        }
     }
 
 }

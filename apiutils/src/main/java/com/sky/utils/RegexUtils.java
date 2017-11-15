@@ -9,7 +9,9 @@ import java.util.regex.Pattern;
 public class RegexUtils {
 
     //1.邮箱
-    private static final String EMAIL = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";
+    private static final String EMAIL = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    //    private static final String EMAIL = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";
+
     //2.域名
     private static final String DOMAINNAME = "[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(/.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+/.?";
     //3.InternetURL
@@ -82,12 +84,15 @@ public class RegexUtils {
 //            34 IP地址：((?:(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d)\\.){3}(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d))
     //车牌号
     public static final String CARDNUM = "^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4}[A-Z0-9挂学警港澳]{1}$";
+    public static final String CARNO = "^[\u4e00-\u9fff]{1}[A-Z]{1}[A-Z0-9]{5,6}$";
 
     public static final Pattern PATTERN_CARNUM = Pattern.compile(CARDNUM);
     public static final Pattern PATTERN_PHONE = Pattern.compile(PHONE);
     public static final Pattern PATTERN_IDNUMBER = Pattern.compile(IDNUMBER);
     public static final Pattern PATTERN_IDNUMBER1 = Pattern.compile(IDNUMBER1);
     public static final Pattern PATTERN_IDNUMBER2 = Pattern.compile(IDNUMBER2);
+    public static final Pattern PATTERN_EMAIL= Pattern.compile(EMAIL);
+    public static final Pattern PATTERN_CARNO= Pattern.compile(CARNO);
 
     /**
      * @param source  需要判断的字符串
@@ -116,11 +121,19 @@ public class RegexUtils {
     }
 
     /**
+     * @param source 邮箱账号
+     * @return 邮箱是否正确
+     */
+    public static boolean isEmail(String source) {
+        return matches(source, PATTERN_EMAIL);
+    }
+
+    /**
      * @param source 身份证号
      * @return 身份证是否正确
      */
     public static boolean isIdNumber(String source) {
-        return matches(source, PATTERN_IDNUMBER)||matches(source, PATTERN_IDNUMBER1)||matches(source, PATTERN_IDNUMBER2);
+        return matches(source, PATTERN_IDNUMBER) || matches(source, PATTERN_IDNUMBER1) || matches(source, PATTERN_IDNUMBER2);
     }
 
     /**
@@ -129,5 +142,8 @@ public class RegexUtils {
      */
     public static boolean isCarNum(String source) {
         return matches(source, PATTERN_CARNUM);
+    }
+    public static boolean isCarNo(String source) {
+        return matches(source, PATTERN_CARNO);
     }
 }

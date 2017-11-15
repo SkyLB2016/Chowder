@@ -67,6 +67,18 @@ public class BaseTitle {
         toolbar.setVisibility(vis);
     }
 
+    public Toolbar getToolbar() {
+        return toolbar;
+    }
+
+    public TextView getTvCenter() {
+        return tvCenter;
+    }
+
+    public TextView getTvRight() {
+        return tvRight;
+    }
+
     /**
      * 设置居中标题
      *
