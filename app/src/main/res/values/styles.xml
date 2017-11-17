@@ -12,7 +12,7 @@
         <!-- 窗口的背景颜色 -->
         <item name="android:windowBackground">@color/white</item>
         <!-- 标题颜色；与drawerlayout共用会崩溃 -->
-        <item name="android:textColorPrimary">#FF0000</item>
+        <!--<item name="android:textColorPrimary">#FF00FF</item>-->
         <!-- 箭头 -->
         <!--<item name="drawerArrowStyle">@style/AppTheme.DrawerArrowToggle</item>-->
         <!-- 菜单按钮 -->

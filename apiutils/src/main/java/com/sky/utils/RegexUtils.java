@@ -91,8 +91,8 @@ public class RegexUtils {
     public static final Pattern PATTERN_IDNUMBER = Pattern.compile(IDNUMBER);
     public static final Pattern PATTERN_IDNUMBER1 = Pattern.compile(IDNUMBER1);
     public static final Pattern PATTERN_IDNUMBER2 = Pattern.compile(IDNUMBER2);
-    public static final Pattern PATTERN_EMAIL= Pattern.compile(EMAIL);
-    public static final Pattern PATTERN_CARNO= Pattern.compile(CARNO);
+    public static final Pattern PATTERN_EMAIL = Pattern.compile(EMAIL);
+    public static final Pattern PATTERN_CARNO = Pattern.compile(CARNO);
 
     /**
      * @param source  需要判断的字符串
@@ -143,6 +143,7 @@ public class RegexUtils {
     public static boolean isCarNum(String source) {
         return matches(source, PATTERN_CARNUM);
     }
+
     public static boolean isCarNo(String source) {
         return matches(source, PATTERN_CARNO);
     }

@@ -16,21 +16,16 @@ public class JavaConsole {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int count;
         String content;
-        byte[] butes = new byte[1024];
         char[] chars = new char[1024];
         while ((count = reader.read(chars)) != -1) {
             content = new String(chars, 0, count);
-            System.out.println(content + "个");
-            if (RegexUtils.isCarNo(content)) {
+//            System.out.println(content.trim() + "个" + count);
+            if (RegexUtils.isEmail(content.trim())) {
                 System.out.println("成功");
-            }
+            } else System.out.println("失败");
         }
         reader.reset();
-//        while ((count = reader.read(chars)) != -1) {
-//            content = new String(chars, 0, count);
-//
-//            System.out.println(content + "加");
-//        }
+//        byte[] butes = new byte[1024];
 //        while ((count = inputStream.read(butes)) != -1) {
 //            content = new String(butes, 0, count);
 //            content = content.replace('\n', ' ');

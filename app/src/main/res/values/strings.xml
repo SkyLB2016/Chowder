@@ -141,6 +141,7 @@
         ]
     </string>
     <string name="act_20">PhotoActivity</string>
+    <string name="act_21">TimeActivity</string>
 
 
 </resources>

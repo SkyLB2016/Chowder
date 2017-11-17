@@ -55,7 +55,7 @@
 
         <activity android:name=".ui.activity.GuideActivity" />
         <activity
-            android:name=".ui.activity.WelcomeActivity"
+            android:name=".ui.activity.TimeActivity"
             android:description="@string/act_01_des">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -221,7 +221,8 @@
             <intent-filter>
                 <action android:name="com.sky.coustom" />
             </intent-filter>
-        </activity><activity
+        </activity>
+        <activity
             android:name=".ui.activity.PhotoActivity"
             android:description="@string/act_20"
             android:icon="@mipmap/ic_launcher"
@@ -232,7 +233,16 @@
             </intent-filter>
         </activity>
 
-
+        <!--<activity-->
+            <!--android:name=".ui.activity.TimeActivity"-->
+            <!--android:description="@string/act_21"-->
+            <!--android:icon="@mipmap/ic_launcher"-->
+            <!--android:label="@string/act_21"-->
+            <!--android:screenOrientation="portrait">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="com.sky.coustom" />-->
+            <!--</intent-filter>-->
+        <!--</activity>-->
         <activity
             android:name=".ui.activity.BroadActivity"
             android:description="@string/act_06_desc"
