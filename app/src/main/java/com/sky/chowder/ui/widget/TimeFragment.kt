@@ -12,6 +12,7 @@ import butterknife.ButterKnife
 import butterknife.OnClick
 import com.sky.chowder.R
 import com.sky.utils.DateUtil
+import com.sky.utils.LogUtils
 import com.sky.utils.ScreenUtils
 import com.sky.utils.ToastUtils
 import kotlinx.android.synthetic.main.fragment_time.*
@@ -28,8 +29,11 @@ class TimeFragment : DialogFragment() {
     var minute = "00"
     private val disOnClick: OnDismissListener? = null
 
-
     var onClick: OnClickListener? = null
+
+    val minCal = Calendar.getInstance()
+    val maxCal = Calendar.getInstance()
+    val currentCal = Calendar.getInstance()
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         //去掉默认的标题
@@ -47,6 +51,9 @@ class TimeFragment : DialogFragment() {
     }
 
     private fun initData() {
+        minCal.timeInMillis = System.currentTimeMillis()-10000
+        currentCal.timeInMillis = System.currentTimeMillis()
+        maxCal.timeInMillis = System.currentTimeMillis() + 15 * 24 * 3600 * 1000
         //获取全部私有属性
         val pickerFields = NumberPicker::class.java.declaredFields
         var formatter: NumberPicker.Formatter? = null
@@ -64,41 +71,31 @@ class TimeFragment : DialogFragment() {
             }
         }
         val interval = 15
-        val newCalendar = Calendar.getInstance()
-        year = newCalendar.get(Calendar.YEAR)
-        month = newCalendar.get(Calendar.MONTH) + 1
-        day = newCalendar.get(Calendar.DAY_OF_MONTH)
-        hour = newCalendar.get(Calendar.HOUR_OF_DAY)
+
+        year = currentCal.get(Calendar.YEAR)
+        month = currentCal.get(Calendar.MONTH) + 1
+        day = currentCal.get(Calendar.DAY_OF_MONTH)
+        hour = currentCal.get(Calendar.HOUR_OF_DAY)
 
         val str = arrayOf("00", "15", "30", "45")
-        val min = newCalendar.get(Calendar.MINUTE) / 15
+        val min = currentCal.get(Calendar.MINUTE) / 15
         minute = str[min]
 
-        newCalendar.timeInMillis = System.currentTimeMillis() + 15 * 24 * 3600 * 1000
-        var maxMonth = newCalendar.get(Calendar.MONTH) + 1
-        var maxDay = newCalendar.get(Calendar.DAY_OF_MONTH)
-        var listMonth = arrayListOf<String>()
-        if (month == maxMonth) listMonth.add(month.toString())
-        else {
-            listMonth.add(month.toString())
-            listMonth.add(maxMonth.toString())
-        }
 
-//        for (i in listMonth)var listMonth = arrayListOf<String>()
+        var maxMonth = maxCal.get(Calendar.MONTH) + 1
+        var maxDay = maxCal.get(Calendar.DAY_OF_MONTH)
 
-        npMonth.displayedValues = listMonth.toArray() as Array<out String>?
-        npMonth.maxValue = listMonth.size - 1
-        npMonth.minValue = 0
-        npMonth.value = 0
-        npHour.setFormatter(formatter)
-        npMonth.setOnValueChangedListener { picker, oldVal, newVal -> month = newVal }
-
+        npMonth.maxValue = 12
+        npMonth.minValue = 1
+        npMonth.value = month
+        npMonth.setFormatter(formatter)
+        npMonth.setOnValueChangedListener(onChangeListener)
 
         npDate.maxValue = 31
         npDate.minValue = 1
         npDate.value = day
-        npHour.setFormatter(formatter)
-        npDate.setOnValueChangedListener { picker, oldVal, newVal -> day = newVal }
+        npDate.setFormatter(formatter)
+        npDate.setOnValueChangedListener(onChangeListener)
 
         npHour.maxValue = 23
         npHour.minValue = 0
@@ -112,6 +109,45 @@ class TimeFragment : DialogFragment() {
         npMinute.minValue = 0
         npMinute.value = min
         npMinute.setOnValueChangedListener { picker, oldVal, newVal -> minute = str[newVal] }
+
+    }
+
+    private val onChangeListener = NumberPicker.OnValueChangeListener { picker, oldVal, newVal ->
+        val mTempDate = Calendar.getInstance()
+        mTempDate.timeInMillis = currentCal.timeInMillis
+        // take care of wrapping of days and months to update greater fields
+        if (picker === npDate) {
+            val maxDayOfMonth = mTempDate.getActualMaximum(Calendar.DAY_OF_MONTH)
+            if (oldVal == maxDayOfMonth && newVal == 1) {
+                mTempDate.add(Calendar.DAY_OF_MONTH, 1)
+            } else if (oldVal == 1 && newVal == maxDayOfMonth) {
+                mTempDate.add(Calendar.DAY_OF_MONTH, -1)
+            } else {
+                mTempDate.add(Calendar.DAY_OF_MONTH, newVal - oldVal)
+            }
+        } else if (picker === npMonth) {
+            if (oldVal == 11 && newVal == 0) {
+                mTempDate.add(Calendar.MONTH, 1)
+            } else if (oldVal == 0 && newVal == 11) {
+                mTempDate.add(Calendar.MONTH, -1)
+            } else {
+                mTempDate.add(Calendar.MONTH, newVal - oldVal)
+            }
+//        } else if (picker === mYearSpinner) {
+//            mTempDate.set(Calendar.YEAR, newVal)
+        } else {
+            throw IllegalArgumentException()
+        }
+        LogUtils.i("min==${currentCal.timeInMillis}")
+        LogUtils.i("current==${minCal.timeInMillis}")
+        LogUtils.i("max==${maxCal.timeInMillis}")
+        if (mTempDate.before(minCal)) {
+            mTempDate.timeInMillis = minCal.timeInMillis
+        } else if (mTempDate.after(maxCal)) {
+            mTempDate.timeInMillis = maxCal.timeInMillis
+        }
+        npMonth.value = currentCal.get(Calendar.MONTH) + 1
+        npDate.value = currentCal.get(Calendar.DAY_OF_MONTH)
     }
 
     override fun onStart() {
