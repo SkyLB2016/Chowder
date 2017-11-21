@@ -25,17 +25,9 @@
 
         <!-- hour -->
         <NumberPicker
-            android:id="@+id/npMonth"
-            android:layout_width="@dimen/wh_48"
+            android:id="@+id/npMonthDay"
+            android:layout_width="@dimen/wh_72"
             android:layout_height="@dimen/wh_120"
-            android:focusable="true"
-            android:focusableInTouchMode="true" />
-
-        <NumberPicker
-            android:id="@+id/npDate"
-            android:layout_width="@dimen/wh_48"
-            android:layout_height="@dimen/wh_120"
-            android:layout_marginLeft="@dimen/wh_2"
             android:focusable="true"
             android:focusableInTouchMode="true" />
 

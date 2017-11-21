@@ -21,7 +21,7 @@ import java.util.Locale;
 public class DateUtil {
     public static String YM = "yyyy-MM";
     public static String YMD = "yyyy-MM-dd";
-    public static String YMDHM = "yyyy-MM-dd HH:mm";
+    public static String YMDHM = "yyyy-MM-dd HH:mm";//默认的格式
     public static String YMDHMS = "yyyy-MM-dd HH:mm:ss";
 
     public static String CYM = "yyyy年MM月";
@@ -79,6 +79,7 @@ public class DateUtil {
     private static String fromatDateTime(Context context, int flags) {
         return DateUtils.formatDateTime(context, System.currentTimeMillis(), flags);
     }
+
     /**
      * 时间戳转换成具体的时间日期
      *
@@ -86,7 +87,7 @@ public class DateUtil {
      * @return
      */
     public static String stampToTime(long time) {
-        return stampToTime(time,YMDHM);
+        return stampToTime(time, YMDHM);
     }
 
     /**
@@ -98,6 +99,10 @@ public class DateUtil {
      */
     public static String stampToTime(long time, String type) {
         return new SimpleDateFormat(type, Locale.CHINA).format(new Date(time));
+    }
+
+    public static long dateToStamp(String time) {
+        return dateToStamp(time, YMDHM);
     }
 
     /**
