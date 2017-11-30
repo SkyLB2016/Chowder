@@ -4,19 +4,33 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.sky.chowder.MyApplication;
 import com.sky.chowder.R;
 import com.sky.chowder.model.ActivityModel;
+import com.sky.chowder.model.AreaEntity;
 import com.sky.model.ApiResponse;
+import com.sky.utils.FileUtils;
 import com.sky.utils.GsonUtils;
 import com.sky.utils.LogUtils;
 
 import java.lang.reflect.Type;
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
+
 /**
  * Created by SKY on 2017/9/28 9:44.
  */
 public class Test {
+    private AreaEntity[] area;
+
+    public void ddqd(Context context) {
+        area= new AreaEntity[4];
+    }
     public void ddd(Context context) {
         GsonUtils.jsonToList("",ActivityModel[].class);
     }
@@ -31,6 +45,26 @@ public class Test {
     private void toObj(String json, Type type) {
         ApiResponse<List<ActivityModel>> model = new Gson().fromJson(json, type);
         LogUtils.i(model.getObjList().get(4).getClassName());
+        Observable.just(FileUtils.readAssestToStr(MyApplication.getInstance(), "address.json"))
+                .map(new Function<String, List<AreaEntity>>() {
+                    @Override
+                    public List<AreaEntity> apply(String s) throws Exception {
+                        return GsonUtils.jsonToList(s, AreaEntity[].class);
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<AreaEntity>>() {
+                    @Override
+                    public void accept(List<AreaEntity> areaEntities) throws Exception {
+
+                    }
+                });
+
+//                .map { s -> GsonUtils.jsonToList(s, Array<AreaEntity>::class.java) }
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe { areaEntities -> list = areaEntities as ArrayList<AreaEntity>? }
     }
 //    MemTotal:        2758932 kB
 //    MemFree:           74616 kB

@@ -242,6 +242,15 @@
             <intent-filter>
                 <action android:name="com.sky.coustom" />
             </intent-filter>
+        </activity> <activity
+            android:name=".ui.activity.AddressActivity"
+            android:description="@string/act_22"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/act_22"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.sky.coustom" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".ui.activity.BroadActivity"

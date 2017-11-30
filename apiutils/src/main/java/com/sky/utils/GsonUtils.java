@@ -85,6 +85,19 @@ public class GsonUtils {
         return null;
     }
 
+    public static <T> T[] jsonToArray(@NonNull String json, Class<T[]> cls) {
+        try {
+            return getGson().fromJson(json, cls);
+        } catch (JsonSyntaxException e) {
+            e.printStackTrace();
+        } catch (JsonParseException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     /**
      * 转换成json对象
      *

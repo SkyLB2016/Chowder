@@ -142,6 +142,7 @@
     </string>
     <string name="act_20">PhotoActivity</string>
     <string name="act_21">TimeActivity</string>
+    <string name="act_22">AddressActivity</string>
 
 
 </resources>
