@@ -35,7 +35,7 @@ android {
         manifestPlaceholders = [CHANNEL_VALUE: "umeng"]//默认是umeng的渠道
         ndk {
             //添加对应cpu类型的.so库。
-            abiFilters 'armeabi-v7a', 'armeabi-v8a', 'armeabi'
+            abiFilters 'armeabi-v7a', 'armeabi-v8a', 'armeabi', 'x86'
         }
     }
     signingConfigs {

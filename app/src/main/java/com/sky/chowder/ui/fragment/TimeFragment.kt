@@ -27,7 +27,6 @@ class TimeFragment : DialogFragment() {
     private var minHour = 0
     private var minute = "00"
 
-
     private val disOnClick: OnDismissListener? = null
     var onClick: OnClickListener? = null
 

@@ -37,6 +37,10 @@ public class SkyApp extends Application {
      * 获取缓存文件夹
      */
     private void getDataCacheDir() {
+//        if (!Environment.isExternalStorageEmulated()){
+//            showToast("虚拟sd卡不存在");
+//            return;
+//        }
         cacheDir = getExternalCacheDir().getAbsolutePath();
         fileCacheDir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath();
         picCacheDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath();
