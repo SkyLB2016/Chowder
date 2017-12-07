@@ -21,17 +21,17 @@ import java.util.*
  * Created by SKY on 2017/7/12.
  */
 class TimeFragment : DialogFragment() {
-    private var year = 0
-    private var monthDay = ""
-    private var hour = 0
-    private var minHour = 0
-    private var minute = "00"
+    private var year = 0//年
+    private var monthDay = ""//月日
+    private var hour = 0//时
+    private var minHour = 0//最小小时
+    private var minute = "00"//分
 
     private val disOnClick: OnDismissListener? = null
-    var onClick: OnClickListener? = null
+    lateinit var onClick: OnClickListener
 
-    private var cal: Calendar? = null
-    private val interval = 15
+    private val interval = 15//最长间隔
+    var time = 0L//最长间隔
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         //去掉默认的标题
@@ -55,29 +55,34 @@ class TimeFragment : DialogFragment() {
     }
 
     private fun initData() {
-        cal = Calendar.getInstance()
+        val cal = Calendar.getInstance()
         cal?.timeInMillis = System.currentTimeMillis()
 
-        val curYear = cal!!.get(Calendar.YEAR)
+        //当前时间下的年月日时分
+        val curYear = cal.get(Calendar.YEAR)
         year = curYear
-        val curMonth = cal!!.get(Calendar.MONTH) + 1
-        val curDay = cal!!.get(Calendar.DAY_OF_MONTH)
-        minHour = cal!!.get(Calendar.HOUR_OF_DAY)
+        val curMonth = cal.get(Calendar.MONTH) + 1
+        val curDay = cal.get(Calendar.DAY_OF_MONTH)
+        minHour = cal.get(Calendar.HOUR_OF_DAY)
 
+        //分钟分为四个时刻
         val minutes4 = arrayOf("00", "15", "30", "45")
-        val min = cal!!.get(Calendar.MINUTE) / 15 + 1
+        val min = cal.get(Calendar.MINUTE) / 15 + 1
         minute = minutes4[min % 4]
 
         if (min >= 4) minHour += 1//当前时间超过45分后，minHour+1
         hour = minHour
+        //获取当前月份的最大天数
+        var maxDayOfMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH)
+        //计算间隔时间后是否仍在本月之内
+        if (curDay + interval < maxDayOfMonth) maxDayOfMonth = curDay + interval
 
-        //间隔时间后月份是否有变化
+        //间隔时间后的最大年月日
         cal?.timeInMillis = System.currentTimeMillis() + interval * 24 * 3600 * 1000
-        val maxYear = cal!!.get(Calendar.YEAR)
-        val maxMonth = cal!!.get(Calendar.MONTH) + 1
-        val maxDay = cal!!.get(Calendar.DAY_OF_MONTH)
+        val maxYear = cal.get(Calendar.YEAR)
+        val maxMonth = cal.get(Calendar.MONTH) + 1
+        val maxDay = cal.get(Calendar.DAY_OF_MONTH)
 
-        val maxDayOfMonth = cal!!.getActualMaximum(Calendar.DAY_OF_MONTH)
         val strMD = getStrMD(maxDayOfMonth, curDay, curMonth, maxMonth, maxDay)
         npMonthDay.displayedValues = strMD
         setNpValue(npMonthDay, strMD.size - 1, 0, 0)
@@ -101,6 +106,20 @@ class TimeFragment : DialogFragment() {
         npMinute.displayedValues = minutes4
         setNpValue(npMinute, minutes4.size - 1, 0, min % 4)
         npMinute.setOnValueChangedListener { _, _, newVal -> minute = minutes4[newVal] }
+        if (time !== 0L) {
+            cal.timeInMillis = time
+            val m = cal.get(Calendar.MONTH) + 1
+            val d = cal.get(Calendar.DAY_OF_MONTH)
+            var po = if (m === curMonth) d - curDay
+            else maxDayOfMonth - curDay + d
+            year = if (curMonth === 12 && maxMonth === 1 && monthDay.startsWith(setTwo(maxMonth))) maxYear else curYear
+            monthDay = strMD[po]!!
+            hour = cal.get(Calendar.HOUR_OF_DAY)
+            minute = minutes4[cal.get(Calendar.MINUTE) / 15]
+            npMonthDay.value = po
+            npHour.value = hour
+            npMinute.value = cal.get(Calendar.MINUTE) / 15
+        }
     }
 
     private fun getStrMD(maxDayOfMonth: Int, curDay: Int, curMonth: Int, maxMonth: Int, maxDay: Int): Array<String?> {
@@ -153,7 +172,6 @@ class TimeFragment : DialogFragment() {
             R.id.tvRight -> {
                 val time = "${year}年$monthDay $hour:$minute"
                 val timeL = DateUtil.dateToStamp(time, "yyyy年MM月dd日 HH:mm")
-//                val timeL = DateUtil.dateToStamp(time, DateUtil.CYMHM)
                 if (timeL < System.currentTimeMillis())
                     ToastUtils.showShort(activity, "下单时间时间不能小于当前时间")
                 else {

@@ -5,12 +5,15 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.sky.chowder.R
 import com.sky.chowder.ui.fragment.AddressFragment
+import com.sky.chowder.ui.fragment.TimeFragment
+import com.sky.utils.DateUtil
 import kotlinx.android.synthetic.main.activity_address.*
+
 
 /**
  * Created by SKY on 2016/8/28.
  */
-class AddressActivity : AppCompatActivity() {
+class SelectActivity : AppCompatActivity() {
     var monthN = 0
     var dateN = 0
     var hourN = 0
@@ -18,17 +21,25 @@ class AddressActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_address)
-//        val currentTimeMillis = oldCalendar.getTimeInMillis()
-//        val newCalendar = Calendar.getInstance(Locale.SIMPLIFIED_CHINESE)
-//        newCalendar.setTimeInMillis(currentTimeMillis)
     }
 
     fun xianshi(v: View) {
-        val time = AddressFragment()
-        time.show(supportFragmentManager, "checkItems")
-        time.onClick = object : AddressFragment.OnClickListener {
+        val time = TimeFragment()
+        time.show(supportFragmentManager, "time")
+        time.time = DateUtil.dateToStamp(btTime.text.toString().trim())
+        time.onClick = object : TimeFragment.OnClickListener {
             override fun onClick(time: String) {
                 btTime.text = time
+            }
+        }
+    }
+
+    fun address(v: View) {
+        val time = AddressFragment()
+        time.show(supportFragmentManager, "address")
+        time.onClick = object : AddressFragment.OnClickListener {
+            override fun onClick(address: String) {
+                btAddress.text = address
             }
         }
     }

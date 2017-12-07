@@ -29,7 +29,7 @@ import kotlinx.android.synthetic.main.content_main.*
  */
 class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IMainView {
 
-    private var adapter: MainAdapter? = null
+    private lateinit var adapter: MainAdapter
 
     public override fun getLayoutResId(): Int = R.layout.activity_main
 
@@ -63,16 +63,6 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 
     @OnClick(R.id.fab)
     fun fabOnClick() {
-        LogUtils.i("${resources.getDimension(R.dimen.text_micro)}")
-        LogUtils.i("${resources.getDimensionPixelOffset(R.dimen.text_micro)}")
-        LogUtils.i("${resources.getDimensionPixelSize(R.dimen.text_micro)}")
-        if (RegexUtils.isEmail("1136096189@qq.m")) {
-            LogUtils.i("1136096189@qq.com")
-        }
-        if (RegexUtils.isEmail("13263172003@163.com")) {
-            LogUtils.i("1136096189@qq.com")
-        }
-
 //        showToast("width==${ScreenUtils.getHeightPX(this)}")
 //        IntentTest.startIntent(this, Extra<String>(),"com.sky.action")
 //        presenter.showToast("测试消息")
@@ -170,7 +160,7 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
         get() {
             val battery = registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
             val currLevel = battery!!.getIntExtra(BatteryManager.EXTRA_LEVEL, 0)
-            val total = battery.getIntExtra(BatteryManager.EXTRA_SCALE, 1)
+            val total = battery.getIntExtra(BatteryManager.EXTRA_SCALE, 0)
             return currLevel * 100 / total
         }
 
