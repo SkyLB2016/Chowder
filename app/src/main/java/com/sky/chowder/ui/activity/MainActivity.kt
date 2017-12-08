@@ -21,6 +21,7 @@ import com.sky.chowder.ui.presenter.MainP
 import com.sky.model.ApiResponse
 import com.sky.utils.*
 import kotlinx.android.synthetic.main.content_main.*
+import kotlin.coroutines.experimental.buildSequence
 
 
 /**
@@ -30,18 +31,15 @@ import kotlinx.android.synthetic.main.content_main.*
 class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IMainView {
 
     private lateinit var adapter: MainAdapter
-
     public override fun getLayoutResId(): Int = R.layout.activity_main
-
     override fun creatPresenter() = MainP(this)
-
     public override fun initialize() {
         baseTitle.setLeftButton(-1)
         recycler?.setHasFixedSize(true)
         adapter = MainAdapter(R.layout.adapter_main)
-        recycler?.adapter = adapter
+        recycler.adapter = adapter
 
-        adapter?.setOnItemClickListener { _, position -> JumpAct.jumpActivity(this, adapter!!.datas[position].componentName) }
+        adapter?.setOnItemClickListener { _, position -> JumpAct.jumpActivity(this, adapter.datas[position].componentName) }
         adapter?.setOnItemLongClickListener { _, _ ->
             showToast("长按监听已处理")
             true
@@ -63,6 +61,7 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 
     @OnClick(R.id.fab)
     fun fabOnClick() {
+        testGson()
 //        showToast("width==${ScreenUtils.getHeightPX(this)}")
 //        IntentTest.startIntent(this, Extra<String>(),"com.sky.action")
 //        presenter.showToast("测试消息")
@@ -166,27 +165,31 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 
     private fun testGson() {
         val model = GsonUtils.jsonToEntity(getString(R.string.jsonobj), ActivityModel::class.java)
-        val model2 = GsonUtils.jsonToList(getString(R.string.jsonarray), Array<ActivityModel>::class.java)
-        val model3 = GsonUtils.jsonToEntity<ApiResponse<List<ActivityModel>>>(getString(R.string.jsonlist), object : TypeToken<ApiResponse<List<ActivityModel>>>() {}.type)
-        val s: Int? = 30000
-        LogUtils.i("${model2[1].img}")
-        LogUtils.i("${model2[1].img == 2}")
-        LogUtils.i("${model2[1].img === 2}")
-        LogUtils.i("${model2[2].img == s}")
-        LogUtils.i("${model2[2].img === s}")
-
-        val a: Int = 10000
-        LogUtils.i("${a == a}")
-        LogUtils.i("${a === a}")
-        val boxedA: Int? = a
-        val anotherBoxedA: Int? = 10000
-        LogUtils.i("${boxedA === anotherBoxedA}") // ！！！输出“false”！！！
-        LogUtils.i("${boxedA == anotherBoxedA}") // ！！！输出“false”！！！
-//        LogUtils.i(model.className);
-//        LogUtils.i(model2[1].className);
-//        LogUtils.i(model3.objList[2].className);
-//        FileUtils.serialToFile(SkyApp.getInstance().fileCacheDir, "model", model)
+        val list = GsonUtils.jsonToList(getString(R.string.jsonarray), Array<ActivityModel>::class.java)
+        val entity = GsonUtils.jsonToEntity<ApiResponse<List<ActivityModel>>>(getString(R.string.jsonlist), object : TypeToken<ApiResponse<List<ActivityModel>>>() {}.type)
+        val array = GsonUtils.jsonToArray(getString(R.string.jsonarray), Array<ActivityModel>::class.java)
         val model4 = FileUtils.fileToSerialObj<ActivityModel>(SkyApp.getInstance().fileCacheDir, "model")
-        LogUtils.i(model4.className);
+        val seq = buildSequence {
+            for (i in 1..5) {
+                // 产生一个 i 的平方
+                yield(i * i)
+            }
+            // 产生一个区间
+            yieldAll(26..28)
+        }
+
+        // 输出该序列
+        println(seq.toList())
+
+        var fruits = listOf("banana", "avocado", "apple", "kiwi")
+        fruits
+                .filter { it.startsWith("a") }
+                .sortedBy { it }
+                .map { it.toUpperCase() }
+                .forEach { LogUtils.i(it) }
+        array
+                .sortedByDescending { it }
+                .forEach { LogUtils.i(it.className) }
+
     }
 }

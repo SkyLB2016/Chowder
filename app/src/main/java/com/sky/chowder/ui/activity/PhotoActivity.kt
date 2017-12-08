@@ -33,7 +33,7 @@ class PhotoActivity : BasePActivity<SolarP>() {
         val photoPath = SkyApp.getInstance().picCacheDir + System.currentTimeMillis() + ".jpg"
         photoUtils = PhotoUtils(this, photoPath)
         photoUtils?.setUploadPicture { photo, bitmap ->
-            image!!.setImageBitmap(bitmap)
+            image.setImageBitmap(bitmap)
             LogUtils.i("photo==$photo")
             LogUtils.i("压缩后所占内存大小==${bitmap.allocationByteCount / 1024}KB")
             LogUtils.i("原图所占内存大小==${BitmapUtils.getBitmapFromPath(photo).allocationByteCount / 1024 / 1024}MB")

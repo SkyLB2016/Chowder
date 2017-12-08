@@ -54,7 +54,7 @@ class MainP(context: Context) : BasePresenter<IMainView>(context), IMainPresente
                 activityInfos.add(ActivityModel(label, describe, icon, info.activityInfo.name))
             }
             //排序
-//            Collections.sort(activityInfos, sDisplayNameComparator)
+            Collections.sort(activityInfos, sDisplayNameComparator)
 //            Collections.sort(activityInfos);//使用activityModel中的compareTo进行排序
             return activityInfos
         }

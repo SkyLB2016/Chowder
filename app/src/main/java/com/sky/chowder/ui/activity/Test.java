@@ -60,11 +60,6 @@ public class Test {
 
                     }
                 });
-
-//                .map { s -> GsonUtils.jsonToList(s, Array<AreaEntity>::class.java) }
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe { areaEntities -> list = areaEntities as ArrayList<AreaEntity>? }
     }
 //    MemTotal:        2758932 kB
 //    MemFree:           74616 kB

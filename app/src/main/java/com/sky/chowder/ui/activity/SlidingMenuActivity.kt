@@ -14,9 +14,7 @@ import java.util.*
  */
 class SlidingMenuActivity : BaseNoPActivity() {
 
-    override fun getLayoutResId(): Int {
-        return R.layout.activity_sliding
-    }
+    override fun getLayoutResId() = R.layout.activity_sliding
 
     override fun initialize() {
         super.initialize()
@@ -28,7 +26,7 @@ class SlidingMenuActivity : BaseNoPActivity() {
         while (i <= 'z'.toInt()) {
             val tv = LayoutInflater.from(this).inflate(R.layout.tv, flowlayout, false) as TextView
             tv.text = "${i.toChar()}"
-            flowlayout!!.addView(tv)
+            flowlayout.addView(tv)
             ObjectAnimator.ofFloat(tv, "rotation", 0f, 360f).setDuration(3000).start()
             setOnclicK(tv)
             i++
@@ -50,7 +48,7 @@ class SlidingMenuActivity : BaseNoPActivity() {
             } else {
                 val tv = LayoutInflater.from(this).inflate(R.layout.tv, flowlayout, false) as TextView
                 tv.text = nums.first + ""
-                flowlayout!!.addView(tv)
+                flowlayout.addView(tv)
                 ObjectAnimator.ofFloat(tv, "rotation", 0f, 360f).setDuration(3000).start()
                 setOnclicK(tv)
                 nums.removeFirst()

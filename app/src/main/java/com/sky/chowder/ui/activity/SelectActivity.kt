@@ -14,10 +14,6 @@ import kotlinx.android.synthetic.main.activity_address.*
  * Created by SKY on 2016/8/28.
  */
 class SelectActivity : AppCompatActivity() {
-    var monthN = 0
-    var dateN = 0
-    var hourN = 0
-    var minuteN = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_address)

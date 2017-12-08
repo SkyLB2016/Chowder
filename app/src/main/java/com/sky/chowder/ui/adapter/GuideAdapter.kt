@@ -9,9 +9,7 @@ import android.view.ViewGroup
  */
 internal class GuideAdapter(private val views: List<View>) : PagerAdapter() {
 
-    override fun getCount(): Int {
-        return views.size
-    }
+    override fun getCount() = views.size
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val view = views[position]

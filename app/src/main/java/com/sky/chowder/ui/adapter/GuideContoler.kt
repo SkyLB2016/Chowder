@@ -14,13 +14,13 @@ import java.util.*
  * Created by SKY on 2017/3/6.
  */
 class GuideContoler(private val mContext: Context) {
-    private var mViewPager: ViewPager? = null
+    private lateinit var mViewPager: ViewPager
     //ViewPager要显示的视图集合
-    private var mViews: MutableList<View>? = null
+    private lateinit var mViews: MutableList<View>
 
     //点的集合
-    private var pointGroup: LinearLayout? = null
-    private var points: Array<View?>? = null
+    private lateinit var pointGroup: LinearLayout
+    private lateinit var points: Array<View?>
     //点的宽高
     private var pointW: Int = 0
     private var pointH: Int = 0
@@ -51,18 +51,15 @@ class GuideContoler(private val mContext: Context) {
      */
     private fun setViewPager() {
         mViewPager = (mContext as Activity).findViewById<ViewPager>(R.id.viewpager)
-        mViewPager!!.setPageTransformer(true, DepthPageTransformer())
-        mViewPager!!.adapter = GuideAdapter(mViews!!)
-        mViewPager!!.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        mViewPager.setPageTransformer(true, DepthPageTransformer())
+        mViewPager.adapter = GuideAdapter(mViews)
+        mViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
 
             override fun onPageSelected(position: Int) {
-                for (i in points!!.indices) {
-                    if (i == position) {
-                        points!![i]!!.setBackgroundResource(pointSelect)
-                    } else {
-                        points!![i]!!.setBackgroundResource(unPointSelect)
-                    }
+                for (i in points.indices) {
+                    if (i == position) points[i]!!.setBackgroundResource(pointSelect)
+                    else points[i]!!.setBackgroundResource(unPointSelect)
                 }
             }
 
@@ -78,18 +75,18 @@ class GuideContoler(private val mContext: Context) {
     private fun setPoints() {
         setPointWH()
         pointGroup = (mContext as Activity).findViewById<LinearLayout>(R.id.layout_group)
-        points = arrayOfNulls(mViews!!.size)
+        points = arrayOfNulls(mViews.size)
         val params = LinearLayout.LayoutParams(pointW, pointH)
         params.setMargins(0, 0, 15, 0)
-        for (i in points!!.indices) {
-            points!![i] = View(mContext)
+        for (i in points.indices) {
+            points[i] = View(mContext)
             if (i == 0) {
-                points!![i]!!.setBackgroundResource(pointSelect)
+                points[i]?.setBackgroundResource(pointSelect)
             } else {
-                points!![i]!!.setBackgroundResource(unPointSelect)
+                points[i]?.setBackgroundResource(unPointSelect)
             }
-            points!![i]!!.layoutParams = params
-            pointGroup!!.addView(points!![i])
+            points[i]?.layoutParams = params
+            pointGroup.addView(points[i])
         }
     }
 

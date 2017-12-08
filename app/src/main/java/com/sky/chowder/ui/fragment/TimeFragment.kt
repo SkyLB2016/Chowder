@@ -106,6 +106,8 @@ class TimeFragment : DialogFragment() {
         npMinute.displayedValues = minutes4
         setNpValue(npMinute, minutes4.size - 1, 0, min % 4)
         npMinute.setOnValueChangedListener { _, _, newVal -> minute = minutes4[newVal] }
+
+        //如已有设置好的时间，则载入
         if (time !== 0L) {
             cal.timeInMillis = time
             val m = cal.get(Calendar.MONTH) + 1

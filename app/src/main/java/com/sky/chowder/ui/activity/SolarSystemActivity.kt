@@ -30,9 +30,7 @@ class SolarSystemActivity : BasePActivity<SolarP>(), Toolbar.OnMenuItemClickList
     }
 
     override fun getLayoutResId(): Int = R.layout.activity_solar
-
     override fun creatPresenter() = SolarP(this)
-
 
     override fun initialize() {
         val width = ScreenUtils.getWidthPX(this)

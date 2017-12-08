@@ -25,8 +25,8 @@ import java.util.*
  */
 class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : RelativeLayout(context, attrs, defStyleAttr), View.OnClickListener {
 
-    private var imageViews: Array<ImageView?>? = null
-    private var imagePieces: List<ImagePiece>? = null
+    private lateinit var imageViews: Array<ImageView?>
+    private lateinit var imagePieces: List<ImagePiece>
     private var margin = 2
     private var piece = 3
 
@@ -56,15 +56,15 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
         imageViews = arrayOfNulls<ImageView>(piece * piece)
         imagePieces = jigsaw(BitmapFactory.decodeResource(resources, R.mipmap.ic_banner), piece)
         //随机打乱数组排序
-        Collections.sort(imagePieces!!) { _, _ -> if (Math.random() > 0.5) 1 else -1 }
+        Collections.sort(imagePieces) { _, _ -> if (Math.random() > 0.5) 1 else -1 }
         pieceWidth = (width!! - margin * (piece + 1)) / piece
-        for (i in imagePieces!!.indices) {
+        for (i in imagePieces.indices) {
             val imageView = ImageView(context)
-            imageView.setImageBitmap(imagePieces!![i].bitmap)
+            imageView.setImageBitmap(imagePieces[i].bitmap)
             imageView.setOnClickListener(this)
             imageView.id = i + 1
-            imageView.tag = i.toString() + "," + imagePieces!![i].number
-            imageViews!![i] = imageView
+            imageView.tag = i.toString() + "," + imagePieces[i].number
+            imageViews[i] = imageView
             val lp = RelativeLayout.LayoutParams(pieceWidth, pieceWidth)
             val leftMargin = i % piece * pieceWidth + (i % piece + 1) * margin
             val topMargin = i / piece * pieceWidth + (i / piece + 1) * margin
@@ -98,28 +98,28 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
     override fun onClick(v: View) {
         if (isAniming) return
         if (firstImg === v) {
-            firstImg!!.colorFilter = null
+            firstImg?.colorFilter = null
             firstImg = null
             return
         }
         if (firstImg == null) {
             firstImg = v as ImageView
-            firstImg!!.setColorFilter(Color.parseColor("#66ff0000"))
+            firstImg?.setColorFilter(Color.parseColor("#66ff0000"))
         } else {
             isAniming = true
             secondImg = v as ImageView
-            firstImg!!.visibility = View.INVISIBLE
-            secondImg!!.visibility = View.INVISIBLE
-            val firBit = imagePieces!![Integer.parseInt(getViewIdByTag(firstImg!!))].bitmap
-            val secBit = imagePieces!![Integer.parseInt(getViewIdByTag(secondImg!!))].bitmap
+            firstImg?.visibility = View.INVISIBLE
+            secondImg?.visibility = View.INVISIBLE
+            val firBit = imagePieces[Integer.parseInt(getViewIdByTag(firstImg!!))].bitmap
+            val secBit = imagePieces[Integer.parseInt(getViewIdByTag(secondImg!!))].bitmap
 
             val aniLayout = RelativeLayout(context)
             addView(aniLayout)
 
-            val firstlp = firstImg!!.layoutParams as RelativeLayout.LayoutParams
+            val firstlp = firstImg?.layoutParams as RelativeLayout.LayoutParams
             val firstLeft = firstlp.leftMargin
             val firstTop = firstlp.topMargin
-            val secLP = secondImg!!.layoutParams as RelativeLayout.LayoutParams
+            val secLP = secondImg?.layoutParams as RelativeLayout.LayoutParams
             val secLeft = secLP.leftMargin
             val secTop = secLP.topMargin
             val aniFirst = ImageView(context)
@@ -150,16 +150,16 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
                     val secTag = getViewTag(secondImg!!)
 
                     getViewTag(firstImg!!)
-                    firstImg!!.setImageBitmap(secBit)
-                    secondImg!!.setImageBitmap(firBit)
-                    firstImg!!.tag = secTag
-                    secondImg!!.tag = firTag
-                    firstImg!!.visibility = View.VISIBLE
-                    secondImg!!.visibility = View.VISIBLE
+                    firstImg?.setImageBitmap(secBit)
+                    secondImg?.setImageBitmap(firBit)
+                    firstImg?.tag = secTag
+                    secondImg?.tag = firTag
+                    firstImg?.visibility = View.VISIBLE
+                    secondImg?.visibility = View.VISIBLE
 
                     //secondImg
                     aniLayout.removeAllViews()
-                    firstImg!!.colorFilter = null
+                    firstImg?.colorFilter = null
                     secondImg = null
                     firstImg = secondImg
                     isAniming = false
@@ -183,10 +183,10 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
     }
 
     private fun checkSuccess() {
-        val isSuccess = imagePieces!!.indices.none { getViewIndexByTag(imageViews!![it]!!) != "" + it }
+        val isSuccess = imagePieces.indices.none { getViewIndexByTag(imageViews[it]!!) != "" + it }
         //上下两种写法效果一致
-//        for (i in imagePieces!!.indices) {
-//            if (getViewIndexByTag(imageViews!![i]!!) != "" + i) {
+//        for (i in imagePieces.indices) {
+//            if (getViewIndexByTag(imageViews[i]) != "" + i) {
 //                isSuccess = false
 //            }
 //        }
