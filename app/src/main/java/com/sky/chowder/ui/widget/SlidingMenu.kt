@@ -44,7 +44,7 @@ class SlidingMenu @JvmOverloads constructor(context: Context, attrs: AttributeSe
     }
 
     interface OnMenuListener {
-        fun OnScrollChangedListener(l: Int, t: Int, oldl: Int, oldt: Int)
+        fun onScrollChangedListener(l: Int, t: Int, oldl: Int, oldt: Int)
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -129,7 +129,7 @@ class SlidingMenu @JvmOverloads constructor(context: Context, attrs: AttributeSe
         //固定缩放时的中心
         content?.pivotX = 0f
         content?.pivotY = (content!!.height / 2).toFloat()
-        if (onMenuListener != null) onMenuListener!!.OnScrollChangedListener(l, t, oldl, oldt)
+        if (onMenuListener != null) onMenuListener!!.onScrollChangedListener(l, t, oldl, oldt)
     }
 
     private fun open(): Boolean {

@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.LinearLayoutCompat
-    android:id="@+id/slidingMenu"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/slidingMenu"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/wh_64"
-    android:paddingRight="@dimen/wh_64"
+    android:paddingLeft="@dimen/wh_16"
+    android:paddingRight="@dimen/wh_16"
     app:divider="@drawable/divider"
     app:showDividers="middle">
 
@@ -24,31 +23,29 @@
             android:id="@+id/civ_head"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:src="@mipmap/ic_launcher"
             app:borderColor="@color/green"
-            app:borderWidth="@dimen/wh_4"/>
+            app:borderWidth="@dimen/wh_4" />
 
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@id/civ_head"
-            android:layout_marginLeft="@dimen/wh_4"
-            android:layout_toRightOf="@id/civ_head"
+            android:layout_below="@id/civ_head"
+            android:gravity="center"
             android:text="sky"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_medium"/>
+            android:textSize="@dimen/text_medium" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/civ_head"
             android:layout_below="@id/tv_name"
-            android:layout_marginLeft="@dimen/wh_4"
-            android:layout_toRightOf="@id/civ_head"
+            android:gravity="center"
             android:text="等级"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_medium"/>
+            android:textSize="@dimen/text_medium" />
     </RelativeLayout>
 
     <android.support.v7.widget.LinearLayoutCompat
@@ -73,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_launcher"
                 app:borderColor="@color/green"
-                app:borderWidth="@dimen/wh_4"/>
+                app:borderWidth="@dimen/wh_4" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -83,7 +80,7 @@
                 android:drawableRight="@mipmap/ic_right"
                 android:text="@string/qq_menu01"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_medium"/>
+                android:textSize="@dimen/text_medium" />
         </LinearLayout>
 
         <LinearLayout
@@ -100,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_launcher"
                 app:borderColor="@color/green"
-                app:borderWidth="@dimen/wh_4"/>
+                app:borderWidth="@dimen/wh_4" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -110,7 +107,7 @@
                 android:drawableRight="@mipmap/ic_right"
                 android:text="@string/qq_menu02"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_medium"/>
+                android:textSize="@dimen/text_medium" />
         </LinearLayout>
 
         <LinearLayout
@@ -127,7 +124,7 @@
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_launcher"
                 app:borderColor="@color/green"
-                app:borderWidth="@dimen/wh_4"/>
+                app:borderWidth="@dimen/wh_4" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -137,7 +134,7 @@
                 android:drawableRight="@mipmap/ic_right"
                 android:text="@string/qq_menu03"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_medium"/>
+                android:textSize="@dimen/text_medium" />
         </LinearLayout>
 
         <LinearLayout
@@ -154,7 +151,7 @@
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_launcher"
                 app:borderColor="@color/green"
-                app:borderWidth="@dimen/wh_4"/>
+                app:borderWidth="@dimen/wh_4" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -164,7 +161,7 @@
                 android:drawableRight="@mipmap/ic_right"
                 android:text="@string/qq_menu04"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_medium"/>
+                android:textSize="@dimen/text_medium" />
         </LinearLayout>
 
         <LinearLayout
@@ -181,7 +178,7 @@
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_launcher"
                 app:borderColor="@color/green"
-                app:borderWidth="@dimen/wh_4"/>
+                app:borderWidth="@dimen/wh_4" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -191,7 +188,7 @@
                 android:drawableRight="@mipmap/ic_right"
                 android:text="@string/qq_menu05"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_medium"/>
+                android:textSize="@dimen/text_medium" />
         </LinearLayout>
     </android.support.v7.widget.LinearLayoutCompat>
 
@@ -211,7 +208,7 @@
             android:layout_marginLeft="@dimen/wh_4"
             android:text="设置"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_medium"/>
+            android:textSize="@dimen/text_medium" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -219,6 +216,6 @@
             android:layout_marginLeft="@dimen/wh_4"
             android:text="退出"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_medium"/>
+            android:textSize="@dimen/text_medium" />
     </LinearLayout>
 </android.support.v7.widget.LinearLayoutCompat>

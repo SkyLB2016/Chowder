@@ -115,7 +115,7 @@ class TimeFragment : DialogFragment() {
             var po = if (m === curMonth) d - curDay
             else maxDayOfMonth - curDay + d
             year = if (curMonth === 12 && maxMonth === 1 && monthDay.startsWith(setTwo(maxMonth))) maxYear else curYear
-            monthDay = strMD[po]!!
+            monthDay = if (po === 0) "${setTwo(curMonth)}月${setTwo(curDay)}日" else strMD[po]!!
             hour = cal.get(Calendar.HOUR_OF_DAY)
             minute = minutes4[cal.get(Calendar.MINUTE) / 15]
             npMonthDay.value = po

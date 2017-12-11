@@ -15,7 +15,6 @@ import java.util.*
 class SlidingMenuActivity : BaseNoPActivity() {
 
     override fun getLayoutResId() = R.layout.activity_sliding
-
     override fun initialize() {
         super.initialize()
         initData()

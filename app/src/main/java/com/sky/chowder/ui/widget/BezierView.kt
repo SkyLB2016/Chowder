@@ -177,6 +177,4 @@ class BezierView(context: Context) : View(context) {
         val bitmap = BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher)
         canvas.drawBitmap(bitmap, 250f, 360f, p)
     }
-
-    internal inner class Point(var x: Int, var y: Int)
 }
