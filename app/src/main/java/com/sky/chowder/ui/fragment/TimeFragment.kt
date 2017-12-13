@@ -1,6 +1,5 @@
 package com.sky.chowder.ui.fragment
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.view.LayoutInflater
@@ -21,23 +20,13 @@ import java.util.*
  * Created by SKY on 2017/7/12.
  */
 class TimeFragment : DialogFragment() {
-    private var year = 0//年
-    private var monthDay = ""//月日
-    private var hour = 0//时
-    private var minHour = 0//最小小时
-    private var minute = "00"//分
-
-    private val disOnClick: OnDismissListener? = null
     lateinit var onClick: OnClickListener
-
-    private val interval = 15//最长间隔
+    private val interval = 30//最长间隔
     var time = 0L//最长间隔
+    private val cal = Calendar.getInstance()!!
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        //去掉默认的标题
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCanceledOnTouchOutside(false)
-        isCancelable = false
         val view = inflater!!.inflate(R.layout.fragment_time, container)
         ButterKnife.bind(this, view)
         return view
@@ -50,96 +39,68 @@ class TimeFragment : DialogFragment() {
 
     override fun onStart() {
         super.onStart()
-        //        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.window!!.setLayout(ScreenUtils.getWidthPX(activity) / 8 * 7, dialog.window!!.attributes.height)
     }
 
     private fun initData() {
-        val cal = Calendar.getInstance()
         cal?.timeInMillis = System.currentTimeMillis()
-
-        //当前时间下的年月日时分
-        val curYear = cal.get(Calendar.YEAR)
-        year = curYear
-        val curMonth = cal.get(Calendar.MONTH) + 1
-        val curDay = cal.get(Calendar.DAY_OF_MONTH)
-        minHour = cal.get(Calendar.HOUR_OF_DAY)
-
-        //分钟分为四个时刻
-        val minutes4 = arrayOf("00", "15", "30", "45")
+        var minHour = cal.get(Calendar.HOUR_OF_DAY)
         val min = cal.get(Calendar.MINUTE) / 15 + 1
-        minute = minutes4[min % 4]
-
-        if (min >= 4) minHour += 1//当前时间超过45分后，minHour+1
-        hour = minHour
-        //获取当前月份的最大天数
-        var maxDayOfMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH)
-        //计算间隔时间后是否仍在本月之内
-        if (curDay + interval < maxDayOfMonth) maxDayOfMonth = curDay + interval
-
-        //间隔时间后的最大年月日
-        cal?.timeInMillis = System.currentTimeMillis() + interval * 24 * 3600 * 1000
-        val maxYear = cal.get(Calendar.YEAR)
-        val maxMonth = cal.get(Calendar.MONTH) + 1
-        val maxDay = cal.get(Calendar.DAY_OF_MONTH)
-
-        val strMD = getStrMD(maxDayOfMonth, curDay, curMonth, maxMonth, maxDay)
+        cal.set(Calendar.MINUTE, (min % 4) * 15)//设置当前分钟
+        //当前时间超过45分后，minHour+1
+        if (min >= 4) {
+            minHour += 1
+            cal.set(Calendar.HOUR_OF_DAY, minHour)
+        }
+        val strMD = getStrMD()
         npMonthDay.displayedValues = strMD
         setNpValue(npMonthDay, strMD.size - 1, 0, 0)
-        monthDay = "${setTwo(curMonth)}月${setTwo(curDay)}日"
-        npMonthDay.setOnValueChangedListener { _, _, newVal ->
+        npMonthDay.setOnValueChangedListener { _, oldVal, newVal ->
+            var hour = cal.get(Calendar.HOUR_OF_DAY)
             if (newVal === 0) {
-                if (minHour > hour) hour = minHour
+                if (hour < minHour) {
+                    hour = minHour
+                    cal.set(Calendar.HOUR_OF_DAY, minHour)
+                }
                 setNpValue(npHour, 23, minHour, hour)
-                monthDay = "${setTwo(curMonth)}月${setTwo(curDay)}日"
-            } else {
-                setNpValue(npHour, 23, 0, hour)
-                monthDay = strMD[newVal]!!
-            }
-            year = if (curMonth === 12 && maxMonth === 1 && monthDay.startsWith(setTwo(maxMonth))) maxYear else curYear
+            } else setNpValue(npHour, 23, 0, hour)
+            cal.add(Calendar.DAY_OF_MONTH, newVal - oldVal)
         }
 
         setNpValue(npHour, 23, minHour, minHour)
-        npHour.setFormatter(getFormatter())
-        npHour.setOnValueChangedListener { _, _, newVal -> hour = newVal }
+        npHour.setFormatter { value -> String.format("%02d", value) }
+        npHour.setOnValueChangedListener { _, oldVal, newVal -> cal.add(Calendar.HOUR_OF_DAY, newVal - oldVal) }
 
+        val minutes4 = arrayOf("00", "15", "30", "45") //分钟分为四个时刻
         npMinute.displayedValues = minutes4
         setNpValue(npMinute, minutes4.size - 1, 0, min % 4)
-        npMinute.setOnValueChangedListener { _, _, newVal -> minute = minutes4[newVal] }
+        npMinute.setOnValueChangedListener { _, oldVal, newVal -> cal.add(Calendar.MINUTE, (newVal - oldVal) * 15) }
 
-        //如已有设置好的时间，则载入
-        if (time !== 0L) {
-            cal.timeInMillis = time
-            val m = cal.get(Calendar.MONTH) + 1
-            val d = cal.get(Calendar.DAY_OF_MONTH)
-            var po = if (m === curMonth) d - curDay
-            else maxDayOfMonth - curDay + d
-            year = if (curMonth === 12 && maxMonth === 1 && monthDay.startsWith(setTwo(maxMonth))) maxYear else curYear
-            monthDay = if (po === 0) "${setTwo(curMonth)}月${setTwo(curDay)}日" else strMD[po]!!
-            hour = cal.get(Calendar.HOUR_OF_DAY)
-            minute = minutes4[cal.get(Calendar.MINUTE) / 15]
-            npMonthDay.value = po
-            npHour.value = hour
-            npMinute.value = cal.get(Calendar.MINUTE) / 15
-        }
+        if (time !== 0L) setSelectTime()//如已有设置好的时间，则载入
     }
 
-    private fun getStrMD(maxDayOfMonth: Int, curDay: Int, curMonth: Int, maxMonth: Int, maxDay: Int): Array<String?> {
+    private fun setSelectTime() {
+        //把当前时间戳转换成日期格式，在转换成00:00时的时间戳
+        val curr = DateUtil.dateToStamp(DateUtil.stampToTime(System.currentTimeMillis(), "yyyy-MM-dd"), "yyyy-MM-dd")
+        val po = (time - curr) / (24 * 3600 * 1000)//选中的时间为第几天
+        cal.timeInMillis = time
+        if (po.toInt() !== 0) setNpValue(npHour, 23, 0, cal.get(Calendar.HOUR_OF_DAY))
+        npMonthDay.value = po.toInt()
+        npHour.value = cal.get(Calendar.HOUR_OF_DAY)
+        npMinute.value = cal.get(Calendar.MINUTE) / 15
+    }
+
+
+    private fun getStrMD(): Array<String?> {
         val strMD = arrayOfNulls<String>(interval + 1)
-        var position = 0
-        for (i in 0..maxDayOfMonth - curDay) {
-            if (i !== 0) strMD[i] = "${setTwo(curMonth)}月${setTwo(curDay + i)}日"
-            else strMD[i] = "今天"
-            position = i
+        val cal = Calendar.getInstance()
+        cal?.timeInMillis = System.currentTimeMillis()
+        for (i in 0..interval) {
+            if (i !== 0) strMD[i] = DateUtil.stampToTime(cal.timeInMillis, "MM月dd日") else strMD[i] = "今天"
+            cal.add(Calendar.DAY_OF_MONTH, 1)
         }
-        if (curMonth != maxMonth)
-            for (i in 1..maxDay) {
-                strMD[i + position] = "${setTwo(maxMonth)}月${setTwo(i)}日"
-            }
         return strMD
     }
-
-    private fun setTwo(month: Int) = String.format("%02d", month)
 
     private fun setNpValue(np: NumberPicker, max: Int, min: Int, value: Int) {
         np.maxValue = max
@@ -148,52 +109,21 @@ class TimeFragment : DialogFragment() {
         np.wrapSelectorWheel = false
     }
 
-    private fun getFormatter(): NumberPicker.Formatter? {
-        //获取全部私有属性
-        val pickerFields = NumberPicker::class.java.declaredFields
-        var formatter: NumberPicker.Formatter? = null
-        for (field in pickerFields) {
-            field.isAccessible = true
-            //遍历找到我们需要获取值的那个属性
-            if (field.name == "sTwoDigitFormatter") {
-                try { //获取属性值
-                    formatter = field.get(npHour) as NumberPicker.Formatter?
-                } catch (e: IllegalAccessException) {
-                    e.printStackTrace()
-                }
-                break
-            }
-        }
-        return formatter
-    }
-
     @OnClick(R.id.tvLeft, R.id.tvRight)
     fun onClick(view: View?) {
         when (view?.id) {
             R.id.tvLeft -> dismiss()
             R.id.tvRight -> {
-                val time = "${year}年$monthDay $hour:$minute"
-                val timeL = DateUtil.dateToStamp(time, "yyyy年MM月dd日 HH:mm")
-                if (timeL < System.currentTimeMillis())
-                    ToastUtils.showShort(activity, "下单时间时间不能小于当前时间")
+                if (cal.timeInMillis < System.currentTimeMillis()) ToastUtils.showShort(activity, "下单时间时间不能小于当前时间")
                 else {
-                    onClick?.onClick(DateUtil.stampToTime(timeL))
+                    onClick?.onClick(DateUtil.stampToTime(cal.timeInMillis))
                     dismiss()
                 }
             }
         }
     }
 
-    override fun onDismiss(dialog: DialogInterface?) {
-        super.onDismiss(dialog)
-        disOnClick?.onDismiss()
-    }
-
     interface OnClickListener {
         fun onClick(time: String)
-    }
-
-    interface OnDismissListener {
-        fun onDismiss()
     }
 }
