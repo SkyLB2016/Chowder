@@ -32,10 +32,7 @@ class AddressFragment : DialogFragment() {
     lateinit var onClick: OnClickListener
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        //去掉默认的标题
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCanceledOnTouchOutside(false)
-        isCancelable = false
         val view = inflater!!.inflate(R.layout.fragment_address, container)
         ButterKnife.bind(this, view)
         return view
@@ -146,14 +143,12 @@ class AddressFragment : DialogFragment() {
 
     override fun onStart() {
         super.onStart()
-        //        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.window.setLayout(ScreenUtils.getWidthPX(activity) / 8 * 7, dialog.window.attributes.height)
     }
 
     @OnClick(R.id.tvLeft, R.id.tvRight)
     fun onClick(view: View?) {
         when (view?.id) {
-//            R.id.tvLeft -> dismiss()
             R.id.tvRight -> onClick?.onClick("$province-$city-$county")
         }
         dismiss()

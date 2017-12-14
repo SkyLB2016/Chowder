@@ -113,13 +113,12 @@ class TimeFragment : DialogFragment() {
     fun onClick(view: View?) {
         when (view?.id) {
             R.id.tvLeft -> dismiss()
-            R.id.tvRight -> {
+            R.id.tvRight ->
                 if (cal.timeInMillis < System.currentTimeMillis()) ToastUtils.showShort(activity, "下单时间时间不能小于当前时间")
                 else {
                     onClick?.onClick(DateUtil.stampToTime(cal.timeInMillis))
                     dismiss()
                 }
-            }
         }
     }
 

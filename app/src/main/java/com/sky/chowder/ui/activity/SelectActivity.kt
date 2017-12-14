@@ -7,8 +7,7 @@ import com.sky.chowder.R
 import com.sky.chowder.ui.fragment.AddressFragment
 import com.sky.chowder.ui.fragment.TimeFragment
 import com.sky.utils.DateUtil
-import kotlinx.android.synthetic.main.activity_address.*
-
+import kotlinx.android.synthetic.main.content_select.*
 
 /**
  * Created by SKY on 2016/8/28.
@@ -16,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_address.*
 class SelectActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_address)
+        setContentView(R.layout.activity_select)
     }
 
     fun xianshi(v: View) {
@@ -31,9 +30,9 @@ class SelectActivity : AppCompatActivity() {
     }
 
     fun address(v: View) {
-        val time = AddressFragment()
-        time.show(supportFragmentManager, "address")
-        time.onClick = object : AddressFragment.OnClickListener {
+        val address = AddressFragment()
+        address.show(supportFragmentManager, "address")
+        address.onClick = object : AddressFragment.OnClickListener {
             override fun onClick(address: String) {
                 btAddress.text = address
             }
