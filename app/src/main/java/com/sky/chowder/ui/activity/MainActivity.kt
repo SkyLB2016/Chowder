@@ -58,10 +58,14 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
     private var test1 = ""
     private var test2 = "22"
     private var temp: List<String>? = null//计价详细信息
+    private var flag = true
 
     @OnClick(R.id.fab)
     fun fabOnClick() {
-        testGson()
+        if (flag)
+            LogUtils.i("true")
+        else
+            LogUtils.i("false")
 //        showToast("width==${ScreenUtils.getHeightPX(this)}")
 //        IntentTest.startIntent(this, Extra<String>(),"com.sky.action")
 //        presenter.showToast("测试消息")
