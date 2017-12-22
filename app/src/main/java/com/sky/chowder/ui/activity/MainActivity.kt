@@ -63,9 +63,8 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
     @OnClick(R.id.fab)
     fun fabOnClick() {
         if (flag)
-            LogUtils.i("true")
-        else
-            LogUtils.i("false")
+            return LogUtils.i("true")
+        LogUtils.i("false")
 //        showToast("width==${ScreenUtils.getHeightPX(this)}")
 //        IntentTest.startIntent(this, Extra<String>(),"com.sky.action")
 //        presenter.showToast("测试消息")
