@@ -21,7 +21,9 @@ import java.util.*
  */
 class TimeFragment : DialogFragment() {
     lateinit var onClick: OnClickListener
-    private val interval = 30//最长间隔
+    private val interval = 14//最长间隔
+    private val minutesInterval = 10//分钟间隔
+    private val minutesSize = 60 / minutesInterval//分钟间隔
     var time = 0L//最长间隔
     private val cal = Calendar.getInstance()!!
 
@@ -45,10 +47,10 @@ class TimeFragment : DialogFragment() {
     private fun initData() {
         cal?.timeInMillis = System.currentTimeMillis()
         var minHour = cal.get(Calendar.HOUR_OF_DAY)
-        val min = cal.get(Calendar.MINUTE) / 15 + 1
-        cal.set(Calendar.MINUTE, (min % 4) * 15)//设置当前分钟
+        val min = cal.get(Calendar.MINUTE) / minutesInterval + 1
+        cal.set(Calendar.MINUTE, (min % minutesSize) * minutesInterval)//设置当前分钟
         //当前时间超过45分后，minHour+1
-        if (min >= 4) {
+        if (min >= minutesSize) {
             minHour += 1
             cal.set(Calendar.HOUR_OF_DAY, minHour)
         }
@@ -71,11 +73,11 @@ class TimeFragment : DialogFragment() {
         npHour.setFormatter { value -> String.format("%02d", value) }
         npHour.setOnValueChangedListener { _, oldVal, newVal -> cal.add(Calendar.HOUR_OF_DAY, newVal - oldVal) }
 
-        val minutes4 = arrayOf("00", "15", "30", "45") //分钟分为四个时刻
+        val minutes4 = (0 until minutesSize).map { "${minutesInterval * it}" }.toTypedArray()
+        minutes4[0]="00"
         npMinute.displayedValues = minutes4
-        setNpValue(npMinute, minutes4.size - 1, 0, min % 4)
-        npMinute.setOnValueChangedListener { _, oldVal, newVal -> cal.add(Calendar.MINUTE, (newVal - oldVal) * 15) }
-
+        setNpValue(npMinute, minutesSize - 1, 0, min % minutesSize)
+        npMinute.setOnValueChangedListener { _, oldVal, newVal -> cal.add(Calendar.MINUTE, (newVal - oldVal) * minutesInterval) }
         if (time !== 0L) setSelectTime()//如已有设置好的时间，则载入
     }
 
@@ -87,7 +89,7 @@ class TimeFragment : DialogFragment() {
         if (po.toInt() !== 0) setNpValue(npHour, 23, 0, cal.get(Calendar.HOUR_OF_DAY))
         npMonthDay.value = po.toInt()
         npHour.value = cal.get(Calendar.HOUR_OF_DAY)
-        npMinute.value = cal.get(Calendar.MINUTE) / 15
+        npMinute.value = cal.get(Calendar.MINUTE) / minutesInterval
     }
 
 
@@ -113,12 +115,13 @@ class TimeFragment : DialogFragment() {
     fun onClick(view: View?) {
         when (view?.id) {
             R.id.tvLeft -> dismiss()
-            R.id.tvRight ->
+            R.id.tvRight -> {
                 if (cal.timeInMillis < System.currentTimeMillis()) ToastUtils.showShort(activity, "下单时间时间不能小于当前时间")
                 else {
                     onClick?.onClick(DateUtil.stampToTime(cal.timeInMillis))
                     dismiss()
                 }
+            }
         }
     }
 
