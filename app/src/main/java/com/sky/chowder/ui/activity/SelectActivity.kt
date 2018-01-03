@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.sky.chowder.R
 import com.sky.chowder.ui.fragment.AddressFragment
+import com.sky.chowder.ui.fragment.TimeFragment
 import com.sky.chowder.ui.fragment.TimeFragment1
 import com.sky.utils.DateUtil
 import kotlinx.android.synthetic.main.content_select.*
@@ -20,6 +21,17 @@ class SelectActivity : AppCompatActivity() {
     }
 
     fun xianshi(v: View) {
+        val time = TimeFragment()
+        time.show(supportFragmentManager, "time")
+        time.time = DateUtil.dateToStamp(btTime.text.toString().trim())
+        time.onClick = object : TimeFragment.OnClickListener {
+            override fun onClick(time: String) {
+                btTime.text = time
+            }
+        }
+    }
+
+    fun timeClick(v: View) {
         val time = TimeFragment1()
         time.show(supportFragmentManager, "time")
         time.time = DateUtil.dateToStamp(btTime.text.toString().trim())
