@@ -59,6 +59,7 @@ class TimeFragment1 : DialogFragment() {
         npMonthDay.setOnValueChangedListener { _, oldVal, newVal ->
             var hour = cal.get(Calendar.HOUR_OF_DAY)
             if (newVal === 0) {
+                var index = 0
                 if (hour < minHour) {
                     hour = minHour
                     cal.set(Calendar.HOUR_OF_DAY, minHour)
@@ -70,11 +71,12 @@ class TimeFragment1 : DialogFragment() {
                     npMinute.maxValue = 0
                     npMinute.displayedValues = minutes
                     setNpValue(npMinute, minutes.size - 1, 0, 0)
+                    index = hour - minHour + 1
                 }
                 val hours = (minHour - 1..23).map { if (it !== minHour - 1) "${String.format("%02d", it)}" else "现在" }.toTypedArray()
                 npHour.maxValue = 0
                 npHour.displayedValues = hours
-                setNpValue(npHour, hours.size - 1, 0, hour - minHour + 1)
+                setNpValue(npHour, hours.size - 1, 0, index)
             } else {
                 val hours = (0..23).map { "${String.format("%02d", it)}" }.toTypedArray()
                 npHour.displayedValues = hours
@@ -155,7 +157,9 @@ class TimeFragment1 : DialogFragment() {
         when (view?.id) {
             R.id.tvLeft -> dismiss()
             R.id.tvRight -> {
-                onClick?.onClick(DateUtil.stampToTime(cal.timeInMillis))
+                if (npHour.displayedValues[npHour.value] == "现在")
+                    onClick?.onClick("现在")
+                else onClick?.onClick(DateUtil.stampToTime(cal.timeInMillis))
                 dismiss()
             }
         }
