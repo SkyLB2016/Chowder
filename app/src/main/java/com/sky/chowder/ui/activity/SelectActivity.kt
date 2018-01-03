@@ -16,6 +16,7 @@ class SelectActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select)
+        btTime.performClick()
     }
 
     fun xianshi(v: View) {
@@ -27,6 +28,7 @@ class SelectActivity : AppCompatActivity() {
                 btTime.text = time
             }
         }
+
     }
 
     fun address(v: View) {

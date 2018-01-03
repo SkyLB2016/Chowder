@@ -12,14 +12,13 @@ import butterknife.OnClick
 import com.sky.chowder.R
 import com.sky.utils.DateUtil
 import com.sky.utils.ScreenUtils
-import com.sky.utils.ToastUtils
 import kotlinx.android.synthetic.main.fragment_time.*
 import java.util.*
 
 /**
  * Created by SKY on 2017/7/12.
  */
-class TimeFragment : DialogFragment() {
+class TimeFragment1 : DialogFragment() {
     lateinit var onClick: OnClickListener
     private val interval = 15//最长间隔
     private val minutesInterval = 10//分钟间隔
@@ -41,16 +40,16 @@ class TimeFragment : DialogFragment() {
 
     override fun onStart() {
         super.onStart()
-        dialog.window!!.setLayout(ScreenUtils.getWidthPX(activity) / 8 * 7, dialog.window!!.attributes.height)
+        dialog.window.setLayout(ScreenUtils.getWidthPX(activity) / 8 * 7, dialog.window.attributes.height)
     }
 
     private fun initData() {
         cal?.timeInMillis = System.currentTimeMillis()
         var minHour = cal.get(Calendar.HOUR_OF_DAY)
-        val min = cal.get(Calendar.MINUTE) / minutesInterval + 1
-        cal.set(Calendar.MINUTE, (min % minutesSize) * minutesInterval)//设置当前分钟
+        val minMinute = cal.get(Calendar.MINUTE) / minutesInterval + 1
+//        cal.set(Calendar.MINUTE, (minMinute % minutesSize) * minutesInterval)//设置当前分钟
         //当前时间超过45分后，minHour+1
-        if (min >= minutesSize) {
+        if (minMinute === minutesSize) {
             minHour += 1
             cal.set(Calendar.HOUR_OF_DAY, minHour)
         }
@@ -63,21 +62,62 @@ class TimeFragment : DialogFragment() {
                 if (hour < minHour) {
                     hour = minHour
                     cal.set(Calendar.HOUR_OF_DAY, minHour)
+                    val minutes = arrayOf(" ")
+                    npMinute.maxValue = 0
+                    npMinute.displayedValues = minutes
+                } else if (hour === minHour) {
+                    val minutes = (minMinute until minutesSize).map { "${String.format("%02d", minutesInterval * it)}" }.toTypedArray()
+                    npMinute.maxValue = 0
+                    npMinute.displayedValues = minutes
+                    setNpValue(npMinute, minutes.size - 1, 0, 0)
                 }
-                setNpValue(npHour, 23, minHour, hour)
-            } else setNpValue(npHour, 23, 0, hour)
+                val hours = (minHour - 1..23).map { if (it !== minHour - 1) "${String.format("%02d", it)}" else "现在" }.toTypedArray()
+                npHour.maxValue = 0
+                npHour.displayedValues = hours
+                setNpValue(npHour, hours.size - 1, 0, hour - minHour + 1)
+            } else {
+                val hours = (0..23).map { "${String.format("%02d", it)}" }.toTypedArray()
+                npHour.displayedValues = hours
+                setNpValue(npHour, hours.size - 1, 0, hour)
+
+                val minutes = (0 until minutesSize).map { "${String.format("%02d", minutesInterval * it)}" }.toTypedArray()
+                npMinute.displayedValues = minutes
+                var minute = cal.get(Calendar.MINUTE) / minutesInterval
+                setNpValue(npMinute, minutesSize - 1, 0, minute)
+            }
             cal.add(Calendar.DAY_OF_MONTH, newVal - oldVal)
         }
 
-        setNpValue(npHour, 23, minHour, minHour)
-        npHour.setFormatter { value -> String.format("%02d", value) }
-        npHour.setOnValueChangedListener { _, oldVal, newVal -> cal.add(Calendar.HOUR_OF_DAY, newVal - oldVal) }
+        val hours = (minHour - 1..23).map { if (it !== minHour - 1) "${String.format("%02d", it)}" else "现在" }.toTypedArray()
+        npHour.displayedValues = hours
+        setNpValue(npHour, hours.size - 1, 0, 0)
+        npHour.setOnValueChangedListener { _, oldVal, newVal ->
+            var minute = cal.get(Calendar.MINUTE) / minutesInterval
+            if (newVal === 0) {
+                cal.set(Calendar.HOUR_OF_DAY, minHour)
+                val minutes = arrayOf(" ")
+                npMinute.maxValue = 0
+                npMinute.displayedValues = minutes
+            } else if (newVal === 1 && minMinute < minutesSize) {
+                cal.set(Calendar.HOUR_OF_DAY, minHour)
+                val minutes = (minMinute until minutesSize).map { "${String.format("%02d", minutesInterval * it)}" }.toTypedArray()
+                npMinute.maxValue = 0
+                npMinute.displayedValues = minutes
+                setNpValue(npMinute, minutes.size - 1, 0, 0)
+            } else {
+                val minutes = (0 until minutesSize).map { "${String.format("%02d", minutesInterval * it)}" }.toTypedArray()
+                npMinute.displayedValues = minutes
+                setNpValue(npMinute, minutesSize - 1, 0, minute)
+                cal.add(Calendar.HOUR_OF_DAY, newVal - oldVal)
+            }
+        }
 
-        val minutes = (0 until minutesSize).map { "${String.format("%02d", minutesInterval * it)}" }.toTypedArray()
+        val minutes = arrayOf(" ")
         npMinute.displayedValues = minutes
-        setNpValue(npMinute, minutesSize - 1, 0, min % minutesSize)
+        setNpValue(npMinute, 0, 0, 0)
         npMinute.setOnValueChangedListener { _, oldVal, newVal -> cal.add(Calendar.MINUTE, (newVal - oldVal) * minutesInterval) }
-        if (time !== 0L) setSelectTime()//如已有设置好的时间，则载入
+
+//        if (time !== 0L) setSelectTime()//如已有设置好的时间，则载入
     }
 
     private fun setSelectTime() {
@@ -115,11 +155,8 @@ class TimeFragment : DialogFragment() {
         when (view?.id) {
             R.id.tvLeft -> dismiss()
             R.id.tvRight -> {
-                if (cal.timeInMillis < System.currentTimeMillis()) ToastUtils.showShort(activity, "下单时间时间不能小于当前时间")
-                else {
-                    onClick?.onClick(DateUtil.stampToTime(cal.timeInMillis))
-                    dismiss()
-                }
+                onClick?.onClick(DateUtil.stampToTime(cal.timeInMillis))
+                dismiss()
             }
         }
     }
