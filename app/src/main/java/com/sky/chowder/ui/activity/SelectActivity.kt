@@ -37,7 +37,7 @@ class SelectActivity : AppCompatActivity() {
         time.time = DateUtil.dateToStamp(btTime.text.toString().trim())
         time.onClick = object : TimeFragment1.OnClickListener {
             override fun onClick(time: String) {
-                btTime.text = time
+                btTime1.text = time
             }
         }
     }
