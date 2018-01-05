@@ -62,11 +62,11 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 
     @OnClick(R.id.fab)
     fun fabOnClick() {
-        if (NetworkUtils.isGpsEnabled(this))
-            showToast("gps已打开")
+        if (RegexUtils.isPhone("16622301874"))
+            showToast("验证通过")
         else {
             NetworkUtils.openGPS(this)
-            showToast("gps未打开")
+            showToast("未通过")
         }
 //        showToast("width==${ScreenUtils.getHeightPX(this)}")
 //        IntentTest.startIntent(this, Extra<String>(),"com.sky.action")
