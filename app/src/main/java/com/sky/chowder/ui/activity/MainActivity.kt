@@ -62,6 +62,11 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 
     @OnClick(R.id.fab)
     fun fabOnClick() {
+        test1?.let { showToast("第二个") }
+
+        showToast(test ?: "第一个")
+        test ?: return
+//        showToast(test1 ?: "第二个")
         if (RegexUtils.isPhone("16622301874"))
             showToast("验证通过")
         else {

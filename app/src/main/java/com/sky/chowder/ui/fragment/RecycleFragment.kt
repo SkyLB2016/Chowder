@@ -23,7 +23,7 @@ class RecycleFragment : BaseFragment<SolarP>() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        recycler!!.layoutManager = LinearLayoutManager(recycler!!.context)
-        recycler!!.adapter = CollapsingAdapter(R.layout.item_recycle_card_main)
+        recycler.layoutManager = LinearLayoutManager(recycler.context)
+        recycler.adapter = CollapsingAdapter(R.layout.item_recycle_card_main)
     }
 }

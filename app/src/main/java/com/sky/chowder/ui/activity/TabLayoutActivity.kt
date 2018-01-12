@@ -22,13 +22,13 @@ class TabLayoutActivity : BaseNoPActivity() {
 
     override fun initialize() {
         setUpViewPager()
-        val mParams = appbar!!.getChildAt(0).layoutParams as AppBarLayout.LayoutParams
+        val mParams = appbar.getChildAt(0).layoutParams as AppBarLayout.LayoutParams
         mParams.scrollFlags = 0//的时候AppBarLayout下的toolbar就不会随着滚动条折叠
         //        mParams.setScrollFlags(5); //的时候AppBarLayout下的toolbar会随着滚动条折叠
     }
 
     private fun setUpViewPager() {
-        tabs!!.visibility = View.VISIBLE
+        tabs.visibility = View.VISIBLE
         val titles = ArrayList<String>()
         titles.add("card")
         titles.add("MeshView")
@@ -36,7 +36,7 @@ class TabLayoutActivity : BaseNoPActivity() {
         titles.add("shape")
         titles.add("通讯录")
         for (i in titles) {
-            tabs!!.addTab(tabs!!.newTab().setText(i))
+            tabs.addTab(tabs.newTab().setText(i))
         }
         val fragments = ArrayList<Fragment>()
         fragments.add(RecycleFragment())
@@ -51,12 +51,12 @@ class TabLayoutActivity : BaseNoPActivity() {
 
             override fun getPageTitle(position: Int): CharSequence = titles[position]
         }
-        viewPager!!.adapter = adapter
-        tabs!!.setupWithViewPager(viewPager)
-        tabs!!.setTabsFromPagerAdapter(adapter)
-        tabs!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+        viewPager.adapter = adapter
+        tabs.setupWithViewPager(viewPager)
+        tabs.setTabsFromPagerAdapter(adapter)
+        tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
-                showToast(tab.text!!.toString())
+                showToast(tab.text.toString())
 //                tab.select();
             }
 

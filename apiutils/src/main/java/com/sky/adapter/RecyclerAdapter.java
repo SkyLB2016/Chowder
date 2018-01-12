@@ -50,6 +50,7 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerHo
     }
 
     public void clearDatas() {
+        if (datas == null) return;
         this.datas.clear();
         notifyDataSetChanged();
     }
