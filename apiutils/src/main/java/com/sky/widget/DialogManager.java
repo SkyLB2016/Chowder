@@ -28,7 +28,6 @@ public class DialogManager {
         AnimationDrawable drawable = (AnimationDrawable) imageView.getBackground();
         drawable.start();
         loading = new AlertDialog.Builder(context, R.style.loading_dialog).setView(imageView).create();// 创建自定义样式dialog
-//        loading.setCancelable(false);// 不可以用“返回键”取消
         return loading;
     }
 
@@ -40,5 +39,15 @@ public class DialogManager {
     public void disDialog() {
         if (loading == null) return;
         loading.dismiss();
+    }
+
+    public void setCancelable() {
+        if (loading == null) return;
+        loading.setCancelable(false);//不可以用“返回键”取消
+    }
+
+    public void setCanceledOnTouchOutside() {
+        if (loading == null) return;
+        loading.setCanceledOnTouchOutside(false);//点击外部不消失
     }
 }

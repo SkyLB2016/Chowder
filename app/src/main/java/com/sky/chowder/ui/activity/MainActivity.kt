@@ -53,16 +53,18 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
     private val f: (Int) -> Int = { a -> a * 2 }
     val sum = { x: Int, y: Int -> x + y }
     val sum1: (Int, Int) -> Int = { x, y -> x + y }
-    val sum2: (Int, Int, Int) -> Int = { x, y, z -> x + y }
+    val sum2: (Int, Int, Int) -> Int = { x, y, z -> x + y + z }
     private var test: String? = null
     private var test1 = ""
-    private var test2 = "22"
+    private var test2 = "12345678"
     private var temp: List<String>? = null//计价详细信息
     private var flag = true
 
     @OnClick(R.id.fab)
     fun fabOnClick() {
-        test1?.let { showToast("第二个") }
+        test1.trim()?.let { showToast("${test1.isBlank()}") }
+        test.isNullOrBlank()
+        showLoading()
 
         showToast(test ?: "第一个")
         test ?: return
