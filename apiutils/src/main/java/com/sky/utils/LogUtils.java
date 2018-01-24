@@ -29,23 +29,19 @@ public class LogUtils {
 
     // 下面四个是默认tag的函数
     public static void i(String msg) {
-        if (!isDebug) return;
-        Log.i(generateTag(), msg);
+        if (isDebug) Log.i(generateTag(), msg);
     }
 
     public static void d(String msg) {
-        if (!isDebug) return;
-        Log.d(generateTag(), msg);
+        if (isDebug) Log.d(generateTag(), msg);
     }
 
     public static void e(String msg) {
-        if (!isDebug) return;
-        Log.e(generateTag(), msg);
+        if (isDebug) Log.e(generateTag(), msg);
     }
 
     public static void v(String msg) {
-        if (!isDebug) return;
-        Log.v(generateTag(), msg);
+        if (isDebug) Log.v(generateTag(), msg);
     }
 
     // 下面是传入自定义tag的函数

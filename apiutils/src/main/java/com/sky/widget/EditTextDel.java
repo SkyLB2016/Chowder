@@ -65,7 +65,7 @@ public class EditTextDel extends AppCompatEditText {
                 Rect rect = new Rect();
                 getGlobalVisibleRect(rect);
                 int height = rect.bottom - rect.top;
-                rect.left = rect.right - height;
+                rect.left = rect.right - height / 2 * 3;
                 if (image != null && rect.contains(x, y)) setText("");
                 break;
         }

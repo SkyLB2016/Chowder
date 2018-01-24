@@ -62,19 +62,23 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 
     @OnClick(R.id.fab)
     fun fabOnClick() {
-        test1.trim()?.let { showToast("${test1.isBlank()}") }
-        test.isNullOrBlank()
-        showLoading()
+        FileUtils.saveCharFile(SkyApp.getInstance().fileCacheDir + "notappend", getString(R.string.daodejing))
+        showToast(test ?: return showToast("通过"))
+        showToast("但是继续执行了")
 
-        showToast(test ?: "第一个")
-        test ?: return
+
+//        test1.trim()?.let { showToast("${test1.isBlank()}") }
+//        test.isNullOrBlank()
+//        showLoading()
+//        showToast(test ?: "第一个")
+//        test ?: return
 //        showToast(test1 ?: "第二个")
-        if (RegexUtils.isPhone("16622301874"))
-            showToast("验证通过")
-        else {
-            NetworkUtils.openGPS(this)
-            showToast("未通过")
-        }
+//        if (RegexUtils.isPhone("16622301874"))
+//            showToast("验证通过")
+//        else {
+//            NetworkUtils.openGPS(this)
+//            showToast("未通过")
+//        }
 //        showToast("width==${ScreenUtils.getHeightPX(this)}")
 //        IntentTest.startIntent(this, Extra<String>(),"com.sky.action")
 //        presenter.showToast("测试消息")
@@ -99,9 +103,9 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 //        if (flag) showToast(getString(R.string.app_name))
 //        adapter!!.datas[2].let { LogUtils.i(it.className) }
 //        LogUtils.i(adapter!!.datas[2].let { it.componentName })
-//        FileUtils.saveFile(SkyApp.getInstance().fileCacheDir, "name1.txt", "name")
-//        FileUtils.saveFile(SkyApp.getInstance().fileCacheDir + "pass", "pass")
-//        FileUtils.saveFile(SkyApp.getInstance().fileCacheDir + "pass.txt", "pass")
+//        FileUtils.saveCharFile(SkyApp.getInstance().fileCacheDir, "name1.txt", "name")
+//        FileUtils.saveCharFile(SkyApp.getInstance().fileCacheDir + "pass", "pass")
+//        FileUtils.saveCharFile(SkyApp.getInstance().fileCacheDir + "pass.txt", "pass")
 //        val map = FileUtils.get(this);
 //        LogUtils.i(map["pass"])
 
@@ -181,7 +185,7 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
         val list = GsonUtils.jsonToList(getString(R.string.jsonarray), Array<ActivityModel>::class.java)
         val entity = GsonUtils.jsonToEntity<ApiResponse<List<ActivityModel>>>(getString(R.string.jsonlist), object : TypeToken<ApiResponse<List<ActivityModel>>>() {}.type)
         val array = GsonUtils.jsonToArray(getString(R.string.jsonarray), Array<ActivityModel>::class.java)
-        val model4 = FileUtils.fileToSerialObj<ActivityModel>(SkyApp.getInstance().fileCacheDir, "model")
+        val model4 = FileUtils.fileToSerialObj<ActivityModel>(SkyApp.getInstance().fileCacheDir+"model")
         val seq = buildSequence {
             for (i in 1..5) {
                 // 产生一个 i 的平方

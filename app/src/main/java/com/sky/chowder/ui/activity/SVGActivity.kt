@@ -45,7 +45,7 @@ class SVGActivity : AppCompatActivity() {
 
         view.isHorizontalScrollBarEnabled = false
         view.setBackgroundColor(Color.TRANSPARENT) // 设置背景色
-        var html = FileUtils.readAssestToStr(this, "html/svg_page_loading.html")
+        var html = FileUtils.readInput(assets.open("html/svg_page_loading.html"))
 
         html = html.replace("@image_assets", "html/logo.png")
         val baseurl = "file:///android_asset/"

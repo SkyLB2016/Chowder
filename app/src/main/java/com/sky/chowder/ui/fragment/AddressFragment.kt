@@ -50,7 +50,15 @@ class AddressFragment : DialogFragment() {
     private lateinit var countyA: Array<AreaEntity>
     private lateinit var countyStr: Array<String?>
     private fun initData() {
-        Observable.just(FileUtils.readAssestToStr(activity, "address.json"))
+//        Observable.just(FileUtils.readAssestToStr(activity, "address.json"))
+//                .map { s -> GsonUtils.jsonToArray(s, Array<AreaEntity>::class.java) }
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe { areaEntities ->
+//                    provinceA = areaEntities
+//                    setAddress()
+//                }
+        Observable.just(FileUtils.readInput(activity.assets.open("address.json")))
                 .map { s -> GsonUtils.jsonToArray(s, Array<AreaEntity>::class.java) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

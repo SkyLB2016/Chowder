@@ -4,24 +4,20 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OptionalDataException;
-import java.io.StreamCorruptedException;
 import java.nio.channels.FileChannel;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by SKY on 2015/11/28.
@@ -30,131 +26,14 @@ public class FileUtils {
 
     /**
      * 从路径中获取最后一个斜杠/之后的名称
+     *
+     * @param path 文件路径名称
+     * @return
      */
     public static String getFileName(String path) {
         int start = path.lastIndexOf(File.separator);
         if (start != -1) return path.substring(start + 1, path.length());
         else return null;
-    }
-
-    /**
-     * 读取文件中的内容
-     *
-     * @param path     文件夹所在路径
-     * @param filename 文件名称
-     * @return
-     */
-    public static String readSdFile(String path, String filename) {
-        return readSdFile(new File(path, filename));
-    }
-
-    @NonNull
-    private static String readSdFile(File file) {
-        StringBuilder result = new StringBuilder();
-        FileInputStream fileIn = null;
-        BufferedInputStream bufferedIn = null;
-        try {
-            fileIn = new FileInputStream(file);
-            bufferedIn = new BufferedInputStream(fileIn);
-            byte[] buffer = new byte[1024];
-            int len;
-            while ((len = bufferedIn.read(buffer)) > -1) {
-                result.append(new String(buffer, 0, len));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (bufferedIn != null) bufferedIn.close();
-                if (fileIn != null) fileIn.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return result.toString();
-    }
-
-    /**
-     * @return 读取assest文件，并返回字符串
-     */
-    public static String readAssestToStr(Context context, String fileName) {
-        //先初始化输入输出流。防止处理失败，不能关闭
-        InputStream input = null;
-        ByteArrayOutputStream byteArrayOut = null;
-        try {
-            input = context.getAssets().open(fileName);
-            //int length = input.available();//输入流的总长度
-            byteArrayOut = new ByteArrayOutputStream();// 创建字节输出流对象
-            int len;//每次读取到的长度
-            byte buffer[] = new byte[1024];//定义缓冲区
-            // 按照缓冲区的大小，循环读取，
-            while ((len = input.read(buffer)) != -1) {
-                byteArrayOut.write(buffer, 0, len);//根据读取的长度写入到os对象中
-            }
-            return new String(byteArrayOut.toByteArray());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (byteArrayOut != null) byteArrayOut.close();
-                if (input != null) input.close();
-            } catch (IOException e) {
-            }
-        }
-        return "";
-    }
-
-    /**
-     * 把序列化的对象保存到本地
-     *
-     * @param dir    文件夹带斜杠的
-     * @param name   文件名，后边会自动拼接“ser.serial”
-     * @param object 要保存的对象
-     */
-    public static <T> void serialToFile(String dir, String name, T object) {
-        ObjectOutputStream objectOut = null;
-        try {
-            objectOut = new ObjectOutputStream(new FileOutputStream(new File(dir, name + "ser.serial")));
-            objectOut.writeObject(object);// 写入到本地
-        } catch (FileNotFoundException e) {
-//            LogUtils.i(e.getMessage());
-        } catch (IOException e) {
-//            LogUtils.i(e.getMessage());
-        } finally {
-            try {
-                if (objectOut != null) objectOut.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * 反序列化
-     *
-     * @param dir  文件夹带斜杠的
-     * @param name 文件名，后边会自动拼接“ser.serial”
-     * @return 解析好的数据对象
-     */
-    public static <T> T fileToSerialObj(String dir, String name) {
-        ObjectInputStream objectIn = null;
-        try {
-            objectIn = new ObjectInputStream(new FileInputStream(new File(dir, name + "ser.serial")));
-            return (T) objectIn.readObject();//从本地获取数据并返回
-        } catch (StreamCorruptedException e) {
-//            LogUtils.i(e.getMessage());
-        } catch (OptionalDataException e) {
-        } catch (FileNotFoundException e) {
-        } catch (IOException e) {
-        } catch (ClassNotFoundException e) {
-        } finally {
-            try {
-                if (objectIn != null) objectIn.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return null;
     }
 
     /**
@@ -197,14 +76,17 @@ public class FileUtils {
     }
 
     /**
-     * 获取文件个数
+     * 获取文件夹内文件个数
+     *
+     * @param folder
+     * @return
      */
-    public static long getlistSize(File f) {
-        File flist[] = f.listFiles();
+    public static long getNumberOfFiles(File folder) {
+        File flist[] = folder.listFiles();
         long size = flist.length;
         for (int i = 0; i < flist.length; i++) {
             if (flist[i].isDirectory()) {
-                size = size + getlistSize(flist[i]);
+                size = size + getNumberOfFiles(flist[i]);
                 size--;
             }
         }
@@ -214,104 +96,269 @@ public class FileUtils {
     /**
      * 复制文件(以超快的速度复制文件)
      *
-     * @param srcFile     源文件File
-     * @param destDir     目标目录File
-     * @param newFileName 新文件名
-     * @return 实际复制的字节数，如果文件、目录不存在、文件为null或者发生IO异常，返回-1
+     * @param srcFile 源文件File
+     * @param destDir 目标目录File
+     * @param newName 新文件名
      */
-    public static long copyFile(File srcFile, File destDir, String newFileName, CopyFileListener listener) {
-        long copySizes = 0;
-        if (!srcFile.exists()) {
-            if (listener != null) listener.onFail("源文件不存在");
-            copySizes = -1;
-        } else if (!destDir.exists()) {
-            if (listener != null) listener.onFail("目标目录不存在");
-            copySizes = -1;
-        } else if (newFileName == null) {
-            if (listener != null) listener.onFail("文件名为null");
-            copySizes = -1;
-        } else {
+    public static void copyFile(File srcFile, File destDir, String newName) {
+        try {
+            File dstFile = new File(destDir, newName);//创建目标文件
+            FileChannel fcin = new FileInputStream(srcFile).getChannel();//源文件通道
+            FileChannel fcout = new FileOutputStream(dstFile).getChannel();
+            long size = fcin.size();
+            fcin.transferTo(0, size, fcout);//写入目标文件
+            fcin.close();
+            fcout.close();
+        } catch (FileNotFoundException e) {
+            LogUtils.d(e.getMessage());
+        } catch (IOException e) {
+            LogUtils.d(e.getMessage());
+        }
+    }
+
+    /**
+     * 把序列化的对象保存到本地
+     *
+     * @param pathname 文件路径，后边会自动拼接“ser.serial”
+     * @param object   要保存的对象
+     */
+    public static <T> void serialToFile(String pathname, T object) {
+        ObjectOutputStream objectOut = null;
+        try {
+            objectOut = new ObjectOutputStream(new FileOutputStream(new File(pathname + "ser.serial")));
+            objectOut.writeObject(object);// 写入到本地
+        } catch (FileNotFoundException e) {
+            LogUtils.d(e.getMessage());
+        } catch (IOException e) {
+            LogUtils.d(e.getMessage());
+        } finally {
             try {
-                File dstFile = new File(destDir, newFileName);//目标文件
-                FileChannel fcin = new FileInputStream(srcFile).getChannel();
-                FileChannel fcout = new FileOutputStream(dstFile).getChannel();
-                long size = fcin.size();
-                fcin.transferTo(0, size, fcout);
-                fcin.close();
-                fcout.close();
-                copySizes = size;
-                if (listener != null) listener.success(dstFile.getPath());
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
+                if (objectOut != null) objectOut.close();
             } catch (IOException e) {
-                e.printStackTrace();
             }
         }
-        return copySizes;
-    }
-
-    public interface CopyFileListener {
-        void onFail(String msg);
-
-        void success(String path);
     }
 
     /**
-     * @param filePath 绝对路径
+     * 反序列化
+     *
+     * @param pathname 文件路径，后边会自动拼接“ser.serial”
+     * @return 解析好的数据对象
      */
-    public static void saveFile(String filePath, String content) {
+    public static <T> T fileToSerialObj(String pathname) {
+        ObjectInputStream objectIn = null;
         try {
-            File file = new File(filePath);
-            BufferedWriter output = new BufferedWriter(new FileWriter(file));
+            objectIn = new ObjectInputStream(new FileInputStream(new File(pathname + "ser.serial")));
+            return (T) objectIn.readObject();//从本地获取数据并返回
+        } catch (IOException e) {
+            LogUtils.d(e.getMessage());
+        } catch (ClassNotFoundException e) {
+            LogUtils.d(e.getMessage());
+        } finally {
+            try {
+                if (objectIn != null) objectIn.close();
+            } catch (IOException e) {
+            }
+        }
+        return null;
+    }
+
+    /**
+     * @param pathname 绝对路径
+     * @param content  要保存的文本内容
+     */
+    public static void saveCharFile(String pathname, String content) {
+        saveCharFile(pathname, content, false);
+    }
+
+    /**
+     * @param pathname 绝对路径
+     * @param content  要保存的文本内容
+     * @param content  是否追加,
+     */
+    public static void saveCharFile(String pathname, String content, Boolean append) {
+        BufferedWriter output = null;
+        try {
+            File file = new File(pathname);
+            output = new BufferedWriter(new FileWriter(file, append));
             output.write(content);
-            output.close();
+            output.flush();
+//            int start = 0;
+//            int interval = 100;
+//            int end = interval;
+//            int index = content.length() / interval;
+//            for (int i = 0; i < index + 1; i++) {
+//                start = (i) * interval;
+//                end = (i + 1) * interval;
+//                if (content.length() < end) end = content.length();
+//                String text = content.substring(start, end);
+//                LogUtils.i(text);
+//                output.write(text);
+//                output.flush();
+//            }
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.d(e.getMessage());
+        } finally {
+            try {
+                if (output != null) output.close();
+            } catch (IOException e) {
+            }
         }
     }
 
     /**
-     * @param dir     文件夹所在路径,带斜杠的
-     * @param file    文件名称，带后缀
-     * @param content
+     * 保存数据流
+     *
+     * @param pathname 文件绝对路径
+     * @param stream   数据流
      */
-    public static void saveFile(String dir, String file, String content) {
+
+    public static void saveByteFile(String pathname, InputStream stream) {
+        FileOutputStream fos = null;
+        BufferedOutputStream bos = null;
         try {
-            FileWriter writer = new FileWriter(dir + file, true);
-            writer.write(content);
-            writer.close();
-        } catch (IOException var5) {
+            File file = new File(pathname);
+            fos = new FileOutputStream(file);
+            bos = new BufferedOutputStream(fos);
+            byte[] buffer = new byte[1024];
+            int len;
+            while ((len = stream.read(buffer)) > -1) {
+                bos.write(buffer, 0, len);
+            }
+        } catch (IOException e) {
+            LogUtils.d(e.getMessage());
+        } finally {
+            try {
+                if (bos != null) bos.close();
+                if (fos != null) fos.close();
+                if (stream != null) stream.close();
+            } catch (IOException e) {
+            }
         }
     }
 
-    public static boolean saveFile1(String filepath, String content) {
-        try {
-            File file = new File(filepath);
-            FileOutputStream fos = new FileOutputStream(file);
-            fos.write((content).getBytes());
-            fos.close();
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-
+    /**
+     * 通过字节流读取文件中的内容，适用于流媒体文件
+     *
+     * @param pathname 绝对路径
+     * @return
+     */
+    public static String readByteFile(String pathname) {
+        return readByteFile(new File(pathname));
     }
 
-    public static Map<String, String> get(Context context) {
-        File file = new File(context.getFilesDir(), "info.txt");
+    /**
+     * 通过字节流读取文件中的内容，适用于流媒体文件
+     *
+     * @param file
+     * @return
+     */
+    @NonNull
+    private static String readByteFile(File file) {
+        StringBuilder result = new StringBuilder();
+        FileInputStream fileIn = null;
+        BufferedInputStream bufferedIn = null;
         try {
-            FileInputStream fis = new FileInputStream(file);
-            BufferedReader br = new BufferedReader(new InputStreamReader(fis));
-            String str = br.readLine();
-            String[] infos = str.split("##");
-            Map<String, String> map = new HashMap<>();
-            map.put("username", infos[0]);
-            map.put("pass", infos[1]);
-            return map;
+            fileIn = new FileInputStream(file);
+            bufferedIn = new BufferedInputStream(fileIn);
+            byte[] buffer = new byte[1024];
+            int len;
+            while ((len = bufferedIn.read(buffer)) > -1) {
+                result.append(new String(buffer, 0, len));
+            }
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            LogUtils.d(e.getMessage());
+        } finally {
+            try {
+                if (bufferedIn != null) bufferedIn.close();
+                if (fileIn != null) fileIn.close();
+            } catch (IOException e) {
+            }
         }
+        return result.toString();
+    }
+
+    /**
+     * 通过字符流读取文件中的内容，适用于文本文件的读取
+     *
+     * @param pathname 绝对路径
+     * @return
+     */
+    public static String readCharFile(String pathname) {
+        return readByteFile(new File(pathname));
+    }
+
+    /**
+     * 通过字符流读取文件中的内容，适用于文本文件的读取
+     *
+     * @param file 文本文件
+     * @return
+     */
+    public static String readCharFile(File file) {
+        StringBuilder result = new StringBuilder();
+        FileReader fileReader = null;
+        BufferedReader bReader = null;
+        try {
+            fileReader = new FileReader(file);
+            bReader = new BufferedReader(fileReader);
+            char[] buffer = new char[1024];
+            int len;
+            while ((len = bReader.read(buffer)) > -1) {
+                result.append(new String(buffer, 0, len));
+            }
+        } catch (IOException e) {
+            LogUtils.d(e.getMessage());
+        } finally {
+            try {
+                if (bReader != null) bReader.close();
+                if (fileReader != null) fileReader.close();
+            } catch (IOException e) {
+            }
+        }
+        return result.toString();
+    }
+
+    /**
+     * 读取输入流中数据
+     *
+     * @param stream
+     * @return
+     */
+    public static String readInput(InputStream stream) {
+        StringBuilder result = new StringBuilder();
+        BufferedInputStream bis = null;
+        try {
+            bis = new BufferedInputStream(stream);
+            int len;
+            byte[] buffer = new byte[1024];
+            while ((len = bis.read(buffer)) > -1) {
+                result.append(new String(buffer, 0, len));
+            }
+        } catch (IOException e) {
+            LogUtils.d(e.getMessage());
+        } finally {
+            try {
+                if (bis != null) bis.close();
+                if (stream != null) stream.close();
+            } catch (IOException e) {
+            }
+        }
+        return result.toString();
+    }
+
+    /**
+     * 读取assest文件，并返回字符串
+     *
+     * @param context
+     * @param pathname 路径
+     * @return
+     */
+    public static String readAssestToStr(Context context, String pathname) {
+        try {
+            return readInput(context.getAssets().open(pathname));
+        } catch (IOException e) {
+
+        }
+        return "";
     }
 }

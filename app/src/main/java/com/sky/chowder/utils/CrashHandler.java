@@ -25,6 +25,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         LogUtils.i("错误所在行数==" + e.getStackTrace()[0].getLineNumber());
         LogUtils.i("错误产生类==" + e.getStackTrace()[0].getFileName());
         LogUtils.i("错误产生类所在路径==" + e.getStackTrace()[0].getClassName());
+        LogUtils.i("错误类型==" + e.getMessage());
         System.exit(1);
     }
 }
