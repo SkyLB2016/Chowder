@@ -25,7 +25,7 @@ public class MemoryUtils {
             br.close();
             return Integer.parseInt(subMemoryLine.replaceAll("\\D+", "")) * 1024l;
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.d(e.getMessage());
         }
         return 0;
     }

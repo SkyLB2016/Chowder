@@ -72,14 +72,12 @@ public class JavaConsole {
             }
             System.out.println("消耗时间==" + (System.currentTimeMillis() - time));
         } catch (IOException e) {
-            e.printStackTrace();
         } finally {
             try {
                 if (writer != null) writer.close();
                 if (bufferedIn != null) bufferedIn.close();
                 if (fileIn != null) fileIn.close();
             } catch (IOException e) {
-                e.printStackTrace();
             }
         }
         return result.toString();
@@ -115,10 +113,9 @@ public class JavaConsole {
                 position++;
             }
 //        } catch (IndexOutOfBoundsException e) {
-//            e.printStackTrace();
+//            LogUtils.d(e.getMessage());
 //            System.out.println(line);
         } catch (IOException e) {
-            e.printStackTrace();
         } finally {
             try {
 
@@ -127,7 +124,6 @@ public class JavaConsole {
                 if (bufferedIn != null) bufferedIn.close();
                 if (fileIn != null) fileIn.close();
             } catch (IOException e) {
-                e.printStackTrace();
             }
         }
         return result.toString();

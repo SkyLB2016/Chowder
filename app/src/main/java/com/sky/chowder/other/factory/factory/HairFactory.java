@@ -3,6 +3,7 @@ package com.sky.chowder.other.factory.factory;
 import com.sky.chowder.other.factory.factory.api.HairInterface;
 import com.sky.chowder.other.factory.factory.hair.LeftHair;
 import com.sky.chowder.other.factory.factory.hair.RightHair;
+import com.sky.utils.LogUtils;
 
 import java.util.Map;
 
@@ -36,11 +37,11 @@ public class HairFactory {
         try {
             return (HairInterface) Class.forName(className).newInstance();
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            LogUtils.d(e.getMessage());
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            LogUtils.d(e.getMessage());
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            LogUtils.d(e.getMessage());
         }
         return null;
     }
@@ -60,11 +61,11 @@ public class HairFactory {
             HairInterface hair = (HairInterface) Class.forName(map.get(key)).newInstance();
             return hair;
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            LogUtils.d(e.getMessage());
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            LogUtils.d(e.getMessage());
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            LogUtils.d(e.getMessage());
         }
         return null;
     }

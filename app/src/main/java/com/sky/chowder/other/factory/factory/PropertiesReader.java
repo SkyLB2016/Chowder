@@ -2,6 +2,7 @@ package com.sky.chowder.other.factory.factory;
 
 
 import com.sky.chowder.R;
+import com.sky.utils.LogUtils;
 
 import java.io.InputStream;
 import java.util.Enumeration;
@@ -38,7 +39,7 @@ public class PropertiesReader {
 //				System.out.println(key + "  " + property);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.d(e.getMessage());
         }
         return map;
     }

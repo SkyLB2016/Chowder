@@ -32,16 +32,16 @@ class PhotoActivity : BasePActivity<SolarP>() {
     private fun getPhoto() {
         val photoPath = SkyApp.getInstance().picCacheDir + System.currentTimeMillis() + ".jpg"
         photoUtils = PhotoUtils(this, photoPath)
-        photoUtils?.setUploadPicture { photo, bitmap ->
+        photoUtils?.setUploadPicture { photoName, bitmap ->
             image.setImageBitmap(bitmap)
-            LogUtils.i("photo==$photo")
+            LogUtils.i("photo==$photoName")
             LogUtils.i("压缩后所占内存大小==${bitmap.allocationByteCount / 1024}KB")
-            LogUtils.i("原图所占内存大小==${BitmapUtils.getBitmapFromPath(photo).allocationByteCount / 1024 / 1024}MB")
+            LogUtils.i("原图所占内存大小==${BitmapUtils.getBitmapFromPath(photoName).allocationByteCount / 1024 / 1024}MB")
 
-            val compress = SkyApp.getInstance().picCacheDir + System.currentTimeMillis() % 1000 + ".jpg"
-            BitmapUtils.saveBitmapToFile(bitmap, compress)//保存照片到应用缓存文件目录下
-            LogUtils.i("原图文件大小==${File(photo).length() / 1024 / 1024}MB")
-            LogUtils.i("压缩后文件大小==${File(compress).length() / 1024}KB")
+            val pathname = SkyApp.getInstance().picCacheDir + System.currentTimeMillis() % 1000 + ".jpg"
+            BitmapUtils.saveBitmapToFile(bitmap, pathname)//保存照片到应用缓存文件目录下
+            LogUtils.i("原图文件大小==${File(photoName).length() / 1024 / 1024}MB")
+            LogUtils.i("压缩后文件大小==${File(pathname).length() / 1024}KB")
         }
     }
 

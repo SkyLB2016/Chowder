@@ -35,11 +35,11 @@ public class GsonUtils {
         try {
             return getGson().fromJson(json, cls);
         } catch (JsonSyntaxException e) {
-            e.printStackTrace();
+            LogUtils.d(e.getMessage());
         } catch (JsonParseException e) {
-            e.printStackTrace();
+            LogUtils.d(e.getMessage());
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.d(e.getMessage());
         }
         return null;
     }
@@ -53,11 +53,11 @@ public class GsonUtils {
         try {
             return getGson().fromJson(json, typeOfT);
         } catch (JsonSyntaxException e) {
-            e.printStackTrace();
+            LogUtils.d(e.getMessage());
         } catch (JsonParseException e) {
-            e.printStackTrace();
+            LogUtils.d(e.getMessage());
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.d(e.getMessage());
         }
         return null;
     }
@@ -76,11 +76,11 @@ public class GsonUtils {
             }
             return list;
         } catch (JsonSyntaxException e) {
-            e.printStackTrace();
+            LogUtils.d(e.getMessage());
         } catch (JsonParseException e) {
-            e.printStackTrace();
+            LogUtils.d(e.getMessage());
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.d(e.getMessage());
         }
         return null;
     }
@@ -89,11 +89,11 @@ public class GsonUtils {
         try {
             return getGson().fromJson(json, cls);
         } catch (JsonSyntaxException e) {
-            e.printStackTrace();
+            LogUtils.d(e.getMessage());
         } catch (JsonParseException e) {
-            e.printStackTrace();
+            LogUtils.d(e.getMessage());
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.d(e.getMessage());
         }
         return null;
     }

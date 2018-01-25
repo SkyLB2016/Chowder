@@ -80,7 +80,7 @@ public class ScreenUtils {
             int height = Integer.parseInt(clazz.getField("status_bar_height").get(object).toString());
             return context.getResources().getDimensionPixelSize(height);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.d(e.getMessage());
         }
         return 0;
     }

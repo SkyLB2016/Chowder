@@ -116,7 +116,7 @@ public class DateUtil {
         try {
             return new SimpleDateFormat(type, Locale.CHINA).parse(time).getTime();
         } catch (ParseException e) {
-            e.printStackTrace();
+            LogUtils.d(e.getMessage());
         }
         return 0;
     }

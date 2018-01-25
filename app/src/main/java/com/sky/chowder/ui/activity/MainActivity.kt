@@ -62,11 +62,9 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 
     @OnClick(R.id.fab)
     fun fabOnClick() {
-        FileUtils.saveCharFile(SkyApp.getInstance().fileCacheDir + "notappend", getString(R.string.daodejing))
-        showToast(test ?: return showToast("通过"))
-        showToast("但是继续执行了")
-
-
+//        showToast(test ?: return showToast("通过"))
+//        showToast("但是继续执行了")
+//        FileUtils.saveCharFile(SkyApp.getInstance().fileCacheDir + "notappend", getString(R.string.daodejing))
 //        test1.trim()?.let { showToast("${test1.isBlank()}") }
 //        test.isNullOrBlank()
 //        showLoading()
@@ -185,7 +183,7 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
         val list = GsonUtils.jsonToList(getString(R.string.jsonarray), Array<ActivityModel>::class.java)
         val entity = GsonUtils.jsonToEntity<ApiResponse<List<ActivityModel>>>(getString(R.string.jsonlist), object : TypeToken<ApiResponse<List<ActivityModel>>>() {}.type)
         val array = GsonUtils.jsonToArray(getString(R.string.jsonarray), Array<ActivityModel>::class.java)
-        val model4 = FileUtils.fileToSerialObj<ActivityModel>(SkyApp.getInstance().fileCacheDir+"model")
+        val model4 = FileUtils.fileToSerialObj<ActivityModel>(SkyApp.getInstance().fileCacheDir + "model")
         val seq = buildSequence {
             for (i in 1..5) {
                 // 产生一个 i 的平方

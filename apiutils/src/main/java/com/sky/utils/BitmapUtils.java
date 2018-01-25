@@ -63,15 +63,13 @@ public class BitmapUtils {
             input = new BufferedInputStream(connection.getInputStream());
             return BitmapFactory.decodeStream(input);
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            LogUtils.d(e.getMessage());
         } catch (IOException e) {
-            e.printStackTrace();
         } finally {
             try {
                 if (input != null) input.close();
                 if (connection != null) connection.disconnect();
             } catch (IOException e) {
-                e.printStackTrace();
             }
         }
         return null;
@@ -141,7 +139,7 @@ public class BitmapUtils {
             byte[] bytes = Base64.decode(base64, Base64.DEFAULT);
             return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.d(e.getMessage());
         }
         return null;
     }
@@ -167,12 +165,11 @@ public class BitmapUtils {
             bitmap.compress(Bitmap.CompressFormat.JPEG, quality, byteArrayout);
             return byteArrayout.toByteArray();
         } catch (Exception e) {
-
+            LogUtils.d(e.getMessage());
         } finally {
             try {
                 if (byteArrayout == null) byteArrayout.close();
             } catch (IOException e) {
-                e.printStackTrace();
             }
         }
         return null;
@@ -205,12 +202,11 @@ public class BitmapUtils {
             out = new FileOutputStream(absoluteName);
             return bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            LogUtils.d(e.getMessage());
         } finally {
             try {
                 if (out != null) out.close();
             } catch (IOException e) {
-                e.printStackTrace();
             }
         }
         return false;

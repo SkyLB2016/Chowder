@@ -133,11 +133,11 @@ public class SPUtils {
                 map.put(key, method.invoke(obj));
             }
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            LogUtils.d(e.getMessage());
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            LogUtils.d(e.getMessage());
         } catch (InvocationTargetException e) {
-            e.printStackTrace();
+            LogUtils.d(e.getMessage());
         }
         return map;
     }

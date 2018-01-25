@@ -112,18 +112,19 @@ public class PhotoUtils {
         if (TextUtil.notNull(photoPath, error)) return;
         Bitmap bitmap = null;
         switch (requestCode) {
-//            case PHOTO: //拍照
-//                BitmapUtils.saveBitmapToFile(bitmap, photoPath);//保存照片到应用缓存文件目录下
-//                break;
+            case PHOTO: //拍照
+                bitmap = BitmapUtils.getBitmapFromPath(photoPath, 600, 600);//获取bitmap
+                break;
             case LOCAL_PHOTO: //图库选择
                 if (data == null) return;
                 Uri uri = data.getData(); //获得图片的uri
                 if (TextUtil.notNullObj(uri, error)) return;
-                photoPath = BitmapUtils.getRealPathFromURI(activity, uri);//获取路径
-                if (TextUtil.notNull(photoPath, error)) return;
+                String path = BitmapUtils.getRealPathFromURI(activity, uri);//获取路径
+                if (TextUtil.notNull(path, error)) return;
+                bitmap = BitmapUtils.getBitmapFromPath(path, 600, 600);//获取bitmap
                 break;
         }
-        bitmap = BitmapUtils.getBitmapFromPath(photoPath,600,600);//获取bitmap
+        BitmapUtils.saveBitmapToFile(bitmap, photoPath);//保存照片到应用缓存文件目录下
         uploadPicture.UpLoadPicture(photoPath, bitmap);
     }
 

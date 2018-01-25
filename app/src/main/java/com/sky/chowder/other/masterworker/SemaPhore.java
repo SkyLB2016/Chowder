@@ -1,5 +1,7 @@
 package com.sky.chowder.other.masterworker;
 
+import com.sky.utils.LogUtils;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
@@ -25,7 +27,7 @@ public class SemaPhore {
                         //availablePermits()指的是当前信号灯库中有多少个可以被使用
                         System.out.println("-----------------" + semp.availablePermits()); 
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        LogUtils.d(e.getMessage());
                     }
                 }
             };

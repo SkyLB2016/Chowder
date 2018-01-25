@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.sky.R;
+import com.sky.utils.LogUtils;
 
 /**
  * Created by SKY on 2016/9/21.
@@ -34,7 +35,7 @@ public class BaseTitle {
             //如果未设置返回程序的名称,即application里的label,
             setToolbar((String) info.loadLabel(activity.getPackageManager()));
         } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
+            LogUtils.d(e.getMessage());
         }
     }
 

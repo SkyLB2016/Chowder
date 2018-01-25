@@ -16,6 +16,7 @@
 package com.sky.chowder.utils;
 
 import com.google.gson.Gson;
+import com.sky.utils.LogUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -113,7 +114,7 @@ public class HttpEngine {
             connection.setRequestProperty("Response-Type", "json");
             connection.setChunkedStreamingMode(0);
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.d(e.getMessage());
         }
         return connection;
     }
@@ -127,7 +128,7 @@ public class HttpEngine {
             try {
                 stringBuilder.append(URLEncoder.encode(paramsMap.get(key), ENCODE_TYPE));
             } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
+                LogUtils.d(e.getMessage());
             }
             stringBuilder.append("&");
         }

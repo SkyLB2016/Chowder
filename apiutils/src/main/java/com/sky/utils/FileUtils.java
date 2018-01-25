@@ -125,7 +125,7 @@ public class FileUtils {
     public static <T> void serialToFile(String pathname, T object) {
         ObjectOutputStream objectOut = null;
         try {
-            objectOut = new ObjectOutputStream(new FileOutputStream(new File(pathname + "ser.serial")));
+            objectOut = new ObjectOutputStream(new FileOutputStream(new File(pathname)));
             objectOut.writeObject(object);// 写入到本地
         } catch (FileNotFoundException e) {
             LogUtils.d(e.getMessage());
@@ -148,7 +148,7 @@ public class FileUtils {
     public static <T> T fileToSerialObj(String pathname) {
         ObjectInputStream objectIn = null;
         try {
-            objectIn = new ObjectInputStream(new FileInputStream(new File(pathname + "ser.serial")));
+            objectIn = new ObjectInputStream(new FileInputStream(new File(pathname)));
             return (T) objectIn.readObject();//从本地获取数据并返回
         } catch (IOException e) {
             LogUtils.d(e.getMessage());
@@ -285,7 +285,7 @@ public class FileUtils {
      * @return
      */
     public static String readCharFile(String pathname) {
-        return readByteFile(new File(pathname));
+        return readCharFile(new File(pathname));
     }
 
     /**
