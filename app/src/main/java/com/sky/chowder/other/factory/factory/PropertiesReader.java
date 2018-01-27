@@ -39,7 +39,7 @@ public class PropertiesReader {
 //				System.out.println(key + "  " + property);
             }
         } catch (Exception e) {
-            LogUtils.d(e.getMessage());
+            LogUtils.d(e.toString());
         }
         return map;
     }

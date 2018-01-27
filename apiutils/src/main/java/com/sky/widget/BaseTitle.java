@@ -35,7 +35,7 @@ public class BaseTitle {
             //如果未设置返回程序的名称,即application里的label,
             setToolbar((String) info.loadLabel(activity.getPackageManager()));
         } catch (PackageManager.NameNotFoundException e) {
-            LogUtils.d(e.getMessage());
+            LogUtils.d(e.toString());
         }
     }
 

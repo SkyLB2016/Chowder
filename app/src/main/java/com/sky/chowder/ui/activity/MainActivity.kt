@@ -5,7 +5,8 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.BatteryManager
-import android.provider.ContactsContract.CommonDataKinds.Phone
+import android.provider.AlarmClock
+import android.provider.ContactsContract
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
@@ -21,6 +22,7 @@ import com.sky.chowder.ui.presenter.MainP
 import com.sky.model.ApiResponse
 import com.sky.utils.*
 import kotlinx.android.synthetic.main.content_main.*
+import java.io.File
 import kotlin.coroutines.experimental.buildSequence
 
 
@@ -50,6 +52,10 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
         )
     }
 
+    override fun setData(data: List<ActivityModel>) {
+        adapter?.datas = data
+    }
+
     private val f: (Int) -> Int = { a -> a * 2 }
     val sum = { x: Int, y: Int -> x + y }
     val sum1: (Int, Int) -> Int = { x, y -> x + y }
@@ -62,76 +68,11 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 
     @OnClick(R.id.fab)
     fun fabOnClick() {
+        LogUtils.i(cacheDir.toString())
+
 //        showToast(test ?: return showToast("通过"))
 //        showToast("但是继续执行了")
-//        FileUtils.saveCharFile(SkyApp.getInstance().fileCacheDir + "notappend", getString(R.string.daodejing))
-//        test1.trim()?.let { showToast("${test1.isBlank()}") }
-//        test.isNullOrBlank()
-//        showLoading()
-//        showToast(test ?: "第一个")
 //        test ?: return
-//        showToast(test1 ?: "第二个")
-//        if (RegexUtils.isPhone("16622301874"))
-//            showToast("验证通过")
-//        else {
-//            NetworkUtils.openGPS(this)
-//            showToast("未通过")
-//        }
-//        showToast("width==${ScreenUtils.getHeightPX(this)}")
-//        IntentTest.startIntent(this, Extra<String>(),"com.sky.action")
-//        presenter.showToast("测试消息")
-//        val intent = Intent(AlarmClock.ACTION_SET_ALARM)
-//        intent.putExtra(AlarmClock.EXTRA_HOUR, 15)
-//        intent.putExtra(AlarmClock.EXTRA_MINUTES, 24)
-//        intent.putExtra(AlarmClock.EXTRA_MESSAGE, "测试")
-//        val intent = Intent(AlarmClock.ACTION_SET_TIMER)
-//                .putExtra(AlarmClock.EXTRA_MESSAGE, "测试")
-//                .putExtra(AlarmClock.EXTRA_LENGTH, 10)
-//                .putExtra(AlarmClock.EXTRA_SKIP_UI, true)
-//        val intent = Intent(MediaStore.INTENT_ACTION_VIDEO_CAMERA)
-//
-//        if (intent.resolveActivity(packageManager) != null) {
-//            startActivity(intent);
-//        }
-//        val intent = Intent(Intent.ACTION_PICK)
-//        intent.type = Phone.CONTENT_TYPE
-//        startActivityForResult(intent, 101)
-
-//        val flag = resources.getBoolean(R.bool.flag)
-//        if (flag) showToast(getString(R.string.app_name))
-//        adapter!!.datas[2].let { LogUtils.i(it.className) }
-//        LogUtils.i(adapter!!.datas[2].let { it.componentName })
-//        FileUtils.saveCharFile(SkyApp.getInstance().fileCacheDir, "name1.txt", "name")
-//        FileUtils.saveCharFile(SkyApp.getInstance().fileCacheDir + "pass", "pass")
-//        FileUtils.saveCharFile(SkyApp.getInstance().fileCacheDir + "pass.txt", "pass")
-//        val map = FileUtils.get(this);
-//        LogUtils.i(map["pass"])
-
-//        val f = File(SkyApp.getInstance().fileCacheDir + "pass.txt")
-//        System.out.println(f.getParent())//返回此抽象路径名父目录的路径名字符串；如果此路径名没有指定父目录，则返回 null
-//        System.out.println(f.getName())//返回由此抽象路径名表示的文件或目录的名称
-//        System.out.println(f.exists())//测试此抽象路径名表示的文件或目录是否存在
-//        System.out.println(f.getAbsoluteFile())// 返回此抽象路径名的绝对路径名形式
-//        System.out.println(f.getAbsolutePath())//返回此抽象路径名的规范路径名字符串
-//        System.out.println(f.getPath())//将此抽象路径名转换为一个路径名字符串
-//        System.out.println(f.hashCode())//计算此抽象路径名的哈希码
-//        System.out.println(f.length())//返回由此抽象路径名表示的文件的长度
-//        System.out.println(f.list())// 返回一个字符串数组，这些字符串指定此抽象路径名表示的目录中的文件和目录
-//        System.out.println(f.mkdir())//创建此抽象路径名指定的目录
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 101 && resultCode == RESULT_OK) {
-            val projection = arrayOf(Phone.NUMBER, Phone._ID, Phone.DISPLAY_NAME)
-            val cursor = contentResolver.query(data?.data, projection, null, null, null);
-            if (cursor != null && cursor.moveToFirst()) {
-                val numberIndex = cursor.getColumnIndex(Phone.DISPLAY_NAME);
-                val number = cursor.getString(numberIndex);
-                showToast(number)
-            }
-            cursor.close()
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -165,10 +106,6 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
         } else super.onBackPressed()
     }
 
-    override fun setData(data: List<ActivityModel>) {
-        adapter?.datas = data
-    }
-
     //获取电量百分比
     val battery: Int
         get() {
@@ -197,14 +134,65 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
         println(seq.toList())
 
         var fruits = listOf("banana", "avocado", "apple", "kiwi")
-        fruits
-                .filter { it.startsWith("a") }
+        fruits.filter { it.startsWith("a") }
                 .sortedBy { it }
                 .map { it.toUpperCase() }
                 .forEach { LogUtils.i(it) }
-        array
-                .sortedByDescending { it }
+        array.sortedByDescending { it }
                 .forEach { LogUtils.i(it.className) }
+    }
 
+    /**
+     * 文件属性
+     */
+    private fun fileTest() {
+        val f = File(SkyApp.getInstance().fileCacheDir + "pass.txt")
+        System.out.println(f.getParent())//返回此抽象路径名父目录的路径名字符串；如果此路径名没有指定父目录，则返回 null
+        System.out.println(f.getName())//返回由此抽象路径名表示的文件或目录的名称
+        System.out.println(f.exists())//测试此抽象路径名表示的文件或目录是否存在
+        System.out.println(f.getAbsoluteFile())// 返回此抽象路径名的绝对路径名形式
+        System.out.println(f.getAbsolutePath())//返回此抽象路径名的规范路径名字符串
+        System.out.println(f.getPath())//将此抽象路径名转换为一个路径名字符串
+        System.out.println(f.hashCode())//计算此抽象路径名的哈希码
+        System.out.println(f.length())//返回由此抽象路径名表示的文件的长度
+        System.out.println(f.list())// 返回一个字符串数组，这些字符串指定此抽象路径名表示的目录中的文件和目录
+        System.out.println(f.mkdir())//创建此抽象路径名指定的目录
+    }
+
+    /**
+     * intent测试
+     */
+    private fun intentTest() {
+        //        IntentTest.startIntent(this, Extra<String>(),"com.sky.action")
+        val intent = Intent(AlarmClock.ACTION_SET_ALARM)
+        intent.putExtra(AlarmClock.EXTRA_HOUR, 15)
+        intent.putExtra(AlarmClock.EXTRA_MINUTES, 24)
+        intent.putExtra(AlarmClock.EXTRA_MESSAGE, "测试")
+        //        val intent = Intent(AlarmClock.ACTION_SET_TIMER)
+        //                .putExtra(AlarmClock.EXTRA_MESSAGE, "测试")
+        //                .p`utExtra(AlarmClock.EXTRA_LENGTH, 10)
+        //                .putExtra(AlarmClock.EXTRA_SKIP_UI, true)
+        //        val intent = Intent(MediaStore.INTENT_ACTION_VIDEO_CAMERA)
+        //
+        //        if (intent.resolveActivity(packageManager) != null) {
+        //            startActivity(intent);
+        //        }
+        //        val intent = Intent(Intent.ACTION_PICK)
+        //        intent.type = Phone.CONTENT_TYPE
+        //        startActivityForResult(intent, 101)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 101 && resultCode == RESULT_OK) {
+            val projection = arrayOf(ContactsContract.CommonDataKinds.Phone.NUMBER, ContactsContract.CommonDataKinds.Phone._ID, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
+            val cursor = contentResolver.query(data?.data, projection, null, null, null);
+            if (cursor != null && cursor.moveToFirst()) {
+                val numberIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
+                val number = cursor.getString(numberIndex);
+                showToast(number)
+            }
+            cursor.close()
+        }
     }
 }

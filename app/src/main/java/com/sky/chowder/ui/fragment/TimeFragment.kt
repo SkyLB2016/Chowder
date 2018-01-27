@@ -77,7 +77,7 @@ class TimeFragment : DialogFragment() {
         npMinute.displayedValues = minutes
         setNpValue(npMinute, minutesSize - 1, 0, min % minutesSize)
         npMinute.setOnValueChangedListener { _, oldVal, newVal -> cal.add(Calendar.MINUTE, (newVal - oldVal) * minutesInterval) }
-        if (time !== 0L) setSelectTime()//如已有设置好的时间，则载入
+        if (time !== 0L && time > System.currentTimeMillis()) setSelectTime()//如已有设置好的时间，则载入
     }
 
     private fun setSelectTime() {

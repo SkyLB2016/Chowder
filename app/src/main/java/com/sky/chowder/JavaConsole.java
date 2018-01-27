@@ -113,7 +113,7 @@ public class JavaConsole {
                 position++;
             }
 //        } catch (IndexOutOfBoundsException e) {
-//            LogUtils.d(e.getMessage());
+//            LogUtils.d(e.toString());
 //            System.out.println(line);
         } catch (IOException e) {
         } finally {

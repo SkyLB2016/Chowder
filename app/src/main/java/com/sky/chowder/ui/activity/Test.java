@@ -26,11 +26,6 @@ import io.reactivex.schedulers.Schedulers;
  * Created by SKY on 2017/9/28 9:44.
  */
 public class Test {
-    private AreaEntity[] area;
-
-    public void ddqd(Context context) {
-        area= new AreaEntity[4];
-    }
     public void ddd(Context context) {
         GsonUtils.jsonToList("",ActivityModel[].class);
     }
@@ -61,6 +56,7 @@ public class Test {
                     }
                 });
     }
+
 //    MemTotal:        2758932 kB
 //    MemFree:           74616 kB
 //    MemAvailable:     649880 kB

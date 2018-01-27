@@ -27,7 +27,7 @@ public class SemaPhore {
                         //availablePermits()指的是当前信号灯库中有多少个可以被使用
                         System.out.println("-----------------" + semp.availablePermits()); 
                     } catch (InterruptedException e) {
-                        LogUtils.d(e.getMessage());
+                        LogUtils.d(e.toString());
                     }
                 }
             };

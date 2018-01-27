@@ -114,7 +114,7 @@ public class HttpEngine {
             connection.setRequestProperty("Response-Type", "json");
             connection.setChunkedStreamingMode(0);
         } catch (IOException e) {
-            LogUtils.d(e.getMessage());
+            LogUtils.d(e.toString());
         }
         return connection;
     }
@@ -128,7 +128,7 @@ public class HttpEngine {
             try {
                 stringBuilder.append(URLEncoder.encode(paramsMap.get(key), ENCODE_TYPE));
             } catch (UnsupportedEncodingException e) {
-                LogUtils.d(e.getMessage());
+                LogUtils.d(e.toString());
             }
             stringBuilder.append("&");
         }

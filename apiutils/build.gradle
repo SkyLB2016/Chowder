@@ -14,7 +14,7 @@ ext {
     siteUrl = 'https://github.com/SkyLB2016/Chowder'
     gitUrl = 'https://github.com/SkyLB2016/Chowder.git'
 
-    libraryVersion = '2.2.87'
+    libraryVersion = '2.2.91'
     developerId = 'SkyLB2016'
 
     developerName = 'libin (sky)'

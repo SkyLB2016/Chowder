@@ -37,13 +37,9 @@ public class SkyApp extends Application {
      * 获取缓存文件夹
      */
     private void getDataCacheDir() {
-//        if (!Environment.isExternalStorageEmulated()){
-//            showToast("虚拟sd卡不存在");
-//            return;
-//        }
-        cacheDir = getExternalCacheDir().getAbsolutePath();
-        fileCacheDir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath();
-        picCacheDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath();
+        cacheDir = getExternalCacheDir().getAbsolutePath() + File.separator;
+        fileCacheDir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath() + File.separator;
+        picCacheDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath() + File.separator;
     }
 
     /**
@@ -52,7 +48,7 @@ public class SkyApp extends Application {
      * @return 图片缓存目录
      */
     public String getCashDir() {
-        return cacheDir + File.separator;
+        return cacheDir;
     }
 
 
@@ -62,7 +58,7 @@ public class SkyApp extends Application {
      * @return 文件缓存目录
      */
     public String getFileCacheDir() {
-        return fileCacheDir + File.separator;
+        return fileCacheDir;
     }
 
     /**
@@ -71,7 +67,7 @@ public class SkyApp extends Application {
      * @return
      */
     public String getPicCacheDir() {
-        return picCacheDir + File.separator;
+        return picCacheDir;
     }
 
     /**

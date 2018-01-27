@@ -7,6 +7,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -15,6 +16,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.channels.FileChannel;
@@ -110,9 +112,9 @@ public class FileUtils {
             fcin.close();
             fcout.close();
         } catch (FileNotFoundException e) {
-            LogUtils.d(e.getMessage());
+            LogUtils.d(e.toString());
         } catch (IOException e) {
-            LogUtils.d(e.getMessage());
+            LogUtils.d(e.toString());
         }
     }
 
@@ -128,9 +130,9 @@ public class FileUtils {
             objectOut = new ObjectOutputStream(new FileOutputStream(new File(pathname)));
             objectOut.writeObject(object);// 写入到本地
         } catch (FileNotFoundException e) {
-            LogUtils.d(e.getMessage());
+            LogUtils.d(e.toString());
         } catch (IOException e) {
-            LogUtils.d(e.getMessage());
+            LogUtils.d(e.toString());
         } finally {
             try {
                 if (objectOut != null) objectOut.close();
@@ -151,9 +153,9 @@ public class FileUtils {
             objectIn = new ObjectInputStream(new FileInputStream(new File(pathname)));
             return (T) objectIn.readObject();//从本地获取数据并返回
         } catch (IOException e) {
-            LogUtils.d(e.getMessage());
+            LogUtils.d(e.toString());
         } catch (ClassNotFoundException e) {
-            LogUtils.d(e.getMessage());
+            LogUtils.d(e.toString());
         } finally {
             try {
                 if (objectIn != null) objectIn.close();
@@ -197,7 +199,7 @@ public class FileUtils {
 //                output.flush();
 //            }
         } catch (Exception e) {
-            LogUtils.d(e.getMessage());
+            LogUtils.d(e.toString());
         } finally {
             try {
                 if (output != null) output.close();
@@ -225,8 +227,9 @@ public class FileUtils {
             while ((len = stream.read(buffer)) > -1) {
                 bos.write(buffer, 0, len);
             }
+            bos.flush();
         } catch (IOException e) {
-            LogUtils.d(e.getMessage());
+            LogUtils.d(e.toString());
         } finally {
             try {
                 if (bos != null) bos.close();
@@ -267,7 +270,7 @@ public class FileUtils {
                 result.append(new String(buffer, 0, len));
             }
         } catch (IOException e) {
-            LogUtils.d(e.getMessage());
+            LogUtils.d(e.toString());
         } finally {
             try {
                 if (bufferedIn != null) bufferedIn.close();
@@ -307,11 +310,32 @@ public class FileUtils {
                 result.append(new String(buffer, 0, len));
             }
         } catch (IOException e) {
-            LogUtils.d(e.getMessage());
+            LogUtils.d(e.toString());
         } finally {
             try {
                 if (bReader != null) bReader.close();
                 if (fileReader != null) fileReader.close();
+            } catch (IOException e) {
+            }
+        }
+        return result.toString();
+    }
+
+    public static String readCharFile(InputStream stream) {
+        StringBuilder result = new StringBuilder();
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new InputStreamReader(stream));
+            char[] buffer = new char[1024];
+            int len;
+            while ((len = br.read(buffer)) > -1) {
+                result.append(new String(buffer, 0, len));
+            }
+        } catch (IOException e) {
+            LogUtils.d(e.toString());
+        } finally {
+            try {
+                if (br != null) br.close();
             } catch (IOException e) {
             }
         }
@@ -335,7 +359,7 @@ public class FileUtils {
                 result.append(new String(buffer, 0, len));
             }
         } catch (IOException e) {
-            LogUtils.d(e.getMessage());
+            LogUtils.d(e.toString());
         } finally {
             try {
                 if (bis != null) bis.close();
@@ -347,7 +371,7 @@ public class FileUtils {
     }
 
     /**
-     * 读取assest文件，并返回字符串
+     * 读取assest文本文件，并返回字符串
      *
      * @param context
      * @param pathname 路径
@@ -355,9 +379,36 @@ public class FileUtils {
      */
     public static String readAssestToStr(Context context, String pathname) {
         try {
-            return readInput(context.getAssets().open(pathname));
+            return readCharFile(context.getAssets().open(pathname));
         } catch (IOException e) {
 
+        }
+        return "";
+    }
+
+    public static String readByteAssest(Context context, String fileName) {
+        //先初始化输入输出流。防止处理失败，不能关闭
+        InputStream input = null;
+        ByteArrayOutputStream byteArrayOut = null;
+        try {
+            input = context.getAssets().open(fileName);
+            //int length = input.available();//输入流的总长度
+            byteArrayOut = new ByteArrayOutputStream();// 创建字节输出流对象
+            int len;//每次读取到的长度
+            byte buffer[] = new byte[1024];//定义缓冲区
+            // 按照缓冲区的大小，循环读取，
+            while ((len = input.read(buffer)) != -1) {
+                byteArrayOut.write(buffer, 0, len);//根据读取的长度写入到os对象中
+            }
+            return new String(byteArrayOut.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (byteArrayOut != null) byteArrayOut.close();
+                if (input != null) input.close();
+            } catch (IOException e) {
+            }
         }
         return "";
     }

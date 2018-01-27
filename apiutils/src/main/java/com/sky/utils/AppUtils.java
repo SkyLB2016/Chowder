@@ -46,7 +46,7 @@ public class AppUtils {
         try {
             return context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
         } catch (NameNotFoundException e) {
-            LogUtils.d(e.getMessage());
+            LogUtils.d(e.toString());
         }
         return null;
     }

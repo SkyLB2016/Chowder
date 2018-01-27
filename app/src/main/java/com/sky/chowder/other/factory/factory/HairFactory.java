@@ -37,11 +37,11 @@ public class HairFactory {
         try {
             return (HairInterface) Class.forName(className).newInstance();
         } catch (InstantiationException e) {
-            LogUtils.d(e.getMessage());
+            LogUtils.d(e.toString());
         } catch (IllegalAccessException e) {
-            LogUtils.d(e.getMessage());
+            LogUtils.d(e.toString());
         } catch (ClassNotFoundException e) {
-            LogUtils.d(e.getMessage());
+            LogUtils.d(e.toString());
         }
         return null;
     }
@@ -61,11 +61,11 @@ public class HairFactory {
             HairInterface hair = (HairInterface) Class.forName(map.get(key)).newInstance();
             return hair;
         } catch (InstantiationException e) {
-            LogUtils.d(e.getMessage());
+            LogUtils.d(e.toString());
         } catch (IllegalAccessException e) {
-            LogUtils.d(e.getMessage());
+            LogUtils.d(e.toString());
         } catch (ClassNotFoundException e) {
-            LogUtils.d(e.getMessage());
+            LogUtils.d(e.toString());
         }
         return null;
     }

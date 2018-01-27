@@ -8,9 +8,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -44,11 +41,8 @@ public class BitmapUtils {
         return BitmapFactory.decodeResource(context.getResources(), resId);
     }
 
-    /**
-     * 获取bitmap的大小
-     */
-    public static int getBitmapSize(Bitmap bitmap) {
-        return bitmap.getAllocationByteCount();
+    public static Bitmap getBitmapFromPath(String pathName) {
+        return BitmapFactory.decodeFile(pathName);
     }
 
     /**
@@ -63,7 +57,7 @@ public class BitmapUtils {
             input = new BufferedInputStream(connection.getInputStream());
             return BitmapFactory.decodeStream(input);
         } catch (MalformedURLException e) {
-            LogUtils.d(e.getMessage());
+            LogUtils.d(e.toString());
         } catch (IOException e) {
         } finally {
             try {
@@ -75,33 +69,35 @@ public class BitmapUtils {
         return null;
     }
 
-    public static Bitmap getBitmapFromPath(String path) {
-        return BitmapFactory.decodeFile(path);
-    }
-
     /**
-     * 从文件路径中获取bitmap,并进行裁剪
+     * 从文件路径中获取bitmap,根据比例inSampleSize，来缩放图片
      */
-    public static Bitmap getBitmapFromPath(String path, int newWidth, int newHeight) {
+    public static Bitmap getBitmapFromPath(String pathName, int newWidth, int newHeight) {
         BitmapFactory.Options opts = new BitmapFactory.Options();
         opts.inJustDecodeBounds = true;//设置为ture只获取图片大小
-        BitmapFactory.decodeFile(path, opts);
+        BitmapFactory.decodeFile(pathName, opts);
 
         opts.inSampleSize = getInSampleSize(opts, newWidth, newHeight);//计算缩放率，缩放图片
         opts.inJustDecodeBounds = false;//至为false
-        return BitmapFactory.decodeFile(path, opts);
+        return BitmapFactory.decodeFile(pathName, opts);
     }
 
     /**
-     * 计算InSampleSize大于1的整数时是缩小原图
+     * 计算InSampleSize,大于1的整数时是缩小原图
      */
     private static int getInSampleSize(BitmapFactory.Options opts, int newW, int newH) {
         int outWidth = opts.outWidth;
         int outHeight = opts.outHeight;
-        if (outWidth > newW || outHeight > newH) {
+        if (outWidth > newW || outHeight > newH)
             return (int) Math.ceil(Math.max(outWidth * 1d / newW, outHeight * 1d / newH));
-        }
         return 1;
+    }
+
+    /**
+     * 获取bitmap的大小
+     */
+    public static int getBitmapSize(Bitmap bitmap) {
+        return bitmap.getAllocationByteCount();
     }
 
     /**
@@ -112,7 +108,7 @@ public class BitmapUtils {
     }
 
     /**
-     * matrix 缩放/裁剪图片
+     * matrix 缩放/裁剪图片，根据提供的宽高缩放
      *
      * @return 裁剪后的图片
      */
@@ -128,6 +124,20 @@ public class BitmapUtils {
     }
 
     /**
+     * 按大小压缩图片
+     *
+     * @param targetKB
+     */
+    public static Bitmap compressBitmap(Bitmap bitmap, int targetKB) {
+        int quality = 100;
+        byte[] target;
+        while ((target = getBytesFromBitmap(bitmap, quality)).length / 1024 > targetKB) {
+            quality -= 10;
+        }
+        return BitmapFactory.decodeByteArray(target, 0, target.length);
+    }
+
+    /**
      * base64转bitmap
      *
      * @param base64 base64 的字符串
@@ -139,7 +149,7 @@ public class BitmapUtils {
             byte[] bytes = Base64.decode(base64, Base64.DEFAULT);
             return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
         } catch (Exception e) {
-            LogUtils.d(e.getMessage());
+            LogUtils.d(e.toString());
         }
         return null;
     }
@@ -159,16 +169,16 @@ public class BitmapUtils {
      * @return
      */
     public static byte[] getBytesFromBitmap(Bitmap bitmap, int quality) {
-        ByteArrayOutputStream byteArrayout = null;
+        ByteArrayOutputStream baos = null;
         try {
-            byteArrayout = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, byteArrayout);
-            return byteArrayout.toByteArray();
+            baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, baos);
+            return baos.toByteArray();
         } catch (Exception e) {
-            LogUtils.d(e.getMessage());
+            LogUtils.d(e.toString());
         } finally {
             try {
-                if (byteArrayout == null) byteArrayout.close();
+                if (baos == null) baos.close();
             } catch (IOException e) {
             }
         }
@@ -176,33 +186,19 @@ public class BitmapUtils {
     }
 
     /**
-     * 按大小压缩图片
-     *
-     * @param targetKB
-     */
-    public static Bitmap compressBitmap(Bitmap bitmap, int targetKB) {
-        int quality = 100;
-        byte[] target;
-        while ((target = getBytesFromBitmap(bitmap, quality)).length / 1024 > targetKB) {
-            quality -= 10;
-        }
-        return BitmapFactory.decodeByteArray(target, 0, target.length);
-    }
-
-    /**
      * bitmap 转 file
      *
      * @param bitmap
-     * @param absoluteName 绝对路径
+     * @param pathName 绝对路径
      * @return
      */
-    public static boolean saveBitmapToFile(Bitmap bitmap, String absoluteName) {
+    public static boolean saveBitmapToFile(Bitmap bitmap, String pathName) {
         FileOutputStream out = null;
         try {
-            out = new FileOutputStream(absoluteName);
+            out = new FileOutputStream(pathName);
             return bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
         } catch (FileNotFoundException e) {
-            LogUtils.d(e.getMessage());
+            LogUtils.d(e.toString());
         } finally {
             try {
                 if (out != null) out.close();
@@ -212,25 +208,14 @@ public class BitmapUtils {
         return false;
     }
 
-    /**
-     * 获得圆角图片的方法
-     */
-    public static Bitmap getRoundCornerBitmap(Bitmap bitmap, float round) {
-        Bitmap outBit = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(outBit);
+    static Bitmap makeDst(int w, int h) {
+        Bitmap bm = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(bm);
+        Paint p = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-        Paint paint = new Paint();
-        paint.setAntiAlias(true);
-        paint.setColor(0xff424242);
-
-        Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
-        RectF rectF = new RectF(rect);
-
-        canvas.drawARGB(0, 0, 0, 0);
-        canvas.drawRoundRect(rectF, round, round, paint);
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        canvas.drawBitmap(bitmap, rect, rect, paint);
-        return outBit;
+        p.setColor(0xFFFFCC44);
+        c.drawOval(new RectF(0, 0, w * 3 / 4, h * 3 / 4), p);
+        return bm;
     }
 
     /**

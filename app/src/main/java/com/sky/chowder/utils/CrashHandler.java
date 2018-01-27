@@ -21,11 +21,11 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
 
     @Override
     public void uncaughtException(Thread t, Throwable e) {
-        LogUtils.i("错误产生类所在方法==" + e.getStackTrace()[0].getMethodName());
-        LogUtils.i("错误所在行数==" + e.getStackTrace()[0].getLineNumber());
-        LogUtils.i("错误产生类==" + e.getStackTrace()[0].getFileName());
-        LogUtils.i("错误产生类所在路径==" + e.getStackTrace()[0].getClassName());
-        LogUtils.i("错误类型==" + e.getMessage());
+        LogUtils.i("错误产生类所在方法:" + e.getStackTrace()[0].getMethodName());
+        LogUtils.i("错误所在行数:" + e.getStackTrace()[0].getLineNumber());
+        LogUtils.i("错误产生类:" + e.getStackTrace()[0].getFileName());
+        LogUtils.i("错误产生类所在路径:" + e.getStackTrace()[0].getClassName());
+        LogUtils.i("错误类型:" + e.toString());
         System.exit(1);
     }
 }
