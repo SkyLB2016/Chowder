@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.baidu.mobstat.StatService;
 import com.sky.api.IBaseView;
 
 import butterknife.ButterKnife;
@@ -125,12 +126,16 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     @Override
     public void onResume() {
         super.onResume();
+        // 页面埋点
+        StatService.onPageStart(getActivity(), getClass().getName());
         presenter.onResume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        // 页面埋点
+        StatService.onPageEnd(getActivity(), getClass().getName());
         presenter.onPause();
     }
 

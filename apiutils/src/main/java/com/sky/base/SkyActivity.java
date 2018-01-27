@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.baidu.mobstat.StatService;
 import com.sky.api.IBaseView;
 import com.sky.utils.ToastUtils;
 import com.sky.widget.BaseTitle;
@@ -50,6 +51,19 @@ public abstract class SkyActivity extends AppCompatActivity implements IBaseView
      * 初始化
      */
     protected abstract void initialize();
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // 页面埋点，需要使用Activity的引用，以便代码能够统计到具体页面名
+        StatService.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // 页面结束埋点，需要使用Activity的引用，以便代码能够统计到具体页面名
+        StatService.onPause(this);
+    }
 
     @Override
     protected void onDestroy() {
