@@ -60,7 +60,7 @@ android {
         }
         release {
             versionNameSuffix "-release"
-            minifyEnabled false //是否开启混淆
+            minifyEnabled true //是否开启混淆
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release  //签名
             zipAlignEnabled true //Zipalign优化
@@ -88,8 +88,8 @@ android {
 def creatName() {
     android.applicationVariants.all { variant ->
         variant.outputs.all {
-            if (variant.buildType.name == "debug") outputFileName = "${variant.baseName}-${variant.versionName}.apk"
-            else outputFileName = "${variant.baseName}-${variant.versionName}.apk"
+            if (variant.buildType.name == "debug") outputFileName = "${variant.baseName}_${variant.versionName}.apk"
+            else outputFileName = "${variant.baseName}_${variant.versionName}_${buildTime()}.apk"
         }
     }
 }

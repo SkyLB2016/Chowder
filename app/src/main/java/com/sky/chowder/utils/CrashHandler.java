@@ -21,11 +21,24 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
 
     @Override
     public void uncaughtException(Thread t, Throwable e) {
-        LogUtils.i("错误产生类所在方法:" + e.getStackTrace()[0].getMethodName());
-        LogUtils.i("错误所在行数:" + e.getStackTrace()[0].getLineNumber());
-        LogUtils.i("错误产生类:" + e.getStackTrace()[0].getFileName());
-        LogUtils.i("错误产生类所在路径:" + e.getStackTrace()[0].getClassName());
-        LogUtils.i("错误类型:" + e.toString());
+        StackTraceElement[] stacks = e.getStackTrace();
+        while (stacks.length < 10) {
+            e = e.getCause();
+            stacks = e.getStackTrace();
+        }
+        LogUtils.i(e.toString());
+        printError(stacks);
         System.exit(1);
+    }
+
+    private void printError(StackTraceElement[] stacks) {
+        for (int i = 0; i < stacks.length; i++) {
+            StackTraceElement stack = stacks[i];
+            String tag = "第%d个%s.%s(L:%d)";
+            String className = stack.getClassName();
+            className = className.substring(className.lastIndexOf(".") + 1);
+            tag = String.format(tag, i, className, stack.getMethodName(), stack.getLineNumber());
+            LogUtils.i(tag);
+        }
     }
 }

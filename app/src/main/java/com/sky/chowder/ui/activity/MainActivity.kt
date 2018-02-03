@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.pm.PackageManager
 import android.os.BatteryManager
 import android.provider.AlarmClock
 import android.provider.ContactsContract
@@ -68,7 +69,16 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 
     @OnClick(R.id.fab)
     fun fabOnClick() {
-        LogUtils.i(cacheDir.toString())
+        showToast(packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA).metaData.get("CHANNEL").toString() + "")
+        LogUtils.i("${Int.MAX_VALUE}")
+        LogUtils.i("${Long.MAX_VALUE}")
+        LogUtils.i("${Float.MAX_VALUE}")
+        LogUtils.i("${Double.MAX_VALUE}")
+        LogUtils.i("${'李'.toInt()}")
+        LogUtils.i("${'彬'.toInt()}")
+//        LogUtils.i(String.format(getString(R.string.format01), 99, 88))
+//        LogUtils.i(String.format(getString(R.string.format02), "abc", "def"))
+//        LogUtils.i(String.format(getString(R.string.format03), "abc", 9))
 
 //        showToast(test ?: return showToast("通过"))
 //        showToast("但是继续执行了")

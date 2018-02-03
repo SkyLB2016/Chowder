@@ -1,0 +1,51 @@
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+def buildTime() {
+    def date = new Date()
+    def formattedDate = date.format('yyyy年MM月dd日HH时mm分ss秒')
+    return formattedDate
+}
+//运行 gradlew hello (-q只显示有用的信息)
+task hello {
+    doLast {
+        println 'Hello world!'
+    }
+}
+task task1 >> {
+    print 'Hello,'
+}
+task intro(dependsOn: hello) << {
+    println "Gradle!"
+}
+task loadfile << {
+    def files = file('local.properties')
+    files.each { File file ->
+        if (file.isFile()) {
+//            ant.loadfile(srcFile: file, property: file.name)
+//            println " *** $file.name ***"
+//            println "${ant.properties[file.name]}"
+            println "task$counter"
+        }
+    }
+}
+//times { counter ->
+//    task "task$counter" << {
+//        println "I'm task number $counter"
+//    }
+//}
+//clearApk,makeApk分别是删除，拷贝，以及将其连接起来的一个设置。
+// 其目的是拷贝 build/outputs/apk下面的debug apk文件到项目根目录的 release 文件夹下，并且更名。与featureCompile冲突
+task clearApk(type: Delete) {
+//    delete '../release/' + POM_ARTIFACT_ID + '_' + VERSION_NAME + '.apk'
+    delete 'app-sky-release.apk'
+}
+task makeApk(type: Copy) {
+    from('/sky/release/')
+    into('/sky/release/')//从哪到哪
+//    include('app-sky-release.apk')//指定移动这个文件
+//    rename('MyDemo-sky-release-v1.1-20150909.apk', POM_ARTIFACT_ID + '_' + VERSION_NAME + '.apk')
+    rename('app-sky-release.apk', "${buildTime()}.apk")
+}

@@ -14,7 +14,7 @@ ext {
     siteUrl = 'https://github.com/SkyLB2016/Chowder'
     gitUrl = 'https://github.com/SkyLB2016/Chowder.git'
 
-    libraryVersion = '2.2.91'
+    libraryVersion = '2.2.9222'
     developerId = 'SkyLB2016'
 
     developerName = 'libin (sky)'
@@ -121,7 +121,7 @@ if (project.hasProperty("android")) { // Android libraries
 
     task javadoc(type: Javadoc) {
         options.encoding = "UTF-8"
-        source = android.sourceSets.main.java.srcDirs
+        source = android.sourceSets.main.java.sourceFiles
         classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
     }
 } else { // Java libraries

@@ -40,10 +40,28 @@
     <string name="act_03_desc">股票计算</string>
     <string name="act_04">自定义贝塞尔曲线</string>
     <string name="act_04_desc">待定</string>
+    <string name="act_05">侧滑栏</string>
     <string name="act_06">receive</string>
     <string name="act_06_desc">receive</string>
     <string name="act_07">service</string>
     <string name="act_07_desc">service</string>
+    <string name="act_08">环形进度条</string>
+    <string name="act_CircleProgress_desc">自定义的环形进度条，内有字体颜色大小等的局部修改</string>
+    <string name="act_09">drawer</string>
+    <string name="act_10">拼图</string>
+    <string name="act_11">网络图片加载与缓存</string>
+    <string name="act_11_des">网络图片加载与缓存，多种布局加载</string>
+    <string name="act_12">载入本地图片</string>
+    <string name="act_13">下拉动画</string>
+    <string name="act_14">collapsing</string>
+    <string name="act_15">双缓冲实验</string>
+    <string name="act_16">工厂模式实验</string>
+    <string name="act_17">SVG</string>
+    <string name="act_18">TabLayoutActivity</string>
+    <string name="act_19">VideoActivity</string>
+    <string name="act_20">PhotoActivity</string>
+    <string name="act_21">时间地址选择器</string>
+    <string name="act_22">test</string>
 
     <string name="test"><i><b><u>service</u></b></i></string>
 
@@ -97,21 +115,7 @@
     绵绵若存，用之不勤。\n\n
     第七章\n
     </string>
-    <string name="act_05">侧滑栏</string>
-    <string name="act_08">环形进度条</string>
-    <string name="act_CircleProgress_desc">自定义的环形进度条，内有字体颜色大小等的局部修改</string>
-    <string name="act_09">drawer</string>
-    <string name="act_10">拼图</string>
-    <string name="act_11">网络图片加载与缓存</string>
-    <string name="act_11_des">网络图片加载与缓存，多种布局加载</string>
-    <string name="act_12">载入本地图片</string>
-    <string name="act_13">下拉动画</string>
-    <string name="act_14">collapsing</string>
-    <string name="act_15">双缓冲实验</string>
-    <string name="act_16">工厂模式实验</string>
-    <string name="act_17">SVG</string>
-    <string name="act_18">TabLayoutActivity</string>
-    <string name="act_19">VideoActivity</string>
+
     <string name="jsonobj">{ "className":"aaaaaa", "describe":"bbbbbbbbbbbb", "img":1, "componentName":"cccccccccccc",
         "objList":[
         { "className":"aaaaaa", "describe":"bbbbbb", "img":1, "componentName":"cccccc"},
@@ -140,9 +144,10 @@
         { "className":"mmmmmm", "describe":"nnnnnn", "img":5, "componentName":"oooooo"}
         ]
     </string>
-    <string name="act_20">PhotoActivity</string>
-    <string name="act_21">时间地址选择器</string>
-    <string name="act_22">test</string>
+
+    <string name="format01">距离%d元奖励还差%d单</string>
+    <string name="format02">距离%s元奖励还差%s单</string>
+    <string name="format03">距离%s元奖励还差%d单</string>
 
 
 </resources>

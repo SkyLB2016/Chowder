@@ -17,12 +17,12 @@ public class LogUtils {
     private static final String TAG = "SKY";//默认情况下的前缀
 
     private static String generateTag() {
-        StackTraceElement caller = new Throwable().getStackTrace()[2];
-//        StackTraceElement caller1 = Thread.currentThread().getStackTrace()[4];
+//        StackTraceElement stack = Thread.currentThread().getStackTrace()[4];//此方法取得的栈的前两个分别为vm和Thread
+        StackTraceElement stack = new Throwable().getStackTrace()[2];
         String tag = "%s.%s(L:%d)";
-        String callerClazzName = caller.getClassName();
-        callerClazzName = callerClazzName.substring(callerClazzName.lastIndexOf(".") + 1);
-        tag = String.format(tag, callerClazzName, caller.getMethodName(), caller.getLineNumber());
+        String className = stack.getClassName();
+        className = className.substring(className.lastIndexOf(".") + 1);
+        tag = String.format(tag, className, stack.getMethodName(), stack.getLineNumber());
         tag = TextUtils.isEmpty(TAG) ? tag : TAG + ":" + tag;
         return tag;
     }
