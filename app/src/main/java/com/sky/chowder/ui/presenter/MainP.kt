@@ -56,8 +56,21 @@ class MainP(context: Context) : BasePresenter<IMainView>(context), IMainPresente
             //排序
             Collections.sort(activityInfos, sDisplayNameComparator)
 //            Collections.sort(activityInfos);//使用activityModel中的compareTo进行排序
+//            iterator(activityInfos)
             return activityInfos
         }
+
+    private fun iterator(activityInfos: ArrayList<ActivityModel>) {
+        val iter = activityInfos.iterator()
+        while (iter.hasNext()) {
+            val obj = iter.next()
+            LogUtils.i(obj.toString())
+        }
+        for (i in iter) {
+            LogUtils.i(i.toString())
+        }
+        //            Collections.copy()
+    }
 
     companion object {
         /**

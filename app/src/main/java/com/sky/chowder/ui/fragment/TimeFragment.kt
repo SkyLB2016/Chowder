@@ -60,24 +60,45 @@ class TimeFragment : DialogFragment() {
         npMonthDay.setOnValueChangedListener { _, oldVal, newVal ->
             var hour = cal.get(Calendar.HOUR_OF_DAY)
             if (newVal === 0) {
-                if (hour < minHour) {
+                if (hour <= minHour) {
                     hour = minHour
                     cal.set(Calendar.HOUR_OF_DAY, minHour)
+                    setNpValue(npHour, 23, minHour, hour)
+                    cal.set(Calendar.MINUTE, min * minutesInterval)
+                    setMinutes(min, 0)
+
+                } else {
+                    setNpValue(npHour, 23, minHour, hour)
+                    setMinutes(0, cal.get(Calendar.MINUTE) / minutesInterval)
                 }
-                setNpValue(npHour, 23, minHour, hour)
-            } else setNpValue(npHour, 23, 0, hour)
+            } else {
+                setNpValue(npHour, 23, 0, hour)
+                setMinutes(0, cal.get(Calendar.MINUTE) / minutesInterval)
+            }
             cal.add(Calendar.DAY_OF_MONTH, newVal - oldVal)
         }
 
         setNpValue(npHour, 23, minHour, minHour)
         npHour.setFormatter { value -> String.format("%02d", value) }
-        npHour.setOnValueChangedListener { _, oldVal, newVal -> cal.add(Calendar.HOUR_OF_DAY, newVal - oldVal) }
+        npHour.setOnValueChangedListener { _, oldVal, newVal ->
+            cal.add(Calendar.HOUR_OF_DAY, newVal - oldVal)
+            if ("${DateUtil.stampToTime(cal.timeInMillis, "dd")}-$newVal" == DateUtil.stampToTime(System.currentTimeMillis(), "dd-HH")) {
+                cal.set(Calendar.MINUTE, min * minutesInterval)
+                setMinutes(min, 0)
+            } else setMinutes(0, cal.get(Calendar.MINUTE) / minutesInterval)
 
-        val minutes = (0 until minutesSize).map { "${String.format("%02d", minutesInterval * it)}" }.toTypedArray()
-        npMinute.displayedValues = minutes
-        setNpValue(npMinute, minutesSize - 1, 0, min % minutesSize)
+        }
+
+        setMinutes(min, 0)
         npMinute.setOnValueChangedListener { _, oldVal, newVal -> cal.add(Calendar.MINUTE, (newVal - oldVal) * minutesInterval) }
         if (time !== 0L && time > System.currentTimeMillis()) setSelectTime()//如已有设置好的时间，则载入
+    }
+
+    private fun setMinutes(min: Int, value: Int) {
+        val minutes = (min until minutesSize).map { "${String.format("%02d", minutesInterval * it)}" }.toTypedArray()
+        npMinute.maxValue = 0
+        npMinute.displayedValues = minutes
+        setNpValue(npMinute, minutes.size - 1, 0, value)
     }
 
     private fun setSelectTime() {

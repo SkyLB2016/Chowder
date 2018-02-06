@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.IntentFilter
-import android.content.pm.PackageManager
 import android.os.BatteryManager
 import android.provider.AlarmClock
 import android.provider.ContactsContract
@@ -18,12 +17,16 @@ import com.sky.base.BasePActivity
 import com.sky.chowder.R
 import com.sky.chowder.api.view.IMainView
 import com.sky.chowder.model.ActivityModel
+import com.sky.chowder.model.TestModel
 import com.sky.chowder.ui.adapter.MainAdapter
 import com.sky.chowder.ui.presenter.MainP
 import com.sky.model.ApiResponse
 import com.sky.utils.*
 import kotlinx.android.synthetic.main.content_main.*
 import java.io.File
+import java.text.Collator
+import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.coroutines.experimental.buildSequence
 
 
@@ -69,13 +72,32 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 
     @OnClick(R.id.fab)
     fun fabOnClick() {
-        showToast(packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA).metaData.get("CHANNEL").toString() + "")
-        LogUtils.i("${Int.MAX_VALUE}")
-        LogUtils.i("${Long.MAX_VALUE}")
-        LogUtils.i("${Float.MAX_VALUE}")
-        LogUtils.i("${Double.MAX_VALUE}")
-        LogUtils.i("${'李'.toInt()}")
-        LogUtils.i("${'彬'.toInt()}")
+//        for (i in 40..122) {
+//        LogUtils.i("${'彬'.toInt()}")
+//        }
+//        val list = (65..122).map { TestModel("${it.toChar()}") }
+        val list = ArrayList<TestModel>()
+        (122 downTo 97).mapTo(list) { TestModel("${it.toChar()}") }
+        (24444 downTo 24422).mapTo(list) { TestModel("${it.toChar()}") }
+        (90 downTo 65).mapTo(list) { TestModel("${it.toChar()}") }
+
+//        Collections.reverse(list)//逆序
+//        LogUtils.i(list.toString())
+//        Collections.shuffle(list)//随机
+//        LogUtils.i(list.toString())
+//        Collections.sort(list)//排序
+//        LogUtils.i(list.toString())
+        LogUtils.i(list.toString())
+        Collections.sort(list, sort)
+        LogUtils.i(list.toString())
+        Collections.sort(list, sort1)
+        LogUtils.i(list.toString())
+//        for (i in list) LogUtils.i("${i.className?.toCharArray()!![0].toInt()}")
+        Collections.sort(list)
+        LogUtils.i(list.toString())
+//        for (i in list) LogUtils.i("${i.className?.toCharArray()!![0].toInt()}")
+
+        //        showToast(packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA).metaData.get("CHANNEL").toString() + "")
 //        LogUtils.i(String.format(getString(R.string.format01), 99, 88))
 //        LogUtils.i(String.format(getString(R.string.format02), "abc", "def"))
 //        LogUtils.i(String.format(getString(R.string.format03), "abc", 9))
@@ -83,6 +105,34 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 //        showToast(test ?: return showToast("通过"))
 //        showToast("但是继续执行了")
 //        test ?: return
+    }
+
+    companion object {
+        /**
+         * 为筛选出的act进行升序排序
+         */
+        private val sort = object : Comparator<TestModel> {
+            private val collator = Collator.getInstance()
+
+            override fun compare(first: TestModel, second: TestModel): Int {
+                return collator.compare(second.className, first.className)
+            }
+        }
+        //降序
+        private val sort1 = object : Comparator<TestModel> {
+            private val collator = Collator.getInstance()
+
+            override fun compare(first: TestModel, second: TestModel): Int {
+                return collator.compare(first.className, second.className)
+            }
+        }
+    }
+
+    private fun equalHashCode() {
+        val a = "Aa"
+        val b = "BB"
+        LogUtils.i(a.hashCode().toString())
+        LogUtils.i(b.hashCode().toString())
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

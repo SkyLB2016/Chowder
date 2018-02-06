@@ -1,5 +1,6 @@
 package com.sky.chowder.model
 
+import com.sky.utils.GsonUtils
 import java.io.Serializable
 
 /**
@@ -18,8 +19,12 @@ class ActivityModel(var className: String?//activity的名称
     val objList: List<ActivityModel>? = null;
 
     /**
-     * Collections.sort(student)  排序
+     * Collections.sort(student)   排序
      */
     override fun compareTo(another: ActivityModel): Int = className!!.compareTo(another.className!!)
 
+    override fun toString(): String {
+//        return "{\"className\":\"$className\",\"describe\":\"$describe\",\"img\":$img,\"componentName\":\"$componentName\"}"
+        return GsonUtils.toJson(this)
+    }
 }
