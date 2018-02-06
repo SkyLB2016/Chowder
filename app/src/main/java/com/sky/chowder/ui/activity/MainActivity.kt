@@ -27,6 +27,7 @@ import java.io.File
 import java.text.Collator
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 import kotlin.coroutines.experimental.buildSequence
 
 
@@ -72,31 +73,13 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 
     @OnClick(R.id.fab)
     fun fabOnClick() {
-//        for (i in 40..122) {
-//        LogUtils.i("${'彬'.toInt()}")
-//        }
-//        val list = (65..122).map { TestModel("${it.toChar()}") }
-        val list = ArrayList<TestModel>()
-        (122 downTo 97).mapTo(list) { TestModel("${it.toChar()}") }
-        (24444 downTo 24422).mapTo(list) { TestModel("${it.toChar()}") }
-        (90 downTo 65).mapTo(list) { TestModel("${it.toChar()}") }
-
-//        Collections.reverse(list)//逆序
-//        LogUtils.i(list.toString())
-//        Collections.shuffle(list)//随机
-//        LogUtils.i(list.toString())
-//        Collections.sort(list)//排序
-//        LogUtils.i(list.toString())
-        LogUtils.i(list.toString())
-        Collections.sort(list, sort)
-        LogUtils.i(list.toString())
-        Collections.sort(list, sort1)
-        LogUtils.i(list.toString())
-//        for (i in list) LogUtils.i("${i.className?.toCharArray()!![0].toInt()}")
-        Collections.sort(list)
-        LogUtils.i(list.toString())
-//        for (i in list) LogUtils.i("${i.className?.toCharArray()!![0].toInt()}")
-
+        val map = HashMap<String, String>()
+        map.put("Aa", "aaaaaaaaa")
+        map.put("BB", "bbbbbbbbbb")
+        LogUtils.i(map["Aa"])
+        LogUtils.i(map["BB"])
+        LogUtils.i(map.put("BB", "ccccccccccc"))
+        LogUtils.i(map["BB"])
         //        showToast(packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA).metaData.get("CHANNEL").toString() + "")
 //        LogUtils.i(String.format(getString(R.string.format01), 99, 88))
 //        LogUtils.i(String.format(getString(R.string.format02), "abc", "def"))
@@ -107,6 +90,28 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 //        test ?: return
     }
 
+    private fun sortList() {
+        //        for (i in 40..122) {
+        //        LogUtils.i("${'彬'.toInt()}")
+        //        }
+        //        val list = (65..122).map { TestModel("${it.toChar()}") }
+        val list = ArrayList<TestModel>()
+        (122 downTo 97).mapTo(list) { TestModel("${it.toChar()}") }
+        (24444 downTo 24422).mapTo(list) { TestModel("${it.toChar()}") }
+        (90 downTo 65).mapTo(list) { TestModel("${it.toChar()}") }
+
+        //        Collections.reverse(list)//逆序
+        //        LogUtils.i(list.toString())
+        //        Collections.shuffle(list)//随机
+        //        LogUtils.i(list.toString())
+//        Collections.sort(list)//排序
+//        LogUtils.i(list.toString())
+        Collections.sort(list, sort)
+        LogUtils.i(list.toString())
+        Collections.sort(list, sort1)
+        LogUtils.i(list.toString())
+    }
+
     companion object {
         /**
          * 为筛选出的act进行升序排序
@@ -115,7 +120,7 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
             private val collator = Collator.getInstance()
 
             override fun compare(first: TestModel, second: TestModel): Int {
-                return collator.compare(second.className, first.className)
+                return collator.compare(first.className, second.className)
             }
         }
         //降序
@@ -123,7 +128,7 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
             private val collator = Collator.getInstance()
 
             override fun compare(first: TestModel, second: TestModel): Int {
-                return collator.compare(first.className, second.className)
+                return collator.compare(second.className, first.className)
             }
         }
     }
