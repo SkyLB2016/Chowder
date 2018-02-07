@@ -124,7 +124,7 @@ class TimeFragment1 : DialogFragment() {
 
     private fun setSelectTime() {
         //把当前时间戳转换成日期格式，在转换成00:00时的时间戳
-        val curr = DateUtil.dateToStamp(DateUtil.stampToTime(System.currentTimeMillis(), "yyyy-MM-dd"), "yyyy-MM-dd")
+        val curr = DateUtil.dateToTimeStamp(DateUtil.timeStampToDate(System.currentTimeMillis(), "yyyy-MM-dd"), "yyyy-MM-dd")
         val po = (time - curr) / (24 * 3600 * 1000)//选中的时间为第几天
         cal.timeInMillis = time
         if (po.toInt() !== 0) setNpValue(npHour, 23, 0, cal.get(Calendar.HOUR_OF_DAY))
@@ -139,7 +139,7 @@ class TimeFragment1 : DialogFragment() {
         val cal = Calendar.getInstance()
         cal?.timeInMillis = System.currentTimeMillis()
         for (i in 0 until interval) {
-            if (i !== 0) strMD[i] = DateUtil.stampToTime(cal.timeInMillis, "MM月dd日") else strMD[i] = "今天"
+            if (i !== 0) strMD[i] = DateUtil.timeStampToDate(cal.timeInMillis, "MM月dd日") else strMD[i] = "今天"
             cal.add(Calendar.DAY_OF_MONTH, 1)
         }
         return strMD
@@ -159,7 +159,7 @@ class TimeFragment1 : DialogFragment() {
             R.id.tvRight -> {
                 if (npHour.displayedValues[npHour.value] == "现在")
                     onClick?.onClick("现在")
-                else onClick?.onClick(DateUtil.stampToTime(cal.timeInMillis))
+                else onClick?.onClick(DateUtil.timeStampToDate(cal.timeInMillis))
                 dismiss()
             }
         }

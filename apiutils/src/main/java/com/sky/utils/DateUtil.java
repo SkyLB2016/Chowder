@@ -32,8 +32,8 @@ public class DateUtil {
     /**
      * @return 当前年月日时分
      */
-    public static String getCurrentTime() {
-        return stampToTime(System.currentTimeMillis());
+    public static String getCurrentDate() {
+        return timeStampToDate(System.currentTimeMillis());
     }
 
     /**
@@ -86,8 +86,8 @@ public class DateUtil {
      * @param time
      * @return
      */
-    public static String stampToTime(long time) {
-        return stampToTime(time, YMDHM);
+    public static String timeStampToDate(long time) {
+        return timeStampToDate(time, YMDHM);
     }
 
     /**
@@ -97,12 +97,12 @@ public class DateUtil {
      * @param type 所要转换成的格式
      * @return
      */
-    public static String stampToTime(long time, String type) {
+    public static String timeStampToDate(long time, String type) {
         return new SimpleDateFormat(type, Locale.CHINA).format(new Date(time));
     }
 
-    public static long dateToStamp(String time) {
-        return dateToStamp(time, YMDHM);
+    public static long dateToTimeStamp(String time) {
+        return dateToTimeStamp(time, YMDHM);
     }
 
     /**
@@ -112,7 +112,7 @@ public class DateUtil {
      * @param type time的格式
      * @return 时间戳毫秒值
      */
-    public static long dateToStamp(String time, String type) {
+    public static long dateToTimeStamp(String time, String type) {
         try {
             return new SimpleDateFormat(type, Locale.CHINA).parse(time).getTime();
         } catch (ParseException e) {

@@ -23,7 +23,7 @@ class SelectActivity : AppCompatActivity() {
     fun xianshi(v: View) {
         val time = TimeFragment()
         time.show(supportFragmentManager, "time")
-        time.time = DateUtil.dateToStamp(btTime.text.toString().trim())
+        time.time = DateUtil.dateToTimeStamp(btTime.text.toString().trim())
         time.onClick = object : TimeFragment.OnClickListener {
             override fun onClick(time: String) {
                 btTime.text = time
@@ -34,7 +34,7 @@ class SelectActivity : AppCompatActivity() {
     fun timeClick(v: View) {
         val time = TimeFragment1()
         time.show(supportFragmentManager, "time")
-        time.time = DateUtil.dateToStamp(btTime.text.toString().trim())
+        time.time = DateUtil.dateToTimeStamp(btTime.text.toString().trim())
         time.onClick = object : TimeFragment1.OnClickListener {
             override fun onClick(time: String) {
                 btTime1.text = time

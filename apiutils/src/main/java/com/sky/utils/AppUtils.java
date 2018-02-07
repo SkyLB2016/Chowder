@@ -94,7 +94,7 @@ public class AppUtils {
     public static void installApp(Context context, File file) {
         Intent install = new Intent(Intent.ACTION_VIEW);
         Uri uri;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)//适配7.0之后
             uri = FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", file);
         else uri = Uri.fromFile(file);
         install.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);//添加这一句表示对目标应用临时授权该Uri所代表的文件

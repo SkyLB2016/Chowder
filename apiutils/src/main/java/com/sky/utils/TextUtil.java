@@ -24,13 +24,13 @@ public class TextUtil {
      */
     public static boolean notNull(String text, String toast) {
         if (!TextUtils.isEmpty(text)) return false;
-        ToastUtils.showShort(ActivityLifecycle.getInstance().getCurrentAct(), toast);
+        ToastUtils.showShort(ActivityLifecycle.getInstance().getCurrent(), toast);
         return true;
     }
 
     public static boolean notNullObj(Object obj, String toast) {
         if (null != obj) return false;
-        ToastUtils.showShort(ActivityLifecycle.getInstance().getCurrentAct(), toast);
+        ToastUtils.showShort(ActivityLifecycle.getInstance().getCurrent(), toast);
         return true;
     }
 

@@ -11,10 +11,9 @@ import java.util.Stack;
  * activity管理类
  */
 public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks {
-    private Stack<Activity> activityStack;
-    private Activity currentActivity;
+    private Stack<Activity> activities;
+    private Activity current;
     private static ActivityLifecycle instance;
-
 
     public static ActivityLifecycle getInstance() {
         if (instance == null)
@@ -30,8 +29,8 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-        if (activityStack == null) activityStack = new Stack<>();
-        activityStack.add(activity);//堆入activitymanager管理栈中
+        if (activities == null) activities = new Stack<>();
+        activities.add(activity);//堆入activities管理栈中
     }
 
     @Override
@@ -40,7 +39,7 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
 
     @Override
     public void onActivityResumed(Activity activity) {
-        currentActivity = activity;
+        current = activity;
     }
 
     @Override
@@ -57,56 +56,67 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
 
     @Override
     public void onActivityDestroyed(Activity activity) {
-        activityStack.remove(activity);//销毁时从管理栈中移除
-        if (currentActivity == activity) currentActivity = null;
+        activities.remove(activity);//销毁时从管理栈中移除
+        if (current == activity) current = null;
     }
 
-    public Activity getCurrentAct() {
-        return currentActivity;
+    public Activity getCurrent() {
+        return current;
     }
 
     /**
      * @return 当前activity的位置
      */
-    public int getCurrentPosition() {
-        return activityStack.size() - 1;
+    public int getLocation() {
+        return activities.size() - 1;
     }
 
     /**
      * @param position 所要获取的activity的位置
      * @return 获取指定的activity
      */
-    public Class<? extends Activity> getAppointPosition(int position) {
-        return activityStack.get(position).getClass();
+    public Activity getActivity(int position) {
+        return activities.get(position);
     }
+
 
     /**
      * 移除所有的activity
      */
-    public void popAllActivity() {
-        while (!activityStack.isEmpty()) {
-            activityStack.lastElement().finish();
-            activityStack.remove(activityStack.lastElement());
-        }
+    public void closeAll() {
+        for (Activity act : activities) act.finish();
+        activities.clear();
+//        Iterator<Activity> iterator = activities.iterator();
+//        while (iterator.hasNext()) {
+//            iterator.next().finish();
+//            iterator.remove();
+//        }
+//        while (!activities.isEmpty()) {
+//            Activity act = activities.lastElement();
+//            act.finish();
+//            activities.remove(act);
+//        }
     }
 
     /**
      * 返回到指定的activity
      */
-    public void backToAppointActivity(Class cls) {
-        while (!activityStack.lastElement().getClass().equals(cls)) {
-            activityStack.lastElement().finish();
-            activityStack.remove(activityStack.lastElement());
+    public void backToAct(Class cls) {
+        while (!activities.lastElement().getClass().equals(cls)) {
+            Activity act = activities.lastElement();
+            act.finish();
+            activities.remove(act);
         }
     }
 
     /**
      * 杀掉并移除 出去当前activity的所有页面
      */
-    public void keepCurrentActivity() {
-        while (activityStack.size() != 1) {
-            activityStack.firstElement().finish();
-            activityStack.remove(activityStack.firstElement());
+    public void remove() {
+        while (activities.size() != 1) {
+            Activity act = activities.firstElement();
+            act.finish();
+            activities.remove(act);
         }
     }
 }

@@ -48,21 +48,21 @@ public class BitmapUtils {
     /**
      * 获取网络图片
      */
-    public static Bitmap getBitmapFromUrl(String urlStr) {
-        InputStream input = null;
-        HttpURLConnection connection = null;
+    public static Bitmap getBitmapFromUrl(String str) {
+        InputStream is = null;
+        HttpURLConnection huc = null;
         try {
-            URL url = new URL(urlStr);
-            connection = (HttpURLConnection) url.openConnection();
-            input = new BufferedInputStream(connection.getInputStream());
-            return BitmapFactory.decodeStream(input);
+            URL url = new URL(str);
+            huc = (HttpURLConnection) url.openConnection();
+            is = new BufferedInputStream(huc.getInputStream());
+            return BitmapFactory.decodeStream(is);
         } catch (MalformedURLException e) {
             LogUtils.d(e.toString());
         } catch (IOException e) {
         } finally {
             try {
-                if (input != null) input.close();
-                if (connection != null) connection.disconnect();
+                if (is != null) is.close();
+                if (huc != null) huc.disconnect();
             } catch (IOException e) {
             }
         }
@@ -193,15 +193,15 @@ public class BitmapUtils {
      * @return
      */
     public static boolean saveBitmapToFile(Bitmap bitmap, String pathName) {
-        FileOutputStream out = null;
+        FileOutputStream fos = null;
         try {
-            out = new FileOutputStream(pathName);
-            return bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            fos = new FileOutputStream(pathName);
+            return bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
         } catch (FileNotFoundException e) {
             LogUtils.d(e.toString());
         } finally {
             try {
-                if (out != null) out.close();
+                if (fos != null) fos.close();
             } catch (IOException e) {
             }
         }

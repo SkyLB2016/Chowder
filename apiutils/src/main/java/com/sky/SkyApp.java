@@ -74,7 +74,7 @@ public class SkyApp extends Application {
      * 退出程序
      */
     public void exit() {
-        ActivityLifecycle.getInstance().popAllActivity();
+        ActivityLifecycle.getInstance().closeAll();
     }
 
     public void showToast(int code) {

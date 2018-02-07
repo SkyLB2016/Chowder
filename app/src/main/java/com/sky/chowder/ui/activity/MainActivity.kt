@@ -27,7 +27,6 @@ import java.io.File
 import java.text.Collator
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 import kotlin.coroutines.experimental.buildSequence
 
 
@@ -73,14 +72,10 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 
     @OnClick(R.id.fab)
     fun fabOnClick() {
-        val map = HashMap<String, String>()
-        map.put("Aa", "aaaaaaaaa")
-        map.put("BB", "bbbbbbbbbb")
-        LogUtils.i(map["Aa"])
-        LogUtils.i(map["BB"])
-        LogUtils.i(map.put("BB", "ccccccccccc"))
-        LogUtils.i(map["BB"])
-        //        showToast(packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA).metaData.get("CHANNEL").toString() + "")
+        val cla = ActivityLifecycle.getInstance().getActivity(0)
+        LogUtils.i(cla.toString())
+//        "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray()
+//        showToast(packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA).metaData.get("CHANNEL").toString() + "")
 //        LogUtils.i(String.format(getString(R.string.format01), 99, 88))
 //        LogUtils.i(String.format(getString(R.string.format02), "abc", "def"))
 //        LogUtils.i(String.format(getString(R.string.format03), "abc", 9))
