@@ -79,8 +79,8 @@ class MainP(context: Context) : BasePresenter<IMainView>(context), IMainPresente
         private val sDisplayNameComparator = object : Comparator<ActivityModel> {
             private val collator = Collator.getInstance()
 
-            override fun compare(lhs: ActivityModel, rhs: ActivityModel): Int {
-                return collator.compare(lhs.className, rhs.className)
+            override fun compare(first: ActivityModel, second: ActivityModel): Int {
+                return collator.compare(second.className, first.className)
             }
         }
     }
