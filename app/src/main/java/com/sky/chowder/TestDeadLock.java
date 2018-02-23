@@ -41,6 +41,5 @@ public class TestDeadLock implements Runnable {
         Thread t2 = new Thread(td2);
         t1.start();
         t2.start();
-
     }
 }

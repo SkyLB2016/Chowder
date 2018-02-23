@@ -1,0 +1,11 @@
+安装apk：
+adb install 路径
+
+从哪向哪传输文件：
+adb push C:/WorkSpace/aa.txt /storage/emulated/0/AmapSdk
+
+录制视频：
+adb shell screenrecord /storage/emulated/0/AmapSdk/test.mp4
+
+查看系统盘符：
+adb shell df
