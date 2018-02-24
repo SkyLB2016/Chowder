@@ -70,10 +70,22 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
     private var temp: List<String>? = null//计价详细信息
     private var flag = true
 
+    @OnClick(R.id.fab1)
+    fun fab1OnClick() {
+        FileUtils.deleteFile(SkyApp.getInstance().fileCacheDir)
+    }
+
     @OnClick(R.id.fab)
     fun fabOnClick() {
-        val cla = ActivityLifecycle.getInstance().getActivity(0)
-        LogUtils.i(cla.toString())
+        FileUtils.serialToFile(SkyApp.getInstance().fileCacheDir + "car", "nsgldkfjsglksdfjlkgf")
+        val src=  File(SkyApp.getInstance().fileCacheDir + "car")
+        val d=  File(SkyApp.getInstance().fileCacheDir +  "cartype/test/test")
+
+        FileUtils.copyFile(src,d, "car")
+//        FileUtils.serialToFile(SkyApp.getInstance().fileCacheDir + "cartyp", "nsgldkfjsglksdfjlkgf")
+//        val list = FileUtils.fileToSerialObj<String>(SkyApp.getInstance().fileCacheDir + "cartype/test")
+
+
 //        "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray()
 //        showToast(packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA).metaData.get("CHANNEL").toString() + "")
 //        LogUtils.i(String.format(getString(R.string.format01), 99, 88))

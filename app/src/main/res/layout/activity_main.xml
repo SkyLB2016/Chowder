@@ -19,6 +19,15 @@
         android:layout_margin="@dimen/wh_16"
         app:rippleColor="@color/colorPrimaryDark"
         app:srcCompat="@android:drawable/ic_dialog_email" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left"
+        android:layout_margin="@dimen/wh_16"
+        app:rippleColor="@color/colorPrimaryDark"
+        app:srcCompat="@android:drawable/ic_lock_idle_lock" />
     <!--app:backgroundTint="@color/colorAccent"-->
     <!--app:backgroundTintMode="screen"-->
     <!--app:layout_anchor="@id/appbar"/>-->

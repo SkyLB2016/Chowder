@@ -29,6 +29,7 @@ class ShaderView @JvmOverloads constructor(context: Context, attrs: AttributeSet
         paint!!.shader = LinearGradient(0f, bitmap!!.height.toFloat(), 0f, bitmap!!.height * 1.8f, 0xEE000000.toInt(), 0x10000000, Shader.TileMode.CLAMP)
 //        paint!!.shader = LinearGradient(0f, bitmap!!.height.toFloat(), 0f, bitmap!!.height * 1.8f, Color.RED, Color.BLUE, Shader.TileMode.CLAMP)
         paint!!.xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_IN)
+
     }
 
     override fun onDraw(canvas: Canvas) {

@@ -34,8 +34,8 @@ public class FileUtils {
      */
     public static String getFileName(String path) {
         int start = path.lastIndexOf(File.separator);
-        if (start != -1) return path.substring(start + 1, path.length());
-        else return null;
+        if (start == -1) return "路径格式错误";
+        return path.substring(start + 1, path.length());
     }
 
     /**
@@ -104,6 +104,7 @@ public class FileUtils {
      */
     public static void copyFile(File srcFile, File destDir, String newName) {
         try {
+            if (!destDir.exists()) destDir.mkdirs();
             File dstFile = new File(destDir, newName);//创建目标文件
             FileChannel fcin = new FileInputStream(srcFile).getChannel();//源文件通道
             FileChannel fcout = new FileOutputStream(dstFile).getChannel();
@@ -127,7 +128,9 @@ public class FileUtils {
     public static <T> void serialToFile(String pathname, T object) {
         ObjectOutputStream oos = null;
         try {
-            oos = new ObjectOutputStream(new FileOutputStream(new File(pathname)));
+            File file = new File(pathname);
+            if (!file.getParentFile().exists()) file.getParentFile().mkdirs();
+            oos = new ObjectOutputStream(new FileOutputStream(file));
             oos.writeObject(object);// 写入到本地
             oos.flush();
         } catch (FileNotFoundException e) {
@@ -183,6 +186,7 @@ public class FileUtils {
         BufferedWriter bw = null;
         try {
             File file = new File(pathname);
+            if (!file.getParentFile().exists()) file.getParentFile().mkdirs();
             bw = new BufferedWriter(new FileWriter(file, append));
             bw.write(content);
             bw.flush();
@@ -221,6 +225,7 @@ public class FileUtils {
         BufferedOutputStream bos = null;
         try {
             File file = new File(pathname);
+            if (!file.getParentFile().exists()) file.getParentFile().mkdirs();
             fos = new FileOutputStream(file);
             bos = new BufferedOutputStream(fos);
             byte[] bytes = new byte[1024];

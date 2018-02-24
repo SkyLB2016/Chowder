@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.Scroller
 import java.util.*
 
 /**
@@ -12,6 +13,11 @@ import java.util.*
  * 流式布局
  */
 class FlowLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : FrameLayout(context, attrs, defStyleAttr) {
+    var scroller: Scroller? = null
+
+    init {
+        scroller = Scroller(context)
+    }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val layoutWidth = View.MeasureSpec.getSize(widthMeasureSpec)//match_parent是的宽
@@ -126,7 +132,25 @@ class FlowLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
      */
     override fun generateLayoutParams(attrs: AttributeSet): FrameLayout.LayoutParams {
         return FrameLayout.LayoutParams(context, attrs)
-        //return new MarginLayoutParams(getContext(), attrs);//继承自viewgroup
     }
+
+//    var lastY = 0f
+//    override fun onTouchEvent(event: MotionEvent?): Boolean {
+//        when (event?.action) {
+//            MotionEvent.ACTION_DOWN -> lastY = event.rawY
+//            MotionEvent.ACTION_MOVE -> {
+//                if (scroller!!.isFinished) scroller?.abortAnimation()
+//                var dy = lastY - event.rawY
+////                if (scrollY < 0)
+////                    dy = 0f
+////                if (scrollY > height-ScreenUtils.getHeightPX(context))
+////                    dy = 0f
+//                scrollBy(0, dy.toInt())
+//                lastY = event.rawY
+//            }
+//        }
+//        postInvalidate()
+//        return true
+//    }
 
 }
