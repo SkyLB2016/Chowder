@@ -18,9 +18,9 @@
             android:background="@mipmap/sliding_content"
             android:orientation="vertical">
 
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <!--<ScrollView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -34,7 +34,7 @@
                         android:layout_height="match_parent"
                         android:padding="10dp"/>
                 </LinearLayout>
-            </ScrollView>
+            <!--</ScrollView>-->
         </LinearLayout>
     </LinearLayout>
 </com.sky.chowder.ui.widget.SlidingMenu>

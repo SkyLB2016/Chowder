@@ -2,9 +2,9 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <com.sky.chowder.ui.widget.Text
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="天地玄黄，宇宙洪荒，日月盈仄，辰宿列张。"/>
+    <com.sky.chowder.ui.widget.TouchView
+        android:layout_width="100dp"
+        android:background="@color/color_66"
+        android:layout_height="100dp"/>
 
 </android.support.constraint.ConstraintLayout>

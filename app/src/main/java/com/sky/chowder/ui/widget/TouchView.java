@@ -10,17 +10,14 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.sky.utils.LogUtils;
+
 /**
  * Created by SKY on 2018/2/24 14:49.
  */
 public class TouchView extends View {
-    private final static int INVALID_ID = -1;
-    private int mActivePointerId = INVALID_ID;
-    private int mSecondaryPointerId = INVALID_ID;
-    private float mPrimaryLastX = -1;
-    private float mPrimaryLastY = -1;
-    private float mSecondaryLastX = -1;
-    private float mSecondaryLastY = -1;
+    float lastX = -1, lastY = -1;
+    float cX = -1, cY = -1;
 
     public TouchView(Context context) {
         super(context);
@@ -38,33 +35,29 @@ public class TouchView extends View {
         int action = MotionEventCompat.getActionMasked(event);
         switch (action) {
             case MotionEvent.ACTION_DOWN:
-                int index = event.getActionIndex();
-                mActivePointerId = event.getPointerId(index);
-                mPrimaryLastX = MotionEventCompat.getX(event, index);
-                mPrimaryLastY = MotionEventCompat.getY(event, index);
-                break;
-            case MotionEvent.ACTION_POINTER_DOWN:
-                index = event.getActionIndex();
-                mSecondaryPointerId = event.getPointerId(index);
-                mSecondaryLastX = event.getX(index);
-                mSecondaryLastY = event.getY(index);
+                lastX = event.getRawX();
+                lastY = event.getRawY();
+                cX = event.getX();
+                cY = event.getY();
                 break;
             case MotionEvent.ACTION_MOVE:
-                index = event.findPointerIndex(mActivePointerId);
-                int secondaryIndex = MotionEventCompat.findPointerIndex(event, mSecondaryPointerId);
-                final float x = MotionEventCompat.getX(event, index);
-                final float y = MotionEventCompat.getY(event, index);
-//                final float secondX = MotionEventCompat.getX(event, secondaryIndex);
-//                final float secondY = MotionEventCompat.getY(event, secondaryIndex);
-                break;
-            case MotionEvent.ACTION_POINTER_UP:
-                //xxxxxx(涉及pointer id的转换，之后的文章会讲解)
+                int dx = (int) (event.getRawX() - lastX);
+                int dY = (int) (event.getRawY() - lastY);
+                LogUtils.i("X=" + event.getRawX());
+
+//                layout(getLeft() + dx, getTop() + dY, getRight() + dx, getBottom() + dY);
+                offsetLeftAndRight(dx);
+                offsetTopAndBottom(dY);
+                cX = event.getX();
+                cY = event.getY();
+                lastX = event.getRawX();
+                lastY = event.getRawY();
                 break;
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
-                mActivePointerId = INVALID_ID;
-                mPrimaryLastX = -1;
-                mPrimaryLastY = -1;
+                lastX = -1;
+                lastY = -1;
+                cX = cY = -1;
                 break;
         }
         invalidate();
@@ -74,10 +67,9 @@ public class TouchView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        Paint paint = new Paint(Color.BLUE);
-        if (mPrimaryLastX != -1)
-            canvas.drawCircle(mPrimaryLastX, mPrimaryLastY, 88, paint);
-        if (mSecondaryLastX != -1)
-            canvas.drawCircle(mSecondaryLastX, mSecondaryLastY, 88, paint);
+//        LogUtils.i(getHeight() + "宽高" + getWidth());
+        Paint paint = new Paint();
+        paint.setColor(Color.RED);
+        if (lastX != -1) canvas.drawCircle(cX, cY, 88, paint);
     }
 }

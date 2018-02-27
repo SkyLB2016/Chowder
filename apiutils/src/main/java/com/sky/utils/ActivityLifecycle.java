@@ -112,7 +112,7 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
     /**
      * 杀掉并移除 出去当前activity的所有页面
      */
-    public void remove() {
+    public void removeOther() {
         while (activities.size() != 1) {
             Activity act = activities.firstElement();
             act.finish();

@@ -24,7 +24,7 @@ class SlidingMenuActivity : BaseNoPActivity() {
         var i: Int = '!'.toInt()
         while (i <= 'z'.toInt()) {
             val tv = LayoutInflater.from(this).inflate(R.layout.tv, flowlayout, false) as TextView
-            tv.text = "${i.toChar()}"
+            tv.text = "${i.toChar()}AABBCC"
             flowlayout.addView(tv)
             ObjectAnimator.ofFloat(tv, "rotation", 0f, 360f).setDuration(3000).start()
             setOnclicK(tv)

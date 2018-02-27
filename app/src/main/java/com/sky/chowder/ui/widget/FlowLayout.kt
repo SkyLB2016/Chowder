@@ -2,10 +2,12 @@ package com.sky.chowder.ui.widget
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.Scroller
+import com.sky.utils.ScreenUtils
 import java.util.*
 
 /**
@@ -134,23 +136,24 @@ class FlowLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
         return FrameLayout.LayoutParams(context, attrs)
     }
 
-//    var lastY = 0f
-//    override fun onTouchEvent(event: MotionEvent?): Boolean {
-//        when (event?.action) {
-//            MotionEvent.ACTION_DOWN -> lastY = event.rawY
-//            MotionEvent.ACTION_MOVE -> {
-//                if (scroller!!.isFinished) scroller?.abortAnimation()
-//                var dy = lastY - event.rawY
-////                if (scrollY < 0)
-////                    dy = 0f
-////                if (scrollY > height-ScreenUtils.getHeightPX(context))
-////                    dy = 0f
-//                scrollBy(0, dy.toInt())
-//                lastY = event.rawY
-//            }
-//        }
-//        postInvalidate()
-//        return true
-//    }
+    var lastY = 0f
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        when (event?.action) {
+            MotionEvent.ACTION_DOWN -> lastY = event.rawY
+            MotionEvent.ACTION_MOVE -> {
+                if (scroller!!.isFinished) scroller?.abortAnimation()
+                var dy = lastY - event.rawY
+                if (scrollY < 0 && dy < 0)
+                    dy = 0f
+                if (scrollY > height - ScreenUtils.getHeightPX(context) + ScreenUtils.getStatusHeight(context) + 10 && dy > 0)
+                    dy = 0f
+                scrollBy(0, dy.toInt())
+//                (parent as View).scrollBy(0, dy.toInt())
+                lastY = event.rawY
+            }
+        }
+        postInvalidate()
+        return true
+    }
 
 }
