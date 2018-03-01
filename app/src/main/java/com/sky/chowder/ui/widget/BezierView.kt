@@ -5,6 +5,7 @@ import android.graphics.*
 import android.view.View
 import com.sky.chowder.R
 import java.util.*
+
 /**
  * Created by SKY on 2017/3/9 20:52.
  */
@@ -163,6 +164,21 @@ class BezierView(context: Context) : View(context) {
             canvas.drawText("" + i, list[i].x.toFloat(), list[i].y.toFloat(), point)
         }
         canvas.drawPath(path2, p)//画出贝塞尔曲线
+
+        val ee = CornerPathEffect(20f)
+        val path3 = Path()
+        path3.moveTo(list[0].x.toFloat(), list[0].y.toFloat()+700)//设置Path的起点
+        for (i in 1 until list.size) {
+            path3.lineTo(list[i].x.toFloat(), list[i].y.toFloat()+700)
+        }
+        val paint= Paint()
+        paint.strokeWidth = 10f
+        paint.style = Paint.Style.STROKE
+        paint.color = Color.RED
+        paint.pathEffect = ee
+        canvas.drawPath(path3, paint)
+
+
         p.style = Paint.Style.FILL
         canvas.drawCircle(list[0].x.toFloat(), list[0].y.toFloat(), 22f, p)// 小圆
 

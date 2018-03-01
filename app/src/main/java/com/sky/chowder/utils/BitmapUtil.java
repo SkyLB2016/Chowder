@@ -16,7 +16,7 @@ import android.view.View;
 /**
  * Created by SKY on 2017/9/30 15:17.
  */
-public class BitmapUtils {
+public class BitmapUtil {
     /**
      * 获得带倒影的图片方法
      *
@@ -59,9 +59,6 @@ public class BitmapUtils {
         Bitmap bmp = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bmp);
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        //* <code>axis=0</code> correspond to a rotation around the RED color
-        //* <code>axis=1</code> correspond to a rotation around the GREEN color
-        //* <code>axis=2</code> correspond to a rotation around the BLUE color
         //设置色相
         ColorMatrix hueMatrix = new ColorMatrix();
         hueMatrix.setRotate(0, huergb);

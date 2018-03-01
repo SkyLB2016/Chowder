@@ -65,8 +65,8 @@ class MeshView @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
         for (i in 0..MESHHEIGHT) {
             for (j in 0..MESHWIDTH) {
                 val offSetY = Math.sin((j.toFloat() / MESHWIDTH).toDouble() * 2.0 * Math.PI + k.toDouble() * 2.0 * Math.PI).toFloat()
-                newPoint[(i * (MESHHEIGHT + 1) + j) * 2 + 0] = oldPoint[(i * (MESHHEIGHT + 1) + j) * 2 + 0] + offSetY * 100 + 200f
-                newPoint[(i * (MESHHEIGHT + 1) + j) * 2 + 1] = oldPoint[(i * (MESHHEIGHT + 1) + j) * 2 + 1] + offSetY * 50 + 400f
+                newPoint[(i * (MESHHEIGHT + 1) + j) * 2 + 0] = oldPoint[(i * (MESHHEIGHT + 1) + j) * 2 + 0] + offSetY * 50 + 200f
+                newPoint[(i * (MESHHEIGHT + 1) + j) * 2 + 1] = oldPoint[(i * (MESHHEIGHT + 1) + j) * 2 + 1] + offSetY * 25 + 400f
             }
         }
         canvas.drawBitmapMesh(mBitmap!!, MESHWIDTH, MESHHEIGHT, newPoint, 0, null, 0, null)

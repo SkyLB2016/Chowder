@@ -32,8 +32,8 @@ class TabLayoutActivity : BaseNoPActivity() {
         val titles = ArrayList<String>()
         titles.add("card")
         titles.add("MeshView")
-        titles.add("倒影")
-        titles.add("shape")
+        titles.add("Shader")
+        titles.add("XferModeView")
         titles.add("通讯录")
         for (i in titles) {
             tabs.addTab(tabs.newTab().setText(i))
@@ -41,8 +41,8 @@ class TabLayoutActivity : BaseNoPActivity() {
         val fragments = ArrayList<Fragment>()
         fragments.add(RecycleFragment())
         fragments.add(One())
-        fragments.add(Two())
-        fragments.add(Three())
+        fragments.add(ShaderF())
+        fragments.add(XferModeF())
         fragments.add(CursorLoaderListFragment())
         val adapter = object : FragmentPagerAdapter(supportFragmentManager) {
             override fun getCount(): Int = fragments.size

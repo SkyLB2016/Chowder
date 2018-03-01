@@ -6,7 +6,6 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.Scroller
 import com.sky.utils.ScreenUtils
 import java.util.*
 
@@ -15,12 +14,6 @@ import java.util.*
  * 流式布局
  */
 class FlowLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : FrameLayout(context, attrs, defStyleAttr) {
-    var scroller: Scroller? = null
-
-    init {
-        scroller = Scroller(context)
-    }
-
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val layoutWidth = View.MeasureSpec.getSize(widthMeasureSpec)//match_parent是的宽
         val widthMode = View.MeasureSpec.getMode(widthMeasureSpec)//获取测量模式，match与wrap
@@ -141,14 +134,20 @@ class FlowLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
         when (event?.action) {
             MotionEvent.ACTION_DOWN -> lastY = event.rawY
             MotionEvent.ACTION_MOVE -> {
-                if (scroller!!.isFinished) scroller?.abortAnimation()
                 var dy = lastY - event.rawY
                 if (scrollY < 0 && dy < 0)
                     dy = 0f
                 if (scrollY > height - ScreenUtils.getHeightPX(context) + ScreenUtils.getStatusHeight(context) + 10 && dy > 0)
                     dy = 0f
                 scrollBy(0, dy.toInt())
-//                (parent as View).scrollBy(0, dy.toInt())
+
+//                var dy = event.rawY - lastY
+//                if (scrollY < 0 && dy > 0)
+//                    dy = 0f
+//                if (scrollY > height - ScreenUtils.getHeightPX(context) + ScreenUtils.getStatusHeight(context) + 10 && dy < 0)
+//                    dy = 0f
+//                scrollBy(0, -dy.toInt())
+
                 lastY = event.rawY
             }
         }

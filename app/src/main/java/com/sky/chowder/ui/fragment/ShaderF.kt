@@ -8,7 +8,7 @@ import com.sky.chowder.ui.presenter.SolarP
 /**
  * Created by SKY on 2015/12/9 20:52.
  */
-class Two : BaseFragment<SolarP>() {
+class ShaderF : BaseFragment<SolarP>() {
     override fun getLayoutResId(): Int {
         return R.layout.fragment_two
     }

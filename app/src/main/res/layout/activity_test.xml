@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <com.sky.chowder.ui.widget.TouchView
-        android:layout_width="100dp"
-        android:background="@color/color_66"
-        android:layout_height="100dp"/>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <com.sky.chowder.ui.widget.SurfaceTest
+        android:layout_width="360dp"
+        android:layout_height="640dp"
+        android:background="@drawable/test" />
+
+</LinearLayout>

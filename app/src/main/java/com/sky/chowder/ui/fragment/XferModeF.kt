@@ -12,7 +12,7 @@ import com.sky.utils.LogUtils
 /**
  * Created by SKY on 2015/12/9 20:52.
  */
-class Three : BaseFragment<SolarP>() {
+class XferModeF : BaseFragment<SolarP>() {
     internal var handler: Handler = object : Handler() {
         override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
