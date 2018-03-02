@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="360dp"
+    android:height="360dp"
+    android:viewportHeight="180"
+    android:viewportWidth="180">
+    <group android:name="test" android:rotation="0">
+        <path android:fillColor="#FF00FF"
+            android:pathData="M 25 50
+            a 25 ,25 90 1, 0 120, 0 "
+            android:strokeColor="#ffff00"
+            android:strokeWidth="2"/>
+    </group>
+
+</vector>

@@ -99,14 +99,21 @@ class TouchView @JvmOverloads constructor(
         val list = (0..30).mapTo(ArrayList()) { Point(100 + it * 30, random.nextInt(500) + 500) }
         val ee = CornerPathEffect(10f)
         val path3 = Path()
-        path3.moveTo(list[0].x.toFloat(), list[0].y.toFloat()+700)//设置Path的起点
+        path3.moveTo(list[0].x.toFloat(), list[0].y.toFloat() + 700)//设置Path的起点
         for (i in 1 until list.size) {
-            path3.lineTo(list[i].x.toFloat(), list[i].y.toFloat()+700)
+            path3.lineTo(list[i].x.toFloat(), list[i].y.toFloat() + 700)
         }
         paint.strokeWidth = 10f
         paint.style = Paint.Style.STROKE
         paint.color = Color.RED
         paint.pathEffect = ee
         canvas.drawPath(path3, paint)
+        animate().alpha(1f)
+                .rotation(360f)
+                .setDuration(900)
+                .withStartAction {  }
+                .withEndAction {  }
+                .start()
+
     }
 }

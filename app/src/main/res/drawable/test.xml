@@ -8,9 +8,9 @@
         android:endColor="#805fbbff"
         android:startColor="#ff5da2ff" />
     <padding
-        android:bottom="@dimen/wh_48"
-        android:left="@dimen/wh_48"
-        android:right="@dimen/wh_48"
-        android:top="@dimen/wh_48" />
+        android:bottom="@dimen/wh_8"
+        android:left="@dimen/wh_8"
+        android:right="@dimen/wh_8"
+        android:top="@dimen/wh_8" />
 
 </shape>

@@ -4,8 +4,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.view.WindowManager
-import android.view.animation.AlphaAnimation
-import android.view.animation.Animation
+import android.view.animation.*
 import android.widget.ImageView
 import com.sky.Common
 import com.sky.chowder.R
@@ -27,10 +26,26 @@ class WelcomeActivity : AppCompatActivity() {
         view.setBackgroundResource(R.mipmap.guide01)
         setContentView(view)
         //加载动画
-        val animation = AlphaAnimation(0.5f, 1f)
-        animation.duration = TIME
-        view.startAnimation(animation)
-        animation.setAnimationListener(object : Animation.AnimationListener {
+        val set = AnimationSet(true)
+        val alpha = AlphaAnimation(0.1f, 1f)
+        alpha.duration = TIME
+        val rotate = RotateAnimation(0f, 360f, RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f)
+        rotate.duration = TIME
+        val tran = TranslateAnimation(0f, 200f, 0f, 200f)
+        tran.duration = TIME
+        val scale = ScaleAnimation(0f, 1f, 0f, 1f)
+//        val scale = Custom()
+        scale.duration = TIME
+
+
+        set.addAnimation(alpha)
+        set.addAnimation(rotate)
+        set.addAnimation(tran)
+        set.addAnimation(scale)
+
+
+        view.startAnimation(set)
+        set.setAnimationListener(object : Animation.AnimationListener {
 
             override fun onAnimationStart(animation: Animation) {}
 

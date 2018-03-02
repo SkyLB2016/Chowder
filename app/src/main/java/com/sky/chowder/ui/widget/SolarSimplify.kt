@@ -17,7 +17,7 @@ import com.sky.chowder.R
  * Created by SKY on 2015/4/9 21:10:39.
  * 卫星式菜单
  */
-class SolarSystem @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : FrameLayout(context, attrs, defStyleAttr) {
+class SolarSimplify @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : FrameLayout(context, attrs, defStyleAttr) {
     private var tempX = 1
     private var tempY = 1
 
@@ -293,9 +293,7 @@ class SolarSystem @JvmOverloads constructor(context: Context, attrs: AttributeSe
                 animator02 = ObjectAnimator.ofFloat(childAt, "translationY", iy, 0f)
             }
             //旋转动画定义
-            rotation = if (i % 2 == 1)
-                ObjectAnimator.ofFloat(childAt, "pivotX", 0f, 360f)
-            else ObjectAnimator.ofFloat(childAt, "pivotY", 0f, 360f)
+            rotation = ObjectAnimator.ofFloat(childAt, "rotation", 0f, 360f)
             //把几个动画组合在一起
             set = AnimatorSet()
             set.interpolator = BounceInterpolator()//差值器

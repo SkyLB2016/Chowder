@@ -4,9 +4,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.sky.chowder.ui.widget.SurfaceTest
-        android:layout_width="360dp"
-        android:layout_height="640dp"
+    <com.sky.chowder.ui.widget.TouchView
+        android:id="@+id/touch"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:background="@drawable/test" />
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:src="@drawable/anim_solar" />
 
 </LinearLayout>

@@ -5,7 +5,10 @@ import android.graphics.Outline
 import android.os.Build
 import android.support.annotation.RequiresApi
 import android.view.View
+import android.view.ViewGroup
 import android.view.ViewOutlineProvider
+import android.view.animation.LayoutAnimationController
+import android.view.animation.ScaleAnimation
 import com.sky.adapter.RecyclerAdapter
 import com.sky.adapter.RecyclerHolder
 import com.sky.chowder.R
@@ -20,11 +23,18 @@ import kotlinx.android.synthetic.main.adapter_main.view.*
 class MainAdapter(layoutId: Int) : RecyclerAdapter<ActivityModel>(layoutId) {
 
     override fun onAchieveHolder(holder: RecyclerHolder, position: Int) {
+        val scale = ScaleAnimation(0f, 1f, 0f, 1f)
+        scale.duration = 2000
+        if (position % 2 == 1) {
+            val controller = LayoutAnimationController(scale, 0.5f)
+            controller.order = LayoutAnimationController.ORDER_RANDOM
+            (holder?.itemView as ViewGroup).layoutAnimation = controller
+        } else holder?.itemView.startAnimation(scale)
         with(holder!!.itemView) {
             tv_name.text = "${position + 1}.${datas[position].className}"
             tv_describe.text = datas[position].describe
             image.background = resources.getDrawable(datas[position].img)
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 //使用ripple
                 //((CardView) holder.getView(R.id.cardView)).setRadius(new Random().nextInt(50));
                 //((CardView) holder.getView(R.id.cardView)).setCardElevation(new Random().nextInt(50));
@@ -42,7 +52,7 @@ class MainAdapter(layoutId: Int) : RecyclerAdapter<ActivityModel>(layoutId) {
                 }
             } else
                 cardView.background = context.resources.getDrawable(R.drawable.bg_card)
-            setOnClickListener{v -> LogUtils.i("lkjdflkajdkf") }
+            setOnClickListener { v -> LogUtils.i("lkjdflkajdkf") }
         }
     }
 }

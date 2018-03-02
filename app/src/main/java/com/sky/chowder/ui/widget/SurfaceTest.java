@@ -37,6 +37,7 @@ public class SurfaceTest extends SurfaceView implements SurfaceHolder.Callback, 
         holder.setFormat(PixelFormat.OPAQUE);
 
         path = new Path();
+        path1 = new Path();
 //        path.moveTo(1f, 0f);
         paint = new Paint();
         paint.setColor(Color.GREEN);
@@ -64,15 +65,16 @@ public class SurfaceTest extends SurfaceView implements SurfaceHolder.Callback, 
     int x = 0;
     int y = 0;
     Path path;
+    Path path1;
     Paint paint;
 
     @Override
     public void run() {
         while (flag) {
             draw();
-//            x += 1;
-//            y = (int) (100 * Math.sin(x * 2 * Math.PI / 180) + 400);
-//            path.lineTo(x, y);
+            x += 1;
+            y = (int) (100 * Math.sin(x * 2 * Math.PI / 180) + 400);
+            path.lineTo(x, y);
         }
     }
 
@@ -80,6 +82,7 @@ public class SurfaceTest extends SurfaceView implements SurfaceHolder.Callback, 
         try {
             canvas = holder.lockCanvas();
             canvas.drawPath(path, paint);
+            canvas.drawPath(path1, paint);
 
         } catch (Exception e) {
 
@@ -92,10 +95,10 @@ public class SurfaceTest extends SurfaceView implements SurfaceHolder.Callback, 
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                path.moveTo(event.getX(), event.getY());
+                path1.moveTo(event.getX(), event.getY());
                 break;
             case MotionEvent.ACTION_MOVE:
-                path.lineTo(event.getX(), event.getY());
+                path1.lineTo(event.getX(), event.getY());
                 break;
             case MotionEvent.ACTION_UP:
                 break;
