@@ -1,10 +1,14 @@
 package com.sky.chowder.ui.activity
 
 import android.Manifest
+import android.annotation.TargetApi
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.BatteryManager
+import android.os.Build
+import android.os.Bundle
+import android.os.Debug
 import android.provider.AlarmClock
 import android.provider.ContactsContract
 import android.support.v7.widget.Toolbar
@@ -37,6 +41,18 @@ import kotlin.coroutines.experimental.buildSequence
 class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IMainView {
 
     private lateinit var adapter: MainAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Debug.startMethodTracing()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Debug.stopMethodTracing()
+    }
+
+
     public override fun getLayoutResId(): Int = R.layout.activity_main
     override fun creatPresenter() = MainP(this)
     public override fun initialize() {
@@ -77,15 +93,6 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 
     @OnClick(R.id.fab)
     fun fabOnClick() {
-        FileUtils.serialToFile(SkyApp.getInstance().fileCacheDir + "car", "nsgldkfjsglksdfjlkgf")
-        val src=  File(SkyApp.getInstance().fileCacheDir + "car")
-        val d=  File(SkyApp.getInstance().fileCacheDir +  "cartype/test/test")
-
-        FileUtils.copyFile(src,d, "car")
-//        FileUtils.serialToFile(SkyApp.getInstance().fileCacheDir + "cartyp", "nsgldkfjsglksdfjlkgf")
-//        val list = FileUtils.fileToSerialObj<String>(SkyApp.getInstance().fileCacheDir + "cartype/test")
-
-
 //        "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray()
 //        showToast(packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA).metaData.get("CHANNEL").toString() + "")
 //        LogUtils.i(String.format(getString(R.string.format01), 99, 88))
@@ -95,6 +102,55 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 //        showToast(test ?: return showToast("通过"))
 //        showToast("但是继续执行了")
 //        test ?: return
+    }
+
+    //获取系统信息
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    fun getSystemMessage() {
+        LogUtils.i("主板型号==${Build.BOARD}")
+        LogUtils.i("系统定制商==${Build.BRAND}")
+
+        val list = Build.SUPPORTED_ABIS
+        for (i in list)
+            LogUtils.i("CPU指令集==$i")
+        LogUtils.i("设备参数==${Build.DEVICE}")
+        LogUtils.i("显示屏参数==${Build.DISPLAY}")
+        LogUtils.i("唯一编号==${Build.FINGERPRINT}")
+        LogUtils.i("硬件序列号==${Build.SERIAL}")
+        LogUtils.i("修订版本列表==${Build.ID}")
+        LogUtils.i("硬件制造商==${Build.MANUFACTURER}")
+        LogUtils.i("版本==${Build.MODEL}")
+        LogUtils.i("硬件名==${Build.HARDWARE}")
+        LogUtils.i("手机产品名==${Build.PRODUCT}")
+        LogUtils.i("描述Build的标签==${Build.TAGS}")
+        LogUtils.i("Builder的类型==${Build.TYPE}")
+        LogUtils.i("当前开发代号==${Build.VERSION.CODENAME}")
+        LogUtils.i("源码控制版本号==${Build.VERSION.INCREMENTAL}")
+        LogUtils.i("系统版本==${Build.VERSION.RELEASE}")
+        LogUtils.i("系统版本号==${Build.VERSION.SDK_INT}")
+        LogUtils.i("Host值==${Build.HOST}")
+        LogUtils.i("User名==${Build.USER}")
+        LogUtils.i("编译时间==${Build.TIME}")
+    }
+
+    //获取系统信息
+    fun getSystemProperty() {
+        LogUtils.i("OS版本==${System.getProperty("os.version")}")
+        LogUtils.i("OS名称==${System.getProperty("os.name")}")
+        LogUtils.i("OS架构==${System.getProperty("os.arch")}")
+        LogUtils.i("Home属性==${System.getProperty("user.home")}")
+        LogUtils.i("Name属性==${System.getProperty("user.name")}")
+        LogUtils.i("Dir属性==${System.getProperty("user.dir")}")
+        LogUtils.i("时区==${System.getProperty("user.timezone")}")
+        LogUtils.i("路径分隔符==${System.getProperty("path.separator")}")
+        LogUtils.i("行分隔符==${System.getProperty("line.separator")}")
+        LogUtils.i("文件分隔符==${System.getProperty("file.separator")}")
+        LogUtils.i("Java vendor URL 属性==${System.getProperty("java.vendor.url")}")
+        LogUtils.i("Java class 路径==${System.getProperty("java.class.path")}")
+        LogUtils.i("Java class 版本==${System.getProperty("java.class.version")}")
+        LogUtils.i("Java Vendor 属性==${System.getProperty("java.vendor")}")
+        LogUtils.i("Java 版本==${System.getProperty("java.version")}")
+        LogUtils.i("Java Home 属性==${System.getProperty("java.home")}")
     }
 
     private fun sortList() {
