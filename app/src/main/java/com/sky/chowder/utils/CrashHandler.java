@@ -26,7 +26,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             e = e.getCause();
             stacks = e.getStackTrace();
         }
-        LogUtils.i(e.toString());
+        LogUtils.d(e.toString());
         printError(stacks);
         System.exit(1);
     }
@@ -38,7 +38,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             String className = stack.getClassName();
             className = className.substring(className.lastIndexOf(".") + 1);
             tag = String.format(tag, i, className, stack.getMethodName(), stack.getLineNumber());
-            LogUtils.i(tag);
+            LogUtils.d(tag);
         }
     }
 }

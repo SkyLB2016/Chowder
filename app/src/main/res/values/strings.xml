@@ -1,52 +1,24 @@
 <resources>
-    <string name="app_name">SKY</string>
-    <bool name="flag">true</bool>
+    <string name="app_name">chowder</string>
 
-    <!--strings的命名-->
-    <!--类型_{范围_}功能，范围可选。-->
-    <!--以下为几种常用的命名：-->
-    <!--页面标题，命名格式为：title_页面-->
-    <!--按钮文字，命名格式为：btn_按钮事件-->
-    <!--标签文字，命名格式为：label_标签文字-->
-    <!--选项卡文字，命名格式为：tab_选项卡文字-->
-    <!--消息框文字，命名格式为：toast_消息-->
-    <!--编辑框的提示文字，命名格式为：hint_提示信息-->
-    <!--图片的描述文字，命名格式为：desc_图片文字-->
-    <!--对话框的文字，命名格式为：dialog_文字-->
-    <!--menu的item文字，命名格式为：action_文字-->
-
-    <!--页面标题，命名格式为：title_页面-->
-
-    <!--按钮文字，命名格式为：btn_按钮事件-->
-    <!--标签文字，命名格式为：label_标签文字-->
-
-    <!--选项卡文字，命名格式为：tab_选项卡文字-->
-    <!--消息框文字，命名格式为：toast_消息-->
     <string name="toast_exit">再按一次返回键回到桌面</string>
-
-    <!--编辑框的提示文字，命名格式为：hint_提示信息-->
-    <!--图片的描述文字，命名格式为：desc_图片文字-->
-    <!--对话框的文字，命名格式为：dialog_文字-->
     <string name="dialog_exit">确定退出应用程序吗?</string>
 
-    <!--menu的item文字，命名格式为：action_文字-->
-    <string name="action_settings">Settings</string>
-
-    <string name="act_01">欢迎页</string>
-    <string name="act_01_des">采用animation编写，延时一秒钟后执行</string>
+    <string name="act_01">方法组合</string>
+    <string name="act_01_d">一些常用的方法调用</string>
     <string name="act_02">卫星式菜单栏</string>
-    <string name="act_02_desc">支持九个方向，采用ObjectAnimator编写</string>
+    <string name="act_02_d">支持九个方向，采用ObjectAnimator编写</string>
     <string name="act_03">股票计算</string>
-    <string name="act_03_desc">股票计算</string>
+    <string name="act_03_d">股票计算</string>
     <string name="act_04">自定义贝塞尔曲线</string>
-    <string name="act_04_desc">待定</string>
+    <string name="act_04_d">待定</string>
     <string name="act_05">侧滑栏</string>
     <string name="act_06">receive</string>
-    <string name="act_06_desc">receive</string>
+    <string name="act_06_d">receive</string>
     <string name="act_07">service</string>
-    <string name="act_07_desc">service</string>
+    <string name="act_07_d">service</string>
     <string name="act_08">环形进度条</string>
-    <string name="act_CircleProgress_desc">自定义的环形进度条，内有字体颜色大小等的局部修改</string>
+    <string name="act_CircleProgress_d">自定义的环形进度条，内有字体颜色大小等的局部修改</string>
     <string name="act_09">drawer</string>
     <string name="act_10">拼图</string>
     <string name="act_11">网络图片加载与缓存</string>
@@ -114,6 +86,9 @@
     玄牝之门，是谓天地根。\n
     绵绵若存，用之不勤。\n\n
     第七章\n
+        天长地久，天地所以长且久者，以其不自生，故能长生。\n
+        是以圣人后其身而身先，外其身而身存。\n
+        非以其无私耶，故能成其私。\n\n
     </string>
 
     <string name="jsonobj">{ "className":"aaaaaa", "describe":"bbbbbbbbbbbb", "img":1, "componentName":"cccccccccccc",
@@ -139,15 +114,17 @@
         [
         { "className":"aaaaaa", "describe":"bbbbbb", "img":1, "componentName":"cccccc"},
         { "className":"dddddd", "describe":"eeeeee", "img":2, "componentName":"ffffff"},
-        { "className":"gggggg", "describe":"hhhhhh", "img":30000, "componentName":"iiiiii"},
+        { "className":"gggggg", "describe":"hhhhhh", "img":3, "componentName":"iiiiii"},
         { "className":"jjjjjj", "describe":"kkkkkk", "img":4, "componentName":"llllll"},
         { "className":"mmmmmm", "describe":"nnnnnn", "img":5, "componentName":"oooooo"}
         ]
     </string>
 
-    <string name="format01">距离%d元奖励还差%d单</string>
-    <string name="format02">距离%s元奖励还差%s单</string>
-    <string name="format03">距离%s元奖励还差%d单</string>
+    <string name="format00">替换%d比%d大还是小 %n</string>
+    <string name="format01">顺序替换%2$d比%1$d大还是小 %n</string>
+    <string name="format02">组合替换字符%s与数字%d %n</string>
+    <string name="format03">转四位数的的数%04d %n</string>
+    <string name="format04">以,分隔，整数%,d与浮点数%,.2f %n</string>
 
 
 </resources>

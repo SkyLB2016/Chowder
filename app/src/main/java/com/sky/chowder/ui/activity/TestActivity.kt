@@ -40,7 +40,7 @@ class TestActivity : AppCompatActivity() {
     fun text() {
         val text = Text(this)
         text.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-        text.text = "天地玄黄，宇宙洪荒，日月盈仄，辰宿列张。"
+        text.text = "天地玄黄，宇宙洪荒，日月盈仄，辰宿列张。寒来暑往，秋收冬藏。闰余成岁，律吕调阳。云腾致雨，露结为霜。金生丽水，玉出昆冈。"
         setContentView(text)
     }
 }

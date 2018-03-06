@@ -41,9 +41,11 @@
             android:name="CHANNEL"
             android:value="${CHANNEL_VALUE}" />
         <!-- 与build.gradle相呼应完-->
+        <!--BugHD-->
         <meta-data
             android:name="BUG_HD_SDK_GENERAL_KEY"
             android:value="279dc3c61d77f5b08b4970a31db93c62" />
+        <!--BugHD-->
 
         <!--拍照时使用-->
         <provider
@@ -57,9 +59,7 @@
         </provider>
         <!--拍照时使用-->
 
-        <activity
-            android:name=".ui.activity.WelcomeActivity"
-            android:description="@string/act_01_des">
+        <activity android:name=".ui.activity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -76,8 +76,18 @@
 
 
         <activity
+            android:name=".ui.activity.MethodTestActivity"
+            android:description="@string/act_01_d"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/act_01"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.sky.coustom" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".ui.activity.SolarSystemActivity"
-            android:description="@string/act_02_desc"
+            android:description="@string/act_02_d"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_02"
             android:screenOrientation="portrait">
@@ -87,7 +97,7 @@
         </activity>
         <activity
             android:name=".ui.activity.StockActivity"
-            android:description="@string/act_03_desc"
+            android:description="@string/act_03_d"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_03"
             android:screenOrientation="portrait">
@@ -97,7 +107,7 @@
         </activity>
         <activity
             android:name=".ui.activity.BezierActivity"
-            android:description="@string/act_04_desc"
+            android:description="@string/act_04_d"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_04"
             android:screenOrientation="portrait">
@@ -117,7 +127,7 @@
         </activity>
         <activity
             android:name=".ui.activity.CircleProgressActivity"
-            android:description="@string/act_CircleProgress_desc"
+            android:description="@string/act_CircleProgress_d"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_08"
             android:screenOrientation="portrait">
@@ -262,13 +272,13 @@
         </activity>
         <activity
             android:name=".ui.activity.BroadActivity"
-            android:description="@string/act_06_desc"
+            android:description="@string/act_06_d"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_06"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.ServiceActivity"
-            android:description="@string/act_07_desc"
+            android:description="@string/act_07_d"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_07"
             android:screenOrientation="portrait" />

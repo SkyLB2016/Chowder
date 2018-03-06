@@ -1,16 +1,9 @@
 package com.sky.chowder.ui.activity
 
 import android.Manifest
-import android.annotation.TargetApi
 import android.content.ActivityNotFoundException
-import android.content.Intent
-import android.content.IntentFilter
-import android.os.BatteryManager
-import android.os.Build
 import android.os.Bundle
 import android.os.Debug
-import android.provider.AlarmClock
-import android.provider.ContactsContract
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
@@ -93,65 +86,9 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 
     @OnClick(R.id.fab)
     fun fabOnClick() {
-//        "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray()
-//        showToast(packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA).metaData.get("CHANNEL").toString() + "")
-//        LogUtils.i(String.format(getString(R.string.format01), 99, 88))
-//        LogUtils.i(String.format(getString(R.string.format02), "abc", "def"))
-//        LogUtils.i(String.format(getString(R.string.format03), "abc", 9))
-
-//        showToast(test ?: return showToast("通过"))
-//        showToast("但是继续执行了")
-//        test ?: return
+        sortList()
     }
 
-    //获取系统信息
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    fun getSystemMessage() {
-        LogUtils.i("主板型号==${Build.BOARD}")
-        LogUtils.i("系统定制商==${Build.BRAND}")
-
-        val list = Build.SUPPORTED_ABIS
-        for (i in list)
-            LogUtils.i("CPU指令集==$i")
-        LogUtils.i("设备参数==${Build.DEVICE}")
-        LogUtils.i("显示屏参数==${Build.DISPLAY}")
-        LogUtils.i("唯一编号==${Build.FINGERPRINT}")
-        LogUtils.i("硬件序列号==${Build.SERIAL}")
-        LogUtils.i("修订版本列表==${Build.ID}")
-        LogUtils.i("硬件制造商==${Build.MANUFACTURER}")
-        LogUtils.i("版本==${Build.MODEL}")
-        LogUtils.i("硬件名==${Build.HARDWARE}")
-        LogUtils.i("手机产品名==${Build.PRODUCT}")
-        LogUtils.i("描述Build的标签==${Build.TAGS}")
-        LogUtils.i("Builder的类型==${Build.TYPE}")
-        LogUtils.i("当前开发代号==${Build.VERSION.CODENAME}")
-        LogUtils.i("源码控制版本号==${Build.VERSION.INCREMENTAL}")
-        LogUtils.i("系统版本==${Build.VERSION.RELEASE}")
-        LogUtils.i("系统版本号==${Build.VERSION.SDK_INT}")
-        LogUtils.i("Host值==${Build.HOST}")
-        LogUtils.i("User名==${Build.USER}")
-        LogUtils.i("编译时间==${Build.TIME}")
-    }
-
-    //获取系统信息
-    fun getSystemProperty() {
-        LogUtils.i("OS版本==${System.getProperty("os.version")}")
-        LogUtils.i("OS名称==${System.getProperty("os.name")}")
-        LogUtils.i("OS架构==${System.getProperty("os.arch")}")
-        LogUtils.i("Home属性==${System.getProperty("user.home")}")
-        LogUtils.i("Name属性==${System.getProperty("user.name")}")
-        LogUtils.i("Dir属性==${System.getProperty("user.dir")}")
-        LogUtils.i("时区==${System.getProperty("user.timezone")}")
-        LogUtils.i("路径分隔符==${System.getProperty("path.separator")}")
-        LogUtils.i("行分隔符==${System.getProperty("line.separator")}")
-        LogUtils.i("文件分隔符==${System.getProperty("file.separator")}")
-        LogUtils.i("Java vendor URL 属性==${System.getProperty("java.vendor.url")}")
-        LogUtils.i("Java class 路径==${System.getProperty("java.class.path")}")
-        LogUtils.i("Java class 版本==${System.getProperty("java.class.version")}")
-        LogUtils.i("Java Vendor 属性==${System.getProperty("java.vendor")}")
-        LogUtils.i("Java 版本==${System.getProperty("java.version")}")
-        LogUtils.i("Java Home 属性==${System.getProperty("java.home")}")
-    }
 
     private fun sortList() {
         //        for (i in 40..122) {
@@ -196,13 +133,6 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
         }
     }
 
-    private fun equalHashCode() {
-        val a = "Aa"
-        val b = "BB"
-        LogUtils.i(a.hashCode().toString())
-        LogUtils.i(b.hashCode().toString())
-    }
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return super.onCreateOptionsMenu(menu)
@@ -233,15 +163,6 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
             lastBack = nowCurrent
         } else super.onBackPressed()
     }
-
-    //获取电量百分比
-    val battery: Int
-        get() {
-            val battery = registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
-            val currLevel = battery!!.getIntExtra(BatteryManager.EXTRA_LEVEL, 0)
-            val total = battery.getIntExtra(BatteryManager.EXTRA_SCALE, 0)
-            return currLevel * 100 / total
-        }
 
     private fun testGson() {
         val model = GsonUtils.jsonToEntity(getString(R.string.jsonobj), ActivityModel::class.java)
@@ -285,42 +206,5 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
         System.out.println(f.length())//返回由此抽象路径名表示的文件的长度
         System.out.println(f.list())// 返回一个字符串数组，这些字符串指定此抽象路径名表示的目录中的文件和目录
         System.out.println(f.mkdir())//创建此抽象路径名指定的目录
-    }
-
-    /**
-     * intent测试
-     */
-    private fun intentTest() {
-        //        IntentTest.startIntent(this, Extra<String>(),"com.sky.action")
-        val intent = Intent(AlarmClock.ACTION_SET_ALARM)
-        intent.putExtra(AlarmClock.EXTRA_HOUR, 15)
-        intent.putExtra(AlarmClock.EXTRA_MINUTES, 24)
-        intent.putExtra(AlarmClock.EXTRA_MESSAGE, "测试")
-        //        val intent = Intent(AlarmClock.ACTION_SET_TIMER)
-        //                .putExtra(AlarmClock.EXTRA_MESSAGE, "测试")
-        //                .p`utExtra(AlarmClock.EXTRA_LENGTH, 10)
-        //                .putExtra(AlarmClock.EXTRA_SKIP_UI, true)
-        //        val intent = Intent(MediaStore.INTENT_ACTION_VIDEO_CAMERA)
-        //
-        //        if (intent.resolveActivity(packageManager) != null) {
-        //            startActivity(intent);
-        //        }
-        //        val intent = Intent(Intent.ACTION_PICK)
-        //        intent.type = Phone.CONTENT_TYPE
-        //        startActivityForResult(intent, 101)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 101 && resultCode == RESULT_OK) {
-            val projection = arrayOf(ContactsContract.CommonDataKinds.Phone.NUMBER, ContactsContract.CommonDataKinds.Phone._ID, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
-            val cursor = contentResolver.query(data?.data, projection, null, null, null);
-            if (cursor != null && cursor.moveToFirst()) {
-                val numberIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
-                val number = cursor.getString(numberIndex);
-                showToast(number)
-            }
-            cursor.close()
-        }
     }
 }
