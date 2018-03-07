@@ -7,7 +7,6 @@ import com.sky.chowder.R
 import com.sky.chowder.api.presenter.IMainPresenter
 import com.sky.chowder.api.view.IMainView
 import com.sky.chowder.model.ActivityModel
-import com.sky.utils.LogUtils
 import java.text.Collator
 import java.util.*
 
@@ -17,10 +16,6 @@ import java.util.*
 class MainP(context: Context) : BasePresenter<IMainView>(context), IMainPresenter {
     override fun showToast(toast: String) {
         mView.showToast(toast)
-    }
-
-    init {
-        LogUtils.i("mainpresenter")
     }
 
     override fun loadData() {
@@ -54,33 +49,15 @@ class MainP(context: Context) : BasePresenter<IMainView>(context), IMainPresente
                 activityInfos.add(ActivityModel(label, describe, icon, info.activityInfo.name))
             }
             //排序
-            Collections.sort(activityInfos, sDisplayNameComparator)
+            Collections.sort(activityInfos, sort)
 //            Collections.sort(activityInfos);//使用activityModel中的compareTo进行排序
-//            iterator(activityInfos)
             return activityInfos
         }
-
-    private fun iterator(activityInfos: ArrayList<ActivityModel>) {
-        val iter = activityInfos.iterator()
-        while (iter.hasNext()) {
-            val obj = iter.next()
-            LogUtils.i(obj.toString())
-        }
-        for (i in iter) {
-            LogUtils.i(i.toString())
-        }
-        //            Collections.copy()
-    }
-
     companion object {
-        /**
-         * 为筛选出的act进行排序
-         */
-        private val sDisplayNameComparator = object : Comparator<ActivityModel> {
+        private val sort = object : Comparator<ActivityModel> {
             private val collator = Collator.getInstance()
-
             override fun compare(first: ActivityModel, second: ActivityModel): Int {
-                return collator.compare(second.className, first.className)
+                return collator.compare(first.className, second.className)
             }
         }
     }

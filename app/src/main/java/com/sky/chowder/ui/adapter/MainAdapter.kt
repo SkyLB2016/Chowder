@@ -24,14 +24,14 @@ class MainAdapter(layoutId: Int) : RecyclerAdapter<ActivityModel>(layoutId) {
 
     override fun onAchieveHolder(holder: RecyclerHolder, position: Int) {
         val scale = ScaleAnimation(0f, 1f, 0f, 1f)
-        scale.duration = 500
+        scale.duration = 100
         if (position % 2 == 1) {
             val controller = LayoutAnimationController(scale, 0.5f)
             controller.order = LayoutAnimationController.ORDER_RANDOM
             (holder?.itemView as ViewGroup).layoutAnimation = controller
         } else holder?.itemView.startAnimation(scale)
         with(holder!!.itemView) {
-            tv_name.text = "${position + 1}.${datas[position].className}"
+            tv_name.text = "${datas[position].className}"
             tv_describe.text = datas[position].describe
             image.background = resources.getDrawable(datas[position].img)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

@@ -1,52 +1,71 @@
 <resources>
     <string name="app_name">chowder</string>
-
     <string name="toast_exit">再按一次返回键回到桌面</string>
     <string name="dialog_exit">确定退出应用程序吗?</string>
 
-    <string name="act_01">方法组合</string>
-    <string name="act_01_d">一些常用的方法调用</string>
-    <string name="act_02">卫星式菜单栏</string>
-    <string name="act_02_d">支持九个方向，采用ObjectAnimator编写</string>
-    <string name="act_03">股票计算</string>
-    <string name="act_03_d">股票计算</string>
-    <string name="act_04">自定义贝塞尔曲线</string>
-    <string name="act_04_d">待定</string>
-    <string name="act_05">侧滑栏</string>
-    <string name="act_06">receive</string>
-    <string name="act_06_d">receive</string>
-    <string name="act_07">service</string>
-    <string name="act_07_d">service</string>
-    <string name="act_08">环形进度条</string>
-    <string name="act_CircleProgress_d">自定义的环形进度条，内有字体颜色大小等的局部修改</string>
-    <string name="act_09">drawer</string>
-    <string name="act_10">拼图</string>
-    <string name="act_11">网络图片加载与缓存</string>
-    <string name="act_11_des">网络图片加载与缓存，多种布局加载</string>
-    <string name="act_12">载入本地图片</string>
-    <string name="act_13">下拉动画</string>
+    <string name="act_method">01.方法组合</string>
+    <string name="act_method_d">一些常用的方法调用</string>
+
+    <string name="act_solar">02.卫星式菜单栏</string>
+    <string name="act_solar_d">支持九个方向，采用ObjectAnimator编写</string>
+
+    <string name="act_slid">03.侧滑栏</string>
+    <string name="act_slid_d">继承自HorizontalScrollView,融合FlowLayout</string>
+
+    <string name="act_bitmapurl">04.网络图片加载与缓存</string>
+    <string name="act_bit_d">网络图片加载与缓存，多种布局加载,AsyncTask多任务加载，LruCache缓存图片，待完成：DisLurCache缓存图片到本地</string>
+
+    <string name="act_bit_uri">05.载入本地图片</string>
+    <string name="act_uri_d">自定义线程池加载，FIFO,FILO,PopWindow弹窗，图片的缩放显示，待优化</string>
+
+    <string name="act_puzzle">06.拼图</string>
+    <string name="act_puzzle_d">自定义View，二维数组，遮罩隐藏</string>
+
+    <string name="act_tab">07.滑动窗口</string>
+    <string name="act_tab_b">tab结合viewpager，包含：CardView,MeshView,Shader，XferModeF，电话簿</string>
+
+    <string name="act_time">08.时间地址选择器</string>
+    <string name="act_time_d">时间地址选择器，dialogfragment，等待继续优化</string>
+
+    <string name="act_canvas">09.Canvas总结应用</string>
+    <string name="act_canvas_d">○，贝赛尔曲线</string>
+
+    <string name="act_circle">10.环形进度条</string>
+    <string name="act_circle_d">自定义的环形进度条，内有字体颜色大小等的局部修改，考虑与canvas结合在一起</string>
+
+    <string name="act_svg">11.SVG</string>
+    <string name="act_svg_d">SVG演示，加载html下的svg</string>
+
+    <string name="act_photo">12.本地照片与相机</string>
+    <string name="act_photo_d">本地照片与相机，兼容7.1版本，4.4以上，考虑与另两个图片处理页面合并</string>
+
+    <string name="act_stock">13.股票计算</string>
+    <string name="act_stock_d">算着玩的</string>
+
+    <string name="act_22">test</string>
     <string name="act_14">collapsing</string>
     <string name="act_15">双缓冲实验</string>
+    <string name="act_13">下拉动画</string>
+    <string name="act_receive">receive</string>
+    <string name="act_receive_d">待处理</string>
+
+    <string name="act_service">service</string>
+    <string name="act_service_d">待处理</string>
+
     <string name="act_16">工厂模式实验</string>
-    <string name="act_17">SVG</string>
-    <string name="act_18">TabLayoutActivity</string>
     <string name="act_19">VideoActivity</string>
-    <string name="act_20">PhotoActivity</string>
-    <string name="act_21">时间地址选择器</string>
-    <string name="act_22">test</string>
 
     <string name="test"><i><b><u>service</u></b></i></string>
 
-
-    <string name="left_top">left_top</string>
-    <string name="left_bottom">left_bottom</string>
-    <string name="right_top">right_top</string>
-    <string name="right_bottom">right_bottom</string>
-    <string name="center_top">center_top</string>
-    <string name="center_bottom">center_bottom</string>
-    <string name="center">center</string>
-    <string name="center_left">center_left</string>
-    <string name="center_right">center_right</string>
+    <string name="left_top">LEFTTOP</string>
+    <string name="left_bottom">LEFTBOTTOM</string>
+    <string name="right_top">RIGHTTOP</string>
+    <string name="right_bottom">RIGHTBOTTOM</string>
+    <string name="center_top">CENTERTOP</string>
+    <string name="center_bottom">CENTERBOTTOM</string>
+    <string name="center">CENTER</string>
+    <string name="center_left">CENTERLEFT</string>
+    <string name="center_right">CENTERRIGHT</string>
 
     <string name="qq_menu01">Login</string>
     <string name="qq_menu02">Battery</string>
@@ -85,38 +104,42 @@
     谷神不死，是谓玄牝。\n
     玄牝之门，是谓天地根。\n
     绵绵若存，用之不勤。\n\n
-    第七章\n
+        第七章\n
         天长地久，天地所以长且久者，以其不自生，故能长生。\n
         是以圣人后其身而身先，外其身而身存。\n
         非以其无私耶，故能成其私。\n\n
+        第八章
+        上善若水。水善利万物而不争，处众人之所恶，故几于道。居善地，心善渊，与善仁，言善信，正善治，事善能，动善时。夫唯不争，故无尤。
+        第九章
+        持而盈之不如其己，揣而锐之不可长保，金玉满堂莫之能守，富贵而骄，自遗其纠。功遂身退，天知道。
+
     </string>
 
-    <string name="jsonobj">{ "className":"aaaaaa", "describe":"bbbbbbbbbbbb", "img":1, "componentName":"cccccccccccc",
+    <string name="jsonobj">{
+        "className":"天",
+        "componentName":"地",
+        "img":1,
+        "describe":"玄黄",
         "objList":[
-        { "className":"aaaaaa", "describe":"bbbbbb", "img":1, "componentName":"cccccc"},
-        { "className":"dddddd", "describe":"eeeeee", "img":2, "componentName":"ffffff"},
-        { "className":"gggggg", "describe":"hhhhhh", "img":3, "componentName":"iiiiii"},
-        { "className":"jjjjjj", "describe":"kkkkkk", "img":4, "componentName":"llllll"},
-        { "className":"mmmmmm", "describe":"nnnnnn", "img":5, "componentName":"oooooo"}
-        ]
-        }</string>
-    <string name="jsonlist">{
-        "objList":[
-        { "className":"aaaaaa", "describe":"bbbbbb", "img":1, "componentName":"cccccc"},
-        { "className":"dddddd", "describe":"eeeeee", "img":2, "componentName":"ffffff"},
-        { "className":"gggggg", "describe":"hhhhhh", "img":3, "componentName":"iiiiii"},
-        { "className":"jjjjjj", "describe":"kkkkkk", "img":4, "componentName":"llllll"},
-        { "className":"mmmmmm", "describe":"nnnnnn", "img":5, "componentName":"oooooo"}
+        {"className":"人", "componentName":"之", "img":1, "describe":"初"},
+        {"className":"性", "componentName":"本", "img":2, "describe":"善"},
+        {"className":"性", "componentName":"相", "img":2, "describe":"近"},
+        {"className":"习", "componentName":"相", "img":3, "describe":"远"}
         ]
         }
     </string>
-    <string name="jsonarray">
-        [
-        { "className":"aaaaaa", "describe":"bbbbbb", "img":1, "componentName":"cccccc"},
-        { "className":"dddddd", "describe":"eeeeee", "img":2, "componentName":"ffffff"},
-        { "className":"gggggg", "describe":"hhhhhh", "img":3, "componentName":"iiiiii"},
-        { "className":"jjjjjj", "describe":"kkkkkk", "img":4, "componentName":"llllll"},
-        { "className":"mmmmmm", "describe":"nnnnnn", "img":5, "componentName":"oooooo"}
+    <string name="jsonlist">{ "objList":[
+        {"className":"人", "componentName":"之", "img":1, "describe":"初"},
+        {"className":"性", "componentName":"本", "img":2, "describe":"善"},
+        {"className":"性", "componentName":"相", "img":2, "describe":"近"},
+        {"className":"习", "componentName":"相", "img":3, "describe":"远"}
+        ]}
+    </string>
+    <string name="jsonarray"> [
+        {"className":"人", "componentName":"之", "img":1, "describe":"初"},
+        {"className":"性", "componentName":"本", "img":2, "describe":"善"},
+        {"className":"性", "componentName":"相", "img":2, "describe":"近"},
+        {"className":"习", "componentName":"相", "img":3, "describe":"远"}
         ]
     </string>
 

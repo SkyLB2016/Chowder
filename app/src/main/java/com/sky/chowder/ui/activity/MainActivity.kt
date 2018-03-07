@@ -8,24 +8,18 @@ import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import butterknife.OnClick
-import com.google.gson.reflect.TypeToken
 import com.sky.SkyApp
 import com.sky.base.BasePActivity
 import com.sky.chowder.R
 import com.sky.chowder.api.view.IMainView
 import com.sky.chowder.model.ActivityModel
-import com.sky.chowder.model.TestModel
 import com.sky.chowder.ui.adapter.MainAdapter
 import com.sky.chowder.ui.presenter.MainP
-import com.sky.model.ApiResponse
-import com.sky.utils.*
+import com.sky.utils.AppUtils
+import com.sky.utils.FileUtils
+import com.sky.utils.JumpAct
 import kotlinx.android.synthetic.main.content_main.*
 import java.io.File
-import java.text.Collator
-import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.coroutines.experimental.buildSequence
-
 
 /**
  * Created by SKY on 2015/12/6.
@@ -44,7 +38,6 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
         super.onDestroy()
         Debug.stopMethodTracing()
     }
-
 
     public override fun getLayoutResId(): Int = R.layout.activity_main
     override fun creatPresenter() = MainP(this)
@@ -69,16 +62,6 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
         adapter?.datas = data
     }
 
-    private val f: (Int) -> Int = { a -> a * 2 }
-    val sum = { x: Int, y: Int -> x + y }
-    val sum1: (Int, Int) -> Int = { x, y -> x + y }
-    val sum2: (Int, Int, Int) -> Int = { x, y, z -> x + y + z }
-    private var test: String? = null
-    private var test1 = ""
-    private var test2 = "12345678"
-    private var temp: List<String>? = null//计价详细信息
-    private var flag = true
-
     @OnClick(R.id.fab1)
     fun fab1OnClick() {
         FileUtils.deleteFile(SkyApp.getInstance().fileCacheDir)
@@ -86,51 +69,7 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 
     @OnClick(R.id.fab)
     fun fabOnClick() {
-        sortList()
-    }
 
-
-    private fun sortList() {
-        //        for (i in 40..122) {
-        //        LogUtils.i("${'彬'.toInt()}")
-        //        }
-        //        val list = (65..122).map { TestModel("${it.toChar()}") }
-        val list = ArrayList<TestModel>()
-        (122 downTo 97).mapTo(list) { TestModel("${it.toChar()}") }
-        (24444 downTo 24422).mapTo(list) { TestModel("${it.toChar()}") }
-        (90 downTo 65).mapTo(list) { TestModel("${it.toChar()}") }
-
-        //        Collections.reverse(list)//逆序
-        //        LogUtils.i(list.toString())
-        //        Collections.shuffle(list)//随机
-        //        LogUtils.i(list.toString())
-//        Collections.sort(list)//排序
-//        LogUtils.i(list.toString())
-        Collections.sort(list, sort)
-        LogUtils.i(list.toString())
-        Collections.sort(list, sort1)
-        LogUtils.i(list.toString())
-    }
-
-    companion object {
-        /**
-         * 为筛选出的act进行升序排序
-         */
-        private val sort = object : Comparator<TestModel> {
-            private val collator = Collator.getInstance()
-
-            override fun compare(first: TestModel, second: TestModel): Int {
-                return collator.compare(first.className, second.className)
-            }
-        }
-        //降序
-        private val sort1 = object : Comparator<TestModel> {
-            private val collator = Collator.getInstance()
-
-            override fun compare(first: TestModel, second: TestModel): Int {
-                return collator.compare(second.className, first.className)
-            }
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -162,33 +101,6 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
             showToast(resources.getString(R.string.toast_exit))
             lastBack = nowCurrent
         } else super.onBackPressed()
-    }
-
-    private fun testGson() {
-        val model = GsonUtils.jsonToEntity(getString(R.string.jsonobj), ActivityModel::class.java)
-        val list = GsonUtils.jsonToList(getString(R.string.jsonarray), Array<ActivityModel>::class.java)
-        val entity = GsonUtils.jsonToEntity<ApiResponse<List<ActivityModel>>>(getString(R.string.jsonlist), object : TypeToken<ApiResponse<List<ActivityModel>>>() {}.type)
-        val array = GsonUtils.jsonToArray(getString(R.string.jsonarray), Array<ActivityModel>::class.java)
-        val model4 = FileUtils.fileToSerialObj<ActivityModel>(SkyApp.getInstance().fileCacheDir + "model")
-        val seq = buildSequence {
-            for (i in 1..5) {
-                // 产生一个 i 的平方
-                yield(i * i)
-            }
-            // 产生一个区间
-            yieldAll(26..28)
-        }
-
-        // 输出该序列
-        println(seq.toList())
-
-        var fruits = listOf("banana", "avocado", "apple", "kiwi")
-        fruits.filter { it.startsWith("a") }
-                .sortedBy { it }
-                .map { it.toUpperCase() }
-                .forEach { LogUtils.i(it) }
-        array.sortedByDescending { it }
-                .forEach { LogUtils.i(it.className) }
     }
 
     /**

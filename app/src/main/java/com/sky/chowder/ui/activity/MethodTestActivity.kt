@@ -7,19 +7,27 @@ import android.os.BatteryManager
 import android.os.Build
 import android.provider.ContactsContract
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.TextView
+import com.google.gson.reflect.TypeToken
 import com.sky.base.BaseNoPActivity
 import com.sky.base.BasePActivity
 import com.sky.chowder.R
+import com.sky.chowder.model.ActivityModel
+import com.sky.model.ApiResponse
 import com.sky.utils.AppUtils
+import com.sky.utils.GsonUtils
 import kotlinx.android.synthetic.main.activity_method.*
 import java.lang.StringBuilder
+import java.text.Collator
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.coroutines.experimental.buildSequence
 
 /**
  * Created by SKY on 2018/3/6 16:43.
  */
-class MethodTestActivity : BaseNoPActivity() {
-
+class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
     override fun getLayoutResId(): Int = R.layout.activity_method
     override fun initialize() {
         super.initialize()
@@ -30,28 +38,118 @@ class MethodTestActivity : BaseNoPActivity() {
                 , "获取app信息"
                 , "Intent测试"
                 , "电池电量"
+                , "数组排序"
+                , "json转换"
+                , "list迭代器"
+                , "list筛选lambda"
         )
         for (i in method) {
             val tvText = LayoutInflater.from(this).inflate(R.layout.tv, flow, false) as TextView
             tvText.text = i
             tvText.tag = i
             flow.addView(tvText)
-            tvText.setOnClickListener { v ->
-                when (v.tag) {
-                    "字符替换" -> tvDisplay.text = replaceStr()
-                    "hash相同" -> tvDisplay.text = equalHashCode()
-                    "字符串数组化" -> tvDisplay.text = toArray()
-                    "系统信息" -> tvDisplay.text = getSystemMessage() + "\n" + getSystemProperty()
-                    "获取app信息" -> tvDisplay.text = "当前版本:${AppUtils.getVersionCode(this)};\n" +
-                            "当前版本号:${AppUtils.getVersionName(this)};\n" +
-                            "当前通道号:${AppUtils.getChannel(this)}"
-                    "Intent测试" -> intentTest()
-                    "电池电量" -> tvDisplay.text = "电池电量==$battery"
-                    "" -> ""
-                }
-            }
+            tvText.setOnClickListener(this)
         }
-        replaceStr()
+        tvDisplay.text = replaceStr()
+    }
+
+    override fun onClick(v: View?) {
+        tvDisplay.text = when (v?.tag) {
+            "字符替换" -> replaceStr()
+            "hash相同" -> equalHashCode()
+            "字符串数组化" -> toArray()
+            "系统信息" -> getSystemMessage() + "\n" + getSystemProperty()
+            "获取app信息" -> "当前版本:${AppUtils.getVersionCode(this)};\n" +
+                    "当前版本号:${AppUtils.getVersionName(this)};\n" +
+                    "当前通道号:${AppUtils.getChannel(this)}"
+            "Intent测试" -> intentTest()
+            "电池电量" -> "电池电量==$battery"
+            "数组排序" -> sortList()
+            "json转换" -> changeJson()
+            "list迭代器" -> iterator()
+            "list筛选lambda" -> lambda()
+            "" -> ""
+            else -> ""
+        }
+    }
+
+    private fun lambda(): String {
+        val text = StringBuilder()
+        val seq = buildSequence {
+            // 产生一个 i 的平方
+            for (i in 1..5) yield(i * i)
+            // 产生一个区间
+            yieldAll(26..28)
+        }
+        text.append(seq.toList().toString() + "\n")
+        var fruits = listOf("banana", "avocado", "apple", "kiwi")
+        fruits.filter { it.startsWith("a") }
+                .sortedBy { it }
+                .map { it.toUpperCase() }
+                .forEach { text.append(it + "\n") }
+        val array = GsonUtils.jsonToArray(getString(R.string.jsonarray), Array<ActivityModel>::class.java)
+        array.sortedByDescending { it }
+                .forEach { text.append(it.className + "\n") }
+        return text.toString()
+    }
+
+    private fun iterator(): String {
+        val list = GsonUtils.jsonToList(getString(R.string.jsonarray), Array<ActivityModel>::class.java)
+        val iter = list.iterator()
+        val text = StringBuilder()
+        for (i in iter) text.append(i.toString())
+//        while (iter.hasNext()) {
+//            val obj = iter.next()
+//            text.append(obj.toString())
+//        }
+        return text.toString()
+    }
+
+    private fun changeJson(): String {
+        val model = GsonUtils.jsonToEntity(getString(R.string.jsonobj), ActivityModel::class.java)
+        val entity = GsonUtils.jsonToEntity<ApiResponse<List<ActivityModel>>>(getString(R.string.jsonlist), object : TypeToken<ApiResponse<List<ActivityModel>>>() {}.type)
+        val list = GsonUtils.jsonToList(getString(R.string.jsonarray), Array<ActivityModel>::class.java)
+        val array = GsonUtils.jsonToArray(getString(R.string.jsonarray), Array<ActivityModel>::class.java)
+        val text = StringBuilder()
+        text.append(model.toString() + "\n")
+        text.append(entity.objList.toString() + "\n")
+        text.append(list.toString() + "\n")
+        for (i in array)
+            text.append(i.toString() + "\n")
+        return text.toString()
+    }
+
+    private fun sortList(): String {
+        val list = ArrayList<SortModel>()
+        ('g' downTo 'a').mapTo(list) { SortModel("$it") }
+        (22222 downTo 22217).mapTo(list) { SortModel("${it.toChar()}") }
+        ('G' downTo 'A').mapTo(list) { SortModel("$it") }
+        val text = StringBuilder()
+        text.append("原数据：${list.toString()}\n")
+        Collections.reverse(list)//逆序
+        text.append("逆序：${list.toString()}\n")
+        Collections.shuffle(list)//随机
+        text.append("随机：${list.toString()}\n")
+        Collections.sort(list)//排序
+        text.append("sort排序（大写小写文字）：${list.toString()}\n")
+        Collections.sort(list, ascending)
+        text.append("Comparable升序(文字小大写)：${list.toString()}\n")
+        Collections.sort(list, descending)
+        text.append("Comparable降序(大小写文字)：${list.toString()}")
+        return text.toString()
+    }
+
+    class SortModel(var className: String?) : Comparable<SortModel> {
+        override fun compareTo(another: SortModel): Int = className!!.compareTo(another.className!!)
+        override fun toString(): String = "$className"
+    }
+
+    companion object {
+        private val collator = Collator.getInstance()
+        //升序
+        private val ascending = Comparator<SortModel> { first, second -> collator.compare(first.className, second.className) }
+        //降序
+        private val descending = Comparator<SortModel> { first, second -> collator.compare(second.className, first.className) }
     }
 
     //获取电量百分比
@@ -66,7 +164,7 @@ class MethodTestActivity : BaseNoPActivity() {
     /**
      * intent测试
      */
-    private fun intentTest(): Unit {
+    private fun intentTest(): String {
         //        IntentTest.startIntent(this, Extra<String>(),"com.sky.action")
 //        val intent = Intent(AlarmClock.ACTION_SET_ALARM)
 //        intent.putExtra(AlarmClock.EXTRA_HOUR, 15)
@@ -84,6 +182,7 @@ class MethodTestActivity : BaseNoPActivity() {
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE
         startActivityForResult(intent, 101)
+        return ""
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -92,10 +191,12 @@ class MethodTestActivity : BaseNoPActivity() {
             val projection = arrayOf(ContactsContract.CommonDataKinds.Phone.NUMBER, ContactsContract.CommonDataKinds.Phone._ID, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
             val cursor = contentResolver.query(data?.data, projection, null, null, null);
             if (cursor != null && cursor.moveToFirst()) {
-                val numberIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
+                val nameIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
+                val numberIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
+                val name = cursor.getString(nameIndex);
                 val number = cursor.getString(numberIndex);
                 showToast(number)
-                tvDisplay.text = number
+                tvDisplay.text = "姓名:$name;\n电话:$number"
             }
             cursor.close()
         }

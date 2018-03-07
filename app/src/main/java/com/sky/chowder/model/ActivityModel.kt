@@ -19,7 +19,7 @@ class ActivityModel(var className: String?//activity的名称
     val objList: List<ActivityModel>? = null;
 
     /**
-     * Collections.sort(student)   排序
+     *  排序
      */
     override fun compareTo(another: ActivityModel): Int = className!!.compareTo(another.className!!)
 
