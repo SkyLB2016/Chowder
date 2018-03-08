@@ -1,15 +1,7 @@
 <resources>
-    <!--strings的命名-->
-    <!--类型_{范围_}功能，范围可选。-->
-    <!--以下为几种常用的命名：-->
-    <!--页面标题，命名格式为：act_页面，activity的标题-->
-    <!--按钮文字，命名格式为：btn_按钮事件-->
-    <!--标签文字，命名格式为：label_标签文字-->
     <string name="sure">确认</string>
     <string name="cancel">取消</string>
     <string name="complete">完成</string>
-    <!--选项卡文字，命名格式为：tab_选项卡文字-->
-    <!--消息框文字，命名格式为：toast_消息-->
     <string name="toast_isinternet">您的网络未连接</string>
     <string name="toast_exit">再按一次返回键回到桌面</string>
     <string name="toast_no_data">暂无数据</string>
@@ -20,11 +12,4 @@
     <string name="text_retry">重试</string>
     <string name="text_data_empty">什么都没有</string>
     <string name="photo_fail">加载图片失败</string>
-
-    <!--编辑框的提示文字，命名格式为：hint_提示信息-->
-    <!--图片的描述文字，命名格式为：desc_图片文字-->
-    <!--对话框的文字，命名格式为：dialog_文字-->
-    <!--menu的item文字，命名格式为：action_文字-->
-
-
 </resources>

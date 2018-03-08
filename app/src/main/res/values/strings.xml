@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">chowder</string>
-    <string name="toast_exit">再按一次返回键回到桌面</string>
     <string name="dialog_exit">确定退出应用程序吗?</string>
 
     <string name="act_method">01.方法组合</string>
@@ -12,8 +11,8 @@
     <string name="act_slid">03.侧滑栏</string>
     <string name="act_slid_d">继承自HorizontalScrollView,融合FlowLayout</string>
 
-    <string name="act_bitmapurl">04.网络图片加载与缓存</string>
-    <string name="act_bit_d">网络图片加载与缓存，多种布局加载,AsyncTask多任务加载，LruCache缓存图片，待完成：DisLurCache缓存图片到本地</string>
+    <string name="act_bitmapurl">04.网络图片加载与缓存,本地照片与相机</string>
+    <string name="act_bit_d">网络图片加载与缓存，多种布局加载,AsyncTask多任务加载，LruCache缓存图片，本地照片与相机，兼容7.1版本，4.4以上,待完成：DisLurCache缓存图片到本地</string>
 
     <string name="act_bit_uri">05.载入本地图片</string>
     <string name="act_uri_d">自定义线程池加载，FIFO,FILO,PopWindow弹窗，图片的缩放显示，待优化</string>
@@ -36,14 +35,13 @@
     <string name="act_svg">11.SVG</string>
     <string name="act_svg_d">SVG演示，加载html下的svg</string>
 
-    <string name="act_photo">12.本地照片与相机</string>
-    <string name="act_photo_d">本地照片与相机，兼容7.1版本，4.4以上，考虑与另两个图片处理页面合并</string>
-
-    <string name="act_stock">13.股票计算</string>
+    <string name="act_stock">12.股票计算</string>
     <string name="act_stock_d">算着玩的</string>
 
+    <string name="act_coordinator">13.CoordinatorLayout与ToolBar的组合应用</string>
+    <string name="act_coordinator_d">CoordinatorLayout与ToolBar的组合应用,待进一步处理</string>
+
     <string name="act_22">test</string>
-    <string name="act_14">collapsing</string>
     <string name="act_15">双缓冲实验</string>
     <string name="act_13">下拉动画</string>
     <string name="act_receive">receive</string>

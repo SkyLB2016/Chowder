@@ -41,6 +41,11 @@ public class BitmapUtils {
         return BitmapFactory.decodeResource(context.getResources(), resId);
     }
 
+    public static Bitmap getBitmapUP(String pathName) {
+        if (pathName.startsWith("http")) return getBitmapFromUrl(pathName);
+        else return getBitmapFromPath(pathName);
+    }
+
     public static Bitmap getBitmapFromPath(String pathName) {
         return BitmapFactory.decodeFile(pathName);
     }
@@ -48,11 +53,11 @@ public class BitmapUtils {
     /**
      * 获取网络图片
      */
-    public static Bitmap getBitmapFromUrl(String str) {
+    public static Bitmap getBitmapFromUrl(String pathName) {
         InputStream is = null;
         HttpURLConnection huc = null;
         try {
-            URL url = new URL(str);
+            URL url = new URL(pathName);
             huc = (HttpURLConnection) url.openConnection();
             is = new BufferedInputStream(huc.getInputStream());
             return BitmapFactory.decodeStream(is);

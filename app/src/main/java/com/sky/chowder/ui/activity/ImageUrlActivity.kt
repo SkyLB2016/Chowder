@@ -1,17 +1,23 @@
 package com.sky.chowder.ui.activity
 
+import android.content.Intent
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
+import com.sky.SkyApp
 import com.sky.base.RecyclerPActivity
 import com.sky.chowder.R
 import com.sky.chowder.model.CourseEntity
 import com.sky.chowder.ui.adapter.LoaderURLAdapter
 import com.sky.chowder.ui.presenter.ImageUrlP
 import com.sky.chowder.utils.ImageLoaderAsync
+import com.sky.utils.BitmapUtils
+import com.sky.utils.LogUtils
+import com.sky.utils.PhotoUtils
 import kotlinx.android.synthetic.main.navigation_content.*
+import java.io.File
 import java.util.*
 
 /**
@@ -39,6 +45,8 @@ class ImageUrlActivity : RecyclerPActivity<CourseEntity, ImageUrlP>() {
         layoutIds.add(R.layout.adapter_main)
         super.initialize()
         fab.setOnClickListener { v -> Snackbar.make(v, "正在加载，请稍后", Snackbar.LENGTH_LONG).setAction("cancel") { showToast("已取消") }.show() }
+        adapter.setOnItemClickListener { view, position -> getPhoto(view, position) }
+
     }
 
     override fun creatAdapter() {
@@ -76,5 +84,35 @@ class ImageUrlActivity : RecyclerPActivity<CourseEntity, ImageUrlP>() {
     override fun onDestroy() {
         super.onDestroy()
         cancelAlltasks()
+    }
+
+    private lateinit var photoUtils: PhotoUtils
+
+    private fun getPhoto(view: View, position: Int) {
+        val photoPath = SkyApp.getInstance().picCacheDir + System.currentTimeMillis() + ".jpg"
+        photoUtils = PhotoUtils(this, photoPath)
+        photoUtils?.setUploadPicture { photoName, bitmap ->
+            val image = view.findViewById<ImageView>(R.id.image)
+            image.setImageBitmap(bitmap)
+            adapter.datas[position].picBig = photoName
+            LogUtils.i("photo==$photoName")
+            LogUtils.i("压缩后所占内存大小==${bitmap.allocationByteCount / 1024}KB")
+            LogUtils.i("原图所占内存大小==${BitmapUtils.getBitmapFromPath(photoName).allocationByteCount / 1024 / 1024}MB")
+
+            val pathname = SkyApp.getInstance().picCacheDir + System.currentTimeMillis() % 1000 + ".jpg"
+            BitmapUtils.saveBitmapToFile(bitmap, pathname)//保存照片到应用缓存文件目录下
+            LogUtils.i("原图文件大小==${File(photoName).length() / 1024 / 1024}MB")
+            LogUtils.i("压缩后文件大小==${File(pathname).length() / 1024}KB")
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        photoUtils?.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        photoUtils?.onActivityResult(requestCode, resultCode, data)
     }
 }

@@ -5,6 +5,7 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
 import butterknife.OnClick
+import com.sky.api.TextWatcherAdapter
 import com.sky.base.BaseNoPActivity
 import com.sky.chowder.R
 import com.sky.utils.TextUtil
@@ -16,7 +17,6 @@ import java.text.DecimalFormat
  * 股票计算
  */
 class StockActivity : BaseNoPActivity() {
-
     //etUnit:单价; etNum:数量; etTotal:总价;tvStampDuty:印花税,只在卖出的时候有
     //tvRealEstateTransferTax:过户税;tvBrokerageCommission:券商佣金;tvTotalCounterFee:总手续费
     //totalBuyOrSell:买还是卖;totalBS:收入与支出
@@ -29,15 +29,7 @@ class StockActivity : BaseNoPActivity() {
         super.initialize()
         checkTextChange(etUnit)
         checkTextChange(etNum)
-        etTotal!!.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-
-            }
-
+        etTotal?.addTextChangedListener(object : TextWatcherAdapter() {
             override fun afterTextChanged(s: Editable) {
                 if (s.isNotEmpty())
                     calculationCounter(java.lang.Double.parseDouble(s.toString()))
@@ -85,48 +77,44 @@ class StockActivity : BaseNoPActivity() {
             strTotal.toDouble()
         else unit!! * num!!
 
-        etTotal!!.setText(total.toString())//股票总价
+        etTotal?.setText(total.toString())//股票总价
         calculationCounter(total)
     }
 
     private fun calculationCounter(total: Double) {
         var stampDuty = 0.0//印花税,只在卖出的时候有
         if (buyOrSell == "2") stampDuty = round(total * 0.001)
-        tvStampDuty!!.text = stampDuty.toString() + "元"//印花税
+        tvStampDuty?.text = stampDuty.toString() + "元"//印花税
 
         //过户税
         val realEstateTransferTax = round(total * 0.00002)
-        tvRealEstateTransferTax!!.text = realEstateTransferTax.toString() + "元"
+        tvRealEstateTransferTax?.text = realEstateTransferTax.toString() + "元"
 
         //券商佣金
         var brokerageCommission = round(total * 0.00025)
         if (total != 0.0 && brokerageCommission < 5) brokerageCommission = 5.0
-        tvBrokerageCommission!!.text = brokerageCommission.toString() + "元"
+        tvBrokerageCommission?.text = brokerageCommission.toString() + "元"
 
         //总手续费
         val totalMoney = stampDuty + realEstateTransferTax + brokerageCommission
-        tvTotalCounterFee!!.text = round(totalMoney).toString() + "元"
+        tvTotalCounterFee?.text = round(totalMoney).toString() + "元"
 
         if (buyOrSell == "2") {//卖
-            totalBuyOrSell!!.text = "实际收入:"
-            totalBS!!.text = (total - totalMoney).toString() + "元"//实际的收入
+            totalBuyOrSell?.text = "实际收入:"
+            totalBS?.text = (total - totalMoney).toString() + "元"//实际的收入
         } else {//买
-            totalBuyOrSell!!.text = "实际支出:"
-            totalBS!!.text = (total + totalMoney).toString() + "元"//实际支出
+            totalBuyOrSell?.text = "实际支出:"
+            totalBS?.text = (total + totalMoney).toString() + "元"//实际支出
         }
-
-
     }
 
-    private fun round(num: Double): Double {
-        return if (num + 0.005 >= getDecimalFormat(num) + 0.01)
-            getDecimalFormat(num) + 0.01
-        else
-            getDecimalFormat(num)
-    }
+    private fun round(num: Double): Double =
+            if (num + 0.005 >= getDecimalFormat(num) + 0.01) getDecimalFormat(num) + 0.01
+            else getDecimalFormat(num)
+
 
     private fun getDecimalFormat(num: Double): Double {
         val df = DecimalFormat("######0.00")
-        return java.lang.Double.parseDouble(df.format(num))
+        return df.format(num).toDouble()
     }
 }

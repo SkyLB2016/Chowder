@@ -12,9 +12,7 @@ import kotlinx.android.synthetic.main.include_recycler.*
  * Created by SKY on 2015/11/28 14:52.
  */
 class RecycleFragment : BaseFragment<SolarP>() {
-    override fun getLayoutResId(): Int
-        = R.layout.include_recycler
-
+    override fun getLayoutResId(): Int = R.layout.include_recycler
     override fun creatPresenter() =SolarP(activity)
 
     override fun initialize() {

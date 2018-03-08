@@ -1,4 +1,4 @@
-package com.sky.chowder.ui.activity
+package com.sky.chowder.ui.activity.pend
 
 import android.content.ComponentName
 import android.content.Context

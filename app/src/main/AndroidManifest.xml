@@ -106,7 +106,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.CanvasActivity"
+            android:name=".ui.activity.pend.CanvasActivity"
             android:description="@string/act_canvas_d"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_canvas"
@@ -126,7 +126,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.CircleProgressActivity"
+            android:name=".ui.activity.pend.CircleProgressActivity"
             android:description="@string/act_circle_d"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_circle"
@@ -166,7 +166,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.PullDownActivity"
+            android:name=".ui.activity.pend.PullDownActivity"
             android:description="@string/act_13"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_13"
@@ -177,9 +177,9 @@
         </activity>
         <activity
             android:name=".ui.activity.DetailActivity"
-            android:description="@string/act_14"
+            android:description="@string/act_coordinator"
             android:icon="@mipmap/ic_launcher"
-            android:label="@string/act_14"
+            android:label="@string/act_coordinator"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.sky.coustom" />
@@ -190,7 +190,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.DrawActivity"
+            android:name=".ui.activity.pend.DrawActivity"
             android:description="@string/act_15"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_15"
@@ -200,7 +200,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.FactoryActivity"
+            android:name=".ui.activity.pend.FactoryActivity"
             android:description="@string/act_16"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_16"
@@ -230,7 +230,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.VideoActivity"
+            android:name=".ui.activity.pend.VideoActivity"
             android:description="@string/act_19"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_19"
@@ -240,28 +240,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.PhotoActivity"
-            android:description="@string/act_photo_d"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/act_photo"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.sky.coustom" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".ui.activity.SelectActivity"
-            android:description="@string/act_time_d"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/act_time"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.sky.coustom" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.activity.TestActivity"
+            android:name=".ui.activity.pend.TestActivity"
             android:description="@string/act_22"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_22"
@@ -271,13 +250,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.BroadActivity"
-            android:description="@string/act_receive_d"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/act_receive"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.ServiceActivity"
+            android:name=".ui.activity.pend.ServiceActivity"
             android:description="@string/act_service_d"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_service"

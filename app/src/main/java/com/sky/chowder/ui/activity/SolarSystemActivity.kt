@@ -25,7 +25,7 @@ class SolarSystemActivity : BasePActivity<SolarP>(), Toolbar.OnMenuItemClickList
 
     internal var handler: Handler = object : Handler() {
         override fun handleMessage(msg: Message) {
-            if (msg.what == C.handler_0x002) layoutDraw?.stop()
+            if (msg.what == C.SOLAR) layoutDraw?.stop()
         }
     }
 
@@ -53,12 +53,12 @@ class SolarSystemActivity : BasePActivity<SolarP>(), Toolbar.OnMenuItemClickList
         solar?.setOnMenuState(object : SolarSystem.MenuState {
             override fun openMenu() {
                 layoutDraw?.start()
-                handler.sendEmptyMessageDelayed(C.handler_0x002, 600)
+                handler.sendEmptyMessageDelayed(C.SOLAR, 600)
             }
 
             override fun closeMenu() {
                 layoutDraw?.start()
-                handler.sendEmptyMessageDelayed(C.handler_0x002, 600)
+                handler.sendEmptyMessageDelayed(C.SOLAR, 600)
             }
         })
         solar?.setOnMenuItemClickListener { view, position ->

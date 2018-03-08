@@ -1,7 +1,6 @@
 package com.sky.chowder
 
 import com.sky.SkyApp
-import com.sky.chowder.utils.CrashHandler
 import com.sky.utils.LogUtils
 
 /**
@@ -14,6 +13,6 @@ class MyApplication : SkyApp() {
         LogUtils.isDebug = BuildConfig.DEBUG
         //bughd监测崩溃事件
         //        FIR.init(this);
-        CrashHandler.getIntance().init(getInstance())
+//        CrashHandler.getIntance().init(getInstance())
     }
 }

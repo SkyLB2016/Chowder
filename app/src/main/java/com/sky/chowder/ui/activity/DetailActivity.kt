@@ -11,7 +11,6 @@ import kotlinx.android.synthetic.main.activity_detail.*
  */
 class DetailActivity : BaseNoPActivity() {
     override fun getLayoutResId(): Int = R.layout.activity_detail
-
     override fun initialize() {
         toolbarv7.setNavigationIcon(R.mipmap.ic_back)
         setSupportActionBar(toolbarv7)

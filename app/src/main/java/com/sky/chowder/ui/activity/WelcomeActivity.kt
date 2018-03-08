@@ -37,12 +37,10 @@ class WelcomeActivity : AppCompatActivity() {
 //        val scale = Custom()
         scale.duration = TIME
 
-
         set.addAnimation(alpha)
         set.addAnimation(rotate)
         set.addAnimation(tran)
         set.addAnimation(scale)
-
 
         view.startAnimation(set)
         set.setAnimationListener(object : Animation.AnimationListener {
@@ -53,8 +51,7 @@ class WelcomeActivity : AppCompatActivity() {
 
             override fun onAnimationEnd(animation: Animation) {
                 Handler().postDelayed({
-                    // 判断程序与第几次运行，如果是第一次运行引导页面
-                    jumpAct()
+                    jumpAct()// 判断程序与第几次运行，如果是第一次运行引导页面
                 }, TIME)
             }
         })

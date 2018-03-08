@@ -10,6 +10,40 @@ import java.io.IOException;
 /**
  * Created by SKY on 2015/4/12.
  * 获取空间大小
+ * MemTotal:        2758932 kB
+ * MemFree:           74616 kB
+ * MemAvailable:     649880 kB
+ * Buffers:           30004 kB
+ * Cached:           733408 kB
+ * SwapCached:         8924 kB
+ * Active:           856568 kB
+ * Inactive:         866112 kB
+ * Active(anon):     553096 kB
+ * Inactive(anon):   562812 kB
+ * Active(file):     303472 kB
+ * Inactive(file):   303300 kB
+ * Unevictable:      144132 kB
+ * Mlocked:          144132 kB
+ * SwapTotal:       1048572 kB
+ * SwapFree:         677776 kB
+ * Dirty:                 4 kB
+ * Writeback:             0 kB
+ * AnonPages:       1098260 kB
+ * Mapped:           430520 kB
+ * Shmem:             12764 kB
+ * Slab:             210228 kB
+ * SReclaimable:      63388 kB
+ * SUnreclaim:       146840 kB
+ * KernelStack:       46896 kB
+ * PageTables:        48272 kB
+ * NFS_Unstable:          0 kB
+ * Bounce:                0 kB
+ * WritebackTmp:          0 kB
+ * CommitLimit:     2428036 kB
+ * Committed_AS:   89864440 kB
+ * VmallocTotal:   258998208 kB
+ * VmallocUsed:      246476 kB
+ * VmallocChunk:   258613732 kB
  */
 public class MemoryUtils {
     /**

@@ -1,4 +1,4 @@
-package com.sky.chowder.ui.activity
+package com.sky.chowder.ui.activity.pend
 
 import android.os.Bundle
 import android.os.Looper

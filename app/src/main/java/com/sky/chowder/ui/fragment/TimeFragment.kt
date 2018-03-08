@@ -80,6 +80,7 @@ class TimeFragment : DialogFragment() {
 
         setNpValue(npHour, 23, minHour, minHour)
         npHour.setFormatter { value -> String.format("%02d", value) }
+//        npHour.setFormatter(getFormatter())
         npHour.setOnValueChangedListener { _, oldVal, newVal ->
             cal.add(Calendar.HOUR_OF_DAY, newVal - oldVal)
             if ("${DateUtil.timeStampToDate(cal.timeInMillis, "dd")}-$newVal" == DateUtil.timeStampToDate(System.currentTimeMillis(), "dd-HH")) {
@@ -150,5 +151,24 @@ class TimeFragment : DialogFragment() {
 
     interface OnClickListener {
         fun onClick(time: String)
+    }
+
+    private fun getFormatter(): NumberPicker.Formatter? {
+        //获取全部私有属性
+        val pickerFields = NumberPicker::class.java.declaredFields
+        var formatter: NumberPicker.Formatter? = null
+        for (field in pickerFields) {
+            field.isAccessible = true
+            //遍历找到我们需要获取值的那个属性
+            if (field.name == "sTwoDigitFormatter") {
+                try { //获取属性值
+                    formatter = field.get(R.id.npHour) as NumberPicker.Formatter?
+                } catch (e: IllegalAccessException) {
+                    e.printStackTrace()
+                }
+                break
+            }
+        }
+        return formatter
     }
 }

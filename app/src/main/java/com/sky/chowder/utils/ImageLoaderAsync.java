@@ -117,7 +117,7 @@ public class ImageLoaderAsync {
                 return null;
             url = params[0];
 //            publishProgress();
-            Bitmap bitmap = BitmapUtils.getBitmapFromUrl(params[0]);
+            Bitmap bitmap = BitmapUtils.getBitmapUP(params[0]);
             addBitmapToCache(url, bitmap);
             BitmapUtils.saveBitmapToFile(bitmap, MyApplication.getInstance().getPicCacheDir() + url.substring(url.lastIndexOf("/")));
             return bitmap;

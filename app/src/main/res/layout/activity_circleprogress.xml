@@ -42,55 +42,6 @@
                     android:text="金额(元)\n20,000"
                     android:textSize="@dimen/text_Xlarge" />
             </FrameLayout>
-
-            <TextView
-                android:id="@+id/tv1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="20dp"
-                android:gravity="center"
-                android:text="金额(元)20,000"
-                android:textSize="@dimen/text_large" />
-
-            <TextView
-                android:id="@+id/tv2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="20dp"
-                android:gravity="center"
-                android:text="金额(元)20,000"
-                android:textSize="@dimen/text_large" />
-
-            <TextView
-                android:id="@+id/tv3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="20dp"
-                android:gravity="center"
-                android:text="金额(元)20,000"
-                android:textSize="@dimen/text_large" />
-
-            <TextView
-                android:id="@+id/tv4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="200dp"
-                android:gravity="center"
-                android:text="金额(元)20,000"
-                android:textSize="@dimen/text_large" />
-
-            <TextView
-                android:id="@+id/tv5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="200dp"
-                android:gravity="center"
-                android:textSize="@dimen/text_large" />
         </LinearLayout>
     </ScrollView>
 </android.support.design.widget.CoordinatorLayout>

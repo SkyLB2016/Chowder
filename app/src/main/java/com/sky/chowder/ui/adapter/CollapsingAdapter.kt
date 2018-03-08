@@ -15,7 +15,7 @@ class CollapsingAdapter(layoutId: Int) : RecyclerAdapter<Void>(layoutId) {
     override fun onAchieveHolder(holder: RecyclerHolder, position: Int) {
         val view = holder.itemView
         view.setOnClickListener {
-            val animator = ObjectAnimator.ofFloat(view, "translationZ", 20f, 0f)
+            val animator = ObjectAnimator.ofFloat(view, "translationZ", 20f, 80f)
             animator.addListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
                     context.startActivity(Intent().setAction("com.sky.action.detail"))

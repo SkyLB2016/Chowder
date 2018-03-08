@@ -39,18 +39,17 @@ class SlidingMenuActivity : BaseNoPActivity() {
         var a = 1
 
         while (!nums.isEmpty()) {
+            val temp = nums.first
+            nums.removeFirst()
             if (a != 13) {
-                val temp = nums.first
-                nums.removeFirst()
                 nums.addLast(temp)
                 a++
             } else {
                 val tv = LayoutInflater.from(this).inflate(R.layout.tv, flowlayout, false) as TextView
-                tv.text = nums.first + ""
+                tv.text = "$temp"
                 flowlayout.addView(tv)
                 ObjectAnimator.ofFloat(tv, "rotation", 0f, 360f).setDuration(3000).start()
                 setOnclicK(tv)
-                nums.removeFirst()
                 a = 1
             }
         }

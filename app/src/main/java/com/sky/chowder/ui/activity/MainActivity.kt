@@ -16,7 +16,6 @@ import com.sky.chowder.model.ActivityModel
 import com.sky.chowder.ui.adapter.MainAdapter
 import com.sky.chowder.ui.presenter.MainP
 import com.sky.utils.AppUtils
-import com.sky.utils.FileUtils
 import com.sky.utils.JumpAct
 import kotlinx.android.synthetic.main.content_main.*
 import java.io.File
@@ -64,12 +63,10 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 
     @OnClick(R.id.fab1)
     fun fab1OnClick() {
-        FileUtils.deleteFile(SkyApp.getInstance().fileCacheDir)
     }
 
     @OnClick(R.id.fab)
     fun fabOnClick() {
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -94,12 +91,11 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
     }
 
     private var lastBack: Long = 0
-
     override fun onBackPressed() {
-        val nowCurrent = System.currentTimeMillis()
-        if (nowCurrent - lastBack > 3000) {
-            showToast(resources.getString(R.string.toast_exit))
-            lastBack = nowCurrent
+        val now = System.currentTimeMillis()
+        if (now - lastBack > 3000) {
+            showToast(getString(R.string.toast_exit))
+            lastBack = now
         } else super.onBackPressed()
     }
 

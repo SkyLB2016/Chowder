@@ -1,4 +1,4 @@
-package com.sky.chowder.ui.activity
+package com.sky.chowder.ui.activity.pend
 
 import com.sky.base.BaseNoPActivity
 import com.sky.chowder.R
