@@ -19,6 +19,5 @@ class DetailActivity : BaseNoPActivity() {
         collapsing.title = "我的课程"
     }
 
-    fun checkin(view: View) =
-            Snackbar.make(view, "checkin success!", Snackbar.LENGTH_SHORT).show()
+    fun checkin(view: View) = Snackbar.make(view, "checkin success!", Snackbar.LENGTH_SHORT).show()
 }

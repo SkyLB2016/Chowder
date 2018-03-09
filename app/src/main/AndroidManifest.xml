@@ -106,7 +106,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.pend.CanvasActivity"
+            android:name=".ui.activity.CanvasActivity"
             android:description="@string/act_canvas_d"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_canvas"
@@ -120,16 +120,6 @@
             android:description="@string/act_slid_d"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_slid"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.sky.coustom" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.activity.pend.CircleProgressActivity"
-            android:description="@string/act_circle_d"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/act_circle"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.sky.coustom" />
@@ -166,10 +156,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.pend.PullDownActivity"
-            android:description="@string/act_13"
+            android:name=".ui.activity.PullDownActivity"
+            android:description="@string/act_pull"
             android:icon="@mipmap/ic_launcher"
-            android:label="@string/act_13"
+            android:label="@string/act_pull"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.sky.coustom" />
@@ -187,26 +177,6 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <action android:name="com.sky.action.detail" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.activity.pend.DrawActivity"
-            android:description="@string/act_15"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/act_15"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.sky.coustom" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.activity.pend.FactoryActivity"
-            android:description="@string/act_16"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/act_16"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.sky.coustom" />
             </intent-filter>
         </activity>
         <activity
@@ -230,17 +200,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.pend.VideoActivity"
-            android:description="@string/act_19"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/act_19"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.sky.coustom" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.activity.pend.TestActivity"
+            android:name=".ui.activity.TestActivity"
             android:description="@string/act_22"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_22"
@@ -249,13 +209,6 @@
                 <action android:name="com.sky.coustom" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.activity.pend.ServiceActivity"
-            android:description="@string/act_service_d"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/act_service"
-            android:screenOrientation="portrait" />
-
         <service android:name=".ui.service.IntentTest" />
     </application>
 

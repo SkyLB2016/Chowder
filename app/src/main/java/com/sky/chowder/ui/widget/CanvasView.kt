@@ -3,7 +3,6 @@ package com.sky.chowder.ui.widget
 import android.content.Context
 import android.graphics.*
 import android.view.View
-import com.sky.chowder.R
 import java.util.*
 
 /**
@@ -13,118 +12,72 @@ class CanvasView(context: Context) : View(context) {
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        /*
-             * 方法 说明 drawRect 绘制矩形 drawCircle 绘制圆形 drawOval 绘制椭圆 drawPath 绘制任意多边形
-             * drawLine 绘制直线 drawPoin 绘制点
-             */
-        // 创建画笔
-        val p = Paint()
-        p.color = Color.RED// 设置红色
-
-        canvas.drawText("画圆：", 10f, 20f, p)// 画文本
-        canvas.drawCircle(60f, 20f, 10f, p)// 小圆
-        p.isAntiAlias = true// 设置画笔的锯齿效果。 true是去除，大家一看效果就明白了
-        canvas.drawCircle(120f, 20f, 20f, p)// 大圆
-
-        canvas.drawText("画线及弧线：", 10f, 60f, p)
-        p.color = Color.GREEN// 设置绿色
-        canvas.drawLine(60f, 40f, 100f, 40f, p)// 画线
-        canvas.drawLine(110f, 40f, 190f, 80f, p)// 斜线
-        //画笑脸弧线
-        p.style = Paint.Style.STROKE//设置空心
-        val oval1 = RectF(150f, 20f, 180f, 40f)
-        canvas.drawArc(oval1, 180f, 180f, false, p)//小弧形
-        oval1.set(190f, 20f, 220f, 40f)
-        canvas.drawArc(oval1, 180f, 180f, false, p)//小弧形
-        oval1.set(160f, 30f, 210f, 60f)
-        canvas.drawArc(oval1, 0f, 180f, false, p)//小弧形
-
-        canvas.drawText("画矩形：", 10f, 80f, p)
-        p.color = Color.GRAY// 设置灰色
-        p.style = Paint.Style.FILL//设置填满
-        canvas.drawRect(60f, 60f, 80f, 80f, p)// 正方形
-        canvas.drawRect(60f, 90f, 160f, 100f, p)// 长方形
-
-        canvas.drawText("画扇形和椭圆:", 10f, 120f, p)
-        /* 设置渐变色 这个正方形的颜色是改变的 */
+        val paint = Paint()
         val mShader = LinearGradient(0f, 0f, 100f, 100f,
-                intArrayOf(Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.LTGRAY), null, Shader.TileMode.REPEAT) // 一个材质,打造出一个线性梯度沿著一条线。
-        p.shader = mShader
-        // p.setColor(Color.BLUE);
-        val oval2 = RectF(60f, 100f, 200f, 240f)// 设置个新的长方形，扫描测量
-        canvas.drawArc(oval2, 200f, 130f, true, p)
-        // 画弧，第一个参数是RectF：该类是第二个参数是角度的开始，第三个参数是多少度，第四个参数是真的时候画扇形，是假的时候画弧线
-        //画椭圆，把oval改一下
-        oval2.set(210f, 100f, 250f, 130f)
-        canvas.drawOval(oval2, p)
+                intArrayOf(Color.RED, Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.LTGRAY), null, Shader.TileMode.REPEAT) // 一个材质,打造出一个线性梯度沿著一条线。
+        paint.shader = mShader
+        val rect = RectF(0f, 0f, 300f, 400f)
+        canvas.drawOval(rect, paint)
 
-        canvas.drawText("画三角形：", 10f, 200f, p)
-        // 绘制这个三角形,你可以绘制任意多边形
-        val path = Path()
-        path.moveTo(80f, 200f)// 此点为多边形的起点
-        path.lineTo(120f, 250f)
-        path.lineTo(80f, 250f)
-        path.close() // 使这些点构成封闭的多边形
-        canvas.drawPath(path, p)
-
-        // 你可以绘制很多任意多边形，比如下面画六连形
-        p.reset()//重置
-        p.color = Color.LTGRAY
-        p.style = Paint.Style.STROKE//设置空心
-        val path1 = Path()
-        path1.moveTo(180f, 200f)
-        path1.lineTo(200f, 200f)
-        path1.lineTo(210f, 210f)
-        path1.lineTo(200f, 220f)
-        path1.lineTo(180f, 220f)
-        path1.lineTo(170f, 210f)
-        path1.close()//封闭
-        canvas.drawPath(path1, p)
-        /*
-             * Path类封装复合(多轮廓几何图形的路径
-             * 由直线段*、二次曲线,和三次方曲线，也可画以油画。drawPath(路径、油漆),要么已填充的或抚摸
-             * (基于油漆的风格),或者可以用于剪断或画画的文本在路径。
-             */
-
-        //画圆角矩形
-        p.style = Paint.Style.FILL//充满
-        p.color = Color.LTGRAY
-        p.isAntiAlias = true// 设置画笔的锯齿效果
-        canvas.drawText("画圆角矩形:", 10f, 260f, p)
-        val oval3 = RectF(80f, 260f, 200f, 300f)// 设置个新的长方形
-        canvas.drawRoundRect(oval3, 20f, 15f, p)//第二个参数是x半径，第三个参数是y半径
-
-        //        //画贝塞尔曲线
-        //        canvas.drawText("画贝塞尔曲线:", 10, 310, p);
-        //        p.reset();
-        //        p.setStyle(Paint.Style.STROKE);
-        //        p.setColor(Color.GREEN);
-        //        p.setStrokeWidth(10);
-        //        Path path2 = new Path();
-        //        path2.moveTo(100, 320);//设置Path的起点
-        //        path2.quadTo(150, 310, 170, 400); //设置贝塞尔曲线的控制点坐标和终点坐标
-        //        canvas.drawPath(path2, p);//画出贝塞尔曲线
-        //画贝塞尔曲线
-        p.strokeWidth = 100f
-        p.color = Color.RED
-        p.textSize = 30f
-
-        canvas.drawText("画贝塞尔曲线:", 10f, 310f, p)
-        p.reset()
-        p.style = Paint.Style.STROKE
-        p.color = Color.GREEN
-        p.strokeWidth = 10f
+        paint.reset()
+        paint.style = Paint.Style.STROKE
+        paint.strokeWidth = 20f
+        paint.color = Color.GREEN
 
         val random = Random()
-        val list = (0..30).mapTo(ArrayList()) { Point(100 + it * 30, random.nextInt(500) + 500) }
+        val list = (0..20).mapTo(ArrayList()) { Point(400 + it * 30, random.nextInt(400) + 10) }
+        val bezierPath = calculateCubicPath(list)//获取三次方贝赛尔曲线
+        canvas.drawPath(bezierPath, paint)//画出贝塞尔曲线
+        //待计算二次贝塞尔曲线控制点
 
-        val path2 = Path()
-        path2.moveTo(list[0].x.toFloat(), list[0].y.toFloat())//设置Path的起点
-        val point = Paint()
-        point.color = Color.RED
-        point.style = Paint.Style.FILL
-        point.strokeWidth = 10f
-        point.textSize = 40f
+        val path3 = Path()
+        path3.moveTo(list[0].x * 1f, list[0].y * 1f)//设置Path的起点
+        for (i in 1 until list.size) {
+            path3.lineTo(list[i].x * 1f, list[i].y * 1f)
+        }
+        paint.strokeWidth = 5f
+        paint.color = Color.RED
+        paint.pathEffect = CornerPathEffect(20f)//圆角
+//        paint.pathEffect = DiscretePathEffect(2f, 3f)//毛茸茸的线
+//        paint.pathEffect = DashPathEffect(floatArrayOf(20f,10f,5f,10f),0f)//虚线
+//        val pp = Path()
+//        pp.addRect(0f, 0f, 8f, 8f, Path.Direction.CCW)
+//        paint.pathEffect = PathDashPathEffect(pp, 12f, 0f, PathDashPathEffect.Style.ROTATE)//自定义的虚线
+//        paint.pathEffect = ComposePathEffect(CornerPathEffect(20f),DiscretePathEffect(2f,3f))//组合
+//        paint.pathEffect = SumPathEffect(CornerPathEffect(20f),DiscretePathEffect(2f,3f))//组合
+        canvas.drawPath(path3, paint)
+
+        paint.style = Paint.Style.FILL
+        paint.textSize = 40f
+        for (i in 0 until list.size) {
+            canvas.drawCircle(list[i].x * 1f, list[i].y * 1f, 10f, paint)// 小圆
+            canvas.drawText("" + i, list[i].x * 1f, list[i].y * 1f, paint)
+        }
+    }
+
+    /**
+     * 三次贝赛尔曲线计算
+     */
+    private fun calculateCubicPath(list: ArrayList<Point>): Path {
+        val bezierPath = Path()
+        bezierPath.moveTo(list[0].x * 1f, list[0].y * 1f)//设置Path的起点
+        val control = calculateCubicContro(list)
+        for (i in 0 until list.size - 1) {
+            when (i) {
+                0 -> bezierPath.quadTo(control[i].x * 1f, control[i].y * 1f, list[i + 1].x * 1f, list[i + 1].y * 1f)
+                list.size - 2 -> bezierPath.quadTo(control[i * 2 - 1].x * 1f, control[i * 2 - 1].y * 1f, list[i + 1].x * 1f, list[i + 1].y * 1f)
+                else -> bezierPath.cubicTo(control[i * 2 - 1].x * 1f, control[i * 2 - 1].y * 1f,
+                        control[i * 2].x * 1f, control[i * 2].y * 1f,
+                        list[i + 1].x * 1f, list[i + 1].y * 1f)
+            }
+        }
+        return bezierPath
+    }
+
+    /**
+     * 三次贝赛尔曲线计算方法
+     */
+    private fun calculateCubicContro(list: ArrayList<Point>): ArrayList<Point> {
         val control = ArrayList<Point>()
         for (i in 0 until list.size - 2) {
             val centerX = (list[i].x + list[i + 1].x) / 2
@@ -134,7 +87,6 @@ class CanvasView(context: Context) : View(context) {
 
             val centerX2 = (centerX + centerX1) / 2
             val centerY2 = (centerY + centerY1) / 2
-
 
             val tranX = centerX2 - list[i + 1].x
             val tranY = centerY2 - list[i + 1].y
@@ -147,50 +99,6 @@ class CanvasView(context: Context) : View(context) {
             control.add(Point(conX1, conY1))
             control.add(Point(conX2, conY2))
         }
-        for (i in 0 until list.size - 1) {
-            when (i) {
-                0 -> path2.quadTo(control[i].x.toFloat(), control[i].y.toFloat(), list[i + 1].x.toFloat(), list[i + 1].y.toFloat())
-                list.size - 2 -> {
-                    path2.quadTo(control[i * 2 - 1].x.toFloat(), control[i * 2 - 1].y.toFloat(), list[i + 1].x.toFloat(), list[i + 1].y.toFloat())
-                    canvas.drawCircle(list[i + 1].x.toFloat(), list[i + 1].y.toFloat(), 10f, point)// 小圆
-                    canvas.drawText("" + (i + 1), list[i + 1].x.toFloat(), list[i + 1].y.toFloat(), point)
-                }
-                else -> path2.cubicTo(control[i * 2 - 1].x.toFloat(), control[i * 2 - 1].y.toFloat(),
-                        control[i * 2].x.toFloat(), control[i * 2].y.toFloat(),
-                        list[i + 1].x.toFloat(), list[i + 1].y.toFloat())
-            }
-
-            canvas.drawCircle(list[i].x.toFloat(), list[i].y.toFloat(), 10f, point)// 小圆
-            canvas.drawText("" + i, list[i].x.toFloat(), list[i].y.toFloat(), point)
-        }
-        canvas.drawPath(path2, p)//画出贝塞尔曲线
-
-        val ee = CornerPathEffect(20f)
-        val path3 = Path()
-        path3.moveTo(list[0].x.toFloat(), list[0].y.toFloat()+700)//设置Path的起点
-        for (i in 1 until list.size) {
-            path3.lineTo(list[i].x.toFloat(), list[i].y.toFloat()+700)
-        }
-        val paint= Paint()
-        paint.strokeWidth = 10f
-        paint.style = Paint.Style.STROKE
-        paint.color = Color.RED
-        paint.pathEffect = ee
-        canvas.drawPath(path3, paint)
-
-
-        p.style = Paint.Style.FILL
-        canvas.drawCircle(list[0].x.toFloat(), list[0].y.toFloat(), 22f, p)// 小圆
-
-
-        //画点
-        p.style = Paint.Style.FILL
-        canvas.drawText("画点：", 10f, 390f, p)
-        canvas.drawPoint(60f, 390f, p)//画一个点
-        canvas.drawPoints(floatArrayOf(60f, 400f, 65f, 400f, 70f, 400f), p)//画多个点
-
-        //画图片，就是贴图
-        val bitmap = BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher)
-        canvas.drawBitmap(bitmap, 250f, 360f, p)
+        return control
     }
 }

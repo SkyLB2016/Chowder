@@ -2,8 +2,6 @@ package com.sky.chowder.ui.activity
 
 import android.Manifest
 import android.content.ActivityNotFoundException
-import android.os.Bundle
-import android.os.Debug
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
@@ -25,19 +23,17 @@ import java.io.File
  * 主页
  */
 class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IMainView {
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        Debug.startMethodTracing()
+//    }
+//
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        Debug.stopMethodTracing()
+//    }
 
     private lateinit var adapter: MainAdapter
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Debug.startMethodTracing()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Debug.stopMethodTracing()
-    }
-
     public override fun getLayoutResId(): Int = R.layout.activity_main
     override fun creatPresenter() = MainP(this)
     public override fun initialize() {

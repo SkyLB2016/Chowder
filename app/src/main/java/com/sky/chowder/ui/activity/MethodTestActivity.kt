@@ -20,6 +20,10 @@ import com.sky.base.BaseNoPActivity
 import com.sky.base.BasePActivity
 import com.sky.chowder.R
 import com.sky.chowder.model.ActivityModel
+import com.sky.chowder.other.factory.abstractfactory.HNFactory
+import com.sky.chowder.other.factory.abstractfactory.MCFctory
+import com.sky.chowder.other.factory.factory.HairFactory
+import com.sky.chowder.other.factory.factory.hair.LeftHair
 import com.sky.chowder.ui.fragment.AddressFragment
 import com.sky.chowder.ui.fragment.TimeFragment
 import com.sky.model.ApiResponse
@@ -46,6 +50,7 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
                 , "Intent测试"
                 , "时间选择"
                 , "地址选择"
+                , "工厂模式"
         )
         for (i in method) {
             val tvText = LayoutInflater.from(this).inflate(R.layout.tv, flow, false) as TextView
@@ -77,10 +82,33 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
             "Intent测试" -> intentTest()
             "时间选择" -> selectTime()
             "地址选择" -> selectAddress()
+            "工厂模式" -> factoryModel()
             "" -> ""
         }
     }
+    /**
+     * 工厂模式应用，待优化
+     */
+    private fun factoryModel() {
+        //工厂模式
+        val leftHair = LeftHair()
+        leftHair.draw()
+        val factory = HairFactory()
+        val right = factory.getHair("right")
+        right?.draw()
+        val left = factory.getHairByClass("com.sky.chowder.other.factory.factory.hair.LeftHair")
+        left?.draw()
+        val hair = factory.getHairByClassKey("in")
+        hair?.draw()
 
+        //抽象工厂模式
+        val facoty = MCFctory()
+        val girl = facoty.girl
+        girl.drawWomen()
+        val boyfacoty = HNFactory()
+        val boy = boyfacoty.boy
+        boy.drawMan()
+    }
     private fun getAppInfo() = "当前版本:${AppUtils.getVersionCode(this)};\n" +
             "当前版本号:${AppUtils.getVersionName(this)};\n" +
             "当前通道号:${AppUtils.getChannel(this)}"

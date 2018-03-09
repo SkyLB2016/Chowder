@@ -23,35 +23,21 @@
     <string name="act_tab">07.滑动窗口</string>
     <string name="act_tab_b">tab结合viewpager，包含：CardView,MeshView,Shader，XferModeF，电话簿</string>
 
-    <string name="act_time">08.时间地址选择器</string>
-    <string name="act_time_d">时间地址选择器，dialogfragment，等待继续优化</string>
-
-    <string name="act_canvas">09.Canvas总结应用</string>
+    <string name="act_canvas">08.Canvas总结应用</string>
     <string name="act_canvas_d">○，贝赛尔曲线</string>
 
-    <string name="act_circle">10.环形进度条</string>
-    <string name="act_circle_d">自定义的环形进度条，内有字体颜色大小等的局部修改，考虑与canvas结合在一起</string>
-
-    <string name="act_svg">11.SVG</string>
+    <string name="act_svg">09.SVG</string>
     <string name="act_svg_d">SVG演示，加载html下的svg</string>
 
-    <string name="act_stock">12.股票计算</string>
-    <string name="act_stock_d">算着玩的</string>
-
-    <string name="act_coordinator">13.CoordinatorLayout与ToolBar的组合应用</string>
+    <string name="act_coordinator">10.CoordinatorLayout与ToolBar的组合应用</string>
     <string name="act_coordinator_d">CoordinatorLayout与ToolBar的组合应用,待进一步处理</string>
 
+    <string name="act_stock">11.股票计算</string>
+    <string name="act_stock_d">算着玩的</string>
+
+    <string name="act_pull">12.下拉动画</string>
+
     <string name="act_22">test</string>
-    <string name="act_15">双缓冲实验</string>
-    <string name="act_13">下拉动画</string>
-    <string name="act_receive">receive</string>
-    <string name="act_receive_d">待处理</string>
-
-    <string name="act_service">service</string>
-    <string name="act_service_d">待处理</string>
-
-    <string name="act_16">工厂模式实验</string>
-    <string name="act_19">VideoActivity</string>
 
     <string name="test"><i><b><u>service</u></b></i></string>
 

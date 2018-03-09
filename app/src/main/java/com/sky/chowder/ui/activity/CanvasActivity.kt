@@ -1,25 +1,23 @@
-package com.sky.chowder.ui.activity.pend
+package com.sky.chowder.ui.activity
 
+import android.app.Activity
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.widget.MediaController
 import android.widget.VideoView
-
-import com.sky.chowder.R
-
+import com.sky.chowder.ui.widget.CanvasView
 import java.io.File
 
 /**
- * Created by SKY on 2016/8/28.
+ * Created by SKY on 2017/3/10.
  */
-class VideoActivity : AppCompatActivity() {
-    private var video: VideoView? = null
-
-
+class CanvasActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_video)
-        video = findViewById<VideoView>(R.id.video)
+        setContentView(CanvasView(this))
+    }
+
+    private fun setVideo() {
+        val video = findViewById<VideoView>(0)
         val mediaController = MediaController(this)
         val file = File("/storage/emulated/0/QQBrowser/视频/隐世小龙女，她用颜值与功夫惊艳了时光.mp4")
         if (file.exists()) {

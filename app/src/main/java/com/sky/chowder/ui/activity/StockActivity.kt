@@ -10,7 +10,6 @@ import com.sky.base.BaseNoPActivity
 import com.sky.chowder.R
 import com.sky.utils.TextUtil
 import kotlinx.android.synthetic.main.activity_stock.*
-import java.text.DecimalFormat
 
 /**
  * Created by SKY on 2016/4/13.
@@ -22,25 +21,19 @@ class StockActivity : BaseNoPActivity() {
     //totalBuyOrSell:买还是卖;totalBS:收入与支出
 
     private var buyOrSell = "1"//1是买,2是卖
-
     private val type = "1"//1是单价与数量算总价,2是直接填写的总价
 
+    override fun getLayoutResId() = R.layout.activity_stock
     override fun initialize() {
         super.initialize()
         checkTextChange(etUnit)
         checkTextChange(etNum)
         etTotal?.addTextChangedListener(object : TextWatcherAdapter() {
             override fun afterTextChanged(s: Editable) {
-                if (s.isNotEmpty())
-                    calculationCounter(java.lang.Double.parseDouble(s.toString()))
-                else
-                    calculationCounter(0.0)
+                if (s.isNotEmpty()) calculationCounter(s.toString().toDouble())
+                else calculationCounter(0.0)
             }
         })
-    }
-
-    override fun getLayoutResId(): Int {
-        return R.layout.activity_stock
     }
 
     private fun checkTextChange(one: EditText?) {
@@ -113,8 +106,5 @@ class StockActivity : BaseNoPActivity() {
             else getDecimalFormat(num)
 
 
-    private fun getDecimalFormat(num: Double): Double {
-        val df = DecimalFormat("######0.00")
-        return df.format(num).toDouble()
-    }
+    private fun getDecimalFormat(num: Double) = TextUtil.formatDou().format(num).toDouble()
 }
