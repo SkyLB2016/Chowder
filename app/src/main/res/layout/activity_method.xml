@@ -20,10 +20,22 @@
         android:layout_weight="1"
         android:background="@drawable/test">
 
-        <TextView
-            android:id="@+id/tvDisplay"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvDisplay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/anim_solar"
+                android:visibility="gone" />
+        </FrameLayout>
     </ScrollView>
 
 </LinearLayout>

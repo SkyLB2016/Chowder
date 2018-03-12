@@ -1,9 +1,13 @@
 package com.sky.chowder.ui.activity
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ValueAnimator
 import android.annotation.TargetApi
 import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Color
+import android.graphics.drawable.Animatable
 import android.os.BatteryManager
 import android.os.Build
 import android.provider.ContactsContract
@@ -51,6 +55,7 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
                 , "时间选择"
                 , "地址选择"
                 , "工厂模式"
+                , "SVG与Value"
         )
         for (i in method) {
             val tvText = LayoutInflater.from(this).inflate(R.layout.tv, flow, false) as TextView
@@ -78,14 +83,36 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
             "" -> ""
             else -> ""
         }
+        image.visibility = View.GONE
         when (v?.tag) {
             "Intent测试" -> intentTest()
             "时间选择" -> selectTime()
             "地址选择" -> selectAddress()
             "工厂模式" -> factoryModel()
+            "SVG与Value" -> setSvg()
             "" -> ""
         }
     }
+
+    private fun setSvg() {
+        image.visibility = View.VISIBLE
+        val value = ValueAnimator.ofFloat(0f, flow.height.toFloat())
+//        value.setTarget(image)
+        value.duration = 2000
+        value.addUpdateListener { animation ->
+            val lp = image.layoutParams
+            lp.height = animation!!.animatedValue.toString().toFloat().toInt()
+            image.layoutParams = lp
+        }
+        value.start()
+        value.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator?) {
+                super.onAnimationEnd(animation)
+                (image.drawable as Animatable).start()
+            }
+        })
+    }
+
     /**
      * 工厂模式应用，待优化
      */
@@ -109,6 +136,7 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
         val boy = boyfacoty.boy
         boy.drawMan()
     }
+
     private fun getAppInfo() = "当前版本:${AppUtils.getVersionCode(this)};\n" +
             "当前版本号:${AppUtils.getVersionName(this)};\n" +
             "当前通道号:${AppUtils.getChannel(this)}"

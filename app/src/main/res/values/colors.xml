@@ -35,6 +35,7 @@
 
     <color name="alpha_00">#00000000</color>
     <color name="alpha_99">#99000000</color>
+    <color name="alpha_66">#ddc29f07</color>
     <color name="red">#f12b2a</color>
     <color name="light_orange">#ffefab</color>
     <color name="dark_orange">#fff6d0</color>

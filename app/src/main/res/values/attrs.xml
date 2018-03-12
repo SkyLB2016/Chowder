@@ -23,23 +23,4 @@
         <attr name="borderColor" format="color"/>
     </declare-styleable>
 
-    <declare-styleable name="CircleProgress">
-        <!--圆的半径-->
-        <attr name="radius"/>
-        <!--总进度条颜色-->
-        <attr name="totalColor" format="color"/>
-        <!--进度条颜色-->
-        <attr name="proColor" format="color"/>
-        <!--进度条宽度-->
-        <attr name="proWidth" format="dimension"/>
-        <!--字体内容-->
-        <attr name="text" format="string"/>
-        <!--字体颜色-->
-        <attr name="textcolor" format="color"/>
-        <!--字体颜色-->
-        <attr name="textsize" format="dimension"/>
-        <!--字体背景-->
-        <attr name="textBackground" format="color|reference"/>
-    </declare-styleable>
-
 </resources>
