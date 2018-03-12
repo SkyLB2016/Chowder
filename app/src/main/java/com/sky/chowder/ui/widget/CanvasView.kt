@@ -62,7 +62,7 @@ class CanvasView @JvmOverloads constructor(
 
         animate().alpha(1f)
                 .rotation(360f)
-                .setDuration(1000)
+                .setDuration(2000)
                 .withStartAction { }
                 .withEndAction { }
                 .start()
@@ -88,18 +88,21 @@ class CanvasView @JvmOverloads constructor(
         canvas.drawCircle(600f, 600f, 200f, paint)
         paint.style = Paint.Style.FILL
         for (i in 0..11) {
-            if (i === 0 || i === 3 || i === 6 || i === 9) {
-                paint.strokeWidth = 8f
-                paint.textSize = 30f
-                canvas.drawLine(600f, 410f, 600f, 440f, paint)
-                val w = paint.measureText(i.toString())
-                canvas.drawText(i.toString(), 600f - w / 2, 440f + paint.descent() - paint.ascent(), paint)
-            } else {
-                paint.strokeWidth = 6f
-                paint.textSize = 20f
-                canvas.drawLine(600f, 410f, 600f, 420f, paint)
-                val w = paint.measureText(i.toString())
-                canvas.drawText(i.toString(), 600f - w / 2, 420f + paint.descent() - paint.ascent(), paint)
+            when (i) {
+                0, 3, 6, 9 -> {
+                    paint.strokeWidth = 8f
+                    paint.textSize = 30f
+                    canvas.drawLine(600f, 410f, 600f, 440f, paint)
+                    val w = paint.measureText("$i")
+                    canvas.drawText("$i", 600f - w / 2, 440f + paint.descent() - paint.ascent(), paint)
+                }
+                else -> {
+                    paint.strokeWidth = 6f
+                    paint.textSize = 20f
+                    canvas.drawLine(600f, 410f, 600f, 420f, paint)
+                    val w = paint.measureText("$i")
+                    canvas.drawText("$i", 600f - w / 2, 420f + paint.descent() - paint.ascent(), paint)
+                }
             }
             canvas.rotate(30f, 600f, 600f)
         }
