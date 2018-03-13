@@ -125,9 +125,7 @@ class FlowLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
     /**
      * 与当前ViewGroup对应的LayoutParams
      */
-    override fun generateLayoutParams(attrs: AttributeSet): FrameLayout.LayoutParams {
-        return FrameLayout.LayoutParams(context, attrs)
-    }
+    override fun generateLayoutParams(attrs: AttributeSet) = FrameLayout.LayoutParams(context, attrs)
 
     var lastY = 0f
     override fun onTouchEvent(event: MotionEvent?): Boolean {

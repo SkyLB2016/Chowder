@@ -45,7 +45,7 @@ class ProcessUtils {
             processInfo.processName = processName
             processInfo.appName = appName
             processEntities.add(processInfo)
-
+            LogUtils.i(processInfo.toString())
             // 获得每个进程里运行的应用程序(包),即每个应用程序的包名
             val packageList = pro.pkgList
             LogUtils.i("process id is " + pid + "has " + packageList.size)
@@ -62,4 +62,8 @@ internal class ProcessEntity : Serializable {
     var memSize: Int = 0//进程占用的内存大小,单位为kb
     var processName: String? = null//进程名，包名
     var appName: String? = null//进程名，包名
+    override fun toString(): String {
+        return "ProcessEntity(uid=$uid, pid=$pid, memSize=$memSize, processName=$processName, appName=$appName)"
+    }
+
 }

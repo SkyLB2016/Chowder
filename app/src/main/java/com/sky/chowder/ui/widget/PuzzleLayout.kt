@@ -54,7 +54,7 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
 
     private fun setView() {
         imageViews = arrayOfNulls<ImageView>(piece * piece)
-        imagePieces = jigsaw(BitmapFactory.decodeResource(resources, R.mipmap.ic_banner), piece)
+        imagePieces = jigsaw(BitmapFactory.decodeResource(resources, R.mipmap.ic_puzzle), piece)
         //随机打乱数组排序
         Collections.sort(imagePieces) { _, _ -> if (Math.random() > 0.5) 1 else -1 }
         pieceWidth = (width!! - margin * (piece + 1)) / piece

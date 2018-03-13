@@ -108,6 +108,7 @@
         <activity
             android:name=".ui.activity.CanvasActivity"
             android:description="@string/act_canvas_d"
+            android:hardwareAccelerated="false"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_canvas"
             android:screenOrientation="portrait">
@@ -157,7 +158,7 @@
         </activity>
         <activity
             android:name=".ui.activity.PullDownActivity"
-            android:description="@string/act_pull"
+            android:description="@string/act_pull_d"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_pull"
             android:screenOrientation="portrait">
@@ -201,14 +202,16 @@
         </activity>
         <activity
             android:name=".ui.activity.TestActivity"
-            android:description="@string/act_22"
+            android:description="@string/act_test"
+            android:hardwareAccelerated="false"
             android:icon="@mipmap/ic_launcher"
-            android:label="@string/act_22"
+            android:label="@string/act_test"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.sky.coustom" />
             </intent-filter>
         </activity>
+
         <service android:name=".ui.service.IntentTest" />
     </application>
 

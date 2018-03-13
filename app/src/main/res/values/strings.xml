@@ -2,8 +2,10 @@
     <string name="app_name">chowder</string>
     <string name="dialog_exit">确定退出应用程序吗?</string>
 
-    <string name="act_method">01.方法组合</string>
-    <string name="act_method_d">一些常用的方法调用</string>
+    <string name="act_test">13.方法测试类</string>
+
+    <string name="act_method">01.方法组合类</string>
+    <string name="act_method_d">常用的方法：字符替换与数组化，数组排序筛选，json转换，时间地址选择</string>
 
     <string name="act_solar">02.卫星式菜单栏</string>
     <string name="act_solar_d">支持九个方向，采用ObjectAnimator编写</string>
@@ -17,14 +19,14 @@
     <string name="act_bit_uri">05.载入本地图片</string>
     <string name="act_uri_d">自定义线程池加载，FIFO,FILO,PopWindow弹窗，图片的缩放显示，待优化</string>
 
-    <string name="act_puzzle">06.拼图</string>
+    <string name="act_canvas">06.图形绘画总结应用</string>
+    <string name="act_canvas_d">线性渐变，三次贝赛尔曲线，maskFilter，pathEffect，移动布局坐标，文字基线绘制，画布状态保存与回溯</string>
+
+    <string name="act_puzzle">07.拼图</string>
     <string name="act_puzzle_d">自定义View，二维数组，遮罩隐藏</string>
 
-    <string name="act_tab">07.滑动窗口</string>
+    <string name="act_tab">08.滑动窗口</string>
     <string name="act_tab_b">tab结合viewpager，包含：CardView,MeshView,Shader，XferModeF，电话簿</string>
-
-    <string name="act_canvas">08.Canvas总结应用</string>
-    <string name="act_canvas_d">○，贝赛尔曲线</string>
 
     <string name="act_svg">09.SVG</string>
     <string name="act_svg_d">SVG演示，加载html下的svg</string>
@@ -36,8 +38,8 @@
     <string name="act_stock_d">算着玩的</string>
 
     <string name="act_pull">12.下拉动画</string>
+    <string name="act_pull_d">待优化</string>
 
-    <string name="act_22">test</string>
 
     <string name="test"><i><b><u>service</u></b></i></string>
 
@@ -95,7 +97,7 @@
         第八章
         上善若水。水善利万物而不争，处众人之所恶，故几于道。居善地，心善渊，与善仁，言善信，正善治，事善能，动善时。夫唯不争，故无尤。
         第九章
-        持而盈之不如其己，揣而锐之不可长保，金玉满堂莫之能守，富贵而骄，自遗其纠。功遂身退，天知道。
+        持而盈之不如其己，揣而锐之不可长保，金玉满堂莫之能守，富贵而骄，自遗其纠。功遂身退，天之道。
 
     </string>
 

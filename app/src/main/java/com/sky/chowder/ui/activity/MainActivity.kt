@@ -15,7 +15,6 @@ import com.sky.chowder.ui.adapter.MainAdapter
 import com.sky.chowder.ui.presenter.MainP
 import com.sky.utils.AppUtils
 import com.sky.utils.JumpAct
-import com.sky.utils.LogUtils
 import kotlinx.android.synthetic.main.content_main.*
 import java.io.File
 
@@ -64,8 +63,6 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 
     @OnClick(R.id.fab)
     fun fabOnClick() {
-        Math.PI
-        LogUtils.i("${Math.sin(Math.PI/6)}")
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -9,7 +9,7 @@ import com.sky.chowder.ui.presenter.SolarP
 /**
  * Created by SKY on 2015/12/9 20:52.
  */
-class One : BaseFragment<SolarP>() {
+class MeshFragment : BaseFragment<SolarP>() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -19,7 +19,7 @@ class One : BaseFragment<SolarP>() {
     }
 
     override fun getLayoutResId(): Int {
-        return R.layout.fragment_first
+        return R.layout.fragment_meshview
     }
 
     override fun creatPresenter(): SolarP? = SolarP(activity)

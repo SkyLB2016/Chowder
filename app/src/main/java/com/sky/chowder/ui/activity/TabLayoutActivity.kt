@@ -40,9 +40,9 @@ class TabLayoutActivity : BaseNoPActivity() {
         }
         val fragments = ArrayList<Fragment>()
         fragments.add(RecycleFragment())
-        fragments.add(One())
-        fragments.add(ShaderF())
-        fragments.add(XferModeF())
+        fragments.add(MeshFragment())
+        fragments.add(ShaderFragment())
+        fragments.add(XferModeFragment())
         fragments.add(CursorLoaderListFragment())
         val adapter = object : FragmentPagerAdapter(supportFragmentManager) {
             override fun getCount(): Int = fragments.size

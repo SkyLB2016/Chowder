@@ -3,6 +3,7 @@ package com.sky.chowder.ui.widget
 import android.content.Context
 import android.graphics.*
 import android.support.v4.content.ContextCompat
+import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
@@ -59,27 +60,56 @@ class CanvasView @JvmOverloads constructor(
         drawBezier(canvas)//画贝赛尔曲线与pathEffect应用
         setProgress(canvas)//环形进度条
         drawClock(canvas)//时钟
+        maskFilter(canvas)
 
-        animate().alpha(1f)
-                .rotation(360f)
-                .setDuration(2000)
-                .withStartAction { }
-                .withEndAction { }
-                .start()
+//        animate().alpha(1f)
+//                .rotation(180f)
+//                .setDuration(3000)
+//                .withStartAction { }
+//                .withEndAction { }
+//                .start()
+    }
+
+    private fun maskFilter(canvas: Canvas) {
+        val paint = Paint(Paint.ANTI_ALIAS_FLAG)
+        paint.color = Color.RED
+        paint.style = Paint.Style.FILL_AND_STROKE
+        val textP = TextPaint(Paint.ANTI_ALIAS_FLAG)
+        textP.textSize = 32f
+        textP.color = Color.BLUE
+        textP.textAlign = Paint.Align.CENTER
+        canvas.save()
+        canvas.translate(0f, 800f)
+
+        paint.maskFilter = BlurMaskFilter(50f, BlurMaskFilter.Blur.NORMAL)
+        canvas.drawCircle(150f, 150f, 100f, paint)
+        canvas.drawText("NORMAL", 150f, 166f, textP)
+
+        paint.maskFilter = BlurMaskFilter(50f, BlurMaskFilter.Blur.SOLID)
+        canvas.drawCircle(400f, 150f, 100f, paint)
+        canvas.drawText("SOLID", 400f, 166f, textP)
+
+        paint.maskFilter = BlurMaskFilter(50f, BlurMaskFilter.Blur.OUTER)
+        canvas.drawCircle(650f, 150f, 100f, paint)
+        canvas.drawText("OUTER", 650f, 166f, textP)
+
+        paint.maskFilter = BlurMaskFilter(50f, BlurMaskFilter.Blur.INNER)
+        canvas.drawCircle(900f, 150f, 100f, paint)
+        canvas.drawText("INNER", 900f, 166f, textP)
+        canvas.restore()
     }
 
     private fun moveLayout(canvas: Canvas) {
         val paint = Paint()
         paint.color = Color.RED
         if (lastX != -1f) canvas.drawCircle(cX, cY, 88f, paint)
-        paint.textSize = 80f
-        //        paint.reset()
-        canvas.drawCircle(150f, 150f, 100f, paint)
-        canvas.saveLayerAlpha(0f, 0f, 300f, 300f, 122, Canvas.ALL_SAVE_FLAG)
+        paint.color = Color.RED
+        canvas.drawCircle(940f, 550f, 100f, paint)
+        val num = canvas.saveLayerAlpha(0f, 0f, 1100f, 700f, 122, Canvas.ALL_SAVE_FLAG)
         paint.color = Color.GREEN
-        canvas.drawCircle(200f, 200f, 100f, paint)
-        canvas.drawCircle(300f, 300f, 100f, paint)
-        canvas.restore()
+        canvas.drawCircle(1000f, 600f, 100f, paint)
+        canvas.drawCircle(1100f, 700f, 100f, paint)
+        canvas.restoreToCount(num)//移除
     }
 
     private fun drawClock(canvas: Canvas) {
@@ -169,15 +199,16 @@ class CanvasView @JvmOverloads constructor(
 
         var start = 140f//起始角度
         var sweep = 260f//旋转角度
+        paint.maskFilter = BlurMaskFilter(25f, BlurMaskFilter.Blur.OUTER)
         canvas.drawArc(area, start, sweep, false, paint)
 
-        paint.style = Paint.Style.FILL
-        paint.textSize = 60f
-        paint.pathEffect = CornerPathEffect(20f)//圆角
-
+        val textP = TextPaint()
+        textP.textSize = 60f
+        textP.pathEffect = CornerPathEffect(20f)//圆角
+        textP.textAlign = Paint.Align.CENTER
         val text = "进度条"
         val textBound = Rect()
-        paint.getTextBounds(text, 0, text.length, textBound)
+        textP.getTextBounds(text, 0, text.length, textBound)
 
         val radius = area.height() / 2
         //计算的文字所在的背景框的左侧，顶部，右侧，底部
@@ -191,9 +222,9 @@ class CanvasView @JvmOverloads constructor(
         textbg.bounds = textRect//为文字设置背景
         textbg.draw(canvas)//画入画布中
         //让文字居于背景中间，计算文字的左距离与底部距离
-        val left = textRect.left + (textRect.width() - textBound.width()) / 2
-        val bottom = textRect.bottom - (textRect.height() - textBound.height()) / 2 - (paint.descent() - paint.ascent() - textBound.height()) / 2
-        canvas.drawText(text, left.toFloat(), bottom, paint)//画入画布中
+        val offset = textP.fontMetricsInt.ascent - textP.fontMetricsInt.top
+        val tY = textRect.exactCenterY() + textBound.height() / 2 - offset / 2
+        canvas.drawText(text, textRect.exactCenterX(), tY, textP)//画入画布中
     }
 
     /**

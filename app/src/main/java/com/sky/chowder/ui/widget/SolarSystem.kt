@@ -227,10 +227,7 @@ class SolarSystem @JvmOverloads constructor(context: Context, attrs: AttributeSe
         else -> 0
     }
 
-    override fun generateLayoutParams(attrs: AttributeSet): FrameLayout.LayoutParams {
-        //return new MarginLayoutParams(getContext(), attrs);//继承自viewgroup,蛋疼的三星
-        return FrameLayout.LayoutParams(context, attrs)
-    }
+    override fun generateLayoutParams(attrs: AttributeSet) = FrameLayout.LayoutParams(context, attrs)
 
     /**
      * 子view的弹出与收回
@@ -325,13 +322,9 @@ class SolarSystem @JvmOverloads constructor(context: Context, attrs: AttributeSe
         mState = changeState()
     }
 
-    private fun getCos(num: Double, count: Int, num3: Int): Float {
-        return (radius * Math.cos(Math.PI / num / count * num3)).toFloat()
-    }
+    private fun getCos(num: Double, count: Int, num3: Int) = (radius * Math.cos(Math.PI / num / count * num3)).toFloat()
 
-    private fun getSin(num: Double, count: Int, num3: Int): Float {
-        return (radius * Math.sin(Math.PI / num / count * num3)).toFloat()
-    }
+    private fun getSin(num: Double, count: Int, num3: Int) = (radius * Math.sin(Math.PI / num / count * num3)).toFloat()
 
     /**
      * 子view的动画效果

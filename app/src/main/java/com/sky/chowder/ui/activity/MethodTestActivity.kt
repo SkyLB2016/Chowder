@@ -48,7 +48,7 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
     override fun getLayoutResId(): Int = R.layout.activity_method
     override fun initialize() {
         super.initialize()
-        val method = arrayListOf("字符替换", "hash相同", "字符串数组化", "字体颜色背景变换"
+        val method = arrayListOf("字符替换与数组化", "hash相同", "字体颜色背景变换"
                 , "系统信息", "获取app信息", "电池电量"
                 , "数组排序", "json转换", "list迭代器", "list筛选lambda"
                 , "Intent测试"
@@ -56,6 +56,7 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
                 , "地址选择"
                 , "工厂模式"
                 , "SVG与Value"
+                , "渐变的文字"
         )
         for (i in method) {
             val tvText = LayoutInflater.from(this).inflate(R.layout.tv, flow, false) as TextView
@@ -69,9 +70,8 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         tvDisplay.text = when (v?.tag) {
-            "字符替换" -> replaceStr()
+            "字符替换与数组化" -> replaceStr() + "\n" + toArray()
             "hash相同" -> equalHashCode()
-            "字符串数组化" -> toArray()
             "字体颜色背景变换" -> changeText()
             "系统信息" -> getSystemMessage() + "\n" + getSystemProperty()
             "获取app信息" -> getAppInfo()
@@ -84,14 +84,22 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
             else -> ""
         }
         image.visibility = View.GONE
+        shader.visibility = View.GONE
         when (v?.tag) {
             "Intent测试" -> intentTest()
             "时间选择" -> selectTime()
             "地址选择" -> selectAddress()
             "工厂模式" -> factoryModel()
             "SVG与Value" -> setSvg()
+            "渐变的文字" -> shaderText()
             "" -> ""
         }
+    }
+
+    private fun shaderText() {
+        shader.visibility = View.VISIBLE
+//        shader.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        shader.text = "天地玄黄，宇宙洪荒，日月盈仄，辰宿列张。寒来暑往，秋收冬藏。闰余成岁，律吕调阳。云腾致雨，露结为霜。金生丽水，玉出昆冈。"
     }
 
     private fun setSvg() {
