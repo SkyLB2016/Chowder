@@ -6,6 +6,7 @@ import android.widget.TextView
 import com.sky.base.BaseNoPActivity
 import com.sky.chowder.R
 import kotlinx.android.synthetic.main.activity_sliding.*
+import kotlinx.android.synthetic.main.activity_sliding_menu.*
 import java.util.*
 
 /**
@@ -18,6 +19,7 @@ class SlidingMenuActivity : BaseNoPActivity() {
     override fun initialize() {
         super.initialize()
         initData()
+        tvLogin.setOnClickListener { showToast("登录") }
     }
 
     private fun initData() {

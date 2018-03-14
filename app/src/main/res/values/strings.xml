@@ -43,18 +43,18 @@
 
     <string name="test"><i><b><u>service</u></b></i></string>
 
-    <string name="left_top">LEFTTOP</string>
-    <string name="left_bottom">LEFTBOTTOM</string>
-    <string name="right_top">RIGHTTOP</string>
-    <string name="right_bottom">RIGHTBOTTOM</string>
-    <string name="center_top">CENTERTOP</string>
-    <string name="center_bottom">CENTERBOTTOM</string>
-    <string name="center">CENTER</string>
-    <string name="center_left">CENTERLEFT</string>
-    <string name="center_right">CENTERRIGHT</string>
+    <string name="left_top">左上</string>
+    <string name="left_bottom">左下</string>
+    <string name="right_top">右上</string>
+    <string name="right_bottom">右下</string>
+    <string name="center_top">中上</string>
+    <string name="center_bottom">中下</string>
+    <string name="center">正中</string>
+    <string name="center_left">中左</string>
+    <string name="center_right">中右</string>
 
-    <string name="qq_menu01">Login</string>
-    <string name="qq_menu02">Battery</string>
+    <string name="qq_menu01">登录</string>
+    <string name="qq_menu02">电池</string>
     <string name="qq_menu03">Broadcast</string>
     <string name="qq_menu04">TreeActivity</string>
     <string name="qq_menu05">PullLayout</string>

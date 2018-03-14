@@ -45,12 +45,11 @@ class SolarSystemActivity : BasePActivity<SolarP>(), Toolbar.OnMenuItemClickList
         val childParams = FrameLayout.LayoutParams(width / 5, width / 5)
         for (i in 0 until childCount - 1) solar!!.getChildAt(i).layoutParams = childParams
 
-        //solarSystem.setPosition(SolarSystem.CENTER_BOTTOM);
-        solar?.setRadius(width / 3)
-        solar?.setRotaMenu(true)//按钮是否旋转
-        solar?.setIsRotate(true)//混合还是单次执行
-        solar?.isRecoverChildView = false
-        solar?.setOnMenuState(object : SolarSystem.MenuState {
+//        solar.position=SolarSystem.CENTER_BOTTOM
+        solar?.radius = width / 3
+        solar?.rotateMenu = true//按钮是否旋转
+        solar?.isRecoverChild = false
+        solar.menuState = object : SolarSystem.OnMenuState {
             override fun openMenu() {
                 layoutDraw?.start()
                 handler.sendEmptyMessageDelayed(C.SOLAR, 600)
@@ -60,10 +59,9 @@ class SolarSystemActivity : BasePActivity<SolarP>(), Toolbar.OnMenuItemClickList
                 layoutDraw?.start()
                 handler.sendEmptyMessageDelayed(C.SOLAR, 600)
             }
-        })
-        solar?.setOnMenuItemClickListener { view, position ->
+        }
+        solar?.menuItemOnClick = { view, position ->
             //可以把所需要跳转的activity的全称写在tag里
-            //JumpAct.jumpActivity(SolarSystemActivity.this, tag);
             when (view.tag) {
                 "flow" -> showToast("position==$position")
                 "list" -> showToast("position==$position")
@@ -83,15 +81,15 @@ class SolarSystemActivity : BasePActivity<SolarP>(), Toolbar.OnMenuItemClickList
 
     override fun onMenuItemClick(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_center -> solar?.setPosition(SolarSystem.CENTER)
-            R.id.action_left_top -> solar?.setPosition(SolarSystem.LEFT_TOP)
-            R.id.action_left_bottom -> solar?.setPosition(SolarSystem.LEFT_BOTTOM)
-            R.id.action_right_top -> solar?.setPosition(SolarSystem.RIGHT_TOP)
-            R.id.action_right_bottom -> solar?.setPosition(SolarSystem.RIGHT_BOTTOM)
-            R.id.action_center_top -> solar?.setPosition(SolarSystem.CENTER_TOP)
-            R.id.action_center_bottom -> solar?.setPosition(SolarSystem.CENTER_BOTTOM)
-            R.id.action_center_left -> solar?.setPosition(SolarSystem.CENTER_LEFT)
-            R.id.action_center_right -> solar?.setPosition(SolarSystem.CENTER_RIGHT)
+            R.id.action_center -> solar?.position=SolarSystem.CENTER
+            R.id.action_left_top -> solar?.position=SolarSystem.LEFT_TOP
+            R.id.action_left_bottom -> solar?.position=SolarSystem.LEFT_BOTTOM
+            R.id.action_right_top -> solar?.position=SolarSystem.RIGHT_TOP
+            R.id.action_right_bottom -> solar?.position=SolarSystem.RIGHT_BOTTOM
+            R.id.action_center_top -> solar?.position=SolarSystem.CENTER_TOP
+            R.id.action_center_bottom -> solar?.position=SolarSystem.CENTER_BOTTOM
+            R.id.action_center_left -> solar?.position=SolarSystem.CENTER_LEFT
+            R.id.action_center_right -> solar?.position=SolarSystem.CENTER_RIGHT
         }
         return false
     }

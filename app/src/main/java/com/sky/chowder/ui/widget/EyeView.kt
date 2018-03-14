@@ -27,6 +27,7 @@ class EyeView @JvmOverloads constructor(
     }
 
     /**
+     * 测试ondraw与dispatchDraw的区别，定义view用ondraw，定义viewgroup用dispatchDraw
      * dispatchDraw
      * View组件的绘制会调用draw(Canvas canvas)方法，
      * draw过程中主要是先画Drawable背景，

@@ -96,7 +96,6 @@ class FlowLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
 
         allViews.add(lineViews)
         mLineHeight.add(lineHeight)
-        // 框架的内边距
         var left = paddingLeft
         var top = paddingTop
 
@@ -128,6 +127,7 @@ class FlowLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
     override fun generateLayoutParams(attrs: AttributeSet) = FrameLayout.LayoutParams(context, attrs)
 
     var lastY = 0f
+    //滑动控件内容
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         when (event?.action) {
             MotionEvent.ACTION_DOWN -> lastY = event.rawY
@@ -152,5 +152,4 @@ class FlowLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
         postInvalidate()
         return true
     }
-
 }
