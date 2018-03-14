@@ -5,10 +5,10 @@
     <string name="act_test">13.方法测试类</string>
 
     <string name="act_method">01.方法组合类</string>
-    <string name="act_method_d">常用的方法：字符替换与数组化，数组排序筛选，json转换，时间地址选择</string>
+    <string name="act_method_d">常用的方法：字符替换与数组化，数组排序筛选，json转换，时间地址选择等等</string>
 
     <string name="act_solar">02.卫星式菜单栏</string>
-    <string name="act_solar_d">支持九个方向，采用ObjectAnimator编写</string>
+    <string name="act_solar_d">支持九个方向，采用属性动画ObjectAnimator编写，三角函数正余弦的顺逆时针（参考笔记），kotlin中调用操作符：a.invoke(v,i)</string>
 
     <string name="act_slid">03.侧滑栏</string>
     <string name="act_slid_d">继承自HorizontalScrollView,融合FlowLayout</string>
