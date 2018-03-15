@@ -6,5 +6,21 @@
     <com.sky.chowder.ui.widget.DoubleCacheView
         android:id="@+id/draw"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/alpha_66"
+            android:textSize="@dimen/text_medium"
+            android:paddingLeft="@dimen/wh_48"
+            android:paddingRight="@dimen/wh_48"
+            android:lineSpacingExtra="@dimen/wh_8"
+            android:text="@string/daodejing" />
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>

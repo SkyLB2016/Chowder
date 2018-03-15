@@ -10,6 +10,7 @@ import android.view.MotionEvent
 import android.widget.ScrollView
 import com.sky.chowder.R
 import com.sky.utils.ScreenUtils
+import com.sky.widget.State
 import kotlinx.android.synthetic.main.activity_pulldown.view.*
 
 /**
@@ -33,22 +34,22 @@ class PullLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
         super.onFinishInflate()
         isVerticalScrollBarEnabled = false
         setTitleBar(R.mipmap.ic_back, R.color.white)
-        eyeView!!.setOnClickListener { close() }
+        eyeView.setOnClickListener { close() }
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         if (once!!) {
-            rlMenu!!.layoutParams.height = screenHeight / 4 * 3
-            menuHeight = rlMenu!!.layoutParams.height
+            rlMenu.layoutParams.height = screenHeight / 4 * 3
+            menuHeight = rlMenu.layoutParams.height
             once = false
         }
     }
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
         super.onLayout(changed, l, t, r, b)
-        titleBar!!.layout(0, 0, titleBar!!.width, titleBar!!.height)
-        llContent!!.layout(0, menuHeight, llContent!!.width, llContent!!.height + menuHeight)
+        titleBar.layout(0, 0, titleBar.width, titleBar.height)
+        llContent.layout(0, menuHeight, llContent.width, llContent.height + menuHeight)
     }
 
     override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
@@ -108,7 +109,7 @@ class PullLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
     private fun animateScroll(t: Float) {
         val percent = t.toFloat() / menuHeight
         ObjectAnimator.ofFloat(rlMenu, "translationY", t)
-        ObjectAnimator.ofFloat(llContent, "translationY", titleBar!!.height * percent)
+        ObjectAnimator.ofFloat(llContent, "translationY", titleBar.height * percent)
         ObjectAnimator.ofFloat(eyeView, "translationY", -t / 2)
         ObjectAnimator.ofFloat(ll_weather, "translationY", -t / 2)
 
@@ -116,24 +117,24 @@ class PullLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
         //        ViewHelper.setTranslationY(llContent, titleBar.getHeight() * percent);
         //        ViewHelper.setTranslationY(ev, -t / 2);
         //        ViewHelper.setTranslationY(ll_weather, -t / 2);
-        eyeView!!.setRadius((menuHeight.toFloat() * 0.25f * (1 - percent)).toInt())
-        action_title!!.setTextColor(evaluate(percent, Color.WHITE, Color.BLACK))
+        eyeView.setRadius((menuHeight.toFloat() * 0.25f * (1 - percent)).toInt())
+        action_title.setTextColor(evaluate(percent, Color.WHITE, Color.BLACK))
         ObjectAnimator.ofFloat(titleBar, "translationY", t)
         //        ViewHelper.setTranslationY(titleBar, t);
-        titleBar!!.setBackgroundColor(evaluate(percent, Color.argb(0, 255, 255, 255), Color.argb(255, 255, 255, 255)))
-        if (percent == 1f) actionBack!!.setCompoundDrawablesWithIntrinsicBounds(resources.getDrawable(R.mipmap.ic_back), null, null, null)
-        else if (percent == 0f) actionBack!!.setCompoundDrawablesWithIntrinsicBounds(resources.getDrawable(R.mipmap.ic_done), null, null, null)
+        titleBar.setBackgroundColor(evaluate(percent, Color.argb(0, 255, 255, 255), Color.argb(255, 255, 255, 255)))
+        if (percent == 1f) actionBack.setCompoundDrawablesWithIntrinsicBounds(resources.getDrawable(R.mipmap.ic_back), null, null, null)
+        else if (percent == 0f) actionBack.setCompoundDrawablesWithIntrinsicBounds(resources.getDrawable(R.mipmap.ic_done), null, null, null)
     }
 
     private fun animatePull(t: Float) {
-        rlMenu!!.layoutParams.height = menuHeight - t.toInt()
-        rlMenu!!.requestLayout()
+        rlMenu.layoutParams.height = menuHeight - t.toInt()
+        rlMenu.requestLayout()
         ObjectAnimator.ofFloat(llContent, "translationY", -t)
         //        ViewHelper.setTranslationY(llContent, -t);
 
         val percent = t.toFloat() / menuHeight
-        eyeView!!.scaleX = 1 - percent
-        eyeView!!.scaleY = 1 - percent
+        eyeView.scaleX = 1 - percent
+        eyeView.scaleY = 1 - percent
         ObjectAnimator.ofFloat(ll_weather, "translationY", -t / 2)
         //        ViewHelper.setScaleX(ev, 1 - percent);
         //        ViewHelper.setScaleY(ev, 1 - percent);
@@ -173,14 +174,14 @@ class PullLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
         val start = scrollY
         animator = ObjectAnimator.ofInt(this, "t", start, menuHeight)
         //        animator.setInterpolator(new DecelerateInterpolator());
-        animator!!.addListener(object : AnimatorListenerAdapter() {
+        animator?.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
                 super.onAnimationEnd(animation)
                 mState = State.CLOSE
             }
         })
-        animator!!.duration = 250
-        animator!!.start()
+        animator?.duration = 250
+        animator?.start()
     }
 
     private fun open() {
@@ -191,23 +192,22 @@ class PullLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
         val center = (-scrollY / 2.2f).toInt()
         animator = ObjectAnimator.ofInt(this, "t", start, center, 0)
         //        animator.setInterpolator(new DecelerateInterpolator());
-        animator!!.addListener(object : AnimatorListenerAdapter() {
+        animator?.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
                 super.onAnimationEnd(animation)
                 mState = State.OPEN
             }
         })
-        animator!!.duration = 400
-        animator!!.start()
+        animator?.duration = 400
+        animator?.start()
     }
 
     /**
      * 设置titlebar
      */
     private fun setTitleBar(backImgId: Int, titleColorId: Int) {
-        actionBack!!.setCompoundDrawablesWithIntrinsicBounds(resources.getDrawable(backImgId), null, null, null)
-        titleBar!!.setBackgroundResource(R.color.dark_orange)
-        action_title!!.setTextColor(resources.getColor(titleColorId))
+        actionBack.setCompoundDrawablesWithIntrinsicBounds(resources.getDrawable(backImgId), null, null, null)
+        titleBar.setBackgroundResource(R.color.dark_orange)
+        action_title.setTextColor(resources.getColor(titleColorId))
     }
-
 }

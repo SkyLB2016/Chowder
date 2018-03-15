@@ -1,4 +1,4 @@
-package com.sky.chowder.ui.widget
+package com.sky.widget
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
@@ -7,10 +7,9 @@ import android.animation.ObjectAnimator
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
-import android.view.ViewGroup
 import android.view.animation.BounceInterpolator
 import android.widget.FrameLayout
-import com.sky.chowder.R
+import com.sky.R
 
 /**
  * Created by SKY on 2015/4/9 21:10:39.
@@ -57,31 +56,31 @@ class SolarSystem @JvmOverloads constructor(context: Context, attrs: AttributeSe
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         // 获取宽高与模式
-        val layoutWidth = View.MeasureSpec.getSize(widthMeasureSpec)
-        val widthMode = View.MeasureSpec.getMode(widthMeasureSpec)
-        val layoutHeight = View.MeasureSpec.getSize(heightMeasureSpec)
-        val heightMode = View.MeasureSpec.getMode(heightMeasureSpec)
+        val layoutWidth = MeasureSpec.getSize(widthMeasureSpec)
+        val widthMode = MeasureSpec.getMode(widthMeasureSpec)
+        val layoutHeight = MeasureSpec.getSize(heightMeasureSpec)
+        val heightMode = MeasureSpec.getMode(heightMeasureSpec)
         // AT_MOST模式即wrap_content时测量父控件的宽高
         var width = 0
         var height = 0
-        var childAt: View
-        var lp: ViewGroup.MarginLayoutParams
+        var child: View
+        var lp: MarginLayoutParams
         var childWidth: Int
         var childHeight: Int
-        val childCount = childCount// 子view的数量
+        val childCount = childCount/*子view的数量*/
         for (i in 0 until childCount) {
-            childAt = getChildAt(i)
-            measureChild(childAt, widthMeasureSpec, heightMeasureSpec)// 测量子view
+            child = getChildAt(i)
+            measureChild(child, widthMeasureSpec, heightMeasureSpec)// 测量子view
             // 获取子view的margin
-            lp = childAt.layoutParams as ViewGroup.MarginLayoutParams
-            childWidth = childAt.measuredWidth + lp.leftMargin + lp.rightMargin
-            childHeight = childAt.measuredHeight + lp.bottomMargin + lp.topMargin
+            lp = child.layoutParams as MarginLayoutParams
+            childWidth = child.measuredWidth + lp.leftMargin + lp.rightMargin
+            childHeight = child.measuredHeight + lp.bottomMargin + lp.topMargin
             // 取出子view中最大的宽高
             width = Math.max(childWidth, width)
             height = Math.max(childHeight, height)
         }
 
-        if (widthMode == View.MeasureSpec.EXACTLY && heightMode == View.MeasureSpec.EXACTLY)
+        if (widthMode == MeasureSpec.EXACTLY && heightMode == MeasureSpec.EXACTLY)
             return setMeasuredDimension(layoutWidth, layoutHeight)
 
         // 居于四个角时父控件的宽高
@@ -100,8 +99,8 @@ class SolarSystem @JvmOverloads constructor(context: Context, attrs: AttributeSe
         if (layoutHeight - paddingTop - paddingBottom < height) height = layoutHeight - paddingTop - paddingBottom
         // 为框架父控件写入宽高
         setMeasuredDimension(
-                if (widthMode == View.MeasureSpec.EXACTLY) layoutWidth else width + paddingLeft + paddingRight,
-                if (heightMode == View.MeasureSpec.EXACTLY) layoutHeight else height + paddingTop + paddingBottom
+                if (widthMode == MeasureSpec.EXACTLY) layoutWidth else width + paddingLeft + paddingRight,
+                if (heightMode == MeasureSpec.EXACTLY) layoutHeight else height + paddingTop + paddingBottom
         )
     }
 
@@ -114,14 +113,14 @@ class SolarSystem @JvmOverloads constructor(context: Context, attrs: AttributeSe
         val menuWidth = getChildAt(childCount - 1).width
         val menuHeight = getChildAt(childCount - 1).height
         var childAt: View
-        var lp: ViewGroup.MarginLayoutParams
+        var lp: MarginLayoutParams
         var childWidth: Int
         var childHeight: Int
         for (i in 0 until childCount) {
             childAt = getChildAt(i)
             childWidth = childAt.measuredWidth
             childHeight = childAt.measuredHeight
-            lp = childAt.layoutParams as ViewGroup.MarginLayoutParams
+            lp = childAt.layoutParams as MarginLayoutParams
             childPadLeft = getChildPadLeft(menuWidth, lp, childWidth)
             childPadTop = getChildPadTop(menuHeight, lp, childHeight)
             childAt.layout(childPadLeft, childPadTop, childPadLeft + childWidth, childPadTop + childHeight)
@@ -140,7 +139,7 @@ class SolarSystem @JvmOverloads constructor(context: Context, attrs: AttributeSe
     }
 
     //九个位置三列
-    private fun getChildPadLeft(menuWidth: Int, lp: ViewGroup.MarginLayoutParams, childWidth: Int): Int {
+    private fun getChildPadLeft(menuWidth: Int, lp: MarginLayoutParams, childWidth: Int): Int {
         return when (position) {
             CENTER, CENTER_TOP, CENTER_BOTTOM -> (width - childWidth) / 2 + lp.leftMargin + paddingLeft - paddingRight
             LEFT_TOP, LEFT_BOTTOM, CENTER_LEFT -> paddingLeft + lp.leftMargin + (menuWidth - childWidth) / 2
@@ -150,14 +149,14 @@ class SolarSystem @JvmOverloads constructor(context: Context, attrs: AttributeSe
     }
 
     //九个位置三行
-    private fun getChildPadTop(menuHeight: Int, lp: ViewGroup.MarginLayoutParams, childHeight: Int): Int = when (position) {
+    private fun getChildPadTop(menuHeight: Int, lp: MarginLayoutParams, childHeight: Int): Int = when (position) {
         CENTER, CENTER_LEFT, CENTER_RIGHT -> (height - childHeight) / 2 + lp.topMargin + paddingTop - paddingBottom
         LEFT_TOP, RIGHT_TOP, CENTER_TOP -> paddingTop + lp.topMargin + (menuHeight - childHeight) / 2
         LEFT_BOTTOM, CENTER_BOTTOM, RIGHT_BOTTOM -> height - childHeight - lp.bottomMargin - paddingBottom - (menuHeight - childHeight) / 2
         else -> 0
     }
 
-    override fun generateLayoutParams(attrs: AttributeSet) = FrameLayout.LayoutParams(context, attrs)
+    override fun generateLayoutParams(attrs: AttributeSet) = LayoutParams(context, attrs)
 
     /**
      * 子view的弹出与收回
@@ -188,7 +187,6 @@ class SolarSystem @JvmOverloads constructor(context: Context, attrs: AttributeSe
             childAt.setOnClickListener { v ->
                 menuItemOnClick?.invoke(v, i)
                 childAnimator(i)//子view点击之后的效果
-                // 点击之后收回子view
                 if (isRecoverChild) toggleMenu(TIME)
             }
             //开始计算每个view的弹出位置

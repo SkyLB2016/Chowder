@@ -4,13 +4,12 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.widget.TextView;
 
 /**
  * Created by SKY on 16/5/10 下午3:50.
  * 滑动的textview
  */
-public class ScrollingTextView extends TextView {
+public class ScrollingTextView extends android.support.v7.widget.AppCompatTextView {
 
     public ScrollingTextView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);

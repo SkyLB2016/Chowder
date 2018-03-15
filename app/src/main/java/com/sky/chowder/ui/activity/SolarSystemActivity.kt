@@ -11,8 +11,8 @@ import com.sky.base.BasePActivity
 import com.sky.chowder.C
 import com.sky.chowder.R
 import com.sky.chowder.ui.presenter.SolarP
-import com.sky.chowder.ui.widget.SolarSystem
 import com.sky.utils.ScreenUtils
+import com.sky.widget.SolarSystem
 import kotlinx.android.synthetic.main.activity_solar.*
 
 /**
@@ -81,15 +81,15 @@ class SolarSystemActivity : BasePActivity<SolarP>(), Toolbar.OnMenuItemClickList
 
     override fun onMenuItemClick(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_center -> solar?.position=SolarSystem.CENTER
-            R.id.action_left_top -> solar?.position=SolarSystem.LEFT_TOP
-            R.id.action_left_bottom -> solar?.position=SolarSystem.LEFT_BOTTOM
-            R.id.action_right_top -> solar?.position=SolarSystem.RIGHT_TOP
-            R.id.action_right_bottom -> solar?.position=SolarSystem.RIGHT_BOTTOM
-            R.id.action_center_top -> solar?.position=SolarSystem.CENTER_TOP
-            R.id.action_center_bottom -> solar?.position=SolarSystem.CENTER_BOTTOM
-            R.id.action_center_left -> solar?.position=SolarSystem.CENTER_LEFT
-            R.id.action_center_right -> solar?.position=SolarSystem.CENTER_RIGHT
+            R.id.action_center -> solar?.position= SolarSystem.CENTER
+            R.id.action_left_top -> solar?.position= SolarSystem.LEFT_TOP
+            R.id.action_left_bottom -> solar?.position= SolarSystem.LEFT_BOTTOM
+            R.id.action_right_top -> solar?.position= SolarSystem.RIGHT_TOP
+            R.id.action_right_bottom -> solar?.position= SolarSystem.RIGHT_BOTTOM
+            R.id.action_center_top -> solar?.position= SolarSystem.CENTER_TOP
+            R.id.action_center_bottom -> solar?.position= SolarSystem.CENTER_BOTTOM
+            R.id.action_center_left -> solar?.position= SolarSystem.CENTER_LEFT
+            R.id.action_center_right -> solar?.position= SolarSystem.CENTER_RIGHT
         }
         return false
     }

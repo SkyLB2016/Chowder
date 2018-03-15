@@ -150,7 +150,7 @@ class CanvasView @JvmOverloads constructor(
         val paint = Paint()
         paint.isAntiAlias = true
         val mShader = LinearGradient(0f, 0f, 100f, 100f,
-                intArrayOf(Color.RED, Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.LTGRAY), null, Shader.TileMode.REPEAT) // 一个材质,打造出一个线性梯度沿著一条线。
+                intArrayOf(Color.RED, Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.LTGRAY), null, Shader.TileMode.REPEAT) //一个材质,打造出一个线性梯度沿著一条线。
         paint.shader = mShader
         val rect = RectF(0f, 0f, 300f, 400f)
         canvas.drawOval(rect, paint)

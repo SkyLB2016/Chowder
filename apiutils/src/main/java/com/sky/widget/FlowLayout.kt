@@ -1,4 +1,4 @@
-package com.sky.chowder.ui.widget
+package com.sky.widget
 
 import android.content.Context
 import android.util.AttributeSet
@@ -14,45 +14,65 @@ import java.util.*
  * 流式布局
  */
 class FlowLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : FrameLayout(context, attrs, defStyleAttr) {
+
+    // 所有控件，分行排列
+    private val allViews = ArrayList<List<View>>()
+    // 记录行高
+    private val lineHeights = ArrayList<Int>()
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        val layoutWidth = View.MeasureSpec.getSize(widthMeasureSpec)//match_parent是的宽
+        val layoutWidth = View.MeasureSpec.getSize(widthMeasureSpec)//match_parent时的宽
         val widthMode = View.MeasureSpec.getMode(widthMeasureSpec)//获取测量模式，match与wrap
         val layoutHeight = View.MeasureSpec.getSize(heightMeasureSpec)
         val heightMode = View.MeasureSpec.getMode(heightMeasureSpec)
 
         // 模式为wrap_content时，测量框架的宽高
-        var width = 0// 框架款起始值
-        var height = 0// 框架高起始值
+        // 先清空
+        allViews.clear()
+        lineHeights.clear()
+        var lineViews: MutableList<View> = ArrayList()
+        var width = 0
+        var height = 0
         // 记录每一行的高度和宽度
         var lineWidth = 0
         var lineHeight = 0
 
-        val childCount = childCount// 获取框架内的子控件
+        var child: View
+        var lp: MarginLayoutParams
+        var childWidth: Int
+        var childHeight: Int
+        val childCount = childCount
+        val realWidth = layoutWidth - paddingLeft - paddingRight
         for (i in 0 until childCount) {
-
-            val view = getChildAt(i)// 获取子view
-            measureChild(view, widthMeasureSpec, widthMeasureSpec)// 测量子view
-
-            val lp = view.layoutParams as ViewGroup.MarginLayoutParams
-            val childWidth = view.measuredWidth + lp.leftMargin + lp.rightMargin
-            val childHeight = view.measuredHeight + lp.topMargin + lp.bottomMargin
-
-            if (lineWidth + childWidth > layoutWidth - paddingLeft - paddingRight) {
+            child = getChildAt(i)
+            measureChild(child, widthMeasureSpec, widthMeasureSpec)// 测量子view
+            lp = child.layoutParams as ViewGroup.MarginLayoutParams
+            childWidth = child.measuredWidth + lp.leftMargin + lp.rightMargin
+            childHeight = child.measuredHeight + lp.topMargin + lp.bottomMargin
+            //当行宽加上一个childWidth大于父布局的实际宽时，切换下一行
+            if (lineWidth + childWidth > realWidth) {
+                //计算流布局的宽高
                 width = Math.max(width, lineWidth)
-                lineWidth = childWidth
-
                 height += lineHeight
+                //切换下一行，重置行高行宽
+                lineWidth = childWidth
                 lineHeight = childHeight
-            } else {
+
+                allViews.add(lineViews)
+                lineHeights.add(lineHeight)
+                lineViews = ArrayList()
+            } else {//不换行时，只计算行宽高
                 lineWidth += childWidth
                 lineHeight = Math.max(lineHeight, childHeight)
             }
-            // 判断最后一个，获取最终宽高
-            if (i == childCount - 1) {
+            //判断最后一个，加载最后一行的宽高，获取最终宽高
+            if (i === childCount - 1) {
                 width = Math.max(width, lineWidth)
                 height += lineHeight
             }
+            lineViews.add(child)
         }
+        allViews.add(lineViews)
+        lineHeights.add(lineHeight)
         // 为框架父控件写入宽高
         setMeasuredDimension(
                 if (widthMode == View.MeasureSpec.EXACTLY) layoutWidth else width + paddingLeft + paddingRight,
@@ -60,58 +80,22 @@ class FlowLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
         )
     }
 
-    // 所有控件，分行排列
-    private val allViews = ArrayList<List<View>>()
-    // 记录行高
-    private val mLineHeight = ArrayList<Int>()
-
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
-        // 先清空
-        allViews.clear()
-        mLineHeight.clear()
-
-        var lineWidth = 0
-        var lineHeight = 0
-        var lineViews: MutableList<View> = ArrayList()
-        val width = width
-        val childCount = childCount
-        for (i in 0 until childCount) {
-            val view = getChildAt(i)
-            val lp = view.layoutParams as ViewGroup.MarginLayoutParams
-            val childWidth = view.measuredWidth + lp.leftMargin + lp.rightMargin
-            val childHeight = view.measuredHeight + lp.topMargin + lp.bottomMargin
-
-            if (childWidth + lineWidth > width - paddingLeft - paddingRight) {
-                allViews.add(lineViews)
-                mLineHeight.add(lineHeight)
-
-                lineWidth = 0
-                lineHeight = childHeight
-                lineViews = ArrayList()
-            }
-            lineWidth += childWidth
-            lineHeight = Math.max(lineHeight, childHeight)
-            lineViews.add(view)
-        }
-
-        allViews.add(lineViews)
-        mLineHeight.add(lineHeight)
+        var lineViews: MutableList<View>
+        var lineHeight: Int
         var left = paddingLeft
         var top = paddingTop
-
         for (i in allViews.indices) {
             lineViews = allViews[i] as MutableList<View>
-            lineHeight = mLineHeight[i]
+            lineHeight = lineHeights[i]
             for (j in lineViews.indices) {
                 val child = lineViews[j]
                 if (child.visibility == View.GONE) continue
                 val lp = child.layoutParams as ViewGroup.MarginLayoutParams
-
                 val leftChild = left + lp.leftMargin
                 val topChild = top + lp.topMargin
                 val rightChild = leftChild + child.measuredWidth
                 val bottomChild = topChild + child.measuredHeight
-
                 child.layout(leftChild, topChild, rightChild, bottomChild)
 
                 left += lp.leftMargin + lp.rightMargin + child.measuredWidth
@@ -121,9 +105,6 @@ class FlowLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
         }
     }
 
-    /**
-     * 与当前ViewGroup对应的LayoutParams
-     */
     override fun generateLayoutParams(attrs: AttributeSet) = FrameLayout.LayoutParams(context, attrs)
 
     var lastY = 0f
