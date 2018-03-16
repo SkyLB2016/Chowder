@@ -29,6 +29,7 @@
     <dimen name="text_micro">12sp</dimen>
     <!--次级正文-->
     <dimen name="text_small">15sp</dimen>
+    <dimen name="text_16">16sp</dimen>
     <!--正文-->
     <dimen name="text_medium">18sp</dimen>
     <!--导航栏-->

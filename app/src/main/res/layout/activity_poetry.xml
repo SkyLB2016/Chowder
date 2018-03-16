@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar" />
+
+    <com.sky.widget.FlowLayout
+        android:id="@+id/flow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/alpha_66"
+        android:elevation="@dimen/wh_8" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.2">
+
+        <!--<TextView-->
+        <!--android:id="@+id/tvDDJ"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="@color/alpha_66"-->
+        <!--android:lineSpacingMultiplier="1.5"-->
+        <!--android:letterSpacing="0.1"-->
+        <!--android:paddingLeft="@dimen/wh_48"-->
+        <!--android:paddingRight="@dimen/wh_48"-->
+        <!--android:text="@string/daodejing"-->
+        <!--android:textSize="@dimen/text_16" />-->
+        <TextView
+            android:id="@+id/tvDisplay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/alpha_66"
+            android:gravity="center"
+            android:letterSpacing="0.1"
+            android:lineSpacingMultiplier="1.5"
+            android:paddingLeft="@dimen/wh_40"
+            android:paddingRight="@dimen/wh_40"
+            android:text="@string/daodejing"
+            android:textSize="@dimen/text_16" />
+    </ScrollView>
+</LinearLayout>
