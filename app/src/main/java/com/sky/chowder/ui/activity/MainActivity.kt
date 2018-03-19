@@ -64,7 +64,7 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 
     @OnClick(R.id.fab)
     fun fabOnClick() {
-        var text = getString(R.string.daodejing).trim()
+        var text = getString(R.string.daodejing1).trim()
         text = text.replace(" ", "")
         LogUtils.i("${text.length}")
     }

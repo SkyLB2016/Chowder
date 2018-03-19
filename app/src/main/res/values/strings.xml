@@ -95,6 +95,4 @@
     <string name="format02">组合替换字符%s与数字%d %n</string>
     <string name="format03">转四位数的的数%04d %n</string>
     <string name="format04">以,分隔整数%,d与浮点数%,.2f %n</string>
-
-
 </resources>
