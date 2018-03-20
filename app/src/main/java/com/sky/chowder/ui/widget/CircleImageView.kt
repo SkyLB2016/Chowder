@@ -15,7 +15,6 @@ import com.sky.utils.BitmapUtils
  */
 class CircleImageView : android.support.v7.widget.AppCompatImageView {
 
-
     private val mDrawableRect = RectF()
     private val mBorderRect = RectF()
 
@@ -93,9 +92,7 @@ class CircleImageView : android.support.v7.widget.AppCompatImageView {
     var borderWidth: Int
         get() = mBorderWidth
         set(borderWidth) {
-            if (borderWidth == mBorderWidth) {
-                return
-            }
+            if (borderWidth == mBorderWidth) return
             mBorderWidth = borderWidth
             setup()
         }
