@@ -7,15 +7,14 @@ import android.annotation.TargetApi
 import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.Animatable
 import android.os.BatteryManager
 import android.os.Build
 import android.provider.ContactsContract
 import android.text.Spannable
 import android.text.SpannableStringBuilder
-import android.text.style.AbsoluteSizeSpan
-import android.text.style.BackgroundColorSpan
-import android.text.style.ForegroundColorSpan
+import android.text.style.*
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
@@ -175,12 +174,19 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
         val text = "天行健，君子以自强不息；地势坤，君子以厚德载物。"
 //        val span = SpannableString(text)
         val span = SpannableStringBuilder(text)
-        span.setSpan(AbsoluteSizeSpan(resources.getDimension(R.dimen.text_medium).toInt()), 0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        span.setSpan(AbsoluteSizeSpan(resources.getDimensionPixelSize(R.dimen.text_medium)), 0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         span.setSpan(ForegroundColorSpan(Color.RED), 8, 17, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         span.setSpan(BackgroundColorSpan(Color.rgb(55, 155, 200)), 17, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        span.setSpan(UnderlineSpan(), 0, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//下划线
+        span.setSpan(StrikethroughSpan(), 4, 8, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//中划线
+        span.setSpan(RelativeSizeSpan(1.2f), 8, 10, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//字号按比例翻倍
+        span.setSpan(SuperscriptSpan(), 10, 11, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//上标
+        span.setSpan(SubscriptSpan(), 12, 13, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//下标
+        span.setSpan(StyleSpan(Typeface.BOLD), 13, 15, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//字体风格
+        span.setSpan(URLSpan("http://www.baidu.com"), 17, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//超链接
         span.append("\n天地玄黄，宇宙洪荒。\n")
         span.append("日月盈仄，辰宿列张。\n")
-        span.append(getText(R.string.test))
+        span.append(getText(R.string.ibu))
         return span
     }
 

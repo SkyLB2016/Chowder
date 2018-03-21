@@ -13,18 +13,17 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/wh_4"
         android:layout_marginTop="@dimen/wh_8"
         android:layout_weight="1.0"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <com.sky.chowder.ui.widget.CircleImageView
+        <com.sky.widget.CircleImageView
             android:id="@+id/civ_head"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/wh_144"
+            android:layout_height="@dimen/wh_144"
             android:layout_centerHorizontal="true"
-            android:src="@mipmap/ic_launcher"
+            android:src="@mipmap/ic_puzzle"
             app:borderColor="@color/green"
             app:borderWidth="@dimen/wh_4" />
 
@@ -34,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/civ_head"
             android:gravity="center"
-            android:text="sky"
+            android:text="@string/app_name"
             android:textColor="@color/white"
             android:textSize="@dimen/text_medium" />
 
@@ -51,7 +50,6 @@
     <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/wh_8"
         android:orientation="vertical"
         app:divider="@drawable/divider"
         app:showDividers="middle">
@@ -66,7 +64,7 @@
             android:tag="@string/qq_menu01">
 
             <!--<android.support.v4.widget.CircleImageView-->
-            <com.sky.chowder.ui.widget.CircleImageView
+            <com.sky.widget.CircleImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_launcher"
@@ -93,7 +91,7 @@
             android:orientation="horizontal"
             android:tag="@string/qq_menu02">
 
-            <com.sky.chowder.ui.widget.CircleImageView
+            <com.sky.widget.CircleImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_launcher"
@@ -120,7 +118,7 @@
             android:orientation="horizontal"
             android:tag="@string/qq_menu03">
 
-            <com.sky.chowder.ui.widget.CircleImageView
+            <com.sky.widget.CircleImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_launcher"
@@ -147,7 +145,7 @@
             android:orientation="horizontal"
             android:tag="@string/qq_menu04">
 
-            <com.sky.chowder.ui.widget.CircleImageView
+            <com.sky.widget.CircleImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_launcher"
@@ -174,7 +172,7 @@
             android:orientation="horizontal"
             android:tag="@string/qq_menu05">
 
-            <com.sky.chowder.ui.widget.CircleImageView
+            <com.sky.widget.CircleImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_launcher"
@@ -207,15 +205,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/wh_4"
+            android:layout_marginRight="@dimen/wh_48"
             android:text="设置"
+            android:gravity="center"
             android:textColor="@color/white"
             android:textSize="@dimen/text_medium" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/wh_4"
+            android:layout_marginLeft="@dimen/wh_48"
             android:text="退出"
+            android:gravity="center"
             android:textColor="@color/white"
             android:textSize="@dimen/text_medium" />
     </LinearLayout>

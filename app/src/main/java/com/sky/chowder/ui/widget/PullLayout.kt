@@ -132,7 +132,7 @@ class PullLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
         ObjectAnimator.ofFloat(llContent, "translationY", -t)
         //        ViewHelper.setTranslationY(llContent, -t);
 
-        val percent = t.toFloat() / menuHeight
+        val percent = t / menuHeight
         eyeView.scaleX = 1 - percent
         eyeView.scaleY = 1 - percent
         ObjectAnimator.ofFloat(ll_weather, "translationY", -t / 2)

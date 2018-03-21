@@ -39,7 +39,7 @@ class WelcomeActivity : AppCompatActivity() {
 
         set.addAnimation(alpha)
         set.addAnimation(rotate)
-        set.addAnimation(tran)
+//        set.addAnimation(tran)
         set.addAnimation(scale)
 
         view.startAnimation(set)

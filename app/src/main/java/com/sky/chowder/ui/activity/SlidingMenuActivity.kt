@@ -20,6 +20,7 @@ class SlidingMenuActivity : BaseNoPActivity() {
         super.initialize()
         initData()
         tvLogin.setOnClickListener { showToast("登录") }
+        civ_head.setImageResource(R.mipmap.ic_puzzle)
     }
 
     private fun initData() {

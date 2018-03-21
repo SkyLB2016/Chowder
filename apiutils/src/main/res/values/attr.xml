@@ -24,4 +24,11 @@
         <attr name="position"/>
         <attr name="radius"/>
     </declare-styleable>
+
+
+    <declare-styleable name="CircleImageView">
+        <attr name="borderWidth" format="dimension"/>
+        <attr name="borderColor" format="color"/>
+    </declare-styleable>
+
 </resources>
