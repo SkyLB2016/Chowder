@@ -29,7 +29,7 @@ class CircleImageView @JvmOverloads constructor(context: Context, attrs: Attribu
     private var bitmap: Bitmap? = null
 
     init {
-        super.setScaleType(SCALE_TYPE)
+        scaleType = SCALE_TYPE
         val array = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView, defStyle, 0)
         borderWidth = array.getDimension(R.styleable.CircleImageView_borderWidth, borderWidth)
         borderColor = array.getColor(R.styleable.CircleImageView_borderColor, BORDER_COLOR)
@@ -52,7 +52,7 @@ class CircleImageView @JvmOverloads constructor(context: Context, attrs: Attribu
         val radius = Math.min(width / 2 - borderWidth, height / 2 - borderWidth)
         canvas.drawCircle(pivotX, pivotY, radius, paint)
 
-        paint.reset()
+        paint.reset()//重置画笔
         //话空心圆，即外圆
         paint.isAntiAlias = true
         paint.style = Paint.Style.STROKE

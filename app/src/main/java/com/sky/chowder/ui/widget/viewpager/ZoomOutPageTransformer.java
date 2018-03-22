@@ -1,4 +1,4 @@
-package com.sky.chowder.ui.widget;
+package com.sky.chowder.ui.widget.viewpager;
 
 import android.support.v4.view.ViewPager;
 import android.view.View;

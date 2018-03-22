@@ -11,7 +11,7 @@
     <string name="act_solar_d">支持九个方向，采用属性动画ObjectAnimator编写，三角函数正余弦的顺逆时针（参考笔记），kotlin中调用操作符：a.invoke(v,i)</string>
 
     <string name="act_slid">03.侧滑栏</string>
-    <string name="act_slid_d">继承自HorizontalScrollView,融合FlowLayout</string>
+    <string name="act_slid_d">继承自HorizontalScrollView,融合FlowLayout流布局，CircleImageView圆形控件，可改圆角图片以及其他自定义图片</string>
 
     <string name="act_bitmapurl">04.网络图片加载与缓存,本地照片与相机</string>
     <string name="act_bit_d">网络图片加载与缓存，多种布局加载,AsyncTask多任务加载，LruCache缓存图片，本地照片与相机，兼容7.1版本，4.4以上,待完成：DisLurCache缓存图片到本地</string>
@@ -23,7 +23,7 @@
     <string name="act_canvas_d">线性渐变，三次贝赛尔曲线，maskFilter，pathEffect，移动布局坐标，文字基线绘制，画布状态保存与回溯</string>
 
     <string name="act_puzzle">07.拼图</string>
-    <string name="act_puzzle_d">自定义View，二维数组，遮罩隐藏</string>
+    <string name="act_puzzle_d">拼图游戏，一维数组模拟二维数组，移动时遮罩隐藏原，移动新view，可引申动态加载大图片</string>
 
     <string name="act_tab">08.滑动窗口</string>
     <string name="act_tab_b">tab结合viewpager，包含：CardView,MeshView,Shader，XferModeF，电话簿</string>
@@ -42,7 +42,6 @@
 
     <string name="act_poetry">14.诗词文赋</string>
     <string name="act_poetry_d">诗词文赋</string>
-
 
     <string name="ibu"><i><b><u>service</u></b></i></string>
 

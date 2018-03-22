@@ -1,6 +1,5 @@
 package com.sky.chowder.ui.activity
 
-import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.sky.chowder.R
@@ -13,10 +12,7 @@ class TestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
-//        civ_head.setImageBitmap(BitmapUtils.getBitmapFromId(this,R.mipmap.ic_puzzle))
-//        civ_head.setImageResource(R.mipmap.ic_puzzle)
-        civ_head.borderColor = Color.BLACK
-        civ_head.borderWidth = 10f
+        bt.setOnClickListener { }
     }
 
 }

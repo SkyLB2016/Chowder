@@ -1,4 +1,4 @@
-package com.sky.chowder.ui.widget
+package com.sky.chowder.ui.widget.pending
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
@@ -22,12 +22,10 @@ class PullLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
     private var animator: ObjectAnimator? = null
 
     private var once: Boolean? = true
-    private val screenWidth: Int = ScreenUtils.getWidthPX(context)
     private val screenHeight: Int = ScreenUtils.getHeightPX(context)
 
     private var mState = State.OPEN
-    private val downX: Float = 0.toFloat()
-    private var downY: Float = 0.toFloat()//按下时的xy
+    private var downY: Float = 0f//按下时的xy
     private var menuHeight: Int = 0
 
     override fun onFinishInflate() {
@@ -52,15 +50,10 @@ class PullLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
         llContent.layout(0, menuHeight, llContent.width, llContent.height + menuHeight)
     }
 
-    override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
-        when (ev.action) {
-            MotionEvent.ACTION_DOWN -> downY = ev.y
-        }
-        return super.onInterceptTouchEvent(ev)
-    }
 
     override fun onTouchEvent(ev: MotionEvent): Boolean {
         when (ev.action) {
+            MotionEvent.ACTION_DOWN -> downY = ev.y
             MotionEvent.ACTION_MOVE -> {
                 val moveY = (ev.y.toInt() - downY).toInt()
                 //moveY>0下拉，同时改变menu的大小；<0上拉，无操作
@@ -107,7 +100,7 @@ class PullLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
     }
 
     private fun animateScroll(t: Float) {
-        val percent = t.toFloat() / menuHeight
+        val percent = t / menuHeight
         ObjectAnimator.ofFloat(rlMenu, "translationY", t)
         ObjectAnimator.ofFloat(llContent, "translationY", titleBar.height * percent)
         ObjectAnimator.ofFloat(eyeView, "translationY", -t / 2)

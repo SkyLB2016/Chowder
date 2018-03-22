@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import com.sky.chowder.R
-import com.sky.chowder.ui.widget.DepthPageTransformer
+import com.sky.chowder.ui.widget.viewpager.DepthPageTransformer
 import java.util.*
 
 /**

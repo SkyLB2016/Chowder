@@ -7,70 +7,54 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.widget.ImageView
-
-import com.sky.utils.BitmapUtils
+import com.sky.utils.ScreenUtils
 
 /**
  * Created by SKY on 2015/8/14 15:27.
  * drawbitmapmesh应用
  */
-class MeshView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : ImageView(context, attrs, defStyleAttr) {
+class MeshView @JvmOverloads constructor(context: Context, attrs: AttributeSet, defStyle: Int = 0) : android.support.v7.widget.AppCompatImageView(context, attrs, defStyle) {
 
-    private val MESHWIDTH = 200
-    private val MESHHEIGHT = 200
-    private val COUNT = (MESHWIDTH + 1) * (MESHHEIGHT + 1)
-    private val oldPoint = FloatArray(COUNT * 2)
-    private val newPoint = FloatArray(COUNT * 2)
-    private var mBitmap: Bitmap? = null
+    private val line = 200//行
+    private val column = 200//列
+    private val total = (line + 1) * (column + 1)//总数
+    private val oldPoint = FloatArray(total * 2)
+    private val newPoint = FloatArray(total * 2)
+
+    private var bitmap: Bitmap? = null
+    private var temp = 1.0//每次的变量
+
 
     init {
-        super.setScaleType(ImageView.ScaleType.CENTER)
-        initView()
+        scaleType = ImageView.ScaleType.CENTER
     }
 
-    override fun setImageBitmap(bm: Bitmap) {
-        super.setImageBitmap(bm)
-        mBitmap = bm
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+        val bitWidth = bitmap!!.width * 1f
+        val bitHeight = bitmap!!.height * 1f
+        for (i in 0 until total) {
+            oldPoint[i * 2 + 0] = bitWidth * (i % (column + 1)) / column
+            oldPoint[i * 2 + 1] = bitHeight * (i / (line + 1)) / line
+            newPoint[i * 2 + 0] = oldPoint[i * 2 + 0]
+            newPoint[i * 2 + 1] = oldPoint[i * 2 + 1]
+        }
+        setMeasuredDimension(ScreenUtils.getWidthPX(context), ScreenUtils.getWidthPX(context))
+    }
+
+    override fun onDraw(canvas: Canvas) {
+        for (i in 0 until total) {
+            val offSetY = Math.sin(i % (column + 1.0) / line * 2.0 * Math.PI + temp * 2.0 * Math.PI).toFloat()
+            newPoint[i * 2 + 0] = oldPoint[i * 2 + 0] + offSetY * 25 + 100
+            newPoint[i * 2 + 1] = oldPoint[i * 2 + 1] + offSetY * 25 + 100
+        }
+        canvas.drawBitmapMesh(bitmap!!, line, column, newPoint, 0, null, 0, null)
+        temp += 0.05//每次增加多少
+        invalidate()
     }
 
     override fun setImageDrawable(drawable: Drawable?) {
         super.setImageDrawable(drawable)
-        mBitmap = (drawable as BitmapDrawable).bitmap
-    }
-
-    override fun setImageResource(resId: Int) {
-        super.setImageResource(resId)
-        mBitmap = BitmapUtils.getBitmapFromId(context,resId)
-    }
-
-    private fun initView() {
-        val bitWidth = mBitmap!!.width.toFloat()
-        val bitHeight = mBitmap!!.height.toFloat()
-        for (i in 0..MESHHEIGHT) {
-            val bitY = bitHeight * i / MESHHEIGHT
-            for (j in 0..MESHHEIGHT) {
-                val bitX = bitWidth * j / MESHWIDTH
-                oldPoint[(i * (MESHHEIGHT + 1) + j) * 2 + 0] = bitX
-                newPoint[(i * (MESHHEIGHT + 1) + j) * 2 + 0] = oldPoint[(i * (MESHHEIGHT + 1) + j) * 2 + 0]
-                oldPoint[(i * (MESHHEIGHT + 1) + j) * 2 + 1] = bitY
-                newPoint[(i * (MESHHEIGHT + 1) + j) * 2 + 1] = oldPoint[(i * (MESHHEIGHT + 1) + j) * 2 + 1]
-            }
-        }
-
-    }
-
-    private var k = 1f
-
-    override fun onDraw(canvas: Canvas) {
-        for (i in 0..MESHHEIGHT) {
-            for (j in 0..MESHWIDTH) {
-                val offSetY = Math.sin((j.toFloat() / MESHWIDTH).toDouble() * 2.0 * Math.PI + k.toDouble() * 2.0 * Math.PI).toFloat()
-                newPoint[(i * (MESHHEIGHT + 1) + j) * 2 + 0] = oldPoint[(i * (MESHHEIGHT + 1) + j) * 2 + 0] + offSetY * 50 + 200f
-                newPoint[(i * (MESHHEIGHT + 1) + j) * 2 + 1] = oldPoint[(i * (MESHHEIGHT + 1) + j) * 2 + 1] + offSetY * 25 + 400f
-            }
-        }
-        canvas.drawBitmapMesh(mBitmap!!, MESHWIDTH, MESHHEIGHT, newPoint, 0, null, 0, null)
-        k += 0.05f
-        invalidate()
+        bitmap = (drawable as BitmapDrawable).bitmap
     }
 }

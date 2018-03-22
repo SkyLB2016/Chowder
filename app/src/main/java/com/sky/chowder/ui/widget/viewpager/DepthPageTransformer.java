@@ -1,4 +1,4 @@
-package com.sky.chowder.ui.widget;
+package com.sky.chowder.ui.widget.viewpager;
 
 import android.annotation.TargetApi;
 import android.os.Build;

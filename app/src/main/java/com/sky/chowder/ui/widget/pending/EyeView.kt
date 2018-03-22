@@ -1,4 +1,4 @@
-package com.sky.chowder.ui.widget
+package com.sky.chowder.ui.widget.pending
 
 import android.content.Context
 import android.graphics.*
@@ -9,18 +9,12 @@ import android.widget.FrameLayout
 /**
  * Created by SKY on 2015/8/17 15:30.
  */
-class EyeView @JvmOverloads constructor(
-        context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : FrameLayout(context, attrs, defStyleAttr) {
+class EyeView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0 ) : FrameLayout(context, attrs, defStyleAttr) {
 
     private var paint: Paint? = null
     private var bitmap: Bitmap? = null
 
     init {
-        init()
-    }
-
-    private fun init() {
         isDrawingCacheEnabled = true
         setLayerType(View.LAYER_TYPE_SOFTWARE, null)
         paint = Paint(Paint.ANTI_ALIAS_FLAG)
@@ -47,15 +41,15 @@ class EyeView @JvmOverloads constructor(
     override fun dispatchDraw(canvas: Canvas) {
         super.dispatchDraw(canvas)
         if (bitmap != null) {
-            paint!!.xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_IN)
+            paint?.xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_IN)
             canvas.drawBitmap(bitmap!!, 0f, 0f, paint)
-            paint!!.xfermode = null
+            paint?.xfermode = null
         }
     }
 
     fun setRadius(radius: Int) {
         if (bitmap != null && !bitmap!!.isRecycled) {
-            bitmap!!.recycle()
+            bitmap?.recycle()
         }
         bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap!!)

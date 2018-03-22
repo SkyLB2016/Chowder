@@ -17,10 +17,6 @@ class ShaderView @JvmOverloads constructor(context: Context, attrs: AttributeSet
     private var paint: Paint? = null
 
     init {
-        initView()
-    }
-
-    private fun initView() {
         bitmap = BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher)
         val matrix = Matrix()
         matrix.setScale(1f, -1f)
@@ -29,12 +25,10 @@ class ShaderView @JvmOverloads constructor(context: Context, attrs: AttributeSet
         paint!!.shader = LinearGradient(0f, bitmap!!.height.toFloat(), 0f, bitmap!!.height * 1.8f, 0xEE000000.toInt(), 0x10000000, Shader.TileMode.CLAMP)
 //        paint!!.shader = LinearGradient(0f, bitmap!!.height.toFloat(), 0f, bitmap!!.height * 1.8f, Color.RED, Color.BLUE, Shader.TileMode.CLAMP)
         paint!!.xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_IN)
-
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-//        canvas.drawColor(Color.BLACK)
         canvas.drawBitmap(bitmap!!, 0f, 0f, null)
         canvas.drawBitmap(refBitmap!!, 0f, bitmap!!.height.toFloat(), null)
         canvas.drawRect(0f, bitmap!!.height.toFloat(), bitmap!!.width.toFloat(), (bitmap!!.height * 2).toFloat(), paint!!)

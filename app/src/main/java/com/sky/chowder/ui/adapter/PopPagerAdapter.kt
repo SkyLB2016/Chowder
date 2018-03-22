@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 
 import com.sky.chowder.R
-import com.sky.chowder.ui.widget.ZoomImageView
+import com.sky.chowder.ui.widget.pending.ZoomImageView
 import com.sky.chowder.utils.ImageLoaderExecutors
 
 /**

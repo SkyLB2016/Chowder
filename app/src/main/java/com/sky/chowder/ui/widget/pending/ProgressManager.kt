@@ -1,4 +1,4 @@
-package com.sky.chowder.ui.widget
+package com.sky.chowder.ui.widget.pending
 
 import android.app.ProgressDialog
 import android.content.Context
