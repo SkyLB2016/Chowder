@@ -24,7 +24,7 @@ public class MyRecyclerView extends RecyclerView {
         setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         //分割线效果
 //        addItemDecoration(new DividerGridItemDecoration(context));
-        //addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL_LIST));
+//        addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
         // 添加删除时的动画效果
         setItemAnimator(new DefaultItemAnimator());
     }
