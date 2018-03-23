@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_poetry.*
 class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
     override fun getLayoutResId(): Int = R.layout.activity_poetry
     override fun initialize() {
-        val method = arrayListOf("道德经", "千字文", "三字经", "弟子规", "沁园春雪", "陋室铭", "陋的室铭")
+        val method = arrayListOf("道德经", "千字文", "三字经", "弟子规", "陋室铭", "沁园春雪")
         for (i in method) {
             val tvText = LayoutInflater.from(this).inflate(R.layout.tv, flow, false) as TextView
             tvText.textSize = 18f
