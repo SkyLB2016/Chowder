@@ -14,7 +14,8 @@ import kotlinx.android.synthetic.main.activity_poetry.*
 class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
     override fun getLayoutResId(): Int = R.layout.activity_poetry
     override fun initialize() {
-        val method = arrayListOf("道德经", "千字文", "三字经", "弟子规", "陋室铭", "沁园春雪")
+//        val method = arrayListOf("道德经", "千字文", "三字经", "弟子规", "陋室铭", "沁园春雪")
+        val method = resources.getStringArray(R.array.poetry)
         for (i in method) {
             val tvText = LayoutInflater.from(this).inflate(R.layout.tv, flow, false) as TextView
             tvText.textSize = 18f
@@ -26,13 +27,50 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
         tvDisplay.text = getString(R.string.daodejing).replace(" ", "")
     }
 
+//    override fun onRestart() {
+//        super.onRestart()
+//        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
+//    }
+//
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
+//    }
+//
+//    override fun onStart() {
+//        super.onStart()
+//        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
+//    }
+//
+//    override fun onResume() {
+//        super.onResume()
+//        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
+//    }
+//
+//    override fun onPause() {
+//        super.onPause()
+//        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
+//    }
+//
+//    override fun onStop() {
+//        super.onStop()
+//        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
+//    }
+//
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
+//    }
+
     override fun onClick(v: View?) {
         tvDisplay.gravity = when (v?.tag) {
-            "道德经", "沁园春雪", "陋室铭" -> Gravity.LEFT
+            "道德经", "论语", "大学", "沁园春雪", "陋室铭" -> Gravity.LEFT
             else -> Gravity.CENTER
         }
         tvDisplay.text = getString(when (v?.tag) {
             "道德经" -> R.string.daodejing
+            "论语" -> R.string.lunyu
+            "大学" -> R.string.daxue
             "千字文" -> R.string.qianziwen
             "三字经" -> R.string.sanzijing
             "弟子规" -> R.string.dizigui

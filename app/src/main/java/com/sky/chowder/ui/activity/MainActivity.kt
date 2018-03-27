@@ -2,6 +2,11 @@ package com.sky.chowder.ui.activity
 
 import android.Manifest
 import android.content.ActivityNotFoundException
+import android.media.AudioAttributes
+import android.media.AudioManager
+import android.media.SoundPool
+import android.os.Build
+import android.support.annotation.RequiresApi
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
@@ -15,8 +20,10 @@ import com.sky.chowder.ui.adapter.MainAdapter
 import com.sky.chowder.ui.presenter.MainP
 import com.sky.utils.AppUtils
 import com.sky.utils.JumpAct
+import com.sky.utils.LogUtils
 import kotlinx.android.synthetic.main.content_main.*
 import java.io.File
+
 
 /**
  * Created by SKY on 2015/12/6.
@@ -27,7 +34,6 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 //        super.onCreate(savedInstanceState)
 //        Debug.startMethodTracing()
 //    }
-//
 //    override fun onDestroy() {
 //        super.onDestroy()
 //        Debug.stopMethodTracing()
@@ -59,10 +65,41 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 
     @OnClick(R.id.fab1)
     fun fab1OnClick() {
+        var text = getString(R.string.cezi).trim().replace(" ", "")
+        LogUtils.i("总长==${text.length - 20}")
     }
 
+    //    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     @OnClick(R.id.fab)
     fun fabOnClick() {
+//        val mMediaPlayer = MediaPlayer.create(this, R.raw.o1);
+//        mMediaPlayer.start()
+//        mMediaPlayer.setOnCompletionListener {
+//            LogUtils.i("播放完成")
+//        }
+        val soundPool = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            SoundPool.Builder()
+                    .setMaxStreams(100)   //设置允许同时播放的流的最大值
+                    .setAudioAttributes(AudioAttributes.Builder()
+                            .setUsage(AudioAttributes.USAGE_MEDIA)
+                            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                            .build())   //完全可以设置为null
+                    .build()
+        else SoundPool(100, AudioManager.STREAM_MUSIC, 0)
+        //构建对象
+        val soundId = soundPool.load(this, R.raw.o1, 1)//加载资源，得到soundId
+//        val streamId = soundPool.play(soundId, 1f, 1f, 1, 0, 1f)//播放，得到StreamId
+        soundPool.setOnLoadCompleteListener { soundPool, sampleId, status ->
+            LogUtils.i("soundPool==$soundPool")
+            LogUtils.i("sampleId==$sampleId")
+            LogUtils.i("status==$status")
+            LogUtils.i("播放完成")
+            val streamId = soundPool.play(soundId, 1f, 1f, 1, 0, 1f)//播放，得到StreamId
+        }
+//        soundPool?.co
+        JumpAct.jumpActivity(this, PoetryActivity::class.java)
+
 
     }
 

@@ -6,4 +6,14 @@
         <item>@color/colorAccent</item>
         <item>@color/yellow</item>
     </array>
+    <array name="poetry">
+        <item>"道德经"</item>
+        <item>"论语"</item>
+        <item>"大学"</item>
+        <item>"千字文"</item>
+        <item>"三字经"</item>
+        <item>"弟子规"</item>
+        <item>"陋室铭"</item>
+        <item>"沁园春雪"</item>
+    </array>
 </resources>

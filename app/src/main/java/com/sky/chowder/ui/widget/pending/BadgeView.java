@@ -15,6 +15,8 @@ import android.widget.FrameLayout.LayoutParams;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
+import com.sky.chowder.ui.activity.PoetryActivity;
+import com.sky.utils.JumpAct;
 import com.sky.utils.LogUtils;
 
 /**
