@@ -29,7 +29,7 @@ group = publishedGroupId// Maven Group ID for the artifact
 version = libraryVersion
 android {
     compileSdkVersion 26
-    buildToolsVersion '27.0.0'
+    buildToolsVersion '27.0.3'
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 26
