@@ -9,6 +9,7 @@ import android.content.IntentFilter
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.Animatable
+import android.media.MediaPlayer
 import android.os.BatteryManager
 import android.os.Build
 import android.provider.ContactsContract
@@ -56,6 +57,7 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
                 , "工厂模式"
                 , "SVG与Value"
                 , "渐变的文字"
+                , "音频处理"
         )
         for (i in method) {
             val tvText = LayoutInflater.from(this).inflate(R.layout.tv, flow, false) as TextView
@@ -91,8 +93,31 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
             "工厂模式" -> factoryModel()
             "SVG与Value" -> setSvg()
             "渐变的文字" -> shaderText()
+            "音频处理" -> makePlayer()
             "" -> ""
         }
+    }
+
+    private fun makePlayer() {
+        val mMediaPlayer = MediaPlayer.create(this, R.raw.sudi);
+        mMediaPlayer.start()
+        mMediaPlayer.setOnCompletionListener {
+            showToast("播放完成")
+        }
+//        val soundPool = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+//            SoundPool.Builder()
+//                    .setMaxStreams(100)   //设置允许同时播放的流的最大值
+//                    .setAudioAttributes(AudioAttributes.Builder()
+//                            .setUsage(AudioAttributes.USAGE_MEDIA)
+//                            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+//                            .build())   //完全可以设置为null
+//                    .build()
+//        else SoundPool(100, AudioManager.STREAM_MUSIC, 0)
+//        构建对象
+//        val soundId = soundPool.load(this, R.raw.sudi, 1)//加载资源，得到soundId
+//        soundPool.setOnLoadCompleteListener { soundPool, sampleId, status ->
+//            val streamId = soundPool.play(soundId, 1f, 1f, 1, 0, 1f)//播放，得到StreamId
+//        }
     }
 
     private fun shaderText() {

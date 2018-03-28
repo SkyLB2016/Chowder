@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.TextView
 import com.sky.base.BaseNoPActivity
 import com.sky.chowder.R
+import com.sky.utils.LogUtils
 import kotlinx.android.synthetic.main.activity_poetry.*
 
 /**
@@ -64,13 +65,16 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         tvDisplay.gravity = when (v?.tag) {
-            "道德经", "论语", "大学", "沁园春雪", "陋室铭" -> Gravity.LEFT
-            else -> Gravity.CENTER
+            "千字文", "三字经", "弟子规" -> Gravity.CENTER
+            else -> Gravity.LEFT
         }
         tvDisplay.text = getString(when (v?.tag) {
             "道德经" -> R.string.daodejing
             "论语" -> R.string.lunyu
             "大学" -> R.string.daxue
+            "中庸" -> R.string.zhongyong
+            "孟子" -> R.string.mengzi
+            "菜根谭" -> R.string.caigentan
             "千字文" -> R.string.qianziwen
             "三字经" -> R.string.sanzijing
             "弟子规" -> R.string.dizigui
@@ -78,5 +82,6 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
             "陋室铭" -> R.string.loushiming
             else -> R.string.daodejing
         }).replace(" ", "")
+        LogUtils.i("总行数==${tvDisplay.lineCount}")
     }
 }

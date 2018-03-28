@@ -27,8 +27,8 @@
             android:paddingTop="@dimen/wh_16"
             android:letterSpacing="0.1"
             android:lineSpacingMultiplier="1.5"
-            android:paddingLeft="@dimen/wh_40"
-            android:paddingRight="@dimen/wh_40"
+            android:paddingLeft="@dimen/wh_32"
+            android:paddingRight="@dimen/wh_32"
             android:text="@string/daodejing"
             android:textSize="@dimen/text_16" />
     </ScrollView>
