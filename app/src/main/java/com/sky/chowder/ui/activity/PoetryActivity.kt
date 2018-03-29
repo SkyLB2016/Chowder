@@ -14,15 +14,15 @@ import kotlinx.android.synthetic.main.activity_poetry.*
 class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
     override fun getLayoutResId(): Int = R.layout.activity_poetry
     override fun initialize() {
-//        val method = arrayListOf("道德经", "千字文", "三字经", "弟子规", "陋室铭", "沁园春雪")
-        val method = resources.getStringArray(R.array.poetry)
-        for (i in method) {
-            val tvText = LayoutInflater.from(this).inflate(R.layout.tv, flow, false) as TextView
-            tvText.textSize = 18f
-            tvText.text = i
-            tvText.tag = i
-            flow.addView(tvText)
-            tvText.setOnClickListener(this)
+        var tv: TextView
+        for ((a, i) in resources.getStringArray(R.array.poetry).withIndex()) {
+            tv = LayoutInflater.from(this).inflate(R.layout.tv, flow, false) as TextView
+            tv.textSize = 18f
+            tv.text = i
+//            tv.tag = i
+            tv.id = a
+            flow.addView(tv)
+            tv.setOnClickListener(this)
         }
         tvDisplay.text = getString(R.string.daodejing).replace(" ", "")
     }
@@ -63,24 +63,29 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
 //    }
 
     override fun onClick(v: View?) {
-        tvDisplay.gravity = when (v?.tag) {
-            "千字文", "三字经", "弟子规" -> Gravity.CENTER
+        tvDisplay.gravity = when (v?.id) {
+            1, 2, 3 -> Gravity.CENTER
             else -> Gravity.LEFT
         }
-        tvDisplay.text = getString(when (v?.tag) {
-            "道德经" -> R.string.daodejing
-            "论语" -> R.string.lunyu
-            "大学" -> R.string.daxue
-            "中庸" -> R.string.zhongyong
-            "孟子" -> R.string.mengzi
-            "菜根谭" -> R.string.caigentan
-            "千字文" -> R.string.qianziwen
-            "三字经" -> R.string.sanzijing
-            "弟子规" -> R.string.dizigui
-            "沁园春雪" -> R.string.xue
-            "陋室铭" -> R.string.loushiming
+        tvDisplay.text = getString(when (v?.id) {
+            0 -> R.string.daodejing
+            1 -> R.string.qianziwen
+            2 -> R.string.sanzijing
+            3 -> R.string.dizigui
+            4 -> R.string.loushiming
+            5 -> R.string.xue
+            6 -> R.string.caigentan
+            7 -> R.string.daxue
+            8 -> R.string.zhongyong
+            9 -> R.string.lunyu
+            10 -> R.string.mengzi
+            11 -> R.string.biancheng
             else -> R.string.daodejing
         }).replace(" ", "")
 //        LogUtils.i("总行数==${tvDisplay.lineCount}")
+//        val method = resources.getStringArray(R.array.poetry)
+//        tvDisplay.text = getString(when (v?.tag) {
+//            method[11] -> R.string.biancheng
+//        }).replace(" ", "")
     }
 }
