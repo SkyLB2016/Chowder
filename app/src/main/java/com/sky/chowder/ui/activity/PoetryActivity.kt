@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.TextView
 import com.sky.base.BaseNoPActivity
 import com.sky.chowder.R
-import com.sky.utils.LogUtils
 import kotlinx.android.synthetic.main.activity_poetry.*
 
 /**
@@ -82,6 +81,6 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
             "陋室铭" -> R.string.loushiming
             else -> R.string.daodejing
         }).replace(" ", "")
-        LogUtils.i("总行数==${tvDisplay.lineCount}")
+//        LogUtils.i("总行数==${tvDisplay.lineCount}")
     }
 }
