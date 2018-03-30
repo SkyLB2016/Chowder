@@ -28,12 +28,12 @@ ext {
 group = publishedGroupId// Maven Group ID for the artifact
 version = libraryVersion
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
     buildToolsVersion '27.0.3'
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 26
-        versionCode 20171026
+        targetSdkVersion 27
+        versionCode 20171027
         versionName libraryVersion
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }

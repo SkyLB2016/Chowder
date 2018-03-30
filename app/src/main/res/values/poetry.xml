@@ -1,7 +1,7 @@
 <resources>
     <string name="qianziwen">
             千字文 \n
-            南北朝 · 周兴嗣\n
+            南北朝·周兴嗣\n
         天地玄黄，宇宙洪荒。\n
         日月盈昃，辰宿列张。\n
         寒来暑往，秋收冬藏。\n
@@ -130,7 +130,7 @@
     </string>
     <string name="sanzijing">
                     三字经\n
-                宋朝 · 王应麟\n
+                宋朝·王应麟\n
                 共1416字\n
         人之初，性本善。性相近，习相远。\n
         苟不教，性乃迁。教之道，贵以专。\n
@@ -253,7 +253,7 @@
     </string>
     <string name="dizigui">
                     弟子规\n
-                清朝 · 李毓秀\n
+                清朝·李毓秀\n
                    共1080字\n
         弟子规，圣人训。首孝悌，次谨信。\n
         泛爱众，而亲仁。有余力，则学文。\n
@@ -371,7 +371,7 @@
         俱往矣，数风流人物，还看今朝。\n
     </string>
     <string name="caigentan">
-        菜 根 谭\n
+        菜根谭\n
         共13892字\n
         　　余过古刹，于残经败纸中拾得《菜根谭》一录。翻视之，虽属禅宗，然于身心性命之学，实有隐隐相发明者。亟携归，重加校雠，缮写成帙。旧有序，文不雅驯，且于是书无关涉语，故芟之。著是书者为洪应明，究不知其为何许人也。\n
         乾隆五十九年二月二日，遂初堂主人识\n
@@ -2512,7 +2512,7 @@
         　　val iy = 200 * Math.cos(radians)\n
         22.从string中获取的文章字符串，有换行的情况下，应先去除空格再用\n
         23.页面跳转顺序:\n
-        　　(1)A启动        A.onCreate -> A.onStart -> A.onResume ->\n
+        　　(1)A启动         A.onCreate -> A.onStart -> A.onResume ->\n
         　　(2)在A中启动B  A.onPause -> B.onCreate -> B.onStart -> B.onResume -> A.onStop\n
         　　(3)关闭B      B.onPause -> A.onRestart -> A.onStart -> A.onResume -> B.onStop -> B.onDestory\n
     </string>
