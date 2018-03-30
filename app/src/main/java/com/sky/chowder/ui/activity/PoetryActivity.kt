@@ -24,7 +24,20 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
             flow.addView(tv)
             tv.setOnClickListener(this)
         }
-        tvDisplay.text = getString(R.string.daodejing).replace(" ", "")
+//        tvDisplay.text = getString(R.string.wangbiben).replace(" ", "")
+        tvDisplay.text = resources.getStringArray(R.array.resId)[0].replace(" ", "")
+    }
+    override fun onClick(v: View?) {
+        tvDisplay.gravity = when (v?.id) {
+            3, 4, 5 -> Gravity.CENTER
+            else -> Gravity.LEFT
+        }
+        tvDisplay.text = resources.getStringArray(R.array.resId)[v!!.id].replace(" ", "")
+//        LogUtils.i("总行数==${tvDisplay.lineCount}")
+//        val method = resources.getStringArray(R.array.poetry)
+//        tvDisplay.text = getString(when (v?.tag) {
+//            method[11] -> R.string.biancheng
+//        }).replace(" ", "")
     }
 
 //    override fun onRestart() {
@@ -62,30 +75,4 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
 //        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
 //    }
 
-    override fun onClick(v: View?) {
-        tvDisplay.gravity = when (v?.id) {
-            1, 2, 3 -> Gravity.CENTER
-            else -> Gravity.LEFT
-        }
-        tvDisplay.text = getString(when (v?.id) {
-            0 -> R.string.daodejing
-            1 -> R.string.qianziwen
-            2 -> R.string.sanzijing
-            3 -> R.string.dizigui
-            4 -> R.string.loushiming
-            5 -> R.string.xue
-            6 -> R.string.caigentan
-            7 -> R.string.daxue
-            8 -> R.string.zhongyong
-            9 -> R.string.lunyu
-            10 -> R.string.mengzi
-            11 -> R.string.biancheng
-            else -> R.string.daodejing
-        }).replace(" ", "")
-//        LogUtils.i("总行数==${tvDisplay.lineCount}")
-//        val method = resources.getStringArray(R.array.poetry)
-//        tvDisplay.text = getString(when (v?.tag) {
-//            method[11] -> R.string.biancheng
-//        }).replace(" ", "")
-    }
 }

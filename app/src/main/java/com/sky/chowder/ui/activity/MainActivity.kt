@@ -66,6 +66,7 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 
     @OnClick(R.id.fab)
     fun fabOnClick() {
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
