@@ -15,12 +15,12 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
     override fun getLayoutResId(): Int = R.layout.activity_poetry
     override fun initialize() {
         var tv: TextView
-        for ((a, i) in resources.getStringArray(R.array.poetry).withIndex()) {
+        for ((index, text) in resources.getStringArray(R.array.poetry).withIndex()) {
             tv = LayoutInflater.from(this).inflate(R.layout.tv, flow, false) as TextView
             tv.textSize = 18f
-            tv.text = i
+            tv.text = text
 //            tv.tag = i
-            tv.id = a
+            tv.id = index
             flow.addView(tv)
             tv.setOnClickListener(this)
         }
