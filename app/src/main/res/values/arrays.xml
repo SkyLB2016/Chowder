@@ -6,36 +6,22 @@
         <item>@color/colorAccent</item>
         <item>@color/yellow</item>
     </array>
+
     <array name="poetry">
-        <item>"王弼本"</item>
-        <item>"河上公"</item>
-        <item>"河上公注解"</item>
-        <item>"千字文"</item>
-        <item>"三字经"</item>
-        <item>"弟子规"</item>
-        <item>"陋室铭"</item>
-        <item>"沁园春雪"</item>
-        <item>"菜根谭"</item>
-        <item>"大学"</item>
-        <item>"中庸"</item>
-        <item>"论语"</item>
-        <item>"孟子"</item>
-        <item>"编程笔记"</item>
-    </array>
-    <array name="resId">
-        <item>@string/wangbiben</item>
-        <item>@string/heshanggong</item>
-        <item>@string/hsgzhujie</item>
-        <item>@string/qianziwen</item>
-        <item>@string/sanzijing</item>
-        <item>@string/dizigui</item>
-        <item>@string/loushiming</item>
-        <item>@string/xue</item>
-        <item>@string/caigentan</item>
-        <item>@string/daxue</item>
-        <item>@string/zhongyong</item>
-        <item>@string/lunyu</item>
-        <item>@string/mengzi</item>
-        <item>@string/biancheng</item>
+        <item>"王弼本"      ,wangbiben</item>
+        <item>"河上公"      ,heshanggong</item>
+        <item>"河上公注解"  ,hsgzhujie</item>
+        <item>"三字经"      ,sanzijing</item>
+        <item>"百家姓"      ,baijiaxing</item>
+        <item>"千字文"      ,qianziwen</item>
+        <item>"弟子规"      ,dizigui</item>
+        <item>"陋室铭"      ,loushiming</item>
+        <item>"沁园春雪"    ,xue</item>
+        <item>"菜根谭"      ,caigentan</item>
+        <item>"大学"       ,daxue</item>
+        <item>"中庸"       ,zhongyong</item>
+        <item>"论语"       ,lunyu</item>
+        <item>"孟子"       ,mengzi</item>
+        <item>"编程笔记"   ,biancheng</item>
     </array>
 </resources>

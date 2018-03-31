@@ -7,32 +7,38 @@ import android.widget.TextView
 import com.sky.base.BaseNoPActivity
 import com.sky.chowder.R
 import kotlinx.android.synthetic.main.activity_poetry.*
+import java.util.*
 
 /**
  * Created by SKY on 2018/3/16.
  */
 class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
+    private val resId = ArrayList<Int>()
     override fun getLayoutResId(): Int = R.layout.activity_poetry
     override fun initialize() {
+        val poetry = resources.getStringArray(R.array.poetry)!!
         var tv: TextView
-        for ((index, text) in resources.getStringArray(R.array.poetry).withIndex()) {
+        for ((index, text) in poetry.withIndex()) {
+            val array = text.split(",")
             tv = LayoutInflater.from(this).inflate(R.layout.tv, flow, false) as TextView
             tv.textSize = 18f
-            tv.text = text
-//            tv.tag = i
+            tv.text = array[0]
+//            tv.tag = array[0]
             tv.id = index
             flow.addView(tv)
             tv.setOnClickListener(this)
+            resId.add(resources.getIdentifier(array[1], "string", packageName))
         }
-//        tvDisplay.text = getString(R.string.wangbiben).replace(" ", "")
-        tvDisplay.text = resources.getStringArray(R.array.resId)[0].replace(" ", "")
+//        val id = R.string::class.java.getField(resId[1]).getInt(R.string())
+        tvDisplay.text = getString(resId[0]).replace(" ", "")
     }
+
     override fun onClick(v: View?) {
         tvDisplay.gravity = when (v?.id) {
-            3, 4, 5 -> Gravity.CENTER
+            in 3..6 -> Gravity.CENTER
             else -> Gravity.LEFT
         }
-        tvDisplay.text = resources.getStringArray(R.array.resId)[v!!.id].replace(" ", "")
+        tvDisplay.text = getString(resId[v!!.id]).replace(" ", "")
 //        LogUtils.i("总行数==${tvDisplay.lineCount}")
 //        val method = resources.getStringArray(R.array.poetry)
 //        tvDisplay.text = getString(when (v?.tag) {
