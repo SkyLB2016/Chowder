@@ -29,7 +29,6 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
             tv.setOnClickListener(this)
             resId.add(resources.getIdentifier(array[1], "string", packageName))
         }
-//        val id = R.string::class.java.getField(resId[1]).getInt(R.string())
         tvDisplay.text = getString(resId[0]).replace(" ", "")
     }
 
@@ -40,10 +39,6 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
         }
         tvDisplay.text = getString(resId[v!!.id]).replace(" ", "")
 //        LogUtils.i("总行数==${tvDisplay.lineCount}")
-//        val method = resources.getStringArray(R.array.poetry)
-//        tvDisplay.text = getString(when (v?.tag) {
-//            method[11] -> R.string.biancheng
-//        }).replace(" ", "")
     }
 
 //    override fun onRestart() {

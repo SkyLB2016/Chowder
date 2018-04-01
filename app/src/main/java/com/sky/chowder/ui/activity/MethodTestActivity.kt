@@ -9,7 +9,9 @@ import android.content.IntentFilter
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.Animatable
-import android.media.MediaPlayer
+import android.media.AudioAttributes
+import android.media.AudioManager
+import android.media.SoundPool
 import android.os.BatteryManager
 import android.os.Build
 import android.provider.ContactsContract
@@ -58,6 +60,7 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
                 , "SVG与Value"
                 , "渐变的文字"
                 , "音频处理"
+                , "字符串转id"
         )
         for (i in method) {
             val tvText = LayoutInflater.from(this).inflate(R.layout.tv, flow, false) as TextView
@@ -81,6 +84,7 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
             "json转换" -> changeJson()
             "list迭代器" -> iterator()
             "list筛选lambda" -> lambda()
+            "字符串转id" -> changeStrToId()
             "" -> ""
             else -> ""
         }
@@ -98,26 +102,33 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
         }
     }
 
+    private fun changeStrToId(): CharSequence? {
+        val id = R.string::class.java.getField("loushiming").getInt(R.string())
+        val id1 = resources.getIdentifier("xue", "string", packageName)
+        val text = StringBuilder()
+        text.append(getString(id).replace(" ", ""))
+        text.append(getString(id1).replace(" ", ""))
+        return text
+    }
+
     private fun makePlayer() {
-        val mMediaPlayer = MediaPlayer.create(this, R.raw.sudi);
-        mMediaPlayer.start()
-        mMediaPlayer.setOnCompletionListener {
-            showToast("播放完成")
-        }
-//        val soundPool = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-//            SoundPool.Builder()
-//                    .setMaxStreams(100)   //设置允许同时播放的流的最大值
-//                    .setAudioAttributes(AudioAttributes.Builder()
-//                            .setUsage(AudioAttributes.USAGE_MEDIA)
-//                            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-//                            .build())   //完全可以设置为null
-//                    .build()
-//        else SoundPool(100, AudioManager.STREAM_MUSIC, 0)
+//        val mMediaPlayer = MediaPlayer.create(this, R.raw.sudi)
+//        mMediaPlayer.start()
+//        mMediaPlayer.setOnCompletionListener { showToast("播放完成") }
+        val soundPool = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            SoundPool.Builder()
+                    .setMaxStreams(100)   //设置允许同时播放的流的最大值
+                    .setAudioAttributes(AudioAttributes.Builder()
+                            .setUsage(AudioAttributes.USAGE_MEDIA)
+                            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                            .build())   //完全可以设置为null
+                    .build()
+        else SoundPool(100, AudioManager.STREAM_MUSIC, 0)
 //        构建对象
-//        val soundId = soundPool.load(this, R.raw.sudi, 1)//加载资源，得到soundId
-//        soundPool.setOnLoadCompleteListener { soundPool, sampleId, status ->
-//            val streamId = soundPool.play(soundId, 1f, 1f, 1, 0, 1f)//播放，得到StreamId
-//        }
+        val soundId = soundPool.load(this, R.raw.sudi, 1)//加载资源，得到soundId
+        soundPool.setOnLoadCompleteListener { soundPool, sampleId, status ->
+            val streamId = soundPool.play(soundId, 1f, 1f, 1, 0, 1f)//播放，得到StreamId
+        }
     }
 
     private fun shaderText() {
@@ -174,7 +185,7 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
             "当前通道号:${AppUtils.getChannel(this)}"
 
 
-    fun selectAddress() {
+    private fun selectAddress() {
         val address = AddressFragment()
         address.show(supportFragmentManager, "address")
         address.onClick = object : AddressFragment.OnClickListener {
@@ -184,7 +195,7 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
         }
     }
 
-    fun selectTime() {
+    private fun selectTime() {
         val time = TimeFragment()
         time.show(supportFragmentManager, "time")
         time.time = DateUtil.dateToTimeStamp(tvDisplay.text.toString().trim())
@@ -295,7 +306,7 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
     }
 
     //获取电量百分比
-    val battery: Int
+    private val battery: Int
         get() {
             val battery = registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
             val currLevel = battery!!.getIntExtra(BatteryManager.EXTRA_LEVEL, 0)
