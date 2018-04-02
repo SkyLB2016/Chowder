@@ -8,20 +8,20 @@
     </array>
 
     <array name="poetry">
-        <item>"王弼本"      ,wangbiben</item>
+        <item>"道德经"      ,wangbiben</item>
         <item>"河上公"      ,heshanggong</item>
-        <item>"河上公注解"  ,hsgzhujie</item>
+        <!--<item>"河上公注解"  ,hsgzhujie</item>-->
         <item>"三字经"      ,sanzijing</item>
         <item>"百家姓"      ,baijiaxing</item>
         <item>"千字文"      ,qianziwen</item>
         <item>"弟子规"      ,dizigui</item>
-        <item>"陋室铭"      ,loushiming</item>
-        <item>"沁园春雪"    ,xue</item>
-        <item>"菜根谭"      ,caigentan</item>
         <item>"大学"       ,daxue</item>
         <item>"中庸"       ,zhongyong</item>
         <item>"论语"       ,lunyu</item>
         <item>"孟子"       ,mengzi</item>
+        <item>"菜根谭"      ,caigentan</item>
+        <item>"陋室铭"      ,loushiming</item>
+        <item>"沁园春雪"    ,xue</item>
         <item>"编程笔记"   ,biancheng</item>
     </array>
 </resources>

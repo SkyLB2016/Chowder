@@ -34,7 +34,7 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         tvDisplay.gravity = when (v?.id) {
-            in 3..6 -> Gravity.CENTER
+            in 2..5 -> Gravity.CENTER
             else -> Gravity.LEFT
         }
         tvDisplay.text = getString(resId[v!!.id]).replace(" ", "")
