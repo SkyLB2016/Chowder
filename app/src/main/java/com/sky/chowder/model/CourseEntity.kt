@@ -33,17 +33,11 @@ class CourseEntity() : Parcelable {
         parcel.writeInt(learner)
     }
 
-    override fun describeContents(): Int {
-        return 0
-    }
+    override fun describeContents() = 0
 
     companion object CREATOR : Parcelable.Creator<CourseEntity> {
-        override fun createFromParcel(parcel: Parcel): CourseEntity {
-            return CourseEntity(parcel)
-        }
+        override fun createFromParcel(parcel: Parcel) = CourseEntity(parcel)
 
-        override fun newArray(size: Int): Array<CourseEntity?> {
-            return arrayOfNulls(size)
-        }
+        override fun newArray(size: Int): Array<CourseEntity?> = arrayOfNulls(size)
     }
 }
