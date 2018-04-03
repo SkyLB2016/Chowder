@@ -66,6 +66,27 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 
     @OnClick(R.id.fab)
     fun fabOnClick() {
+        BubbleSort(intArrayOf(12, 35, 5, 9, 54, 44))
+    }
+
+    fun BubbleSort(arr: IntArray) {
+        var temp: Int//临时变量
+        var flag = false;
+        var text = ""
+        for (i in 0 until arr.size - 1) { //表示趟数，一共arr.length-1次。
+            flag = false
+            for (j in arr.size - 1 downTo i + 1) {
+                if (arr[j] < arr[j - 1]) {
+                    temp = arr[j]
+                    arr[j] = arr[j - 1]
+                    arr[j - 1] = temp
+                    flag = true
+                }
+            }
+            for (i in arr) text = "$text,$i"
+            LogUtils.i("==$text")
+            if (!flag)break
+        }
 
     }
 
