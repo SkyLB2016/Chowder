@@ -1,6 +1,5 @@
 package com.sky.chowder.ui.widget
 
-import android.animation.ObjectAnimator
 import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
@@ -58,6 +57,7 @@ class SlidingMenu @JvmOverloads constructor(context: Context, attrs: AttributeSe
         super.onLayout(changed, l, t, r, b)
         //默认关闭
         this.smoothScrollTo(menuWidth, 0)
+        state = State.CLOSE
     }
 
     override fun onInterceptTouchEvent(event: MotionEvent): Boolean {
@@ -69,7 +69,8 @@ class SlidingMenu @JvmOverloads constructor(context: Context, attrs: AttributeSe
                 if (isOpen && downX > menuWidth) return true//打开时，某些部分的touch事件不向下传递
             }
             MotionEvent.ACTION_MOVE ->//在范围内时滑动的x距离大于100的时候才开始滑动状态
-                if (downY > screenHeight * 2 / 5 && event.rawX - downX > 100) return true
+                if (downY > screenHeight * 2 / 5 && event.rawX - downX > 100)
+                    return true
         }
         return false
     }
@@ -92,12 +93,11 @@ class SlidingMenu @JvmOverloads constructor(context: Context, attrs: AttributeSe
                             && downY > top && downY < bottom && upY > top && upY < bottom /*&& Math.abs(upY - downY) < 10*/)
                         return close()//不在向下传递
                 }
-
                 //计算速度,以及左右滑动时的操作
                 val speed = distance / (System.currentTimeMillis() - downTime)
+//                LogUtils.i("speed==$speed")
                 if (distance < 0 /*左滑*/ && Math.abs(speed) > SPEED && isOpen) return close()
                 else if (distance > 0 /*右滑*/ && Math.abs(speed) > SPEED && isClose) return open()
-
                 //正常滑动时，menu滑出不到一半时关闭，否则打开,/*true事件拦截不再向下传递*/
                 return if (scrollX >= menuWidth / 2) close() else open()
             }
@@ -112,7 +112,8 @@ class SlidingMenu @JvmOverloads constructor(context: Context, attrs: AttributeSe
         //打开时menu的透明度及大小从0.7到1，content的大小从1到0.7
         //关闭时menu的透明度及大小从1到0.7，content的大小从0.7到1
         val mPercent = SCALE - (SCALE - mMenuScale) * percent//0.7--1
-        ObjectAnimator.ofFloat(menu!!, "translationX", menuWidth.toFloat() * percent * mMenuScale)//有从后边拉出来的感觉
+//        ObjectAnimator.ofFloat(menu!!, "translationX", menuWidth.toFloat() * percent * mMenuScale)//有从后边拉出来的感觉
+//        menu?.translationX = menuWidth.toFloat() * percent * mMenuScale
         menu?.alpha = mPercent
         menu?.scaleX = mPercent
         menu?.scaleY = mPercent
@@ -133,7 +134,7 @@ class SlidingMenu @JvmOverloads constructor(context: Context, attrs: AttributeSe
         return true
     }
 
-    private  fun close(): Boolean {
+    private fun close(): Boolean {
         smoothScrollTo(menuWidth, 0)
         state = State.CLOSE
         if (menuState != null) menuState!!.onClose()

@@ -278,17 +278,17 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
         (22222 downTo 22217).mapTo(list) { SortModel("${it.toChar()}") }
         ('G' downTo 'A').mapTo(list) { SortModel("$it") }
         val text = StringBuilder()
-        text.append("原数据：${list.toString()}\n")
-        Collections.reverse(list)//逆序
-        text.append("逆序：${list.toString()}\n")
-        Collections.shuffle(list)//随机
-        text.append("随机：${list.toString()}\n")
-        Collections.sort(list)//排序
-        text.append("sort排序（大写小写文字）：${list.toString()}\n")
+        text.append("原数据：$list\n")
+        list.reverse()//逆序
+        text.append("逆序：$list\n")
+        list.shuffle()//随机
+        text.append("随机：$list\n")
+        list.sort()//排序
+        text.append("sort排序（大写小写文字）：$list\n")
         Collections.sort(list, ascending)
-        text.append("Comparable升序(文字小大写)：${list.toString()}\n")
+        text.append("Comparable升序(文字小大写)：$list\n")
         Collections.sort(list, descending)
-        text.append("Comparable降序(大小写文字)：${list.toString()}")
+        text.append("Comparable降序(大小写文字)：$list")
         return text.toString()
     }
 

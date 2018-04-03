@@ -187,7 +187,7 @@ class CanvasView @JvmOverloads constructor(
     private fun setProgress(canvas: Canvas) {
         val paint = Paint()
         paint.isAntiAlias = true
-        paint.color = ContextCompat.getColor(context, R.color.alpha_66)
+        paint.color = ContextCompat.getColor(context, R.color.darkyellow)
         paint.style = Paint.Style.FILL
 
         val area = RectF(0f, 400f, 400f, 800f)

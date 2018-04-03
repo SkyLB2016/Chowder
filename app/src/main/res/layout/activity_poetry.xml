@@ -1,35 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.sky.chowder.ui.widget.SlidingMenu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sliding"
     android:layout_width="match_parent"
-    android:background="@color/alpha_66"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="@mipmap/sliding_bg">
 
-    <include layout="@layout/include_toolbar" />
-
-    <com.sky.widget.FlowLayout
-        android:id="@+id/flow"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/alpha_66"
-        android:elevation="@dimen/wh_8" />
-
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.2">
+        android:background="@color/darkyellow"
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tvDisplay"
+
+        <com.sky.widget.FlowLayout
+            android:id="@+id/flow"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="@dimen/wh_16"
-            android:letterSpacing="0.1"
-            android:lineSpacingMultiplier="1.5"
-            android:paddingLeft="@dimen/wh_32"
-            android:paddingRight="@dimen/wh_32"
-            android:text="@string/wangbiben"
-            android:textSize="@dimen/text_16" />
-    </ScrollView>
-</LinearLayout>
+            android:padding="@dimen/wh_8"
+            android:elevation="@dimen/wh_8" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/include_toolbar" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tvDisplay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:letterSpacing="0.1"
+                    android:lineSpacingMultiplier="1.5"
+                    android:paddingLeft="@dimen/wh_32"
+                    android:paddingRight="@dimen/wh_32"
+                    android:paddingTop="@dimen/wh_16"
+                    android:textSize="@dimen/text_16" />
+            </ScrollView>
+        </LinearLayout>
+    </LinearLayout>
+
+</com.sky.chowder.ui.widget.SlidingMenu>
