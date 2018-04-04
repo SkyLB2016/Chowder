@@ -61,6 +61,7 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
                 , "渐变的文字"
                 , "音频处理"
                 , "字符串转id"
+                , "排序算法"
         )
         for (i in method) {
             val tvText = LayoutInflater.from(this).inflate(R.layout.tv, flow, false) as TextView
@@ -85,6 +86,7 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
             "list迭代器" -> iterator()
             "list筛选lambda" -> lambda()
             "字符串转id" -> changeStrToId()
+            "排序算法" -> sort()
             "" -> ""
             else -> ""
         }
@@ -100,6 +102,97 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
             "音频处理" -> makePlayer()
             "" -> ""
         }
+    }
+
+    private fun sort(): CharSequence? {
+        val arr = intArrayOf(99, 12, 35, 5, 9, 54, 44)
+        var text = "${arr[0]}"
+        for (a in 1 until arr.size) text = "$text，${arr[a]}"
+        return "原始数据：$text；\n" +
+                "冒泡排序：${bubbleSort(arr)}；\n" +
+                "冒泡排序：${bubbleSort1(arr)}；\n" +
+                "选择排序：${selectSort(arr)}；\n" +
+                "插入排序：${insertSort(arr)}。"
+    }
+
+    private fun insertSort(arr: IntArray): String {
+        var temp: Int
+        var text = ""
+        for (i in 0 until arr.size - 1) {
+            for (j in i + 1 downTo 1) {
+                if (arr[j] < arr[j - 1]) {
+                    temp = arr[j - 1]
+                    arr[j - 1] = arr[j]
+                    arr[j] = temp
+                } else { //不需要交换
+                    break
+                }
+            }
+            text = "${arr[0]}"
+            for (a in 1 until arr.size) text = "$text，${arr[a]}"
+        }
+        return text
+    }
+
+    private fun selectSort(arr: IntArray): String {
+        var index: Int//临时变量
+        var temp: Int//临时变量
+        var text = ""
+        for (i in 0..arr.size - 2) {
+            index = i
+            for (j in i + 1 until arr.size) {
+                if (arr[j] < arr[index]) index = j
+            }
+            if (index === i) continue
+            temp = arr[i]
+            arr[i] = arr[index]
+            arr[index] = temp
+            text = "${arr[0]}"
+            for (a in 1 until arr.size) text = "$text，${arr[a]}"
+        }
+        return text
+    }
+
+    private fun bubbleSort1(arr: IntArray): String {
+        var temp: Int//临时变量
+        var flag: Boolean
+        var text = ""
+        for (i in arr.size - 1 downTo 1) { //表示趟数，一共arr.length-1次。
+            flag = false
+            for (j in 0 until i) {
+                if (arr[j] < arr[j + 1]) {
+                    temp = arr[j]
+                    arr[j] = arr[j + 1]
+                    arr[j + 1] = temp
+                    flag = true
+                }
+            }
+            text = "${arr[0]}"
+            for (a in 1 until arr.size) text = "$text，${arr[a]}"
+            if (!flag) break
+        }
+        return text
+    }
+
+    private fun bubbleSort(arr: IntArray): String {
+        var temp: Int//临时变量
+        var flag: Boolean
+        var text = ""
+        for (i in 0 until arr.size - 1) { //表示趟数，一共arr.length-1次。
+            flag = false
+            for (j in arr.size - 1 downTo i + 1) {
+                if (arr[j] < arr[j - 1]) {
+                    temp = arr[j]
+                    arr[j] = arr[j - 1]
+                    arr[j - 1] = temp
+                    flag = true
+                }
+            }
+            text = "${arr[0]}"
+            for (a in 1 until arr.size) text = "$text，${arr[a]}"
+            if (!flag) break
+        }
+        return text
     }
 
     private fun changeStrToId(): CharSequence? {
