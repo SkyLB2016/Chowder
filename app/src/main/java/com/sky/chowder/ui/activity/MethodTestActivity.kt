@@ -117,7 +117,6 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
 
     private fun insertSort(arr: IntArray): String {
         var temp: Int
-        var text = ""
         for (i in 0 until arr.size - 1) {
             for (j in i + 1 downTo 1) {
                 if (arr[j] < arr[j - 1]) {
@@ -128,9 +127,9 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
                     break
                 }
             }
-            text = "${arr[0]}"
-            for (a in 1 until arr.size) text = "$text，${arr[a]}"
         }
+        var text = "${arr[0]}"
+        for (a in 1 until arr.size) text = "$text，${arr[a]}"
         return text
     }
 

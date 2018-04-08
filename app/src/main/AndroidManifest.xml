@@ -70,6 +70,7 @@
             android:name=".ui.activity.MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity android:name=".ui.activity.GuideActivity" />
@@ -214,8 +215,7 @@
             android:name=".ui.activity.PoetryActivity"
             android:description="@string/act_poetry_d"
             android:icon="@mipmap/ic_launcher"
-            android:label="@string/act_poetry"
-            android:screenOrientation="portrait">
+            android:label="@string/act_poetry">
             <intent-filter>
                 <action android:name="com.sky.coustom" />
             </intent-filter>
