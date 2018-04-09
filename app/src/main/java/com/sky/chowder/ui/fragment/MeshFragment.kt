@@ -11,10 +11,10 @@ import com.sky.chowder.ui.presenter.SolarP
  */
 class MeshFragment : BaseFragment<SolarP>() {
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view!!, savedInstanceState)
         if (arguments != null) {
-            val mTitle = arguments.getString("title")
+            val mTitle = arguments?.getString("title")
         }
     }
 
@@ -22,7 +22,7 @@ class MeshFragment : BaseFragment<SolarP>() {
         return R.layout.fragment_meshview
     }
 
-    override fun creatPresenter(): SolarP? = SolarP(activity)
+    override fun creatPresenter(): SolarP? = SolarP(activity!!)
 
     override fun initialize() {
 

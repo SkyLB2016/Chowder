@@ -31,15 +31,15 @@ class AddressFragment : DialogFragment() {
 
     lateinit var onClick: OnClickListener
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         val view = inflater!!.inflate(R.layout.fragment_address, container)
         ButterKnife.bind(this, view)
         return view
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view!!, savedInstanceState)
         initData()
     }
 
@@ -51,7 +51,7 @@ class AddressFragment : DialogFragment() {
     private lateinit var countyStr: Array<String?>
     private fun initData() {
 //        Observable.just(FileUtils.readAssestToStr(activity, "address.json"))
-        Observable.just(FileUtils.readInput(activity.assets.open("address.json")))
+        Observable.just(FileUtils.readInput(activity?.assets?.open("address.json")))
                 .map { s -> GsonUtils.jsonToArray(s, Array<AreaEntity>::class.java) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

@@ -13,7 +13,7 @@ class ShaderFragment : BaseFragment<SolarP>() {
         return R.layout.fragment_two
     }
 
-    override fun creatPresenter() = SolarP(activity)
+    override fun creatPresenter() = SolarP(activity!!)
 
     override fun initialize() {
 

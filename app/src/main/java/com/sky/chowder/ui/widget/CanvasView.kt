@@ -219,8 +219,8 @@ class CanvasView @JvmOverloads constructor(
         //文字背景所在矩形
         val textRect = Rect(leftX.toInt(), topY.toInt(), rightX.toInt(), bottomY.toInt())
         val textbg = ContextCompat.getDrawable(context, R.drawable.sel_shape_rect)
-        textbg.bounds = textRect//为文字设置背景
-        textbg.draw(canvas)//画入画布中
+        textbg?.bounds = textRect//为文字设置背景
+        textbg?.draw(canvas)//画入画布中
         //让文字居于背景中间，计算文字的左距离与底部距离
         val offset = textP.fontMetricsInt.ascent - textP.fontMetricsInt.top
         val tY = textRect.exactCenterY() + textBound.height() / 2 - offset / 2

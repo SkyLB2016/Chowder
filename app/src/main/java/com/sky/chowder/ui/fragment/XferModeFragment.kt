@@ -38,8 +38,8 @@ class XferModeFragment : BaseFragment<SolarP>() {
         }
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view!!, savedInstanceState)
         //        handler.post(new Runnable() {
         //            public void run() {
         //                //通知错误消息
@@ -50,7 +50,7 @@ class XferModeFragment : BaseFragment<SolarP>() {
 
     override fun getLayoutResId(): Int = R.layout.fragment_three
 
-    override fun creatPresenter() = SolarP(activity)
+    override fun creatPresenter() = SolarP(activity!!)
 
     override fun initialize() {
 

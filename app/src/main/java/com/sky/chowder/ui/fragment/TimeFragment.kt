@@ -27,15 +27,15 @@ class TimeFragment : DialogFragment() {
     var time = 0L//最长间隔
     private val cal = Calendar.getInstance()!!
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         val view = inflater!!.inflate(R.layout.fragment_time, container)
         ButterKnife.bind(this, view)
         return view
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view!!, savedInstanceState)
         initData()
     }
 
