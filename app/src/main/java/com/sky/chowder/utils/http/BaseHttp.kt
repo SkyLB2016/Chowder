@@ -109,7 +109,7 @@ open class BaseHttp {
     companion object {
         private val UTF8 = Charset.forName("UTF-8")
 
-        private val REQUEST_TIME_OUT = 15 // 请求超时
-        private val RESPONSE_TIME_OUT = 15 // 响应超时
+        private const val REQUEST_TIME_OUT = 15 // 请求超时
+        private const val RESPONSE_TIME_OUT = 15 // 响应超时
     }
 }

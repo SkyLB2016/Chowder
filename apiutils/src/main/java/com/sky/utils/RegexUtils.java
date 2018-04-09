@@ -10,7 +10,7 @@ public class RegexUtils {
 
     //1.邮箱
     private static final String EMAIL = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
-    //    private static final String EMAIL = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";
+    //private static final String EMAIL = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";
 
     //2.域名
     private static final String DOMAINNAME = "[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(/.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+/.?";
@@ -18,8 +18,8 @@ public class RegexUtils {
     private static final String InternetURL = "[a-zA-z]+://[^\\s]*";
     private static final String InternetURL2 = "^http://([\\w-]+\\.)+[\\w-]+(/[\\w-./?%&=]*)?$";
     //4.手机号码
-//    private static final String PHONE = "^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|17[0|1|2|3|5|6|7|8]|18[0|1|2|3|4|5|6|7|8|9])\\d{8}$";
-    private static final String PHONE = "^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|166|17[0|1|2|3|5|6|7|8]|18[0|1|2|3|4|5|6|7|8|9])\\d{8}$";
+    //private static final String PHONE = "^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|17[0|1|2|3|5|6|7|8]|18[0|1|2|3|4|5|6|7|8|9])\\d{8}$";
+    private static final String PHONE = "^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|166|17[0|1|2|3|5|6|7|8]|18[0|1|2|3|4|5|6|7|8|9]|19[8|9])\\d{8}$";
     //5.电话号码("XXX-XXXXXXX"、"XXXX-XXXXXXXX"、"XXX-XXXXXXX"、"XXX-XXXXXXXX"、"XXXXXXX"和"XXXXXXXX)：
     private static final String TELPHONE = "^(\\(\\d{3,4}-)|\\d{3.4}-)?\\d{7,8}$";
     //6.国内电话号码(0511-4405222、021-87888822)：\d{3}-\d{8}|\d{4}-\d{7}
@@ -30,8 +30,6 @@ public class RegexUtils {
     private static final String IDNUMBER1 = "^([0-9]){7,18}(x|X)?$";
     private static final String IDNUMBER2 = "^\\d{8,18}|[0-9x]{8,18}|[0-9X]{8,18}?$";
 
-    //    private static final String a = "";
-//    private static final String a = "";
 //9 帐号是否合法(字母开头，允许5-16字节，允许字母数字下划线)：^[a-zA-Z][a-zA-Z0-9_]{4,15}$
 //
 //10 密码(以字母开头，长度在6~18之间，只能包含字母、数字和下划线)：^[a-zA-Z]\w{5,17}$
