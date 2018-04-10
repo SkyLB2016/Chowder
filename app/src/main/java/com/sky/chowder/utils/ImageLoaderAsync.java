@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.os.AsyncTaskCompat;
 import android.util.LruCache;
 import android.view.View;
 import android.widget.ImageView;
@@ -71,8 +70,8 @@ public class ImageLoaderAsync {
             //开启异步任务加载图片
             ImageAsyncTask task = new ImageAsyncTask(view);
             tasks.add(task);
-            //task.execute(path);//多任务串行运行方式。
-            AsyncTaskCompat.executeParallel(task, path);//多任务并行方式
+            task.execute(path);//多任务串行运行方式。
+//            AsyncTaskCompat.executeParallel(task, path);//多任务并行方式
         } else {
             //发送message消息，view，path，bitmap
             sendMessage(view, path, getBitmapFromCache(path));
