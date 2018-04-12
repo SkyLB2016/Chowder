@@ -35,7 +35,7 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
             tv.setOnClickListener(this)
             resId.add(resources.getIdentifier(array[1], "string", packageName))
         }
-        tvDisplay.text = getString(resId[2]).replace(" ", "")
+        tvDisplay.text = getString(resId[3]).replace(" ", "")
         tvDisplay.gravity = Gravity.CENTER
     }
 
@@ -45,6 +45,7 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
             else -> Gravity.LEFT
         }
         tvDisplay.text = getString(resId[v!!.id]).replace(" ", "")
+        setToolbarTitle(tvDisplay.text.lines()[0])
 //        LogUtils.i("总行数==${tvDisplay.lineCount}")
     }
 
