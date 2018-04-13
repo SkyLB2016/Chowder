@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.NumberPicker
-import butterknife.ButterKnife
-import butterknife.OnClick
 import com.sky.chowder.R
 import com.sky.utils.DateUtil
 import com.sky.utils.ScreenUtils
@@ -29,9 +27,7 @@ class TimeFragment : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        val view = inflater!!.inflate(R.layout.fragment_time, container)
-        ButterKnife.bind(this, view)
-        return view
+        return inflater!!.inflate(R.layout.fragment_time, container)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -93,6 +89,14 @@ class TimeFragment : DialogFragment() {
         setMinutes(min, 0)
         npMinute.setOnValueChangedListener { _, oldVal, newVal -> cal.add(Calendar.MINUTE, (newVal - oldVal) * minutesInterval) }
         if (time !== 0L && time > System.currentTimeMillis()) setSelectTime()//如已有设置好的时间，则载入
+        tvLeft.setOnClickListener { dismiss() }
+        tvRight.setOnClickListener {
+            if (cal.timeInMillis < System.currentTimeMillis()) ToastUtils.showShort(activity, "下单时间时间不能小于当前时间")
+            else {
+                onClick?.onClick(DateUtil.timeStampToDate(cal.timeInMillis))
+                dismiss()
+            }
+        }
     }
 
     private fun setMinutes(min: Int, value: Int) {
@@ -133,20 +137,6 @@ class TimeFragment : DialogFragment() {
         np.minValue = min
         np.value = value
         np.wrapSelectorWheel = false
-    }
-
-    @OnClick(R.id.tvLeft, R.id.tvRight)
-    fun onClick(view: View?) {
-        when (view?.id) {
-            R.id.tvLeft -> dismiss()
-            R.id.tvRight -> {
-                if (cal.timeInMillis < System.currentTimeMillis()) ToastUtils.showShort(activity, "下单时间时间不能小于当前时间")
-                else {
-                    onClick?.onClick(DateUtil.timeStampToDate(cal.timeInMillis))
-                    dismiss()
-                }
-            }
-        }
     }
 
     interface OnClickListener {

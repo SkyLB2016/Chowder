@@ -21,7 +21,7 @@ class ActivityModel(var className: String?//activity的名称
     /**
      *  排序
      */
-    override fun compareTo(another: ActivityModel): Int = className!!.compareTo(another.className!!)
+    override fun compareTo(model: ActivityModel): Int = className!!.compareTo(model.className!!)
 
     override fun toString(): String {
 //        return "{\"className\":\"$className\",\"describe\":\"$describe\",\"img\":$img,\"componentName\":\"$componentName\"}"

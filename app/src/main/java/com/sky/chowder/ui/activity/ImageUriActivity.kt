@@ -4,8 +4,6 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.Gravity
 import android.view.LayoutInflater
-import android.view.View
-import butterknife.OnClick
 import com.sky.base.RecyclerPActivity
 import com.sky.chowder.R
 import com.sky.chowder.api.view.ImageUriV
@@ -49,6 +47,7 @@ class ImageUriActivity : RecyclerPActivity<String, ImageUriP>(), ImageUriV<Strin
         setRecyclerLayout(layoutManager)
         //        recycler.setLayoutManager(new StaggeredGridLayoutManager(this,null,0,0));
         //        recycler.setLayoutManager(new GridLayoutManager(this,3));
+        layout.setOnClickListener { if (!floderPop!!.isShowing) floderPop!!.showAtLocation(window.decorView, Gravity.BOTTOM, 0, 0) }
     }
 
     private fun showImagePop(position: Int) {
@@ -62,7 +61,7 @@ class ImageUriActivity : RecyclerPActivity<String, ImageUriP>(), ImageUriV<Strin
     override fun creatAdapter() {
         adapter = LoaderUriAdapter(R.layout.adapter_uri)
         loaderAdapter = adapter as LoaderUriAdapter
-        adapter?.setOnItemClickListener { view, position -> showImagePop(position) }
+        adapter?.setOnItemClickListener { _, position -> showImagePop(position) }
     }
 
     override fun onRecyclerScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
@@ -95,11 +94,6 @@ class ImageUriActivity : RecyclerPActivity<String, ImageUriP>(), ImageUriV<Strin
                 .map { lastPositions[it] }
                 .max()
                 ?: lastPositions[0]
-    }
-
-    @OnClick(R.id.layout)
-    fun layoutEvent(view: View) {
-        if (!floderPop!!.isShowing) floderPop!!.showAtLocation(window.decorView, Gravity.BOTTOM, 0, 0)
     }
 
     override fun showFloderPop(floders: List<ImageFloder>) {

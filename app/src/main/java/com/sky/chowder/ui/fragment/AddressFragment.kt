@@ -8,8 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.NumberPicker
-import butterknife.ButterKnife
-import butterknife.OnClick
 import com.sky.chowder.R
 import com.sky.chowder.model.AreaEntity
 import com.sky.utils.FileUtils
@@ -33,9 +31,7 @@ class AddressFragment : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        val view = inflater!!.inflate(R.layout.fragment_address, container)
-        ButterKnife.bind(this, view)
-        return view
+        return inflater!!.inflate(R.layout.fragment_address, container)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -59,6 +55,12 @@ class AddressFragment : DialogFragment() {
                     provinceA = areaEntities
                     setAddress()
                 }
+        tvLeft.setOnClickListener { dismiss() }
+        tvRight.setOnClickListener {
+            onClick?.onClick("$province-$city-$county")
+            dismiss()
+        }
+
     }
 
     private fun setAddress() {
@@ -145,14 +147,6 @@ class AddressFragment : DialogFragment() {
     override fun onStart() {
         super.onStart()
         dialog.window.setLayout(ScreenUtils.getWidthPX(activity) / 8 * 7, dialog.window.attributes.height)
-    }
-
-    @OnClick(R.id.tvLeft, R.id.tvRight)
-    fun onClick(view: View?) {
-        when (view?.id) {
-            R.id.tvRight -> onClick?.onClick("$province-$city-$county")
-        }
-        dismiss()
     }
 
     override fun onDismiss(dialog: DialogInterface?) {

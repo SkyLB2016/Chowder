@@ -2,9 +2,7 @@ package com.sky.chowder.ui.activity
 
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.View
 import android.widget.EditText
-import butterknife.OnClick
 import com.sky.api.TextWatcherAdapter
 import com.sky.base.BaseNoPActivity
 import com.sky.chowder.R
@@ -34,10 +32,18 @@ class StockActivity : BaseNoPActivity() {
                 else calculationCounter(0.0)
             }
         })
+        btnBuy.setOnClickListener {
+            buyOrSell = "1"
+            setTotal()
+        }
+        btnSell.setOnClickListener {
+            buyOrSell = "2"
+            setTotal()
+        }
     }
 
     private fun checkTextChange(one: EditText?) {
-        one!!.addTextChangedListener(object : TextWatcher {
+        one?.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
 
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
@@ -46,16 +52,6 @@ class StockActivity : BaseNoPActivity() {
                 setTotal()
             }
         })
-    }
-
-
-    @OnClick(R.id.btnBuy, R.id.btnSell)
-    fun onClick(view: View) {
-        when (view.id) {
-            R.id.btnBuy -> buyOrSell = "1"
-            R.id.btnSell -> buyOrSell = "2"
-        }
-        setTotal()
     }
 
     private fun setTotal() {

@@ -5,7 +5,7 @@ import android.content.ActivityNotFoundException
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
-import butterknife.OnClick
+import android.view.View
 import com.sky.SkyApp
 import com.sky.base.BasePActivity
 import com.sky.chowder.R
@@ -16,15 +16,15 @@ import com.sky.chowder.ui.presenter.MainP
 import com.sky.utils.AppUtils
 import com.sky.utils.JumpAct
 import com.sky.utils.LogUtils
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import java.io.File
-
 
 /**
  * Created by SKY on 2015/12/6.
  * 主页
  */
-class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IMainView {
+class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IMainView, View.OnClickListener {
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //super.onCreate(savedInstanceState)
 //Debug.startMethodTracing()
@@ -52,20 +52,26 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
                 arrayOf(Manifest.permission.WRITE_CONTACTS, Manifest.permission.READ_CONTACTS, Manifest.permission.READ_EXTERNAL_STORAGE),
                 intArrayOf(0, 0, 0)
         )
+        registerOnClick(fab,fab1)
+    }
+//    private fun registerOnClick(vararg views: View) {
+//        for (v in views)
+//            v.setOnClickListener(this)
+//
+//    }
+    override fun onClick(v: View?) {
+        when (v!!.id) {
+            R.id.fab -> {
+            }
+            R.id.fab1 -> {
+                var text = getString(R.string.cezi).trim().replace(" ", "")
+                LogUtils.i("总长==${text.length}")
+            }
+        }
     }
 
     override fun setData(data: List<ActivityModel>) {
         adapter?.datas = data
-    }
-
-    @OnClick(R.id.fab1)
-    fun fab1OnClick() {
-        var text = getString(R.string.cezi).trim().replace(" ", "")
-        LogUtils.i("总长==${text.length}")
-    }
-
-    @OnClick(R.id.fab)
-    fun fabOnClick() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

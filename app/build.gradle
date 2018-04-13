@@ -14,8 +14,8 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation project(':apiutils')
     //butterknife
-    annotationProcessor "com.jakewharton:butterknife-compiler:$bknifeVer"
-    kapt "com.jakewharton:butterknife-compiler:$bknifeVer"
+//    annotationProcessor "com.jakewharton:butterknife-compiler:$bknifeVer"
+//    kapt "com.jakewharton:butterknife-compiler:$bknifeVer"
     //butterknife
 }
 def keystorePropertiesFile = rootProject.file("keystore.properties")

@@ -14,28 +14,21 @@ import android.view.ViewGroup;
 import com.baidu.mobstat.StatService;
 import com.sky.api.IBaseView;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-
 /**
  * Created by SKY on 2017/6/7.
  */
 public abstract class BaseFragment<P extends BasePresenter> extends Fragment implements IBaseView {
-    protected View view;
     protected P presenter;
     protected Context context;
-    protected Unbinder unbinder;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(getLayoutResId(), null, false);
         context = getActivity();
-        unbinder = ButterKnife.bind(this, view);
         if (presenter == null) presenter = creatPresenter();
         checkPresenterIsNull();
         presenter.onCreateView(savedInstanceState);
-        return view;
+        return inflater.inflate(getLayoutResId(), null, false);
     }
 
     @Override
@@ -148,7 +141,6 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
         presenter.onDestroyView();
     }
 

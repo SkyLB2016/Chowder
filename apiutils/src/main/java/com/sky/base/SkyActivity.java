@@ -14,9 +14,6 @@ import com.sky.utils.ToastUtils;
 import com.sky.widget.BaseTitle;
 import com.sky.widget.DialogManager;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-
 /**
  * activity 的基类
  * Created by SKY on 2017/5/27.
@@ -25,7 +22,6 @@ public abstract class SkyActivity extends AppCompatActivity implements IBaseView
 
     protected BaseTitle baseTitle;//公共标题
     protected DialogManager dialogManager;//公共弹窗
-    protected Unbinder unbinder;
 
     protected <T extends View> T getView(int id) {
         return (T) findViewById(id);
@@ -35,7 +31,6 @@ public abstract class SkyActivity extends AppCompatActivity implements IBaseView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResId());
-        unbinder = ButterKnife.bind(this);
         baseTitle = new BaseTitle(this);
         //在应用内时，屏幕常亮
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -51,6 +46,7 @@ public abstract class SkyActivity extends AppCompatActivity implements IBaseView
      * 初始化
      */
     protected abstract void initialize();
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -68,7 +64,6 @@ public abstract class SkyActivity extends AppCompatActivity implements IBaseView
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unbinder.unbind();
     }
 
     @Override
@@ -106,5 +101,19 @@ public abstract class SkyActivity extends AppCompatActivity implements IBaseView
     public void disLoading() {
         if (dialogManager != null)
             dialogManager.disDialog();
+    }
+
+    public void registerOnClick(View... views) {
+        for (View v : views) {
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SkyActivity.this.onClick(v);
+                }
+            });
+        }
+    }
+
+    public void onClick(View v) {
     }
 }
