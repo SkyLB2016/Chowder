@@ -102,18 +102,4 @@ public abstract class SkyActivity extends AppCompatActivity implements IBaseView
         if (dialogManager != null)
             dialogManager.disDialog();
     }
-
-    public void registerOnClick(View... views) {
-        for (View v : views) {
-            v.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    SkyActivity.this.onClick(v);
-                }
-            });
-        }
-    }
-
-    public void onClick(View v) {
-    }
 }
