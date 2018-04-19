@@ -18,11 +18,9 @@ class MeshFragment : BaseFragment<SolarP>() {
         }
     }
 
-    override fun getLayoutResId(): Int {
-        return R.layout.fragment_meshview
-    }
+    override fun getLayoutResId(): Int = R.layout.fragment_meshview
 
-    override fun creatPresenter(): SolarP? = SolarP(activity!!)
+    override fun creatPresenter(): SolarP = SolarP(activity!!)
 
     override fun initialize() {
 
