@@ -3847,6 +3847,8 @@
 
     <!--编程笔记-->
     <string name="biancheng">
+        编程笔记·李彬\n
+        使用其中代码时，应先去掉中文空格
         01.Android的系统架构\n
         第一、操作系统层（OS）:linux内核\n
         第二、各种库（Libraries）和Android 运行环境（RunTime）\n

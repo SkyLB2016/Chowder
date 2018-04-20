@@ -43,6 +43,8 @@
     <string name="act_poetry">14.诗词文赋</string>
     <string name="act_poetry_d">诗词文赋</string>
 
+    <string name="act_game">00.2048</string>
+
     <string name="ibu"><i><b><u>service</u></b></i></string>
 
     <string name="left_top">左上</string>

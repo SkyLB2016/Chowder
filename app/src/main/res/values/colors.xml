@@ -39,4 +39,6 @@
     <color name="red">#f12b2a</color>
     <color name="light_orange">#ffefab</color>
     <color name="dark_orange">#fff6d0</color>
+    <color name="gray">#CCC0B2</color>
+    <color name="gray1">#CCC0B2</color>
 </resources>

@@ -220,6 +220,15 @@
                 <action android:name="com.sky.coustom" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.activity.Game2048Activity"
+            android:description="@string/act_game"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/act_game">
+            <intent-filter>
+                <action android:name="com.sky.coustom" />
+            </intent-filter>
+        </activity>
 
         <service android:name=".ui.service.IntentTest" />
     </application>
