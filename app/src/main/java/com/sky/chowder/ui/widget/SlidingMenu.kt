@@ -99,7 +99,7 @@ class SlidingMenu @JvmOverloads constructor(context: Context, attrs: AttributeSe
                 if (distance < 0 /*左滑*/ && Math.abs(speed) > SPEED && isOpen) return close()
                 else if (distance > 0 /*右滑*/ && Math.abs(speed) > SPEED && isClose) return open()
                 //正常滑动时，menu滑出不到一半时关闭，否则打开,/*true事件拦截不再向下传递*/
-                return if (scrollX >= menuWidth / 2) close() else open()
+//                return if (scrollX >= menuWidth / 2) close() else open()
             }
         }
         return super.onTouchEvent(event)

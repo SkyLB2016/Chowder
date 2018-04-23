@@ -3845,6 +3845,10 @@
         围棋笔记\n
     </string>
 
+    <string name="yingyu">
+        英语笔记\n
+    </string>
+
     <!--编程笔记-->
     <string name="biancheng">
         编程笔记·李彬\n
@@ -4000,5 +4004,4 @@
         　　
 
     </string>
-
 </resources>

@@ -16,8 +16,8 @@
             android:id="@+id/flow"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="@dimen/wh_8"
-            android:elevation="@dimen/wh_8" />
+            android:elevation="@dimen/wh_8"
+            android:padding="@dimen/wh_8" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,21 +26,65 @@
 
             <include layout="@layout/include_toolbar" />
 
-            <ScrollView
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/tvDisplay"
+                <ScrollView
+                    android:id="@+id/scroll"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:letterSpacing="0.1"
-                    android:lineSpacingMultiplier="1.5"
-                    android:paddingLeft="@dimen/wh_32"
-                    android:paddingRight="@dimen/wh_32"
-                    android:paddingTop="@dimen/wh_16"
-                    android:textSize="@dimen/text_16" />
-            </ScrollView>
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/tvDisplay"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:letterSpacing="0.1"
+                        android:lineSpacingMultiplier="1.5"
+                        android:paddingLeft="@dimen/wh_32"
+                        android:paddingRight="@dimen/wh_32"
+                        android:paddingTop="@dimen/wh_16"
+                        android:textSize="@dimen/text_16" />
+                </ScrollView>
+
+                <LinearLayout
+                    android:id="@+id/llBottomBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:background="@android:color/white"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/wh_16">
+
+                    <TextView
+                        android:id="@+id/tvLast"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/text_medium"
+                        android:gravity="center"
+                        android:text="上一章" />
+
+                    <TextView
+                        android:id="@+id/tvCatalog"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textSize="@dimen/text_medium"
+                        android:text="目录" />
+
+                    <TextView
+                        android:textSize="@dimen/text_medium"
+                        android:id="@+id/tvNext"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="下一章" />
+
+                </LinearLayout>
+            </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
 

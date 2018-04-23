@@ -40,8 +40,8 @@
     <string name="act_pull">12.下拉动画</string>
     <string name="act_pull_d">待优化</string>
 
-    <string name="act_poetry">14.诗词文赋</string>
-    <string name="act_poetry_d">诗词文赋</string>
+    <string name="act_poetry">14.诗文，语言，笔记，英语</string>
+    <string name="act_poetry_d">争取做到每日至少背诵一百字</string>
 
     <string name="act_game">00.2048</string>
 
