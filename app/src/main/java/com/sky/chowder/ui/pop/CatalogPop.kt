@@ -25,6 +25,8 @@ class CatalogPop(view: View, width: Int, height: Int) : BasePop<ChapterEntity>(v
             override fun onAchieveHolder(holder: RecyclerHolder, position: Int) {
                 with(holder!!.itemView) {
                     tv.text = datas[position].chapter
+                    tv.setBackgroundResource(R.drawable.sel_yellow)
+                    tv.textSize=18f
                 }
             }
         }

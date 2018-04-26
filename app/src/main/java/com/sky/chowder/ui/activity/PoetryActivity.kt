@@ -120,15 +120,15 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
             if (i.startsWith("第") && i.endsWith("章")
                     || i.startsWith("卷")
                     || i.contains("第") && !i.contains("。")) {
-                chapter.content.setLength(chapter.content.length-1)
+                chapter.content.setLength(chapter.content.length - 1)
                 catalog.add(chapter)
                 chapter = ChapterEntity()
                 chapter.chapter = i
             } else if (i.contains(".")) {
-                chapter.content.setLength(chapter.content.length-1)
+                chapter.content.setLength(chapter.content.length - 1)
                 catalog.add(chapter)
                 chapter = ChapterEntity()
-                chapter.chapter = i.substring(2, i.indexOf("."))
+                chapter.chapter = i.substring(2, 15)
             }
             chapter.content.append("$i\n")
         }
@@ -184,11 +184,10 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
         if (llBottomBar.visibility == View.VISIBLE) {
             llBottomBar.visibility = View.GONE
             return
-        }
+        } else super.onBackPressed()
     }
 
 //    override fun onRestart() {
