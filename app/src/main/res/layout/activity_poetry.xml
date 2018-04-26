@@ -30,22 +30,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ScrollView
-                    android:id="@+id/scroll"
+                <com.sky.widget.MyRecyclerView
+                    android:id="@+id/recycler"
+                    android:background="@color/color_66"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/tvDisplay"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:letterSpacing="0.1"
-                        android:lineSpacingMultiplier="1.5"
-                        android:paddingLeft="@dimen/wh_32"
-                        android:paddingRight="@dimen/wh_32"
-                        android:paddingTop="@dimen/wh_16"
-                        android:textSize="@dimen/text_16" />
-                </ScrollView>
+                    android:layout_height="match_parent" />
 
                 <LinearLayout
                     android:id="@+id/llBottomBar"
