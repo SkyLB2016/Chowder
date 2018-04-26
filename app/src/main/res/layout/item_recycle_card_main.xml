@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_margin="8dp"
-                android:background="@drawable/sel_shape_rect"
+                android:background="@drawable/sel_rect_green"
                 android:text="+订阅"
                 android:textColor="#ffffffff" />
         </LinearLayout>

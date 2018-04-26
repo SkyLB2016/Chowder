@@ -22,13 +22,14 @@ class SlidingMenuActivity : BaseNoPActivity(), View.OnClickListener {
         initData()
         tvLogin.setOnClickListener { showToast("登录") }
         civ_head.setImageResource(R.mipmap.ic_puzzle)
+        sliding.menuState = { flag -> }
     }
 
     private fun initData() {
         var i: Int = '!'.toInt()
         var tv: TextView
         while (i <= 'z'.toInt()) {
-            tv = LayoutInflater.from(this).inflate(R.layout.tv, flow, false) as TextView
+            tv = LayoutInflater.from(this).inflate(R.layout.item_tv, flow, false) as TextView
             tv.text = "${i.toChar()}AABBCC"
             flow.addView(tv)
             ObjectAnimator.ofFloat(tv, "rotation", 0f, 360f).setDuration(3000).start()
@@ -51,7 +52,7 @@ class SlidingMenuActivity : BaseNoPActivity(), View.OnClickListener {
                 nums.addLast(temp)
                 a++
             } else {
-                tv = LayoutInflater.from(this).inflate(R.layout.tv, flow, false) as TextView
+                tv = LayoutInflater.from(this).inflate(R.layout.item_tv, flow, false) as TextView
                 tv.text = "$temp"
                 flow.addView(tv)
                 ObjectAnimator.ofFloat(tv, "rotation", 0f, 360f).setDuration(3000).start()

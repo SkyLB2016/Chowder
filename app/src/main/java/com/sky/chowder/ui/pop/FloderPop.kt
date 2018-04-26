@@ -33,17 +33,17 @@ class FloderPop(view: View, width: Int, height: Int) : BasePop<ImageFloder>(view
                 holder.setText(R.id.tv_count, datas[position].count.toString() + "个")
             }
         }
-        recycle!!.adapter = adapter
+        recycle?.adapter = adapter
     }
 
     override fun initEvent() {
-        adapter!!.setOnItemClickListener { view, position ->
-            if (itemClickListener != null)
-                itemClickListener.onItemClick(view, position)
+        adapter?.setOnItemClickListener { view, position ->
+            itemClickListener?.onItemClick(view, position)
+            dismiss()
         }
     }
 
     override fun initDatas() {
-        adapter!!.datas = popDatas
+        adapter?.datas = popDatas
     }
 }

@@ -49,7 +49,10 @@ import kotlin.coroutines.experimental.buildSequence
 class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
     override fun getLayoutResId(): Int = R.layout.activity_method
     override fun initialize() {
-        super.initialize()
+        //            val patPunc = Pattern.compile("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]$")
+//            val str = "同！意!"
+//            val matcher = patPunc.matcher(str)
+//            LogUtils.i("==${matcher.find()}")
         val method = arrayListOf("字符替换与数组化", "hash相同", "字体颜色背景变换"
                 , "系统信息", "获取app信息", "电池电量"
                 , "数组排序", "json转换", "list迭代器", "list筛选lambda"
@@ -64,7 +67,7 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
                 , "排序算法"
         )
         for (i in method) {
-            val tvText = LayoutInflater.from(this).inflate(R.layout.tv, flow, false) as TextView
+            val tvText = LayoutInflater.from(this).inflate(R.layout.item_tv, flow, false) as TextView
             tvText.text = i
             tvText.tag = i
             flow.addView(tvText)

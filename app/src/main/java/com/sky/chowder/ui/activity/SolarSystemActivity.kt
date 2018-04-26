@@ -49,16 +49,10 @@ class SolarSystemActivity : BasePActivity<SolarP>(), Toolbar.OnMenuItemClickList
         solar?.radius = width / 3
         solar?.rotateMenu = true//按钮是否旋转
         solar?.isRecoverChild = false
-        solar.menuState = object : SolarSystem.OnMenuState {
-            override fun openMenu() {
-                layoutDraw?.start()
-                handler.sendEmptyMessageDelayed(C.SOLAR, 600)
-            }
-
-            override fun closeMenu() {
-                layoutDraw?.start()
-                handler.sendEmptyMessageDelayed(C.SOLAR, 600)
-            }
+        solar.menuState = { state ->
+            if (state) showToast("打开") else showToast("关闭")
+            layoutDraw?.start()
+            handler.sendEmptyMessageDelayed(C.SOLAR, 600)
         }
         solar?.menuItemOnClick = { view, position ->
             //可以把所需要跳转的activity的全称写在tag里
@@ -81,15 +75,15 @@ class SolarSystemActivity : BasePActivity<SolarP>(), Toolbar.OnMenuItemClickList
 
     override fun onMenuItemClick(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_center -> solar?.position= SolarSystem.CENTER
-            R.id.action_left_top -> solar?.position= SolarSystem.LEFT_TOP
-            R.id.action_left_bottom -> solar?.position= SolarSystem.LEFT_BOTTOM
-            R.id.action_right_top -> solar?.position= SolarSystem.RIGHT_TOP
-            R.id.action_right_bottom -> solar?.position= SolarSystem.RIGHT_BOTTOM
-            R.id.action_center_top -> solar?.position= SolarSystem.CENTER_TOP
-            R.id.action_center_bottom -> solar?.position= SolarSystem.CENTER_BOTTOM
-            R.id.action_center_left -> solar?.position= SolarSystem.CENTER_LEFT
-            R.id.action_center_right -> solar?.position= SolarSystem.CENTER_RIGHT
+            R.id.action_center -> solar?.position = SolarSystem.CENTER
+            R.id.action_left_top -> solar?.position = SolarSystem.LEFT_TOP
+            R.id.action_left_bottom -> solar?.position = SolarSystem.LEFT_BOTTOM
+            R.id.action_right_top -> solar?.position = SolarSystem.RIGHT_TOP
+            R.id.action_right_bottom -> solar?.position = SolarSystem.RIGHT_BOTTOM
+            R.id.action_center_top -> solar?.position = SolarSystem.CENTER_TOP
+            R.id.action_center_bottom -> solar?.position = SolarSystem.CENTER_BOTTOM
+            R.id.action_center_left -> solar?.position = SolarSystem.CENTER_LEFT
+            R.id.action_center_right -> solar?.position = SolarSystem.CENTER_RIGHT
         }
         return false
     }

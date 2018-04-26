@@ -121,7 +121,6 @@ class ImageUriActivity : RecyclerPActivity<String, ImageUriP>(), ImageUriV<Strin
     }
 
     private var filter: FilenameFilter = FilenameFilter { _, filename ->
-        val type = arrayOf(".jpg", ".JPG", ".jpeg", ".JPEG", ".png", ".PNG")
-        type.any { filename.endsWith(it) }
+        arrayOf(".jpg", ".JPG", ".jpeg", ".JPEG", ".png", ".PNG").any { filename.endsWith(it) }
     }
 }

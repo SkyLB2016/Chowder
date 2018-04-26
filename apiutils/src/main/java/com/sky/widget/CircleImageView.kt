@@ -80,7 +80,7 @@ class CircleImageView @JvmOverloads constructor(context: Context, attrs: Attribu
 
     companion object {
         private val SCALE_TYPE = ImageView.ScaleType.CENTER_CROP
-        private val BORDER_WIDTH = 0f
-        private val BORDER_COLOR = Color.BLACK
+        private const val BORDER_WIDTH = 0f
+        private const val BORDER_COLOR = Color.BLACK
     }
 }

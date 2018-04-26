@@ -29,14 +29,14 @@ class SlidingMenu @JvmOverloads constructor(context: Context, attrs: AttributeSe
     private var downTime: Long = 0//按下时的时间，计算速度，展开或者关闭menu
     private var state = State.CLOSE//默认状态
 
-    private val isClose: Boolean
+    val isClose: Boolean
         get() = state === State.CLOSE
 
-    private val isOpen: Boolean
+    val isOpen: Boolean
         get() = state === State.OPEN
 
-    var onMenuScroll: OnMenuScroll? = null//
-    var menuState: MenuState? = null//menu打开与关闭时的监听
+    var onMenuScroll: ((Int, Int, Int, Int) -> Unit)? = null//
+    var menuState: ((Boolean) -> Unit)? = null//menu打开与关闭时的监听,
 
     fun toggleMenu() = if (isClose) open() else close()
 
@@ -69,8 +69,7 @@ class SlidingMenu @JvmOverloads constructor(context: Context, attrs: AttributeSe
                 if (isOpen && downX > menuWidth) return true//打开时，某些部分的touch事件不向下传递
             }
             MotionEvent.ACTION_MOVE ->//在范围内时滑动的x距离大于100的时候才开始滑动状态
-                if (downY > screenHeight * 2 / 5 && event.rawX - downX > 100)
-                    return true
+                if (downY > screenHeight * 2 / 5 && event.rawX - downX > 100) return true
         }
         return false
     }
@@ -124,35 +123,26 @@ class SlidingMenu @JvmOverloads constructor(context: Context, attrs: AttributeSe
         //固定缩放时的中心
         content?.pivotX = 0f
         content?.pivotY = (content!!.height / 2).toFloat()
-        if (onMenuScroll != null) onMenuScroll!!.onScrollChanged(l, t, oldl, oldt)
+        onMenuScroll?.invoke(l, t, oldl, oldt)
     }
 
     private fun open(): Boolean {
         smoothScrollTo(0, 0)
         state = State.OPEN
-        if (menuState != null) menuState!!.onOpen()
+        menuState?.invoke(true)
         return true
     }
 
     private fun close(): Boolean {
         smoothScrollTo(menuWidth, 0)
         state = State.CLOSE
-        if (menuState != null) menuState!!.onClose()
+        menuState?.invoke(false)
         return true
     }
 
-    interface MenuState {
-        fun onOpen()
-        fun onClose()
-    }
-
     companion object {
-        private val SPEED = 2
-        private val SCALE = 1f
-        private val DEFAULTSCALE = 0.7f
-    }
-
-    interface OnMenuScroll {
-        fun onScrollChanged(l: Int, t: Int, oldl: Int, oldt: Int)
+        private const val SPEED = 2
+        private const val SCALE = 1f
+        private const val DEFAULTSCALE = 0.7f
     }
 }

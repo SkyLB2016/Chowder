@@ -53,35 +53,39 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:background="@android:color/white"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/wh_16">
+                    android:orientation="horizontal">
 
-                    <TextView
+                    <Button
                         android:id="@+id/tvLast"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="@dimen/text_medium"
+                        android:background="@drawable/sel_yellow"
                         android:gravity="center"
-                        android:text="上一章" />
+                        android:text="上一章"
+                        android:textSize="@dimen/text_medium" />
 
-                    <TextView
+                    <Button
                         android:id="@+id/tvCatalog"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/wh_1"
+                        android:layout_marginRight="@dimen/wh_1"
                         android:layout_weight="1"
+                        android:background="@drawable/sel_yellow"
                         android:gravity="center"
-                        android:textSize="@dimen/text_medium"
-                        android:text="目录" />
+                        android:text="目录"
+                        android:textSize="@dimen/text_medium" />
 
-                    <TextView
-                        android:textSize="@dimen/text_medium"
+                    <Button
                         android:id="@+id/tvNext"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:background="@drawable/sel_yellow"
                         android:gravity="center"
-                        android:text="下一章" />
+                        android:text="下一章"
+                        android:textSize="@dimen/text_medium" />
 
                 </LinearLayout>
             </RelativeLayout>

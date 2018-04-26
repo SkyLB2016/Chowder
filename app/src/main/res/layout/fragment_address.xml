@@ -62,7 +62,7 @@
             android:layout_marginLeft="@dimen/wh_8"
             android:layout_marginRight="@dimen/wh_8"
             android:layout_weight="1"
-            android:background="@drawable/sel_shape_red"
+            android:background="@drawable/sel_shape_yellow"
             android:text="取消" />
 
         <Button
@@ -72,7 +72,7 @@
             android:layout_marginLeft="@dimen/wh_8"
             android:layout_marginRight="@dimen/wh_8"
             android:layout_weight="1"
-            android:background="@drawable/sel_shape_rect"
+            android:background="@drawable/sel_rect_green"
             android:text="确定" />
     </LinearLayout>
 </LinearLayout>

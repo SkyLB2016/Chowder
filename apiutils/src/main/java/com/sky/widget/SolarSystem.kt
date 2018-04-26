@@ -28,7 +28,7 @@ class SolarSystem @JvmOverloads constructor(context: Context, attrs: AttributeSe
 
     private var mState = State.CLOSE// 默认状态
     var menuItemOnClick: ((View, Int) -> Unit)? = null
-    var menuState: OnMenuState? = null
+    var menuState: ((Boolean) -> Unit)? = null
     /**
      * @return 判断是打开还是关闭状态
      */
@@ -132,8 +132,8 @@ class SolarSystem @JvmOverloads constructor(context: Context, attrs: AttributeSe
      */
     private fun onMenuClick(v: View) {
         if (isRotating) return
-        if (isOpen) menuState?.closeMenu()
-        else menuState?.openMenu()
+        if (isOpen) menuState?.invoke(false)
+        else menuState?.invoke(true)
         if (rotateMenu) ObjectAnimator.ofFloat(v, "rotation", 0f, 720f).setDuration(1000).start()
         toggleMenu(TIME)//子view弹出与收回
     }
@@ -246,22 +246,17 @@ class SolarSystem @JvmOverloads constructor(context: Context, attrs: AttributeSe
 
     companion object {
         // 九个位置定义
-        val LEFT_TOP = 0
-        val LEFT_BOTTOM = 1
-        val RIGHT_TOP = 2
-        val RIGHT_BOTTOM = 3
-        val CENTER_TOP = 4
-        val CENTER_BOTTOM = 5
-        val CENTER = 6
-        val CENTER_LEFT = 7
-        val CENTER_RIGHT = 8
+        const val LEFT_TOP = 0
+        const val LEFT_BOTTOM = 1
+        const val RIGHT_TOP = 2
+        const val RIGHT_BOTTOM = 3
+        const val CENTER_TOP = 4
+        const val CENTER_BOTTOM = 5
+        const val CENTER = 6
+        const val CENTER_LEFT = 7
+        const val CENTER_RIGHT = 8
 
-        val RADIUS = 300 //默认的半径
-        val TIME = 500L  //子view弹出与收回的时间
-    }
-
-    interface OnMenuState {
-        fun openMenu()
-        fun closeMenu()
+        const val RADIUS = 300 //默认的半径
+        const val TIME = 500L  //子view弹出与收回的时间
     }
 }

@@ -17,19 +17,18 @@ class URIPop(contentView: View) : BasePop<String>(contentView) {
     private var adapter: PopPagerAdapter? = null
 
     override fun initEvent() {
-        viewPager = view.findViewById<ViewPager>(R.id.id_viewpager)
+        viewPager = view.findViewById(R.id.id_viewpager)
         adapter = PopPagerAdapter()
-        viewPager!!.adapter = adapter
+        viewPager?.adapter = adapter
     }
 
     override fun initDatas() {
-        adapter!!.parentPath = parentPath
-        adapter!!.strings = popDatas
-        adapter!!.notifyDataSetChanged()
-
+        adapter?.parentPath = parentPath
+        adapter?.strings = popDatas
+        adapter?.notifyDataSetChanged()
     }
 
     fun setCurrentItem(position: Int) {
-        viewPager!!.setCurrentItem(position, false)
+        viewPager?.setCurrentItem(position, false)
     }
 }
