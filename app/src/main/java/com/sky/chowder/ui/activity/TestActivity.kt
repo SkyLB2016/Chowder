@@ -3,6 +3,7 @@ package com.sky.chowder.ui.activity
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.sky.chowder.R
+import com.sky.utils.ToastUtils
 import kotlinx.android.synthetic.main.activity_test.*
 
 /**

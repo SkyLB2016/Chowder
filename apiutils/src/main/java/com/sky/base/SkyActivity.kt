@@ -44,13 +44,13 @@ abstract class SkyActivity : AppCompatActivity(), IBaseView {
 
     override fun onResume() {
         super.onResume()
-        // 页面埋点，需要使用Activity的引用，以便代码能够统计到具体页面名
+        //待删除 页面埋点，需要使用Activity的引用，以便代码能够统计到具体页面名
         StatService.onResume(this)
     }
 
     override fun onPause() {
         super.onPause()
-        // 页面结束埋点，需要使用Activity的引用，以便代码能够统计到具体页面名
+        //待删除 页面结束埋点，需要使用Activity的引用，以便代码能够统计到具体页面名
         StatService.onPause(this)
     }
 
@@ -69,8 +69,7 @@ abstract class SkyActivity : AppCompatActivity(), IBaseView {
     }
 
     override fun disLoading() {
-        if (dialogManager != null)
-            dialogManager?.disDialog()
+        dialogManager?.disDialog()
     }
 
     fun registerOnClick(vararg views: View) {

@@ -128,7 +128,7 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
                 chapter.content.setLength(chapter.content.length - 1)
                 catalog.add(chapter)
                 chapter = ChapterEntity()
-                chapter.chapter = i.substring(2, 15)
+                chapter.chapter = i.substring(2, i.indexOf("."))
             }
             chapter.content.append("$i\n")
         }
@@ -189,40 +189,4 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
             return
         } else super.onBackPressed()
     }
-
-//    override fun onRestart() {
-//        super.onRestart()
-//        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
-//    }
-//
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
-//    }
-//
-//    override fun onStart() {
-//        super.onStart()
-//        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
-//    }
-//
-//    override fun onResume() {
-//        super.onResume()
-//        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
-//    }
-//
-//    override fun onPause() {
-//        super.onPause()
-//        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
-//    }
-//
-//    override fun onStop() {
-//        super.onStop()
-//        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
-//    }
-//
-//    override fun onDestroy() {
-//        super.onDestroy()
-//        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
-//    }
-
 }

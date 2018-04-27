@@ -122,4 +122,36 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
         System.out.println(f.list())// 返回一个字符串数组，这些字符串指定此抽象路径名表示的目录中的文件和目录
         System.out.println(f.mkdir())//创建此抽象路径名指定的目录
     }
+
+//    override fun onRestart() {
+//        super.onRestart()
+//        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
+//    }
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
+//    }
+//
+//    override fun onStart() {
+//        super.onStart()
+//        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
+//    }
+//
+//    override fun onResume() {
+//        super.onResume()
+//        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
+//    }
+//    override fun onPause() {
+//        super.onPause()
+//        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
+//    }
+//
+//    override fun onStop() {
+//        super.onStop()
+//        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
+//    }
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
+//    }
 }

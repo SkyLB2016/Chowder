@@ -23,7 +23,7 @@ class SolarSystemActivity : BasePActivity<SolarP>(), Toolbar.OnMenuItemClickList
 
     private var layoutDraw: AnimationDrawable? = null
 
-    internal var handler: Handler = object : Handler() {
+    private var handler: Handler = object : Handler() {
         override fun handleMessage(msg: Message) {
             if (msg.what == C.SOLAR) layoutDraw?.stop()
         }
