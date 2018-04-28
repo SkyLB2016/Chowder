@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_game.*
 /**
  * Created by SKY on 2018/4/20 11:17.
  */
-class Game2048Activity : BasePActivity<GameP>() {
+class Game2048Activity2 : BasePActivity<GameP>() {
     var adapter: RecyclerAdapter<Int>? = null
 
     override fun getLayoutResId(): Int = R.layout.activity_game

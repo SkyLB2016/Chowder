@@ -62,8 +62,6 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
             tv.setOnClickListener(this)
             resId.add(resources.getIdentifier(array[1], "string", packageName))
         }
-
-
         val text = getString(resId[3]).replace(" ", "")
         gravity = Gravity.CENTER
         setToolbarTitle(text.lines()[0])
@@ -119,6 +117,7 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
         for (i in list) {
             if (i.startsWith("第") && i.endsWith("章")
                     || i.startsWith("卷")
+                    || i.startsWith("【")
                     || i.contains("第") && !i.contains("。")) {
                 chapter.content.setLength(chapter.content.length - 1)
                 catalog.add(chapter)
