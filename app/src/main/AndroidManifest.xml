@@ -222,9 +222,9 @@
         </activity>
         <activity
             android:name=".ui.activity.Game2048Activity"
-            android:description="@string/act_game"
+            android:description="@string/act_game2048"
             android:icon="@mipmap/ic_launcher"
-            android:label="@string/act_game">
+            android:label="@string/act_game2048">
             <intent-filter>
                 <action android:name="com.sky.coustom" />
             </intent-filter>

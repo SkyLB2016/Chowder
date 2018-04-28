@@ -2,7 +2,7 @@
     <string name="app_name">chowder</string>
     <string name="dialog_exit">确定退出应用程序吗?</string>
 
-    <string name="act_test">13.方法测试类</string>
+    <string name="act_test">230.方法测试类</string>
 
     <string name="act_method">01.方法组合类</string>
     <string name="act_method_d">常用的方法：字符替换与数组化，数组排序筛选，json转换，时间地址选择等等</string>
@@ -25,25 +25,26 @@
     <string name="act_puzzle">07.拼图</string>
     <string name="act_puzzle_d">拼图游戏，一维数组模拟二维数组，移动时遮罩隐藏原，移动新view，可引申动态加载大图片</string>
 
-    <string name="act_tab">08.滑动窗口</string>
+    <string name="act_game2048">08.2048</string>
+
+    <string name="act_tab">09.滑动窗口</string>
     <string name="act_tab_b">tab结合viewpager，包含：CardView,MeshView,Shader，XferModeF，电话簿</string>
 
-    <string name="act_svg">09.SVG</string>
+    <string name="act_svg">10.SVG</string>
     <string name="act_svg_d">SVG演示，加载html下的svg</string>
 
-    <string name="act_coordinator">10.CoordinatorLayout与ToolBar的组合应用</string>
+    <string name="act_coordinator">11.CoordinatorLayout与ToolBar的组合应用</string>
     <string name="act_coordinator_d">CoordinatorLayout与ToolBar的组合应用,待进一步处理</string>
 
-    <string name="act_stock">11.股票计算</string>
+    <string name="act_stock">12.股票计算</string>
     <string name="act_stock_d">算着玩的</string>
 
-    <string name="act_pull">12.下拉动画</string>
+    <string name="act_pull">13.下拉动画</string>
     <string name="act_pull_d">待优化</string>
 
     <string name="act_poetry">14.诗文，语言，笔记，英语</string>
     <string name="act_poetry_d">争取做到每日至少背诵一百字</string>
 
-    <string name="act_game">00.2048</string>
 
     <string name="ibu"><i><b><u>service</u></b></i></string>
 
