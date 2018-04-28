@@ -6,6 +6,7 @@
 
 
     <com.sky.chowder.ui.widget.Game2048Layout
+        android:id="@+id/game"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>
