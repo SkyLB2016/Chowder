@@ -224,7 +224,8 @@
             android:name=".ui.activity.Game2048Activity"
             android:description="@string/act_game2048"
             android:icon="@mipmap/ic_launcher"
-            android:label="@string/act_game2048">
+            android:label="@string/act_game2048"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.sky.coustom" />
             </intent-filter>
