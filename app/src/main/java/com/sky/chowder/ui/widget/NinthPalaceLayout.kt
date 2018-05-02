@@ -60,7 +60,7 @@ class NinthPalaceLayout @JvmOverloads constructor(context: Context, attrs: Attri
         paint.strokeWidth = 5f
         for (i in select.indices) {
             canvas?.drawCircle(select[i].rect.centerX() * 1f, select[i].rect.centerY() * 1f, select[i].radius, paint)
-            if (i + 1 <= select.size - 1) canvas?.drawLine(select[i].rect.centerX() * 1f, select[i].rect.centerY() * 1f, select[i + 1].rect.centerX() * 1f, select[i + 1].rect.centerY() * 1f, paint)
+            if (i + 1 < select.size) canvas?.drawLine(select[i].rect.centerX() * 1f, select[i].rect.centerY() * 1f, select[i + 1].rect.centerX() * 1f, select[i + 1].rect.centerY() * 1f, paint)
             else if (endX !== 0f && endY !== 0f) canvas?.drawLine(select[i].rect.centerX() * 1f, select[i].rect.centerY() * 1f, endX, endY, paint)
         }
     }
