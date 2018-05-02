@@ -5,8 +5,6 @@ import android.graphics.Rect
 /**
  * Created by SKY on 2018/5/2 17:01.
  */
-class NinthPalaceEntity {
-    var rect: Rect = Rect()
+class NinthPalaceEntity(var id: Int, var rect: Rect) {
     var radius = 10f
-    var id: Int = 0
 }
