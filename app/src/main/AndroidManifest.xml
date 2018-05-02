@@ -230,6 +230,16 @@
                 <action android:name="com.sky.coustom" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.activity.NinthPalaceActivity"
+            android:description="@string/act_ninth"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/act_ninth"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.sky.coustom" />
+            </intent-filter>
+        </activity>
 
         <service android:name=".ui.service.IntentTest" />
     </application>

@@ -61,24 +61,9 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
         }
     }
 
-    private fun getImageDrawable(position: Int): Drawable? {
-        return when (list[position]) {
-            2 -> resources.getDrawable(R.mipmap.i2)
-            4 -> resources.getDrawable(R.mipmap.i4)
-            8 -> resources.getDrawable(R.mipmap.i8)
-            16 -> resources.getDrawable(R.mipmap.i16)
-            32 -> resources.getDrawable(R.mipmap.i32)
-            64 -> resources.getDrawable(R.mipmap.i64)
-            128 -> resources.getDrawable(R.mipmap.i128)
-            256 -> resources.getDrawable(R.mipmap.i256)
-            512 -> resources.getDrawable(R.mipmap.i512)
-            1024 -> resources.getDrawable(R.mipmap.i1024)
-            2048 -> resources.getDrawable(R.mipmap.i2048)
-            4096 -> resources.getDrawable(R.mipmap.i4096)
-//                    8192 -> resources.getDrawable(R.mipmap.i4096)
-            else -> null
-        }
-    }
+    private fun getImageDrawable(position: Int): Drawable? =
+            if (list[position] in 2..4096) resources.getDrawable(resources.getIdentifier("i${list[position]}", "mipmap", context.packageName))
+            else null
 
     private var downX: Float = 0f
     private var downY: Float = 0f
@@ -122,9 +107,15 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
         //是否还有空白的位置
         if (random.isNotEmpty()) {
             val randomNum = if (random.size > 1) random[Random().nextInt(random.size - 1)] else random[0]
-            list[randomNum] = 2
+            list[randomNum] = randomTwoOrFour()
             (getChildAt(randomNum) as ImageView).setImageDrawable(getImageDrawable(randomNum))
         }
+    }
+
+    private fun randomTwoOrFour(): Int {
+        var flag = 0.25//50
+        for (i in list) if (i > 31) flag = 0.5
+        return if (Math.random() > flag) 2 else 4
     }
 
     private fun slideRight() {

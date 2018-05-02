@@ -57,13 +57,7 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
             LogUtils.i("总长==${text.length}")
         }
         fab.setOnClickListener {
-
-            val list = ArrayList<String>()
-            list.add("aa")
-
-            val name = list.toString()
-            val n = name.substring(1, name.length - 1)
-            LogUtils.i(n)
+                LogUtils.i("${Math.random()}")
         }
     }
 

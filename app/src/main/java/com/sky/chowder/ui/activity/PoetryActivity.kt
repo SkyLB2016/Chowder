@@ -13,6 +13,7 @@ import com.sky.base.BaseNoPActivity
 import com.sky.chowder.R
 import com.sky.chowder.model.ChapterEntity
 import com.sky.chowder.ui.pop.CatalogPop
+import com.sky.utils.LogUtils
 import com.sky.utils.ScreenUtils
 import com.sky.widget.BaseTitle
 import kotlinx.android.synthetic.main.activity_poetry.*
@@ -37,10 +38,7 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
                     tvDisplay.text = getDatas()[position].content
                     tvDisplay.gravity = gravity
                     if (position == 0) {
-                        tvDisplay.setPadding(resources.getDimensionPixelSize(R.dimen.wh_32),
-                                resources.getDimensionPixelSize(R.dimen.wh_16),
-                                resources.getDimensionPixelSize(R.dimen.wh_32),
-                                resources.getDimensionPixelSize(R.dimen.wh_4))
+                        tvDisplay.setPadding(resources.getDimensionPixelSize(R.dimen.wh_32), resources.getDimensionPixelSize(R.dimen.wh_16), resources.getDimensionPixelSize(R.dimen.wh_32), resources.getDimensionPixelSize(R.dimen.wh_4))
                     }
                 }
             }
@@ -80,6 +78,7 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
         val text = getString(resId[v!!.id]).replace(" ", "")
         setToolbarTitle(text.lines()[0])
         getCatalog(text)
+        LogUtils.i("行数==${text.lines().size}")
     }
 
     private val catalog = View.OnClickListener { v ->
@@ -162,6 +161,16 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
         super.onEnterAnimationComplete()
         val yy = getObject("scrollX", 0)
 //        scroll?.scrollTo(0, yy)
+// 像这种话啊，你也别问员工，没意义，员工要是说实话呢，那叫挑拨离间，就如某某，公司内的人基本都讨厌ta,要是不说实话呢，又觉着过意不去，所以说话就支支吾吾。
+// 说到底呢，我也只是名员工，说的再具体点我只是一名专精技术的员工，我也没那么强的事业心，用不着去事事迎合你们，行就是行，不行就是不行（或者换个说法：
+// 我曾经对你们说过，在程序上只要你能想到，在我这基本都是能实现的，但是，请注意这里有个但是，你想到的在程序逻辑上不一定能很好的兼容，往往这样就会产生连锁bug，
+// 又或者会让本来很简单的一个功能，因为加了很多限制，变成一个臃肿的逻辑，无形中就限制了后期维护与改动）或许在你们看来这后期维护与改动没什么，但是像这种问题多了，
+// 所要耗费的时间可不是说抬抬手就能解决的了，往往是改这，别的地也会出bug，程序是一个整体，但局部应该就是局部，一件事只做一件事。
+// 程序要上线了，这边页面又变了，这就是你们那位口中喊着这是为公司写的又不是为我写的的人常干的事，或许变就变呗，这在你们看着很正常，因为需求有改动了嘛，
+// 但那只是因为你们不了解也不想了解，我记着我们说过，上线前就不要改动的话吧，你这改一个小改动，我这可能就需要大改，可能就需要涉及底层的更改，这样牵扯的地方就多了，
+// 很容易产生bug，这项目还上不上线，况且需求变了，那时间工期变不变？。？。都说无规矩不成方圆，打我们开始接手这个项目到现在，这规矩也还是没立起来，其原因何在。？
+//明明呢是自己的一家之言，就张口闭口为用户，用户需要。
+// 给android提的bug，却是iPhone的页面，而我这查无此bug，你们说这bug是ios还是android，这种问题常犯的话，你们觉着作为一个产品他合格吗，连自己的产品都不了解的产品合格吗。
     }
 
     var downX = 0f
