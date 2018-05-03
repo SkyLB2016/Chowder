@@ -132,22 +132,22 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
         return if (Math.random() > flag) 2 else 4
     }
 
+    private fun initRLNums(i: Int, nums: ArrayList<Int>) {
+        nums.clear()
+        if (list[i * 4] !== 0) nums.add(list[i * 4])
+        if (list[i * 4 + 1] !== 0) nums.add(list[i * 4 + 1])
+        if (list[i * 4 + 2] !== 0) nums.add(list[i * 4 + 2])
+        if (list[i * 4 + 3] !== 0) nums.add(list[i * 4 + 3])
+        list[i * 4] = 0
+        list[i * 4 + 1] = 0
+        list[i * 4 + 2] = 0
+        list[i * 4 + 3] = 0
+    }
+
     private fun slideRight() {
         val nums = ArrayList<Int>()
         for (i in 0..3) {
-            val one = list[i * 4]
-            val two = list[i * 4 + 1]
-            val three = list[i * 4 + 2]
-            val four = list[i * 4 + 3]
-            nums.clear()
-            if (one !== 0) nums.add(one)
-            if (two !== 0) nums.add(two)
-            if (three !== 0) nums.add(three)
-            if (four !== 0) nums.add(four)
-            list[i * 4] = 0
-            list[i * 4 + 1] = 0
-            list[i * 4 + 2] = 0
-            list[i * 4 + 3] = 0
+            initRLNums(i, nums)
             when (nums.size) {
                 1 -> list[i * 4 + 3] = nums[0]
                 2 -> if (nums[0] == nums[1]) list[i * 4 + 3] = nums[0] + nums[1]
@@ -204,19 +204,7 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
     private fun slideLeft() {
         val nums = ArrayList<Int>()
         for (i in 0..3) {
-            val one = list[i * 4]
-            val two = list[i * 4 + 1]
-            val three = list[i * 4 + 2]
-            val four = list[i * 4 + 3]
-            nums.clear()
-            if (one !== 0) nums.add(one)
-            if (two !== 0) nums.add(two)
-            if (three !== 0) nums.add(three)
-            if (four !== 0) nums.add(four)
-            list[i * 4] = 0
-            list[i * 4 + 1] = 0
-            list[i * 4 + 2] = 0
-            list[i * 4 + 3] = 0
+            initRLNums(i, nums)
             when (nums.size) {
                 1 -> list[i * 4] = nums[0]
                 2 -> if (nums[0] == nums[1]) list[i * 4] = nums[0] + nums[1]
@@ -270,22 +258,22 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
         }
     }
 
+    private fun initDUNums(i: Int, nums: ArrayList<Int>) {
+        nums.clear()
+        if (list[i] !== 0) nums.add(list[i])
+        if (list[i + 4] !== 0) nums.add(list[i + 4])
+        if (list[i + 8] !== 0) nums.add(list[i + 8])
+        if (list[i + 12] !== 0) nums.add(list[i + 12])
+        list[i] = 0
+        list[i + 4] = 0
+        list[i + 8] = 0
+        list[i + 12] = 0
+    }
+
     private fun slideDown() {
         val nums = ArrayList<Int>()
         for (i in 0..3) {
-            val one = list[i]
-            val two = list[i + 4]
-            val three = list[i + 8]
-            val four = list[i + 12]
-            nums.clear()
-            if (one !== 0) nums.add(one)
-            if (two !== 0) nums.add(two)
-            if (three !== 0) nums.add(three)
-            if (four !== 0) nums.add(four)
-            list[i] = 0
-            list[i + 4] = 0
-            list[i + 8] = 0
-            list[i + 12] = 0
+            initDUNums(i, nums)
             when (nums.size) {
                 1 -> list[i + 12] = nums[0]
                 2 -> if (nums[0] == nums[1]) list[i + 12] = nums[0] + nums[1]
@@ -342,15 +330,7 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
     private fun slideUp() {
         val nums = ArrayList<Int>()
         for (i in 0..3) {
-            nums.clear()
-            if (list[i] !== 0) nums.add(list[i])
-            if (list[i + 4] !== 0) nums.add(list[i + 4])
-            if (list[i + 8] !== 0) nums.add(list[i + 8])
-            if (list[i + 12] !== 0) nums.add(list[i + 12])
-            list[i] = 0
-            list[i + 4] = 0
-            list[i + 8] = 0
-            list[i + 12] = 0
+            initDUNums(i, nums)
             when (nums.size) {
                 1 -> list[i] = nums[0]
                 2 -> if (nums[0] == nums[1]) list[i] = nums[0] + nums[1]
