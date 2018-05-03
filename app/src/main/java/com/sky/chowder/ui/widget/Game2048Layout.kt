@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.widget.ImageView
 import android.widget.RelativeLayout
+import com.sky.SkyApp
 import com.sky.chowder.R
 import com.sky.utils.ScreenUtils
 import java.util.*
@@ -78,16 +79,16 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
                 val diffX = event.x - downX
                 val diffY = event.y - downY
                 //移动距离过小则返回
-                if (Math.abs(diffX) < 300 && Math.abs(diffY) < 300) return true
+                if (Math.abs(diffX) < 100 && Math.abs(diffY) < 100) return true
                 //复制原数据
                 val oldList = list.clone() as ArrayList<Int>
                 //开始移动数据
                 if (Math.abs(diffX) > Math.abs(diffY)) {
-                    if (diffX > 300) /*右滑*/ slideRight()
-                    else if (diffX < -300) /*左滑*/ slideLeft()
+                    if (diffX > 100) /*右滑*/ slideRight()
+                    else if (diffX < -100) /*左滑*/ slideLeft()
                 } else {
-                    if (diffY > 300) /*下滑*/ slideDown()
-                    else if (diffY < -300) /*上滑*/ slideUp()
+                    if (diffY > 100) /*下滑*/ slideDown()
+                    else if (diffY < -100) /*上滑*/ slideUp()
                 }
                 //现数据与原数据比较，不同则重置数组
                 if (list != oldList) resetView()
@@ -110,11 +111,24 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
             list[randomNum] = randomTwoOrFour()
             (getChildAt(randomNum) as ImageView).setImageDrawable(getImageDrawable(randomNum))
         }
+        if (random.size < 2) {
+            var isMove = true
+            for (i in 0..3) {
+                //横向对比
+                if (list[i * 4] == list[i * 4 + 1] || list[i * 4 + 1] == list[i * 4 + 2] || list[i * 4 + 2] == list[i * 4 + 3] ||
+                        //纵向对比
+                        list[i] == list[i + 4] || list[i + 4] == list[i + 8] || list[i + 8] == list[i + 12]) {
+                    isMove = false
+                    break
+                }
+            }
+            if (isMove) SkyApp.getInstance().showToast("游戏结束")
+        }
     }
 
     private fun randomTwoOrFour(): Int {
         var flag = 0.25//50
-        for (i in list) if (i > 31) flag = 0.5
+        for (i in list) if (i > 511) flag = 0.5
         return if (Math.random() > flag) 2 else 4
     }
 
@@ -328,15 +342,11 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
     private fun slideUp() {
         val nums = ArrayList<Int>()
         for (i in 0..3) {
-            val one = list[i]
-            val two = list[i + 4]
-            val three = list[i + 8]
-            val four = list[i + 12]
             nums.clear()
-            if (one !== 0) nums.add(one)
-            if (two !== 0) nums.add(two)
-            if (three !== 0) nums.add(three)
-            if (four !== 0) nums.add(four)
+            if (list[i] !== 0) nums.add(list[i])
+            if (list[i + 4] !== 0) nums.add(list[i + 4])
+            if (list[i + 8] !== 0) nums.add(list[i + 8])
+            if (list[i + 12] !== 0) nums.add(list[i + 12])
             list[i] = 0
             list[i + 4] = 0
             list[i + 8] = 0

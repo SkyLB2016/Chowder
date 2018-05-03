@@ -19,14 +19,17 @@ import com.sky.utils.ScreenUtils
 class NinthPalaceLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
     : View(context, attrs, defStyleAttr) {
 
-    private val list = ArrayList<NinthPalaceEntity>()
+    private val orginal = ArrayList<NinthPalaceEntity>()
     private val select = ArrayList<NinthPalaceEntity>()
+    private var passWord = ArrayList<NinthPalaceEntity>()
+
+    var onSuccess: ((Boolean) -> Unit)? = null//
 
     private val piece = 3//几行几列
     private var once = true
 
     init {
-        setBackgroundResource(R.color.alpha_66)
+        setBackgroundResource(R.color.alpha_99)
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -46,7 +49,7 @@ class NinthPalaceLayout @JvmOverloads constructor(context: Context, attrs: Attri
             val left = i % piece * pieceWidth
             val top = i / piece * pieceWidth + top
             val rect = Rect(left + pieceWidth / 4, top + pieceWidth / 4, left + pieceWidth * 3 / 4, top + pieceWidth * 3 / 4)
-            list.add(NinthPalaceEntity(i, rect))
+            orginal.add(NinthPalaceEntity(i, rect))
         }
     }
 
@@ -54,7 +57,7 @@ class NinthPalaceLayout @JvmOverloads constructor(context: Context, attrs: Attri
         super.onDraw(canvas)
         val paint = Paint()
         paint.color = Color.BLUE
-        for (i in list) canvas?.drawCircle(i.rect.centerX() * 1f, i.rect.centerY() * 1f, i.radius, paint)
+        for (i in orginal) canvas?.drawCircle(i.rect.centerX() * 1f, i.rect.centerY() * 1f, i.radius, paint)
 
         paint.color = Color.RED
         paint.strokeWidth = 5f
@@ -76,7 +79,7 @@ class NinthPalaceLayout @JvmOverloads constructor(context: Context, attrs: Attri
                 downX = event.x
                 downY = event.y
                 select.clear()
-                for (i in list) if (i.rect.contains(downX.toInt(), downY.toInt())) {
+                for (i in orginal) if (i.rect.contains(downX.toInt(), downY.toInt())) {
                     select.add(i)
                     invalidate()
                 }
@@ -85,17 +88,17 @@ class NinthPalaceLayout @JvmOverloads constructor(context: Context, attrs: Attri
                 endX = event.x
                 endY = event.y
                 if (select.isEmpty()) return false
-                for (i in list)
+                for (i in orginal)
                     if (i.rect.contains(endX.toInt(), endY.toInt()) && !select.contains(i)) {
                         val sId = select.last().id//上一个点的id
                         val eId = i.id//后一个点的id
                         val eq = EqualEntity(sId, eId)
                         //获取中间点0-8,1-7,2-6,3-5中间点为4；0-2为1；0-6为3；8-2为5；8-6为7；
-                        val contains = if (eq.equalsTwo(0, 8) || eq.equalsTwo(1, 7) || eq.equalsTwo(2, 6) || eq.equalsTwo(3, 5)) list[4]
-                        else if (eq.equalsTwo(0, 2)) list[1]
-                        else if (eq.equalsTwo(0, 6)) list[3]
-                        else if (eq.equalsTwo(8, 2)) list[5]
-                        else if (eq.equalsTwo(8, 6)) list[7]
+                        val contains = if (eq.equalsTwo(0, 8) || eq.equalsTwo(1, 7) || eq.equalsTwo(2, 6) || eq.equalsTwo(3, 5)) orginal[4]
+                        else if (eq.equalsTwo(0, 2)) orginal[1]
+                        else if (eq.equalsTwo(0, 6)) orginal[3]
+                        else if (eq.equalsTwo(8, 2)) orginal[5]
+                        else if (eq.equalsTwo(8, 6)) orginal[7]
                         else null
                         //判断是否已包含此点，为包含则包含
                         if (contains != null && !select.contains(contains)) select.add(contains)
@@ -107,6 +110,10 @@ class NinthPalaceLayout @JvmOverloads constructor(context: Context, attrs: Attri
                 endX = 0f
                 endY = 0f
                 invalidate()
+                if (passWord.isEmpty())
+                    passWord = select.clone() as ArrayList<NinthPalaceEntity>
+                else
+                    onSuccess?.invoke(select == passWord)
             }
         }
         return true
