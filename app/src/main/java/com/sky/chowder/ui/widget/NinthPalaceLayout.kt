@@ -19,9 +19,9 @@ import com.sky.utils.ScreenUtils
 class NinthPalaceLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
     : View(context, attrs, defStyleAttr) {
 
-    private val orginal = ArrayList<NinthPalaceEntity>()
-    private val select = ArrayList<NinthPalaceEntity>()
-    private var passWord = ArrayList<NinthPalaceEntity>()
+    private val orginal = ArrayList<NinthPalaceEntity>()//原数据
+    private val select = ArrayList<NinthPalaceEntity>()//选中的
+    private var passWord = ArrayList<NinthPalaceEntity>()//密码
 
     var onSuccess: ((Boolean) -> Unit)? = null//
 
@@ -57,10 +57,12 @@ class NinthPalaceLayout @JvmOverloads constructor(context: Context, attrs: Attri
         super.onDraw(canvas)
         val paint = Paint()
         paint.color = Color.BLUE
+        //原点
         for (i in orginal) canvas?.drawCircle(i.rect.centerX() * 1f, i.rect.centerY() * 1f, i.radius, paint)
 
         paint.color = Color.RED
         paint.strokeWidth = 5f
+        //选中的点与线
         for (i in select.indices) {
             canvas?.drawCircle(select[i].rect.centerX() * 1f, select[i].rect.centerY() * 1f, select[i].radius, paint)
             if (i + 1 < select.size) canvas?.drawLine(select[i].rect.centerX() * 1f, select[i].rect.centerY() * 1f, select[i + 1].rect.centerX() * 1f, select[i + 1].rect.centerY() * 1f, paint)

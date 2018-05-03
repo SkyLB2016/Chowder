@@ -1,5 +1,7 @@
 package com.sky.chowder.ui.widget
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
@@ -19,7 +21,8 @@ import kotlin.collections.ArrayList
 class Game2048Layout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
     : RelativeLayout(context, attrs, defStyleAttr) {
 
-    val list = ArrayList<Int>()
+    val orginal = ArrayList<Int>()
+    var oldOrginal = ArrayList<Int>()
     private var margin = resources.getDimensionPixelSize(R.dimen.wh_8)//分割后图片之间的间隔
     private val piece = 4//几行几列
     private var once = true
@@ -45,13 +48,13 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
     }
 
     private fun setView() {
-        for (i in 0..15) list.add(0)
-        list[Random().nextInt(15)] = 2
-        list[Random().nextInt(15)] = 4
+        for (i in 0..15) orginal.add(0)
+        orginal[Random().nextInt(15)] = 2
+        orginal[Random().nextInt(15)] = 4
         pieceWidth = (width!! - margin * (piece + 1)) / piece
-        for (i in list.indices) {
+        for (i in orginal.indices) {
             val child = ImageView(context)
-            child.setImageDrawable(getImageDrawable(i))
+            child.setImageDrawable(getImageDrawable(orginal[i]))
             val lp = RelativeLayout.LayoutParams(pieceWidth, pieceWidth)
             val leftMargin = i % piece * pieceWidth + (i % piece + 1) * margin
             val topMargin = i / piece * pieceWidth + (i / piece + 1) * margin
@@ -62,8 +65,8 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
         }
     }
 
-    private fun getImageDrawable(position: Int): Drawable? =
-            if (list[position] in 2..4096) resources.getDrawable(resources.getIdentifier("i${list[position]}", "mipmap", context.packageName))
+    private fun getImageDrawable(num: Int): Drawable? =
+            if (num in 2..4096) resources.getDrawable(resources.getIdentifier("i$num", "mipmap", context.packageName))
             else null
 
     private var downX: Float = 0f
@@ -81,7 +84,7 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
                 //移动距离过小则返回
                 if (Math.abs(diffX) < 100 && Math.abs(diffY) < 100) return true
                 //复制原数据
-                val oldList = list.clone() as ArrayList<Int>
+                oldOrginal = orginal.clone() as ArrayList<Int>
                 //开始移动数据
                 if (Math.abs(diffX) > Math.abs(diffY)) {
                     if (diffX > 100) /*右滑*/ slideRight()
@@ -91,7 +94,7 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
                     else if (diffY < -100) /*上滑*/ slideUp()
                 }
                 //现数据与原数据比较，不同则重置数组
-                if (list != oldList) resetView()
+                if (orginal != oldOrginal) resetView()
             }
         }
         return true
@@ -102,22 +105,28 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
         val random = ArrayList<Int>()
         val count = childCount
         for (i in 0 until count) {
-            (getChildAt(i) as ImageView).setImageDrawable(getImageDrawable(i))
-            if (list[i] == 0) random.add(i)
+            (getChildAt(i) as ImageView).setImageDrawable(getImageDrawable(orginal[i]))
+            if (orginal[i] == 0) random.add(i)
         }
         //是否还有空白的位置
         if (random.isNotEmpty()) {
             val randomNum = if (random.size > 1) random[Random().nextInt(random.size - 1)] else random[0]
-            list[randomNum] = randomTwoOrFour()
-            (getChildAt(randomNum) as ImageView).setImageDrawable(getImageDrawable(randomNum))
+            orginal[randomNum] = randomTwoOrFour()
+            val image = getChildAt(randomNum) as ImageView
+            image.setImageDrawable(getImageDrawable(orginal[randomNum]))
+            val set = AnimatorSet()
+            set.playTogether(ObjectAnimator.ofFloat(image, "scaleX", 0f, 1f)
+                    , ObjectAnimator.ofFloat(image, "scaleY", 0f, 1f))
+            set.duration = 300
+            set.start()
         }
         if (random.size < 2) {
             var isMove = true
             for (i in 0..3) {
                 //横向对比
-                if (list[i * 4] == list[i * 4 + 1] || list[i * 4 + 1] == list[i * 4 + 2] || list[i * 4 + 2] == list[i * 4 + 3] ||
+                if (orginal[i * 4] == orginal[i * 4 + 1] || orginal[i * 4 + 1] == orginal[i * 4 + 2] || orginal[i * 4 + 2] == orginal[i * 4 + 3] ||
                         //纵向对比
-                        list[i] == list[i + 4] || list[i + 4] == list[i + 8] || list[i + 8] == list[i + 12]) {
+                        orginal[i] == orginal[i + 4] || orginal[i + 4] == orginal[i + 8] || orginal[i + 8] == orginal[i + 12]) {
                     isMove = false
                     break
                 }
@@ -126,22 +135,45 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
         }
     }
 
+    private fun addAnimator() {
+        val rl = RelativeLayout(context)//遮罩层
+        addView(rl)
+        for (i in oldOrginal.indices) {
+            val child = ImageView(context)
+            child.setImageDrawable(getImageDrawable(oldOrginal[i]))
+            val lp = RelativeLayout.LayoutParams(pieceWidth, pieceWidth)
+            val leftMargin = i % piece * pieceWidth + (i % piece + 1) * margin
+            val topMargin = i / piece * pieceWidth + (i / piece + 1) * margin
+            lp.setMargins(leftMargin, topMargin, 0, 0)
+            rl.addView(child)
+            child.layoutParams = lp//一定要放在addview之后
+        }
+        val count = childCount
+        for (i in 0 until count) {
+            val image = getChildAt(i) as ImageView
+            val set = AnimatorSet()
+            set.playTogether(ObjectAnimator.ofFloat(image, "translationX", 0f, i%4f*pieceWidth))
+            set.duration = 300
+            set.start()
+        }
+    }
+
     private fun randomTwoOrFour(): Int {
         var flag = 0.25//50
-        for (i in list) if (i > 511) flag = 0.5
+        for (i in orginal) if (i > 511) flag = 0.5
         return if (Math.random() > flag) 2 else 4
     }
 
     private fun initRLNums(i: Int, nums: ArrayList<Int>) {
         nums.clear()
-        if (list[i * 4] !== 0) nums.add(list[i * 4])
-        if (list[i * 4 + 1] !== 0) nums.add(list[i * 4 + 1])
-        if (list[i * 4 + 2] !== 0) nums.add(list[i * 4 + 2])
-        if (list[i * 4 + 3] !== 0) nums.add(list[i * 4 + 3])
-        list[i * 4] = 0
-        list[i * 4 + 1] = 0
-        list[i * 4 + 2] = 0
-        list[i * 4 + 3] = 0
+        if (orginal[i * 4] !== 0) nums.add(orginal[i * 4])
+        if (orginal[i * 4 + 1] !== 0) nums.add(orginal[i * 4 + 1])
+        if (orginal[i * 4 + 2] !== 0) nums.add(orginal[i * 4 + 2])
+        if (orginal[i * 4 + 3] !== 0) nums.add(orginal[i * 4 + 3])
+        orginal[i * 4] = 0
+        orginal[i * 4 + 1] = 0
+        orginal[i * 4 + 2] = 0
+        orginal[i * 4 + 3] = 0
     }
 
     private fun slideRight() {
@@ -149,52 +181,52 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
         for (i in 0..3) {
             initRLNums(i, nums)
             when (nums.size) {
-                1 -> list[i * 4 + 3] = nums[0]
-                2 -> if (nums[0] == nums[1]) list[i * 4 + 3] = nums[0] + nums[1]
+                1 -> orginal[i * 4 + 3] = nums[0]
+                2 -> if (nums[0] == nums[1]) orginal[i * 4 + 3] = nums[0] + nums[1]
                 else {
-                    list[i * 4 + 2] = nums[0]
-                    list[i * 4 + 3] = nums[1]
+                    orginal[i * 4 + 2] = nums[0]
+                    orginal[i * 4 + 3] = nums[1]
                 }
                 3 -> when {
                     nums[1] == nums[2] -> {
-                        list[i * 4 + 2] = nums[0]
-                        list[i * 4 + 3] = nums[1] + nums[2]
+                        orginal[i * 4 + 2] = nums[0]
+                        orginal[i * 4 + 3] = nums[1] + nums[2]
                     }
                     nums[0] == nums[1] -> {
-                        list[i * 4 + 2] = nums[0] + nums[1]
-                        list[i * 4 + 3] = nums[2]
+                        orginal[i * 4 + 2] = nums[0] + nums[1]
+                        orginal[i * 4 + 3] = nums[2]
                     }
                     else -> {
-                        list[i * 4 + 1] = nums[0]
-                        list[i * 4 + 2] = nums[1]
-                        list[i * 4 + 3] = nums[2]
+                        orginal[i * 4 + 1] = nums[0]
+                        orginal[i * 4 + 2] = nums[1]
+                        orginal[i * 4 + 3] = nums[2]
                     }
                 }
                 4 -> when {
                     nums[0] == nums[1] && nums[2] == nums[3] -> {
-                        list[i * 4 + 2] = nums[0] + nums[1]
-                        list[i * 4 + 3] = nums[2] + nums[3]
+                        orginal[i * 4 + 2] = nums[0] + nums[1]
+                        orginal[i * 4 + 3] = nums[2] + nums[3]
                     }
                     nums[2] == nums[3] -> {
-                        list[i * 4 + 1] = nums[0]
-                        list[i * 4 + 2] = nums[1]
-                        list[i * 4 + 3] = nums[2] + nums[3]
+                        orginal[i * 4 + 1] = nums[0]
+                        orginal[i * 4 + 2] = nums[1]
+                        orginal[i * 4 + 3] = nums[2] + nums[3]
                     }
                     nums[1] == nums[2] -> {
-                        list[i * 4 + 1] = nums[0]
-                        list[i * 4 + 2] = nums[1] + nums[2]
-                        list[i * 4 + 3] = nums[3]
+                        orginal[i * 4 + 1] = nums[0]
+                        orginal[i * 4 + 2] = nums[1] + nums[2]
+                        orginal[i * 4 + 3] = nums[3]
                     }
                     nums[0] == nums[1] -> {
-                        list[i * 4 + 1] = nums[0] + nums[1]
-                        list[i * 4 + 2] = nums[2]
-                        list[i * 4 + 3] = nums[3]
+                        orginal[i * 4 + 1] = nums[0] + nums[1]
+                        orginal[i * 4 + 2] = nums[2]
+                        orginal[i * 4 + 3] = nums[3]
                     }
                     else -> {
-                        list[i * 4] = nums[0]
-                        list[i * 4 + 1] = nums[1]
-                        list[i * 4 + 2] = nums[2]
-                        list[i * 4 + 3] = nums[3]
+                        orginal[i * 4] = nums[0]
+                        orginal[i * 4 + 1] = nums[1]
+                        orginal[i * 4 + 2] = nums[2]
+                        orginal[i * 4 + 3] = nums[3]
                     }
                 }
             }
@@ -206,52 +238,52 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
         for (i in 0..3) {
             initRLNums(i, nums)
             when (nums.size) {
-                1 -> list[i * 4] = nums[0]
-                2 -> if (nums[0] == nums[1]) list[i * 4] = nums[0] + nums[1]
+                1 -> orginal[i * 4] = nums[0]
+                2 -> if (nums[0] == nums[1]) orginal[i * 4] = nums[0] + nums[1]
                 else {
-                    list[i * 4] = nums[0]
-                    list[i * 4 + 1] = nums[1]
+                    orginal[i * 4] = nums[0]
+                    orginal[i * 4 + 1] = nums[1]
                 }
                 3 -> when {
                     nums[0] == nums[1] -> {
-                        list[i * 4] = nums[0] + nums[1]
-                        list[i * 4 + 1] = nums[2]
+                        orginal[i * 4] = nums[0] + nums[1]
+                        orginal[i * 4 + 1] = nums[2]
                     }
                     nums[1] == nums[2] -> {
-                        list[i * 4] = nums[0]
-                        list[i * 4 + 1] = nums[1] + nums[2]
+                        orginal[i * 4] = nums[0]
+                        orginal[i * 4 + 1] = nums[1] + nums[2]
                     }
                     else -> {
-                        list[i * 4] = nums[0]
-                        list[i * 4 + 1] = nums[1]
-                        list[i * 4 + 2] = nums[2]
+                        orginal[i * 4] = nums[0]
+                        orginal[i * 4 + 1] = nums[1]
+                        orginal[i * 4 + 2] = nums[2]
                     }
                 }
                 4 -> when {
                     nums[0] == nums[1] && nums[2] == nums[3] -> {
-                        list[i * 4] = nums[0] + nums[1]
-                        list[i * 4 + 1] = nums[2] + nums[3]
+                        orginal[i * 4] = nums[0] + nums[1]
+                        orginal[i * 4 + 1] = nums[2] + nums[3]
                     }
                     nums[0] == nums[1] -> {
-                        list[i * 4 + 0] = nums[0] + nums[1]
-                        list[i * 4 + 1] = nums[2]
-                        list[i * 4 + 2] = nums[3]
+                        orginal[i * 4 + 0] = nums[0] + nums[1]
+                        orginal[i * 4 + 1] = nums[2]
+                        orginal[i * 4 + 2] = nums[3]
                     }
                     nums[1] == nums[2] -> {
-                        list[i * 4 + 0] = nums[0]
-                        list[i * 4 + 1] = nums[1] + nums[2]
-                        list[i * 4 + 2] = nums[3]
+                        orginal[i * 4 + 0] = nums[0]
+                        orginal[i * 4 + 1] = nums[1] + nums[2]
+                        orginal[i * 4 + 2] = nums[3]
                     }
                     nums[2] == nums[3] -> {
-                        list[i * 4 + 0] = nums[0]
-                        list[i * 4 + 1] = nums[1]
-                        list[i * 4 + 2] = nums[2] + nums[3]
+                        orginal[i * 4 + 0] = nums[0]
+                        orginal[i * 4 + 1] = nums[1]
+                        orginal[i * 4 + 2] = nums[2] + nums[3]
                     }
                     else -> {
-                        list[i * 4] = nums[0]
-                        list[i * 4 + 1] = nums[1]
-                        list[i * 4 + 2] = nums[2]
-                        list[i * 4 + 3] = nums[3]
+                        orginal[i * 4] = nums[0]
+                        orginal[i * 4 + 1] = nums[1]
+                        orginal[i * 4 + 2] = nums[2]
+                        orginal[i * 4 + 3] = nums[3]
                     }
                 }
             }
@@ -260,14 +292,14 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
 
     private fun initDUNums(i: Int, nums: ArrayList<Int>) {
         nums.clear()
-        if (list[i] !== 0) nums.add(list[i])
-        if (list[i + 4] !== 0) nums.add(list[i + 4])
-        if (list[i + 8] !== 0) nums.add(list[i + 8])
-        if (list[i + 12] !== 0) nums.add(list[i + 12])
-        list[i] = 0
-        list[i + 4] = 0
-        list[i + 8] = 0
-        list[i + 12] = 0
+        if (orginal[i] !== 0) nums.add(orginal[i])
+        if (orginal[i + 4] !== 0) nums.add(orginal[i + 4])
+        if (orginal[i + 8] !== 0) nums.add(orginal[i + 8])
+        if (orginal[i + 12] !== 0) nums.add(orginal[i + 12])
+        orginal[i] = 0
+        orginal[i + 4] = 0
+        orginal[i + 8] = 0
+        orginal[i + 12] = 0
     }
 
     private fun slideDown() {
@@ -275,52 +307,52 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
         for (i in 0..3) {
             initDUNums(i, nums)
             when (nums.size) {
-                1 -> list[i + 12] = nums[0]
-                2 -> if (nums[0] == nums[1]) list[i + 12] = nums[0] + nums[1]
+                1 -> orginal[i + 12] = nums[0]
+                2 -> if (nums[0] == nums[1]) orginal[i + 12] = nums[0] + nums[1]
                 else {
-                    list[i + 8] = nums[0]
-                    list[i + 12] = nums[1]
+                    orginal[i + 8] = nums[0]
+                    orginal[i + 12] = nums[1]
                 }
                 3 -> when {
                     nums[1] == nums[2] -> {
-                        list[i + 8] = nums[0]
-                        list[i + 12] = nums[1] + nums[2]
+                        orginal[i + 8] = nums[0]
+                        orginal[i + 12] = nums[1] + nums[2]
                     }
                     nums[0] == nums[1] -> {
-                        list[i + 8] = nums[0] + nums[1]
-                        list[i + 12] = nums[2]
+                        orginal[i + 8] = nums[0] + nums[1]
+                        orginal[i + 12] = nums[2]
                     }
                     else -> {
-                        list[i + 4] = nums[0]
-                        list[i + 8] = nums[1]
-                        list[i + 12] = nums[2]
+                        orginal[i + 4] = nums[0]
+                        orginal[i + 8] = nums[1]
+                        orginal[i + 12] = nums[2]
                     }
                 }
                 4 -> when {
                     nums[0] == nums[1] && nums[2] == nums[3] -> {
-                        list[i + 8] = nums[0] + nums[1]
-                        list[i + 12] = nums[2] + nums[3]
+                        orginal[i + 8] = nums[0] + nums[1]
+                        orginal[i + 12] = nums[2] + nums[3]
                     }
                     nums[2] == nums[3] -> {
-                        list[i + 4] = nums[0]
-                        list[i + 8] = nums[1]
-                        list[i + 12] = nums[2] + nums[3]
+                        orginal[i + 4] = nums[0]
+                        orginal[i + 8] = nums[1]
+                        orginal[i + 12] = nums[2] + nums[3]
                     }
                     nums[1] == nums[2] -> {
-                        list[i + 4] = nums[0]
-                        list[i + 8] = nums[1] + nums[2]
-                        list[i + 12] = nums[3]
+                        orginal[i + 4] = nums[0]
+                        orginal[i + 8] = nums[1] + nums[2]
+                        orginal[i + 12] = nums[3]
                     }
                     nums[0] == nums[1] -> {
-                        list[i + 4] = nums[0] + nums[1]
-                        list[i + 8] = nums[2]
-                        list[i + 12] = nums[3]
+                        orginal[i + 4] = nums[0] + nums[1]
+                        orginal[i + 8] = nums[2]
+                        orginal[i + 12] = nums[3]
                     }
                     else -> {
-                        list[i] = nums[0]
-                        list[i + 4] = nums[1]
-                        list[i + 8] = nums[2]
-                        list[i + 12] = nums[3]
+                        orginal[i] = nums[0]
+                        orginal[i + 4] = nums[1]
+                        orginal[i + 8] = nums[2]
+                        orginal[i + 12] = nums[3]
                     }
                 }
             }
@@ -332,52 +364,52 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
         for (i in 0..3) {
             initDUNums(i, nums)
             when (nums.size) {
-                1 -> list[i] = nums[0]
-                2 -> if (nums[0] == nums[1]) list[i] = nums[0] + nums[1]
+                1 -> orginal[i] = nums[0]
+                2 -> if (nums[0] == nums[1]) orginal[i] = nums[0] + nums[1]
                 else {
-                    list[i] = nums[0]
-                    list[i + 4] = nums[1]
+                    orginal[i] = nums[0]
+                    orginal[i + 4] = nums[1]
                 }
                 3 -> when {
                     nums[0] == nums[1] -> {
-                        list[i] = nums[0] + nums[1]
-                        list[i + 4] = nums[2]
+                        orginal[i] = nums[0] + nums[1]
+                        orginal[i + 4] = nums[2]
                     }
                     nums[1] == nums[2] -> {
-                        list[i] = nums[0]
-                        list[i + 4] = nums[1] + nums[2]
+                        orginal[i] = nums[0]
+                        orginal[i + 4] = nums[1] + nums[2]
                     }
                     else -> {
-                        list[i] = nums[0]
-                        list[i + 4] = nums[1]
-                        list[i + 8] = nums[2]
+                        orginal[i] = nums[0]
+                        orginal[i + 4] = nums[1]
+                        orginal[i + 8] = nums[2]
                     }
                 }
                 4 -> when {
                     nums[0] == nums[1] && nums[2] == nums[3] -> {
-                        list[i] = nums[0] + nums[1]
-                        list[i + 4] = nums[2] + nums[3]
+                        orginal[i] = nums[0] + nums[1]
+                        orginal[i + 4] = nums[2] + nums[3]
                     }
                     nums[0] == nums[1] -> {
-                        list[i] = nums[0] + nums[1]
-                        list[i + 4] = nums[2]
-                        list[i + 8] = nums[3]
+                        orginal[i] = nums[0] + nums[1]
+                        orginal[i + 4] = nums[2]
+                        orginal[i + 8] = nums[3]
                     }
                     nums[1] == nums[2] -> {
-                        list[i] = nums[0]
-                        list[i + 4] = nums[1] + nums[2]
-                        list[i + 8] = nums[3]
+                        orginal[i] = nums[0]
+                        orginal[i + 4] = nums[1] + nums[2]
+                        orginal[i + 8] = nums[3]
                     }
                     nums[2] == nums[3] -> {
-                        list[i] = nums[0]
-                        list[i + 4] = nums[1]
-                        list[i + 8] = nums[2] + nums[3]
+                        orginal[i] = nums[0]
+                        orginal[i + 4] = nums[1]
+                        orginal[i + 8] = nums[2] + nums[3]
                     }
                     else -> {
-                        list[i] = nums[0]
-                        list[i + 4] = nums[1]
-                        list[i + 8] = nums[2]
-                        list[i + 12] = nums[3]
+                        orginal[i] = nums[0]
+                        orginal[i + 4] = nums[1]
+                        orginal[i + 8] = nums[2]
+                        orginal[i + 12] = nums[3]
                     }
                 }
             }
