@@ -56,9 +56,22 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
             var text = getString(R.string.cezi).trim().replace(" ", "")
             LogUtils.i("总长==${text.length}")
         }
-        fab.setOnClickListener {}
+//        var num = Array(4, { Array(4) { 0 } })
+        var num = Array(4) { IntArray(4) }
+//        for (i in 0..3) {
+//            for (j in 0..3) {
+//                num[i][j] = i * j
+//            }
+//        }
+        fab.setOnClickListener {
+            for (i in num) {
+                LogUtils.i("${i}")
+//                LogUtils.i("${i.toList()}")
+            }
+        }
+
     }
-    //    private fun registerOnClick(vararg views: View) {
+//    private fun registerOnClick(vararg views: View) {
 //        for (v in views)
 //            v.setOnClickListener(this)
 //    }

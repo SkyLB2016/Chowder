@@ -61,7 +61,6 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
             lp.setMargins(leftMargin, topMargin, 0, 0)
             addView(child)
             child.layoutParams = lp//一定要放在addview之后
-//            imageViews[i] = child
         }
     }
 
@@ -95,6 +94,15 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
                 }
                 //现数据与原数据比较，不同则重置数组
                 if (orginal != oldOrginal) resetView()
+//                if (orginal != oldOrginal) {
+//                    if (Math.abs(diffX) > Math.abs(diffY)) {
+//                        if (diffX > 100) /*右滑*/ addAnimator()
+//                        else if (diffX < -100) /*左滑*/ addAnimator()
+//                    } else {
+//                        if (diffY > 100) /*下滑*/ addAnimator()
+//                        else if (diffY < -100) /*上滑*/ addAnimator()
+//                    }
+//                }
             }
         }
         return true
@@ -114,11 +122,7 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
             orginal[randomNum] = randomTwoOrFour()
             val image = getChildAt(randomNum) as ImageView
             image.setImageDrawable(getImageDrawable(orginal[randomNum]))
-            val set = AnimatorSet()
-            set.playTogether(ObjectAnimator.ofFloat(image, "scaleX", 0f, 1f)
-                    , ObjectAnimator.ofFloat(image, "scaleY", 0f, 1f))
-            set.duration = 300
-            set.start()
+            addAni(image)
         }
         if (random.size < 2) {
             var isMove = true
@@ -135,6 +139,14 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
         }
     }
 
+    private fun addAni(image: ImageView) {
+        val set = AnimatorSet()
+        set.playTogether(ObjectAnimator.ofFloat(image, "scaleX", 0f, 1f)
+                , ObjectAnimator.ofFloat(image, "scaleY", 0f, 1f))
+        set.duration = 300
+        set.start()
+    }
+
     private fun addAnimator() {
         val rl = RelativeLayout(context)//遮罩层
         addView(rl)
@@ -149,10 +161,15 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
             child.layoutParams = lp//一定要放在addview之后
         }
         val count = childCount
-        for (i in 0 until count) {
+        for (i in 0 until aniList.size) {
+
+            if (orginal[i] !== oldOrginal[i]) {
+
+
+            }
             val image = getChildAt(i) as ImageView
             val set = AnimatorSet()
-            set.playTogether(ObjectAnimator.ofFloat(image, "translationX", 0f, i%4f*pieceWidth))
+            set.playTogether(ObjectAnimator.ofFloat(image, "translationX", 0f, i % 4f * pieceWidth))
             set.duration = 300
             set.start()
         }
@@ -160,7 +177,7 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
 
     private fun randomTwoOrFour(): Int {
         var flag = 0.25//50
-        for (i in orginal) if (i > 511) flag = 0.5
+        for (i in orginal) if (i > 512) flag = 0.5
         return if (Math.random() > flag) 2 else 4
     }
 
@@ -176,10 +193,12 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
         orginal[i * 4 + 3] = 0
     }
 
+    val aniList = ArrayList<List<Int>>()
     private fun slideRight() {
         val nums = ArrayList<Int>()
         for (i in 0..3) {
             initRLNums(i, nums)
+
             when (nums.size) {
                 1 -> orginal[i * 4 + 3] = nums[0]
                 2 -> if (nums[0] == nums[1]) orginal[i * 4 + 3] = nums[0] + nums[1]
