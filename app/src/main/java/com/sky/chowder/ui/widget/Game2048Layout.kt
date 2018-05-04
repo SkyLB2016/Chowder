@@ -21,7 +21,7 @@ import kotlin.collections.ArrayList
 class Game2048Layout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
     : RelativeLayout(context, attrs, defStyleAttr) {
 
-    val orginal = ArrayList<Int>()
+    private val orginal = ArrayList<Int>()
     var oldOrginal = ArrayList<Int>()
     private var margin = resources.getDimensionPixelSize(R.dimen.wh_8)//分割后图片之间的间隔
     private val piece = 4//几行几列
@@ -94,15 +94,6 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
                 }
                 //现数据与原数据比较，不同则重置数组
                 if (orginal != oldOrginal) resetView()
-//                if (orginal != oldOrginal) {
-//                    if (Math.abs(diffX) > Math.abs(diffY)) {
-//                        if (diffX > 100) /*右滑*/ addAnimator()
-//                        else if (diffX < -100) /*左滑*/ addAnimator()
-//                    } else {
-//                        if (diffY > 100) /*下滑*/ addAnimator()
-//                        else if (diffY < -100) /*上滑*/ addAnimator()
-//                    }
-//                }
             }
         }
         return true
@@ -147,34 +138,6 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
         set.start()
     }
 
-    private fun addAnimator() {
-        val rl = RelativeLayout(context)//遮罩层
-        addView(rl)
-        for (i in oldOrginal.indices) {
-            val child = ImageView(context)
-            child.setImageDrawable(getImageDrawable(oldOrginal[i]))
-            val lp = RelativeLayout.LayoutParams(pieceWidth, pieceWidth)
-            val leftMargin = i % piece * pieceWidth + (i % piece + 1) * margin
-            val topMargin = i / piece * pieceWidth + (i / piece + 1) * margin
-            lp.setMargins(leftMargin, topMargin, 0, 0)
-            rl.addView(child)
-            child.layoutParams = lp//一定要放在addview之后
-        }
-        val count = childCount
-        for (i in 0 until aniList.size) {
-
-            if (orginal[i] !== oldOrginal[i]) {
-
-
-            }
-            val image = getChildAt(i) as ImageView
-            val set = AnimatorSet()
-            set.playTogether(ObjectAnimator.ofFloat(image, "translationX", 0f, i % 4f * pieceWidth))
-            set.duration = 300
-            set.start()
-        }
-    }
-
     private fun randomTwoOrFour(): Int {
         var flag = 0.25//50
         for (i in orginal) if (i > 512) flag = 0.5
@@ -193,12 +156,10 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
         orginal[i * 4 + 3] = 0
     }
 
-    val aniList = ArrayList<List<Int>>()
     private fun slideRight() {
         val nums = ArrayList<Int>()
         for (i in 0..3) {
             initRLNums(i, nums)
-
             when (nums.size) {
                 1 -> orginal[i * 4 + 3] = nums[0]
                 2 -> if (nums[0] == nums[1]) orginal[i * 4 + 3] = nums[0] + nums[1]
