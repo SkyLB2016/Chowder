@@ -215,6 +215,7 @@
             android:name=".ui.activity.PoetryActivity"
             android:description="@string/act_poetry_d"
             android:icon="@mipmap/ic_launcher"
+            android:process=":poetry"
             android:label="@string/act_poetry">
             <intent-filter>
                 <action android:name="com.sky.coustom" />
@@ -225,6 +226,7 @@
             android:description="@string/act_game2048"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_game2048"
+            android:process=":game2048"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.sky.coustom" />
@@ -235,6 +237,7 @@
             android:description="@string/act_ninth"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_ninth"
+            android:process=":ninthPalace"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.sky.coustom" />

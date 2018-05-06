@@ -22,7 +22,7 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
     : RelativeLayout(context, attrs, defStyleAttr) {
 
     private val orginal = ArrayList<Int>()
-    var oldOrginal = ArrayList<Int>()
+    private var oldOrginal = ArrayList<Int>()
     private var margin = resources.getDimensionPixelSize(R.dimen.wh_8)//分割后图片之间的间隔
     private val piece = 4//几行几列
     private var once = true
@@ -60,12 +60,12 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
             val topMargin = i / piece * pieceWidth + (i / piece + 1) * margin
             lp.setMargins(leftMargin, topMargin, 0, 0)
             addView(child)
-            child.layoutParams = lp//一定要放在addview之后
+            child.layoutParams = lp//一定要放在addview之后`
         }
     }
 
     private fun getImageDrawable(num: Int): Drawable? =
-            if (num in 2..4096) resources.getDrawable(resources.getIdentifier("i$num", "mipmap", context.packageName))
+            if (num in 2..8192) resources.getDrawable(resources.getIdentifier("i$num", "mipmap", context.packageName))
             else null
 
     private var downX: Float = 0f

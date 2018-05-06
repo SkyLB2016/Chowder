@@ -116,16 +116,17 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
             if (i.startsWith("第") && i.endsWith("章")
                     || i.startsWith("卷")
                     || i.startsWith("【")
+                    || i.startsWith("●")
                     || i.contains("第") && !i.contains("。")) {
                 chapter.content.setLength(chapter.content.length - 1)
                 catalog.add(chapter)
                 chapter = ChapterEntity()
                 chapter.chapter = i
-            } else if (i.contains(".")) {
-                chapter.content.setLength(chapter.content.length - 1)
-                catalog.add(chapter)
-                chapter = ChapterEntity()
-                chapter.chapter = i.substring(2, i.indexOf("."))
+//            } else if (i.contains(".")) {
+//                chapter.content.setLength(chapter.content.length - 1)
+//                catalog.add(chapter)
+//                chapter = ChapterEntity()
+//                chapter.chapter = i.substring(2, i.indexOf("."))
             }
             chapter.content.append("$i\n")
         }
@@ -171,10 +172,11 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
                 downY = ev.y
             }
             MotionEvent.ACTION_UP -> {
-                val rect = RectF(1080 / 3f, 1920 / 3f, 1080 / 3f * 2, 1920 / 3f * 2)
+                val width = ScreenUtils.getWidthPX(this) / 3f
+                val height = ScreenUtils.getHeightPX(this) / 3f
+                val rect = RectF(width, height, width * 2, height * 2)
                 if (Math.abs(ev.x - downX) < 5 && Math.abs(ev.y - downY) < 1 && rect.contains(ev.x, ev.y) && sliding.isClose)
-                    if (llBottomBar.visibility == View.GONE) llBottomBar.visibility = View.VISIBLE
-                    else llBottomBar.visibility = View.GONE
+                    llBottomBar.visibility = if (llBottomBar.visibility == View.GONE) View.VISIBLE else View.GONE
             }
         }
         return super.dispatchTouchEvent(ev)

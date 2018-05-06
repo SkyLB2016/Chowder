@@ -1,6 +1,8 @@
 package com.sky.chowder.ui.pop
 
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.RecyclerView
+import android.view.Gravity
 import android.view.View
 import com.sky.adapter.RecyclerAdapter
 import com.sky.adapter.RecyclerHolder
@@ -20,13 +22,16 @@ class CatalogPop(view: View, width: Int, height: Int) : BasePop<ChapterEntity>(v
 
     override fun initView() {
         super.initView()
+        var swipe: SwipeRefreshLayout = view.findViewById(R.id.swipe)
+        swipe.isRefreshing=false
         recycle = view.findViewById(R.id.recycler)
         adapter = object : RecyclerAdapter<ChapterEntity>(R.layout.item_tv) {
             override fun onAchieveHolder(holder: RecyclerHolder, position: Int) {
                 with(holder!!.itemView) {
                     tv.text = datas[position].chapter
                     tv.setBackgroundResource(R.drawable.sel_yellow)
-                    tv.textSize=18f
+                    tv.textSize = 18f
+                    tv.gravity = Gravity.LEFT
                 }
             }
         }

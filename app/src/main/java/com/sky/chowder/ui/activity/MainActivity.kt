@@ -2,6 +2,8 @@ package com.sky.chowder.ui.activity
 
 import android.Manifest
 import android.content.ActivityNotFoundException
+import android.os.Bundle
+import android.os.PersistableBundle
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
@@ -58,24 +60,18 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
         }
 //        var num = Array(4, { Array(4) { 0 } })
         var num = Array(4) { IntArray(4) }
-//        for (i in 0..3) {
-//            for (j in 0..3) {
-//                num[i][j] = i * j
-//            }
-//        }
         fab.setOnClickListener {
-            for (i in num) {
-                LogUtils.i("${i}")
-//                LogUtils.i("${i.toList()}")
-            }
         }
 
     }
-//    private fun registerOnClick(vararg views: View) {
-//        for (v in views)
-//            v.setOnClickListener(this)
-//    }
 
+    override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
+        super.onSaveInstanceState(outState, outPersistentState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+    }
     override fun setData(data: List<ActivityModel>) {
         adapter?.datas = data
     }

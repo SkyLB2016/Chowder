@@ -2,6 +2,7 @@ package com.sky.chowder.ui.presenter
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import com.sky.base.BasePresenter
 import com.sky.chowder.R
 import com.sky.chowder.api.presenter.IMainPresenter
@@ -33,7 +34,8 @@ class MainP(context: Context) : BasePresenter<IMainView>(context), IMainPresente
             //mainIntent.setPackage(getPackageName());//只选出自己应用的act
             val mainIntent = Intent("com.sky.coustom") //自定义的action
             val manager = context.packageManager
-            val resolveInfos = manager?.queryIntentActivities(mainIntent, 0) ?: return activityInfos
+            val resolveInfos = manager?.queryIntentActivities(mainIntent, PackageManager.MATCH_ALL) ?: return activityInfos
+//            val resolveInfos1 = manager?.resolveActivity(mainIntent, 0) ?: return activityInfos
 
             for (i in resolveInfos.indices) {
                 val info = resolveInfos[i]
