@@ -23,7 +23,7 @@ class CatalogPop(view: View, width: Int, height: Int) : BasePop<ChapterEntity>(v
     override fun initView() {
         super.initView()
         var swipe: SwipeRefreshLayout = view.findViewById(R.id.swipe)
-        swipe.isRefreshing=false
+        swipe.isEnabled=false
         recycle = view.findViewById(R.id.recycler)
         adapter = object : RecyclerAdapter<ChapterEntity>(R.layout.item_tv) {
             override fun onAchieveHolder(holder: RecyclerHolder, position: Int) {

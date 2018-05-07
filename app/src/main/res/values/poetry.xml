@@ -5593,57 +5593,72 @@
     <!--编程笔记-->
     <string name="biancheng">
         编程笔记·李彬\n
-        使用其中代码时，应先去掉中文空格\n
+        <!--使用其中代码时，应先去掉中文空格\n-->
         ●01.Android的系统架构\n
-        　　(1)操作系统层（OS）:linux内核\n
-        　　(2)各种库（Libraries）和Android 运行环境（RunTime）\n
-        　　(3)应用程序框架（Application　Framework）\n
-        　　(4)应用程序（Application）\n
-        ●02.dalvik与ART\n
-        　　dalvik是运行时编译，ART是安装时就进行编译。目前采用的是ART模式\n
-        ●03.Makefile机制:组合文件，进行自动的可控制的编译（待加强）\n
-        ●04.ADB命令行：\n
-        　　安装apk：adb　install　路径\n
-        　　向手机传输文件：\n
-        　　adb　push　C:/WorkSpace/aa.txt　/storage/emulated/0/AmapSdk\n
-        　　手机向电脑传输文件：\n
-        　　adb　pull　/storage/emulated/0/AmapSdk　C:/WorkSpace/aa.txt\n
-        　　录制视频：\n
-        　　adb　shell　screenrecord　/storage/emulated/0/AmapSdk/test.mp4\n
-        　　查看系统盘符：\n
-        　　adb　shell　df\n
-        ●05.View控件的测量onMeasure：\n
-        　　三种模式：\n
+        　　(1)操作系统层OS：linux内核\n
+        　　(2)各种库Libraries和Android运行环境RunTime\n
+        　　(3)应用程序框架Application Framework\n
+        　　(4)应用程序Application\n
+        ●02.小常识\n
+        　　(1)File文件所在文件夹存在时，写入数据时自动创建；不存在，则需调用mkdis(),当父类的父类也不存在是应调用mkdirs(),创建父类文件夹。\n
+        　　(2)从string中获取的文章字符串，有换行的情况下，会用空格，应先去除空格再用\n
+        　　(3)for (;;)死循环\n
+        　　(4)MarginLayoutParams是viewGroup的父类\n
+        　　(5)ViewDragHelper滑动控制类，子类有DrawerLayout与SlidingPaneLayout\n
+        　　(6)dalvik是运行时编译，ART是安装时就进行编译。目前采用的是ART模式\n
+        　　(7)scrollBy()与scrollTo，坐标系（待深入研究）\n
+        　　(8)Makefile机制:组合文件，进行自动的可控制的编译（待加强）\n
+        ●03.ADB命令行：\n
+        　　(1)安装apk：adb install 路径\n
+        　　(2)向手机传输文件：\n
+        　　adb push C:/WorkSpace/aa.txt /storage/emulated/0/AmapSdk\n
+        　　(3)手机向电脑传输文件：\n
+        　　adb pull /storage/emulated/0/AmapSdk C:/WorkSpace/aa.txt\n
+        　　(4)录制视频：\n
+        　　adb shell screenrecord /storage/emulated/0/AmapSdk/test.mp4\n
+        　　(5)查看系统盘符：adb shell df\n
+        ●04.Intent：意图\n
+        　　(1)构造函数：可以是类名或者action（setClass）\n
+        　　(2)操作类型action：Intent中只能存在一个，存在则必须有一个相同，setAction()\n
+        　　(3)类别筛选category：Intent中存在几个匹配几个，\n
+        　　(4)数据类型data与type：setDataAandType()，地址有特定规则\n
+        　　(5)启动模式LaunchMode四种（manifest中用）：standard（标准），singleTop（栈顶不创建），singleTask（单例，独一份，再次进入后，清空之前在其上的页面），singleInstance（独立栈中的独一份）\n
+        　　(6)标志也即启动模式（Intent中用）：FLAG_ACTIVITY_NEW_TASK(需要搭配FLAG_ACTIVITY_CLEAR_TASK使用),FLAG_ACTIVITY_SINGLE_TOP,FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS(跳转页面后自动finish,android:excludeFromRecents="true"，目前未起作用)\n
+        ●05.页面跳转顺序:\n
+        　　(1)A启动 A.onCreate->A.onStart->A.onResume->\n
+        　　(2)在A中启动B A.onPause->B.onCreate->B.onStart->B.onResume->A.onStop\n
+        　　(3)关闭B B.onPause->A.onRestart->A.onStart->A.onResume->B.onStop->B.onDestory\n
+        ●06.屏幕的坐标原点是左上角，向右是X轴正方向，向下是Y轴正方向，获取坐标值的各种方法\n
+        　　(1)View中提供的获取坐标方法：\n
+        　　　　getLeft()与getRight()都是View自身到父布局左边的距离\n
+        　　　　getTop()与getBottom()都是View自身到父布局顶边的距离\n
+        　　(2)MotionEvent中的方法：\n
+        　　　　GetX()与getY()是视图坐标，即是触摸点到它自身左边与顶边的距离\n
+        　　　　GetRawX()与getRawY()是绝对坐标，即是触摸点到屏幕左边与顶边的距离\n
+        ●07.View控件的测量onMeasure，有三种模式：\n
         　　(1)EXACTLY,精确值模式，具体数字如100dp或者match_parent，默认即为EXACTLY；\n
         　　(2)AT_MOST,自适应模式，warp_content,需要用setMeasureDimension(width,height)设置算好的宽高；\n
         　　(3)UNSPECIFIED，想要多大即多大，所以可以超过屏幕尺寸，显示不下的在屏幕之外；目前没用过。\n
-        ●06.自定义View中比较重要的回调方法：\n
+        ●08.自定义View中比较重要的回调方法：\n
         　　(1)onFinishInflate()：从XML加载组件后回调；\n
         　　(2)onSizeChanged()：组件大小改变时回调；\n
         　　(3)onMeasure()：测量view宽高\n
         　　(4)onLayout()：控件内的子控件的显示位置，自定义ViewGroup时用\n
         　　(5)onTouchEvent()：触摸事件\n
-        ●07.触摸事件机制：\n
-        　　触摸方法回调有：默认返回false\n
-        　　(1)disPatchTouchEvent(MotionEvent　e)（分发事件，一般不用管）\n
-        　　(2)onInterceptTouchEvent(MotionEvent　e)，　ViewGroup独有\n
-        　　(3)onTouchEvent(MotionEvent　e)\n
+        ●09.触摸事件机制，方法回调有：（默认返回false）\n
+        　　(1)disPatchTouchEvent(MotionEvent e)（分发事件，一般不用管）\n
+        　　(2)onInterceptTouchEvent(MotionEvent e)， ViewGroup独有\n
+        　　(3)onTouchEvent(MotionEvent e)\n
         　　(4)触摸按钮时的回调机制：(A(B(C))\n
-        　　A.disPatch　->　A.intercept　->B.disPatch　->　B.intercept　->C.disPatch　->　C.touch　->　B.touch　->　A.touch\n
-        ●08.屏幕的坐标原点是左上角，向右是X轴正方向，向下是Y轴正方向\n
-        ●09.获取坐标值的各种方法\n
-        　　View中提供的获取坐标方法：\n
-        　　　　getLeft()与getRight()都是View自身到父布局左边的距离\n
-        　　　　getTop()与getBottom()都是View自身到父布局顶边的距离\n
-        　　MotionEvent中的方法：\n
-        　　　　GetX()与getY()是视图坐标，即是触摸点到它自身左边与顶边的距离\n
-        　　　　GetRawX()与getRawY()是绝对坐标，即是触摸点到屏幕左边与顶边的距离\n
-        ●10.File文件所在文件夹存在时，写入数据时自动创建；不存在，则需调用mkdis(),当父类的父类也不存在是应调用mkdirs(),创建父类文件夹。\n
-        ●11.MarginLayoutParams是父类\n
-        ●12.scrollBy()与scrollTo，坐标系\n
-        ●13.ViewDragHelper　滑动控制类，子类有DrawerLayout与SlidingPaneLayout\n
-        ●14.Paint的重要属性：TextPaint.getFontMetricsInt()\n
-        　　(1)setAntialias()与Paint(Paint.ANTI_ALIAS_FLAG)　：抗锯齿\n
+        　　A.disPatch -> A.intercept ->B.disPatch -> B.intercept ->C.disPatch -> C.touch -> B.touch -> A.touch\n
+        ●10.Canvas方法：\n
+        　　(1)translate(x,y)：将原点(0,0)移动(x,y)\n
+        　　(2)rotate(a,x,y)：将画布以(x,y)为中心旋转a度\n
+        　　(3)save(),saveLayer(),saveLayerAlpha():保存画布当前状态，并返回int值，方便移除此状态\n
+        　　(4)restore():返回画布此次保存的初始状态\n
+        　　(5)restoreToCount():移除画布此次保存的状态\n
+        ●11.Paint的重要属性：TextPaint.getFontMetricsInt()\n
+        　　(1)setAntialias()与Paint(Paint.ANTI_ALIAS_FLAG) ：抗锯齿\n
         　　(2)setStrokeWidth(),宽度是从中间开始计算的\n
         　　(3)setARGB(),setAlpha(),setTextSize(),setStyle(),setColor().\n
         　　textHeight=paint.descent()-paint.ascent()\n
@@ -5652,65 +5667,54 @@
         　　(6)descent：字体在是baseline下方被推荐的距离（一些字体制作商需要参考这个）\n
         　　(7)top：ascent的最大值\n
         　　(8)bottom：descent的最大值\n
-        　　(9)getTextBounds(String　text,　int　start,　int　end,　Rect　bounds):获取文字宽高\n
+        　　(9)getTextBounds(String text, int start, int end, Rect bounds):获取文字宽高\n
         　　(10)measureTest(text)：获取文字宽度\n
         　　(11)ColorMatrix\n
         　　(12)PorterDuffXfermode（不好用），\n
-        　　(13)Shader　　着色器　渲染器：（TileMode三中模式：CLAMP拉伸；REPEAT重复；MIRROR镜像）\n
+        　　(13)Shader，着色器，渲染器：（TileMode三中模式：CLAMP拉伸；REPEAT重复；MIRROR镜像）\n
         　　　　BitmapShader：位图\n
         　　　　LinearGradient：线性\n
         　　　　RadialGradient：光束\n
         　　　　SweepGradient：梯度\n
         　　　　ComposeShader：混合\n
-        　　(14)PathEffect　　画线用，结合Path的lineTo来使用\n
+        　　(14)PathEffect画线用，结合Path的lineTo来使用\n
         　　　　CornerPathEffect：拐角圆滑\n
         　　　　DiscretePathEffect：相当于画了一条毛茸茸的线\n
         　　　　DashPathEffect：画虚线\n
         　　　　PathDashPathEffect：升级的画虚线\n
         　　　　ComPosePathEffect与SunPathEffect：组合前几者\n
-        ●15.视图动画：Animation：\n
+        ●12.视图动画：Animation：\n
         　　TranslateAnimation，ScaleAnimation，RatateAnimation，AlphaAnimation，用AnimationSet可以把四个视图动画组合在一起\n
-        ●16.属性动画：ValueAnimator包括：ObjectAnimator，AnimatorSet组合，动画属性值：\n
+        ●13.属性动画：ValueAnimator包括：ObjectAnimator，AnimatorSet组合，动画属性值：\n
         　　(1)translationX、translationY，增量平移\n
-        　　(2)rotation、rotationX、rotationY　旋转\n
-        　　(3)pivotX、pivotY　　没看出和rotation有什么区别\n
-        　　(4)scaleX、scaleY　缩放\n
-        　　(5)x、y　最终位置\n
-        　　(6)alpha　透明度　默认为1，不透明，0代表完全透明，即不可见\n
+        　　(2)rotation、rotationX、rotationY 旋转\n
+        　　(3)pivotX、pivotY没看出和rotation有什么区别\n
+        　　(4)scaleX、scaleY 缩放\n
+        　　(5)x、y 最终位置\n
+        　　(6)alpha 透明度 默认为1，不透明，0代表完全透明，即不可见\n
         　　(7)PropertyValuesHolder，ObjectAnimator.ofPropertyValuesHolder(view,pro...)\n
         　　(8)Value的主要方法：addUpdateListener()\n
-        ●17.AnimatorSet属性：palyTogether()，playSequentially()，play().with()、befor()、after();来控制动画的播放规则\n
-        ●18.布局动画：LayoutAnimationController，在MainAdapter中有使用\n
-        　　(1)LayoutAnimationController.ORDER_NORMAL　--顺序\n
-        　　(2)LayoutAnimationController.ORDER_RANDOM　--随机\n
-        　　(3)LayoutAnimationController.ORDER_REVERSE　--反序\n
-        ●19.SVG:VectorDrawable（vector静态效果）、AnimatedVectorDrawable（nimated-vector）：animated-vector组合objectAnimator与vector形成动态的动画效果\n
-        ●20.Canvas方法：\n
-        　　(1)translate(x,y)：将原点(0,0)移动(x,y)\n
-        　　(2)rotate(a,x,y)：将画布以(x,y)为中心旋转a度\n
-        　　(3)save(),saveLayer(),saveLayerAlpha():保存画布当前状态，并返回int值，方便移除此状态\n
-        　　(4)restore():返回画布此次保存的初始状态\n
-        　　(5)restoreToCount():移除画布此次保存的状态\n
-        ●21.Math的三角函数：\n
-        　　var　angle　=　30.0//角度\n
-        　　val　radians　=　Math.PI　*　angle　/　180//转换成弧度\n
-        　　val　ix　=　200　*　Math.cos(radians)\n
-        　　val　iy　=　200　*　Math.sin(radians)\n
-        　　0-360　度，Cos取值范围1..0..-1..0..1，即+--+，Sin　取值范围0..1..0..-1..0,即++--\n
+        ●14.AnimatorSet属性：palyTogether()，playSequentially()，play().with()、befor()、after();来控制动画的播放规则\n
+        ●15.布局动画：LayoutAnimationController，在MainAdapter中有使用\n
+        　　(1)LayoutAnimationController.ORDER_NORMAL --顺序\n
+        　　(2)LayoutAnimationController.ORDER_RANDOM --随机\n
+        　　(3)LayoutAnimationController.ORDER_REVERSE --反序\n
+        ●16.SVG:VectorDrawable（vector静态效果）、AnimatedVectorDrawable（nimated-vector）：animated-vector组合objectAnimator与vector形成动态的动画效果\n
+        ●17.Math的三角函数：\n
+        　　var angle = 30.0//角度\n
+        　　val radians = Math.PI * angle / 180//转换成弧度\n
+        　　val ix = 200 * Math.cos(radians)\n
+        　　val iy = 200 * Math.sin(radians)\n
+        　　0-360 度，Cos取值范围1..0..-1..0..1，即+--+，Sin 取值范围0..1..0..-1..0,即++--\n
         　　以x=Cos,y=Sin算为++，-+，--，+-，即一二三四象限，以X正轴1为起点，逆时针方向画圆，画布上Y轴正负颠倒，所以是顺时针方向画圆\n
         　　以x=Sin,y=Cos算为++，+-，--，-+，即一四三二象限，以Y正轴1为起点，顺时针方向画圆，画布上Y轴正负颠倒，所以是逆时针方向画圆\n
-        　　val　ix　=　200　*　Math.sin(radians)\n
-        　　val　iy　=　200　*　Math.cos(radians)\n
-        ●22.从string中获取的文章字符串，有换行的情况下，会用空格，应先去除空格再用\n
-        ●23.页面跳转顺序:\n
-        　　(1)A启动　A.onCreate->A.onStart->A.onResume->\n
-        　　(2)在A中启动B　A.onPause->B.onCreate->B.onStart->B.onResume->A.onStop\n
-        　　(3)关闭B　B.onPause->A.onRestart->A.onStart->A.onResume->B.onStop->B.onDestory\n
-        ●24.排序算法：\n
+        　　val ix = 200 * Math.sin(radians)\n
+        　　val iy = 200 * Math.cos(radians)\n
+        ●18.排序算法：\n
         　　(1)冒泡排序：选定一端，两相比较，顺序错误则交换。\n
         　　(2)选择排序：每次选出最大或最小的放在队首，直到完成。\n
         　　(3)插入排序：排序头两个数据，然后每次增加一个数据来循环，直到完成。\n
-        ●25.设计模式的六大原则（待深刻理解）\n
+        ●19.设计模式的六大原则（待深刻理解）\n
         　　(1)开闭原则（Open Close Principle）\n
         　　开闭原则就是说对扩展开放，对修改关闭。在程序需要进行拓展的时候，不能去修改原有的代码，实现一个热插拔的效果。所以一句话概括就是：为了使程序的扩展性好，易于维护和升级。想要达到这样的效果，我们需要使用接口和抽象类，后面的具体设计中我们会提到这点。\n
         　　(2)里氏代换原则（Liskov Substitution Principle）\n
@@ -5723,7 +5727,7 @@
         　　为什么叫最少知道原则，就是说：一个实体应当尽量少的与其他实体之间发生相互作用，使得系统功能模块相对独立。\n
         　　(6)合成复用原则（Composite Reuse Principle）\n
         　　原则是尽量使用合成/聚合的方式，而不是使用继承。\n
-        ●26.设计模式的分类\n
+        ●20.设计模式的分类\n
         　　总体来说设计模式分为三大类：\n
         　　(1)创建型模式，共五种：\n
         　　工厂模式、抽象工厂模式、单例模式（单线程与多线程）、建造者模式、原型模式（浅复制与深复制）。\n
@@ -5737,13 +5741,24 @@
         　　两个类之间：观察者模式（rxjava）、迭代子模式(数组迭代器)、责任链模式（handler的循环链）、命令模式（相当于逐级传递）。\n
         　　类的状态：备忘录模式（备份模式）、状态模式（状态的切换，卫星菜单栏，侧滑栏）。\n
         　　通过中间类：访问者模式、中介者模式、解释器模式。\n
-        　　其实还有两类：并发型模式和线程池模式。\n
-        ●27.handler执行\n
-        　　handler分发dispatchMessage()：先检测message中的callback是否为空不为空执行，为空在检测handler自己的callback，为true终止，false执行handleMessage()。\n
-        　　handler中执行enqueueMessage()方法将消息放入队列中，等待loop循环。\n
-        　　Looper.loop()方法是死循环，其中选取消息的方法Message msg = queue.next();也是一个死循环，直到取到消息，开始往下执行，直到执行handler的分发方法dispatchMessage()开始回调，方法执行完成后，此次消息处理完成。\n
-        　　for (;;)死循环\n
-        　　
+        　　(4)其实还有两类：并发型模式和线程池模式。\n
+        ●21.handler执行\n
+        　　(1)handler分发dispatchMessage()：先检测message中的callback是否为空不为空执行，为空在检测handler自己的callback，为true终止，false执行handleMessage()。\n
+        　　(2)handler中执行enqueueMessage()方法将消息放入队列中，等待loop循环。\n
+        　　(3)Looper.loop()方法是死循环，其中选取消息的方法Message msg = queue.next();也是一个死循环，直到取到消息，开始往下执行；\n
+        　　(4)取到消息后开始执行handler的分发方法dispatchMessage()开始回调，方法执行完成后，此次消息处理完成。\n
+        ●22.IPC机制：多进程间通信\n
+        　　会造成的问题：\n
+        　　(1)静态成员和单例模式完全失效：不同进程间的静态和单例是互相独立的\n
+        　　(2)线程同步机制完全失效：不同进程间的线程也是互相独立的\n
+        　　(3)SharedPreferences可靠性下降：不支持两个进程同时读写，有一定几率会丢数据\n
+        　　(4)application多次创建：新进程代表新的虚拟机的启动\n
+        ●23.Serializable，数据序列化，可自己重写序列化与反序列化过程\n
+        　　(1)FileUtils中serialize(path,value)（序列化）与deserialize(path)（反序列化）运用\n
+        　　(2)静态成员变量属于类不属于对象，不参与序列化\n
+        　　(3)用transient关键字标记的成员变量不参与序列化\n
+        ●24.Parcelable，数据序列化，在CourseEntity中有应用\n
+        ●25.Binder\n
 
     </string>
 </resources>

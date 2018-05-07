@@ -51,6 +51,23 @@ class NinthPalaceLayout @JvmOverloads constructor(context: Context, attrs: Attri
             val rect = Rect(left + pieceWidth / 4, top + pieceWidth / 4, left + pieceWidth * 3 / 4, top + pieceWidth * 3 / 4)
             orginal.add(NinthPalaceEntity(i, rect))
         }
+        select.add(orginal[1])
+        select.add(orginal[4])
+        select.add(orginal[7])
+        select.add(orginal[0])
+        select.add(orginal[8])
+        select.add(orginal[3])
+        select.add(orginal[5])
+
+        //五角星
+        //select.add(orginal[3])
+        //select.add(orginal[4])
+        //select.add(orginal[5])
+        //select.add(orginal[6])
+        //select.add(orginal[1])
+        //select.add(orginal[8])
+        //select.add(orginal[3])
+        passWord = select.clone() as ArrayList<NinthPalaceEntity>
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -60,7 +77,7 @@ class NinthPalaceLayout @JvmOverloads constructor(context: Context, attrs: Attri
         //原点
         for (i in orginal) canvas?.drawCircle(i.rect.centerX() * 1f, i.rect.centerY() * 1f, i.radius, paint)
 
-        paint.color = Color.RED
+        paint.color = Color.CYAN
         paint.strokeWidth = 5f
         //选中的点与线
         for (i in select.indices) {

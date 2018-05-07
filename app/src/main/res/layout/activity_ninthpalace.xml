@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <com.sky.chowder.ui.widget.NinthPalaceLayout
-        android:layout_width="match_parent"
         android:id="@+id/nine"
+        android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </android.support.constraint.ConstraintLayout>

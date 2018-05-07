@@ -59,7 +59,7 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
             tv.setOnClickListener(this)
             resId.add(resources.getIdentifier(array[1], "string", packageName))
         }
-        val text = getString(resId[3]).replace(" ", "")
+        val text = getString(resId[3])
         gravity = Gravity.CENTER
         setToolbarTitle(text.lines()[0])
         llBottomBar.visibility = View.GONE
@@ -74,7 +74,7 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
             in 2..5 -> Gravity.CENTER
             else -> Gravity.LEFT
         }
-        val text = getString(resId[v!!.id]).replace(" ", "")
+        val text = getString(resId[v!!.id])
         setToolbarTitle(text.lines()[0])
         getCatalog(text)
 //        LogUtils.i("行数==${text.lines().size}")
@@ -113,35 +113,37 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
         var chapter = ChapterEntity()
         chapter.chapter = list[0]
         for (i in list) {
-            if (i.startsWith("第") && i.endsWith("章")
-                    || i.startsWith("卷")
-                    || i.startsWith("【")
-                    || i.startsWith("●")
-                    || i.contains("第") && !i.contains("。")) {
+            val text=if (i.startsWith(" "))i.substring(1) else i
+            if (text.startsWith("第") && text.endsWith("章")
+                    || text.startsWith("卷")
+                    || text.startsWith("【")
+                    || text.startsWith("●")
+                    || text.contains("第") && !text.contains("。")) {
                 chapter.content.setLength(chapter.content.length - 1)
                 catalog.add(chapter)
                 chapter = ChapterEntity()
-                chapter.chapter = i
+                chapter.chapter = text
 //            } else if (i.contains(".")) {
 //                chapter.content.setLength(chapter.content.length - 1)
 //                catalog.add(chapter)
 //                chapter = ChapterEntity()
 //                chapter.chapter = i.substring(2, i.indexOf("."))
             }
-            chapter.content.append("$i\n")
+            chapter.content.append("$text\n")
         }
         var sign = -1
         if (catalog.isEmpty() && list.size > 30) {
             chapter.content = StringBuilder()
             for (i in list.indices) {
-                if (sign === -1 && list[i].contains("，")) sign = i % 10
+                val text=if (list[i].startsWith(" "))list[i].substring(1) else list[i]
+                if (sign === -1 && text.contains("，")) sign = i % 10
                 if (i % 10 === sign) {
                     chapter.content.setLength(chapter.content.length - 1)
                     catalog.add(chapter)
                     chapter = ChapterEntity()
-                    chapter.chapter = list[i]
+                    chapter.chapter = text
                 }
-                chapter.content.append("${list[i]}\n")
+                chapter.content.append("$text\n")
             }
         }
         chapter.content.setLength(chapter.content.length - 1)

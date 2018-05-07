@@ -215,8 +215,8 @@
             android:name=".ui.activity.PoetryActivity"
             android:description="@string/act_poetry_d"
             android:icon="@mipmap/ic_launcher"
-            android:process=":poetry"
-            android:label="@string/act_poetry">
+            android:label="@string/act_poetry"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.sky.coustom" />
             </intent-filter>
@@ -226,21 +226,24 @@
             android:description="@string/act_game2048"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_game2048"
-            android:process=":game2048"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.sky.coustom" />
+
+                <category android:name="android.intent.category.APP_MUSIC" />
+                <category android:name="android.intent.category.CAR_MODE" />
             </intent-filter>
         </activity>
+        <!--android:process=":ninthPalace"-->
         <activity
             android:name=".ui.activity.NinthPalaceActivity"
             android:description="@string/act_ninth"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_ninth"
-            android:process=":ninthPalace"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.sky.coustom" />
+                <category android:name="android.intent.category.CAR_MODE" />
             </intent-filter>
         </activity>
 

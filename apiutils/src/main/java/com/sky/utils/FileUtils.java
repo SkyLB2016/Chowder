@@ -122,10 +122,10 @@ public class FileUtils {
     /**
      * 把序列化的对象保存到本地
      *
-     * @param pathname 文件路径，后边会自动拼接“ser.serial”
+     * @param pathname 文件路径
      * @param object   要保存的对象
      */
-    public static <T> void serialToFile(String pathname, T object) {
+    public static <T> void serialize(String pathname, T object) {
         ObjectOutputStream oos = null;
         try {
             File file = new File(pathname);
@@ -148,10 +148,10 @@ public class FileUtils {
     /**
      * 反序列化
      *
-     * @param pathname 文件路径，后边会自动拼接“ser.serial”
+     * @param pathname 文件路径
      * @return 解析好的数据对象
      */
-    public static <T> T fileToSerialObj(String pathname) {
+    public static <T> T deserialize(String pathname) {
         ObjectInputStream ois = null;
         try {
             ois = new ObjectInputStream(new FileInputStream(new File(pathname)));

@@ -33,6 +33,11 @@ class MainP(context: Context) : BasePresenter<IMainView>(context), IMainPresente
             //mainIntent.addCategory(Intent.CATEGORY_SAMPLE_CODE);//筛选category为sample code的act
             //mainIntent.setPackage(getPackageName());//只选出自己应用的act
             val mainIntent = Intent("com.sky.coustom") //自定义的action
+//            mainIntent.action="com.sky.coustomd"
+//            mainIntent.addCategory(Intent.CATEGORY_CAR_MODE)
+//            mainIntent.addCategory(Intent.CATEGORY_APP_MUSIC)
+//            mainIntent.flags=Intent.FLAG_ACTIVITY_NEW_TASK
+//            mainIntent.flags=Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
             val manager = context.packageManager
             val resolveInfos = manager?.queryIntentActivities(mainIntent, PackageManager.MATCH_ALL) ?: return activityInfos
 //            val resolveInfos1 = manager?.resolveActivity(mainIntent, 0) ?: return activityInfos

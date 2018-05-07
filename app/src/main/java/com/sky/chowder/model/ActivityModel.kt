@@ -16,6 +16,7 @@ class ActivityModel(var className: String?//activity的名称
         private const val serialVersionUID = -6504989616188082278L//保证增加属性后，依然可以读取之前的属性
     }
 
+//    @Transient
     val objList: List<ActivityModel>? = null;
 
     /**

@@ -11,6 +11,7 @@ class NinthPalaceActivity : BaseNoPActivity() {
     override fun getLayoutResId(): Int = R.layout.activity_ninthpalace
     override fun initialize() {
         nine.onSuccess = { s -> if (s) showToast("成功") else showToast("失败") }
+//        LogUtils.i("${ProcessUtils().getRunningAppProcessInfo(this)}")
     }
 
 }
