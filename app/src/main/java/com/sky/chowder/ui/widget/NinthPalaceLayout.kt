@@ -51,11 +51,13 @@ class NinthPalaceLayout @JvmOverloads constructor(context: Context, attrs: Attri
             val rect = Rect(left + pieceWidth / 4, top + pieceWidth / 4, left + pieceWidth * 3 / 4, top + pieceWidth * 3 / 4)
             orginal.add(NinthPalaceEntity(i, rect))
         }
-        select.add(orginal[1])
+        select.add(orginal[0])
+//        select.add(orginal[8])
         select.add(orginal[4])
         select.add(orginal[7])
-        select.add(orginal[0])
-        select.add(orginal[8])
+        select.add(orginal[1])
+        select.add(orginal[6])
+        select.add(orginal[2])
         select.add(orginal[3])
         select.add(orginal[5])
 
