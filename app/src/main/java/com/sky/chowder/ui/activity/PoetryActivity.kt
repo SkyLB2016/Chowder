@@ -36,16 +36,14 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
                 with(holder!!.itemView) {
                     tvDisplay.text = getDatas()[position].content
                     tvDisplay.gravity = gravity
-                    if (position == 0) {
-                        tvDisplay.setPadding(resources.getDimensionPixelSize(R.dimen.wh_32), resources.getDimensionPixelSize(R.dimen.wh_16), resources.getDimensionPixelSize(R.dimen.wh_32), resources.getDimensionPixelSize(R.dimen.wh_4))
-                    }
+                    if (position == 0) tvDisplay.setPadding(resources.getDimensionPixelSize(R.dimen.wh_32), resources.getDimensionPixelSize(R.dimen.wh_16), resources.getDimensionPixelSize(R.dimen.wh_32), resources.getDimensionPixelSize(R.dimen.wh_4))
                 }
             }
         }
         recycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recycler.adapter = adapter
 
-        val poetry = resources.getStringArray(R.array.poetry)!!
+        val poetry = resources.getStringArray(R.array.poetry)
         var tv: TextView
         for ((index, text) in poetry.withIndex()) {
             val array = text.split(",")
@@ -83,7 +81,7 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
     private val catalog = View.OnClickListener { v ->
         when (v?.id) {
             R.id.tvLast -> upToChapter()
-            R.id.tvCatalog -> showCatalogPop(adapter?.datas!!)
+            R.id.tvCatalog -> showCatalogPop(adapter?.datas)
             R.id.tvNext -> nextChapter()
         }
     }
@@ -151,7 +149,7 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
         adapter?.datas = catalog
     }
 
-    private fun showCatalogPop(floders: List<ChapterEntity>) {
+    private fun showCatalogPop(floders: List<ChapterEntity>?) {
         val floderPop = CatalogPop(LayoutInflater.from(this).inflate(R.layout.include_recycler, null),
                 ScreenUtils.getWidthPX(this), (ScreenUtils.getHeightPX(this) * 0.7).toInt())
         floderPop?.datas = floders
