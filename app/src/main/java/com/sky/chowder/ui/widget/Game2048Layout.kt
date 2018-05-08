@@ -21,8 +21,8 @@ import kotlin.collections.ArrayList
 class Game2048Layout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
     : RelativeLayout(context, attrs, defStyleAttr) {
 
-    private val orginal = ArrayList<Int>()
-    //            var orginal = Array(4, { Array(4) { 0 } })
+    //    private val orginal = ArrayList<Int>()
+    var orginal = IntArray(16)
     //    private var oldOrginal = ArrayList<Int>()
     private var margin = resources.getDimensionPixelSize(R.dimen.wh_8)//分割后图片之间的间隔
     private val piece = 4//几行几列
@@ -49,7 +49,7 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
     }
 
     private fun setView() {
-        for (i in 0..15) orginal.add(0)
+//        for (i in 0..15) orginal.add(0)
         orginal[Random().nextInt(15)] = randomTwoOrFour()
         orginal[Random().nextInt(15)] = randomTwoOrFour()
         pieceWidth = (width!! - margin * (piece + 1)) / piece
@@ -66,8 +66,8 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
     }
 
     public fun restart() {
-        orginal.clear()
-        for (i in 0..15) orginal.add(0)
+//        orginal.clear()
+        for (i in 0..15) orginal[i] = 0
         orginal[Random().nextInt(15)] = randomTwoOrFour()
         resetView()
     }
@@ -91,7 +91,7 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
                 //移动距离过小则返回
                 if (Math.abs(diffX) < 100 && Math.abs(diffY) < 100) return true
                 //复制原数据
-                val oldOrginal = orginal.clone() as ArrayList<Int>
+                val oldOrginal = orginal.clone()
                 //开始移动数据
                 if (Math.abs(diffX) > Math.abs(diffY)) {
                     if (diffX > 100) /*右滑*/ slideRight()
@@ -101,7 +101,9 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
                     else if (diffY < -100) /*上滑*/ slideUp()
                 }
                 //现数据与原数据比较，不同则重置数组
-                if (orginal != oldOrginal) resetView()
+                if (!Arrays.equals(orginal, oldOrginal)) resetView()
+                //list可直接相比
+//                if (orginal != oldOrginal) resetView()
             }
         }
         return true
