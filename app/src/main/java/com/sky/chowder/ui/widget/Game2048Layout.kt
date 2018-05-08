@@ -22,7 +22,8 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
     : RelativeLayout(context, attrs, defStyleAttr) {
 
     private val orginal = ArrayList<Int>()
-    private var oldOrginal = ArrayList<Int>()
+    //            var orginal = Array(4, { Array(4) { 0 } })
+    //    private var oldOrginal = ArrayList<Int>()
     private var margin = resources.getDimensionPixelSize(R.dimen.wh_8)//分割后图片之间的间隔
     private val piece = 4//几行几列
     private var once = true
@@ -49,8 +50,8 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
 
     private fun setView() {
         for (i in 0..15) orginal.add(0)
-        orginal[Random().nextInt(15)] = 2
-        orginal[Random().nextInt(15)] = 4
+        orginal[Random().nextInt(15)] = randomTwoOrFour()
+        orginal[Random().nextInt(15)] = randomTwoOrFour()
         pieceWidth = (width!! - margin * (piece + 1)) / piece
         for (i in orginal.indices) {
             val child = ImageView(context)
@@ -62,6 +63,13 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
             addView(child)
             child.layoutParams = lp//一定要放在addview之后`
         }
+    }
+
+    public fun restart() {
+        orginal.clear()
+        for (i in 0..15) orginal.add(0)
+        orginal[Random().nextInt(15)] = randomTwoOrFour()
+        resetView()
     }
 
     private fun getImageDrawable(num: Int): Drawable? =
@@ -83,7 +91,7 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
                 //移动距离过小则返回
                 if (Math.abs(diffX) < 100 && Math.abs(diffY) < 100) return true
                 //复制原数据
-                oldOrginal = orginal.clone() as ArrayList<Int>
+                val oldOrginal = orginal.clone() as ArrayList<Int>
                 //开始移动数据
                 if (Math.abs(diffX) > Math.abs(diffY)) {
                     if (diffX > 100) /*右滑*/ slideRight()

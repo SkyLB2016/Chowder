@@ -41,6 +41,6 @@ class CourseEntity() : Parcelable {
         override fun newArray(size: Int): Array<CourseEntity?> = arrayOfNulls(size)
     }
 //    val intent = Intent()
-//                intent.putExtra("", datalist.toTypedArray())
-//                intent.putParcelableArrayListExtra("", datalist as ArrayList<out Parcelable>)
+//    intent.putExtra("", datalist.toTypedArray())
+//    intent.putParcelableArrayListExtra("", datalist as ArrayList<out Parcelable>)
 }

@@ -10,5 +10,9 @@ import kotlinx.android.synthetic.main.activity_game.*
  */
 class Game2048Activity : BaseNoPActivity() {
     override fun getLayoutResId(): Int = R.layout.activity_game
+    override fun initialize() {
+        super.initialize()
+        btRestart.setOnClickListener { game.restart() }
+    }
     override fun onTouchEvent(event: MotionEvent?): Boolean = game.onTouchEvent(event!!)
 }
