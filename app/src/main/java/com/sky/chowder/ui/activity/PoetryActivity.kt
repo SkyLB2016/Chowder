@@ -113,7 +113,7 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
         var chapter = ChapterEntity()
         chapter.chapter = list[0]
         for (i in list) {
-            val text=if (i.startsWith(" "))i.substring(1) else i
+            val text = if (i.startsWith(" ")) i.substring(1) else i
             if (text.startsWith("第") && text.endsWith("章")
                     || text.startsWith("卷")
                     || text.startsWith("【")
@@ -135,7 +135,7 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
         if (catalog.isEmpty() && list.size > 30) {
             chapter.content = StringBuilder()
             for (i in list.indices) {
-                val text=if (list[i].startsWith(" "))list[i].substring(1) else list[i]
+                val text = if (list[i].startsWith(" ")) list[i].substring(1) else list[i]
                 if (sign === -1 && text.contains("，")) sign = i % 10
                 if (i % 10 === sign) {
                     chapter.content.setLength(chapter.content.length - 1)
@@ -185,9 +185,13 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
     }
 
     override fun onBackPressed() {
-        if (llBottomBar.visibility == View.VISIBLE) {
-            llBottomBar.visibility = View.GONE
-            return
-        } else super.onBackPressed()
+        when {
+            sliding.isOpen -> sliding.toggleMenu()
+            llBottomBar.visibility == View.VISIBLE -> {
+                llBottomBar.visibility = View.GONE
+                return
+            }
+            else -> super.onBackPressed()
+        }
     }
 }

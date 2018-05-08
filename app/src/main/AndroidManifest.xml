@@ -248,6 +248,12 @@
         </activity>
 
         <service android:name=".ui.service.IntentTest" />
+        <service
+            android:name=".ui.service.PairServiceA"
+            android:enabled="true" />
+        <service
+            android:name=".ui.service.PairServiceB"
+            android:enabled="true" />
     </application>
 
 </manifest>

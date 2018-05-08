@@ -5753,12 +5753,14 @@
         　　(2)线程同步机制完全失效：不同进程间的线程也是互相独立的\n
         　　(3)SharedPreferences可靠性下降：不支持两个进程同时读写，有一定几率会丢数据\n
         　　(4)application多次创建：新进程代表新的虚拟机的启动\n
-        ●23.Serializable，数据序列化，可自己重写序列化与反序列化过程\n
+        　　通信方式：序列化serializable与parcelable，Binder，Intent，共享文件，ContentProvider，socket网络通信。\n
+        ●23.Serializable，java数据序列化，可自己重写序列化与反序列化过程\n
         　　(1)FileUtils中serialize(path,value)（序列化）与deserialize(path)（反序列化）运用\n
         　　(2)静态成员变量属于类不属于对象，不参与序列化\n
         　　(3)用transient关键字标记的成员变量不参与序列化\n
-        ●24.Parcelable，数据序列化，在CourseEntity中有应用\n
-        ●25.Binder\n
+        ●24.Parcelable，Android数据序列化，在CourseEntity中有应用\n
+        ●25.本地保存数据时以及简单的数据通讯可以使用serializable，Parcelable主要用在内存序列化上，建议比较大的数据对象传输是使用。\n
+        ●26.Binder实现IBinder接口（aidl快速实现Binder的工具），主要用在Service开发中，（待研究）\n
 
     </string>
 </resources>

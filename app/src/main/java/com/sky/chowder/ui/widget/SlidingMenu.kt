@@ -44,11 +44,11 @@ class SlidingMenu @JvmOverloads constructor(context: Context, attrs: AttributeSe
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         if (once) {//执行一次
             wallPaper = getChildAt(0) as ViewGroup
-            menu = wallPaper!!.getChildAt(0) as ViewGroup
-            content = wallPaper!!.getChildAt(1) as ViewGroup
-            menu!!.layoutParams.width = screenWidth / 4 * 3
-            menuWidth = menu!!.layoutParams.width
-            content!!.layoutParams.width = screenWidth
+            menu = wallPaper?.getChildAt(0) as ViewGroup
+            content = wallPaper?.getChildAt(1) as ViewGroup
+            menu?.layoutParams?.width = screenWidth / 4 * 3
+            menuWidth = menu?.layoutParams?.width!!
+            content?.layoutParams?.width = screenWidth
             once = false
         }
     }

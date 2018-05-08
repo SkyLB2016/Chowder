@@ -43,7 +43,7 @@ public class MyScrollview extends ScrollView {
                 }
             case MotionEvent.ACTION_UP:
                 LogUtils.i("==dslfkjldkjflskdjlfksjdf");
-break;
+                break;
         }
         return super.onInterceptTouchEvent(e);
     }
