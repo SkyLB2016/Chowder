@@ -2,8 +2,6 @@
     <string name="app_name">chowder</string>
     <string name="dialog_exit">确定退出应用程序吗?</string>
 
-    <string name="act_test">15.方法测试类</string>
-
     <string name="act_method">01.方法组合类</string>
     <string name="act_method_d">常用的方法：字符替换与数组化，数组排序筛选，json转换，时间地址选择等等</string>
 
@@ -43,10 +41,13 @@
     <string name="act_pull">14.下拉动画</string>
     <string name="act_pull_d">待优化</string>
 
-    <string name="act_poetry">16.诗文，语言，笔记，英语</string>
-    <string name="act_poetry_d">争取做到每日至少背诵一百字</string>
+    <string name="act_IPC">15.IPC机制</string>
+    <string name="act_IPC_d">IPC，待深入研究</string>
 
-    <string name="act_IPC">IPC机制</string>
+    <string name="act_test">16.方法测试类</string>
+
+    <string name="act_poetry">诗文，语言，笔记，英语</string>
+    <string name="act_poetry_d">争取做到每日至少背诵一百字</string>
 
 
     <string name="ibu"><i><b><u>service</u></b></i></string>
