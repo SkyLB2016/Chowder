@@ -51,8 +51,34 @@ class NinthPalaceLayout @JvmOverloads constructor(context: Context, attrs: Attri
             val rect = Rect(left + pieceWidth / 4, top + pieceWidth / 4, left + pieceWidth * 3 / 4, top + pieceWidth * 3 / 4)
             orginal.add(NinthPalaceEntity(i, rect))
         }
+        butterfly()
+    }
+
+    fun shuffle() {
+        select.clear()
+        for (i in orginal) select.add(i)
+        select.shuffle()
+        invalidate()
+    }
+
+    private fun fiveStar() {
+        select.clear()
+        //五角星
+        select.add(orginal[3])
+        select.add(orginal[4])
+        select.add(orginal[5])
+        select.add(orginal[6])
+        select.add(orginal[1])
+        select.add(orginal[8])
+        select.add(orginal[3])
+        invalidate()
+    }
+
+    //蜻蜓dragonfly或者蝴蝶
+    private fun butterfly() {
+        select.clear()
         select.add(orginal[0])
-//        select.add(orginal[8])
+        //        select.add(orginal[8])
         select.add(orginal[4])
         select.add(orginal[7])
         select.add(orginal[1])
@@ -61,15 +87,8 @@ class NinthPalaceLayout @JvmOverloads constructor(context: Context, attrs: Attri
         select.add(orginal[3])
         select.add(orginal[5])
 
-        //五角星
-        //select.add(orginal[3])
-        //select.add(orginal[4])
-        //select.add(orginal[5])
-        //select.add(orginal[6])
-        //select.add(orginal[1])
-        //select.add(orginal[8])
-        //select.add(orginal[3])
         passWord = select.clone() as ArrayList<NinthPalaceEntity>
+        invalidate()
     }
 
     override fun onDraw(canvas: Canvas?) {

@@ -2,8 +2,6 @@ package com.sky.chowder.ui.activity
 
 import android.Manifest
 import android.content.ActivityNotFoundException
-import android.content.Intent
-import android.os.Binder
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.support.v7.widget.Toolbar
@@ -16,7 +14,6 @@ import com.sky.chowder.api.view.IMainView
 import com.sky.chowder.model.ActivityModel
 import com.sky.chowder.ui.adapter.MainAdapter
 import com.sky.chowder.ui.presenter.MainP
-import com.sky.chowder.ui.service.PairServiceA
 import com.sky.utils.AppUtils
 import com.sky.utils.JumpAct
 import com.sky.utils.LogUtils
@@ -47,7 +44,6 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
         adapter = MainAdapter(R.layout.adapter_main)
         recycler.adapter = adapter
 
-        startService(Intent(this, PairServiceA::class.java))
 
         adapter?.setOnItemClickListener { _, position -> JumpAct.jumpActivity(this, adapter.datas[position].componentName) }
         adapter?.setOnItemLongClickListener { _, _ ->
@@ -67,12 +63,7 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
         var num = Array(4) { IntArray(4) }
         fab.setOnClickListener {
         }
-        val b = Binder()
-        val i = Intent()
-        val bundle = Bundle()
-        bundle.putDouble("", 78.0)
-        val sdf= bundle["df"]
-        i.putExtras(bundle)
+
     }
 
     override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {

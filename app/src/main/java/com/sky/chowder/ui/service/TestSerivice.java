@@ -15,7 +15,16 @@ public class TestSerivice extends Service {
         return null;
     }
 
+    boolean flag = true;
 
+    class work implements Runnable {
 
+        @Override
+        public void run() {
+            while (flag) {
+
+            }
+        }
+    }
 
 }

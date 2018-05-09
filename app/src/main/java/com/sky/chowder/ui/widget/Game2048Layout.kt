@@ -50,8 +50,10 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
 
     private fun setView() {
 //        for (i in 0..15) orginal.add(0)
-        orginal[Random().nextInt(15)] = randomTwoOrFour()
-        orginal[Random().nextInt(15)] = randomTwoOrFour()
+//        orginal[Random().nextInt(15)] = randomTwoOrFour()
+//        orginal[Random().nextInt(15)] = randomTwoOrFour()
+        orginal[12] = 4096
+        orginal[13] = 2048
         pieceWidth = (width!! - margin * (piece + 1)) / piece
         for (i in orginal.indices) {
             val child = ImageView(context)
@@ -68,7 +70,9 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
     public fun restart() {
 //        orginal.clear()
         for (i in 0..15) orginal[i] = 0
-        orginal[Random().nextInt(15)] = randomTwoOrFour()
+//        orginal[Random().nextInt(15)] = randomTwoOrFour()
+        orginal[12] = 4096
+        orginal[13] = 2048
         resetView()
     }
 
@@ -89,16 +93,16 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
                 val diffX = event.x - downX
                 val diffY = event.y - downY
                 //移动距离过小则返回
-                if (Math.abs(diffX) < 100 && Math.abs(diffY) < 100) return true
+                if (Math.abs(diffX) < 200 && Math.abs(diffY) < 200) return true
                 //复制原数据
                 val oldOrginal = orginal.clone()
                 //开始移动数据
                 if (Math.abs(diffX) > Math.abs(diffY)) {
-                    if (diffX > 100) /*右滑*/ slideRight()
-                    else if (diffX < -100) /*左滑*/ slideLeft()
+                    if (diffX > 200) /*右滑*/ slideRight()
+                    else if (diffX < -200) /*左滑*/ slideLeft()
                 } else {
-                    if (diffY > 100) /*下滑*/ slideDown()
-                    else if (diffY < -100) /*上滑*/ slideUp()
+                    if (diffY > 200) /*下滑*/ slideDown()
+                    else if (diffY < -200) /*上滑*/ slideUp()
                 }
                 //现数据与原数据比较，不同则重置数组
                 if (!Arrays.equals(orginal, oldOrginal)) resetView()

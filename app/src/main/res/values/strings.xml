@@ -46,6 +46,8 @@
     <string name="act_poetry">16.诗文，语言，笔记，英语</string>
     <string name="act_poetry_d">争取做到每日至少背诵一百字</string>
 
+    <string name="act_IPC">IPC机制</string>
+
 
     <string name="ibu"><i><b><u>service</u></b></i></string>
 
