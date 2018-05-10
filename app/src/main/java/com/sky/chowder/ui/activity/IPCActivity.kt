@@ -20,7 +20,7 @@ import com.sky.utils.LogUtils
  * Created by SKY on 2018/5/9 19:07.
  */
 class IPCActivity : BaseNoPActivity() {
-    override fun getLayoutResId(): Int = R.layout.activity_main
+    override fun getLayoutResId(): Int = R.layout.activity_test
     override fun initialize() {
         super.initialize()
 

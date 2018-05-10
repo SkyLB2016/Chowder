@@ -49,11 +49,11 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
     }
 
     private fun setView() {
-//        for (i in 0..15) orginal.add(0)
+        orginal[0] = 4
+        for (i in 1..15) orginal[i] = Math.pow(2.0, i + 1.0).toInt()
 //        orginal[Random().nextInt(15)] = randomTwoOrFour()
 //        orginal[Random().nextInt(15)] = randomTwoOrFour()
-        orginal[12] = 4096
-        orginal[13] = 2048
+
         pieceWidth = (width!! - margin * (piece + 1)) / piece
         for (i in orginal.indices) {
             val child = ImageView(context)
@@ -67,23 +67,28 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
         }
     }
 
-    public fun restart() {
-//        orginal.clear()
+    fun restart() {
         for (i in 0..15) orginal[i] = 0
-//        orginal[Random().nextInt(15)] = randomTwoOrFour()
-        orginal[12] = 4096
-        orginal[13] = 2048
+        orginal[Random().nextInt(15)] = randomTwoOrFour()
+//        orginal[12] = 4096
+//        orginal[13] = 2048
         resetView()
     }
 
     private fun getImageDrawable(num: Int): Drawable? =
-            if (num in 2..8192) resources.getDrawable(resources.getIdentifier("i$num", "mipmap", context.packageName))
+            if (num in 2..131072) resources.getDrawable(resources.getIdentifier("i$num", "mipmap", context.packageName))
             else null
 
     private var downX: Float = 0f
     private var downY: Float = 0f
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
+//        val velocity = VelocityTracker.obtain()
+//        velocity.addMovement(event)
+//        velocity.computeCurrentVelocity(1000)
+//        LogUtils.i("速度X==${velocity.xVelocity},速度Y=" + "${velocity.yVelocity}")
+//        velocity.clear()
+//        velocity.recycle()
         when (event?.action) {
             MotionEvent.ACTION_DOWN -> {
                 downX = event.x
@@ -123,10 +128,10 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
         }
         //是否还有空白的位置
         if (random.isNotEmpty()) {
-            val randomNum = if (random.size > 1) random[Random().nextInt(random.size - 1)] else random[0]
-            orginal[randomNum] = randomTwoOrFour()
-            val image = getChildAt(randomNum) as ImageView
-            image.setImageDrawable(getImageDrawable(orginal[randomNum]))
+            val position = if (random.size > 1) random[Random().nextInt(random.size - 1)] else random[0]
+            orginal[position] = randomTwoOrFour()
+            val image = getChildAt(position) as ImageView
+            image.setImageDrawable(getImageDrawable(orginal[position]))
             addAni(image)
         }
         if (random.size < 2) {

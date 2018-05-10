@@ -5628,13 +5628,18 @@
         　　(1)A启动 A.onCreate->A.onStart->A.onResume->\n
         　　(2)在A中启动B A.onPause->B.onCreate->B.onStart->B.onResume->A.onStop\n
         　　(3)关闭B B.onPause->A.onRestart->A.onStart->A.onResume->B.onStop->B.onDestory\n
-        ●06.屏幕的坐标原点是左上角，向右是X轴正方向，向下是Y轴正方向，获取坐标值的各种方法\n
+        ●06.view的基础知识：屏幕的坐标原点是左上角，向右X轴正方向，向下Y轴正方向\n
         　　(1)View中提供的获取坐标方法：\n
         　　　　getLeft()与getRight()都是View自身到父布局左边的距离\n
         　　　　getTop()与getBottom()都是View自身到父布局顶边的距离\n
+        　　　　x，y，translationX，translationY
         　　(2)MotionEvent中的方法：\n
-        　　　　GetX()与getY()是视图坐标，即是触摸点到它自身左边与顶边的距离\n
+        　　　　GetX()与getY()是视图坐标，即是触摸点到它自身左边到父布局顶边的距离\n
         　　　　GetRawX()与getRawY()是绝对坐标，即是触摸点到屏幕左边与顶边的距离\n
+        　　(3)TouchSlop：最小滑动距离，获取方法：ViewConfiguration.get(this).scaledTouchSlop，zoom中有使用\n
+        　　(4)VelocityTracker：速度跟踪器，只在move中有用，up时为0\n
+        　　(5)GestureDetector：手势检测，相关方法：单击，拖动，滑动，长按，双击。\n
+        　　(6)Scroller：弹性滑动对象，与view中的computeScroll方法配合。\n
         ●07.View控件的测量onMeasure，有三种模式：\n
         　　(1)EXACTLY,精确值模式，具体数字如100dp或者match_parent，默认即为EXACTLY；\n
         　　(2)AT_MOST,自适应模式，warp_content,需要用setMeasureDimension(width,height)设置算好的宽高；\n

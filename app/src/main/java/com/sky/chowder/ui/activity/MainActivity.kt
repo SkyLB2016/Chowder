@@ -7,6 +7,7 @@ import android.os.PersistableBundle
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import android.view.ViewConfiguration
 import com.sky.SkyApp
 import com.sky.base.BasePActivity
 import com.sky.chowder.R
@@ -62,6 +63,7 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 //        var num = Array(4, { Array(4) { 0 } })
         var num = Array(4) { IntArray(4) }
         fab.setOnClickListener {
+            LogUtils.i("${ViewConfiguration.get(this).scaledTouchSlop}")
         }
 
     }

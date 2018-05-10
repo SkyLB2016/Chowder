@@ -202,16 +202,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.TestActivity"
-            android:description="@string/act_test"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/act_test"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.sky.coustom" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".ui.activity.PoetryActivity"
             android:description="@string/act_poetry_d"
             android:icon="@mipmap/ic_launcher"

@@ -42,9 +42,7 @@
     <string name="act_pull_d">待优化</string>
 
     <string name="act_IPC">15.IPC机制</string>
-    <string name="act_IPC_d">IPC，待深入研究</string>
-
-    <string name="act_test">16.方法测试类</string>
+    <string name="act_IPC_d">surfaceView，IPC，待深入研究</string>
 
     <string name="act_poetry">诗文，语言，笔记，英语</string>
     <string name="act_poetry_d">争取做到每日至少背诵一百字</string>

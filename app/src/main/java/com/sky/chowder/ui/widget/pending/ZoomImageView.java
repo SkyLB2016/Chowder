@@ -13,36 +13,35 @@ import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewTreeObserver;
-import android.widget.ImageView;
 
 /**
  * Created by SKY on 2015/8/17 15:30.
  * 图片缩放
  */
-public class ZoomImageView extends ImageView implements ViewTreeObserver.OnGlobalLayoutListener, View.OnTouchListener, ScaleGestureDetector.OnScaleGestureListener {
+public class ZoomImageView extends android.support.v7.widget.AppCompatImageView implements
+        ViewTreeObserver.OnGlobalLayoutListener, View.OnTouchListener, ScaleGestureDetector.OnScaleGestureListener {
 
-
-    private boolean first = true;//只执行一次
+    private boolean once = true;//只执行一次
     private float minScale;
     private float midScale;
     private float maxScale;
-
-    private Matrix matrix;
-    private ScaleGestureDetector scaleGestureDetector;
 
     /**
      * 记录上次多点触控的数量
      */
     private int mLastPointerCount;
     private int mTouchSlop;
-    private Boolean isCanDrag;
 
+    private Boolean isCanDrag;
     private Boolean isCheckLeftAndRight;
     private Boolean isCheckTopAndBottom;
+    private Boolean isAutoScale;
 
 
     private GestureDetector gestureDetector;
-    private Boolean isAutoScale;
+    private ScaleGestureDetector scaleGestureDetector;
+
+    private Matrix matrix;
 
     public ZoomImageView(Context context) {
         this(context, null);
@@ -83,6 +82,7 @@ public class ZoomImageView extends ImageView implements ViewTreeObserver.OnGloba
                 return true;
             }
         });
+        gestureDetector.setIsLongpressEnabled(false);
     }
 
     private class AutoScaleRunnable implements Runnable {
@@ -142,7 +142,7 @@ public class ZoomImageView extends ImageView implements ViewTreeObserver.OnGloba
 
     @Override
     public void onGlobalLayout() {
-        if (first) {
+        if (once) {
             int width = getWidth();
             int height = getHeight();
             Drawable image = getDrawable();
@@ -173,7 +173,7 @@ public class ZoomImageView extends ImageView implements ViewTreeObserver.OnGloba
             matrix.postTranslate(cx, cy);
             matrix.postScale(minScale, minScale, width / 2, height / 2);
             setImageMatrix(matrix);
-            first = false;
+            once = false;
         }
 
     }
