@@ -85,6 +85,7 @@ public class ZoomImageView extends android.support.v7.widget.AppCompatImageView 
         gestureDetector.setIsLongpressEnabled(false);
     }
 
+
     private class AutoScaleRunnable implements Runnable {
 
         private float mTageTScale;

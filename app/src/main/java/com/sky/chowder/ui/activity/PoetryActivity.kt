@@ -57,8 +57,8 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
             tv.setOnClickListener(this)
             resId.add(resources.getIdentifier(array[1], "string", packageName))
         }
-        val text = getString(resId[3])
-        gravity = Gravity.CENTER
+        val text = getString(resId[6])
+//        gravity = Gravity.CENTER
         setToolbarTitle(text.lines()[0])
         llBottomBar.visibility = View.GONE
         registerOnClick(tvLast, tvCatalog, tvNext)

@@ -234,22 +234,23 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
 
     private fun setSvg() {
         image.visibility = View.VISIBLE
-        val value = ValueAnimator.ofFloat(0f, flow.height.toFloat())
+        val animator = ValueAnimator.ofFloat(0f, flow.height.toFloat())
 //        value.setTarget(image)
-        value.duration = 2000
-        value.addUpdateListener { animation ->
+        animator.duration = 2000
+        animator.addUpdateListener { animation ->
             val lp = image.layoutParams
             lp.height = animation!!.animatedValue.toString().toFloat().toInt()
             image.layoutParams = lp
         }
-        value.start()
-        value.addListener(object : AnimatorListenerAdapter() {
+        animator.start()
+        animator.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator?) {
                 super.onAnimationEnd(animation)
                 (image.drawable as Animatable).start()
             }
         })
     }
+
 
     /**
      * 工厂模式应用，待优化

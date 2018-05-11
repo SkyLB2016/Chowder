@@ -68,8 +68,8 @@ class SlidingMenu @JvmOverloads constructor(context: Context, attrs: AttributeSe
                 downTime = System.currentTimeMillis()
                 if (isOpen && downX > menuWidth) return true//打开时，某些部分的touch事件不向下传递
             }
-            MotionEvent.ACTION_MOVE ->//在范围内时滑动的x距离大于100的时候才开始滑动状态
-                if (downY > screenHeight * 2 / 5 && event.rawX - downX > 100) return true
+        /*在范围内时滑动的x距离大于100的时候才开始滑动状态*/
+            MotionEvent.ACTION_MOVE -> if (downY > screenHeight * 2 / 5 && event.rawX - downX > 100) return true
         }
         return false
     }

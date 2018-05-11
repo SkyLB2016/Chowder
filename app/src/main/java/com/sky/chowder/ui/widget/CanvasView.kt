@@ -7,6 +7,7 @@ import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Scroller
 import com.sky.chowder.R
 import java.util.*
 
@@ -40,6 +41,7 @@ class CanvasView @JvmOverloads constructor(
                 cY = event.y
                 lastX = event.rawX
                 lastY = event.rawY
+//                smoothScrollTo(dX, dY)
             }
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                 lastX = -1f
@@ -50,6 +52,21 @@ class CanvasView @JvmOverloads constructor(
         }
         invalidate()
         return true
+    }
+
+    val scroller = Scroller(context)
+    override fun computeScroll() {
+        super.computeScroll()
+        if (scroller.computeScrollOffset()) {
+            scrollTo(scroller.currX, scroller.currY)
+            postInvalidate()
+        }
+    }
+
+    fun smoothScrollTo(destX: Int, destY: Int) {
+        val scrollX = scrollX
+        val delta = destX - scrollX
+        scroller.startScroll(scrollX, 0, delta, 0, 1000)
     }
 
     override fun onDraw(canvas: Canvas) {
