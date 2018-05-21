@@ -81,21 +81,21 @@ public class BitmapUtils {
         BitmapFactory.Options opts = new BitmapFactory.Options();
         opts.inJustDecodeBounds = true;//设置为ture只获取图片大小
         BitmapFactory.decodeFile(pathName, opts);
-
         opts.inSampleSize = getInSampleSize(opts, newWidth, newHeight);//计算缩放率，缩放图片
         opts.inJustDecodeBounds = false;//至为false
         return BitmapFactory.decodeFile(pathName, opts);
     }
 
     /**
-     * 计算InSampleSize,大于1的整数时是缩小原图
+     * 计算InSampleSize,大于1的整数时等比缩小原图
      */
     private static int getInSampleSize(BitmapFactory.Options opts, int newW, int newH) {
-        int outWidth = opts.outWidth;
-        int outHeight = opts.outHeight;
-        if (outWidth > newW || outHeight > newH)
-            return (int) Math.ceil(Math.max(outWidth * 1d / newW, outHeight * 1d / newH));
-        return 1;
+        int inSampleSize = 1;//计算缩放率，缩放图片
+        int width = opts.outWidth;
+        int height = opts.outHeight;
+        if (width > newW || height > newH)
+            inSampleSize = (int) Math.ceil(Math.min(width * 1d / newW, height * 1d / newH));
+        return inSampleSize;
     }
 
     /**

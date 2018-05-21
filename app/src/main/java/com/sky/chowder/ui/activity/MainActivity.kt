@@ -64,7 +64,6 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
         fab.setOnClickListener {
             LogUtils.i("${window.decorView}")
         }
-
     }
 
     override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {

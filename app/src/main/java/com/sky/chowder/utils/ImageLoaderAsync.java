@@ -10,7 +10,10 @@ import android.widget.ImageView;
 
 import com.sky.chowder.MyApplication;
 import com.sky.utils.BitmapUtils;
+import com.sky.utils.DiskLruCache;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,6 +42,7 @@ public class ImageLoaderAsync {
         }
     };
     private LruCache<String, Bitmap> lruCache;
+    private DiskLruCache diskLruCache;
     private Set<ImageAsyncTask> tasks;
 
     private void addBitmapToCache(String url, Bitmap bitmap) {
@@ -47,7 +51,46 @@ public class ImageLoaderAsync {
     }
 
     private Bitmap getBitmapFromCache(String url) {
+//        Bitmap bitmap = lruCache.get(url);
+//        String key;
+//        if (bitmap == null) {
+//            try {
+//                MessageDigest md5 = MessageDigest.getInstance("MD5");
+//                md5.update(url.getBytes());
+//                key = changeKey(md5.digest());
+//            } catch (NoSuchAlgorithmException e) {
+//                key = String.valueOf(url.hashCode());
+//            }
+//            try {
+//                DiskLruCache.Editor editor = diskLruCache.edit(key);
+//                OutputStream os = editor.newOutputStream(0);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//            try {
+//                DiskLruCache.Snapshot snap = diskLruCache.get(key);
+//                FileInputStream is = (FileInputStream) snap.getInputStream(0);
+//                FileDescriptor fd = is.getFD();
+//            bitmap= BitmapFactory.decodeFileDescriptor(fd);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+
         return lruCache.get(url);
+    }
+
+    private String changeKey(byte[] digest) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < digest.length; i++) {
+            String hex = Integer.toHexString(0xFF & digest[i]);
+            if (hex.length() == 1) {
+                builder.append("0");
+            }
+            builder.append(hex);
+        }
+        return builder.toString();
     }
 
     public ImageLoaderAsync() {
@@ -58,7 +101,11 @@ public class ImageLoaderAsync {
             }
         };
         tasks = new HashSet<>();
-//        diskCache = new DiskLruCache();
+        try {
+            diskLruCache = DiskLruCache.open(new File(MyApplication.getInstance().getPicCacheDir()), 1, 1, Runtime.getRuntime().maxMemory() / 4);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

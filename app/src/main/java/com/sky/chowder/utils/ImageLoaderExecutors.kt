@@ -25,28 +25,27 @@ import java.util.concurrent.Semaphore
 class ImageLoaderExecutors @JvmOverloads constructor(type: FileType = FileType.LIFO, count: Int = 3) {
 
     private val lruCache: LruCache<String, Bitmap>//内存缓存
-
     private var type = FileType.LIFO//任务执行方式
-    private val threads: LinkedList<Runnable>
+    private val runnables: LinkedList<Runnable>
     //UI主线程handler
-    private val UIHandler = object : Handler() {
+    private val handlerUI = object : Handler() {
         override fun handleMessage(msg: Message) {
             when (msg.what) {
                 0X01 -> {
                     val imageHolder = msg.obj as ImageHolder
-                    if (imageHolder.view!!.tag == imageHolder.path)
+                    if (imageHolder.view?.tag == imageHolder.path)
                         if (imageHolder.view is ImageView) {
                             val bitmap = imageHolder.bitmap
                             val view = imageHolder.view as ImageView?
 //                            run {
-//                                val params = view!!.layoutParams
-//                                params.width = bitmap!!.width
+//                                val params = view?.layoutParams
+//                                params.width = bitmap?.width
 //                                params.height = bitmap.height
 //                                view.layoutParams = params
 //                            }
-                            view!!.setImageBitmap(bitmap)
+                            view?.setImageBitmap(bitmap)
                         } else {
-                            imageHolder.view!!.background = BitmapUtils.getDrawableFromBitmap(imageHolder.view!!.context, imageHolder.bitmap)
+                            imageHolder.view?.background = BitmapUtils.getDrawableFromBitmap(imageHolder.view?.context, imageHolder.bitmap)
                         }
                 }
             }
@@ -64,10 +63,9 @@ class ImageLoaderExecutors @JvmOverloads constructor(type: FileType = FileType.L
     init {
         var count = count
         this.type = type
-        if (count > MAXCOUNT)
-            count = MAXCOUNT
-        threads = LinkedList()
-        lruCache = object : LruCache<String, Bitmap>((Runtime.getRuntime().maxMemory() / 4).toInt()) {
+        if (count > MAXCOUNT) count = MAXCOUNT
+        runnables = LinkedList()
+        lruCache = object : LruCache<String, Bitmap>((Runtime.getRuntime().maxMemory() / 8).toInt()) {
             override fun sizeOf(key: String, value: Bitmap): Int {
                 return BitmapUtils.getBitmapSize(value)
             }
@@ -84,7 +82,7 @@ class ImageLoaderExecutors @JvmOverloads constructor(type: FileType = FileType.L
                         when (msg.what) {
                             THREADH_CODE -> {
                                 //获取一个任务，并执行
-                                executors!!.execute(thread)
+                                executors?.execute(runnable)
                                 try {
                                     //同时请求一个信号量
                                     threadSemaphore.acquire()
@@ -108,13 +106,13 @@ class ImageLoaderExecutors @JvmOverloads constructor(type: FileType = FileType.L
      *
      * @return
      */
-    private val thread: Runnable
+    private val runnable: Runnable
         get() {
             if (type == FileType.FIFO)
-                return threads.removeFirst()
+                return runnables.removeFirst()
             else if (type == FileType.LIFO)
-                return threads.removeLast()
-            throw NullPointerException("getThread()获取任务失败")
+                return runnables.removeLast()
+            throw NullPointerException("runnables获取任务失败")
         }
 
 
@@ -137,7 +135,6 @@ class ImageLoaderExecutors @JvmOverloads constructor(type: FileType = FileType.L
             createRunnable(Runnable {
                 //从网络或本地获取图片
                 val size = getViewSize(view)
-
                 val bitmap = getBitmap(path, size)
 
                 //添加到缓存中
@@ -169,13 +166,13 @@ class ImageLoaderExecutors @JvmOverloads constructor(type: FileType = FileType.L
         holder.bitmap = bitmap
         holder.view = view
         holder.path = path
-        val msg = UIHandler.obtainMessage()
+        val msg = handlerUI.obtainMessage()
         //        Message msg = Message.obtain();
-        //        Message msg = Message.obtain(UIHandler);
+        //        Message msg = Message.obtain(handlerUI);
         msg.obj = holder
         msg.what = UIH_CODE
         msg.sendToTarget()
-        //        UIHandler.sendMessage(msg);
+        //        handlerUI.sendMessage(msg);
     }
 
     /**
@@ -202,10 +199,9 @@ class ImageLoaderExecutors @JvmOverloads constructor(type: FileType = FileType.L
         } catch (e: InterruptedException) {
             e.printStackTrace()
         }
-
-        threads.add(runnable)
+        runnables.add(runnable)
         //添加完成后发送handler，轮询添加到线程池中
-        threadHandler!!.sendEmptyMessage(THREADH_CODE)
+        threadHandler?.sendEmptyMessage(THREADH_CODE)
     }
 
     /**
@@ -231,9 +227,7 @@ class ImageLoaderExecutors @JvmOverloads constructor(type: FileType = FileType.L
      * @param path
      * @return
      */
-    private fun getBitmapFromLruCache(path: String): Bitmap? {
-        return lruCache.get(path)
-    }
+    private fun getBitmapFromLruCache(path: String): Bitmap? = lruCache.get(path)
 
     /**
      * 根据View获得适当的压缩的宽和高
@@ -279,14 +273,14 @@ class ImageLoaderExecutors @JvmOverloads constructor(type: FileType = FileType.L
             height = displayMetrics.heightPixels
         imageSize.width = width
         imageSize.height = height
-        LogUtils.i("width==" + width)
-        LogUtils.i("height==" + height)
+        LogUtils.i("width==$width")
+        LogUtils.i("height==$height")
         return imageSize
 
     }
 
     fun closeExecutors() {
-        executors!!.shutdown()//结束空闲的线程interrupt
+        executors?.shutdown()//结束空闲的线程interrupt
         //        executors.shutdownNow();//中断部分未在执行的线程
         executors = null
     }
@@ -308,9 +302,9 @@ class ImageLoaderExecutors @JvmOverloads constructor(type: FileType = FileType.L
     }
 
     companion object {
-        private val MAXCOUNT = 5//最多执行多少个线程
-        private val UIH_CODE = 0X01//UI线程用
-        private val THREADH_CODE = 0X02//异步线程用
+        private const val MAXCOUNT = 5//最多执行多少个线程
+        private const val UIH_CODE = 0X01//UI线程用
+        private const val THREADH_CODE = 0X02//异步线程用
 
         /**
          * 反射获得View设置的最大宽度和高度
@@ -333,7 +327,6 @@ class ImageLoaderExecutors @JvmOverloads constructor(type: FileType = FileType.L
                 }
             } catch (e: Exception) {
             }
-
             return value
         }
     }
