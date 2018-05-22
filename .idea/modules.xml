@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/Chowder.iml" filepath="$PROJECT_DIR$/Chowder.iml" />
       <module fileurl="file://$PROJECT_DIR$/apiutils/apiutils.iml" filepath="$PROJECT_DIR$/apiutils/apiutils.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jnilib/jnilib.iml" filepath="$PROJECT_DIR$/jnilib/jnilib.iml" />
     </modules>
   </component>
 </project>

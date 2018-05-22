@@ -1,5 +1,7 @@
 package com.sky.chowder.ui.activity
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.graphics.RectF
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Gravity
@@ -23,9 +25,11 @@ import java.util.*
  * Created by SKY on 2018/3/16.
  */
 class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
-    var gravity = Gravity.LEFT
-    var adapter: RecyclerAdapter<ChapterEntity>? = null
+    private var gravity = Gravity.LEFT
+    private lateinit var adapter: RecyclerAdapter<ChapterEntity>
     private val resId = ArrayList<Int>()
+    private lateinit var clipM: ClipboardManager
+
     override fun getLayoutResId(): Int = R.layout.activity_poetry
     override fun initialize() {
         baseTitle.setLeftButton(R.mipmap.ic_menu)
@@ -42,11 +46,15 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
         }
         recycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recycler.adapter = adapter
+        clipM = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+    }
 
+    override fun loadData() {
         val poetry = resources.getStringArray(R.array.poetry)
         var tv: TextView
+        var array: List<String>
         for ((index, text) in poetry.withIndex()) {
-            val array = text.split(",")
+            array = text.split(",")
             tv = LayoutInflater.from(this).inflate(R.layout.item_tv, flow, false) as TextView
             tv.width = resources.getDimensionPixelSize(R.dimen.wh_96)
             tv.textSize = 18f
@@ -73,6 +81,7 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
             else -> Gravity.LEFT
         }
         val text = getString(resId[v!!.id])
+        clipM.primaryClip = ClipData.newPlainText("",text.lines()[0])
         setToolbarTitle(text.lines()[0])
         getCatalog(text)
 //        LogUtils.i("行数==${text.lines().size}")

@@ -51,33 +51,6 @@ public class ImageLoaderAsync {
     }
 
     private Bitmap getBitmapFromCache(String url) {
-//        Bitmap bitmap = lruCache.get(url);
-//        String key;
-//        if (bitmap == null) {
-//            try {
-//                MessageDigest md5 = MessageDigest.getInstance("MD5");
-//                md5.update(url.getBytes());
-//                key = changeKey(md5.digest());
-//            } catch (NoSuchAlgorithmException e) {
-//                key = String.valueOf(url.hashCode());
-//            }
-//            try {
-//                DiskLruCache.Editor editor = diskLruCache.edit(key);
-//                OutputStream os = editor.newOutputStream(0);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//
-//            try {
-//                DiskLruCache.Snapshot snap = diskLruCache.get(key);
-//                FileInputStream is = (FileInputStream) snap.getInputStream(0);
-//                FileDescriptor fd = is.getFD();
-//            bitmap= BitmapFactory.decodeFileDescriptor(fd);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-
         return lruCache.get(url);
     }
 
