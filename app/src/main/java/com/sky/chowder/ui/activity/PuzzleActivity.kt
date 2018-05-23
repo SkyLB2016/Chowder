@@ -23,7 +23,8 @@ class PuzzleActivity : BaseNoPActivity() {
         btUp.setOnClickListener { puzzle.piece = -1 }
         btChange.setOnClickListener { getPhoto() }
         btNext.setOnClickListener { puzzle.piece = 1 }
-        puzzle.bitmap=BitmapUtils.getBitmapFromPath(getObject("puzzle",""))
+        val path = getObject("puzzle", "")
+        if (path.isNotEmpty()) puzzle.bitmap = BitmapUtils.getBitmapFromPath(path)
     }
 
     private var photoUtils: PhotoUtils? = null
