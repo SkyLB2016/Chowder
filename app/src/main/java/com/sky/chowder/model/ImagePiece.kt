@@ -1,8 +1,8 @@
 package com.sky.chowder.model
 
-import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 
 class ImagePiece {
-    var bitmap: Bitmap? = null
+    var bitmap: BitmapDrawable? = null
     var number: Int = 0
 }

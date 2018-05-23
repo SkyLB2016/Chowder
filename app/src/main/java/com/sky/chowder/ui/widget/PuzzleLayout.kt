@@ -8,6 +8,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.graphics.drawable.BitmapDrawable
 import android.util.AttributeSet
 import android.view.View
 import android.view.animation.BounceInterpolator
@@ -80,7 +81,7 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
         pieceWidth = (width!! - margin * (piece + 1)) / piece
         for (i in images!!.indices) {
             val child = ImageView(context)
-            child.setImageBitmap(images!![i].bitmap)
+            child.setImageBitmap(images!![i].bitmap?.bitmap)
             child.setOnClickListener(this)
 //            child.id = i + 1
             child.tag = "$i,${images!![i].number}"//第一个数代表此图片在数组中的位置，第二个数是此图片正确的顺序
@@ -99,7 +100,7 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
         for (i in 0 until count) {
             val child = getChildAt(i) as ImageView
             child.tag = "$i,${images!![i].number}"//第一个数代表此图片在数组中的位置，第二个数是此图片正确的顺序
-            child.setImageBitmap(images!![i].bitmap)
+            child.setImageBitmap(images!![i].bitmap?.bitmap)
         }
     }
 
@@ -111,7 +112,7 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
         for (i in 0 until total) {
             image = ImagePiece()
             image.number = i
-            image.bitmap = Bitmap.createBitmap(bitmap, i % piece * pW, i / piece * pW, pW, pW)
+            image.bitmap = BitmapDrawable(Bitmap.createBitmap(bitmap, i % piece * pW, i / piece * pW, pW, pW))
             pieces.add(image)
         }
         pieces.shuffle()
@@ -148,11 +149,11 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
             //替换的两个view
             val first = ImageView(context)
             first.layoutParams = firstlp
-            first.setImageBitmap(firBitmap)
+            first.setImageBitmap(firBitmap?.bitmap)
 
             val second = ImageView(context)
             second.layoutParams = seclp
-            second.setImageBitmap(secBitmap)
+            second.setImageBitmap(secBitmap?.bitmap)
             //加入布局中
             rl.addView(first)
             rl.addView(second)
@@ -173,22 +174,23 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
                     val firstTag = firstImg?.tag
                     val secondTag = secondImg?.tag
                     //设置bitmap，交换tag，并显示view
-                    firstImg?.setImageBitmap(secBitmap)
+                    firstImg?.setImageBitmap(secBitmap?.bitmap)
                     firstImg?.tag = secondTag
                     firstImg?.visibility = View.VISIBLE
 
-                    secondImg?.setImageBitmap(firBitmap)
+                    secondImg?.setImageBitmap(firBitmap?.bitmap)
                     secondImg?.tag = firstTag
                     secondImg?.visibility = View.VISIBLE
-
-                    firstImg?.colorFilter = null
-                    secondImg = null
-                    firstImg = null
-                    isAniming = false
 
                     //移除新加的布局
                     rl.removeAllViews()
                     removeView(rl)
+
+                    secondImg = null
+                    firstImg?.colorFilter = null
+                    isAniming = false
+                    firstImg = null
+
                     //检测拼图是否完成
                     checkSuccess()
                 }
