@@ -1,6 +1,5 @@
 package com.sky.chowder.ui.activity
 
-import android.content.ClipData
 import android.content.ClipboardManager
 import android.graphics.RectF
 import android.support.v7.widget.LinearLayoutManager
@@ -8,6 +7,8 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
+import android.view.animation.AnimationUtils
+import android.view.animation.LayoutAnimationController
 import android.widget.TextView
 import com.sky.adapter.RecyclerAdapter
 import com.sky.adapter.RecyclerHolder
@@ -47,6 +48,12 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
         recycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recycler.adapter = adapter
         clipM = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+
+        val controller = AnimationUtils.loadLayoutAnimation(this, R.anim.anim_layout)
+        controller.delay = 0.5f
+        controller.order = LayoutAnimationController.ORDER_NORMAL
+        recycler.layoutAnimation = controller
+
     }
 
     override fun loadData() {
@@ -81,7 +88,7 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
             else -> Gravity.LEFT
         }
         val text = getString(resId[v!!.id])
-        clipM.primaryClip = ClipData.newPlainText("",text.lines()[0])
+//        clipM.primaryClip = ClipData.newPlainText("",text.lines()[0])
         setToolbarTitle(text.lines()[0])
         getCatalog(text)
 //        LogUtils.i("行数==${text.lines().size}")

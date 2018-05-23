@@ -22,6 +22,12 @@ class CanvasView @JvmOverloads constructor(
     private var cX = -1f
     private var cY = -1f
     override fun onTouchEvent(event: MotionEvent): Boolean {
+//        val velocity = VelocityTracker.obtain()
+//        velocity.addMovement(event)
+//        velocity.computeCurrentVelocity(1000)
+//        LogUtils.i("速度X==${velocity.xVelocity},速度Y=" + "${velocity.yVelocity}")
+//        velocity.clear()
+//        velocity.recycle()
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
                 lastX = event.rawX

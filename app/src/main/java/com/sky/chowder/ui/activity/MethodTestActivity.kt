@@ -20,6 +20,8 @@ import android.text.SpannableStringBuilder
 import android.text.style.*
 import android.view.LayoutInflater
 import android.view.View
+import android.view.animation.AnimationUtils
+import android.view.animation.LayoutAnimationController
 import android.widget.TextView
 import com.google.gson.reflect.TypeToken
 import com.sky.base.BaseNoPActivity
@@ -74,9 +76,17 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
             tvText.setOnClickListener(this)
         }
         tvDisplay.text = replaceStr()
+        val controller = AnimationUtils.loadLayoutAnimation(this, R.anim.anim_layout)
+
+//        val controller = LayoutAnimationController(animation)
+        controller.delay = 0.5f
+        controller.order = LayoutAnimationController.ORDER_NORMAL
+        flow.layoutAnimation = controller
     }
 
     override fun onClick(v: View?) {
+
+
         tvDisplay.text = when (v?.tag) {
             "字符替换与数组化" -> replaceStr() + "\n" + toArray()
             "hash相同" -> equalHashCode()

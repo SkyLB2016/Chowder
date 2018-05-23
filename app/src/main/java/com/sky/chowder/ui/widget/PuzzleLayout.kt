@@ -27,6 +27,13 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
 
     //private lateinit var imageViews: Array<ImageView?>
     private lateinit var images: List<ImagePiece>
+    var bitmap: Bitmap = BitmapFactory.decodeResource(resources, R.mipmap.ic_puzzle)
+        set(value) {
+            field = value
+            images = cutImage(value, piece)
+            resetView()
+            invalidate()
+        }
     private var margin = 2//分割后图片之间的间隔
     var piece = 3//几行几列
         set(value) {
@@ -45,6 +52,10 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
     private var pieceWidth: Int = 0
     private var width: Int? = 0
 
+    init {
+
+    }
+
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         width = ScreenUtils.getWidthPX(context)
@@ -61,17 +72,18 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
 
     private fun setView() {
 //        imageViews = arrayOfNulls<ImageView>(piece * piece)
-        images = cutImage(BitmapFactory.decodeResource(resources, R.mipmap.ic_puzzle), piece)
+        images = cutImage(bitmap, piece)
+
         //随机打乱数组排序
 //        Collections.sort(images) { _, _ -> if (Math.random() > 0.5) 1 else -1 }
-        Collections.shuffle(images)
+//        Collections.shuffle(images)
         pieceWidth = (width!! - margin * (piece + 1)) / piece
-        for (i in images.indices) {
+        for (i in images!!.indices) {
             val child = ImageView(context)
-            child.setImageBitmap(images[i].bitmap)
+            child.setImageBitmap(images!![i].bitmap)
             child.setOnClickListener(this)
             child.id = i + 1
-            child.tag = "$i,${images[i].number}"//第一个数代表此图片在数组中的位置，第二个数是此图片正确的顺序
+            child.tag = "$i,${images!![i].number}"//第一个数代表此图片在数组中的位置，第二个数是此图片正确的顺序
             val lp = RelativeLayout.LayoutParams(pieceWidth, pieceWidth)
             val leftMargin = i % piece * pieceWidth + (i % piece + 1) * margin
             val topMargin = i / piece * pieceWidth + (i / piece + 1) * margin
@@ -79,6 +91,13 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
             addView(child)
             child.layoutParams = lp//一定要放在addview之后
 //            imageViews[i] = child
+        }
+    }
+
+    private fun resetView() {
+        val count = childCount
+        for (i in 0 until count) {
+            (getChildAt(i) as ImageView).setImageBitmap(images!![i].bitmap)
         }
     }
 
@@ -93,6 +112,7 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
             image.bitmap = Bitmap.createBitmap(bitmap, i % piece * pW, i / piece * pW, pW, pW)
             pieces.add(image)
         }
+        pieces.shuffle()
         return pieces
     }
 
@@ -115,8 +135,8 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
             secondImg = v as ImageView
             firstImg?.visibility = View.INVISIBLE
             secondImg?.visibility = View.INVISIBLE
-            val firBitmap = images[getPosition(firstImg!!, 0)].bitmap
-            val secBitmap = images[getPosition(secondImg!!, 0)].bitmap
+            val firBitmap = images!![getPosition(firstImg!!, 0)].bitmap
+            val secBitmap = images!![getPosition(secondImg!!, 0)].bitmap
 
             val rl = RelativeLayout(context)//遮罩层
             addView(rl)

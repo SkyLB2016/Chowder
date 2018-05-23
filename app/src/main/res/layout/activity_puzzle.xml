@@ -20,6 +20,13 @@
         android:text="上一关" />
 
     <Button
+        android:id="@+id/btChange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="换图" />
+
+    <Button
         android:id="@+id/btNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

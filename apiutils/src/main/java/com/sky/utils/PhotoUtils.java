@@ -28,10 +28,10 @@ public class PhotoUtils {
     private AppCompatActivity activity;
     private String photoPath;//图片所在的位置
 
-    private static final int PHOTO = 1501; // 拍照
-    private static final int PHOTO_PERMISSIONS = 1502; // 拍照权限请求
-    private static final int LOCAL_PHOTO = 1503; // 图库
-    private static final int LOCAL_PHOTO_PERMISSIONS = 1504; // 图库相册权限
+    public static final int PHOTO = 1501; // 拍照
+    public static final int PHOTO_PERMISSIONS = 1502; // 拍照权限请求
+    public static final int LOCAL_PHOTO = 1503; // 图库
+    public static final int LOCAL_PHOTO_PERMISSIONS = 1504; // 图库相册权限
 
     @SuppressLint("RestrictedApi")
     public PhotoUtils(AppCompatActivity context, String photoPath) {
@@ -54,6 +54,13 @@ public class PhotoUtils {
                             })
                     .show();
         else checkCamera();//拍照
+    }
+
+    public PhotoUtils(AppCompatActivity context, String photoPath, int position) {
+        this.activity = context;
+        this.photoPath = photoPath;
+        if (position == 0) checkCamera();//拍照
+        else checkAlbum();//本地图库
     }
 
     //打开相机

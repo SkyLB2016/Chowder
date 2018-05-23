@@ -45,9 +45,8 @@ public class JumpAct {
      *
      * @param className 绝对路径
      */
-    public static void jumpActivity(String className, Context context) {
-        ComponentName component = new ComponentName(context, className);
-        jumpActivity(context, new Intent().setComponent(component));
+    public static void jumpComponentName(Context context, String className) {
+        jumpActivity(context, new Intent().setComponent(new ComponentName(context, className)));
     }
 
     /**
@@ -60,11 +59,11 @@ public class JumpAct {
 
     public static void jumpActivity(Context context, Class<?> cls, String... values) {
         Intent intent = new Intent(context, cls);
-        String name = null;
-        String value = null;
-        for (int i = 0; i < values.length; i++) {
-            if (i % 2 == 0) name = values[i];
-            else if (i % 2 == 1) value = values[i];
+        String name;
+        String value;
+        for (int i = 0; i < values.length / 2; i++) {
+            name = values[i * 2 + 0];
+            value = values[i * 2 + 1];
             intent.putExtra(name, value);
         }
         jumpActivity(context, intent);
