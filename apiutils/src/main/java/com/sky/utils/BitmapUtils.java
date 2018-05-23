@@ -84,6 +84,7 @@ public class BitmapUtils {
         opts.inSampleSize = calculateInSampleSize(opts, newWidth, newHeight);//计算缩放率，缩放图片
         opts.inJustDecodeBounds = false;//至为false
         return BitmapFactory.decodeFile(pathName, opts);
+
     }
 
     /**

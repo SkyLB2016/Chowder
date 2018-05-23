@@ -82,7 +82,7 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
             val child = ImageView(context)
             child.setImageBitmap(images!![i].bitmap)
             child.setOnClickListener(this)
-            child.id = i + 1
+//            child.id = i + 1
             child.tag = "$i,${images!![i].number}"//第一个数代表此图片在数组中的位置，第二个数是此图片正确的顺序
             val lp = RelativeLayout.LayoutParams(pieceWidth, pieceWidth)
             val leftMargin = i % piece * pieceWidth + (i % piece + 1) * margin
@@ -97,7 +97,9 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
     private fun resetView() {
         val count = childCount
         for (i in 0 until count) {
-            (getChildAt(i) as ImageView).setImageBitmap(images!![i].bitmap)
+            val child = getChildAt(i) as ImageView
+            child.tag = "$i,${images!![i].number}"//第一个数代表此图片在数组中的位置，第二个数是此图片正确的顺序
+            child.setImageBitmap(images!![i].bitmap)
         }
     }
 
@@ -198,6 +200,9 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
 
     private fun checkSuccess() {
         val isSuccess = (0 until childCount).none { getPosition(getChildAt(it), 1) != it }
-        if (isSuccess) Toast.makeText(context, "拼图完成", Toast.LENGTH_LONG).show()
+        if (isSuccess) {
+            Toast.makeText(context, "拼图完成", Toast.LENGTH_LONG).show()
+            piece = 1
+        }
     }
 }

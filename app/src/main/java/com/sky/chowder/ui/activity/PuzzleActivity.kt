@@ -24,7 +24,7 @@ class PuzzleActivity : BaseNoPActivity() {
         btChange.setOnClickListener { getPhoto() }
         btNext.setOnClickListener { puzzle.piece = 1 }
         val path = getObject("puzzle", "")
-        if (path.isNotEmpty()) puzzle.bitmap = BitmapUtils.getBitmapFromPath(path)
+        if (path.isNotEmpty()) puzzle.bitmap = BitmapUtils.getBitmapFromPath(path,1024,1024)
     }
 
     private var photoUtils: PhotoUtils? = null
@@ -50,7 +50,7 @@ class PuzzleActivity : BaseNoPActivity() {
                 if (TextUtil.notNullObj(uri, error)) return
                 val path = BitmapUtils.getRealPathFromURI(this, uri)//获取路径
                 if (TextUtil.notNull(path, error)) return
-                bitmap = BitmapUtils.getBitmapFromPath(path)//获取bitmap
+                bitmap = BitmapUtils.getBitmapFromPath(path,1024,1024)//获取bitmap
                 puzzle.bitmap = bitmap
                 setObject("puzzle", path)
             }
