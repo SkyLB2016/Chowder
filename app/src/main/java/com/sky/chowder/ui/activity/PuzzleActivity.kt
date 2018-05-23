@@ -23,6 +23,7 @@ class PuzzleActivity : BaseNoPActivity() {
         btUp.setOnClickListener { puzzle.piece = -1 }
         btChange.setOnClickListener { getPhoto() }
         btNext.setOnClickListener { puzzle.piece = 1 }
+        puzzle.bitmap=BitmapUtils.getBitmapFromPath(getObject("puzzle",""))
     }
 
     private var photoUtils: PhotoUtils? = null
@@ -50,7 +51,9 @@ class PuzzleActivity : BaseNoPActivity() {
                 if (TextUtil.notNull(path, error)) return
                 bitmap = BitmapUtils.getBitmapFromPath(path)//获取bitmap
                 puzzle.bitmap = bitmap
+                setObject("puzzle", path)
             }
         }
     }
+
 }
