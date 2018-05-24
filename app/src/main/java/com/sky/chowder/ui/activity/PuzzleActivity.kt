@@ -2,11 +2,11 @@ package com.sky.chowder.ui.activity
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
 import com.sky.base.BaseNoPActivity
 import com.sky.chowder.R
 import com.sky.utils.BitmapUtils
 import com.sky.utils.PhotoUtils
+import com.sky.utils.ScreenUtils
 import com.sky.utils.TextUtil
 import kotlinx.android.synthetic.main.activity_puzzle.*
 
@@ -19,18 +19,24 @@ class PuzzleActivity : BaseNoPActivity() {
     override fun getLayoutResId(): Int = R.layout.activity_puzzle
 
     override fun initialize() {
-        super.initialize()
         btUp.setOnClickListener { puzzle.piece = -1 }
         btChange.setOnClickListener { getPhoto() }
         btNext.setOnClickListener { puzzle.piece = 1 }
         val path = getObject("puzzle", "")
-        if (path.isNotEmpty()) puzzle.bitmap = BitmapUtils.getBitmapFromPath(path,1024,1024)
+        if (path.isNotEmpty()) puzzle.bitmap = BitmapUtils.getBitmapFromPath(path, 2048, 2048)
+        val lp = ImgOriginal.layoutParams
+        lp.width = ScreenUtils.getWidthPX(this) / 5
+        lp.height = ScreenUtils.getHeightPX(this) / 5
+//        ImgOriginal.layoutParams = lp
+        ImgOriginal.setImageBitmap(puzzle.bitmap)
+
+//        puzzle.checkSuccess = { b -> }
     }
 
     private var photoUtils: PhotoUtils? = null
 
     private fun getPhoto() {
-        photoUtils = PhotoUtils(this, "", 1)
+        photoUtils = PhotoUtils(this, "", false)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
@@ -42,7 +48,6 @@ class PuzzleActivity : BaseNoPActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode != Activity.RESULT_OK) return
         val error = getString(R.string.photo_fail)
-        var bitmap: Bitmap
         when (requestCode) {
             PhotoUtils.LOCAL_PHOTO -> {
                 if (data == null) return
@@ -50,8 +55,8 @@ class PuzzleActivity : BaseNoPActivity() {
                 if (TextUtil.notNullObj(uri, error)) return
                 val path = BitmapUtils.getRealPathFromURI(this, uri)//获取路径
                 if (TextUtil.notNull(path, error)) return
-                bitmap = BitmapUtils.getBitmapFromPath(path,1024,1024)//获取bitmap
-                puzzle.bitmap = bitmap
+                puzzle.bitmap = BitmapUtils.getBitmapFromPath(path, 1024, 1024)//获取bitmap
+                ImgOriginal.setImageBitmap(puzzle.bitmap)
                 setObject("puzzle", path)
             }
         }

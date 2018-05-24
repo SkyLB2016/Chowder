@@ -1,36 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="@mipmap/bg_poetry">
 
-    <include layout="@layout/include_toolbar" />
+    <!--<include layout="@layout/include_toolbar" />-->
+
+    <ImageView
+        android:id="@+id/ImgOriginal"
+        android:layout_width="100dp"
+        android:layout_height="200dp"
+        android:layout_margin="@dimen/wh_4"
+        android:scaleType="fitXY" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/ImgOriginal"
+        android:layout_alignTop="@id/ImgOriginal"
+        android:layout_toRightOf="@id/ImgOriginal">
+
+        <View
+            android:id="@+id/center"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:id="@+id/btUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:layout_toLeftOf="@id/center"
+            android:background="@drawable/sel_rect_green"
+            android:text="上一关" />
+
+        <Button
+            android:id="@+id/btNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:layout_toRightOf="@id/center"
+            android:background="@drawable/sel_rect_green"
+            android:text="下一关" />
+
+        <Button
+            android:id="@+id/btChange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/btUp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/wh_4"
+            android:background="@drawable/sel_rect_green"
+            android:text="换图" />
+
+        <ImageView
+            android:id="@+id/imgSuccess"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/wh_8"
+            android:src="@mipmap/ic_success"
+            android:visibility="gone" />
+    </RelativeLayout>
 
     <com.sky.chowder.ui.widget.PuzzleLayout
         android:id="@+id/puzzle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_marginTop="10dp" />
 
-    <Button
-        android:id="@+id/btUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="上一关" />
-
-    <Button
-        android:id="@+id/btChange"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="换图" />
-
-    <Button
-        android:id="@+id/btNext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="下一关" />
-
-</LinearLayout>
+</RelativeLayout>

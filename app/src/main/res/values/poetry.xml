@@ -5584,7 +5584,7 @@
         十年的寒窗苦读，日日夜夜的秉烛夜读，43800个小时的投入，换来状元及第的可能，何谓坚持，此即谓坚持。\n
         待完成任务\n
         　　(1)文本搜索 算数\n
-        　　(2)图片拼图选择，原图\n
+        　　(2)拼图拉伸优化\n
         　　(3)位移运算\n
         　　(4)通知pendingIntent，notification\n
         　　(5)重构apputils\n
@@ -5634,6 +5634,10 @@
         logistics\n
         　英 [ləˈdʒɪstɪks] 美 [loˈdʒɪstɪks]\n
         　n. 物流;后勤;逻辑学;组织工作\n
+        original\n
+        　英 [əˈrɪdʒənl] 美 [əˈrɪdʒənəl]\n
+        　adj. 原始的;最初的;独创的;新颖的\n
+        　n. 原件;原文;原型;怪人\n
         recently\n
         　英 [ˈri:sntli] 美 [ˈrisṇtlɪ]\n
         　adv. 近日;新近;最近，近来;不久以前\n

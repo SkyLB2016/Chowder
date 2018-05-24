@@ -35,31 +35,24 @@ public class PhotoUtils {
 
     @SuppressLint("RestrictedApi")
     public PhotoUtils(AppCompatActivity context, String photoPath) {
-        this(context, photoPath, true);
-    }
-
-    @SuppressLint("RestrictedApi")
-    public PhotoUtils(AppCompatActivity context, String photoPath, Boolean dialog) {
         this.activity = context;
         this.photoPath = photoPath;
-        if (dialog)
-            new AlertDialog.Builder(new ContextThemeWrapper(context, R.style.AlertDialog))
-                    .setItems(new String[]{"拍照", "本地照片"},
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    if (which == 0) checkCamera();//拍照
-                                    else checkAlbum();//本地图库
-                                }
-                            })
-                    .show();
-        else checkCamera();//拍照
+        new AlertDialog.Builder(new ContextThemeWrapper(context, R.style.AlertDialog))
+                .setItems(new String[]{"拍照", "本地照片"},
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (which == 0) checkCamera();//拍照
+                                else checkAlbum();//本地图库
+                            }
+                        })
+                .show();
     }
 
-    public PhotoUtils(AppCompatActivity context, String photoPath, int position) {
+    public PhotoUtils(AppCompatActivity context, String photoPath, Boolean flag) {
         this.activity = context;
         this.photoPath = photoPath;
-        if (position == 0) checkCamera();//拍照
+        if (flag) checkCamera();//拍照
         else checkAlbum();//本地图库
     }
 

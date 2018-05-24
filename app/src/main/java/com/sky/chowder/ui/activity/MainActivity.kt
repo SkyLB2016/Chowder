@@ -2,6 +2,8 @@ package com.sky.chowder.ui.activity
 
 import android.Manifest
 import android.content.ActivityNotFoundException
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.support.v7.widget.Toolbar
@@ -15,6 +17,7 @@ import com.sky.chowder.model.ActivityModel
 import com.sky.chowder.ui.adapter.MainAdapter
 import com.sky.chowder.ui.presenter.MainP
 import com.sky.utils.AppUtils
+import com.sky.utils.BitmapUtils
 import com.sky.utils.JumpAct
 import com.sky.utils.LogUtils
 import kotlinx.android.synthetic.main.activity_main.*
@@ -56,13 +59,22 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
         )
 //        registerOnClick(fab,fab1)
         fab1.setOnClickListener {
-            var text = getString(R.string.cezi).trim().replace(" ", "")
-            LogUtils.i("总长==${text.length}")
+            //            var text = getString(R.string.cezi).trim().replace(" ", "")
+//            LogUtils.i("总长==${text.length}")
         }
 //        var num = Array(4, { Array(4) { 0 } })
         var num = Array(4) { IntArray(4) }
         fab.setOnClickListener {
-            LogUtils.i("${window.decorView}")
+            //            val bitmap =
+//
+//            LogUtils.i("${bitmap.allocationByteCount/1024/1024}")
+            val draw = BitmapDrawable(BitmapUtils.getBitmapFromPath(presenter.getObject("puzzle", "")))
+            LogUtils.i("原内存==${draw.bitmap.allocationByteCount / 1024 / 1024}")
+            val draw1 = BitmapDrawable(BitmapUtils.getBitmapFromPath(presenter.getObject("puzzle", ""), 2048, 2048))
+            LogUtils.i("压缩后==${draw1.bitmap.allocationByteCount / 1024 / 1024}")
+            val draw2 = BitmapDrawable(BitmapUtils.getBitmapFromPath(presenter.getObject("puzzle", ""), 2048, 2048))
+            val bb=BitmapFactory.decodeResource(resources, R.mipmap.ic_puzzle)
+            LogUtils.i("压缩后bb==${bb.allocationByteCount / 1024 / 1024}")
         }
     }
 

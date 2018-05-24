@@ -8,7 +8,6 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
-import android.graphics.drawable.BitmapDrawable
 import android.util.AttributeSet
 import android.view.View
 import android.view.animation.BounceInterpolator
@@ -17,6 +16,7 @@ import android.widget.RelativeLayout
 import android.widget.Toast
 import com.sky.chowder.R
 import com.sky.chowder.model.ImagePiece
+import com.sky.utils.LogUtils
 import com.sky.utils.ScreenUtils
 import java.util.*
 
@@ -30,6 +30,7 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
     private lateinit var images: List<ImagePiece>
     var bitmap: Bitmap = BitmapFactory.decodeResource(resources, R.mipmap.ic_puzzle)
         set(value) {
+            LogUtils.i("总内存==${value.allocationByteCount / 1024}")
             field = value
             images = cutImage(value, piece)
             resetView()
@@ -51,16 +52,15 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
         }
     private var once = true
     private var pieceWidth: Int = 0
+    private var pieceH: Int = 0
     private var width: Int? = 0
-
-    init {
-
-    }
+    private var height: Int? = 0
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         width = ScreenUtils.getWidthPX(context)
-        setMeasuredDimension(width!!, width!!)
+        height = ScreenUtils.getHeightPX(context) / 4 * 3
+        setMeasuredDimension(width!!, height!!)
     }
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
@@ -79,15 +79,17 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
 //        Collections.sort(images) { _, _ -> if (Math.random() > 0.5) 1 else -1 }
 //        Collections.shuffle(images)
         pieceWidth = (width!! - margin * (piece + 1)) / piece
+        pieceH = (height!! - margin * (piece + 1)) / piece
         for (i in images!!.indices) {
             val child = ImageView(context)
-            child.setImageBitmap(images!![i].bitmap?.bitmap)
+            child.setImageBitmap(images!![i].bitmap)
+            child.scaleType = ImageView.ScaleType.FIT_XY
             child.setOnClickListener(this)
 //            child.id = i + 1
             child.tag = "$i,${images!![i].number}"//第一个数代表此图片在数组中的位置，第二个数是此图片正确的顺序
-            val lp = RelativeLayout.LayoutParams(pieceWidth, pieceWidth)
+            val lp = RelativeLayout.LayoutParams(pieceWidth, pieceH)
             val leftMargin = i % piece * pieceWidth + (i % piece + 1) * margin
-            val topMargin = i / piece * pieceWidth + (i / piece + 1) * margin
+            val topMargin = i / piece * pieceH + (i / piece + 1) * margin
             lp.setMargins(leftMargin, topMargin, 0, 0)
             addView(child)
             child.layoutParams = lp//一定要放在addview之后
@@ -100,19 +102,24 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
         for (i in 0 until count) {
             val child = getChildAt(i) as ImageView
             child.tag = "$i,${images!![i].number}"//第一个数代表此图片在数组中的位置，第二个数是此图片正确的顺序
-            child.setImageBitmap(images!![i].bitmap?.bitmap)
+            child.setImageBitmap(images!![i].bitmap)
         }
     }
 
     private fun cutImage(bitmap: Bitmap, piece: Int): List<ImagePiece> {
         val pieces = ArrayList<ImagePiece>()
-        val pW = Math.min(bitmap.width, bitmap.height) / piece
+        val pW = bitmap.width / piece
+        val pH = bitmap.height / piece
         val total = piece * piece
         var image: ImagePiece
         for (i in 0 until total) {
             image = ImagePiece()
             image.number = i
-            image.bitmap = BitmapDrawable(Bitmap.createBitmap(bitmap, i % piece * pW, i / piece * pW, pW, pW))
+//            image.bitmap = Bitmap.createBitmap(bitmap, i % piece * pW, i / piece * pW, pW, pW)
+            image.bitmap = Bitmap.createBitmap(bitmap, i % piece * pW, i / piece * pH, pW, pH)
+
+            LogUtils.i("分内存==${image.bitmap!!.allocationByteCount / 1024}")
+
             pieces.add(image)
         }
         pieces.shuffle()
@@ -149,11 +156,11 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
             //替换的两个view
             val first = ImageView(context)
             first.layoutParams = firstlp
-            first.setImageBitmap(firBitmap?.bitmap)
+            first.setImageBitmap(firBitmap)
 
             val second = ImageView(context)
             second.layoutParams = seclp
-            second.setImageBitmap(secBitmap?.bitmap)
+            second.setImageBitmap(secBitmap)
             //加入布局中
             rl.addView(first)
             rl.addView(second)
@@ -174,11 +181,11 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
                     val firstTag = firstImg?.tag
                     val secondTag = secondImg?.tag
                     //设置bitmap，交换tag，并显示view
-                    firstImg?.setImageBitmap(secBitmap?.bitmap)
+                    firstImg?.setImageBitmap(secBitmap)
                     firstImg?.tag = secondTag
                     firstImg?.visibility = View.VISIBLE
 
-                    secondImg?.setImageBitmap(firBitmap?.bitmap)
+                    secondImg?.setImageBitmap(firBitmap)
                     secondImg?.tag = firstTag
                     secondImg?.visibility = View.VISIBLE
 
@@ -200,11 +207,13 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
 
     private fun getPosition(view: View, index: Int): Int = view.tag.toString().split(",")[index].toInt()
 
+    var checkSuccess: ((Boolean) -> Unit)? = null
     private fun checkSuccess() {
         val isSuccess = (0 until childCount).none { getPosition(getChildAt(it), 1) != it }
         if (isSuccess) {
             Toast.makeText(context, "拼图完成", Toast.LENGTH_LONG).show()
             piece = 1
+//            checkSuccess?.invoke(isSuccess)
         }
     }
 }
