@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">拼图</string>
+    <string name="act_puzzle">07.拼图</string>
+    <string name="act_puzzle_d">拼图游戏，一维数组模拟二维数组，移动时遮罩隐藏原，移动新view，可引申动态加载大图片</string>
+
+</resources>

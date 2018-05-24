@@ -1,4 +1,4 @@
-package com.sky.chowder.ui.widget
+package com.sky.puzzle
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
@@ -14,8 +14,6 @@ import android.view.animation.BounceInterpolator
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.Toast
-import com.sky.chowder.R
-import com.sky.chowder.model.ImagePiece
 import com.sky.utils.LogUtils
 import com.sky.utils.ScreenUtils
 import java.util.*

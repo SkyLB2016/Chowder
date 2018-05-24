@@ -1,9 +1,8 @@
-package com.sky.chowder.ui.activity
+package com.sky.puzzle
 
 import android.app.Activity
 import android.content.Intent
 import com.sky.base.BaseNoPActivity
-import com.sky.chowder.R
 import com.sky.utils.BitmapUtils
 import com.sky.utils.PhotoUtils
 import com.sky.utils.ScreenUtils
@@ -15,20 +14,18 @@ import kotlinx.android.synthetic.main.activity_puzzle.*
  * 拼图游戏
  */
 class PuzzleActivity : BaseNoPActivity() {
-
     override fun getLayoutResId(): Int = R.layout.activity_puzzle
-
     override fun initialize() {
-        btUp.setOnClickListener { puzzle.piece = -1 }
-        btChange.setOnClickListener { getPhoto() }
-        btNext.setOnClickListener { puzzle.piece = 1 }
+        btUp?.setOnClickListener { puzzle.piece = -1 }
+        btChange?.setOnClickListener { getPhoto() }
+        btNext?.setOnClickListener { puzzle.piece = 1 }
         val path = getObject("puzzle", "")
-        if (path.isNotEmpty()) puzzle.bitmap = BitmapUtils.getBitmapFromPath(path, 2048, 2048)
-        val lp = ImgOriginal.layoutParams
-        lp.width = ScreenUtils.getWidthPX(this) / 5
-        lp.height = ScreenUtils.getHeightPX(this) / 5
+        if (path.isNotEmpty()) puzzle?.bitmap = BitmapUtils.getBitmapFromPath(path, 2048, 2048)
+        val lp = ImgOriginal?.layoutParams
+        lp?.width = ScreenUtils.getWidthPX(this) / 5
+        lp?.height = ScreenUtils.getHeightPX(this) / 5
 //        ImgOriginal.layoutParams = lp
-        ImgOriginal.setImageBitmap(puzzle.bitmap)
+        ImgOriginal?.setImageBitmap(puzzle.bitmap)
 
 //        puzzle.checkSuccess = { b -> }
     }

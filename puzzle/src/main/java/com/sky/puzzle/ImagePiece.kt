@@ -1,4 +1,4 @@
-package com.sky.chowder.model
+package com.sky.puzzle
 
 import android.graphics.Bitmap
 
