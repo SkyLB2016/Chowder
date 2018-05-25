@@ -77,12 +77,12 @@
             <ImageView
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:background="@mipmap/guide01"/>
+                android:background="@mipmap/ic_bg"/>
 
             <ImageView
                 android:layout_width="360dp"
                 android:layout_height="wrap_content"
-                android:background="@mipmap/guide02"
+                android:background="@mipmap/ic_bg_02"
                 android:paddingBottom="50dp"/>
         </LinearLayout>
 

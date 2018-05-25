@@ -30,4 +30,13 @@ class Game2048Activity : BaseNoPActivity() {
         if (game.isEnd) FileUtils.deleteFile(pathName)
         else FileUtils.serialize(pathName, game.orginal)
     }
+
+    private var lastBack: Long = 0
+    override fun onBackPressed() {
+        val now = System.currentTimeMillis()
+        if (BuildConfig.isModel && now - lastBack > 3000) {
+            showToast(getString(R.string.toast_exit))
+            lastBack = now
+        } else super.onBackPressed()
+    }
 }

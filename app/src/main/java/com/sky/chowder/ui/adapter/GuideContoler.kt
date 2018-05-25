@@ -80,11 +80,7 @@ class GuideContoler(private val mContext: Context) {
         params.setMargins(0, 0, 15, 0)
         for (i in points.indices) {
             points[i] = View(mContext)
-            if (i == 0) {
-                points[i]?.setBackgroundResource(pointSelect)
-            } else {
-                points[i]?.setBackgroundResource(unPointSelect)
-            }
+            points[i]?.setBackgroundResource(if (i == 0) pointSelect else unPointSelect)
             points[i]?.layoutParams = params
             pointGroup.addView(points[i])
         }
@@ -109,7 +105,7 @@ class GuideContoler(private val mContext: Context) {
     companion object {
 
         //默认点的宽高
-        private val POINT_W = 25
-        private val POINT_H = 25
+        private const val POINT_W = 25
+        private const val POINT_H = 25
     }
 }

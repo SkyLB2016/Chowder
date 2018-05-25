@@ -67,6 +67,7 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
                 , "音频处理"
                 , "字符串转id"
                 , "排序算法"
+                , "LinkedList使用"
         )
         for (i in method) {
             val tvText = LayoutInflater.from(this).inflate(R.layout.item_tv, flow, false) as TextView
@@ -85,8 +86,6 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-
-
         tvDisplay.text = when (v?.tag) {
             "字符替换与数组化" -> replaceStr() + "\n" + toArray()
             "hash相同" -> equalHashCode()
@@ -100,6 +99,7 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
             "list筛选lambda" -> lambda()
             "字符串转id" -> changeStrToId()
             "排序算法" -> sort()
+            "LinkedList使用" -> getNum()
             "" -> ""
             else -> ""
         }
@@ -115,6 +115,25 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
             "音频处理" -> makePlayer()
             "" -> ""
         }
+    }
+
+    //一组数据从1开始数，到13时移除此数，之后继续从1开始数
+    private fun getNum(): String {
+        val nums = (1..14).mapTo(LinkedList<String>()) { it.toString() + "" }
+        val builder = StringBuilder()
+        var a = 1
+        while (!nums.isEmpty()) {
+            val temp = nums.first
+            nums.removeFirst()
+            if (a != 13) {
+                nums.addLast(temp)
+                a++
+            } else {
+                builder.append("$temp,")
+                a = 1
+            }
+        }
+        return builder.toString()
     }
 
     private fun sort(): CharSequence? {

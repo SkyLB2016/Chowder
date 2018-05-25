@@ -34,22 +34,21 @@ class ImageUrlActivity : RecyclerPActivity<CourseEntity, ImageUrlP>() {
     override fun creatPresenter() = ImageUrlP(this)
 
     private lateinit var imageLoader: ImageLoaderAsync
-    private val layoutIds = ArrayList<Int>()//主体布局
 
     override fun initialize() {
+        super.initialize()
         first = true
         imageLoader = ImageLoaderAsync()
-        layoutIds.add(R.layout.adapter_main)
-        layoutIds.add(R.layout.adapter_main)
-        layoutIds.add(R.layout.adapter_main)
-        layoutIds.add(R.layout.adapter_main)
-        super.initialize()
         fab.setOnClickListener { v -> Snackbar.make(v, "正在加载，请稍后", Snackbar.LENGTH_LONG).setAction("cancel") { showToast("已取消") }.show() }
         adapter.setOnItemClickListener { view, position -> getPhoto(view, position) }
-
     }
 
     override fun creatAdapter() {
+        val layoutIds = ArrayList<Int>()//主体布局
+        layoutIds.add(R.layout.adapter_main)
+        layoutIds.add(R.layout.adapter_main_02)
+        layoutIds.add(R.layout.adapter_main_02)
+        layoutIds.add(R.layout.adapter_main)
         adapter = LoaderURLAdapter(layoutIds)
     }
 

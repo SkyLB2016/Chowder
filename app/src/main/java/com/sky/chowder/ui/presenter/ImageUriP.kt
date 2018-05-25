@@ -45,7 +45,8 @@ class ImageUriP(context: Context) : RefreshP<ImageUriV<String>>(context) {
             val floder = ImageFloder()//开始收集父级文件夹得信息
             floder.dirPath = parentPath//父文件夹路径
             floder.firstImagePath = path//第一张图片
-            val count = parentFile.list(filter).size//总数量
+            val count = parentFile?.list(filter)?.size ?: 0//总数量
+            if (count == 0) continue
             floder.count = count
             floders.add(floder)
 

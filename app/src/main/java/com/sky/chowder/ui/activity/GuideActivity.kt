@@ -29,7 +29,7 @@ class GuideActivity : AppCompatActivity() {
      */
     private fun initData() {
         val contoler = GuideContoler(this)
-        val imgIds = intArrayOf(R.mipmap.guide01, R.mipmap.guide02, R.mipmap.guide03)
+        val imgIds = intArrayOf(R.mipmap.ic_bg, R.mipmap.ic_bg_01, R.mipmap.ic_bg_02)
         val view = LayoutInflater.from(this).inflate(R.layout.pager_end, null)
         contoler.init(imgIds, view)
         view.findViewById<Button>(R.id.btBegin).setOnClickListener {

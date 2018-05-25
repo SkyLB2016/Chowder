@@ -23,7 +23,7 @@ class WelcomeActivity : AppCompatActivity() {
         this.window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)//去掉信息栏
         super.onCreate(savedInstanceState)
         val view = ImageView(this)
-        view.setBackgroundResource(R.mipmap.guide01)
+        view.setBackgroundResource(R.mipmap.ic_bg)
         setContentView(view)
         //加载动画
         val set = AnimationSet(true)
@@ -50,9 +50,8 @@ class WelcomeActivity : AppCompatActivity() {
             override fun onAnimationRepeat(animation: Animation) {}
 
             override fun onAnimationEnd(animation: Animation) {
-                Handler().postDelayed({
-                    jumpAct()// 判断程序与第几次运行，如果是第一次运行引导页面
-                }, TIME)
+                // 判断程序与第几次运行，如果是第一次运行引导页面
+                Handler().postDelayed({ jumpAct() }, TIME)
             }
         })
     }

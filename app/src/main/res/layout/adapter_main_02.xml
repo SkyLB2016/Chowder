@@ -15,12 +15,14 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/wh_8">
 
-        <ImageView
+        <com.sky.widget.CircleImageView
             android:id="@+id/image"
             android:layout_width="@dimen/wh_72"
             android:layout_height="@dimen/wh_72"
             android:src="@mipmap/ic_launcher"
-            android:scaleType="fitXY" />
+            android:scaleType="fitXY"
+            app:borderColor="@color/green"
+            app:borderWidth="@dimen/wh_4" />
 
         <TextView
             android:id="@+id/tv_name"

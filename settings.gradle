@@ -1,1 +1,1 @@
-include ':app', ':apiutils', ':jnilib', ':puzzle', ':g2048'
+include ':app', ':apiutils', ':jnilib', ':puzzle', ':g2048', ':common'

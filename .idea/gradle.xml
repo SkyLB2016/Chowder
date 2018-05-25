@@ -10,6 +10,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/apiutils" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/g2048" />
             <option value="$PROJECT_DIR$/jnilib" />
             <option value="$PROJECT_DIR$/puzzle" />

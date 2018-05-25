@@ -113,6 +113,7 @@ class ImageUriActivity : RecyclerPActivity<String, ImageUriP>(), ImageUriV<Strin
 
         flodername?.text = parent.name
         number?.text = "共${imageNames.size}张图片"
+        first = true
     }
 
     override fun onDestroy() {
