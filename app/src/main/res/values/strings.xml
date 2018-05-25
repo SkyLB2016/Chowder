@@ -20,7 +20,6 @@
     <string name="act_canvas">06.图形绘画总结应用</string>
     <string name="act_canvas_d">线性渐变，三次贝赛尔曲线，maskFilter，pathEffect，移动布局坐标，文字基线绘制，画布状态保存与回溯</string>
 
-    <string name="act_game2048">08.2048</string>
     <string name="act_ninth">09.九宫解锁图案</string>
 
     <string name="act_tab">10.滑动窗口</string>

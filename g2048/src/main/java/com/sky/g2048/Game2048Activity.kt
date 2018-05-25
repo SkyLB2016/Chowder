@@ -1,23 +1,26 @@
-package com.sky.chowder.ui.activity
+package com.sky.g2048
 
 import android.view.MotionEvent
 import android.view.View
 import com.sky.SkyApp
 import com.sky.base.BaseNoPActivity
-import com.sky.chowder.R
 import com.sky.utils.FileUtils
-import kotlinx.android.synthetic.main.activity_game.*
+import kotlinx.android.synthetic.main.activity_g2048.*
 
-/**
- * Created by SKY on 2018/4/20 11:17.
- */
 class Game2048Activity : BaseNoPActivity() {
     private val pathName = SkyApp.getInstance().fileCacheDir + "2048orginal.txt"
-    override fun getLayoutResId(): Int = R.layout.activity_game
+    override fun getLayoutResId(): Int = R.layout.activity_g2048
     override fun initialize() {
         setToolbarRightTitle("重新开始")
+//        if (BuildConfig.isModel)
+//            baseTitle.setLeftButton(-1)
+        when (BuildConfig.isModel) {
+            true -> baseTitle.setLeftButton(-1)
+        }
         game.orginal = FileUtils.deserialize<IntArray>(pathName) ?: IntArray(0)
+        game.checkIsEnd = { end -> imgEnd.visibility = if (end) View.VISIBLE else View.GONE }
         getView<View>(R.id.tvRight).setOnClickListener { game.restartGame() }
+        imgEnd.setOnClickListener { game.restartGame() }
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean = game.onTouchEvent(event!!)

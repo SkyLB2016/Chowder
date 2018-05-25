@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/titleBar"
+        layout="@layout/include_toolbar" />
+
+    <com.sky.g2048.Game2048Layout
+        android:id="@+id/game"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/titleBar" />
+
+    <FrameLayout
+        android:id="@+id/imgEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/game"
+        android:layout_alignLeft="@id/game"
+        android:layout_alignRight="@id/game"
+        android:layout_alignTop="@id/game"
+        android:layout_below="@id/titleBar"
+        android:background="@color/alpha_66"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@mipmap/i2048" />
+    </FrameLayout>
+</RelativeLayout>

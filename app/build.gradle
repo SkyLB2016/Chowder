@@ -15,6 +15,7 @@ dependencies {
     implementation project(':apiutils')
     if (!puzzle.toBoolean()) {
         implementation project(':puzzle')
+        implementation project(':g2048')
     }
     //butterknife
 //    annotationProcessor "com.jakewharton:butterknife-compiler:$bknifeVer"

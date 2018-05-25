@@ -7,12 +7,14 @@ android {
     compileSdkVersion 27
 
     defaultConfig {
-        if (puzzle.toBoolean()) applicationId "com.sky.puzzle"
+        if (puzzle.toBoolean()) applicationId "com.sky.g2048"
         minSdkVersion 19
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        buildConfigField "boolean", "isModel", puzzle
     }
 
     buildTypes {
@@ -25,7 +27,7 @@ android {
     sourceSets {
         main {
             if (puzzle.toBoolean()) {
-                manifest.srcFile 'src/main/manifest/puzzle/AndroidManifest.xml'
+                manifest.srcFile 'src/main/manifest/g2048/AndroidManifest.xml'
             } else {
                 manifest.srcFile 'src/main/manifest/app/AndroidManifest.xml'
             }
@@ -37,5 +39,4 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation project(':apiutils')
-
 }

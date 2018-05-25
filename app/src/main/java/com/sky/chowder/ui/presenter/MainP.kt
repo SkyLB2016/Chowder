@@ -8,6 +8,7 @@ import com.sky.chowder.R
 import com.sky.chowder.api.presenter.IMainPresenter
 import com.sky.chowder.api.view.IMainView
 import com.sky.chowder.model.ActivityModel
+import com.sky.utils.LogUtils
 import java.text.Collator
 import java.util.*
 
@@ -54,6 +55,7 @@ class MainP(context: Context) : BasePresenter<IMainView>(context), IMainPresente
                 val iconRes = info.activityInfo.icon
                 val icon = if (iconRes == 0) R.mipmap.ic_launcher else iconRes
                 activityInfos.add(ActivityModel(label, describe, icon, info.activityInfo.name))
+                LogUtils.i("${info.activityInfo.name}")
             }
             //排序
             Collections.sort(activityInfos, sort)

@@ -201,19 +201,6 @@
                 <action android:name="com.sky.coustom" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.activity.Game2048Activity"
-            android:description="@string/act_game2048"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/act_game2048"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.sky.coustom" />
-
-                <category android:name="android.intent.category.APP_MUSIC" />
-                <category android:name="android.intent.category.CAR_MODE" />
-            </intent-filter>
-        </activity>
         <!--android:process=":ninthPalace"-->
         <activity
             android:name=".ui.activity.NinthPalaceActivity"

@@ -1,4 +1,4 @@
-package com.sky.chowder.ui.widget
+package com.sky.g2048
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
@@ -9,7 +9,6 @@ import android.view.MotionEvent
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import com.sky.SkyApp
-import com.sky.chowder.R
 import com.sky.utils.ScreenUtils
 import java.util.*
 import kotlin.collections.ArrayList
@@ -38,6 +37,7 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
     private var width: Int? = 0
     private val nums = ArrayList<Int>()//临时判定数组
     var isEnd = false//是否结束
+    var checkIsEnd: ((Boolean) -> Unit)? = null
 
     init {
         setBackgroundResource(R.mipmap.bg2048)
@@ -75,6 +75,7 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
         orginal[Random().nextInt(15)] = randomTwoOrFour()
         resetView()
         isEnd = false
+        checkIsEnd?.invoke(isEnd)
     }
 
     private fun getImageDrawable(num: Int): Drawable? =
@@ -142,6 +143,7 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
                 }
             }
             if (isEnd) SkyApp.getInstance().showToast("游戏结束")
+            checkIsEnd?.invoke(isEnd)
         }
     }
 
