@@ -8,7 +8,7 @@
     <string name="toast_max_text">您输入的字数已达到了限制的最大字数</string>
 
     <string name="toast_no_more_data">没有更多数据了</string>
-    <string name="text_net_work_err">网络异常</string>
+    <string name="text_net_work_err">当前网络不可用</string>
     <string name="text_retry">重试</string>
     <string name="text_data_empty">什么都没有</string>
     <string name="photo_fail">加载图片失败</string>
