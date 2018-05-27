@@ -210,8 +210,7 @@ class PuzzleLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
         val isSuccess = (0 until childCount).none { getPosition(getChildAt(it), 1) != it }
         if (isSuccess) {
             Toast.makeText(context, "拼图完成", Toast.LENGTH_LONG).show()
-            piece = 1
-//            checkSuccess?.invoke(isSuccess)
+            checkSuccess?.invoke(isSuccess)
         }
     }
 }

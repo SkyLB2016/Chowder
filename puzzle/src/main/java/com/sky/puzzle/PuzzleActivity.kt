@@ -2,7 +2,10 @@ package com.sky.puzzle
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Handler
+import android.os.Message
 import com.sky.base.BaseNoPActivity
+import com.sky.puzzle.R.id.*
 import com.sky.utils.BitmapUtils
 import com.sky.utils.PhotoUtils
 import com.sky.utils.ScreenUtils
@@ -14,6 +17,13 @@ import kotlinx.android.synthetic.main.activity_puzzle.*
  * 拼图游戏
  */
 class PuzzleActivity : BaseNoPActivity() {
+    private val handler=object :Handler(){
+        override fun handleMessage(msg: Message?) {
+            super.handleMessage(msg)
+            puzzle.piece = 1
+        }
+    }
+
     override fun getLayoutResId(): Int = R.layout.activity_puzzle
     override fun initialize() {
         btUp?.setOnClickListener { puzzle.piece = -1 }
@@ -21,13 +31,13 @@ class PuzzleActivity : BaseNoPActivity() {
         btNext?.setOnClickListener { puzzle.piece = 1 }
         val path = getObject("puzzle", "")
         if (path.isNotEmpty()) puzzle?.bitmap = BitmapUtils.getBitmapFromPath(path, 2048, 2048)
+
         val lp = ImgOriginal?.layoutParams
         lp?.width = ScreenUtils.getWidthPX(this) / 5
         lp?.height = ScreenUtils.getHeightPX(this) / 5
 //        ImgOriginal.layoutParams = lp
         ImgOriginal?.setImageBitmap(puzzle.bitmap)
-
-//        puzzle.checkSuccess = { b -> }
+        puzzle.checkSuccess = { success -> if (success)handler.sendEmptyMessageDelayed(101,5000) }
     }
 
     private var photoUtils: PhotoUtils? = null
@@ -52,7 +62,7 @@ class PuzzleActivity : BaseNoPActivity() {
                 if (TextUtil.notNullObj(uri, error)) return
                 val path = BitmapUtils.getRealPathFromURI(this, uri)//获取路径
                 if (TextUtil.notNull(path, error)) return
-                puzzle.bitmap = BitmapUtils.getBitmapFromPath(path, 1024, 1024)//获取bitmap
+                puzzle.bitmap = BitmapUtils.getBitmapFromPath(path, 2048, 2048)//获取bitmap
                 ImgOriginal.setImageBitmap(puzzle.bitmap)
                 setObject("puzzle", path)
             }
