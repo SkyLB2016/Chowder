@@ -6,7 +6,7 @@ import com.sky.Common
 import com.sky.ErrorMes
 import com.sky.SkyApp
 import com.sky.api.OnRequestCallback
-import com.sky.model.ApiResponse
+import common.model.ApiResponse
 
 import io.reactivex.annotations.NonNull
 import io.reactivex.observers.DefaultObserver

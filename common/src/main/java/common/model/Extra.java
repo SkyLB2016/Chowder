@@ -1,4 +1,4 @@
-package com.sky.model;
+package common.model;
 
 import java.io.Serializable;
 import java.util.List;

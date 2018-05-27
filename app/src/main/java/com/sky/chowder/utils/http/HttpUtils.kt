@@ -3,7 +3,7 @@ package com.sky.chowder.utils.http
 import com.sky.chowder.model.CourseEntity
 import com.sky.chowder.model.LoginEntity
 import com.sky.chowder.model.params.LoginParams
-import com.sky.model.ApiResponse
+import common.model.ApiResponse
 import io.reactivex.Observable
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory

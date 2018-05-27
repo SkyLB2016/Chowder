@@ -9,7 +9,7 @@ import com.sky.chowder.R
 import com.sky.chowder.model.CourseEntity
 import com.sky.chowder.utils.http.HttpUtils
 import com.sky.chowder.utils.http.UseCase
-import com.sky.model.ApiResponse
+import common.model.ApiResponse
 import io.reactivex.Observable
 
 class ImageUrlP(context: Context) : RefreshP<IRefreshV<CourseEntity>>(context){

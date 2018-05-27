@@ -1,7 +1,7 @@
 package com.sky.chowder.utils.http
 
 import com.sky.api.OnRequestCallback
-import com.sky.model.ApiResponse
+import common.model.ApiResponse
 
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers

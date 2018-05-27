@@ -13,6 +13,7 @@ dependencies {
     implementation "com.android.support:design:$googleVer"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation project(':apiutils')
+    implementation project(':common')
     if (!puzzle.toBoolean()) {
         implementation project(':puzzle')
         implementation project(':g2048')

@@ -34,10 +34,10 @@ import com.sky.chowder.other.factory.factory.HairFactory
 import com.sky.chowder.other.factory.factory.hair.LeftHair
 import com.sky.chowder.ui.fragment.AddressFragment
 import com.sky.chowder.ui.fragment.TimeFragment
-import com.sky.model.ApiResponse
 import com.sky.utils.AppUtils
 import com.sky.utils.DateUtil
 import com.sky.utils.GsonUtils
+import common.model.ApiResponse
 import kotlinx.android.synthetic.main.activity_method.*
 import java.lang.StringBuilder
 import java.text.Collator

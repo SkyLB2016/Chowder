@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 
 import com.sky.SkyApp;
-import com.sky.model.Extra;
+import common.model.Extra;
 import com.sky.utils.LogUtils;
 
 /**
