@@ -1,7 +1,7 @@
 package com.sky.chowder.api.view
 
-import com.sky.api.IRefreshV
 import com.sky.chowder.model.ImageFloder
+import common.api.IRefreshV
 import java.io.File
 
 interface ImageUriV<T> : IRefreshV<T> {

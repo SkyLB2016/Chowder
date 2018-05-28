@@ -3,12 +3,12 @@ package com.sky.chowder.ui.presenter
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import com.sky.base.BasePresenter
 import com.sky.chowder.R
 import com.sky.chowder.api.presenter.IMainPresenter
 import com.sky.chowder.api.view.IMainView
 import com.sky.chowder.model.ActivityModel
 import com.sky.utils.LogUtils
+import common.base.BasePresenter
 import java.text.Collator
 import java.util.*
 

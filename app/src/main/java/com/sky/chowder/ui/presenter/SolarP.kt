@@ -2,8 +2,8 @@ package com.sky.chowder.ui.presenter
 
 import android.content.Context
 import com.sky.api.IBaseView
+import common.base.BasePresenter
 
-import com.sky.base.BasePresenter
 /**
  * Created by SKY on 2017/5/9 20:52.
  */

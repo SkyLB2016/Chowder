@@ -1,4 +1,4 @@
-package com.sky.api;
+package common.api;
 
 /**
  * Created by SKY on 16/5/10 下午3:50.

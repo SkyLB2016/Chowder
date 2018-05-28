@@ -4,30 +4,26 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
-import android.os.Handler
-import android.os.IBinder
-import android.os.Message
-import android.os.RemoteException
-import com.sky.base.BaseNoPActivity
+import android.os.*
 import com.sky.chowder.R
 import com.sky.chowder.ui.service.Book
 import com.sky.chowder.ui.service.IBookManager
 import com.sky.chowder.ui.service.IOnNewBookArriveListener
 import com.sky.chowder.ui.service.PairServiceA
 import com.sky.utils.LogUtils
+import common.base.BaseNoPActivity
 
 /**
  * Created by SKY on 2018/5/9 19:07.
  */
 class IPCActivity : BaseNoPActivity() {
     override fun getLayoutResId(): Int = R.layout.activity_test
-    override fun initialize() {
-        super.initialize()
-
+    override fun initialize(savedInstanceState: Bundle?) {
         bindService(Intent(this, PairServiceA::class.java), connection, Context.BIND_AUTO_CREATE)
 //        startService(Intent(this, PairServiceA::class.java))
     }
 
+    override fun loadData() = Unit
     private val handler: Handler = object : Handler() {
         override fun handleMessage(msg: Message) {
             super.handleMessage(msg)

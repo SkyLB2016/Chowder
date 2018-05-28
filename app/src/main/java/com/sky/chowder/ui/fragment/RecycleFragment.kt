@@ -15,7 +15,7 @@ class RecycleFragment : BaseFragment<SolarP>() {
     override fun getLayoutResId(): Int = R.layout.include_recycler
     override fun creatPresenter() =SolarP(activity!!)
 
-    override fun initialize() {
+    override fun initialize(savedInstanceState: Bundle?) {
 
     }
 

@@ -1,12 +1,13 @@
 package com.sky.chowder.ui.activity
 
+import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
 import com.sky.api.TextWatcherAdapter
-import com.sky.base.BaseNoPActivity
 import com.sky.chowder.R
 import com.sky.utils.TextUtil
+import common.base.BaseNoPActivity
 import kotlinx.android.synthetic.main.activity_stock.*
 
 /**
@@ -22,8 +23,7 @@ class StockActivity : BaseNoPActivity() {
     private val type = "1"//1是单价与数量算总价,2是直接填写的总价
 
     override fun getLayoutResId() = R.layout.activity_stock
-    override fun initialize() {
-        super.initialize()
+    override fun initialize(savedInstanceState: Bundle?) {
         checkTextChange(etUnit)
         checkTextChange(etNum)
         etTotal?.addTextChangedListener(object : TextWatcherAdapter() {
@@ -41,6 +41,7 @@ class StockActivity : BaseNoPActivity() {
             setTotal()
         }
     }
+    override fun loadData() = Unit
 
     private fun checkTextChange(one: EditText?) {
         one?.addTextChangedListener(object : TextWatcher {

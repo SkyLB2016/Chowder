@@ -52,7 +52,7 @@ class XferModeFragment : BaseFragment<SolarP>() {
 
     override fun creatPresenter() = SolarP(activity!!)
 
-    override fun initialize() {
+    override fun initialize(savedInstanceState: Bundle?) {
 
     }
 

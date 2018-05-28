@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 
 import com.sky.R;
 
@@ -19,6 +20,10 @@ public class JumpAct {
      */
     public static void jumpActivity(Context context, Class<?> cls) {
         jumpActivity(context, new Intent(context, cls));
+    }
+
+    public static void jumpActivity(Context context, Class<?> cls, Bundle bundle) {
+        jumpActivity(context, new Intent(context, cls).putExtras(bundle));
     }
 
     public static void jumpActivity(Context context, Class<?> cls, String name, CharSequence value) {

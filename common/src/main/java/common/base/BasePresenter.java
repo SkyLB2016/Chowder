@@ -1,4 +1,4 @@
-package com.sky.base;
+package common.base;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,14 +8,12 @@ import android.text.TextUtils;
 
 import com.sky.Common;
 import com.sky.R;
-import com.sky.api.IBasePresenter;
 import com.sky.api.IBaseView;
 import com.sky.rxbus.DefaultBus;
 import com.sky.utils.NetworkUtils;
 import com.sky.utils.SPUtils;
 
-import java.io.Serializable;
-
+import common.api.IBasePresenter;
 import io.reactivex.functions.Consumer;
 
 /**
@@ -89,12 +87,8 @@ public abstract class BasePresenter<V extends IBaseView> implements IBasePresent
     public abstract void loadData();
 
     @Override
-    public Serializable getExtras() {
-        Bundle extras = ((AppCompatActivity) context).getIntent().getExtras();
-        if (extras != null) {
-            return extras.getSerializable(Common.EXTRA);
-        }
-        return null;
+    public Bundle getExtras() {
+        return ((AppCompatActivity) context).getIntent().getExtras();
     }
 
     @Override

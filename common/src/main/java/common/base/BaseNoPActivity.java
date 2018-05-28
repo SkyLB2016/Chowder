@@ -1,17 +1,18 @@
-package com.sky.base;
+package common.base;
 
 import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.sky.Common;
 import com.sky.R;
-import com.sky.api.IBasePresenter;
+import com.sky.base.SkyActivity;
 import com.sky.rxbus.DefaultBus;
 import com.sky.utils.NetworkUtils;
 import com.sky.utils.SPUtils;
 
-import java.io.Serializable;
+import org.jetbrains.annotations.Nullable;
 
+import common.api.IBasePresenter;
 import io.reactivex.functions.Consumer;
 
 /**
@@ -31,7 +32,7 @@ public abstract class BaseNoPActivity extends SkyActivity implements IBasePresen
                             }
                         }));
         if (!hasInternetConnected()) showToast(getString(R.string.toast_isinternet));
-        initialize();
+        initialize(savedInstanceState);
         loadData();
     }
 
@@ -41,23 +42,12 @@ public abstract class BaseNoPActivity extends SkyActivity implements IBasePresen
         Common.getRxBus().unregister(this);
     }
 
-    @Override
-    protected void initialize() {
-
-    }
+    protected abstract void initialize(@Nullable Bundle savedInstanceState);
+    public abstract void loadData();
 
     @Override
-    public void loadData() {
-
-    }
-
-    @Override
-    public Serializable getExtras() {
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            return extras.getSerializable(Common.EXTRA);
-        }
-        return null;
+    public Bundle getExtras() {
+        return  getIntent().getExtras();
     }
 
     @Override
@@ -99,6 +89,7 @@ public abstract class BaseNoPActivity extends SkyActivity implements IBasePresen
     public boolean hasInternetConnected() {
         return NetworkUtils.isConnected(this);
     }
+
     @Override
     public String getStringArray(int array, int position) {
         return getResources().getStringArray(array)[position];

@@ -2,14 +2,14 @@ package com.sky.puzzle
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Bundle
 import android.os.Handler
 import android.os.Message
-import com.sky.base.BaseNoPActivity
-import com.sky.puzzle.R.id.*
 import com.sky.utils.BitmapUtils
 import com.sky.utils.PhotoUtils
 import com.sky.utils.ScreenUtils
 import com.sky.utils.TextUtil
+import common.base.BaseNoPActivity
 import kotlinx.android.synthetic.main.activity_puzzle.*
 
 /**
@@ -25,7 +25,7 @@ class PuzzleActivity : BaseNoPActivity() {
     }
 
     override fun getLayoutResId(): Int = R.layout.activity_puzzle
-    override fun initialize() {
+    override fun initialize(savedInstanceState: Bundle?) {
         btUp?.setOnClickListener { puzzle.piece = -1 }
         btChange?.setOnClickListener { getPhoto() }
         btNext?.setOnClickListener { puzzle.piece = 1 }
@@ -39,6 +39,8 @@ class PuzzleActivity : BaseNoPActivity() {
         ImgOriginal?.setImageBitmap(puzzle.bitmap)
         puzzle.checkSuccess = { success -> if (success)handler.sendEmptyMessageDelayed(101,5000) }
     }
+
+    override fun loadData() =Unit
 
     private var photoUtils: PhotoUtils? = null
 

@@ -2,6 +2,7 @@ package com.sky.chowder.ui.activity
 
 import android.content.ClipboardManager
 import android.graphics.RectF
+import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -12,12 +13,12 @@ import android.view.animation.LayoutAnimationController
 import android.widget.TextView
 import com.sky.adapter.RecyclerAdapter
 import com.sky.adapter.RecyclerHolder
-import com.sky.base.BaseNoPActivity
 import com.sky.chowder.R
 import com.sky.chowder.model.ChapterEntity
 import com.sky.chowder.ui.pop.CatalogPop
 import com.sky.utils.ScreenUtils
 import com.sky.widget.BaseTitle
+import common.base.BaseNoPActivity
 import kotlinx.android.synthetic.main.activity_poetry.*
 import kotlinx.android.synthetic.main.item_tvdisplay.view.*
 import java.util.*
@@ -32,7 +33,7 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
     private lateinit var clipM: ClipboardManager
 
     override fun getLayoutResId(): Int = R.layout.activity_poetry
-    override fun initialize() {
+    override fun initialize(savedInstanceState: Bundle?) {
         baseTitle.setLeftButton(R.mipmap.ic_menu)
         baseTitle.onLeftImgClick = BaseTitle.OnClickListener { sliding.toggleMenu() }
         baseTitle.setRightText("3.16建")

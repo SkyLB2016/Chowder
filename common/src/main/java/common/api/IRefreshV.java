@@ -1,4 +1,6 @@
-package com.sky.api;
+package common.api;
+
+import com.sky.api.IBaseView;
 
 import java.util.List;
 

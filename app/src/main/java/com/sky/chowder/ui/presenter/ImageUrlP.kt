@@ -2,13 +2,13 @@ package com.sky.chowder.ui.presenter
 
 import android.content.Context
 import com.sky.ErrorMes
-import com.sky.api.IRefreshV
-import com.sky.api.OnRequestCallback
-import com.sky.base.RefreshP
+import com.sky.chowder.api.OnRequestCallback
 import com.sky.chowder.R
 import com.sky.chowder.model.CourseEntity
 import com.sky.chowder.utils.http.HttpUtils
 import com.sky.chowder.utils.http.UseCase
+import common.api.IRefreshV
+import common.base.RefreshP
 import common.model.ApiResponse
 import io.reactivex.Observable
 

@@ -14,6 +14,7 @@ import android.media.AudioManager
 import android.media.SoundPool
 import android.os.BatteryManager
 import android.os.Build
+import android.os.Bundle
 import android.provider.ContactsContract
 import android.text.Spannable
 import android.text.SpannableStringBuilder
@@ -24,8 +25,6 @@ import android.view.animation.AnimationUtils
 import android.view.animation.LayoutAnimationController
 import android.widget.TextView
 import com.google.gson.reflect.TypeToken
-import com.sky.base.BaseNoPActivity
-import com.sky.base.BasePActivity
 import com.sky.chowder.R
 import com.sky.chowder.model.ActivityModel
 import com.sky.chowder.other.factory.abstractfactory.HNFactory
@@ -37,6 +36,8 @@ import com.sky.chowder.ui.fragment.TimeFragment
 import com.sky.utils.AppUtils
 import com.sky.utils.DateUtil
 import com.sky.utils.GsonUtils
+import common.base.BaseNoPActivity
+import common.base.BasePActivity
 import common.model.ApiResponse
 import kotlinx.android.synthetic.main.activity_method.*
 import java.lang.StringBuilder
@@ -50,7 +51,8 @@ import kotlin.coroutines.experimental.buildSequence
  */
 class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
     override fun getLayoutResId(): Int = R.layout.activity_method
-    override fun initialize() {
+    override fun loadData() = Unit
+    override fun initialize(savedInstanceState: Bundle?) {
         //            val patPunc = Pattern.compile("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]$")
 //            val str = "同！意!"
 //            val matcher = patPunc.matcher(str)

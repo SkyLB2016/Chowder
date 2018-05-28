@@ -12,7 +12,6 @@ dependencies {
     implementation "com.android.support:appcompat-v7:$googleVer"
     implementation "com.android.support:design:$googleVer"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation project(':apiutils')
     implementation project(':common')
     if (!puzzle.toBoolean()) {
         implementation project(':puzzle')
@@ -33,8 +32,8 @@ android {
         applicationId "com.sky.chowder"
         minSdkVersion 19
         targetSdkVersion 27
-        versionCode 2
-        versionName "2.0"
+        versionCode 3
+        versionName "3.0"
         // dex突破65535的限制
 //        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 
 import com.sky.SkyApp;
-import common.model.Extra;
 import com.sky.utils.LogUtils;
 
 /**
@@ -14,7 +13,7 @@ import com.sky.utils.LogUtils;
  */
 public class IntentTest extends IntentService {
 
-    public static void startIntent(Context context, Extra extra, String action) {
+    public static void startIntent(Context context,  String action) {
         Intent intent = new Intent(context, IntentTest.class);
         intent.setAction(action);
         intent.putExtra("jj", "lkjlkjlk");

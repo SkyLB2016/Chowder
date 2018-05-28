@@ -2,10 +2,10 @@ package com.sky.chowder.ui.presenter
 
 import android.content.Context
 import android.provider.MediaStore
-import com.sky.base.RefreshP
 import com.sky.chowder.api.view.ImageUriV
 import com.sky.chowder.model.ImageFloder
 import com.sky.utils.SDCardUtils
+import common.base.RefreshP
 import java.io.File
 import java.io.FilenameFilter
 import java.util.*

@@ -5679,6 +5679,7 @@
         　　(4)数据类型data与type：setDataAandType()，地址有特定规则\n
         　　(5)启动模式LaunchMode四种（manifest中用）：standard（标准），singleTop（栈顶不创建），singleTask（单例，独一份，再次进入后，清空之前在其上的页面），singleInstance（独立栈中的独一份）\n
         　　(6)标志也即启动模式（Intent中用）：FLAG_ACTIVITY_NEW_TASK(需要搭配FLAG_ACTIVITY_CLEAR_TASK使用),FLAG_ACTIVITY_SINGLE_TOP,FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS(跳转页面后自动finish,android:excludeFromRecents="true"，目前未起作用)\n
+        　　(7)数据传递bundle：Intent内部已经封装好，不用自己封了，serializable，parcelable，也可以转成json字符串传过去\n
         ●05.页面跳转顺序:\n
         　　(1)A启动 A.onCreate->A.onStart->A.onResume->\n
         　　(2)在A中启动B A.onPause->B.onCreate->B.onStart->B.onResume->A.onStop\n

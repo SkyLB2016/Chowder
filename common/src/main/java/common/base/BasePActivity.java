@@ -1,6 +1,10 @@
-package com.sky.base;
+package common.base;
 
 import android.os.Bundle;
+
+import com.sky.base.SkyActivity;
+
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by SKY on 2017/5/31.
@@ -12,9 +16,11 @@ public abstract class BasePActivity<P extends BasePresenter> extends SkyActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (presenter == null) presenter = creatPresenter();
-        initialize();//需要初始化的成员变量
+        initialize(savedInstanceState);//需要初始化的成员变量
         presenter.onCreate(savedInstanceState);//请求数据
     }
+
+    protected abstract void initialize(@Nullable Bundle savedInstanceState);
 
     @Override
     protected void onStart() {

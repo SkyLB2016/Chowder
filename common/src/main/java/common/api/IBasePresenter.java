@@ -1,11 +1,10 @@
-package com.sky.api;
+package common.api;
 
+import android.os.Bundle;
 import android.support.annotation.ArrayRes;
 import android.support.annotation.StringRes;
 
 import com.sky.rxbus.DefaultBus;
-
-import java.io.Serializable;
 
 /**
  * Created by SKY on 2017/5/29.
@@ -18,7 +17,7 @@ public interface IBasePresenter {
     /**
      * @return 获取传递的数据
      */
-    Serializable getExtras();
+    Bundle getExtras();
 
     /**
      * @param code 发送空事件

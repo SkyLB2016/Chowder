@@ -5,7 +5,7 @@ import com.sky.BuildConfig
 import com.sky.Common
 import com.sky.ErrorMes
 import com.sky.SkyApp
-import com.sky.api.OnRequestCallback
+import com.sky.chowder.api.OnRequestCallback
 import common.model.ApiResponse
 
 import io.reactivex.annotations.NonNull

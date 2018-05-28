@@ -1,10 +1,11 @@
 package com.sky.chowder.ui.activity
 
+import android.os.Bundle
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.Gravity
 import android.view.LayoutInflater
-import com.sky.base.RecyclerPActivity
 import com.sky.chowder.R
 import com.sky.chowder.api.view.ImageUriV
 import com.sky.chowder.model.ImageFloder
@@ -14,6 +15,8 @@ import com.sky.chowder.ui.pop.URIPop
 import com.sky.chowder.ui.presenter.ImageUriP
 import com.sky.utils.ScreenUtils
 import com.sky.widget.BasePop
+import com.sky.widget.MyRecyclerView
+import common.base.RecyclerPActivity
 import kotlinx.android.synthetic.main.activity_uri.*
 import kotlinx.android.synthetic.main.include_recycler.*
 import java.io.File
@@ -25,6 +28,13 @@ import java.util.*
  * 加载本地图片
  */
 class ImageUriActivity : RecyclerPActivity<String, ImageUriP>(), ImageUriV<String> {
+    override fun getRecyclerView(): MyRecyclerView {
+       return recycler
+    }
+
+    override fun getSwipeView(): SwipeRefreshLayout {
+        return swipe
+    }
 
     //瀑布流布局
     private var layoutManager: StaggeredGridLayoutManager? = null
@@ -39,8 +49,8 @@ class ImageUriActivity : RecyclerPActivity<String, ImageUriP>(), ImageUriV<Strin
 
     override fun creatPresenter() = ImageUriP(this)
 
-    override fun initialize() {
-        super.initialize()
+    override fun initialize(savedInstanceState: Bundle?) {
+        super.initialize(savedInstanceState)
         setSwipeEnable(false)
 //        //瀑布流布局
         layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)

@@ -7,8 +7,8 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.baidu.mobstat.StatService
 import com.sky.api.IBaseView
+import common.base.BasePresenter
 
 /**
  * Created by SKY on 2017/6/7.
@@ -25,7 +25,7 @@ abstract class BaseFragment<P : BasePresenter<*>> : Fragment(), IBaseView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initialize()
+        initialize(savedInstanceState)
         presenter?.onViewCreate(savedInstanceState)
     }
 
@@ -43,7 +43,7 @@ abstract class BaseFragment<P : BasePresenter<*>> : Fragment(), IBaseView {
     /**
      * 初始化
      */
-    protected abstract fun initialize()
+    protected abstract fun initialize(savedInstanceState: Bundle?)
 
     /**
      * 检查mPresenter是否为空
@@ -99,15 +99,11 @@ abstract class BaseFragment<P : BasePresenter<*>> : Fragment(), IBaseView {
 
     override fun onResume() {
         super.onResume()
-        // 页面埋点
-        StatService.onPageStart(activity, javaClass.name)
         presenter?.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        // 页面埋点
-        StatService.onPageEnd(activity, javaClass.name)
         presenter?.onPause()
     }
 

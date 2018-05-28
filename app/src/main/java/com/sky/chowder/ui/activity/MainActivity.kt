@@ -2,24 +2,21 @@ package com.sky.chowder.ui.activity
 
 import android.Manifest
 import android.content.ActivityNotFoundException
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import android.view.WindowManager
 import com.sky.SkyApp
-import com.sky.base.BasePActivity
 import com.sky.chowder.R
 import com.sky.chowder.api.view.IMainView
 import com.sky.chowder.model.ActivityModel
 import com.sky.chowder.ui.adapter.MainAdapter
 import com.sky.chowder.ui.presenter.MainP
 import com.sky.utils.AppUtils
-import com.sky.utils.BitmapUtils
 import com.sky.utils.JumpAct
-import com.sky.utils.LogUtils
+import common.base.BasePActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import java.io.File
@@ -41,7 +38,11 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
     private lateinit var adapter: MainAdapter
     public override fun getLayoutResId(): Int = R.layout.activity_main
     override fun creatPresenter() = MainP(this)
-    public override fun initialize() {
+    public override fun initialize(savedInstanceState: Bundle?) {
+        //在应用内时，屏幕常亮
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+
+
         baseTitle.setLeftButton(-1)
         recycler?.setHasFixedSize(true)
         adapter = MainAdapter(R.layout.adapter_main)
@@ -65,16 +66,9 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 //        var num = Array(4, { Array(4) { 0 } })
         var num = Array(4) { IntArray(4) }
         fab.setOnClickListener {
-            //            val bitmap =
-//
+
+            showLoading()
 //            LogUtils.i("${bitmap.allocationByteCount/1024/1024}")
-            val draw = BitmapDrawable(BitmapUtils.getBitmapFromPath(presenter.getObject("puzzle", "")))
-            LogUtils.i("原内存==${draw.bitmap.allocationByteCount / 1024 / 1024}")
-            val draw1 = BitmapDrawable(BitmapUtils.getBitmapFromPath(presenter.getObject("puzzle", ""), 2048, 2048))
-            LogUtils.i("压缩后==${draw1.bitmap.allocationByteCount / 1024 / 1024}")
-            val draw2 = BitmapDrawable(BitmapUtils.getBitmapFromPath(presenter.getObject("puzzle", ""), 2048, 2048))
-            val bb=BitmapFactory.decodeResource(resources, R.mipmap.ic_puzzle)
-            LogUtils.i("压缩后bb==${bb.allocationByteCount / 1024 / 1024}")
         }
     }
 

@@ -1,18 +1,19 @@
 package com.sky.chowder.ui.activity
 
 import android.graphics.drawable.AnimationDrawable
+import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.FrameLayout
-import com.sky.base.BasePActivity
 import com.sky.chowder.C
 import com.sky.chowder.R
 import com.sky.chowder.ui.presenter.SolarP
 import com.sky.utils.ScreenUtils
 import com.sky.widget.SolarSystem
+import common.base.BasePActivity
 import kotlinx.android.synthetic.main.activity_solar.*
 
 /**
@@ -32,7 +33,7 @@ class SolarSystemActivity : BasePActivity<SolarP>(), Toolbar.OnMenuItemClickList
     override fun getLayoutResId(): Int = R.layout.activity_solar
     override fun creatPresenter() = SolarP(this)
 
-    override fun initialize() {
+    override fun initialize(savedInstanceState: Bundle?) {
         val width = ScreenUtils.getWidthPX(this)
         val lp = relative.layoutParams
         lp.height = width / 3

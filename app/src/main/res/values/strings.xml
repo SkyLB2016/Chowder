@@ -8,11 +8,8 @@
     <string name="act_solar">02.卫星式菜单栏</string>
     <string name="act_solar_d">支持九个方向，采用属性动画ObjectAnimator编写，三角函数正余弦的顺逆时针（参考笔记），kotlin中调用操作符：a.invoke(v,i)</string>
 
-    <string name="act_slid">03.侧滑栏</string>
-    <string name="act_slid_d">继承自HorizontalScrollView,融合FlowLayout流布局，CircleImageView圆形控件，可改圆角图片以及其他自定义图片</string>
-
     <string name="act_bitmapurl">04.网络图片加载与缓存,本地照片与相机</string>
-    <string name="act_bit_d">网络图片加载与缓存，多种布局加载,AsyncTask多任务加载，LruCache缓存图片，本地照片与相机，兼容7.1版本，4.4以上,待完成：DisLurCache缓存图片到本地</string>
+    <string name="act_bit_d">AsyncTask网络图片加载与缓存，CircleImageView圆形控件，多布局加载，LruCache缓存图片，本地照片与相机，兼容7.1版本，4.4以上；待加入：DisLurCache缓存图片到本地</string>
 
     <string name="act_bit_uri">05.载入本地图片</string>
     <string name="act_uri_d">自定义线程池加载，FIFO,FILO,PopWindow弹窗，图片的缩放显示，待优化</string>
@@ -41,7 +38,7 @@
     <string name="act_IPC_d">surfaceView，IPC，待深入研究</string>
 
     <string name="act_poetry">诗文，语言，笔记，英语</string>
-    <string name="act_poetry_d">争取做到每日至少背诵一百字</string>
+    <string name="act_poetry_d">争取做到每日至少背诵一百字，SlidingMenu，FlowLayout</string>
 
 
     <string name="ibu"><i><b><u>service</u></b></i></string>
@@ -55,12 +52,6 @@
     <string name="center">正中</string>
     <string name="center_left">中左</string>
     <string name="center_right">中右</string>
-
-    <string name="qq_menu01">登录</string>
-    <string name="qq_menu02">电池</string>
-    <string name="qq_menu03">Broadcast</string>
-    <string name="qq_menu04">TreeActivity</string>
-    <string name="qq_menu05">PullLayout</string>
 
     <string name="jsonobj">{
         "className":"天",

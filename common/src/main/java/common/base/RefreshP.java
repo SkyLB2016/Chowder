@@ -1,10 +1,9 @@
-package com.sky.base;
+package common.base;
 
 import android.content.Context;
 
-import com.sky.api.IRefreshP;
-import com.sky.api.IRefreshV;
-
+import common.api.IRefreshP;
+import common.api.IRefreshV;
 
 /**
  * Created by SKY on 2017/8/22.

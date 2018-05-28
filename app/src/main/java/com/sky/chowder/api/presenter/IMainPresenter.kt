@@ -1,6 +1,6 @@
 package com.sky.chowder.api.presenter
 
-import com.sky.api.IBasePresenter
+import common.api.IBasePresenter
 
 /**
  * Created by SKY on 2017/5/31.

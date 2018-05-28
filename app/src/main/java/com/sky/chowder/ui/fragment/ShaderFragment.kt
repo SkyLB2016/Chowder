@@ -1,6 +1,7 @@
 package com.sky.chowder.ui.fragment
 
 
+import android.os.Bundle
 import com.sky.base.BaseFragment
 import com.sky.chowder.R
 import com.sky.chowder.ui.presenter.SolarP
@@ -15,7 +16,7 @@ class ShaderFragment : BaseFragment<SolarP>() {
 
     override fun creatPresenter() = SolarP(activity!!)
 
-    override fun initialize() {
+    override fun initialize(savedInstanceState: Bundle?) {
 
     }
 }

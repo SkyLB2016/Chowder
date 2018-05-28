@@ -1,15 +1,16 @@
-package com.sky.base;
+package common.base;
 
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 
-import com.sky.R;
 import com.sky.adapter.RecyclerAdapter;
-import com.sky.api.IRefreshV;
 import com.sky.widget.MyRecyclerView;
 
 import java.util.List;
+
+import common.api.IRefreshV;
 
 /**
  * Created by SKY on 2017/6/15.
@@ -25,9 +26,9 @@ public abstract class RecyclerPActivity<T, P extends RefreshP> extends BasePActi
     private boolean firstTail = false;//第一次到达底部
 
     @Override
-    protected void initialize() {
-        recycler = getView(R.id.recycler);
-        swipe = getView(R.id.swipe);
+    protected void initialize(Bundle savedInstanceState) {
+        recycler = getRecyclerView();
+        swipe =  getSwipeView();
         //设置swipe的开始位置与结束位置
         swipe.setProgressViewOffset(false, 0, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 80, getResources().getDisplayMetrics()));
         //为进度圈设置颜色
@@ -70,6 +71,9 @@ public abstract class RecyclerPActivity<T, P extends RefreshP> extends BasePActi
         creatAdapter();
         recycler.setAdapter(adapter);
     }
+
+    protected abstract MyRecyclerView getRecyclerView();
+    protected abstract SwipeRefreshLayout getSwipeView();
 
 //    private int findMax(int[] positions) {
 //        int position = 0;

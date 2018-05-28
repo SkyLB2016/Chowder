@@ -1,13 +1,14 @@
 package com.sky.chowder.ui.activity
 
 import android.content.Intent
+import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
 import com.sky.SkyApp
-import com.sky.base.RecyclerPActivity
 import com.sky.chowder.R
 import com.sky.chowder.model.CourseEntity
 import com.sky.chowder.ui.adapter.LoaderURLAdapter
@@ -16,6 +17,8 @@ import com.sky.chowder.utils.ImageLoaderAsync
 import com.sky.utils.BitmapUtils
 import com.sky.utils.LogUtils
 import com.sky.utils.PhotoUtils
+import com.sky.widget.MyRecyclerView
+import common.base.RecyclerPActivity
 import kotlinx.android.synthetic.main.navigation_content.*
 import java.io.File
 import java.util.*
@@ -34,9 +37,16 @@ class ImageUrlActivity : RecyclerPActivity<CourseEntity, ImageUrlP>() {
     override fun creatPresenter() = ImageUrlP(this)
 
     private lateinit var imageLoader: ImageLoaderAsync
+    override fun getRecyclerView(): MyRecyclerView {
+        return recycler
+    }
 
-    override fun initialize() {
-        super.initialize()
+    override fun getSwipeView(): SwipeRefreshLayout {
+        return swipe
+    }
+
+    override fun initialize(savedInstanceState: Bundle?) {
+        super.initialize(savedInstanceState)
         first = true
         imageLoader = ImageLoaderAsync()
         fab.setOnClickListener { v -> Snackbar.make(v, "正在加载，请稍后", Snackbar.LENGTH_LONG).setAction("cancel") { showToast("已取消") }.show() }

@@ -22,7 +22,7 @@ class MeshFragment : BaseFragment<SolarP>() {
 
     override fun creatPresenter(): SolarP = SolarP(activity!!)
 
-    override fun initialize() {
+    override fun initialize(savedInstanceState: Bundle?) {
 
     }
 }
