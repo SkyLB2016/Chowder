@@ -54,7 +54,6 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
         controller.delay = 0.5f
         controller.order = LayoutAnimationController.ORDER_NORMAL
         recycler.layoutAnimation = controller
-
     }
 
     override fun loadData() {
@@ -76,12 +75,16 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
         val text = getString(resId[6])
 //        gravity = Gravity.CENTER
         setToolbarTitle(text.lines()[0])
-        llBottomBar.visibility = View.GONE
-        registerOnClick(tvLast, tvCatalog, tvNext)
         getCatalog(text)
+
+        initEvent()
     }
 
-    override fun registerView(v: View) = v.setOnClickListener(catalog)
+    private fun initEvent() {
+        tvLast.setOnClickListener { upToChapter() }
+        tvCatalog.setOnClickListener { showCatalogPop(adapter?.datas) }
+        tvNext.setOnClickListener { nextChapter() }
+    }
 
     override fun onClick(v: View?) {
         gravity = when (v?.id) {
@@ -93,14 +96,6 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
         setToolbarTitle(text.lines()[0])
         getCatalog(text)
 //        LogUtils.i("行数==${text.lines().size}")
-    }
-
-    private val catalog = View.OnClickListener { v ->
-        when (v?.id) {
-            R.id.tvLast -> upToChapter()
-            R.id.tvCatalog -> showCatalogPop(adapter?.datas)
-            R.id.tvNext -> nextChapter()
-        }
     }
 
     private fun nextChapter() {
