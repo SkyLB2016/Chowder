@@ -42,12 +42,10 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
         //在应用内时，屏幕常亮
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
-
         baseTitle.setLeftButton(-1)
         recycler?.setHasFixedSize(true)
         adapter = MainAdapter(R.layout.adapter_main)
         recycler.adapter = adapter
-
 
         adapter?.setOnItemClickListener { _, position -> JumpAct.jumpActivity(this, adapter.datas[position].componentName) }
         adapter?.setOnItemLongClickListener { _, _ ->
@@ -58,7 +56,6 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
                 arrayOf(Manifest.permission.WRITE_CONTACTS, Manifest.permission.READ_CONTACTS, Manifest.permission.READ_EXTERNAL_STORAGE),
                 intArrayOf(0, 0, 0)
         )
-//        registerOnClick(fab,fab1)
         fab1.setOnClickListener {
             //            var text = getString(R.string.cezi).trim().replace(" ", "")
 //            LogUtils.i("总长==${text.length}")
@@ -66,7 +63,6 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 //        var num = Array(4, { Array(4) { 0 } })
         var num = Array(4) { IntArray(4) }
         fab.setOnClickListener {
-
             showLoading()
 //            LogUtils.i("${bitmap.allocationByteCount/1024/1024}")
         }

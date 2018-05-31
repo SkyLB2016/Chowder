@@ -2,7 +2,6 @@ package com.sky.chowder.ui.activity
 
 import android.os.Bundle
 import android.text.Editable
-import android.text.TextWatcher
 import android.widget.EditText
 import com.sky.api.TextWatcherAdapter
 import com.sky.chowder.R
@@ -44,11 +43,7 @@ class StockActivity : BaseNoPActivity() {
     override fun loadData() = Unit
 
     private fun checkTextChange(one: EditText?) {
-        one?.addTextChangedListener(object : TextWatcher {
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
-
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-
+        one?.addTextChangedListener(object : TextWatcherAdapter() {
             override fun afterTextChanged(text: Editable) {
                 setTotal()
             }

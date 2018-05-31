@@ -26,12 +26,11 @@ import java.util.*
 /**
  * Created by SKY on 2018/3/16.
  */
-class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
+class PoetryActivity : BaseNoPActivity() {
     private var gravity = Gravity.LEFT
     private lateinit var adapter: RecyclerAdapter<ChapterEntity>
     private val resId = ArrayList<Int>()
     private lateinit var clipM: ClipboardManager
-
     override fun getLayoutResId(): Int = R.layout.activity_poetry
     override fun initialize(savedInstanceState: Bundle?) {
         baseTitle.setLeftButton(R.mipmap.ic_menu)
@@ -50,6 +49,11 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
         recycler.adapter = adapter
         clipM = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
 
+        initEvent()
+        addAni()
+    }
+
+    private fun addAni() {
         val controller = AnimationUtils.loadLayoutAnimation(this, R.anim.anim_layout)
         controller.delay = 0.5f
         controller.order = LayoutAnimationController.ORDER_NORMAL
@@ -69,15 +73,13 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
 //            item_tv.tag = array[0]
             tv.id = index
             flow.addView(tv)
-            tv.setOnClickListener(this)
+            tv.setOnClickListener(selectArticle)
             resId.add(resources.getIdentifier(array[1], "string", packageName))
         }
         val text = getString(resId[6])
 //        gravity = Gravity.CENTER
         setToolbarTitle(text.lines()[0])
         getCatalog(text)
-
-        initEvent()
     }
 
     private fun initEvent() {
@@ -86,7 +88,7 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
         tvNext.setOnClickListener { nextChapter() }
     }
 
-    override fun onClick(v: View?) {
+    private val selectArticle = View.OnClickListener { v ->
         gravity = when (v?.id) {
             in 2..5 -> Gravity.CENTER
             else -> Gravity.LEFT
@@ -197,10 +199,7 @@ class PoetryActivity : BaseNoPActivity(), View.OnClickListener {
     override fun onBackPressed() {
         when {
             sliding.isOpen -> sliding.toggleMenu()
-            llBottomBar.visibility == View.VISIBLE -> {
-                llBottomBar.visibility = View.GONE
-                return
-            }
+            llBottomBar.visibility == View.VISIBLE -> llBottomBar.visibility = View.GONE
             else -> super.onBackPressed()
         }
     }
