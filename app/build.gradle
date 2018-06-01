@@ -13,14 +13,19 @@ dependencies {
     implementation "com.android.support:design:$googleVer"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation project(':common')
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.facebook.fresco:fresco:1.3.0'
+    implementation 'com.facebook.fresco:animated-gif:1.3.0'
+
     if (!puzzle.toBoolean()) {
         implementation project(':puzzle')
         implementation project(':g2048')
     }
     //butterknife
-//    annotationProcessor "com.jakewharton:butterknife-compiler:$bknifeVer"
-//    kapt "com.jakewharton:butterknife-compiler:$bknifeVer"
+    //    annotationProcessor "com.jakewharton:butterknife-compiler:$bknifeVer"
+    //    kapt "com.jakewharton:butterknife-compiler:$bknifeVer"
     //butterknife
+//    implementation 'com.novoda.imageloader:imageloader-core:1.6.1'
 }
 def keystorePropertiesFile = rootProject.file("keystore.properties")
 def keystoreProperties = new Properties()
