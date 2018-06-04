@@ -17,7 +17,7 @@ import common.base.BaseNoPActivity
  * Created by SKY on 2018/5/9 19:07.
  */
 class IPCActivity : BaseNoPActivity() {
-    override fun getLayoutResId(): Int = R.layout.activity_test
+    override fun getLayoutResId(): Int = R.layout.item_recycle_card_main
     override fun initialize(savedInstanceState: Bundle?) {
         bindService(Intent(this, PairServiceA::class.java), connection, Context.BIND_AUTO_CREATE)
 //        startService(Intent(this, PairServiceA::class.java))
