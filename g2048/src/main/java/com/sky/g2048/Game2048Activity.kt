@@ -23,6 +23,7 @@ class Game2048Activity : BaseNoPActivity() {
         game.checkIsEnd = { end -> imgEnd.visibility = if (end) View.VISIBLE else View.GONE }
         findViewById<View>(R.id.tvRight).setOnClickListener { game.restartGame() }
         imgEnd.setOnClickListener { game.restartGame() }
+        btReturnOld.setOnClickListener { game.returnOld() }
     }
 
     override fun loadData() = Unit

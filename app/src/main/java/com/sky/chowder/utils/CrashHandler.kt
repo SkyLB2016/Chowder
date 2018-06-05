@@ -26,7 +26,7 @@ class CrashHandler : Thread.UncaughtExceptionHandler {
 
     override fun uncaughtException(t: Thread, e: Throwable) {
 
-        if (!handlerException(e) && handler != null) handler!!.uncaughtException(t, e)
+        if (!handlerException(e) && handler != null) handler?.uncaughtException(t, e)
         else {
             try {
                 Thread.sleep(3000)

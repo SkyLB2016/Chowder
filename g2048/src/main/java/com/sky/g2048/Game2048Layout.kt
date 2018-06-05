@@ -30,6 +30,7 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
             }
             invalidate()
         }
+    var oldOrginal = IntArray(16)
     private var margin = resources.getDimensionPixelSize(R.dimen.wh_8)//分割后图片之间的间隔
     private val piece = 4//几行几列
     private var once = true
@@ -78,6 +79,14 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
         checkIsEnd?.invoke(isEnd)
     }
 
+    fun returnOld() {
+        orginal = oldOrginal
+        val count = childCount
+        for (i in 0 until count) (getChildAt(i) as ImageView).setImageDrawable(getImageDrawable(orginal[i]))
+        isEnd = false
+        checkIsEnd?.invoke(isEnd)
+    }
+
     private fun getImageDrawable(num: Int): Drawable? =
             if (num in 2..16384) resources.getDrawable(resources.getIdentifier("i$num", "mipmap", context.packageName))
             else null
@@ -97,7 +106,7 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
                 //移动距离过小则返回
                 if (Math.abs(diffX) < 200 && Math.abs(diffY) < 200) return true
                 //复制原数据
-                val oldOrginal = orginal.clone()
+                oldOrginal = orginal.clone()
                 //开始移动数据
                 if (Math.abs(diffX) > Math.abs(diffY)) {
                     if (diffX > 200) /*右滑*/ slideRight()
