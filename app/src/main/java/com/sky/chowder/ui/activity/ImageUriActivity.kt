@@ -29,7 +29,7 @@ import java.util.*
  */
 class ImageUriActivity : RecyclerPActivity<String, ImageUriP>(), ImageUriV<String> {
     override fun getRecyclerView(): MyRecyclerView {
-       return recycler
+        return recycler
     }
 
     override fun getSwipeView(): SwipeRefreshLayout {
@@ -85,8 +85,9 @@ class ImageUriActivity : RecyclerPActivity<String, ImageUriP>(), ImageUriV<Strin
         firstVisibleItem = getMinPositions(firstPositions)
         val lastPositions = layoutManager!!.findLastVisibleItemPositions(IntArray(layoutManager!!.spanCount))
         lastVisibleItem = getMaxPositions(lastPositions)
+        if (firstVisibleItem == -1) firstVisibleItem = 0
         //首次加载执行
-        if (lastVisibleItem > 0 && first) {
+        if (lastVisibleItem > -1 && first) {
             first = false
             loaderAdapter?.setImageLoader(firstVisibleItem, lastVisibleItem, recycler)
         }
@@ -110,20 +111,19 @@ class ImageUriActivity : RecyclerPActivity<String, ImageUriP>(), ImageUriV<Strin
         floderPop = FloderPop(LayoutInflater.from(this).inflate(R.layout.include_recycler, null),
                 ScreenUtils.getWidthPX(this), (ScreenUtils.getHeightPX(this) * 0.7).toInt())
         floderPop?.datas = floders
-        floderPop?.setOnItemClickListener { v, position ->
+        floderPop?.setOnItemClickListener { _, position ->
             setAdapterData(File(floders[position].dirPath!!))
             floderPop?.dismiss()
         }
     }
 
     override fun setAdapterData(parent: File?) {
+        first = true
         val imageNames = Arrays.asList(*parent!!.list(filter))
         loaderAdapter?.parentPath = parent.absolutePath
         loaderAdapter?.datas = imageNames
-
         flodername?.text = parent.name
         number?.text = "共${imageNames.size}张图片"
-        first = true
     }
 
     override fun onDestroy() {

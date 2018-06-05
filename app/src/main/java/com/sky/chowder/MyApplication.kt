@@ -14,6 +14,6 @@ class MyApplication : SkyApp() {
         LogUtils.isDebug = BuildConfig.DEBUG
         //bughd监测崩溃事件
         //        FIR.init(this);
-        CrashHandler.getIntance().init(getInstance())
+        CrashHandler.intance.init(getInstance())
     }
 }

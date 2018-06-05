@@ -63,8 +63,7 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 //        var num = Array(4, { Array(4) { 0 } })
         var num = Array(4) { IntArray(4) }
         fab.setOnClickListener {
-            showLoading()
-//            LogUtils.i("${bitmap.allocationByteCount/1024/1024}")
+            num[5]
         }
     }
 

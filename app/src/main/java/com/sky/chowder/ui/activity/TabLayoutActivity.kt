@@ -22,7 +22,7 @@ class TabLayoutActivity : BaseNoPActivity() {
 
     override fun initialize(savedInstanceState: Bundle?) {
         setUpViewPager()
-        val mParams = findViewById<TabLayout>(R.id.appbar).getChildAt(0).layoutParams as AppBarLayout.LayoutParams
+        val mParams = findViewById<AppBarLayout>(R.id.appbar).getChildAt(0).layoutParams as AppBarLayout.LayoutParams
         mParams.scrollFlags = 0//的时候AppBarLayout下的toolbar就不会随着滚动条折叠
         //        mParams.setScrollFlags(5); //的时候AppBarLayout下的toolbar会随着滚动条折叠
     }
