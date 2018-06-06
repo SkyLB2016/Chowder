@@ -12,15 +12,18 @@ import com.sky.chowder.ui.service.IOnNewBookArriveListener
 import com.sky.chowder.ui.service.PairServiceA
 import com.sky.utils.LogUtils
 import common.base.BaseNoPActivity
+import kotlinx.android.synthetic.main.activity_ipc.*
 
 /**
  * Created by SKY on 2018/5/9 19:07.
  */
 class IPCActivity : BaseNoPActivity() {
-    override fun getLayoutResId(): Int = R.layout.item_recycle_card_main
+    override fun getLayoutResId(): Int = R.layout.activity_ipc
     override fun initialize(savedInstanceState: Bundle?) {
         bindService(Intent(this, PairServiceA::class.java), connection, Context.BIND_AUTO_CREATE)
 //        startService(Intent(this, PairServiceA::class.java))
+//        val badge = BadgeView(this)
+        badge.badgeCount=0
     }
 
     override fun loadData() = Unit

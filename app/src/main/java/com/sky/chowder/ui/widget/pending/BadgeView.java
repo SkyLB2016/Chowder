@@ -22,7 +22,7 @@ import com.sky.utils.LogUtils;
 /**
  * Created by SKY on 2015/12/9 20:52.
  */
-public class BadgeView extends TextView {
+public class BadgeView extends android.support.v7.widget.AppCompatTextView {
 
     private boolean mHideOnNull = true;
 

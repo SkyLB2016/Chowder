@@ -80,6 +80,7 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
     }
 
     fun returnOld() {
+        if (checkArrayIsZero(oldOrginal)) return
         orginal = oldOrginal
         val count = childCount
         for (i in 0 until count) (getChildAt(i) as ImageView).setImageDrawable(getImageDrawable(orginal[i]))
@@ -106,7 +107,7 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
                 //移动距离过小则返回
                 if (Math.abs(diffX) < 200 && Math.abs(diffY) < 200) return true
                 //复制原数据
-                oldOrginal = orginal.clone()
+                val old = orginal.clone()
                 //开始移动数据
                 if (Math.abs(diffX) > Math.abs(diffY)) {
                     if (diffX > 200) /*右滑*/ slideRight()
@@ -116,11 +117,19 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
                     else if (diffY < -200) /*上滑*/ slideUp()
                 }
                 //现数据与原数据比较，不同则重置数组
-                if (!Arrays.equals(orginal, oldOrginal)) resetView()
+                if (!Arrays.equals(orginal, old)) {
+                    resetView()
+                    oldOrginal = old//上一步数据
+                }
                 //list可直接相比
 //                if (orginal != oldOrginal) resetView()
             }
         }
+        return true
+    }
+
+    private fun checkArrayIsZero(array: IntArray): Boolean {
+        for (i in array) if (i != 0) return false
         return true
     }
 
@@ -144,9 +153,9 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
             isEnd = true
             for (i in 0..3) {
                 //横向对比
-                if (orginal[i * 4] == orginal[i * 4 + 1] || orginal[i * 4 + 1] == orginal[i * 4 + 2] || orginal[i * 4 + 2] == orginal[i * 4 + 3] ||
+                if (contrast(i * 4, i * 4 + 1) || contrast(i * 4 + 1, i * 4 + 2) || contrast(i * 4 + 2, i * 4 + 3) ||
                         //纵向对比
-                        orginal[i] == orginal[i + 4] || orginal[i + 4] == orginal[i + 8] || orginal[i + 8] == orginal[i + 12]) {
+                        contrast(i, i + 4) || contrast(i + 4, i + 8) || contrast(i + 8, i + 12)) {
                     isEnd = false
                     break
                 }
@@ -155,6 +164,8 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
             checkIsEnd?.invoke(isEnd)
         }
     }
+
+    private fun contrast(one: Int, two: Int) = orginal[one] == orginal[two]
 
     private fun addAni(image: ImageView) {
         val set = AnimatorSet()

@@ -7,7 +7,6 @@ import com.sky.chowder.R
 import com.sky.chowder.api.presenter.IMainPresenter
 import com.sky.chowder.api.view.IMainView
 import com.sky.chowder.model.ActivityModel
-import com.sky.utils.LogUtils
 import common.base.BasePresenter
 import java.text.Collator
 import java.util.*
@@ -40,7 +39,8 @@ class MainP(context: Context) : BasePresenter<IMainView>(context), IMainPresente
 //            mainIntent.flags=Intent.FLAG_ACTIVITY_NEW_TASK
 //            mainIntent.flags=Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
             val manager = context.packageManager
-            val resolveInfos = manager?.queryIntentActivities(mainIntent, PackageManager.MATCH_ALL) ?: return activityInfos
+            val resolveInfos = manager?.queryIntentActivities(mainIntent, PackageManager.MATCH_ALL)
+                    ?: return activityInfos
 //            val resolveInfos1 = manager?.resolveActivity(mainIntent, 0) ?: return activityInfos
 
             for (i in resolveInfos.indices) {
@@ -55,19 +55,13 @@ class MainP(context: Context) : BasePresenter<IMainView>(context), IMainPresente
                 val iconRes = info.activityInfo.icon
                 val icon = if (iconRes == 0) R.mipmap.ic_launcher else iconRes
                 activityInfos.add(ActivityModel(label, describe, icon, info.activityInfo.name))
-                LogUtils.i("${info.activityInfo.name}")
+//                LogUtils.i("${info.activityInfo.name}")
             }
             //排序
-            Collections.sort(activityInfos, sort)
-//            Collections.sort(activityInfos);//使用activityModel中的compareTo进行排序
+            Collections.sort(activityInfos, comparator)
+//            Collections.comparator(activityInfos);//使用activityModel中的compareTo进行排序
             return activityInfos
         }
-    companion object {
-        private val sort = object : Comparator<ActivityModel> {
-            private val collator = Collator.getInstance()
-            override fun compare(first: ActivityModel, second: ActivityModel): Int {
-                return collator.compare(first.className, second.className)
-            }
-        }
-    }
+    private val comparator = Comparator<ActivityModel> { first, second -> Collator.getInstance().compare(first.className, second.className) }
+    private val sort = Comparator<Double> { first, second -> if (first > second) 1 else if (first < second) -1 else 0 }
 }

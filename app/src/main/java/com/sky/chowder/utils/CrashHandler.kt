@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Looper
-import android.os.Process
 import com.sky.SkyApp
 import com.sky.utils.DateUtil
 import com.sky.utils.LogUtils
@@ -33,7 +32,9 @@ class CrashHandler : Thread.UncaughtExceptionHandler {
             } catch (e: InterruptedException) {
 
             }
-            Process.killProcess(Process.myPid())
+            e.printStackTrace()
+//            handler?.uncaughtException(t, e)
+            android.os.Process.killProcess(android.os.Process.myPid())
             System.exit(1)
         }
 
@@ -110,10 +111,9 @@ class CrashHandler : Thread.UncaughtExceptionHandler {
 
     companion object {
         internal var crash: CrashHandler? = null
-
         val intance: CrashHandler
             get() {
-                if (crash == null) crash = CrashHandler()
+                crash = crash ?: CrashHandler()
                 return crash!!
             }
     }

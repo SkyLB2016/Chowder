@@ -20,7 +20,6 @@ import common.base.BasePActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import java.io.File
-import java.util.*
 
 /**
  * Created by SKY on 2015/12/6.
@@ -65,7 +64,7 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
         var num = Array(4) { IntArray(4) }
         fab.setOnClickListener {
 //            num[5]
-            Random().nextInt(0)
+//            Random().nextInt(0)
         }
     }
 

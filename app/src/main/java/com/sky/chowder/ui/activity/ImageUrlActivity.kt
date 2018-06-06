@@ -31,19 +31,11 @@ class ImageUrlActivity : RecyclerPActivity<CourseEntity, ImageUrlP>() {
     private var first: Boolean = false
     private var firstVisibleItem: Int = 0
     private var lastVisibleItem: Int = 0
-
     override fun getLayoutResId() = R.layout.navigation_content
-
     override fun creatPresenter() = ImageUrlP(this)
-
     private lateinit var imageLoader: ImageLoaderAsync
-    override fun getRecyclerView(): MyRecyclerView {
-        return recycler
-    }
-
-    override fun getSwipeView(): SwipeRefreshLayout {
-        return swipe
-    }
+    override fun getRecyclerView(): MyRecyclerView = recycler
+    override fun getSwipeView(): SwipeRefreshLayout = swipe
 
     override fun initialize(savedInstanceState: Bundle?) {
         super.initialize(savedInstanceState)

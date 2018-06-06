@@ -28,13 +28,8 @@ import java.util.*
  * 加载本地图片
  */
 class ImageUriActivity : RecyclerPActivity<String, ImageUriP>(), ImageUriV<String> {
-    override fun getRecyclerView(): MyRecyclerView {
-        return recycler
-    }
-
-    override fun getSwipeView(): SwipeRefreshLayout {
-        return swipe
-    }
+    override fun getRecyclerView(): MyRecyclerView = recycler
+    override fun getSwipeView(): SwipeRefreshLayout = swipe
 
     //瀑布流布局
     private var layoutManager: StaggeredGridLayoutManager? = null
