@@ -61,6 +61,8 @@ android {
         debug {
             versionNameSuffix "-debug"
             signingConfig signingConfigs.debug
+            minifyEnabled true //是否开启混淆
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             creatName()
         }
         release {

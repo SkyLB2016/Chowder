@@ -5879,6 +5879,13 @@
         　　(1)addView(v,layoutparam)\n
         　　(2)updateViewLayout(v,layoutparam)\n
         　　(3)rempveView(v)\n
+        ●34.ProGuard，参见app下的proguard文件\n
+        　　(1)压缩Shrink：侦测并移除代码中的无用类，字段，方法和特性。\n
+        　　(2)优化Optimize：对字节码进行优化，移除无用的指令。\n
+        　　(3)混淆Obfuscate：使用a、b、c、d这样简短而无意义的名称，对类、字段和方法进行重命名。\n
+        　　(4)预检Preveirfy：在java平台上对处理后的代码进行预检。\n
+        　　(5)\n
+        　　(6)\n
         ●34.\n
         　　(1)\n
         　　(2)\n

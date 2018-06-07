@@ -47,7 +47,7 @@ android {
         abortOnError false
     }
 }
-def retrofit2 = '2.3.0'
+def retrofit2 = '2.4.0'
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     api "com.android.support:appcompat-v7:$googleVer"
@@ -63,7 +63,7 @@ dependencies {
     api "com.squareup.retrofit2:converter-gson:$retrofit2"
     api "com.squareup.retrofit2:adapter-rxjava2:$retrofit2"
     //retrofit2
-    api 'com.squareup.okhttp3:okhttp:3.9.0'
+    api 'com.squareup.okhttp3:okhttp:3.10.0'
 //    api "com.jakewharton:butterknife:$bknifeVer"
     //工具类
     //    api 'com.blankj:utilcode:1.6.3'
