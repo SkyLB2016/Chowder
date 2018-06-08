@@ -251,7 +251,7 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
                     .build()
         else SoundPool(100, AudioManager.STREAM_MUSIC, 0)
 //        构建对象
-        val soundId = soundPool.load(this, R.raw.sudi, 1)//加载资源，得到soundId
+        val soundId = soundPool.load(this, R.raw.bgyxc, 1)//加载资源，得到soundId
         soundPool.setOnLoadCompleteListener { soundPool, sampleId, status ->
             val streamId = soundPool.play(soundId, 1f, 1f, 1, 0, 1f)//播放，得到StreamId
         }
@@ -394,8 +394,7 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
         text.append(model.toString() + "\n")
         text.append(entity.objList.toString() + "\n")
         text.append(list.toString() + "\n")
-        for (i in array)
-            text.append(i.toString() + "\n")
+        for (i in array) text.append(i.toString() + "\n")
         return text.toString()
     }
 

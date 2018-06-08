@@ -31,7 +31,7 @@ class WelcomeActivity : AppCompatActivity() {
         alpha.duration = TIME
         val rotate = RotateAnimation(0f, 360f, RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f)
         rotate.duration = TIME
-        val tran = TranslateAnimation(0f, 200f, 0f, 200f)
+        val tran = TranslateAnimation(200f, 0f, 200f, 0f)
         tran.duration = TIME
         val scale = ScaleAnimation(0f, 1f, 0f, 1f)
 //        val scale = Custom()
@@ -39,7 +39,7 @@ class WelcomeActivity : AppCompatActivity() {
 
         set.addAnimation(alpha)
         set.addAnimation(rotate)
-//        set.addAnimation(tran)
+        set.addAnimation(tran)
         set.addAnimation(scale)
 
         view.startAnimation(set)

@@ -1,12 +1,7 @@
 package com.sky.chowder.ui.adapter
 
-import android.animation.AnimatorInflater
-import android.graphics.Outline
-import android.os.Build
-import android.support.annotation.RequiresApi
-import android.view.View
+import android.graphics.Typeface
 import android.view.ViewGroup
-import android.view.ViewOutlineProvider
 import android.view.animation.LayoutAnimationController
 import android.view.animation.ScaleAnimation
 import com.sky.adapter.RecyclerAdapter
@@ -20,6 +15,8 @@ import kotlinx.android.synthetic.main.adapter_main.view.*
  * 主页
  */
 class MainAdapter(layoutId: Int) : RecyclerAdapter<ActivityModel>(layoutId) {
+    var fontIcon = intArrayOf(R.string.font, R.string.font01, R.string.font02, R.string.font03,
+            R.string.font04, R.string.font05, R.string.font06, R.string.font07, R.string.font08)
 
     override fun onAchieveHolder(holder: RecyclerHolder, position: Int) {
         //应写成异步调用
@@ -30,29 +27,16 @@ class MainAdapter(layoutId: Int) : RecyclerAdapter<ActivityModel>(layoutId) {
             controller.order = LayoutAnimationController.ORDER_RANDOM
             (holder?.itemView as ViewGroup).layoutAnimation = controller
         } else holder?.itemView.startAnimation(scale)
+        val face = Typeface.createFromAsset(context.assets, "font/icomoon.ttf")
         with(holder!!.itemView) {
-            tv_name.text = "${datas[position].className}"
-            tv_describe.text = datas[position].describe
-            image.background = resources.getDrawable(datas[position].img)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                //使用ripple
-                //((CardView) holder.getView(R.id.cardView)).setRadius(new Random().nextInt(50));
-                //((CardView) holder.getView(R.id.cardView)).setCardElevation(new Random().nextInt(50));
-                cardView.background = context.getDrawable(R.drawable.ripple)
-                //点击效果，阴影效果
-                //((CardView) holder.getView(R.id.cardView)).setCardElevation(new Random().nextInt(100));
-                cardView.stateListAnimator = AnimatorInflater.loadStateListAnimator(context, R.drawable.state_list_animator)
-                //视图裁剪
-                image.clipToOutline = true
-                image.outlineProvider = object : ViewOutlineProvider() {
-                    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-                    override fun getOutline(view: View, outline: Outline) {
-                        outline.setRoundRect(view.left, view.top, view.right, view.bottom, 60f)
-                    }
-                }
-            } else
-                cardView.background = context.resources.getDrawable(R.drawable.bg_card)
-//            setOnClickListener { v -> LogUtils.i("lkjdflkajdkf") }
+            tvName.text = "${datas[position].className}" + resources.getString(fontIcon[position % 9])
+            tvDescribe.text = resources.getString(fontIcon[8 - position % 9]) + datas[position].describe
+            tvImage.text = resources.getString(fontIcon[position % 9])
+
+            tvName.typeface = face
+            tvDescribe.typeface = face
+            tvImage.typeface = face
+            tvImage.textSize=50f
         }
     }
 }

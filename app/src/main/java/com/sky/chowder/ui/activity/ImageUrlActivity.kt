@@ -47,10 +47,10 @@ class ImageUrlActivity : RecyclerPActivity<CourseEntity, ImageUrlP>() {
 
     override fun creatAdapter() {
         val layoutIds = ArrayList<Int>()//主体布局
-        layoutIds.add(R.layout.adapter_main)
+        layoutIds.add(R.layout.adapter_main_01)
         layoutIds.add(R.layout.adapter_main_02)
         layoutIds.add(R.layout.adapter_main_02)
-        layoutIds.add(R.layout.adapter_main)
+        layoutIds.add(R.layout.adapter_main_01)
         adapter = LoaderURLAdapter(layoutIds)
     }
 

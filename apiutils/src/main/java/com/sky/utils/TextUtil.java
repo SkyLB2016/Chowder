@@ -14,6 +14,7 @@ public class TextUtil {
      * @return 获取控件中的内容
      */
     public static String getText(TextView text) {
+        if (text==null)return "";
         return text.getText().toString().trim();
     }
 

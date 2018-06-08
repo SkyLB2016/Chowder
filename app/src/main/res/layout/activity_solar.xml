@@ -17,37 +17,37 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/main_flow"
+            android:src="@drawable/solar_flow"
             android:tag="flow" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/main_refresh"
+            android:src="@drawable/solar_refresh"
             android:tag="list" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/main_pager"
+            android:src="@drawable/solar_pager"
             android:tag="viewpager" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/main_recycler"
+            android:src="@drawable/solar_recycler"
             android:tag="recyclerview" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/main_bitmap"
+            android:src="@drawable/solar_bitmap"
             android:tag="bitmap" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/main_sliding"
+            android:src="@drawable/solar_sliding"
             android:tag="slidingmenu" />
 
         <RelativeLayout

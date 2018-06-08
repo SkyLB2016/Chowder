@@ -85,4 +85,17 @@
     <string name="format02">组合替换字符%s与数字%d %n</string>
     <string name="format03">转四位数的的数%04d %n</string>
     <string name="format04">以,分隔整数%,d与浮点数%,.2f %n</string>
+
+
+
+
+    <string name="font">&#xe900;</string>
+    <string name="font01">&#xe906;</string>
+    <string name="font02">&#xe907;</string>
+    <string name="font03">&#xe90b;</string>
+    <string name="font04">&#xe91c;</string>
+    <string name="font05">&#xe91d;</string>
+    <string name="font06">&#xe97f;</string>
+    <string name="font07">&#xe982;</string>
+    <string name="font08">&#xe983;</string>
 </resources>

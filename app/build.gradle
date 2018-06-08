@@ -83,13 +83,11 @@ android {
         sky {
             dimension "sky"
         }
-//        GooglePlay {}
+//        baidu {}
 //        xiaomi {}
 //        umeng {}
     }
-    productFlavors.all { flavor ->
-        flavor.manifestPlaceholders = [CHANNEL_VALUE: name]
-    }
+    productFlavors.all { flavor -> flavor.manifestPlaceholders = [CHANNEL_VALUE: name] }
 }
 
 def creatName() {

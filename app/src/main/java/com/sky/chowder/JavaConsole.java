@@ -50,7 +50,7 @@ public class JavaConsole {
         }
         FileWriter writer = null;
         try {
-            writer = new FileWriter("C:\\WorkSpace\\Chowder\\app\\poetry", true);
+            writer = new FileWriter("C:\\WorkSpace\\Chowder\\app\\poetry1", true);
             writer.write(builder.toString());
         } catch (IOException e) {
         } finally {

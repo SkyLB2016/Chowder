@@ -5589,6 +5589,7 @@
         　　(4)通知pendingIntent，notification\n
         　　(5)重构apputils\n
         　　(6)整理笔记顺序\n
+        <!--　　(7)参考App研发录，重新定义页面跳转\n-->
     </string>
 
     <string name="weiqi">
@@ -5670,7 +5671,8 @@
         　　(4)MarginLayoutParams是viewGroup的父类\n
         　　(5)ViewDragHelper滑动控制类，子类有DrawerLayout与SlidingPaneLayout\n
         　　(6)dalvik是运行时编译，ART是安装时就进行编译。目前采用的是ART模式\n
-        　　(7)Makefile机制:组合文件，进行自动的可控制的编译（待加强）\n
+        　　(7)drawable文件，true，false，不同时出现的话，true，必须在前，文件效果才有效\n
+        　　(8)Makefile机制:组合文件，进行自动的可控制的编译（待加强）\n
         ●03.ADB命令行：\n
         　　(1)安装apk：adb install 路径\n
         　　(2)向手机传输文件：\n

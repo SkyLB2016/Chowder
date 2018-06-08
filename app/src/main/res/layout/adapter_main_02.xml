@@ -25,7 +25,7 @@
             app:borderWidth="@dimen/wh_4" />
 
         <TextView
-            android:id="@+id/tv_name"
+            android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/wh_16"
@@ -35,10 +35,10 @@
             android:textStyle="italic" />
 
         <TextView
-            android:id="@+id/tv_describe"
+            android:id="@+id/tvDescribe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_name"
+            android:layout_below="@id/tvName"
             android:layout_marginLeft="@dimen/wh_16"
             android:layout_marginTop="@dimen/wh_4"
             android:layout_toRightOf="@id/image"

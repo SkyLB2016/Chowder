@@ -2,6 +2,7 @@ package com.sky.chowder.ui.adapter
 
 import android.animation.AnimatorInflater
 import android.graphics.Outline
+import android.graphics.Typeface
 import android.os.Build
 import android.support.annotation.RequiresApi
 import android.view.LayoutInflater
@@ -12,7 +13,7 @@ import com.sky.adapter.RecyclerAdapter
 import com.sky.adapter.RecyclerHolder
 import com.sky.chowder.R
 import com.sky.chowder.model.CourseEntity
-import kotlinx.android.synthetic.main.adapter_main.view.*
+import kotlinx.android.synthetic.main.adapter_main_01.view.*
 import java.util.*
 
 /**
@@ -31,7 +32,10 @@ class LoaderURLAdapter(layoutIds: List<Int>) : RecyclerAdapter<CourseEntity>(0) 
     }
 
     override fun onAchieveHolder(holder: RecyclerHolder, position: Int) {
+        val face = Typeface.createFromAsset(context.assets, "font/Lobster-Regular.ttf")
         with(holder.itemView) {
+            tvName.typeface = face
+            tvDescribe.typeface = face
             val viewType = getItemViewType(position)
             when (viewType % layoutIds.size) {
                 0 -> setView(position)
@@ -43,27 +47,27 @@ class LoaderURLAdapter(layoutIds: List<Int>) : RecyclerAdapter<CourseEntity>(0) 
     }
 
     private fun View.setView(position: Int) {
-        tv_name.text = "${position + 1}.${datas[position].name}   第一种布局"
-        tv_describe.text = datas[position].description
+        tvName.text = "${position + 1}.${datas[position].name}   第一种布局"
+        tvDescribe.text = datas[position].description
         image.tag = datas[position].picBig
         clipView()
     }
 
     private fun View.setView1(position: Int) {
-        tv_name.text = "${position + 1}.${datas[position].name}   第二种布局"
-        tv_describe.text = datas[position].description
+        tvName.text = "${position + 1}.${datas[position].name}   第二种布局"
+        tvDescribe.text = datas[position].description
         image.tag = datas[position].picBig
     }
 
     private fun View.setView2(position: Int) {
-        tv_name.text = "${position + 1}.${datas[position].name}   第三种布局"
-        tv_describe.text = datas[position].description
+        tvName.text = "${position + 1}.${datas[position].name}   第三种布局"
+        tvDescribe.text = datas[position].description
         image.tag = datas[position].picBig
     }
 
     private fun View.setView3(position: Int) {
-        tv_name.text = "${position + 1}.${datas[position].name}   第四种布局"
-        tv_describe.text = datas[position].description
+        tvName.text = "${position + 1}.${datas[position].name}   第四种布局"
+        tvDescribe.text = datas[position].description
         image.tag = datas[position].picBig
         clipView()
     }
@@ -72,8 +76,11 @@ class LoaderURLAdapter(layoutIds: List<Int>) : RecyclerAdapter<CourseEntity>(0) 
         image.setBackgroundResource(R.mipmap.ic_launcher)
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
             //使用ripple
+            //((CardView) holder.getView(R.id.cardView)).setRadius(new Random().nextInt(50));
+            //((CardView) holder.getView(R.id.cardView)).setCardElevation(new Random().nextInt(50));
             cardView.background = context.getDrawable(R.drawable.ripple)
             //点击效果，阴影效果
+            //((CardView) holder.getView(R.id.cardView)).setCardElevation(new Random().nextInt(100));
             cardView.stateListAnimator = AnimatorInflater.loadStateListAnimator(context, R.drawable.state_list_animator)
             //视图裁剪
             image.clipToOutline = true
@@ -83,6 +90,6 @@ class LoaderURLAdapter(layoutIds: List<Int>) : RecyclerAdapter<CourseEntity>(0) 
                     outline.setRoundRect(view.left, view.top, view.right, view.bottom, 30f)
                 }
             }
-        }
+        } else cardView.background = context.resources.getDrawable(R.drawable.bg_card)
     }
 }
