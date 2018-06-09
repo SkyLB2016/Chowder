@@ -5,13 +5,17 @@ import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.view.KeyEvent
 import android.view.MotionEvent
+import android.view.View
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import com.sky.SkyApp
+import com.sky.utils.LogUtils
 import com.sky.utils.ScreenUtils
 import java.util.*
 import kotlin.collections.ArrayList
+
 
 /**
  * Created by SKY on 2015/12/24 10:58.
@@ -31,6 +35,7 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
             invalidate()
         }
     var oldOrginal = IntArray(16)
+    var oldOrginal2 = IntArray(16)
     private var margin = resources.getDimensionPixelSize(R.dimen.wh_8)//分割后图片之间的间隔
     private val piece = 4//几行几列
     private var once = true
@@ -42,7 +47,14 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
 
     init {
         setBackgroundResource(R.mipmap.bg2048)
+        setOnKeyListener(object : OnKeyListener {
+            override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
+                LogUtils.i("==键盘事件")
+                return true
+            }
+        })
     }
+
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
@@ -82,6 +94,8 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
     fun returnOld() {
         if (checkArrayIsZero(oldOrginal)) return
         orginal = oldOrginal
+        oldOrginal = oldOrginal2
+
         val count = childCount
         for (i in 0 until count) (getChildAt(i) as ImageView).setImageDrawable(getImageDrawable(orginal[i]))
         isEnd = false
@@ -101,31 +115,52 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
                 downX = event.x
                 downY = event.y
             }
+            MotionEvent.EDGE_LEFT -> {
+                MotionEvent.EDGE_RIGHT
+                LogUtils.i("zuo左右左右")
+            }
             MotionEvent.ACTION_UP -> {
                 val diffX = event.x - downX
                 val diffY = event.y - downY
                 //移动距离过小则返回
                 if (Math.abs(diffX) < 200 && Math.abs(diffY) < 200) return true
-                //复制原数据
-                val old = orginal.clone()
-                //开始移动数据
                 if (Math.abs(diffX) > Math.abs(diffY)) {
-                    if (diffX > 200) /*右滑*/ slideRight()
-                    else if (diffX < -200) /*左滑*/ slideLeft()
+                    if (diffX > 200) /*右滑*/ changeData(22)
+                    else if (diffX < -200) /*左滑*/ changeData(21)
                 } else {
-                    if (diffY > 200) /*下滑*/ slideDown()
-                    else if (diffY < -200) /*上滑*/ slideUp()
+                    if (diffY > 200) /*下滑*/ changeData(20)
+                    else if (diffY < -200) /*上滑*/ changeData(19)
                 }
-                //现数据与原数据比较，不同则重置数组
-                if (!Arrays.equals(orginal, old)) {
-                    resetView()
-                    oldOrginal = old//上一步数据
-                }
-                //list可直接相比
-//                if (orginal != oldOrginal) resetView()
             }
         }
         return true
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        when (keyCode) {
+            KeyEvent.KEYCODE_DPAD_UP,
+            KeyEvent.KEYCODE_DPAD_DOWN,
+            KeyEvent.KEYCODE_DPAD_LEFT,
+            KeyEvent.KEYCODE_DPAD_RIGHT -> changeData(keyCode)
+        }
+        return super.onKeyDown(keyCode, event)
+    }
+
+    private fun changeData(status: Int) {
+        //复制原数据
+        val old = orginal.clone()
+        //开始移动数据
+        when (status) {
+            19 -> slideUp()/*上滑*/
+            20 -> slideDown()/*下滑*/
+            21 -> slideLeft()/*左滑*/
+            22 -> slideRight()/*右滑*/
+        }
+        if (!Arrays.equals(orginal, old)) {
+            resetView()
+            oldOrginal2 = oldOrginal
+            oldOrginal = old//上一步数据
+        }
     }
 
     private fun checkArrayIsZero(array: IntArray): Boolean {

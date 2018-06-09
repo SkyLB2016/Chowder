@@ -2,8 +2,8 @@ package com.sky.chowder.ui.presenter
 
 import android.content.Context
 import com.sky.ErrorMes
-import com.sky.chowder.api.OnRequestCallback
 import com.sky.chowder.R
+import com.sky.chowder.api.OnRequestCallback
 import com.sky.chowder.model.CourseEntity
 import com.sky.chowder.utils.http.HttpUtils
 import com.sky.chowder.utils.http.UseCase
@@ -12,7 +12,7 @@ import common.base.RefreshP
 import common.model.ApiResponse
 import io.reactivex.Observable
 
-class ImageUrlP(context: Context) : RefreshP<IRefreshV<CourseEntity>>(context){
+class ImageUrlP(context: Context) : RefreshP<IRefreshV<CourseEntity>>(context) {
     override fun getDataList() {
         mView.showLoading()
         object : UseCase<ApiResponse<CourseEntity>>() {
@@ -32,7 +32,7 @@ class ImageUrlP(context: Context) : RefreshP<IRefreshV<CourseEntity>>(context){
 //                totalCount = data.totalCount
                 val datalist = data.data
 
-                if (datalist.isEmpty()) mView.showToast(R.string.toast_no_data)
+                if (datalist != null && datalist.isEmpty()) return mView.showToast(R.string.toast_no_data)
                 if (page == 1) mView.setAdapterList(datalist)
                 else mView.addAdapterList(datalist)
             }

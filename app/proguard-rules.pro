@@ -156,6 +156,7 @@
 -dontwarn okio.**
 -dontwarn javax.annotation.**
 -dontwarn org.conscrypt.**
+#-keep class okhttp3.**{*;}
 # A resource is loaded with a relative path so the package of this class must be preserved.
 -keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
 # OkHttp3
@@ -192,6 +193,11 @@
 -keepattributes EnclosingMethod
 -keep class org.xz_sale.entity.**{*;}
 # Gson
+
+-keep class com.sky.**{*;}
+-keep class common.**{*;}
+
+
 
 -dontwarn com.google.**
 -keep class com.google.** { *;}

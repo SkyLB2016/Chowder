@@ -1,6 +1,7 @@
 package com.sky.g2048
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
 import com.sky.SkyApp
@@ -34,6 +35,17 @@ class Game2048Activity : BaseNoPActivity() {
         super.onStop()
         if (game.isEnd) FileUtils.deleteFile(pathName)
         else FileUtils.serialize(pathName, game.orginal)
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        when (keyCode) {
+            KeyEvent.KEYCODE_DPAD_UP,
+            KeyEvent.KEYCODE_DPAD_DOWN,
+            KeyEvent.KEYCODE_DPAD_LEFT,
+            KeyEvent.KEYCODE_DPAD_RIGHT -> game.onKeyDown(keyCode,event)
+            KeyEvent.KEYCODE_R->game.returnOld()
+        }
+        return super.onKeyDown(keyCode,event!!)
     }
 
     private var lastBack: Long = 0
