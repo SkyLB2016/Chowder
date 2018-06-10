@@ -35,7 +35,6 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
             invalidate()
         }
     var oldOrginal = IntArray(16)
-    var oldOrginal2 = IntArray(16)
     private var margin = resources.getDimensionPixelSize(R.dimen.wh_8)//分割后图片之间的间隔
     private val piece = 4//几行几列
     private var once = true
@@ -94,8 +93,6 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
     fun returnOld() {
         if (checkArrayIsZero(oldOrginal)) return
         orginal = oldOrginal
-        oldOrginal = oldOrginal2
-
         val count = childCount
         for (i in 0 until count) (getChildAt(i) as ImageView).setImageDrawable(getImageDrawable(orginal[i]))
         isEnd = false
@@ -137,12 +134,7 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        when (keyCode) {
-            KeyEvent.KEYCODE_DPAD_UP,
-            KeyEvent.KEYCODE_DPAD_DOWN,
-            KeyEvent.KEYCODE_DPAD_LEFT,
-            KeyEvent.KEYCODE_DPAD_RIGHT -> changeData(keyCode)
-        }
+        changeData(keyCode)
         return super.onKeyDown(keyCode, event)
     }
 
@@ -158,7 +150,6 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
         }
         if (!Arrays.equals(orginal, old)) {
             resetView()
-            oldOrginal2 = oldOrginal
             oldOrginal = old//上一步数据
         }
     }
