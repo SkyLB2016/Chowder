@@ -43,7 +43,8 @@ class Game2048Activity : BaseNoPActivity() {
             KeyEvent.KEYCODE_DPAD_DOWN,
             KeyEvent.KEYCODE_DPAD_LEFT,
             KeyEvent.KEYCODE_DPAD_RIGHT -> game.onKeyDown(keyCode,event)
-            KeyEvent.KEYCODE_R->game.returnOld()
+            KeyEvent.KEYCODE_B->game.returnOld()
+            KeyEvent.KEYCODE_R->game.restartGame()
         }
         return super.onKeyDown(keyCode,event!!)
     }
