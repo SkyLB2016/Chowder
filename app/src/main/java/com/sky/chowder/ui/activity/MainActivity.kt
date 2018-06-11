@@ -56,11 +56,8 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
                 arrayOf(Manifest.permission.WRITE_CONTACTS, Manifest.permission.READ_CONTACTS, Manifest.permission.READ_EXTERNAL_STORAGE),
                 intArrayOf(0, 0, 0)
         )
-        fab1.setOnClickListener {
             //            var text = getString(R.string.cezi).trim().replace(" ", "")
 //            LogUtils.i("总长==${text.length}")
-//            没有灵魂的产品经理做出来的产品会有灵魂吗
-        }
 //        var num = Array(4, { Array(4) { 0 } })
         var num = Array(4) { IntArray(4) }
         fab.setOnClickListener {

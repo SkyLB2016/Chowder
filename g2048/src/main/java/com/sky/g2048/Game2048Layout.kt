@@ -7,7 +7,6 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.KeyEvent
 import android.view.MotionEvent
-import android.view.View
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import com.sky.SkyApp
@@ -46,12 +45,6 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
 
     init {
         setBackgroundResource(R.mipmap.bg2048)
-        setOnKeyListener(object : OnKeyListener {
-            override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
-                LogUtils.i("==键盘事件")
-                return true
-            }
-        })
     }
 
 
