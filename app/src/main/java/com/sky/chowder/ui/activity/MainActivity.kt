@@ -16,6 +16,7 @@ import com.sky.chowder.ui.adapter.MainAdapter
 import com.sky.chowder.ui.presenter.MainP
 import com.sky.utils.AppUtils
 import com.sky.utils.JumpAct
+import com.sky.utils.LogUtils
 import common.base.BasePActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -56,13 +57,11 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
                 arrayOf(Manifest.permission.WRITE_CONTACTS, Manifest.permission.READ_CONTACTS, Manifest.permission.READ_EXTERNAL_STORAGE),
                 intArrayOf(0, 0, 0)
         )
-            //            var text = getString(R.string.cezi).trim().replace(" ", "")
-//            LogUtils.i("总长==${text.length}")
 //        var num = Array(4, { Array(4) { 0 } })
         var num = Array(4) { IntArray(4) }
         fab.setOnClickListener {
-//            num[5]
-//            Random().nextInt(0)
+            var text = getString(R.string.cezi).trim().replace(" ", "")
+            LogUtils.i("总长==${text.length}")
         }
     }
 
@@ -133,12 +132,10 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 //        super.onCreate(savedInstanceState)
 //        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
 //    }
-//
 //    override fun onStart() {
 //        super.onStart()
 //        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
 //    }
-//
 //    override fun onResume() {
 //        super.onResume()
 //        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
@@ -147,7 +144,6 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 //        super.onPause()
 //        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
 //    }
-//
 //    override fun onStop() {
 //        super.onStop()
 //        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")

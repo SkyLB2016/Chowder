@@ -8,26 +8,32 @@
     </array>
 
     <array name="poetry">
-        <item>道德经 ,wangbiben</item>
-        <item>河上公 ,heshanggong</item>
-        <!--<item>河上公注解  ,hsgzhujie</item>-->
-        <item>三字经 ,sanzijing</item>
-        <item>百家姓 ,baijiaxing</item>
-        <item>千字文 ,qianziwen</item>
-        <item>弟子规 ,dizigui</item>
-        <item>大学 ,daxue</item>
-        <item>中庸 ,zhongyong</item>
-        <item>论语 ,lunyu</item>
-        <item>孟子 ,mengzi</item>
-        <item>诗经 ,shijing</item>
-        <item>孝经 ,xiaojing</item>
-        <item>七发 ,qifa</item>
-        <item>菜根谭 ,caigentan</item>
-        <item>陋室铭 ,loushiming</item>
-        <item>沁园春雪 ,xue</item>
-        <item>随笔 ,suibi</item>
-        <item>围棋 ,weiqi</item>
-        <item>英语 ,yingyu</item>
-        <item>编程笔记 ,biancheng</item>
+        <item>道德经,wangbiben</item>
+        <item>河上公,heshanggong</item>
+        <!--<item>河上公注解 ,hsgzhujie</item>-->
+        <item>三字经,sanzijing</item>
+        <item>百家姓,baijiaxing</item>
+        <item>千字文,qianziwen</item>
+        <item>弟子规,dizigui</item>
+        <item>孝经,xiaojing</item>
+        <item>增广贤文,zgxw</item>
+        <item>朱子家训,zzjx</item>
+        <item>大学,daxue</item>
+        <item>中庸,zhongyong</item>
+        <item>论语,lunyu</item>
+        <item>孟子,mengzi</item>
+        <item>诗经,shijing</item>
+        <item>尚书,shangshu</item>
+        <item>易经,yijing</item>
+        <item>礼记,liji</item>
+        <item>春秋,chunqiu</item>
+        <item>七发,qifa</item>
+        <item>菜根谭,caigentan</item>
+        <item>陋室铭,loushiming</item>
+        <item>沁园春雪,xue</item>
+        <item>随笔,suibi</item>
+        <item>围棋,weiqi</item>
+        <item>英语,yingyu</item>
+        <item>编程笔记,biancheng</item>
     </array>
 </resources>

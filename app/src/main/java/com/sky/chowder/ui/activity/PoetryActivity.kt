@@ -70,13 +70,14 @@ class PoetryActivity : BaseNoPActivity() {
             tv.width = resources.getDimensionPixelSize(R.dimen.wh_96)
             tv.textSize = 18f
             tv.text = array[0]
+            tv.setPadding(10,0,10,0)
 //            item_tv.tag = array[0]
             tv.id = index
             flow.addView(tv)
             tv.setOnClickListener(selectArticle)
             resId.add(resources.getIdentifier(array[1], "string", packageName))
         }
-        val text = getString(resId[6])
+        val text = getString(resId[9])
 //        gravity = Gravity.CENTER
         setToolbarTitle(text.lines()[0])
         getCatalog(text)
@@ -130,6 +131,7 @@ class PoetryActivity : BaseNoPActivity() {
                     || text.startsWith("卷")
                     || text.startsWith("【")
                     || text.startsWith("●")
+                    || text.startsWith("·")
                     || text.contains("第") && !text.contains("。")) {
                 chapter.content.setLength(chapter.content.length - 1)
                 catalog.add(chapter)
