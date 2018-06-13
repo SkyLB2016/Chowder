@@ -131,8 +131,7 @@ class PoetryActivity : BaseNoPActivity() {
                     || text.startsWith("卷")
                     || text.startsWith("【")
                     || text.startsWith("●")
-                    || text.startsWith("·")
-                    || text.contains("第") && !text.contains("。")) {
+                    || text.startsWith("·")) {
                 chapter.content.setLength(chapter.content.length - 1)
                 catalog.add(chapter)
                 chapter = ChapterEntity()
