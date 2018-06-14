@@ -23,21 +23,19 @@ class CrashHandler : Thread.UncaughtExceptionHandler {
         this.context = context.applicationContext
     }
 
-    override fun uncaughtException(t: Thread, e: Throwable) {
-
-        if (!handlerException(e) && handler != null) handler?.uncaughtException(t, e)
+    override fun uncaughtException(t: Thread, ex: Throwable) {
+        if (!handlerException(ex) && handler != null) handler?.uncaughtException(t, ex)
         else {
             try {
                 Thread.sleep(3000)
             } catch (e: InterruptedException) {
 
             }
-            e.printStackTrace()
+            ex.printStackTrace()
 //            handler?.uncaughtException(t, e)
             android.os.Process.killProcess(android.os.Process.myPid())
             System.exit(1)
         }
-
 
 //        StackTraceElement[] stacks = e.getStackTrace();
 //        while (stacks.length < 10) {
@@ -64,8 +62,23 @@ class CrashHandler : Thread.UncaughtExceptionHandler {
      * 上传到服务器
      */
     private fun sendCrash(ex: Throwable?) {
+        val pm = context?.packageManager
+        val pi = pm!!.getPackageInfo(context?.packageName, PackageManager.GET_ACTIVITIES)
+        "App Version：" + pi.versionName + "-" + pi.versionCode
+        "OS Version：" + Build.VERSION.RELEASE + "-" + Build.VERSION.SDK_INT
+        "Vendor：" + Build.MANUFACTURER
+        "Model：" + Build.MODEL
+        "CPU ABI：" + Build.CPU_ABI
 
-
+        val sw = StringWriter()
+        val pw = PrintWriter(BufferedWriter(sw))
+        ex?.printStackTrace(pw)
+        pw.flush()
+        sw.flush()
+        val error = sw.toString()
+        LogUtils.i(error)
+        pw.close()
+        sw.close()
     }
 
     /**
@@ -75,7 +88,7 @@ class CrashHandler : Thread.UncaughtExceptionHandler {
      */
     private fun saveExceptionToSDCard(e: Throwable) {
         val time = DateUtil.timeStampToDate(System.currentTimeMillis(), DateUtil.YMDHMS)
-        val file = File(SkyApp.getInstance().fileCacheDir + "crash" + time + ".trace")
+        val file = File(SkyApp.getInstance().fileCacheDir + "crash/crash$time.trace")
         try {
             val pw = PrintWriter(BufferedWriter(FileWriter(file)))
             pw.println(time)

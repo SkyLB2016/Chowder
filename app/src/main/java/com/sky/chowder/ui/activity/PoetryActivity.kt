@@ -136,11 +136,6 @@ class PoetryActivity : BaseNoPActivity() {
                 catalog.add(chapter)
                 chapter = ChapterEntity()
                 chapter.chapter = text
-//            } else if (i.contains(".")) {
-//                chapter.content.setLength(chapter.content.length - 1)
-//                catalog.add(chapter)
-//                chapter = ChapterEntity()
-//                chapter.chapter = i.substring(2, i.indexOf("."))
             }
             chapter.content.append("$text\n")
         }

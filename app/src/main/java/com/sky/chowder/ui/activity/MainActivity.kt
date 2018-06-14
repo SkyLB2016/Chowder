@@ -16,7 +16,6 @@ import com.sky.chowder.ui.adapter.MainAdapter
 import com.sky.chowder.ui.presenter.MainP
 import com.sky.utils.AppUtils
 import com.sky.utils.JumpAct
-import com.sky.utils.LogUtils
 import common.base.BasePActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -60,8 +59,9 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 //        var num = Array(4, { Array(4) { 0 } })
         var num = Array(4) { IntArray(4) }
         fab.setOnClickListener {
-            var text = getString(R.string.cezi).trim().replace(" ", "")
-            LogUtils.i("总长==${text.length}")
+            num[6]
+//            var text = getString(R.string.cezi).trim().replace(" ", "")
+//            LogUtils.i("总长==${text.length}")
         }
     }
 
