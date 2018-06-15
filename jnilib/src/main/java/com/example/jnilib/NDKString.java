@@ -17,7 +17,6 @@ public class NDKString {
         System.out.print( ndk.getName());
 //        ndk.setName("名字");
         System.out.print( ndk.getName());
-
     }
 
     public static native String getName();//方法名称

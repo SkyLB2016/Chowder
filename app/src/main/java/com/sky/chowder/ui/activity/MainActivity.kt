@@ -59,7 +59,7 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 //        var num = Array(4, { Array(4) { 0 } })
         var num = Array(4) { IntArray(4) }
         fab.setOnClickListener {
-            num[6]
+//            num[6]
 //            var text = getString(R.string.cezi).trim().replace(" ", "")
 //            LogUtils.i("总长==${text.length}")
         }

@@ -22,9 +22,9 @@ dependencies {
 //    kapt "com.jakewharton:butterknife-compiler:$bknifeVer"
     //butterknife
 }
-def keystorePropertiesFile = rootProject.file("keystore.properties")
-def keystoreProperties = new Properties()
-keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+def keyPass = rootProject.file("local.properties")
+def key = new Properties()
+key.load(new FileInputStream(keyPass))
 android {
     compileSdkVersion 27
     buildToolsVersion '27.0.3'
@@ -45,16 +45,16 @@ android {
     }
     signingConfigs {
         debug {
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
-            storeFile file(keystoreProperties['storeFile'])
-            storePassword keystoreProperties['storePassword']
+            keyAlias key['keyAlias']
+            keyPassword key['keyPassword']
+            storeFile file(key['storeFile'])
+            storePassword key['storePassword']
         }
         release {
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
-            storeFile file(keystoreProperties['storeFile'])
-            storePassword keystoreProperties['storePassword']
+            keyAlias key['keyAlias']
+            keyPassword key['keyPassword']
+            storeFile file(key['storeFile'])
+            storePassword key['storePassword']
         }
     }
     buildTypes {
