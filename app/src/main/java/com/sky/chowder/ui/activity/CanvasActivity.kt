@@ -4,7 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.widget.MediaController
 import android.widget.VideoView
-import com.sky.chowder.ui.widget.CanvasView
+import com.sky.chowder.R
 import java.io.File
 
 /**
@@ -13,8 +13,8 @@ import java.io.File
 class CanvasActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_canvas)
-        setContentView(CanvasView(this))
+        setContentView(R.layout.activity_canvas)
+//        setContentView(CanvasView(this))
     }
 
 

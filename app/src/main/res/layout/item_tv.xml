@@ -8,3 +8,5 @@
     android:gravity="center"
     android:textColor="@color/white"
     android:textSize="@dimen/text_small" />
+    <!--android:selectAllOnFocus="true"-->
+    <!--android:textIsSelectable="true"-->

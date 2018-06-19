@@ -23,7 +23,9 @@ class IPCActivity : BaseNoPActivity() {
         bindService(Intent(this, PairServiceA::class.java), connection, Context.BIND_AUTO_CREATE)
 //        startService(Intent(this, PairServiceA::class.java))
 //        val badge = BadgeView(this)
-        badge.badgeCount=0
+        badge.badgeCount=10
+        chro.base=SystemClock.elapsedRealtime()
+        chro.start()
     }
 
     override fun loadData() = Unit

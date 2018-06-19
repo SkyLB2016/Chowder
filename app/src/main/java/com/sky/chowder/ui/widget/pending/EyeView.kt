@@ -9,7 +9,7 @@ import android.widget.FrameLayout
 /**
  * Created by SKY on 2015/8/17 15:30.
  */
-class EyeView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0 ) : FrameLayout(context, attrs, defStyleAttr) {
+class EyeView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : FrameLayout(context, attrs, defStyleAttr) {
 
     private var paint: Paint? = null
     private var bitmap: Bitmap? = null

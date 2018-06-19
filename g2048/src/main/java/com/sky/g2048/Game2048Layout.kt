@@ -115,11 +115,11 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
                 //移动距离过小则返回
                 if (Math.abs(diffX) < 200 && Math.abs(diffY) < 200) return true
                 if (Math.abs(diffX) > Math.abs(diffY)) {
-                    if (diffX > 200) /*右滑*/ changeData(22)
-                    else if (diffX < -200) /*左滑*/ changeData(21)
+                    if (diffX > 200) /*右滑*/ changeData(KeyEvent.KEYCODE_DPAD_RIGHT)
+                    else if (diffX < -200) /*左滑*/ changeData(KeyEvent.KEYCODE_DPAD_LEFT)
                 } else {
-                    if (diffY > 200) /*下滑*/ changeData(20)
-                    else if (diffY < -200) /*上滑*/ changeData(19)
+                    if (diffY > 200) /*下滑*/ changeData(KeyEvent.KEYCODE_DPAD_DOWN)
+                    else if (diffY < -200) /*上滑*/ changeData(KeyEvent.KEYCODE_DPAD_UP)
                 }
             }
         }
@@ -130,16 +130,19 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
         changeData(keyCode)
         return super.onKeyDown(keyCode, event)
     }
-
     private fun changeData(status: Int) {
         //复制原数据
         val old = orginal.clone()
         //开始移动数据
         when (status) {
-            19 -> slideUp()/*上滑*/
-            20 -> slideDown()/*下滑*/
-            21 -> slideLeft()/*左滑*/
-            22 -> slideRight()/*右滑*/
+            KeyEvent.KEYCODE_DPAD_UP,
+            KeyEvent.KEYCODE_W -> slideUp()/*上滑*/
+            KeyEvent.KEYCODE_DPAD_DOWN,
+            KeyEvent.KEYCODE_S -> slideDown()/*下滑*/
+            KeyEvent.KEYCODE_DPAD_LEFT,
+            KeyEvent.KEYCODE_A -> slideLeft()/*左滑*/
+            KeyEvent.KEYCODE_DPAD_RIGHT,
+            KeyEvent.KEYCODE_D -> slideRight()/*右滑*/
         }
         if (!Arrays.equals(orginal, old)) {
             resetView()

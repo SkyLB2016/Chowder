@@ -39,6 +39,10 @@ class Game2048Activity : BaseNoPActivity() {
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         when (keyCode) {
+            KeyEvent.KEYCODE_W,
+            KeyEvent.KEYCODE_S,
+            KeyEvent.KEYCODE_A,
+            KeyEvent.KEYCODE_D,
             KeyEvent.KEYCODE_DPAD_UP,
             KeyEvent.KEYCODE_DPAD_DOWN,
             KeyEvent.KEYCODE_DPAD_LEFT,

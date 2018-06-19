@@ -8469,11 +8469,11 @@
         　　(4)录制视频：\n
         　　adb shell screenrecord /storage/emulated/0/AmapSdk/test.mp4\n
         　　(5)查看系统盘符：adb shell df\n
-        ●04.Intent：意图\n
+        ●04.Intent：意图，分显示与隐式两种，显示是指定了component属性，明确启动哪个组件，\n
         　　(1)构造函数：可以是类名或者action（setClass）\n
-        　　(2)操作类型action：Intent中只能存在一个，存在则必须有一个相同，setAction()\n
-        　　(3)类别筛选category：Intent中存在几个匹配几个，\n
-        　　(4)数据类型data与type：setDataAandType()，地址有特定规则\n
+        　　(2)操作类型action：Intent中只能存在一个，存在则必须有一个相同，setAction()，xml中可存在多个。\n
+        　　(3)类别筛选category：Intent中存在几个匹配几个，xml中可存在多个。\n
+        　　(4)数据类型data与type：setDataAandType()，地址有特定规则，要么同时设置，要么单独只设置一个。\n
         　　(5)启动模式LaunchMode四种（manifest中用）：standard（标准），singleTop（栈顶不创建），singleTask（单例，独一份，再次进入后，清空之前在其上的页面），singleInstance（独立栈中的独一份）\n
         　　(6)标志也即启动模式（Intent中用）：FLAG_ACTIVITY_NEW_TASK(需要搭配FLAG_ACTIVITY_CLEAR_TASK使用),FLAG_ACTIVITY_SINGLE_TOP,FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS(跳转页面后自动finish,android:excludeFromRecents="true"，目前未起作用)\n
         　　(7)数据传递bundle：Intent内部已经封装好，不用自己封了，serializable，parcelable，也可以转成json字符串传过去\n
@@ -8501,7 +8501,6 @@
         　　绘制自己 onDraw\n
         　　绘制children dispatchDraw\n
         　　绘制装饰 onDrawScrollBars\n
-        　　
         ●07.view滑动：\n
         　　(1)scrollTo/scrollBy：操作简单，适合对View内容的滑动；\n
         　　(2)动画：操作简单，主要适用于实现复杂的动画效果；\n
@@ -8511,11 +8510,23 @@
         　　(2)AT_MOST,自适应模式，warp_content,需要用setMeasureDimension(width,height)设置算好的宽高；\n
         　　(3)UNSPECIFIED，想要多大即多大，所以可以超过屏幕尺寸，显示不下的在屏幕之外；用于系统内部，目前没用过。\n
         ●09.自定义View中比较重要的回调方法：\n
-        　　(1)onFinishInflate()：从XML加载组件后回调；\n
-        　　(2)onSizeChanged()：组件大小改变时回调；\n
-        　　(3)onMeasure()：测量view宽高\n
-        　　(4)onLayout()：控件内的子控件的显示位置，自定义ViewGroup时用\n
-        　　(5)onTouchEvent()：触摸事件，不消费ACTION_DOWN的话，之后的也不会消费，消费的话down，move，up，统一消耗。\n
+        　　第一次进入是的顺序回调\n
+        　　(01)onFinishInflate()：从XML加载组件完成后回调；\n
+        　　(02)onAttachedToWindow()：组件放入窗口是回调\n
+        　　(03)onWindowVisibilityChanged(int)：当包含该组件的窗口可见性发生改变时回调\n
+        　　(04)onMeasure()：测量view宽高\n
+        　　(05)onSizeChanged()：组件大小改变时回调；\n
+        　　(06)onLayout()：控件内的子控件的显示位置，自定义ViewGroup时用\n
+        　　(07)onDraw()：绘制所需要显示的内容\n
+        　　(08)onWindowFocusChanged()：当包含该组件的窗口失去或的得到焦点时回调\n
+        　　退出时的顺序回调onWindowVisibilityChanged->onWindowFocusChanged->onDetachedFromWindow
+        　　费顺序回调：\n
+        　　(09)onTouchEvent()：触摸事件，不消费ACTION_DOWN的话，之后的也不会消费，消费的话down，move，up，统一消耗。\n
+        　　(10)onFocusChanged()：当该组件焦点发生改变时回调\n
+        　　(11)onKeyDown()：键盘键按下\n
+        　　(12)onKeyUp()：键盘键按下后后抬起\n
+        　　(13)onTrackballEvent()：发生轨迹球事件时回调\n
+        　　(14)onDetachedFromWindow()：组件从窗口移除时回调\n
         ●10.触摸事件机制，传递顺序:activity->window->view,方法回调有：（默认返回false）\n
         　　(1)disPatchTouchEvent(MotionEvent e)（分发事件，一般不用管）\n
         　　(2)onInterceptTouchEvent(MotionEvent e)， ViewGroup独有\n
