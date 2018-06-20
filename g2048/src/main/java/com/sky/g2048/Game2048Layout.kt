@@ -80,6 +80,7 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
         orginal[Random().nextInt(15)] = randomTwoOrFour()
         resetView()
         isEnd = false
+        oldOrginal = IntArray(16)
         checkIsEnd?.invoke(isEnd)
     }
 
@@ -130,6 +131,7 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
         changeData(keyCode)
         return super.onKeyDown(keyCode, event)
     }
+
     private fun changeData(status: Int) {
         //复制原数据
         val old = orginal.clone()

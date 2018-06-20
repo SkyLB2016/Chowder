@@ -2,9 +2,11 @@ package com.sky.chowder.ui.activity
 
 import android.app.Activity
 import android.os.Bundle
+import android.view.KeyEvent
 import android.widget.MediaController
 import android.widget.VideoView
 import com.sky.chowder.R
+import kotlinx.android.synthetic.main.activity_canvas.*
 import java.io.File
 
 /**
@@ -15,6 +17,11 @@ class CanvasActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_canvas)
 //        setContentView(CanvasView(this))
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        touch.onKeyDown(keyCode, event)
+        return super.onKeyDown(keyCode, event)
     }
 
 

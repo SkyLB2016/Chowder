@@ -8460,6 +8460,7 @@
         　　(6)dalvik是运行时编译，ART是安装时就进行编译。目前采用的是ART模式\n
         　　(7)drawable文件，true，false，不同时出现的话，true，必须在前，文件效果才有效\n
         　　(8)Makefile机制:组合文件，进行自动的可控制的编译（待加强）\n
+        　　(9)multidex参见错误统计表.xlsx\n
         ●03.ADB命令行：\n
         　　(1)安装apk：adb install 路径\n
         　　(2)向手机传输文件：\n
@@ -8501,20 +8502,19 @@
         　　绘制自己 onDraw\n
         　　绘制children dispatchDraw\n
         　　绘制装饰 onDrawScrollBars\n
-        ●07.view滑动：\n
-        　　(1)scrollTo/scrollBy：操作简单，适合对View内容的滑动；\n
-        　　(2)动画：操作简单，主要适用于实现复杂的动画效果；\n
-        　　(3)改变布局参数，操作稍微复杂，适用于有交互的View。\n
-        ●08.View控件的测量onMeasure，有三种模式：\n
-        　　(1)EXACTLY,精确值模式，具体数字如100dp或者match_parent，默认即为EXACTLY；\n
-        　　(2)AT_MOST,自适应模式，warp_content,需要用setMeasureDimension(width,height)设置算好的宽高；\n
-        　　(3)UNSPECIFIED，想要多大即多大，所以可以超过屏幕尺寸，显示不下的在屏幕之外；用于系统内部，目前没用过。\n
-        ●09.自定义View中比较重要的回调方法：\n
+        　　(9)view滑动：\n
+        　　scrollTo/scrollBy：操作简单，适合对View内容的滑动；\n
+        　　动画：操作简单，主要适用于实现复杂的动画效果；\n
+        　　改变布局参数，操作稍微复杂，适用于有交互的View。\n
+        ●07.自定义View中比较重要的回调方法：\n
         　　第一次进入是的顺序回调\n
         　　(01)onFinishInflate()：从XML加载组件完成后回调；\n
         　　(02)onAttachedToWindow()：组件放入窗口是回调\n
         　　(03)onWindowVisibilityChanged(int)：当包含该组件的窗口可见性发生改变时回调\n
         　　(04)onMeasure()：测量view宽高\n
+        　　EXACTLY,精确值模式，具体数字如100dp或者match_parent，默认即为EXACTLY；\n
+        　　AT_MOST,自适应模式，warp_content,需要用setMeasureDimension(width,height)设置算好的宽高；\n
+        　　UNSPECIFIED，想要多大即多大，所以可以超过屏幕尺寸，显示不下的在屏幕之外；用于系统内部，目前没用过。\n
         　　(05)onSizeChanged()：组件大小改变时回调；\n
         　　(06)onLayout()：控件内的子控件的显示位置，自定义ViewGroup时用\n
         　　(07)onDraw()：绘制所需要显示的内容\n
@@ -8527,19 +8527,21 @@
         　　(12)onKeyUp()：键盘键按下后后抬起\n
         　　(13)onTrackballEvent()：发生轨迹球事件时回调\n
         　　(14)onDetachedFromWindow()：组件从窗口移除时回调\n
-        ●10.触摸事件机制，传递顺序:activity->window->view,方法回调有：（默认返回false）\n
+        ●08.触摸事件机制，传递顺序:activity->window->view,方法回调有：（默认返回false）\n
         　　(1)disPatchTouchEvent(MotionEvent e)（分发事件，一般不用管）\n
         　　(2)onInterceptTouchEvent(MotionEvent e)， ViewGroup独有\n
         　　(3)onTouchEvent(MotionEvent e)\n
         　　(4)触摸按钮时的回调机制：(A(B(C))\n
         　　A.disPatch -> A.intercept ->B.disPatch -> B.intercept ->C.disPatch -> C.touch -> B.touch -> A.touch\n
-        ●11.Canvas方法：\n
+        ●09.Canvas方法：\n
         　　(1)translate(x,y)：将原点(0,0)移动(x,y)\n
         　　(2)rotate(a,x,y)：将画布以(x,y)为中心旋转a度\n
+        　　(2)scale(x,y,px,py)：将画布缩放\n
+        　　(2)skew(x,y)：将画布倾斜\n
         　　(3)save(),saveLayer(),saveLayerAlpha():保存画布当前状态，并返回int值，方便移除此状态\n
         　　(4)restore():返回画布此次保存的初始状态\n
         　　(5)restoreToCount():移除画布此次保存的状态\n
-        ●12.Paint的重要属性：TextPaint.getFontMetricsInt()\n
+        ●10.Paint的重要属性：TextPaint.getFontMetricsInt()\n
         　　(1)setAntialias()与Paint(Paint.ANTI_ALIAS_FLAG) ：抗锯齿\n
         　　(2)setStrokeWidth(),宽度是从中间开始计算的\n
         　　(3)setARGB(),setAlpha(),setTextSize(),setStyle(),setColor().\n
@@ -8565,9 +8567,10 @@
         　　　　DashPathEffect：画虚线\n
         　　　　PathDashPathEffect：升级的画虚线\n
         　　　　ComPosePathEffect与SunPathEffect：组合前几者\n
-        ●13.视图动画：Animation：\n
+        ●11.视图动画，补间动画：Animation：\n
         　　TranslateAnimation，ScaleAnimation，RatateAnimation，AlphaAnimation，用AnimationSet可以把四个视图动画组合在一起\n
-        ●14.属性动画：ValueAnimator包括：ObjectAnimator，AnimatorSet组合，动画属性值：\n
+        　　对应的xml：translate，scale，ratate，alpha，set\n
+        ●12.属性动画：ValueAnimator包括：ObjectAnimator，AnimatorSet组合，也有相应的xml对应字段，动画属性值：\n
         　　(1)translationX、translationY，增量平移\n
         　　(2)rotation、rotationX、rotationY 旋转\n
         　　(3)pivotX、pivotY没看出和rotation有什么区别\n
@@ -8576,13 +8579,38 @@
         　　(6)alpha 透明度 默认为1，不透明，0代表完全透明，即不可见\n
         　　(7)PropertyValuesHolder，ObjectAnimator.ofPropertyValuesHolder(view,pro...)\n
         　　(8)Value的主要方法：addUpdateListener()\n
-        ●15.AnimatorSet属性：palyTogether()，playSequentially()，play().with()、befor()、after();来控制动画的播放规则\n
-        ●16.布局动画：LayoutAnimationController，在MainAdapter中有使用\n
+        ●13.AnimatorSet属性：palyTogether()，playSequentially()，play().with()、befor()、after();来控制动画的播放规则\n
+        ●14.动画差值器interpolator\n
+        　　(1)LinearInterPolator：匀速\n
+        　　(2)AccelerateInterpolator：匀加速\n
+        　　(3)AccelerateDecelerateInterpolator：起始加速，末尾减速\n
+        　　(4)CycleInterpolator：循环播放，正弦曲线\n
+        　　(5)DecelerateInterpolator：匀减速\n
+        ●15.StateListDrawable属性值item\n
+        　　(1)android:state_active：代表是否处于激活状态\n
+        　　(2)android:state_checkable：代表是否处于可勾选状态\n
+        　　(3)android:state_checked：代表是否处于已勾选状态\n
+        　　(4)android:state_enabled：代表是否处于可用状态\n
+        　　(5)android:state_first：代表是否处于开始状态\n
+        　　(6)android:state_focused：代表是否处于已得到焦点状态\n
+        　　(7)android:state_last：代表是否处于结束状态\n
+        　　(8)android:state_middle：代表是否处于中间状态\n
+        　　(9)android:state_pressed：代表是否处于已被按下状态状态\n
+        　　(10)android:state_selected：代表是否处于选中状态\n
+        　　(11)android:state_window_focused：代表窗口是否处于已得到焦点状态\n
+        ●16.shape属性\n
+        　　(1)corners：圆角\n
+        　　(2)gradient：渐变色\n
+        　　(3)padding：内边距\n
+        　　(4)size：基本没用\n
+        　　(5)solid：内部填充色\n
+        　　(6)stroke：边框，以及虚边\n
+        ●17.布局动画：LayoutAnimationController，在MainAdapter中有使用\n
         　　(1)LayoutAnimationController.ORDER_NORMAL --顺序\n
         　　(2)LayoutAnimationController.ORDER_RANDOM --随机\n
         　　(3)LayoutAnimationController.ORDER_REVERSE --反序\n
-        ●17.SVG:VectorDrawable（vector静态效果）、AnimatedVectorDrawable（nimated-vector）：animated-vector组合objectAnimator与vector形成动态的动画效果\n
-        ●18.Math的三角函数：\n
+        ●18.SVG:VectorDrawable（vector静态效果）、AnimatedVectorDrawable（nimated-vector）：animated-vector组合objectAnimator与vector形成动态的动画效果\n
+        ●19.Math的三角函数：\n
         　　var angle = 30.0//角度\n
         　　val radians = Math.PI * angle / 180//转换成弧度\n
         　　val ix = 200 * Math.cos(radians)\n
@@ -8592,23 +8620,18 @@
         　　以x=Sin,y=Cos算为++，+-，--，-+，即一四三二象限，以Y正轴1为起点，顺时针方向画圆，画布上Y轴正负颠倒，所以是逆时针方向画圆\n
         　　val ix = 200 * Math.sin(radians)\n
         　　val iy = 200 * Math.cos(radians)\n
-        ●19.排序算法：\n
+        ●20.排序算法：\n
         　　(1)冒泡排序：选定一端，两相比较，顺序错误则交换。\n
         　　(2)选择排序：每次选出最大或最小的放在队首，直到完成。\n
         　　(3)插入排序：排序头两个数据，然后每次增加一个数据来循环，直到完成。\n
-        ●20.设计模式的六大原则（待深刻理解）\n
-        　　(6)单一职责原则\n
-        　　(1)开闭原则（Open Close Principle）\n
-        　　开闭原则就是说对扩展开放，对修改关闭。在程序需要进行拓展的时候，不能去修改原有的代码，实现一个热插拔的效果。所以一句话概括就是：为了使程序的扩展性好，易于维护和升级。想要达到这样的效果，我们需要使用接口和抽象类，后面的具体设计中我们会提到这点。\n
-        　　(2)里氏代换原则（Liskov Substitution Principle）\n
-        　　里氏代换原则(Liskov Substitution Principle LSP)面向对象设计的基本原则之一。 里氏代换原则中说，任何基类可以出现的地方，子类一定可以出现。 LSP是继承复用的基石，只有当衍生类可以替换掉基类，软件单位的功能不受到影响时，基类才能真正被复用，而衍生类也能够在基类的基础上增加新的行为。里氏代换原则是对“开-闭”原则的补充。实现“开-闭”原则的关键步骤就是抽象化。而基类与子类的继承关系就是抽象化的具体实现，所以里氏代换原则是对实现抽象化的具体步骤的规范。—— From Baidu 百科\n
-        　　(3)依赖倒转原则（Dependence Inversion Principle）\n
-        　　这个是开闭原则的基础，具体内容：真对接口编程，依赖于抽象而不依赖于具体。\n
-        　　(4)接口隔离原则（Interface Segregation Principle）\n
-        　　这个原则的意思是：使用多个隔离的接口，比使用单个接口要好。还是一个降低类之间的耦合度的意思，从这儿我们看出，其实设计模式就是一个软件的设计思想，从大型软件架构出发，为了升级和维护方便。所以上文中多次出现：降低依赖，降低耦合。\n
-        　　(5)迪米特法则（最少知道原则）（Demeter Principle）\n
-        　　为什么叫最少知道原则，就是说：一个实体应当尽量少的与其他实体之间发生相互作用，使得系统功能模块相对独立。\n
-        ●21.设计模式的分类\n
+        ●21.设计模式的六大原则（待深刻理解）\n
+        　　(1)单一职责原则\n
+        　　(2)开闭原则（Open Close Principle）\n
+        　　(3)里氏代换原则（Liskov Substitution Principle）\n
+        　　(4)依赖倒转原则（Dependence Inversion Principle）\n
+        　　(5)接口隔离原则（Interface Segregation Principle）\n
+        　　(6)迪米特法则（最少知道原则）（Demeter Principle）\n
+        ●22.设计模式的分类\n
         　　总体来说设计模式分为三大类：\n
         　　(1)创建型模式，共五种：\n
         　　工厂模式、抽象工厂模式、单例模式（单线程与多线程）、建造者模式、原型模式（浅复制与深复制）。\n
@@ -8623,34 +8646,33 @@
         　　类的状态：备忘录模式（备份模式）、状态模式（状态的切换，卫星菜单栏，侧滑栏）。\n
         　　通过中间类：访问者模式、中介者模式、解释器模式。\n
         　　(4)其实还有两类：并发型模式和线程池模式。\n
-        ●22.handler执行\n
+        ●23.handler执行\n
         　　(1)handler分发dispatchMessage()：先检测message中的callback是否为空不为空执行，为空在检测handler自己的callback，为true终止，false执行handleMessage()。\n
         　　(2)handler中执行enqueueMessage()方法将消息放入队列中，等待loop循环。\n
         　　(3)Looper.loop()方法是死循环，其中选取消息的方法Message msg = queue.next();也是一个死循环，直到取到消息，开始往下执行；\n
         　　(4)取到消息后开始执行handler的分发方法dispatchMessage()开始回调，方法执行完成后，此次消息处理完成。\n
-        ●23.IPC机制：多进程间通信\n
+        ●24.IPC机制：多进程间通信\n
         　　会造成的问题：\n
         　　(1)静态成员和单例模式完全失效：不同进程间的静态和单例是互相独立的\n
         　　(2)线程同步机制完全失效：不同进程间的线程也是互相独立的\n
         　　(3)SharedPreferences可靠性下降：不支持两个进程同时读写，有一定几率会丢数据\n
         　　(4)application多次创建：新进程代表新的虚拟机的启动\n
         　　通信方式：序列化serializable与parcelable，Binder（待深入AIDL），Intent，共享文件，Messenger（待深入研究AIDL），ContentProvider，socket网络通信。\n
-        ●24.Serializable，java数据序列化，可自己重写序列化与反序列化过程\n
+        ●25.Serializable，java数据序列化，可自己重写序列化与反序列化过程\n
         　　(1)FileUtils中serialize(path,value)（序列化）与deserialize(path)（反序列化）运用\n
         　　(2)静态成员变量属于类不属于对象，不参与序列化\n
         　　(3)用transient关键字标记的成员变量不参与序列化\n
-        ●25.Parcelable，Android数据序列化，在CourseEntity中有应用\n
-        ●26.本地保存数据时以及简单的数据通讯可以使用serializable，Parcelable主要用在内存序列化上，建议比较大的数据对象传输是使用。\n
-        ●27.Binder实现IBinder接口（aidl快速实现Binder的工具），主要用在Service开发中，AIDL在PairServiceA中有应用\n
-        ●28.线程Thread：AsyncTask，HandlerThread，IntentService，ThreadPoolExecutor。\n
+        ●26.Parcelable，Android数据序列化，在CourseEntity中有应用\n
+        ●27.本地保存数据时以及简单的数据通讯可以使用serializable，Parcelable主要用在内存序列化上，建议比较大的数据对象传输是使用。\n
+        ●28.Binder实现IBinder接口（aidl快速实现Binder的工具），主要用在Service开发中，AIDL在PairServiceA中有应用\n
+        ●29.线程Thread：AsyncTask，HandlerThread，IntentService，ThreadPoolExecutor。\n
         　　(1)Executors.newFixedThreadPool()，都为核心线程，且数量固定的线程池，无超时机制。
         　　(2)Executors.newCachedThreadPool()，无核心，非核心线程数不限数量，有超时机制60s，适合多图加载这种文件小而多的任务。
         　　(3)Executors.newScheduledThreadPool()，核心固定，非核心不限，闲置时超时回收，主要用于执行定时任务和具有固定周期的重复任务。
         　　(4)Executors.newSingleThreadExecutor()，仅创建一个单核心线程，任务串行。
-        ●29.Bitmap，缓存机制LruCache与DiskLruCache，BitmapFactory.Options\n
+        ●30.Bitmap，缓存机制LruCache与DiskLruCache，BitmapFactory.Options\n
         　　(1)inSampleSize，整数，最小为1，等比缩小原图宽高。\n
         　　(2)inJustDecodeBounds，true时只解析宽高不加载到内存中。\n
-        ●30.multidex参见错误统计表.xlsx\n
         ●31.JNI和NDK编程，JNI是java的本地交互，NDK是Android提供得工具集合，可以在android中更加方便的通过JNI来访问本地代码，如C,C++。NDK
         还提供了交叉编译器，开发人员只需要简单的修改mk文件就可以生成特定的CPU平带的动态库，使用NDK有如下好处：\n
         　　(1)提高代码的安全性。so库反编译比较困难\n
@@ -8678,14 +8700,19 @@
         　　(1)addView(v,layoutparam)\n
         　　(2)updateViewLayout(v,layoutparam)\n
         　　(3)rempveView(v)\n
-        ●34.ProGuard，参见app下的proguard文件\n
+        ●34.ProGuard，参见app下的proguard文件，App研发录\n
         　　(1)压缩Shrink：侦测并移除代码中的无用类，字段，方法和特性。\n
         　　(2)优化Optimize：对字节码进行优化，移除无用的指令。\n
         　　(3)混淆Obfuscate：使用a、b、c、d这样简短而无意义的名称，对类、字段和方法进行重命名。\n
         　　(4)预检Preveirfy：在java平台上对处理后的代码进行预检。\n
+        ●35.\n
+        　　(1)\n
+        　　(2)\n
+        　　(3)\n
+        　　(4)\n
         　　(5)\n
         　　(6)\n
-        ●34.\n
+        ●36.\n
         　　(1)\n
         　　(2)\n
         　　(3)\n

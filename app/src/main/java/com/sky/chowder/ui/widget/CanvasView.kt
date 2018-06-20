@@ -5,6 +5,7 @@ import android.graphics.*
 import android.support.v4.content.ContextCompat
 import android.text.TextPaint
 import android.util.AttributeSet
+import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Scroller
@@ -75,6 +76,19 @@ class CanvasView @JvmOverloads constructor(
         scroller.startScroll(scrollX, 0, delta, 0, 1000)
     }
 
+    var bitmap: Bitmap = BitmapFactory.decodeResource(resources, R.mipmap.ic_puzzle)
+    var sx = 0f
+    var bw = 0
+    var bh = 0
+    var scale = 1f
+    var isScale = false
+
+    init {
+        bw = bitmap.width
+        bh = bitmap.height
+        isFocusable = true
+    }
+
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
@@ -85,12 +99,49 @@ class CanvasView @JvmOverloads constructor(
         drawClock(canvas)//时钟
         maskFilter(canvas)
 
+
+        val matrix = matrix
+        matrix?.reset()
+        matrix.setTranslate(0f, 1100f)
+//        matrix?.setScale(1.5f, 1.5f)
+//        if (!isScale)
+//            matrix?.setSkew(sx, 0f)
+//        else matrix?.setScale(scale, scale)
+        val b2 = Bitmap.createBitmap(bitmap, 0, 0, bw, bh, matrix, true)
+        canvas.drawBitmap(b2, matrix, null)
+
 //        animate().alpha(1f)
 //                .rotation(180f)
 //                .setDuration(3000)
 //                .withStartAction { }
 //                .withEndAction { }
 //                .start()
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        when (keyCode) {
+            KeyEvent.KEYCODE_W -> {
+                isScale = true
+                if (scale < 2.0f) scale += 0.1f
+                postInvalidate()
+            }
+            KeyEvent.KEYCODE_S -> {
+                isScale = true
+                if (scale > 0.5f) scale -= 0.1f
+                postInvalidate()
+            }
+            KeyEvent.KEYCODE_A -> {
+                isScale = false
+                sx += 0.1f
+                postInvalidate()
+            }
+            KeyEvent.KEYCODE_D -> {
+                isScale = false
+                sx -= 0.1f
+                postInvalidate()
+            }
+        }
+        return super.onKeyDown(keyCode, event)
     }
 
     private fun maskFilter(canvas: Canvas) {

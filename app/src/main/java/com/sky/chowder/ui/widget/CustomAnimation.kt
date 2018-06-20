@@ -1,5 +1,6 @@
 package com.sky.chowder.ui.widget
 
+import android.graphics.Camera
 import android.view.animation.Animation
 import android.view.animation.BounceInterpolator
 import android.view.animation.Transformation
@@ -8,10 +9,11 @@ import android.view.animation.Transformation
  * Created by SKY on 2018/3/2 15:43.
  * 自定义动画效果
  */
-class Custom : Animation() {
+class CustomAnimation : Animation() {
 
     private var centerX: Int = 0
     private var centerY: Int = 0
+    val cc=Camera()
     override fun initialize(width: Int, height: Int, parentWidth: Int, parentHeight: Int) {
         super.initialize(width, height, parentWidth, parentHeight)
         duration = 2000
