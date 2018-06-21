@@ -8367,6 +8367,10 @@
         teach yourself programming in ten years\n
         十年编程\n
         十年的寒窗苦读，日日夜夜的秉烛夜读，43800个小时的投入，换来状元及第的可能，何谓坚持，此即谓坚持。\n
+        穷养儿富养女，养的是儿子的自信与独立，养的是女儿的知性与高雅
+    </string>
+
+    <string name="renwu">
         待完成任务\n
         　　(1)文本搜索，算数，目录筛选拆分\n
         　　(2)拼图拉伸优化\n
@@ -8377,6 +8381,9 @@
         　　(7)插件拆分第九章第九节，第四小节\n
         　　(8)第九章第十一节h5篇安卓片上面应用的技术分析。\n
         　　(9)monkey\n
+        　　(9)插件拆分第九章第九节，第四小节。\n
+        　　(9)第九章第十一节h5篇安卓片上面应用的技术分析。\n
+        　　(9)总结知识框架\n
     </string>
 
     <string name="weiqi">
@@ -8461,6 +8468,7 @@
         　　(7)drawable文件，true，false，不同时出现的话，true，必须在前，文件效果才有效\n
         　　(8)Makefile机制:组合文件，进行自动的可控制的编译（待加强）\n
         　　(9)multidex参见错误统计表.xlsx\n
+        　　(10)TCP/IP，URLConnection，webView使用，疯狂讲义第十三章\n
         ●03.ADB命令行：\n
         　　(1)安装apk：adb install 路径\n
         　　(2)向手机传输文件：\n
@@ -8493,7 +8501,7 @@
         　　(3)TouchSlop：最小滑动距离，获取方法：ViewConfiguration.get(this).scaledTouchSlop，zoom中有使用\n
         　　(4)VelocityTracker：速度跟踪器，只在move中有用，up时为0\n
         　　(5)GestureDetector：手势检测，相关方法：单击，拖动，滑动，长按，双击。\n
-        　　(6)Scroller（待深入研究）：弹性滑动对象，与view中的computeScroll方法配合。\n
+        　　(6)Scroller（待深入研究）：弹性滑动对象，与view中的computeScr oll方法配合。\n
         　　(6)View的OnTouchListener优先于onTouchEvent，返回true，onTouchEvent不会执行；平常调用的点击事件onClickListener也不会执行。\n
         　　(6)requestDisallowInterceptTouchEvent(boolean)强制请求分发触摸事件。\n
         　　(7)activity中获取宽高onWindowFocusChanged，view.post(runnable),viewTreeObserver.addOnGlobalLayoutListener()\n
@@ -8706,6 +8714,17 @@
         　　(3)混淆Obfuscate：使用a、b、c、d这样简短而无意义的名称，对类、字段和方法进行重命名。\n
         　　(4)预检Preveirfy：在java平台上对处理后的代码进行预检。\n
         ●35.\n
+        　　(1)TelephonyManager：电话管理器；\n
+        　　(2)SmsManager：短信管理器\n
+        　　(3)AudioManager：音频管理器\n
+        　　(4)Vibrator：振动器\n
+        　　(5)AlarmManager：手机闹钟服务\n
+        ●36.\n
+        　　(1)MediaPlayer：音频\n
+        　　(2)SoundPool：音频\n
+        　　(3)VideoView：播放视频\n
+        　　(4)mediaRecorder：录制音频\n
+        ●37.\n
         　　(1)\n
         　　(2)\n
         　　(3)\n

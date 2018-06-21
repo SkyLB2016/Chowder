@@ -36,10 +36,11 @@
         <item>唐诗,tangshi</item>
         <item>近代诗词,jindaishici</item>
 
-        <item>随笔,suibi</item>
-
         <item>围棋,weiqi</item>
         <item>英语,yingyu</item>
+
+        <item>随笔,suibi</item>
+        <item>任务,renwu</item>
 
         <item>编程笔记,biancheng</item>
     </array>

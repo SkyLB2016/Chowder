@@ -178,6 +178,8 @@ public class FileUtils {
     }
 
     /**
+     * 保存数据，字符流
+     *
      * @param pathname 绝对路径
      * @param content  要保存的文本内容
      * @param content  是否追加,
@@ -214,7 +216,7 @@ public class FileUtils {
     }
 
     /**
-     * 保存数据流
+     * 保存数据流，字节流
      *
      * @param pathname 文件绝对路径
      * @param stream   数据流
@@ -264,89 +266,12 @@ public class FileUtils {
      */
     @NonNull
     private static String readByteFile(File file) {
-        StringBuilder result = new StringBuilder();
-        FileInputStream fis = null;
-        BufferedInputStream bis = null;
         try {
-            fis = new FileInputStream(file);
-            bis = new BufferedInputStream(fis);
-            byte[] bytes = new byte[1024];
-            int len;
-            while ((len = bis.read(bytes)) > -1) {
-                result.append(new String(bytes, 0, len));
-            }
-        } catch (IOException e) {
+            return readInput(new FileInputStream(file));
+        } catch (FileNotFoundException e) {
             LogUtils.d(e.toString());
-        } finally {
-            try {
-                if (bis != null) bis.close();
-                if (fis != null) fis.close();
-            } catch (IOException e) {
-            }
         }
-        return result.toString();
-    }
-
-    /**
-     * 通过字符流读取文件中的内容，适用于文本文件的读取
-     *
-     * @param pathname 绝对路径
-     * @return
-     */
-    public static String readCharFile(String pathname) {
-        return readCharFile(new File(pathname));
-    }
-
-    /**
-     * 通过字符流读取文件中的内容，适用于文本文件的读取
-     *
-     * @param file 文本文件
-     * @return
-     */
-    public static String readCharFile(File file) {
-        StringBuilder result = new StringBuilder();
-        FileReader fr = null;
-        BufferedReader br = null;
-        try {
-            fr = new FileReader(file);
-            br = new BufferedReader(fr);
-            char[] chars = new char[1024];
-            int len;
-            while ((len = br.read(chars)) > -1) {
-                result.append(new String(chars, 0, len));
-            }
-        } catch (IOException e) {
-            LogUtils.d(e.toString());
-        } finally {
-            try {
-                if (br != null) br.close();
-                if (fr != null) fr.close();
-            } catch (IOException e) {
-            }
-        }
-        return result.toString();
-    }
-
-    public static String readCharFile(InputStream in) {
-        StringBuilder result = new StringBuilder();
-        BufferedReader br = null;
-        try {
-            br = new BufferedReader(new InputStreamReader(in));
-            char[] chars = new char[1024];
-            int len;
-            while ((len = br.read(chars)) > -1) {
-                result.append(new String(chars, 0, len));
-            }
-        } catch (IOException e) {
-            LogUtils.d(e.toString());
-        } finally {
-            try {
-                if (br != null) br.close();
-                if (in != null) in.close();
-            } catch (IOException e) {
-            }
-        }
-        return result.toString();
+        return "";
     }
 
     /**
@@ -370,6 +295,57 @@ public class FileUtils {
         } finally {
             try {
                 if (bis != null) bis.close();
+                if (in != null) in.close();
+            } catch (IOException e) {
+            }
+        }
+        return result.toString();
+    }
+
+    /**
+     * 通过字符流读取文件中的内容，适用于文本文件的读取
+     *
+     * @param pathname 绝对路径
+     * @return
+     */
+    public static String readCharFile(String pathname) {
+        return readCharFile(new File(pathname));
+    }
+
+    /**
+     * 通过字符流读取文件中的内容，适用于文本文件的读取
+     *
+     * @param file 文本文件
+     * @return
+     */
+    public static String readCharFile(File file) {
+        try {
+            return readCharFile(new FileReader(file));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    public static String readCharFile(InputStream in) {
+        return readCharFile(new InputStreamReader(in));
+    }
+
+    public static String readCharFile(InputStreamReader in) {
+        StringBuilder result = new StringBuilder();
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(in);
+            char[] chars = new char[1024];
+            int len;
+            while ((len = br.read(chars)) > -1) {
+                result.append(new String(chars, 0, len));
+            }
+        } catch (IOException e) {
+            LogUtils.d(e.toString());
+        } finally {
+            try {
+                if (br != null) br.close();
                 if (in != null) in.close();
             } catch (IOException e) {
             }

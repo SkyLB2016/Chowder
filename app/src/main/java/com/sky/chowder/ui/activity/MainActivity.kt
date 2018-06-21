@@ -2,8 +2,10 @@ package com.sky.chowder.ui.activity
 
 import android.Manifest
 import android.content.ActivityNotFoundException
+import android.os.Build
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.speech.tts.TextToSpeech
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
@@ -14,12 +16,16 @@ import com.sky.chowder.api.view.IMainView
 import com.sky.chowder.model.ActivityModel
 import com.sky.chowder.ui.adapter.MainAdapter
 import com.sky.chowder.ui.presenter.MainP
+import com.sky.chowder.utils.http.HttpUrl
 import com.sky.utils.AppUtils
 import com.sky.utils.JumpAct
+import com.sky.utils.LogUtils
 import common.base.BasePActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import java.io.File
+import java.net.URL
+import java.util.*
 
 /**
  * Created by SKY on 2015/12/6.
@@ -56,12 +62,36 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
                 arrayOf(Manifest.permission.WRITE_CONTACTS, Manifest.permission.READ_CONTACTS, Manifest.permission.READ_EXTERNAL_STORAGE),
                 intArrayOf(0, 0, 0)
         )
-//        var num = Array(4, { Array(4) { 0 } })
-        var num = Array(4) { IntArray(4) }
+        tts = TextToSpeech(this, TextToSpeech.OnInitListener { status ->
+            checkTTS(status)
+        })
         fab.setOnClickListener {
-//            num[6]
+            //            num[6]
 //            var text = getString(R.string.cezi).trim().replace(" ", "")
 //            LogUtils.i("总长==${text.length}")
+            val url = URL(HttpUrl.URL_MUKE + HttpUrl.URL_MUKE1)
+            LogUtils.i("资源名==${url.file}")
+            LogUtils.i("主机名==${url.host}")
+            LogUtils.i("路径==${url.path}")
+            LogUtils.i("端口==${url.port}")
+            LogUtils.i("协议名称==${url.protocol}")
+            LogUtils.i("查询字符串==${url.query}")
+        }
+    }
+
+    private fun ttsTest() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            tts?.speak("gesture", TextToSpeech.QUEUE_ADD, null, "speech")
+            //                tts?.synthesizeToFile("gesture",null,File(""),"record")
+        }
+    }
+
+    var tts: TextToSpeech? = null
+    private fun checkTTS(status: Int) {
+        if (status == TextToSpeech.SUCCESS) {
+            val result = tts?.setLanguage(Locale.US)
+            if (result != TextToSpeech.LANG_COUNTRY_AVAILABLE && result != TextToSpeech.LANG_AVAILABLE)
+                showToast("TTS暂不支持这种语言的朗读")
         }
     }
 
@@ -124,6 +154,10 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
         System.out.println(f.mkdir())//创建此抽象路径名指定的目录
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        tts?.shutdown()
+    }
 //    override fun onRestart() {
 //        super.onRestart()
 //        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
