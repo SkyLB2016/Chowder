@@ -16,6 +16,7 @@ import com.sky.adapter.RecyclerHolder
 import com.sky.chowder.R
 import com.sky.chowder.model.ChapterEntity
 import com.sky.chowder.ui.pop.CatalogPop
+import com.sky.chowder.utils.CatalogThread
 import com.sky.utils.ScreenUtils
 import com.sky.widget.BaseTitle
 import common.base.BaseNoPActivity
@@ -121,42 +122,7 @@ class PoetryActivity : BaseNoPActivity() {
     }
 
     private fun getCatalog(text: String) {
-        val list = text.lines()
-        val catalog = ArrayList<ChapterEntity>()
-        var chapter = ChapterEntity()
-        chapter.chapter = list[0]
-        for (i in list) {
-            val text = if (i.startsWith(" ")) i.substring(1) else i
-            if (text.startsWith("第") && text.endsWith("章")
-                    || text.startsWith("卷")
-                    || text.startsWith("【")
-                    || text.startsWith("●")
-                    || text.startsWith("·")) {
-                chapter.content.setLength(chapter.content.length - 1)
-                catalog.add(chapter)
-                chapter = ChapterEntity()
-                chapter.chapter = text
-            }
-            chapter.content.append("$text\n")
-        }
-        var sign = -1
-        if (catalog.isEmpty() && list.size > 30) {
-            chapter.content = StringBuilder()
-            for (i in list.indices) {
-                val text = if (list[i].startsWith(" ")) list[i].substring(1) else list[i]
-                if (sign === -1 && text.contains("，")) sign = i % 10
-                if (i % 10 === sign) {
-                    chapter.content.setLength(chapter.content.length - 1)
-                    catalog.add(chapter)
-                    chapter = ChapterEntity()
-                    chapter.chapter = text
-                }
-                chapter.content.append("$text\n")
-            }
-        }
-        chapter.content.setLength(chapter.content.length - 1)
-        catalog.add(chapter)
-        adapter?.datas = catalog
+        CatalogThread(text) { catalog-> adapter?.datas = catalog }
     }
 
     private fun showCatalogPop(floders: List<ChapterEntity>?) {
