@@ -12,9 +12,8 @@ class CatalogThread {
 
     var catalog: ((MutableList<ChapterEntity>) -> Unit)? = null
 
-    val handler = object : Handler() {
+    private val handler = object : Handler() {
         override fun handleMessage(msg: Message?) {
-            super.handleMessage(msg)
             catalog?.invoke(msg?.obj as MutableList<ChapterEntity>)
         }
     }

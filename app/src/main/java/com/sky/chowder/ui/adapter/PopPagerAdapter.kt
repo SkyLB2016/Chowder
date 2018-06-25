@@ -8,7 +8,7 @@ import android.widget.ImageView
 
 import com.sky.chowder.R
 import com.sky.chowder.ui.widget.pending.ZoomImageView
-import com.sky.chowder.utils.ImageLoaderExecutors
+import com.sky.chowder.utils.imageloader.ImageLoaderExecutors
 
 /**
  * Created by SKY on 2016/1/13 14:09.

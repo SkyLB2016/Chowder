@@ -18,14 +18,11 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Base64;
 
-import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
@@ -54,24 +51,18 @@ public class BitmapUtils {
      * 获取网络图片
      */
     public static Bitmap getBitmapFromUrl(String pathName) {
-        InputStream is = null;
-        HttpURLConnection huc = null;
+        Bitmap bitmap = null;
+        HttpURLConnection conn = null;
         try {
             URL url = new URL(pathName);
-            huc = (HttpURLConnection) url.openConnection();
-            is = new BufferedInputStream(huc.getInputStream());
-            return BitmapFactory.decodeStream(is);
-        } catch (MalformedURLException e) {
-            LogUtils.d(e.toString());
+            conn = (HttpURLConnection) url.openConnection();
+//            is = new BufferedInputStream(conn.getInputStream());
+            bitmap = BitmapFactory.decodeStream(conn.getInputStream());
         } catch (IOException e) {
         } finally {
-            try {
-                if (is != null) is.close();
-                if (huc != null) huc.disconnect();
-            } catch (IOException e) {
-            }
+            if (conn != null) conn.disconnect();
         }
-        return null;
+        return bitmap;
     }
 
     /**
@@ -209,7 +200,7 @@ public class BitmapUtils {
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(pathName);
-            return bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            return bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
         } catch (FileNotFoundException e) {
             LogUtils.d(e.toString());
         } finally {

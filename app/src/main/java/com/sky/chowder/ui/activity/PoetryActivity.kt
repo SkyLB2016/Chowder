@@ -33,6 +33,7 @@ class PoetryActivity : BaseNoPActivity() {
     private val resId = ArrayList<Int>()
     private lateinit var clipM: ClipboardManager
     override fun getLayoutResId(): Int = R.layout.activity_poetry
+
     override fun initialize(savedInstanceState: Bundle?) {
         baseTitle.setLeftButton(R.mipmap.ic_menu)
         baseTitle.onLeftImgClick = BaseTitle.OnClickListener { sliding.toggleMenu() }
@@ -131,12 +132,6 @@ class PoetryActivity : BaseNoPActivity() {
         floderPop?.datas = floders
         floderPop?.setOnItemClickListener { _, position -> moveToChapter(position) }
         floderPop?.showAtLocation(window.decorView, Gravity.CENTER, 0, 0)
-    }
-
-    override fun onEnterAnimationComplete() {
-        super.onEnterAnimationComplete()
-        val yy = getObject("scrollX", 0)
-//        scroll?.scrollTo(0, yy)
     }
 
     private var downX = 0f

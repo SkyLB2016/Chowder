@@ -1,10 +1,9 @@
-package com.sky.chowder.utils
+package com.sky.chowder.utils.imageloader
 
 import android.graphics.Bitmap
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
-import android.util.LruCache
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -22,9 +21,9 @@ import java.util.concurrent.Semaphore
  * Created by SKY on 2015/1/6 17:21.
  * 线程池的使用
  */
-class ImageLoaderExecutors @JvmOverloads constructor(type: FileType = FileType.LIFO, count: Int = 3) {
+class ImageLoaderExecutors @JvmOverloads constructor(type: FileType = FileType.LIFO) {
 
-    private val lruCache: LruCache<String, Bitmap>//内存缓存
+    private val imageCache: MemoryCache//内存缓存
     private var type = FileType.LIFO//任务执行方式
     private val runnables: LinkedList<Runnable>
     //UI主线程handler
@@ -61,15 +60,11 @@ class ImageLoaderExecutors @JvmOverloads constructor(type: FileType = FileType.L
     private val semaphore = Semaphore(0)
 
     init {
-        var count = count
         this.type = type
-        if (count > MAXCOUNT) count = MAXCOUNT
         runnables = LinkedList()
-        lruCache = object : LruCache<String, Bitmap>((Runtime.getRuntime().maxMemory() / 8).toInt()) {
-            override fun sizeOf(key: String, value: Bitmap): Int {
-                return BitmapUtils.getBitmapSize(value)
-            }
-        }
+        imageCache = MemoryCache()
+        //执行多少个线程
+        val count=Runtime.getRuntime().availableProcessors()
         executors = Executors.newFixedThreadPool(count)
         threadSemaphore = Semaphore(count)
         object : Thread() {
@@ -125,7 +120,7 @@ class ImageLoaderExecutors @JvmOverloads constructor(type: FileType = FileType.L
     fun loadImage(view: View, path: String) {
         view.tag = path
         //先从内存中查找是否含有图片
-        if (getBitmapFromLruCache(path) == null) {
+        if (imageCache.get(path) == null) {
             if (view is ImageView) {
                 if (view !is ZoomImageView)
                     view.setImageBitmap(BitmapUtils.getBitmapFromId(view.getContext(), R.mipmap.ic_launcher))
@@ -138,7 +133,7 @@ class ImageLoaderExecutors @JvmOverloads constructor(type: FileType = FileType.L
                 val bitmap = getBitmap(path, size)
 
                 //添加到缓存中
-                addBitmapToLruCache(path, bitmap)
+                imageCache.put(path, bitmap)
                 //发送message消息，view，path，bitmap
                 sendMessage(view, path, bitmap)
                 //释放异步线程中使用的信号量
@@ -146,7 +141,7 @@ class ImageLoaderExecutors @JvmOverloads constructor(type: FileType = FileType.L
                 LogUtils.i(threadSemaphore.availablePermits().toString() + "个")
             })
         } else {
-            val bitmap = getBitmapFromLruCache(path)
+            val bitmap = imageCache.get(path)
             //发送message消息，view，path，bitmap
             sendMessage(view, path, bitmap)
             //不为空直接可以加载图片，但传递给UIhandler来加载为好，统一规则
@@ -204,30 +199,7 @@ class ImageLoaderExecutors @JvmOverloads constructor(type: FileType = FileType.L
         threadHandler?.sendEmptyMessage(THREADH_CODE)
     }
 
-    /**
-     * 添加bitmap到lrucache中
-     *
-     * @param path
-     * @param bitmap
-     * @return 是否成功
-     */
-    private fun addBitmapToLruCache(path: String, bitmap: Bitmap?): Boolean {
-        if (getBitmapFromLruCache(path) == null) {
-            if (bitmap != null) {
-                lruCache.put(path, bitmap)
-                return true
-            }
-        }
-        return false
-    }
 
-    /**
-     * 从缓存中获取bitmap
-     *
-     * @param path
-     * @return
-     */
-    private fun getBitmapFromLruCache(path: String): Bitmap? = lruCache.get(path)
 
     /**
      * 根据View获得适当的压缩的宽和高
@@ -302,7 +274,6 @@ class ImageLoaderExecutors @JvmOverloads constructor(type: FileType = FileType.L
     }
 
     companion object {
-        private const val MAXCOUNT = 5//最多执行多少个线程
         private const val UIH_CODE = 0X01//UI线程用
         private const val THREADH_CODE = 0X02//异步线程用
 

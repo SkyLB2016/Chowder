@@ -10,7 +10,7 @@ import android.view.ViewOutlineProvider
 import com.sky.adapter.RecyclerAdapter
 import com.sky.adapter.RecyclerHolder
 import com.sky.chowder.R
-import com.sky.chowder.utils.ImageLoaderExecutors
+import com.sky.chowder.utils.imageloader.ImageLoaderExecutors
 import kotlinx.android.synthetic.main.adapter_uri.view.*
 
 /**

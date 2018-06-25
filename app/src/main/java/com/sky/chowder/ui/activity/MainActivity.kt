@@ -20,6 +20,7 @@ import com.sky.chowder.utils.http.HttpUrl
 import com.sky.utils.AppUtils
 import com.sky.utils.JumpAct
 import com.sky.utils.LogUtils
+import com.sky.utils.MD5Utils
 import common.base.BasePActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -69,14 +70,24 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
             //            num[6]
 //            var text = getString(R.string.cezi).trim().replace(" ", "")
 //            LogUtils.i("总长==${text.length}")
-            val url = URL(HttpUrl.URL_MUKE + HttpUrl.URL_MUKE1)
-            LogUtils.i("资源名==${url.file}")
-            LogUtils.i("主机名==${url.host}")
-            LogUtils.i("路径==${url.path}")
-            LogUtils.i("端口==${url.port}")
-            LogUtils.i("协议名称==${url.protocol}")
-            LogUtils.i("查询字符串==${url.query}")
+            val url = "http://img.mukewang.com/55237dcc0001128c06000338.jpg"
+            val key = MD5Utils.encryption(url)
+            LogUtils.i("key==$key")
+            LogUtils.i("MD5Utils==${MD5Utils.encrypt(url)}")
+            LogUtils.i("bool==${MD5Utils.encrypt(url)==key}")
+            LogUtils.i("hashcode==${url.hashCode()}")
+            LogUtils.i("jiqqu==${url.substring(url.lastIndexOf("/"))}")
         }
+    }
+
+    private fun getURL() {
+        val url = URL(HttpUrl.URL_MUKE + HttpUrl.URL_MUKE1)
+        LogUtils.i("资源名==${url.file}")
+        LogUtils.i("主机名==${url.host}")
+        LogUtils.i("路径==${url.path}")
+        LogUtils.i("端口==${url.port}")
+        LogUtils.i("协议名称==${url.protocol}")
+        LogUtils.i("查询字符串==${url.query}")
     }
 
     private fun ttsTest() {

@@ -13,7 +13,7 @@ import com.sky.chowder.R
 import com.sky.chowder.model.CourseEntity
 import com.sky.chowder.ui.adapter.LoaderURLAdapter
 import com.sky.chowder.ui.presenter.ImageUrlP
-import com.sky.chowder.utils.ImageLoaderAsync
+import com.sky.chowder.utils.imageloader.ImageLoaderAsync
 import com.sky.utils.BitmapUtils
 import com.sky.utils.LogUtils
 import com.sky.utils.PhotoUtils
