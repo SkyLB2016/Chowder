@@ -6,6 +6,7 @@ import android.view.MotionEvent
 import android.view.View
 import com.sky.SkyApp
 import com.sky.utils.FileUtils
+import com.sky.utils.LogUtils
 import common.base.BaseNoPActivity
 import kotlinx.android.synthetic.main.activity_g2048.*
 
@@ -14,6 +15,7 @@ class Game2048Activity : BaseNoPActivity() {
     private val pathName = SkyApp.getInstance().fileCacheDir + "2048orginal.txt"
     override fun getLayoutResId(): Int = R.layout.activity_g2048
     override fun initialize(savedInstanceState: Bundle?) {
+        LogUtils.isDebug = BuildConfig.DEBUG
         setToolbarRightTitle("重新开始")
 //        if (BuildConfig.isModel)
 //            baseTitle.setLeftButton(-1)

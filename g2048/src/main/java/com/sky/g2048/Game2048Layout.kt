@@ -10,7 +10,6 @@ import android.view.MotionEvent
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import com.sky.SkyApp
-import com.sky.utils.LogUtils
 import com.sky.utils.ScreenUtils
 import java.util.*
 import kotlin.collections.ArrayList
@@ -105,10 +104,6 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
             MotionEvent.ACTION_DOWN -> {
                 downX = event.x
                 downY = event.y
-            }
-            MotionEvent.EDGE_LEFT -> {
-                MotionEvent.EDGE_RIGHT
-                LogUtils.i("zuo左右左右")
             }
             MotionEvent.ACTION_UP -> {
                 val diffX = event.x - downX

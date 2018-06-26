@@ -71,13 +71,13 @@ class ImageUrlActivity : RecyclerPActivity<CourseEntity, ImageUrlP>() {
 
     private fun setImageLoader(start: Int, last: Int, recycle: RecyclerView) {
         for (i in start..last) {
-            ImageLoaderAsync.getInstance().showAsyncImage(recycle.findViewWithTag<View>(adapter.datas[i].picBig) as ImageView, adapter.datas[i].picBig)
+            ImageLoaderAsync.showAsyncImage(recycle.findViewWithTag<View>(adapter.datas[i].picBig) as ImageView, adapter.datas[i].picBig!!)
 //            imageLoader.showAsyncImage(image, adapter.datas[i].picBig);
         }
     }
 
     private fun cancelAlltasks() {
-        ImageLoaderAsync.getInstance().cancelAlltasks()
+        ImageLoaderAsync.cancelAlltasks()
     }
 
     override fun onDestroy() {
