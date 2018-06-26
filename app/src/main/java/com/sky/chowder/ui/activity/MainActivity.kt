@@ -16,6 +16,7 @@ import com.sky.chowder.api.view.IMainView
 import com.sky.chowder.model.ActivityModel
 import com.sky.chowder.ui.adapter.MainAdapter
 import com.sky.chowder.ui.presenter.MainP
+import com.sky.chowder.utils.SingletonDemo
 import com.sky.chowder.utils.http.HttpUrl
 import com.sky.utils.AppUtils
 import com.sky.utils.JumpAct
@@ -77,6 +78,7 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
             LogUtils.i("bool==${MD5Utils.encrypt(url)==key}")
             LogUtils.i("hashcode==${url.hashCode()}")
             LogUtils.i("jiqqu==${url.substring(url.lastIndexOf("/"))}")
+            SingletonDemo.INSTANCE.otherMethods()
         }
     }
 

@@ -22,12 +22,16 @@
       </configuration>
     </facet>
     <facet type="kotlin-language" name="Kotlin">
-      <configuration version="3" platform="Common (experimental) " useProjectSettings="false">
+      <configuration version="3" platform="JVM 1.8" useProjectSettings="false">
         <compilerSettings />
         <compilerArguments>
           <option name="destination" value="$MODULE_DIR$/build/tmp/kotlin-classes/skyDebug" />
-          <option name="classpath" value="$USER_HOME$/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.0.aar/cc3f21f02e69069ace7cba39e614fbea/jars/classes.jar;C:/Users/SKY/.gradle/caches/transforms-1/files-1.1/cardview-v7-27.1.1.aar/8ab1dbd5883fefd36cf62bdba37d9623/jars/classes.jar;C:/Users/SKY/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/036ec7f69a4c45818c24c96250a74ff9/jars/classes.jar;C:/Users/SKY/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/18c17d7a2784b71d9ce275fbe5f90b4b/jars/classes.jar;C:/Users/SKY/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.2.50/66d47b004c5b8a1d2d1df9e463187390ed741316/kotlin-stdlib-1.2.50.jar;C:/Users/SKY/.gradle/caches/modules-2/files-2.1/com.android.support.constraint/constraint-layout-solver/1.1.0/931532e953a477f876f2de18c2e7f16eee01078f/constraint-layout-solver-1.1.0.jar;C:/Users/SKY/.gradle/caches/transforms-1/files-1.1/support-v4-27.1.1.aar/731b2923f51fc7df2de09071ce8366d2/jars/classes.jar;C:/Users/SKY/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/33f11b730b99432442ff23bd0bbfde46/jars/classes.jar;C:/Users/SKY/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/7bfa6165a32f828c80eb8972dcc4ffa0/jars/classes.jar;C:/Users/SKY/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.1.1.aar/e9e19de3117d50cbf556b14f6f2e2146/jars/classes.jar;C:/Users/SKY/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/6e9796ee68919db9b9ff7f03c44a0c71/jars/classes.jar;C:/Users/SKY/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/cf77d8227f4afa6240f9a36de990301a/jars/classes.jar;C:/Users/SKY/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/663e6bc226bfd197fde11ce1e56bd6e8/jars/classes.jar;C:/Users/SKY/.gradle/caches/transforms-1/files-1.1/transition-27.1.1.aar/6f238dc8fec4c8dca11be53fb2b0d8bf/jars/classes.jar;C:/Users/SKY/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/5a4628ff47324e8414ee86a0479f3d71/jars/classes.jar;C:/Users/SKY/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/bf683414c2e1a984f36178a362a8835b/jars/classes.jar;C:/Users/SKY/.gradle/caches/modules-2/files-2.1/com.android.support/support-annotations/27.1.1/39ded76b5e1ce1c5b2688e1d25cdc20ecee32007/support-annotations-27.1.1.jar;C:/Users/SKY/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.2.50/6b19a2fcc29d34878b3aab33fd5fcf70458a73df/kotlin-stdlib-common-1.2.50.jar;C:/Users/SKY/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar;C:/Users/SKY/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/9240efe9f6765ccbd23321b485c5996f/jars/classes.jar;C:/Users/SKY/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/a1357655d8ff2ce979878d9a0b15e46c/jars/classes.jar;C:/Users/SKY/.gradle/caches/transforms-1/files-1.1/rxandroid-2.0.1.aar/972646eb99c72586e0043005436040bf/jars/classes.jar;C:/Users/SKY/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/adapter-rxjava2/2.4.0/9286ea8ac29dc3822cca03291259db825e118506/adapter-rxjava2-2.4.0.jar;C:/Users/SKY/.gradle/caches/modules-2/files-2.1/io.reactivex.rxjava2/rxjava/2.1.5/1de589f16cd088be91ca6877cb836529276a6bb2/rxjava-2.1.5.jar;C:/Users/SKY/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/converter-gson/2.4.0/15d7790ee311d961379c51b00aba12d5967cb7ea/converter-gson-2.4.0.jar;C:/Users/SKY/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/retrofit/2.4.0/fc4aa382632bfaa7be7b41579efba41d5a71ecf3/retrofit-2.4.0.jar;C:/Users/SKY/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.10.0/7ef0f1d95bf4c0b3ba30bbae25e0e562b05cf75e/okhttp-3.10.0.jar;C:/Users/SKY/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/e89200b07cedb183642b8133e0a61108/jars/classes.jar;C:/Users/SKY/.gradle/caches/modules-2/files-2.1/android.arch.lifecycle/common/1.1.0/edf3f7bfb84a7521d0599efa3b0113a0ee90f85/common-1.1.0.jar;C:/Users/SKY/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/5843473d1a54f040bff54c152427b4fc/jars/classes.jar;C:/Users/SKY/.gradle/caches/modules-2/files-2.1/android.arch.core/common/1.1.0/8007981f7d7540d89cd18471b8e5dcd2b4f99167/common-1.1.0.jar;C:/Users/SKY/.gradle/caches/modules-2/files-2.1/org.reactivestreams/reactive-streams/1.0.1/1b1c911686eb40179219466e6a59b634b9d7a748/reactive-streams-1.0.1.jar;C:/Users/SKY/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.2/3edcfe49d2c6053a70a2a47e4e1c2f94998a49cf/gson-2.8.2.jar;C:/Users/SKY/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.14.0/102d7be47241d781ef95f1581d414b0943053130/okio-1.14.0.jar;C:/Android/sdk/platforms/android-27/android.jar" />
+          <option name="noStdlib" value="true" />
+          <option name="noReflect" value="true" />
           <option name="moduleName" value="app_skyDebug" />
+          <option name="jvmTarget" value="1.8" />
+          <option name="addCompilerBuiltIns" value="true" />
+          <option name="loadBuiltInsFromDependencies" value="true" />
           <option name="languageVersion" value="1.2" />
           <option name="apiVersion" value="1.2" />
           <option name="pluginOptions">
@@ -47,7 +51,7 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7">
     <output url="file://$MODULE_DIR$/build/intermediates/classes/sky/debug" />
     <output-test url="file://$MODULE_DIR$/build/intermediates/classes/test/sky/debug" />
     <exclude-output />
@@ -165,8 +169,9 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/splits-support" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/symbols" />
       <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
+      <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
     </content>
-    <orderEntry type="jdk" jdkName="Kotlin SDK" jdkType="KotlinSDK" />
+    <orderEntry type="jdk" jdkName="Android API 27 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Gradle: com.android.support:transition-27.1.1" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-v4-27.1.1" level="project" />
@@ -216,6 +221,5 @@
     <orderEntry type="library" name="Gradle: android.arch.lifecycle:runtime-1.1.0" level="project" />
     <orderEntry type="module" module-name="apiutils" />
     <orderEntry type="module" module-name="common" />
-    <orderEntry type="library" name="Gradle: android-android-27" level="project" />
   </component>
 </module>

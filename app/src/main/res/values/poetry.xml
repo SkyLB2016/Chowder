@@ -8618,70 +8618,34 @@
         　　(2)LayoutAnimationController.ORDER_RANDOM --随机\n
         　　(3)LayoutAnimationController.ORDER_REVERSE --反序\n
         ●18.SVG:VectorDrawable（vector静态效果）、AnimatedVectorDrawable（nimated-vector）：animated-vector组合objectAnimator与vector形成动态的动画效果\n
-        ●19.Math的三角函数：\n
-        　　var angle = 30.0//角度\n
-        　　val radians = Math.PI * angle / 180//转换成弧度\n
-        　　val ix = 200 * Math.cos(radians)\n
-        　　val iy = 200 * Math.sin(radians)\n
-        　　0-360 度，Cos取值范围1..0..-1..0..1，即+--+，Sin 取值范围0..1..0..-1..0,即++--\n
-        　　以x=Cos,y=Sin算为++，-+，--，+-，即一二三四象限，以X正轴1为起点，逆时针方向画圆，画布上Y轴正负颠倒，所以是顺时针方向画圆\n
-        　　以x=Sin,y=Cos算为++，+-，--，-+，即一四三二象限，以Y正轴1为起点，顺时针方向画圆，画布上Y轴正负颠倒，所以是逆时针方向画圆\n
-        　　val ix = 200 * Math.sin(radians)\n
-        　　val iy = 200 * Math.cos(radians)\n
-        ●20.排序算法：\n
-        　　(1)冒泡排序：选定一端，两相比较，顺序错误则交换。\n
-        　　(2)选择排序：每次选出最大或最小的放在队首，直到完成。\n
-        　　(3)插入排序：排序头两个数据，然后每次增加一个数据来循环，直到完成。\n
-        ●21.设计模式的六大原则（待深刻理解）\n
-        　　(1)单一职责原则(Single Responsibility Principle)：不同功能间拆分成独立的类\n
-        　　(2)开闭原则（Open Close Principle）：依赖于抽象，接口不变，增加实现类\n
-        　　(3)里氏代换原则（Liskov Substitution Principle）：核心依然依赖于抽象，拆分出共同的实现方法，单独编写不同的实现，依赖于面向对象三大特性中的继承与多态。\n
-        　　(4)依赖倒转原则（Dependence Inversion Principle）：模块间的依赖通过抽象发生，，实现类之间不发生直接依赖关系，依赖于三大特性中的多态。\n
-        　　(5)接口隔离原则（Interface Segregation Principle）：接口中方法的拆分，实现类只需要继承自己需要的接口\n
-        　　(6)迪米特法则（最少知道原则）（Demeter Principle）：类似于MVP，单一指向\n
-        ●22.设计模式的分类\n
-        　　总体来说设计模式分为三大类：\n
-        　　(1)创建型模式，共五种：\n
-        　　工厂模式、抽象工厂模式、单例模式（单线程与多线程）、建造者模式、原型模式（浅复制与深复制）。\n
-        　　(2)结构型模式，共七种：\n
-        　　适配器模式：类（在MVP中用过，类似于两类重用一个方法）、对象（在一个类里的一个方法中调用另一个类里的相同方法）、接口（用过）三种适配器模式）；\n
-        　　（后六种是对象适配器的衍生）：\n
-        　　装饰器模式（同接口间两个类的操作）->代理模式（与装饰器基本相同，细微差别具体分析）->外观模式（相当于类的组合排序）；\n
-        　　桥接模式（公共管理器，动态替换其中的对象）->组合模式（地址选择中有运用，有点类似于linked）->享元模式（一般结合工厂模式，jdbc连接池）。\n
-        　　(3)行为型模式，共十一种：\n
-        　　父类与子类：一个方法不同的实现，公共方法的提取形成的两种模式：策略模式、模板方法模式；适用于算法的改变。\n
-        　　两个类之间：观察者模式（rxjava）、迭代子模式(数组迭代器)、责任链模式（handler的循环链）、命令模式（相当于逐级传递）。\n
-        　　类的状态：备忘录模式（备份模式）、状态模式（状态的切换，卫星菜单栏，侧滑栏）。\n
-        　　通过中间类：访问者模式、中介者模式、解释器模式。\n
-        　　(4)其实还有两类：并发型模式和线程池模式。\n
-        ●23.handler执行\n
+        ●19.handler执行\n
         　　(1)handler分发dispatchMessage()：先检测message中的callback是否为空不为空执行，为空在检测handler自己的callback，为true终止，false执行handleMessage()。\n
         　　(2)handler中执行enqueueMessage()方法将消息放入队列中，等待loop循环。\n
         　　(3)Looper.loop()方法是死循环，其中选取消息的方法Message msg = queue.next();也是一个死循环，直到取到消息，开始往下执行；\n
         　　(4)取到消息后开始执行handler的分发方法dispatchMessage()开始回调，方法执行完成后，此次消息处理完成。\n
-        ●24.IPC机制：多进程间通信\n
+        ●20.IPC机制：多进程间通信\n
         　　会造成的问题：\n
         　　(1)静态成员和单例模式完全失效：不同进程间的静态和单例是互相独立的\n
         　　(2)线程同步机制完全失效：不同进程间的线程也是互相独立的\n
         　　(3)SharedPreferences可靠性下降：不支持两个进程同时读写，有一定几率会丢数据\n
         　　(4)application多次创建：新进程代表新的虚拟机的启动\n
         　　通信方式：序列化serializable与parcelable，Binder（待深入AIDL），Intent，共享文件，Messenger（待深入研究AIDL），ContentProvider，socket网络通信。\n
-        ●25.Serializable，java数据序列化，可自己重写序列化与反序列化过程\n
+        ●21.Serializable，java数据序列化，可自己重写序列化与反序列化过程\n
         　　(1)FileUtils中serialize(path,value)（序列化）与deserialize(path)（反序列化）运用\n
         　　(2)静态成员变量属于类不属于对象，不参与序列化\n
         　　(3)用transient关键字标记的成员变量不参与序列化\n
-        ●26.Parcelable，Android数据序列化，在CourseEntity中有应用\n
-        ●27.本地保存数据时以及简单的数据通讯可以使用serializable，Parcelable主要用在内存序列化上，建议比较大的数据对象传输是使用。\n
-        ●28.Binder实现IBinder接口（aidl快速实现Binder的工具），主要用在Service开发中，AIDL在PairServiceA中有应用\n
-        ●29.线程Thread：AsyncTask，HandlerThread，IntentService，ThreadPoolExecutor。\n
+        ●22.Parcelable，Android数据序列化，在CourseEntity中有应用\n
+        ●23.本地保存数据时以及简单的数据通讯可以使用serializable，Parcelable主要用在内存序列化上，建议比较大的数据对象传输是使用。\n
+        ●24.Binder实现IBinder接口（aidl快速实现Binder的工具），主要用在Service开发中，AIDL在PairServiceA中有应用\n
+        ●25.线程Thread：AsyncTask，HandlerThread，IntentService，ThreadPoolExecutor。\n
         　　(1)Executors.newFixedThreadPool()，都为核心线程，且数量固定的线程池，无超时机制。
         　　(2)Executors.newCachedThreadPool()，无核心，非核心线程数不限数量，有超时机制60s，适合多图加载这种文件小而多的任务。
         　　(3)Executors.newScheduledThreadPool()，核心固定，非核心不限，闲置时超时回收，主要用于执行定时任务和具有固定周期的重复任务。
         　　(4)Executors.newSingleThreadExecutor()，仅创建一个单核心线程，任务串行。
-        ●30.Bitmap，缓存机制LruCache与DiskLruCache，BitmapFactory.Options\n
+        ●26.Bitmap，缓存机制LruCache与DiskLruCache，BitmapFactory.Options\n
         　　(1)inSampleSize，整数，最小为1，等比缩小原图宽高。\n
         　　(2)inJustDecodeBounds，true时只解析宽高不加载到内存中。\n
-        ●31.JNI和NDK编程，JNI是java的本地交互，NDK是Android提供得工具集合，可以在android中更加方便的通过JNI来访问本地代码，如C,C++。NDK
+        ●27.JNI和NDK编程，JNI是java的本地交互，NDK是Android提供得工具集合，可以在android中更加方便的通过JNI来访问本地代码，如C,C++。NDK
         还提供了交叉编译器，开发人员只需要简单的修改mk文件就可以生成特定的CPU平带的动态库，使用NDK有如下好处：\n
         　　(1)提高代码的安全性。so库反编译比较困难\n
         　　(2)可以使用目前已有的C/C++开源库\n
@@ -8689,7 +8653,7 @@
         　　(4)提高程序在某些特定情形下的执行效率，但是并不能明显提升Android程序的性能。\n
         　　(5)在cmd终端中进入到main目录下 cd (具体路径)/apiutils/src/main\n
         　　执行此语句  javah -d jni -classpath ../../build/intermediates/classes/debug com.sky.NDKString  会自动生成jni文件com_sky_NDKString.h,自定义.c的file\n
-        ●32.性能优化\n
+        ●28.性能优化\n
         　　(1)布局优化：include，merge，ViewStub，减少层级嵌套，加强view复用。\n
         　　(2)绘制优化：在onDraw中不要创建新对象，不执行浩氏人物，view的绘制帧率保证60fps是最佳的，每帧所需时间不超过16ms（16ms=1000/60）.\n
         　　(3)内存泄漏：分析工具MAT。\n
@@ -8704,33 +8668,69 @@
         　　　适当使用软引用与弱引用；\n
         　　　采用内存加磁盘缓存；\n
         　　　尽量使用静态内部类，这样可以避免潜在的由于内部类而导致的内存泄漏。\n
-        ●33.window与WindowManager ipc机制\n
+        ●29.window与WindowManager ipc机制\n
         　　(1)addView(v,layoutparam)\n
         　　(2)updateViewLayout(v,layoutparam)\n
         　　(3)rempveView(v)\n
-        ●34.ProGuard，参见app下的proguard文件，App研发录\n
+        ●30.ProGuard，参见app下的proguard文件，App研发录\n
         　　(1)压缩Shrink：侦测并移除代码中的无用类，字段，方法和特性。\n
         　　(2)优化Optimize：对字节码进行优化，移除无用的指令。\n
         　　(3)混淆Obfuscate：使用a、b、c、d这样简短而无意义的名称，对类、字段和方法进行重命名。\n
         　　(4)预检Preveirfy：在java平台上对处理后的代码进行预检。\n
-        ●35.\n
+        ●31.\n
         　　(1)TelephonyManager：电话管理器；\n
         　　(2)SmsManager：短信管理器\n
         　　(3)AudioManager：音频管理器\n
         　　(4)Vibrator：振动器\n
         　　(5)AlarmManager：手机闹钟服务\n
-        ●36.\n
+        ●32.\n
         　　(1)MediaPlayer：音频\n
         　　(2)SoundPool：音频\n
         　　(3)VideoView：播放视频\n
         　　(4)mediaRecorder：录制音频\n
-        ●37.\n
-        　　(1)\n
-        　　(2)\n
-        　　(3)\n
-        　　(4)\n
-        　　(5)\n
-        　　(6)\n
+        ●33.Math的三角函数：\n
+        　　var angle = 30.0//角度\n
+        　　val radians = Math.PI * angle / 180//转换成弧度\n
+        　　val ix = 200 * Math.cos(radians)\n
+        　　val iy = 200 * Math.sin(radians)\n
+        　　0-360 度，Cos取值范围1..0..-1..0..1，即+--+，Sin 取值范围0..1..0..-1..0,即++--\n
+        　　以x=Cos,y=Sin算为++，-+，--，+-，即一二三四象限，以X正轴1为起点，逆时针方向画圆，画布上Y轴正负颠倒，所以是顺时针方向画圆\n
+        　　以x=Sin,y=Cos算为++，+-，--，-+，即一四三二象限，以Y正轴1为起点，顺时针方向画圆，画布上Y轴正负颠倒，所以是逆时针方向画圆\n
+        　　val ix = 200 * Math.sin(radians)\n
+        　　val iy = 200 * Math.cos(radians)\n
+        ●34.排序算法：\n
+        　　(1)冒泡排序：选定一端，两相比较，顺序错误则交换。\n
+        　　(2)选择排序：每次选出最大或最小的放在队首，直到完成。\n
+        　　(3)插入排序：排序头两个数据，然后每次增加一个数据来循环，直到完成。\n
+        ●35.设计模式的六大原则（待深刻理解）\n
+        　　(1)单一职责原则(Single Responsibility Principle)：不同功能间拆分成独立的类\n
+        　　(2)开闭原则（Open Close Principle）：依赖于抽象，接口不变，增加实现类\n
+        　　(3)里氏代换原则（Liskov Substitution Principle）：核心依然依赖于抽象，拆分出共同的实现方法，单独编写不同的实现，依赖于面向对象三大特性中的继承与多态。\n
+        　　(4)依赖倒转原则（Dependence Inversion Principle）：模块间的依赖通过抽象发生，，实现类之间不发生直接依赖关系，依赖于三大特性中的多态。\n
+        　　(5)接口隔离原则（Interface Segregation Principle）：接口中方法的拆分，实现类只需要继承自己需要的接口\n
+        　　(6)迪米特法则（最少知道原则）（Demeter Principle）：类似于MVP，单一指向\n
+        ●36.设计模式的分类\n
+        　　总体来说设计模式分为三大类：\n
+        　　(1)创建型模式，共五种：\n
+        　　工厂模式、抽象工厂模式、单例模式（单线程与多线程）、建造者模式、原型模式（浅复制与深复制）。\n
+        　　(2)结构型模式，共七种：\n
+        　　适配器模式：类（在MVP中用过，类似于两类重用一个方法）、对象（在一个类里的一个方法中调用另一个类里的相同方法）、接口（用过）三种适配器模式）；\n
+        　　（后六种是对象适配器的衍生）：\n
+        　　装饰器模式（同接口间两个类的操作）->代理模式（与装饰器基本相同，细微差别具体分析）->外观模式（相当于类的组合排序）；\n
+        　　桥接模式（公共管理器，动态替换其中的对象）->组合模式（地址选择中有运用，有点类似于linked）->享元模式（一般结合工厂模式，jdbc连接池）。\n
+        　　(3)行为型模式，共十一种：\n
+        　　父类与子类：一个方法不同的实现，公共方法的提取形成的两种模式：策略模式、模板方法模式；适用于算法的改变。\n
+        　　两个类之间：观察者模式（rxjava）、迭代子模式(数组迭代器)、责任链模式（handler的循环链）、命令模式（相当于逐级传递）。\n
+        　　类的状态：备忘录模式（备份模式）、状态模式（状态的切换，卫星菜单栏，侧滑栏）。\n
+        　　通过中间类：访问者模式、中介者模式、解释器模式。\n
+        　　(4)其实还有两类：并发型模式和线程池模式。\n
+        ●37.单例实现的几种模式\n
+        　　(1)饿汉模式：第一次加载是就初始化，如不是用的话是一种资源的浪费\n
+        　　(2)懒汉模式（synchronized修饰方法）：第一次使用时才初始化，但是每次使用时，必须同步，一样会造成资源的浪费\n
+        　　(3)双重检索模式：目前使用最多的，但是在高并发的环境下有一定缺陷。\n
+        　　(4)静态内部类模式：推荐使用的\n
+        　　(5)枚举模式：线程安全，反序列化不生成新实例。\n
+        　　(6)容器承载单例，统一调配使用。\n
         ●36.\n
         　　(1)\n
         　　(2)\n

@@ -27,6 +27,8 @@ class TimeFragment : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+//        dialog.setCanceledOnTouchOutside(true)//默认为true，点击外部消失且只有在cancel为true是才有效，变为false是，不消失
+//        isCancelable = true//默认为true，可返回，变为false是，既不可以返回，点击外部也不会消失，只能点击按钮
         return inflater!!.inflate(R.layout.fragment_time, container)
     }
 

@@ -21,7 +21,6 @@ public class SPUtils {
     public static SharedPreferences sp;
     private static Map<String, SharedPreferences> SPMaps = new HashMap<>();
 
-
     public static void init(Context context) {
         SPUtils.context = context.getApplicationContext();
     }

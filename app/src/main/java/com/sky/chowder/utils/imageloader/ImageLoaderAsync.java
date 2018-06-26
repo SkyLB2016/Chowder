@@ -41,9 +41,16 @@ public class ImageLoaderAsync {
     private Set<ImageAsyncTask> tasks;
     private ImageCache imageCache;
 
+    public static ImageLoaderAsync getInstance() {
+        return Singleton.singleton;
+    }
 
-    public ImageLoaderAsync() {
-        imageCache =new DoubleCache();
+    private static class Singleton {
+        private static final ImageLoaderAsync singleton = new ImageLoaderAsync();
+    }
+
+    private ImageLoaderAsync() {
+        imageCache = new DoubleCache();
         tasks = new HashSet<>();
     }
 

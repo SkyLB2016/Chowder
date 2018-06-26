@@ -33,14 +33,12 @@ class ImageUrlActivity : RecyclerPActivity<CourseEntity, ImageUrlP>() {
     private var lastVisibleItem: Int = 0
     override fun getLayoutResId() = R.layout.navigation_content
     override fun creatPresenter() = ImageUrlP(this)
-    private lateinit var imageLoader: ImageLoaderAsync
     override fun getRecyclerView(): MyRecyclerView = recycler
     override fun getSwipeView(): SwipeRefreshLayout = swipe
 
     override fun initialize(savedInstanceState: Bundle?) {
         super.initialize(savedInstanceState)
         first = true
-        imageLoader = ImageLoaderAsync()
         fab.setOnClickListener { v -> Snackbar.make(v, "正在加载，请稍后", Snackbar.LENGTH_LONG).setAction("cancel") { showToast("已取消") }.show() }
         adapter.setOnItemClickListener { view, position -> getPhoto(view, position) }
     }
@@ -73,13 +71,13 @@ class ImageUrlActivity : RecyclerPActivity<CourseEntity, ImageUrlP>() {
 
     private fun setImageLoader(start: Int, last: Int, recycle: RecyclerView) {
         for (i in start..last) {
-            imageLoader.showAsyncImage(recycle.findViewWithTag<View>(adapter.datas[i].picBig) as ImageView, adapter.datas[i].picBig)
+            ImageLoaderAsync.getInstance().showAsyncImage(recycle.findViewWithTag<View>(adapter.datas[i].picBig) as ImageView, adapter.datas[i].picBig)
 //            imageLoader.showAsyncImage(image, adapter.datas[i].picBig);
         }
     }
 
     private fun cancelAlltasks() {
-        imageLoader.cancelAlltasks()
+        ImageLoaderAsync.getInstance().cancelAlltasks()
     }
 
     override fun onDestroy() {

@@ -13,18 +13,24 @@ import java.util.Stack;
 public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks {
     private Stack<Activity> activities;
     private Activity current;
-    private static ActivityLifecycle instance;
+//    private static ActivityLifecycle instance;
 
     public static ActivityLifecycle getInstance() {
-        if (instance == null)
-            //所有加上synchronized 和 块语句，在多线程访问的时候，同一时刻只能有一个线程能够用
-            //同步检查，获得锁，先清空工作内存，即子内存；然后从主内存中拷贝变量的新副本到子内存中，
-            // 执行后强制刷新主内存，并释放
-            synchronized (ActivityLifecycle.class) {
-                if (instance == null)
-                    instance = new ActivityLifecycle();
-            }
-        return instance;
+        //双重检索模式（Double Check Lock ）DCL
+//        if (instance == null)
+//            //所有加上synchronized 和 块语句，在多线程访问的时候，同一时刻只能有一个线程能够用
+//            //同步检查，获得锁，先清空工作内存，即子内存；然后从主内存中拷贝变量的新副本到子内存中，
+//            // 执行后强制刷新主内存，并释放
+//            synchronized (ActivityLifecycle.class) {
+//                if (instance == null)
+//                    instance = new ActivityLifecycle();
+//            }
+////        return instance;
+        return SingletonHolder.sigleton;
+    }
+
+    private static class SingletonHolder {
+        private static final ActivityLifecycle sigleton = new ActivityLifecycle();
     }
 
     @Override
