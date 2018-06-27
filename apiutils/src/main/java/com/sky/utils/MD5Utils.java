@@ -34,7 +34,12 @@ public class MD5Utils {
             return null;
         }
     }
-
+    /**
+     * 加密
+     *
+     * @param plain 明文
+     * @return ciphertext 密文
+     */
     public static String encryption(String plain) {
         StringBuilder builder = new StringBuilder();
         try {

@@ -12,7 +12,7 @@ import java.util.Map;
  *
  * @author Administrator
  */
-public class HairFactory {
+public class HairFactory extends Factory {
 
     /**
      * 根据类型来创建对象
@@ -57,7 +57,6 @@ public class HairFactory {
 
         try {
             Map<String, String> map = new PropertiesReader().getProperties();
-
             HairInterface hair = (HairInterface) Class.forName(map.get(key)).newInstance();
             return hair;
         } catch (InstantiationException e) {
@@ -66,6 +65,18 @@ public class HairFactory {
             LogUtils.d(e.toString());
         } catch (ClassNotFoundException e) {
             LogUtils.d(e.toString());
+        }
+        return null;
+    }
+
+    @Override
+   public  <T extends HairInterface> T create(Class<T> cla) {
+        try {
+            return cla.newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
         }
         return null;
     }

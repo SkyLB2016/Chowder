@@ -26,7 +26,7 @@ public class PropertiesReader {
             String packageName = "/" + R.class.getName().replace('.', '/');
 
             packageName = packageName.substring(0, packageName.length() - 1);
-            InputStream in = getClass().getResourceAsStream("/assets/type.properties");//放在build的PropertiesReader同级目录下
+            InputStream in = getClass().getResourceAsStream("/assets/type.properties");
 //			InputStream in = PropertiesReader.class.getResourceAsStream("/assets/type.properties");
 //			InputStream is = context.getAssets().open("type.properties");
 //			InputStream is = context.getResources().openRawResource(R.raw.type);

@@ -36,6 +36,7 @@ import com.sky.chowder.ui.fragment.TimeFragment
 import com.sky.utils.AppUtils
 import com.sky.utils.DateUtil
 import com.sky.utils.GsonUtils
+import com.sky.utils.MD5Utils
 import common.base.BaseNoPActivity
 import common.base.BasePActivity
 import common.model.ApiResponse
@@ -60,16 +61,10 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
         val method = arrayListOf("字符替换与数组化", "hash相同", "字体颜色背景变换"
                 , "系统信息", "获取app信息", "电池电量"
                 , "数组排序", "json转换", "list迭代器", "list筛选lambda"
-                , "Intent测试"
-                , "时间选择"
-                , "地址选择"
-                , "工厂模式"
-                , "SVG与Value"
-                , "渐变的文字"
-                , "音频处理"
-                , "字符串转id"
-                , "排序算法"
-                , "LinkedList使用"
+                , "Intent测试", "时间选择", "地址选择", "工厂模式"
+                , "SVG与Value", "渐变的文字", "音频处理", "字符串转id"
+                , "排序算法", "LinkedList使用"
+                , "MD5加密"
         )
         for (i in method) {
             val tvText = LayoutInflater.from(this).inflate(R.layout.item_tv, flow, false) as TextView
@@ -102,6 +97,7 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
             "字符串转id" -> changeStrToId()
             "排序算法" -> sort()
             "LinkedList使用" -> getNum()
+            "MD5加密" -> MD5Utils.encryption("http://img.mukewang.com/55237dcc0001128c06000338.jpg")
             "" -> ""
             else -> ""
         }
@@ -297,7 +293,9 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
         left?.draw()
         val hair = factory.getHairByClassKey("in")
         hair?.draw()
-
+        val ddddd = factory.create(LeftHair::class.java)
+        ddddd.draw()
+        
         //抽象工厂模式
         val facoty = MCFctory()
         val girl = facoty.girl

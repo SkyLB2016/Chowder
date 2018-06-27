@@ -15,8 +15,7 @@ import kotlinx.android.synthetic.main.adapter_main.view.*
  * 主页
  */
 class MainAdapter(layoutId: Int) : RecyclerAdapter<ActivityModel>(layoutId) {
-    var fontIcon = intArrayOf(R.string.font, R.string.font01, R.string.font02, R.string.font03,
-            R.string.font04, R.string.font05, R.string.font06, R.string.font07, R.string.font08)
+    private val fontIcon = intArrayOf(R.string.font, R.string.font01, R.string.font02, R.string.font03, R.string.font04, R.string.font05, R.string.font06, R.string.font07, R.string.font08)
 
     override fun onAchieveHolder(holder: RecyclerHolder, position: Int) {
         //应写成异步调用
@@ -36,7 +35,7 @@ class MainAdapter(layoutId: Int) : RecyclerAdapter<ActivityModel>(layoutId) {
             tvName.typeface = face
             tvDescribe.typeface = face
             tvImage.typeface = face
-            tvImage.textSize=50f
+            tvImage.textSize = 50f
         }
     }
 }

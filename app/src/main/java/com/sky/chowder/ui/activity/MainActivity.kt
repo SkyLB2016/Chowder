@@ -22,7 +22,6 @@ import com.sky.chowder.utils.http.HttpUrl
 import com.sky.utils.AppUtils
 import com.sky.utils.JumpAct
 import com.sky.utils.LogUtils
-import com.sky.utils.MD5Utils
 import common.base.BasePActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -69,16 +68,8 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
             checkTTS(status)
         })
         fab.setOnClickListener {
-            //            num[6]
-//            var text = getString(R.string.cezi).trim().replace(" ", "")
-//            LogUtils.i("总长==${text.length}")
-            val url = "http://img.mukewang.com/55237dcc0001128c06000338.jpg"
-            val key = MD5Utils.encryption(url)
-            LogUtils.i("key==$key")
-            LogUtils.i("MD5Utils==${MD5Utils.encrypt(url)}")
-            LogUtils.i("bool==${MD5Utils.encrypt(url)==key}")
-            LogUtils.i("hashcode==${url.hashCode()}")
-            LogUtils.i("jiqqu==${url.substring(url.lastIndexOf("/"))}")
+            //var text = getString(R.string.cezi).trim().replace(" ", "")
+            //LogUtils.i("总长==${text.length}")
             SingletonDemo.INSTANCE.otherMethods()
             SingletonTest.test()
         }
