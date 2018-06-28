@@ -16,8 +16,6 @@ import com.sky.chowder.api.view.IMainView
 import com.sky.chowder.model.ActivityModel
 import com.sky.chowder.ui.adapter.MainAdapter
 import com.sky.chowder.ui.presenter.MainP
-import com.sky.chowder.utils.SingletonDemo
-import com.sky.chowder.utils.SingletonTest
 import com.sky.chowder.utils.http.HttpUrl
 import com.sky.utils.AppUtils
 import com.sky.utils.JumpAct
@@ -70,9 +68,16 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
         fab.setOnClickListener {
             //var text = getString(R.string.cezi).trim().replace(" ", "")
             //LogUtils.i("总长==${text.length}")
-            SingletonDemo.INSTANCE.otherMethods()
-            SingletonTest.test()
+//            SingletonDemo.INSTANCE.otherMethods()
+//            SingletonTest.test()
         }
+//        animate(fab).alpha(1f)
+//                .rotation(180f)
+//                .translationX(-500f)
+//                .setDuration(3000)
+//                .withStartAction { }
+//                .withEndAction { }
+//                .start()
     }
 
     private fun getURL() {

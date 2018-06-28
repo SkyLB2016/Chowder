@@ -32,7 +32,8 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
             }
             invalidate()
         }
-    var oldOrginal = IntArray(16)
+
+    private val oldOrginal = LinkedList<IntArray>()
     private var margin = resources.getDimensionPixelSize(R.dimen.wh_8)//分割后图片之间的间隔
     private val piece = 4//几行几列
     private var once = true
@@ -79,13 +80,13 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
         orginal[Random().nextInt(15)] = randomTwoOrFour()
         resetView()
         isEnd = false
-        oldOrginal = IntArray(16)
+        oldOrginal.clear()
         checkIsEnd?.invoke(isEnd)
     }
 
     fun returnOld() {
-        if (checkArrayIsZero(oldOrginal)) return
-        orginal = oldOrginal
+        if (oldOrginal.isEmpty()) return
+        orginal = oldOrginal.removeLast()
         val count = childCount
         for (i in 0 until count) (getChildAt(i) as ImageView).setImageDrawable(getImageDrawable(orginal[i]))
         isEnd = false
@@ -143,13 +144,9 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
         }
         if (!Arrays.equals(orginal, old)) {
             resetView()
-            oldOrginal = old//上一步数据
+            oldOrginal.add(old)//上一步数据
+            while (oldOrginal.size > 10) oldOrginal.removeFirst()
         }
-    }
-
-    private fun checkArrayIsZero(array: IntArray): Boolean {
-        for (i in array) if (i != 0) return false
-        return true
     }
 
     //现数据与原数据比较，不同则重置数组
