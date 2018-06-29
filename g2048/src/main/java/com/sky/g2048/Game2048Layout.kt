@@ -47,7 +47,6 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
         setBackgroundResource(R.mipmap.bg2048)
     }
 
-
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         width = ScreenUtils.getWidthPX(context)
@@ -123,12 +122,7 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
         return true
     }
 
-    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        changeData(keyCode)
-        return super.onKeyDown(keyCode, event)
-    }
-
-    private fun changeData(status: Int) {
+    fun changeData(status: Int) {
         //复制原数据
         val old = orginal.clone()
         //开始移动数据
@@ -145,7 +139,7 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
         if (!Arrays.equals(orginal, old)) {
             resetView()
             oldOrginal.add(old)//上一步数据
-            while (oldOrginal.size > 10) oldOrginal.removeFirst()
+            while (oldOrginal.size > 20) oldOrginal.removeFirst()
         }
     }
 

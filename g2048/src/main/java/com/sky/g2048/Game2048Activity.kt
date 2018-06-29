@@ -1,10 +1,13 @@
 package com.sky.g2048
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
 import com.sky.SkyApp
+import com.sky.utils.DateUtil
 import com.sky.utils.FileUtils
 import com.sky.utils.LogUtils
 import common.base.BaseNoPActivity
@@ -24,9 +27,28 @@ class Game2048Activity : BaseNoPActivity() {
         }
         game.orginal = FileUtils.deserialize<IntArray>(pathName) ?: IntArray(0)
         game.checkIsEnd = { end -> imgEnd.visibility = if (end) View.VISIBLE else View.GONE }
-        findViewById<View>(R.id.tvRight).setOnClickListener { game.restartGame() }
+        findViewById<View>(R.id.tvRight).setOnClickListener {
+            game.restartGame()
+            setTime()
+        }
 //        imgEnd.setOnClickListener { game.restartGame() }
         btReturnOld.setOnClickListener { game.returnOld() }
+
+        tvTime.text = "00:00"
+        setTime()
+    }
+
+    private val handler = object : Handler() {
+        override fun handleMessage(msg: Message?) {
+            tvTime.text = DateUtil.timeStampToDate(System.currentTimeMillis() - start, "mm:ss")
+            sendEmptyMessage(1009)
+        }
+    }
+    var start = 0L
+    private fun setTime() {
+        start = System.currentTimeMillis()
+        setObject("time", start)
+        handler.sendEmptyMessage(1009)
     }
 
     override fun loadData() = Unit
@@ -48,11 +70,14 @@ class Game2048Activity : BaseNoPActivity() {
             KeyEvent.KEYCODE_DPAD_UP,
             KeyEvent.KEYCODE_DPAD_DOWN,
             KeyEvent.KEYCODE_DPAD_LEFT,
-            KeyEvent.KEYCODE_DPAD_RIGHT -> game.onKeyDown(keyCode,event)
-            KeyEvent.KEYCODE_B->game.returnOld()
-            KeyEvent.KEYCODE_R->game.restartGame()
+            KeyEvent.KEYCODE_DPAD_RIGHT -> game.changeData(keyCode)
+            KeyEvent.KEYCODE_B -> game.returnOld()
+            KeyEvent.KEYCODE_R -> {
+                game.restartGame()
+                setTime()
+            }
         }
-        return super.onKeyDown(keyCode,event!!)
+        return super.onKeyDown(keyCode, event!!)
     }
 
     private var lastBack: Long = 0

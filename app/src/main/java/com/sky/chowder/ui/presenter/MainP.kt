@@ -7,6 +7,7 @@ import com.sky.chowder.R
 import com.sky.chowder.api.presenter.IMainPresenter
 import com.sky.chowder.api.view.IMainView
 import com.sky.chowder.model.ActivityModel
+import com.sky.utils.LogUtils
 import common.base.BasePresenter
 import java.text.Collator
 import java.util.*
@@ -60,6 +61,11 @@ class MainP(context: Context) : BasePresenter<IMainView>(context), IMainPresente
             //排序
             Collections.sort(activityInfos, comparator)
 //            Collections.comparator(activityInfos);//使用activityModel中的compareTo进行排序
+
+            val iterator = activityInfos.iterator()
+            while (iterator.hasNext()) {
+                LogUtils.i("==${iterator.next().className}")
+            }
             return activityInfos
         }
     private val comparator = Comparator<ActivityModel> { first, second -> Collator.getInstance().compare(first.className, second.className) }

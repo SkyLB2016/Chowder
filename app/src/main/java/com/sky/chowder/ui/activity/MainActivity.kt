@@ -4,8 +4,8 @@ import android.Manifest
 import android.content.ActivityNotFoundException
 import android.os.Build
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.speech.tts.TextToSpeech
+import android.support.v4.view.ViewCompat.animate
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
@@ -31,7 +31,7 @@ import java.util.*
  * Created by SKY on 2015/12/6.
  * 主页
  */
-class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IMainView {
+class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IMainView, Observer {
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //super.onCreate(savedInstanceState)
 //Debug.startMethodTracing()
@@ -70,14 +70,35 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
             //LogUtils.i("总长==${text.length}")
 //            SingletonDemo.INSTANCE.otherMethods()
 //            SingletonTest.test()
+            setObserver()
+            setAnimator()
         }
-//        animate(fab).alpha(1f)
-//                .rotation(180f)
-//                .translationX(-500f)
-//                .setDuration(3000)
-//                .withStartAction { }
-//                .withEndAction { }
-//                .start()
+    }
+
+    private fun setObserver() {
+        val observer = Observer { o, arg -> LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}==$arg") }
+        val observable = object : Observable() {
+            fun send(content: String) {
+                setChanged()
+                notifyObservers(content)
+            }
+        }
+        observable.addObserver(observer)
+        observable.addObserver(this)
+        observable.send("观察者模式")
+    }
+
+    override fun update(o: Observable?, arg: Any?) {
+        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}==$arg")
+    }
+    private fun setAnimator() {
+        animate(fab).alpha(1f)
+                .rotation(180f)
+                .translationX(-500f)
+                .setDuration(3000)
+                .withStartAction { }
+                .withEndAction { }
+                .start()
     }
 
     private fun getURL() {
@@ -104,14 +125,6 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
             if (result != TextToSpeech.LANG_COUNTRY_AVAILABLE && result != TextToSpeech.LANG_AVAILABLE)
                 showToast("TTS暂不支持这种语言的朗读")
         }
-    }
-
-    override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
-        super.onSaveInstanceState(outState, outPersistentState)
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
-        super.onRestoreInstanceState(savedInstanceState)
     }
 
     override fun setData(data: List<ActivityModel>) {
@@ -171,30 +184,6 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
     }
 //    override fun onRestart() {
 //        super.onRestart()
-//        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
-//    }
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
-//    }
-//    override fun onStart() {
-//        super.onStart()
-//        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
-//    }
-//    override fun onResume() {
-//        super.onResume()
-//        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
-//    }
-//    override fun onPause() {
-//        super.onPause()
-//        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
-//    }
-//    override fun onStop() {
-//        super.onStop()
-//        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
-//    }
-//    override fun onDestroy() {
-//        super.onDestroy()
 //        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
 //    }
 }
