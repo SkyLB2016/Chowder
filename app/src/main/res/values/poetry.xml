@@ -8747,7 +8747,8 @@
         　　(6)\n
     </string>
     <string name="designPattern">
-        ●01.设计模式的六大原则（待深刻理解）\n
+        设计模式\n
+        ●01.设计模式的六大原则\n
         　　(1)单一职责原则(Single Responsibility Principle)：不同功能间拆分成独立的类\n
         　　(2)开闭原则（Open Close Principle）：让程序更稳定，更灵活；依赖于抽象，关闭接口修改，增加实现类\n
         　　(3)里氏代换原则（Liskov Substitution Principle）：构建扩展性更好的系统；核心依然依赖于抽象，拆分出共同的实现方法，单独编写不同的实现，依赖于面向对象三大特性中的继承与多态。\n
