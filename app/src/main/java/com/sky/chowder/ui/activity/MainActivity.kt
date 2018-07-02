@@ -5,6 +5,7 @@ import android.content.ActivityNotFoundException
 import android.os.Build
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
+import android.support.annotation.LayoutRes
 import android.support.v4.view.ViewCompat.animate
 import android.support.v7.widget.Toolbar
 import android.view.Menu
@@ -53,7 +54,7 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
         adapter = MainAdapter(R.layout.adapter_main)
         recycler.adapter = adapter
 
-        adapter?.setOnItemClickListener { _, position -> JumpAct.jumpActivity(this, adapter.datas[position].componentName) }
+        adapter.setOnItemClickListener { _, position -> JumpAct.jumpActivity(this, adapter.datas[position].componentName) }
         adapter?.setOnItemLongClickListener { _, _ ->
             showToast("长按监听已处理")
             true
@@ -70,12 +71,11 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
             //LogUtils.i("总长==${text.length}")
 //            SingletonDemo.INSTANCE.otherMethods()
 //            SingletonTest.test()
-            setObserver()
-            setAnimator()
+
         }
     }
 
-    private fun setObserver() {
+    private fun setObserver(@LayoutRes item: Int?) {
         val observer = Observer { o, arg -> LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}==$arg") }
         val observable = object : Observable() {
             fun send(content: String) {
@@ -91,6 +91,7 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
     override fun update(o: Observable?, arg: Any?) {
         LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}==$arg")
     }
+
     private fun setAnimator() {
         animate(fab).alpha(1f)
                 .rotation(180f)
@@ -128,7 +129,7 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
     }
 
     override fun setData(data: List<ActivityModel>) {
-        adapter?.datas = data
+        adapter.datas = data
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

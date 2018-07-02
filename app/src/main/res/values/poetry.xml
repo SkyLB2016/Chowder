@@ -8381,9 +8381,14 @@
         　　(7)插件拆分第九章第九节，第四小节\n
         　　(8)第九章第十一节h5篇安卓片上面应用的技术分析。\n
         　　(9)monkey\n
-        　　(9)插件拆分第九章第九节，第四小节。\n
-        　　(9)第九章第十一节h5篇安卓片上面应用的技术分析。\n
-        　　(9)总结知识框架\n
+        　　(10)插件拆分第九章第九节，第四小节。\n
+        　　(11)第九章第十一节h5篇安卓片上面应用的技术分析。\n
+        　　(12)总结知识框架\n
+        　　(13)annotation使用\n
+        　　(14)Percent 百分比使用：com.android.suport:percent:23.2.0，包含PercentFrameLayout，PercentRelativeLayout，PercentLayoutHoper\n
+        　　(15)Design兼容库\n
+        　　(15)\n
+
     </string>
 
     <string name="weiqi">
@@ -8461,7 +8466,7 @@
     </string>
 
     <!--编程笔记-->
-    <string name="biancheng">
+    <string name="programming">
         编程笔记·李彬\n
         <!--使用其中代码时，应先去掉中文空格\n-->
         ●01.Android的系统架构\n
@@ -8586,9 +8591,14 @@
         　　　　DashPathEffect：画虚线\n
         　　　　PathDashPathEffect：升级的画虚线\n
         　　　　ComPosePathEffect与SunPathEffect：组合前几者\n
-        ●11.视图动画，补间动画：Animation：\n
-        　　TranslateAnimation，ScaleAnimation，RatateAnimation，AlphaAnimation，用AnimationSet可以把四个视图动画组合在一起\n
-        　　对应的xml：translate，scale，ratate，alpha，set\n
+        ●11.动画类型分为三种：逐帧动画，补间动画，属性动画：\n
+        　　(1)逐帧动画（Frame Animation）：AnimationDrawable相对于animation-list\n
+        　　(2)补间动画：\n
+        位移：TranslateAnimation对应的xml：translate\n
+        缩放：ScaleAnimation 对应的xml：scale\n
+        旋转：RatateAnimation 对应的xml：ratate\n
+        透明度：AlphaAnimation 对应的xml：alpha\n
+        组合：AnimationSet 对应的xml：set\n
         ●12.属性动画：ValueAnimator包括：ObjectAnimator，AnimatorSet组合，也有相应的xml对应字段，动画属性值：\n
         　　(1)translationX、translationY，增量平移\n
         　　(2)rotation、rotationX、rotationY 旋转\n
@@ -8598,6 +8608,7 @@
         　　(6)alpha 透明度 默认为1，不透明，0代表完全透明，即不可见\n
         　　(7)PropertyValuesHolder，ObjectAnimator.ofPropertyValuesHolder(view,pro...)\n
         　　(8)Value的主要方法：addUpdateListener()\n
+        　　(9)过度动画（Transiton Animation）：属性动画的变种。\n
         ●13.AnimatorSet属性：palyTogether()，playSequentially()，play().with()、befor()、after();来控制动画的播放规则\n
         ●14.动画插值器TimeInterpolator，计算时间流逝的百分比；类型估值器TypeEvaluaor,计算当前的属性值\n
         　　(1)LinearInterPolator：匀速\n
@@ -8713,7 +8724,7 @@
         　　(1)冒泡排序：选定一端，两相比较，顺序错误则交换。\n
         　　(2)选择排序：每次选出最大或最小的放在队首，直到完成。\n
         　　(3)插入排序：排序头两个数据，然后每次增加一个数据来循环，直到完成。\n
-        ●.\n
+        ●35.Support Annotation Library\n
         　　(1)\n
         　　(2)\n
         　　(3)\n
@@ -8766,7 +8777,7 @@
         　　(5)枚举模式：线程安全，反序列化不生成新实例。\n
         　　(6)单例容器，统一调配使用。系统服务的获取就是单例容器的应用\n
         　　(7)LayoutInflater\n
-        ●04.建造者模式 Builder：二次封装，从设置到创建中间还有一层设置\n
+        ●04.建造者模式 Builder：二次封装，犹如三层楼，第一层设置参数，第二层通过build再次复制参数，第三层开始使用。只有一层的话，当第一层发生变化，使用时也就发生了变化，所以需要加入第二层，只要不执行build创建，第一层可以随便改。\n
         　　(1)dialog的创建\n
         　　(2)WindowManager\n
         ●05.原型模式：浅复制与深复制，当对象中的属性都为八种基本类型时，浅复制即可；其他引用类型需用深复制才能拷贝一份独立的对象。\n
@@ -8777,7 +8788,7 @@
         　　(1)MediaPlayer的创建\n
         ●08.策略模式：工厂模式的变种，一种产品的多种实现，工厂与调用结合依赖于抽象产品（多态）（OCP与DIP原则）\n
         　　(1)动画的实现应用了策略模式\n
-        ●09.状态模式：书写模式和策略模式基本相同，但应用场景不同，适用于状态改变后，之后的操作都不一样。\n
+        ●09.状态模式：此模式模式和策略模式基本相同，但应用场景不同，适用于状态改变后，之后的操作都不一样。\n
         　　(1)WiFi的模式\n
         ●10.责任链模式：Iterator Pattern，一个事件，第一级处理不了，则依次传递到下一级，最后被某个对象所处理，则为纯责任链，如还没处理，则为不纯\n
         　　(1)触摸事件的分发\n
@@ -8793,8 +8804,8 @@
         ●14.备忘录模式：Originator，（被保存的对象）创建备忘录Memoto；Memoto需要存取的属性值，Caretaker保存和读取Memoto。\n
         　　(1)activity被杀死时备份\n
         　　(2)游戏存档\n
-        ●15.迭代器模式：Iterator，也叫游标模式Cursor，iterator与iterable联合使用。\n
-        　　(1)Iterator迭代器\n
+        ●15.迭代器模式：Iterator，也叫游标模式Cursor。\n
+        　　(1)Iterator迭代器，iterator与iterable联合使用\n
         　　(2)数据库中的游标\n
         ●16.模板方法模式\n
         　　(1)\n

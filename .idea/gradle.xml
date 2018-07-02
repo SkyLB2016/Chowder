@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/g2048" />
             <option value="$PROJECT_DIR$/jnilib" />
             <option value="$PROJECT_DIR$/puzzle" />
+            <option value="$PROJECT_DIR$/tetris" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

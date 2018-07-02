@@ -54,10 +54,6 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
     override fun getLayoutResId(): Int = R.layout.activity_method
     override fun loadData() = Unit
     override fun initialize(savedInstanceState: Bundle?) {
-        //            val patPunc = Pattern.compile("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]$")
-//            val str = "同！意!"
-//            val matcher = patPunc.matcher(str)
-//            LogUtils.i("==${matcher.find()}")
         val method = arrayListOf("字符替换与数组化", "hash相同", "字体颜色背景变换"
                 , "系统信息", "获取app信息", "电池电量"
                 , "数组排序", "json转换", "list迭代器", "list筛选lambda"
