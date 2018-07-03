@@ -12,6 +12,7 @@ import com.sky.utils.FileUtils
 import com.sky.utils.LogUtils
 import common.base.BaseNoPActivity
 import kotlinx.android.synthetic.main.activity_g2048.*
+import java.util.*
 
 class Game2048Activity : BaseNoPActivity() {
 
@@ -31,17 +32,51 @@ class Game2048Activity : BaseNoPActivity() {
             game.restartGame()
             setTime()
         }
-//        imgEnd.setOnClickListener { game.restartGame() }
         btReturnOld.setOnClickListener { game.returnOld() }
 
         tvTime.text = "00:00"
         setTime()
+        tvAutomatic.setOnClickListener { setAutomatic() }
     }
 
+    private fun setAutomatic() {
+        if (!automatic) {
+            handler.sendEmptyMessage(1110)
+            tvAutomatic.text = "停止计算"
+        } else {
+            tvAutomatic.text = "自动计算"
+            handler.removeMessages(1110)
+        }
+        automatic = !automatic
+    }
+
+    var automatic: Boolean = false
+
+    val array = intArrayOf(
+            KeyEvent.KEYCODE_W,
+            KeyEvent.KEYCODE_S,
+            KeyEvent.KEYCODE_A,
+            KeyEvent.KEYCODE_D,
+            KeyEvent.KEYCODE_DPAD_UP,
+            KeyEvent.KEYCODE_DPAD_DOWN,
+            KeyEvent.KEYCODE_DPAD_LEFT,
+            KeyEvent.KEYCODE_DPAD_RIGHT)
     private val handler = object : Handler() {
         override fun handleMessage(msg: Message?) {
-            tvTime.text = DateUtil.timeStampToDate(System.currentTimeMillis() - start, "mm:ss")
-            sendEmptyMessage(1009)
+            when (msg!!.what) {
+                1009 -> {
+                    tvTime.text = DateUtil.timeStampToDate(System.currentTimeMillis() - start, "mm:ss")
+                    sendEmptyMessage(1009)
+                }
+                1110 -> {
+//                    if (game.orginal[12] == 0)
+//                        game.changeData(KeyEvent.KEYCODE_S)
+//                    else
+                    game.changeData(array[Random().nextInt(array.size - 1)])
+                    sendEmptyMessage(1110)
+                }
+            }
+
         }
     }
     var start = 0L
@@ -72,6 +107,7 @@ class Game2048Activity : BaseNoPActivity() {
             KeyEvent.KEYCODE_DPAD_LEFT,
             KeyEvent.KEYCODE_DPAD_RIGHT -> game.changeData(keyCode)
             KeyEvent.KEYCODE_B -> game.returnOld()
+            KeyEvent.KEYCODE_E -> setAutomatic()
             KeyEvent.KEYCODE_R -> {
                 game.restartGame()
                 setTime()

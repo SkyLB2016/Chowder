@@ -71,18 +71,21 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
             //LogUtils.i("总长==${text.length}")
 //            SingletonDemo.INSTANCE.otherMethods()
 //            SingletonTest.test()
-
         }
     }
 
     private fun setObserver(@LayoutRes item: Int?) {
+        //观察者
         val observer = Observer { o, arg -> LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}==$arg") }
+
+        //被观察者
         val observable = object : Observable() {
-            fun send(content: String) {
+            fun send(content: Any) {
                 setChanged()
                 notifyObservers(content)
             }
         }
+        //把观察者注册到被观察者中
         observable.addObserver(observer)
         observable.addObserver(this)
         observable.send("观察者模式")
@@ -121,11 +124,7 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 
     var tts: TextToSpeech? = null
     private fun checkTTS(status: Int) {
-        if (status == TextToSpeech.SUCCESS) {
-            val result = tts?.setLanguage(Locale.US)
-            if (result != TextToSpeech.LANG_COUNTRY_AVAILABLE && result != TextToSpeech.LANG_AVAILABLE)
-                showToast("TTS暂不支持这种语言的朗读")
-        }
+
     }
 
     override fun setData(data: List<ActivityModel>) {
