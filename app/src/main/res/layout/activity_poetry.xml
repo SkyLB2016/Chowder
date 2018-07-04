@@ -10,7 +10,6 @@
         android:background="@color/darkyellow"
         android:orientation="horizontal">
 
-
         <com.sky.widget.FlowLayout
             android:id="@+id/flow"
             android:layout_width="match_parent"
