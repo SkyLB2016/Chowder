@@ -8469,12 +8469,13 @@
         编程笔记·李彬\n
         ●01.Android的系统架构\n
         　　(1)操作系统层OS：linux内核\n
-        　　(2)各种库Libraries和Android运行环境RunTime\n
-        　　(3)应用程序框架Application Framework\n
-        　　(4)应用程序Application\n
+        　　(2)HAL,硬件抽象层，设备内核驱动的抽象接口\n
+        　　(3)native C\C++ Libraries和Android运行环境RunTime\n
+        　　(4)应用程序框架Application Framework\n
+        　　(5)应用程序Application\n
         ●02.小常识\n
-        　　(1)File文件所在文件夹存在时，写入数据时自动创建；不存在，则需调用mkdis(),当父类的父类也不存在是应调用mkdirs(),创建父类文件夹。\n
-        　　(2)从string中获取的文章字符串，有换行的情况下，会用空格，应先去除空格再用\n
+        　　(1)File文件所在文件夹存在时，写入数据时自动创建；不存在，则需调用mkdir(),当父类的父类也不存在是应调用mkdirs(),创建父类文件夹。\n
+        　　(2)从string中获取的文章字符串，有换行的情况下，会有空格，应先去除空格再用\n
         　　(3)for (;;)死循环\n
         　　(4)MarginLayoutParams是viewGroup的父类\n
         　　(5)ViewDragHelper滑动控制类，子类有DrawerLayout与SlidingPaneLayout\n
