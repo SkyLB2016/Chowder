@@ -8477,7 +8477,7 @@
         ●01.Android的系统架构\n
         　　(1)操作系统层OS：linux内核\n
         　　(2)HAL,硬件抽象层，设备内核驱动的抽象接口\n
-        　　(3)native C\C++ Libraries和Android运行环境RunTime\n
+        　　(3)native C/C++ Libraries和Android运行环境RunTime\n
         　　(4)应用程序框架Application Framework\n
         　　(5)应用程序Application\n
         ●02.小常识\n
