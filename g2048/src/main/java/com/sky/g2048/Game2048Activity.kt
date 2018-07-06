@@ -12,55 +12,14 @@ import com.sky.utils.FileUtils
 import com.sky.utils.LogUtils
 import common.base.BaseNoPActivity
 import kotlinx.android.synthetic.main.activity_g2048.*
-import java.util.*
 
 class Game2048Activity : BaseNoPActivity() {
 
     private val pathName = SkyApp.getInstance().fileCacheDir + "2048orginal.txt"
-    override fun getLayoutResId(): Int = R.layout.activity_g2048
-    override fun initialize(savedInstanceState: Bundle?) {
-        LogUtils.isDebug = BuildConfig.DEBUG
-        setToolbarRightTitle("重新开始")
-//        if (BuildConfig.isModel)
-//            baseTitle.setLeftButton(-1)
-        when (BuildConfig.isModel) {
-            true -> baseTitle.setLeftButton(-1)
-        }
-        game.orginal = FileUtils.deserialize<IntArray>(pathName) ?: IntArray(0)
-        game.checkIsEnd = { end -> imgEnd.visibility = if (end) View.VISIBLE else View.GONE }
-        findViewById<View>(R.id.tvRight).setOnClickListener {
-            game.restartGame()
-            setTime()
-        }
-        btReturnOld.setOnClickListener { game.returnOld() }
+    var automatic: Boolean = false//自动AI
 
-        tvTime.text = "00:00"
-        setTime()
-        tvAutomatic.setOnClickListener { setAutomatic() }
-    }
-
-    private fun setAutomatic() {
-        if (!automatic) {
-            handler.sendEmptyMessage(1110)
-            tvAutomatic.text = "停止计算"
-        } else {
-            tvAutomatic.text = "自动计算"
-            handler.removeMessages(1110)
-        }
-        automatic = !automatic
-    }
-
-    var automatic: Boolean = false
-
-    val array = intArrayOf(
-            KeyEvent.KEYCODE_W,
-            KeyEvent.KEYCODE_S,
-            KeyEvent.KEYCODE_A,
-            KeyEvent.KEYCODE_D,
-            KeyEvent.KEYCODE_DPAD_UP,
-            KeyEvent.KEYCODE_DPAD_DOWN,
-            KeyEvent.KEYCODE_DPAD_LEFT,
-            KeyEvent.KEYCODE_DPAD_RIGHT)
+    val array = intArrayOf(KeyEvent.KEYCODE_W, KeyEvent.KEYCODE_S, KeyEvent.KEYCODE_A, KeyEvent.KEYCODE_D,
+            KeyEvent.KEYCODE_DPAD_UP, KeyEvent.KEYCODE_DPAD_DOWN, KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_DPAD_RIGHT)
     private val handler = object : Handler() {
         override fun handleMessage(msg: Message?) {
             when (msg!!.what) {
@@ -72,14 +31,50 @@ class Game2048Activity : BaseNoPActivity() {
 //                    if (game.orginal[12] == 0)
 //                        game.changeData(KeyEvent.KEYCODE_S)
 //                    else
-                    game.changeData(array[Random().nextInt(array.size - 1)])
-                    sendEmptyMessage(1110)
+//                    game.changeData(array[Random().nextInt(array.size - 1)])
+//                    sendEmptyMessage(1110)
                 }
+                2001 -> game.orginal = FileUtils.deserialize<IntArray>(pathName) ?: IntArray(0)
             }
 
         }
     }
-    var start = 0L
+    var start = 0L//开始时间
+    override fun getLayoutResId(): Int = R.layout.activity_g2048
+    override fun initialize(savedInstanceState: Bundle?) {
+        LogUtils.isDebug = BuildConfig.DEBUG
+        setToolbarRightTitle("重新开始")
+//        if (BuildConfig.isModel)
+//            baseTitle.setLeftButton(-1)
+        when (BuildConfig.isModel) {
+            true -> baseTitle.setLeftButton(-1)
+        }
+        game.checkIsEnd = { end -> imgEnd.visibility = if (end) View.VISIBLE else View.GONE }
+        findViewById<View>(R.id.tvRight).setOnClickListener {
+            game.restartGame()
+            setTime()
+        }
+        btReturnOld.setOnClickListener { game.returnOld() }
+
+        tvTime.text = "00:00"
+        setTime()
+        tvAutomatic.setOnClickListener { setAutomatic() }
+//        handler.sendEmptyMessageDelayed(2001, 100)
+        handler.postDelayed({ game.orginal = FileUtils.deserialize<IntArray>(pathName) ?: IntArray(0) }, 100)
+    }
+
+    private fun setAutomatic() {
+//        if (!automatic) {
+//            handler.sendEmptyMessage(1110)
+//            tvAutomatic.text = "停止计算"
+//        } else {
+//            tvAutomatic.text = "自动计算"
+//            handler.removeMessages(1110)
+//        }
+//        automatic = !automatic
+    }
+
+
     private fun setTime() {
         start = System.currentTimeMillis()
         setObject("time", start)

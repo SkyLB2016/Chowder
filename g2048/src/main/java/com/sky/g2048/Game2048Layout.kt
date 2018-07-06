@@ -30,7 +30,8 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
                 field[Random().nextInt(15)] = randomTwoOrFour()
                 field[Random().nextInt(15)] = randomTwoOrFour()
             }
-            invalidate()
+            val count = childCount
+            for (i in 0 until count) (getChildAt(i) as ImageView).setImageDrawable(getImageDrawable(field[i]))
         }
 
     private val oldOrginal = LinkedList<IntArray>()
@@ -66,7 +67,7 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
                 val topMargin = i / piece * pieceWidth + (i / piece + 1) * margin
                 lp.setMargins(leftMargin, topMargin, 0, 0)
                 addView(child)
-                child.layoutParams = lp//一定要放在addview之后`
+                child.layoutParams = lp//一定要放在addview之后
             }
         }
     }

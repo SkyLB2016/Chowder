@@ -8387,6 +8387,7 @@
         (13)annotation使用\n
         (14)Percent 百分比使用：com.android.suport:percent:23.2.0，包含PercentFrameLayout，PercentRelativeLayout，PercentLayoutHoper\n
         (15)Design兼容库\n
+        (16)TCP/IP，URLConnection，webView使用，疯狂讲义第十三章\n
         (15)\n
     </string>
 
@@ -8462,6 +8463,12 @@
         synchronized\n
         　英 [ˈsɪŋkrənaɪzd] 美 [ˈsɪŋkrənaɪzd]\n
         　同步的\n
+        tracker
+        　英 [ˈtrækə(r)] 美 ['trækər]
+        　n. 追踪者，追踪系统，纤夫
+        velocity
+        　英 [vəˈlɒsəti] 美 [vəˈlɑ:səti]
+        　n. 速率，速度;周转率;高速，快速
     </string>
 
     <!--编程笔记-->
@@ -8476,14 +8483,12 @@
         ●02.小常识\n
         　　(1)File文件所在文件夹存在时，写入数据时自动创建；不存在，则需调用mkdir(),当父类的父类也不存在是应调用mkdirs(),创建父类文件夹。\n
         　　(2)从string中获取的文章字符串，有换行的情况下，会有空格，应先去除空格再用\n
-        　　(3)for (;;)死循环\n
-        　　(4)MarginLayoutParams是viewGroup的父类\n
-        　　(5)ViewDragHelper滑动控制类，子类有DrawerLayout与SlidingPaneLayout\n
-        　　(6)dalvik是运行时编译，ART是安装时就进行编译。目前采用的是ART模式\n
-        　　(7)drawable文件，true，false，不同时出现的话，true，必须在前，文件效果才有效\n
-        　　(8)Makefile机制:组合文件，进行自动的可控制的编译（待加强）\n
-        　　(9)multidex参见错误统计表.xlsx\n
-        　　(10)TCP/IP，URLConnection，webView使用，疯狂讲义第十三章\n
+        　　(3)MarginLayoutParams是viewGroup的父类\n
+        　　(4)ViewDragHelper滑动控制类，子类有DrawerLayout与SlidingPaneLayout\n
+        　　(5)dalvik是运行时编译，ART是安装时就进行编译。目前采用的是ART模式\n
+        　　(6)drawable文件，true，false，不同时出现的话，true，必须在前，文件效果才有效\n
+        　　(7)Makefile机制:组合文件，进行自动的可控制的编译（待加强）\n
+        　　(8)multidex参见错误统计表.xlsx\n
         ●03.ADB命令行：\n
         　　(1)安装apk：adb install 路径\n
         　　(2)向手机传输文件：\n
@@ -8493,7 +8498,7 @@
         　　(4)录制视频：\n
         　　adb shell screenrecord /storage/emulated/0/AmapSdk/test.mp4\n
         　　(5)查看系统盘符：adb shell df\n
-        ●04.Intent：意图，分显示与隐式两种，显示是指定了component属性，明确启动哪个组件，\n
+        ●04.Intent：意图，分显式与隐式两种，显示是指定了component属性，明确启动哪个组件，\n
         　　(1)构造函数：可以是类名或者action（setClass）\n
         　　(2)操作类型action：Intent中只能存在一个，存在则必须有一个相同，setAction()，xml中可存在多个。\n
         　　(3)类别筛选category：Intent中存在几个匹配几个，xml中可存在多个。\n
@@ -8511,26 +8516,26 @@
         　　　　getTop()与getBottom()都是View自身到父布局顶边的距离\n
         　　　　x，y，translationX，translationY。\n
         　　(2)MotionEvent中的方法：\n
-        　　　　GetX()与getY()是视图坐标，即是触摸点到它自身左边到父布局顶边的距离\n
+        　　　　GetX()与getY()是视图坐标，相对坐标，即是触摸点到它到父布局左边与顶边的距离\n
         　　　　GetRawX()与getRawY()是绝对坐标，即是触摸点到屏幕左边与顶边的距离\n
         　　(3)TouchSlop：最小滑动距离，获取方法：ViewConfiguration.get(this).scaledTouchSlop，zoom中有使用\n
-        　　(4)VelocityTracker：速度跟踪器，只在move中有用，up时为0\n
+        　　(4)VelocityTracker：速度跟踪器，只在move中有用，up抬起时为0\n
         　　(5)GestureDetector：手势检测，相关方法：单击，拖动，滑动，长按，双击。\n
-        　　(6)Scroller（待深入研究）：弹性滑动对象，与view中的computeScr oll方法配合。\n
-        　　(6)View的OnTouchListener优先于onTouchEvent，返回true，onTouchEvent不会执行；平常调用的点击事件onClickListener也不会执行。\n
-        　　(6)requestDisallowInterceptTouchEvent(boolean)强制请求分发触摸事件。\n
-        　　(7)activity中获取宽高onWindowFocusChanged，view.post(runnable),viewTreeObserver.addOnGlobalLayoutListener()\n
-        　　(8)onDraw()\n
+        　　(6)Scroller（待深入研究）：弹性滑动对象，与view中的computeScroll方法配合。\n
+        　　(7)View的OnTouchListener优先于onTouchEvent，返回true，onTouchEvent不会执行；平常调用的点击事件onClickListener也不会执行。\n
+        　　(8)requestDisallowInterceptTouchEvent(boolean)强制请求分发触摸事件。\n
+        　　(9)activity中获取宽高onWindowFocusChanged，view.post(runnable),viewTreeObserver.addOnGlobalLayoutListener()\n
+        　　(10)onDraw()\n
         　　绘制背景 background.draw(canvas)\n
         　　绘制自己 onDraw\n
         　　绘制children dispatchDraw\n
         　　绘制装饰 onDrawScrollBars\n
-        　　(9)view滑动：\n
+        　　(11)view滑动：\n
         　　scrollTo/scrollBy：操作简单，适合对View内容的滑动；\n
         　　动画：操作简单，主要适用于实现复杂的动画效果；\n
         　　改变布局参数，操作稍微复杂，适用于有交互的View。\n
         ●07.自定义View中比较重要的回调方法：\n
-        　　第一次进入是的顺序回调\n
+        　　第一次进入时的顺序回调\n
         　　(01)onFinishInflate()：从XML加载组件完成后回调；\n
         　　(02)onAttachedToWindow()：组件放入窗口是回调\n
         　　(03)onWindowVisibilityChanged(int)：当包含该组件的窗口可见性发生改变时回调\n

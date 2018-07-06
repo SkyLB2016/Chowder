@@ -261,6 +261,7 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
 //        value.setTarget(image)
         animator.duration = 2000
         animator.addUpdateListener { animation ->
+//            animation!!.animatedFraction//当前百分比
             val lp = image.layoutParams
             lp.height = animation!!.animatedValue.toString().toFloat().toInt()
             image.layoutParams = lp
