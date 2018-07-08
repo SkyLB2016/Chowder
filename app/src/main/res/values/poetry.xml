@@ -8537,7 +8537,7 @@
         ●07.自定义View中比较重要的回调方法：\n
         　　第一次进入时的顺序回调\n
         　　(01)onFinishInflate()：从XML加载组件完成后回调；\n
-        　　(02)onAttachedToWindow()：组件放入窗口是回调\n
+        　　(02)onAttachedToWindow()：组件放入窗口时回调\n
         　　(03)onWindowVisibilityChanged(int)：当包含该组件的窗口可见性发生改变时回调\n
         　　(04)onMeasure()：测量view宽高\n
         　　EXACTLY,精确值模式，具体数字如100dp或者match_parent，默认即为EXACTLY；\n
@@ -8548,7 +8548,7 @@
         　　(07)onDraw()：绘制所需要显示的内容\n
         　　(08)onWindowFocusChanged()：当包含该组件的窗口失去或的得到焦点时回调\n
         　　退出时的顺序回调onWindowVisibilityChanged->onWindowFocusChanged->onDetachedFromWindow
-        　　费顺序回调：\n
+        　　非顺序回调：\n
         　　(09)onTouchEvent()：触摸事件，不消费ACTION_DOWN的话，之后的也不会消费，消费的话down，move，up，统一消耗。\n
         　　(10)onFocusChanged()：当该组件焦点发生改变时回调\n
         　　(11)onKeyDown()：键盘键按下\n
@@ -8580,13 +8580,13 @@
         　　(7)top：ascent的最大值\n
         　　(8)bottom：descent的最大值\n
         　　(9)getTextBounds(String text, int start, int end, Rect bounds):获取文字宽高\n
-        　　(10)measureTest(text)：获取文字宽度\n
+        　　(10)measureText(text)：获取文字宽度\n
         　　(11)ColorMatrix\n
         　　(12)PorterDuffXfermode（不好用），\n
         　　(13)Shader，着色器，渲染器：（TileMode三中模式：CLAMP拉伸；REPEAT重复；MIRROR镜像）\n
         　　　　BitmapShader：位图\n
         　　　　LinearGradient：线性\n
-        　　　　RadialGradient：光束\n
+        　　　　RadiolGradient：光束\n
         　　　　SweepGradient：梯度\n
         　　　　ComposeShader：混合\n
         　　(14)PathEffect画线用，结合Path的lineTo来使用\n
@@ -8596,11 +8596,11 @@
         　　　　PathDashPathEffect：升级的画虚线\n
         　　　　ComPosePathEffect与SunPathEffect：组合前几者\n
         ●11.动画类型分为三种：逐帧动画，补间动画，属性动画：\n
-        　　(1)逐帧动画（Frame Animation）：AnimationDrawable相对于animation-list\n
-        　　(2)补间动画：\n
+        (1)逐帧动画（Frame Animation）：AnimationDrawable相对于animation-list\n
+        (2)补间动画：\n
         位移：TranslateAnimation对应的xml：translate\n
         缩放：ScaleAnimation 对应的xml：scale\n
-        旋转：RatateAnimation 对应的xml：ratate\n
+        旋转：RotateAnimation 对应的xml：ratate\n
         透明度：AlphaAnimation 对应的xml：alpha\n
         组合：AnimationSet 对应的xml：set\n
         ●12.属性动画：ValueAnimator包括：ObjectAnimator，AnimatorSet组合，也有相应的xml对应字段，动画属性值：\n
@@ -8620,7 +8620,7 @@
         　　(3)AccelerateDecelerateInterpolator：起始加速，末尾减速\n
         　　(4)CycleInterpolator：循环播放，正弦曲线\n
         　　(5)DecelerateInterpolator：匀减速\n
-        ●15.StateListDrawable属性值item\n
+        ●15.StateListDrawable属性值item:selector\n
         　　(1)android:state_active：代表是否处于激活状态\n
         　　(2)android:state_checkable：代表是否处于可勾选状态\n
         　　(3)android:state_checked：代表是否处于已勾选状态\n
@@ -8643,12 +8643,12 @@
         　　(1)LayoutAnimationController.ORDER_NORMAL --顺序\n
         　　(2)LayoutAnimationController.ORDER_RANDOM --随机\n
         　　(3)LayoutAnimationController.ORDER_REVERSE --反序\n
-        ●18.SVG:VectorDrawable（vector静态效果）、AnimatedVectorDrawable（nimated-vector）：animated-vector组合objectAnimator与vector形成动态的动画效果\n
+        ●18.SVG:VectorDrawable（vector静态效果）、AnimatedVectorDrawable（animated-vector）：animated-vector组合objectAnimator与vector形成动态的动画效果\n
         ●19.handler执行\n
-        　　(1)handler分发dispatchMessage()：先检测message中的callback是否为空不为空执行，为空在检测handler自己的callback，为true终止，false执行handleMessage()。\n
-        　　(2)handler中执行enqueueMessage()方法将消息放入队列中，等待loop循环。\n
-        　　(3)Looper.loop()方法是死循环，其中选取消息的方法Message msg = queue.next();也是一个死循环，直到取到消息，开始往下执行；\n
-        　　(4)取到消息后开始执行handler的分发方法dispatchMessage()开始回调，方法执行完成后，此次消息处理完成。\n
+        　　(1)handler中执行enqueueMessage()方法将消息放入队列中，等待loop循环并找到此消息。\n
+        　　(2)Looper.loop()方法是死循环，其中选取消息的方法Message msg = queue.next();也是一个死循环，直到取到消息，开始往下执行；\n
+        　　(3)取到消息后开始执行handler的分发方法dispatchMessage()开始回调，方法执行完成后，此次消息处理完成。\n
+        　　(4)handler分发dispatchMessage()：先检测message中的callback是否为空，不为空消费此消息；为空则检测handler自己的callback，返回出rue则消费此消息，终止传递；为false则执行handleMessage()。\n
         ●20.IPC机制：多进程间通信\n
         　　会造成的问题：\n
         　　(1)静态成员和单例模式完全失效：不同进程间的静态和单例是互相独立的\n
