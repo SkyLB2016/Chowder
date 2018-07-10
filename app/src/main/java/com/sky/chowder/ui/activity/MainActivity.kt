@@ -166,16 +166,16 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
      */
     private fun fileTest() {
         val f = File(SkyApp.getInstance().fileCacheDir + "pass.txt")
-        System.out.println(f.getParent())//返回此抽象路径名父目录的路径名字符串；如果此路径名没有指定父目录，则返回 null
-        System.out.println(f.getName())//返回由此抽象路径名表示的文件或目录的名称
-        System.out.println(f.exists())//测试此抽象路径名表示的文件或目录是否存在
-        System.out.println(f.getAbsoluteFile())// 返回此抽象路径名的绝对路径名形式
-        System.out.println(f.getAbsolutePath())//返回此抽象路径名的规范路径名字符串
-        System.out.println(f.getPath())//将此抽象路径名转换为一个路径名字符串
-        System.out.println(f.hashCode())//计算此抽象路径名的哈希码
-        System.out.println(f.length())//返回由此抽象路径名表示的文件的长度
-        System.out.println(f.list())// 返回一个字符串数组，这些字符串指定此抽象路径名表示的目录中的文件和目录
-        System.out.println(f.mkdir())//创建此抽象路径名指定的目录
+        LogUtils.i(f.getParent())//返回此抽象路径名父目录的路径名字符串；如果此路径名没有指定父目录，则返回 null
+        LogUtils.i(f.getName())//返回由此抽象路径名表示的文件或目录的名称
+        LogUtils.i("${f.exists()}")//测试此抽象路径名表示的文件或目录是否存在
+        LogUtils.i("${f.getAbsoluteFile()}")// 返回此抽象路径名的绝对路径名形式
+        LogUtils.i(f.getAbsolutePath())//返回此抽象路径名的规范路径名字符串
+        LogUtils.i(f.getPath())//将此抽象路径名转换为一个路径名字符串
+        LogUtils.i("${f.hashCode()}")//计算此抽象路径名的哈希码
+        LogUtils.i("${f.length()}")//返回由此抽象路径名表示的文件的长度
+        LogUtils.i("${f.list()}")// 返回一个字符串数组，这些字符串指定此抽象路径名表示的目录中的文件和目录
+        LogUtils.i("${f.mkdir()}")//创建此抽象路径名指定的目录
     }
 
     override fun onDestroy() {

@@ -140,7 +140,7 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
         if (!Arrays.equals(orginal, old)) {
             resetView()
             oldOrginal.add(old)//上一步数据
-            while (oldOrginal.size > 20) oldOrginal.removeFirst()
+//            while (oldOrginal.size > 20) oldOrginal.removeFirst()
         }
     }
 

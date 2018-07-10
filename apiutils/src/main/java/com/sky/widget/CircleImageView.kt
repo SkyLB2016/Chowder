@@ -40,7 +40,7 @@ class CircleImageView @JvmOverloads constructor(context: Context, attrs: Attribu
 
     override fun setImageDrawable(drawable: Drawable?) {
         super.setImageDrawable(drawable)
-        bitmap = (drawable as BitmapDrawable).bitmap
+        if (drawable is BitmapDrawable) bitmap = drawable?.bitmap
     }
 
     override fun onDraw(canvas: Canvas) {
