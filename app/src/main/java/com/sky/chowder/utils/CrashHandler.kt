@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Looper
 import com.sky.SkyApp
+import com.sky.chowder.BuildConfig
 import com.sky.utils.DateUtil
 import com.sky.utils.LogUtils
 import com.sky.utils.ToastUtils
@@ -31,7 +32,7 @@ class CrashHandler : Thread.UncaughtExceptionHandler {
             } catch (e: InterruptedException) {
 
             }
-            ex.printStackTrace()
+            if (BuildConfig.DEBUG) ex.printStackTrace()
 //            handler?.uncaughtException(t, e)
             android.os.Process.killProcess(android.os.Process.myPid())
             System.exit(1)
