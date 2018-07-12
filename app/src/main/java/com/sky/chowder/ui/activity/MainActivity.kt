@@ -63,14 +63,12 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
                 arrayOf(Manifest.permission.WRITE_CONTACTS, Manifest.permission.READ_CONTACTS, Manifest.permission.READ_EXTERNAL_STORAGE),
                 intArrayOf(0, 0, 0)
         )
-        tts = TextToSpeech(this, TextToSpeech.OnInitListener { status ->
-            checkTTS(status)
-        })
+        tts = TextToSpeech(this, TextToSpeech.OnInitListener { status -> checkTTS(status) })
         fab.setOnClickListener {
             //var text = getString(R.string.cezi).trim().replace(" ", "")
             //LogUtils.i("总长==${text.length}")
-//            SingletonDemo.INSTANCE.otherMethods()
-//            SingletonTest.test()
+            //SingletonDemo.INSTANCE.otherMethods()
+            //SingletonTest.test()
         }
     }
 

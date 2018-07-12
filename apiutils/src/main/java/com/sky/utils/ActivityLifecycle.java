@@ -16,7 +16,7 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
 //    private static ActivityLifecycle instance;
 
     public static ActivityLifecycle getInstance() {
-        //双重检索模式（Double Check Lock ）DCL
+        //双重检索模式（Double Check Lock）DCL
 //        if (instance == null)
 //            //所有加上synchronized 和 块语句，在多线程访问的时候，同一时刻只能有一个线程能够用
 //            //同步检查，获得锁，先清空工作内存，即子内存；然后从主内存中拷贝变量的新副本到子内存中，

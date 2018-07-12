@@ -31,6 +31,7 @@ class CatalogThread {
                 val text = if (i.startsWith(" ")) i.substring(1) else i
                 if (text.startsWith("第") && text.contains("章")
                         || text.startsWith("第") && text.contains("卦")
+                        || text.contains("篇") && text.contains("第")
                         || text.startsWith("卷")
                         || text.startsWith("【")
                         || text.startsWith("●")) {
