@@ -123,7 +123,12 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
         return true
     }
 
-    fun changeData(status: Int) {
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        changeData(keyCode)
+        return super.onKeyDown(keyCode, event)
+    }
+
+    private fun changeData(status: Int) {
         //复制原数据
         val old = orginal.clone()
         //开始移动数据
