@@ -148,7 +148,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.DetailActivity"
+            android:name=".ui.activity.CoordinatorActivity"
             android:description="@string/act_coordinator"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_coordinator"

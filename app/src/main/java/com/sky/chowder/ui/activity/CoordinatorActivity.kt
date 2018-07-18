@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_detail.*
 /**
  * Created by SKY on 15/11/28 下午2:22.
  */
-class DetailActivity : BaseNoPActivity() {
+class CoordinatorActivity : BaseNoPActivity() {
     override fun getLayoutResId(): Int = R.layout.activity_detail
     override fun initialize(savedInstanceState: Bundle?) {
         toolbarv7.setNavigationIcon(R.mipmap.ic_back)
