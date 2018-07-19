@@ -40,7 +40,7 @@
     <string name="act_IPC">15.IPC机制</string>
     <string name="act_IPC_d">surfaceView，IPC，待深入研究</string>
 
-    <string name="ibu"><i><b><u>service</u></b></i></string>
+    <string name="ibu"><i><b><u>下划线加粗斜体</u></b></i></string>
 
     <string name="left_top">左上</string>
     <string name="left_bottom">左下</string>
