@@ -34,7 +34,7 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
             for (i in 0 until count) (getChildAt(i) as ImageView).setImageDrawable(getImageDrawable(field[i]))
         }
 
-    private val oldOrginal = LinkedList<IntArray>()
+    val oldOrginal = LinkedList<IntArray>()
     private var margin = resources.getDimensionPixelSize(R.dimen.wh_8)//分割后图片之间的间隔
     private val piece = 4//几行几列
     private var once = true
@@ -91,6 +91,13 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
         for (i in 0 until count) (getChildAt(i) as ImageView).setImageDrawable(getImageDrawable(orginal[i]))
         isEnd = false
         checkIsEnd?.invoke(isEnd)
+    }
+
+    fun setAutomatic(automatic: IntArray) {
+        orginal = automatic
+        val count = childCount
+        for (i in 0 until count) (getChildAt(i) as ImageView).setImageDrawable(getImageDrawable(orginal[i]))
+        oldOrginal.add(orginal)
     }
 
     private fun getImageDrawable(num: Int): Drawable? =
