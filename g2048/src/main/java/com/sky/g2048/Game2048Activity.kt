@@ -12,7 +12,7 @@ import com.sky.utils.FileUtils
 import com.sky.utils.LogUtils
 import common.base.BaseNoPActivity
 import kotlinx.android.synthetic.main.activity_g2048.*
-import java.io.File
+import java.io.ObjectInputStream
 import java.util.*
 
 class Game2048Activity : BaseNoPActivity() {
@@ -41,10 +41,9 @@ class Game2048Activity : BaseNoPActivity() {
                 2002 -> {
                     if (auto!!.isEmpty()) return
                     game.setAutomatic(auto!!.removeFirst())
-                    sendEmptyMessageDelayed(2002, 42)
+                    sendEmptyMessageDelayed(2002, 20)
                 }
             }
-
         }
     }
     var start = 0L//开始时间
@@ -73,10 +72,13 @@ class Game2048Activity : BaseNoPActivity() {
 
     var auto: LinkedList<IntArray>? = null
     private fun setAutomatic() {
-        auto = FileUtils.deserialize<LinkedList<IntArray>>(automaticPath)
-                ?: LinkedList<IntArray>()
+//        auto = FileUtils.deserialize<LinkedList<IntArray>>(automaticPath)
+//                ?: LinkedList<IntArray>()
+
+        val ois = ObjectInputStream(resources.openRawResource(R.raw.auto2048))
+        auto= ois.readObject() as LinkedList<IntArray>?
         if (auto!!.isEmpty()) return
-        handler.sendEmptyMessageDelayed(2002, 100)
+        handler.sendEmptyMessageDelayed(2002, 50)
 
 //        if (!automatic) {
 //            handler.sendEmptyMessage(1110)
@@ -103,23 +105,23 @@ class Game2048Activity : BaseNoPActivity() {
         super.onStop()
         if (game.isEnd) FileUtils.deleteFile(pathName)
         else FileUtils.serialize(pathName, game.orginal)
-        if (!File(automaticPath).exists()) FileUtils.serialize(automaticPath, game.oldOrginal)
-        else {
-            val oldList = FileUtils.deserialize<LinkedList<IntArray>>(automaticPath)
-            val list = game.oldOrginal
-            if (oldList.isEmpty()) return FileUtils.serialize(automaticPath, game.oldOrginal)
-            if (list.isEmpty()) return
-            if (oldList.size - 100 > list.size) return
-            val oldLast = oldList?.last
-            val last = list?.last
-
-            var oldTotal = 0
-            for (i in oldLast!!) oldTotal += i
-            var total = 0
-            for (i in last) total += i
-
-            if (oldTotal < total) FileUtils.serialize(automaticPath, game.oldOrginal)
-        }
+//        if (!File(automaticPath).exists()) FileUtils.serialize(automaticPath, game.oldOrginal)
+//        else {
+//            val oldList = FileUtils.deserialize<LinkedList<IntArray>>(automaticPath)
+//            val list = game.oldOrginal
+//            if (oldList.isEmpty()) return FileUtils.serialize(automaticPath, game.oldOrginal)
+//            if (list.isEmpty()) return
+//            if (oldList.size - 100 > list.size) return
+//            val oldLast = oldList?.last
+//            val last = list?.last
+//
+//            var oldTotal = 0
+//            for (i in oldLast!!) oldTotal += i
+//            var total = 0
+//            for (i in last) total += i
+//
+//            if (oldTotal < total) FileUtils.serialize(automaticPath, game.oldOrginal)
+//        }
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
