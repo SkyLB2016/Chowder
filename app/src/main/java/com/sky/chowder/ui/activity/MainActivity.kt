@@ -86,6 +86,8 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
         //把观察者注册到被观察者中
         observable.addObserver(observer)
         observable.addObserver(this)
+
+        //被观察者发送消息
         observable.send("观察者模式")
     }
 
