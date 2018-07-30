@@ -333,7 +333,7 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
 //        val span = SpannableString(text)
         val span = SpannableStringBuilder(text)
         span.setSpan(AbsoluteSizeSpan(resources.getDimensionPixelSize(R.dimen.text_medium)), 0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        span.setSpan(ForegroundColorSpan(Color.RED), 8, 17, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        span.setSpan(ForegroundColorSpan(Color.RED), 8, 17, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//字体颜色
         span.setSpan(BackgroundColorSpan(Color.rgb(55, 155, 200)), 17, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         span.setSpan(UnderlineSpan(), 0, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//下划线
         span.setSpan(StrikethroughSpan(), 4, 8, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//中划线
