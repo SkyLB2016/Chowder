@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_ipc.*
 /**
  * Created by SKY on 2018/5/9 19:07.
  */
-class IPCActivity : BaseNoPActivity() {
+class TestActivity : BaseNoPActivity() {
     override fun getLayoutResId(): Int = R.layout.activity_ipc
     override fun initialize(savedInstanceState: Bundle?) {
         bindService(Intent(this, PairServiceA::class.java), connection, Context.BIND_AUTO_CREATE)
@@ -30,11 +30,7 @@ class IPCActivity : BaseNoPActivity() {
 
     override fun loadData() = Unit
     private val handler: Handler = object : Handler() {
-        override fun handleMessage(msg: Message) {
-            super.handleMessage(msg)
-            LogUtils.i("${msg.obj}")
-
-        }
+        override fun handleMessage(msg: Message) = LogUtils.i("${msg.obj}")
     }
     var bookManager: IBookManager? = null
     private val connection = object : ServiceConnection {

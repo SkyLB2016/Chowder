@@ -204,7 +204,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.IPCActivity"
+            android:name=".ui.activity.TestActivity"
             android:description="@string/act_IPC_d"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_IPC"

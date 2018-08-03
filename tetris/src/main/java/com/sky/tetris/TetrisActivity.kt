@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 /**
  * Created by SKY on 2018/7/2 17:28.
+ * 俄罗斯方块
  */
 class TetrisActivity : AppCompatActivity() {
 
