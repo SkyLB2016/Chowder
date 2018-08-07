@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_ipc.*
 /**
  * Created by SKY on 2018/5/9 19:07.
  */
-class TestActivity : BaseNoPActivity() {
+class IPCActivity : BaseNoPActivity() {
     override fun getLayoutResId(): Int = R.layout.activity_ipc
     override fun initialize(savedInstanceState: Bundle?) {
         bindService(Intent(this, PairServiceA::class.java), connection, Context.BIND_AUTO_CREATE)
