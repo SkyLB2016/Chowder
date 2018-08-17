@@ -9055,14 +9055,14 @@
         ●23.本地保存数据时以及简单的数据通讯可以使用serializable，Parcelable主要用在内存序列化上，建议比较大的数据对象传输是使用。\n
         ●24.Binder实现IBinder接口（aidl快速实现Binder的工具），主要用在Service开发中，AIDL在PairServiceA中有应用\n
         ●25.线程Thread：AsyncTask，HandlerThread，IntentService，ThreadPoolExecutor。\n
-        　　(1)Executors.newFixedThreadPool()，都为核心线程，且数量固定的线程池，无超时机制。
-        　　(2)Executors.newCachedThreadPool()，无核心，非核心线程数不限数量，有超时机制60s，适合多图加载这种文件小而多的任务。
-        　　(3)Executors.newScheduledThreadPool()，核心固定，非核心不限，闲置时超时回收，主要用于执行定时任务和具有固定周期的重复任务。
-        　　(4)Executors.newSingleThreadExecutor()，仅创建一个单核心线程，任务串行。
+        　　(1)Executors.newFixedThreadPool()，都为核心线程，且数量固定的线程池，无超时机制。\n
+        　　(2)Executors.newCachedThreadPool()，无核心，非核心线程数不限数量，有超时机制60s，适合多图加载这种文件小而多的任务。\n
+        　　(3)Executors.newScheduledThreadPool()，核心固定，非核心不限，闲置时超时回收，主要用于执行定时任务和具有固定周期的重复任务。\n
+        　　(4)Executors.newSingleThreadExecutor()，仅创建一个单核心线程，任务串行。\n
         ●26.Bitmap，缓存机制LruCache与DiskLruCache，BitmapFactory.Options\n
         　　(1)inSampleSize，整数，最小为1，等比缩小原图宽高。\n
         　　(2)inJustDecodeBounds，true时只解析宽高不加载到内存中。\n
-        ●27.JNI和NDK编程，JNI是java的本地交互，NDK是Android提供得工具集合，可以在android中更加方便的通过JNI来访问本地代码，如C,C++。NDK
+        ●27.JNI和NDK编程，JNI是java的本地交互，NDK是Android提供得工具集合，可以在android中更加方便的通过JNI来访问本地代码，如C，C++，NDK\n
         还提供了交叉编译器，开发人员只需要简单的修改mk文件就可以生成特定的CPU平带的动态库，使用NDK有如下好处：\n
         　　(1)提高代码的安全性。so库反编译比较困难\n
         　　(2)可以使用目前已有的C/C++开源库\n
@@ -9148,8 +9148,8 @@
     </string>
     <string name="designPattern">
         设计模式\n
-        ●01.设计模式的六大原则\n
-        　　(1)单一职责原则(Single Responsibility Principle)：不同功能间拆分成独立的类\n
+        ●01.面向对象的六大原则\n
+        　　(1)单一职责原则(Single Responsibility Principle)：不同功能间拆分成独立的类（与接口隔离原则相类似，都是大类的细化拆分）\n
         　　(2)开闭原则（Open Close Principle）：让程序更稳定，更灵活；依赖于抽象，独立于实现。在文件来说就是隐藏实现private，暴露调用方法public。\n
         　　(3)里氏代换原则（Liskov Substitution Principle）：构建扩展性更好的系统；核心依然依赖于抽象，拆分出共同的实现方法，单独编写不同的实现，依赖于面向对象三大特性中的继承与多态。\n
         　　(4)依赖倒转原则（Dependence Inversion Principle）：让项目拥有变化的能力；模块间的依赖通过抽象发生，实现类之间不发生直接依赖关系，依赖于三大特性中的多态。\n
@@ -9198,7 +9198,7 @@
         　　(1)计算器可以使用解释器来写\n
         ●12.命令模式：Command Pattern，接收者（执行者），命令者，请求者，客户端。\n
         　　(1)android的输入事件\n
-        ●13.观察者模式：对象解耦；一个对象改变，所有依赖于他的对象都会得到通知。类似于责任链的线性传递，转成平级传递。\n
+        ●13.观察者模式：对象解耦；一个对象改变，所有依赖于他的对象都会得到通知。类似于责任链的线性传递，转成并行传递，相当于一个是串行，一个是并行。\n
         　　(1)adapter适配器\n
         　　(2)BroadcastReceiver\n
         　　(3)事件总线\n
@@ -9233,7 +9233,7 @@
         　　(6)\n
     </string>
     <string name="thinkInJava">
-        Java编程思想
+        Java编程思想\n
         ●01.万物皆对象，程序就是对象的集合。具有状态，行为，标识。\n
         ●02.java三大特性：封装，继承，多态。\n
         ●03.封装，隐藏实现，暴露必须的方法\n
