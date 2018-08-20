@@ -8804,9 +8804,9 @@
         　英 [ˈkælkjuleɪt] 美 [ˈkælkjəˌlet]\n
         　vt. vi. 计算;估计;打算，计划;旨在\n
         　vt. 预测，推测\n
-        caught
-        　英 [kɔ:t] 美 [kɔt]
-        　v. 引起;赶上( catch的过去式和过去分词 );接住;看见
+        caught\n
+        　英 [kɔ:t] 美 [kɔt]\n
+        　v. 引起;赶上( catch的过去式和过去分词 );接住;看见\n
         crash\n
         　英 [kræʃ] 美 [kræʃ]\n
         　v. 碰撞;使发出巨响;暴跌;睡觉\n
@@ -8815,11 +8815,11 @@
         decode\n
         　英 [ˌdi:ˈkəʊd] 美 [ˌdi:ˈkoʊd]\n
         　vt. 译（码），解（码）;分析及译解电子信号\n
-        default
-        　英 [dɪˈfɔ:lt] 美 [dɪˈfɔlt]
-        　vi. 未履行任务或责任;受传唤时未出庭;由于不到庭而败诉;弃权
-        　vt. 未履行，拖欠;未参加或完成（例如，比赛）;[法]因未到庭而败（诉）
-        　n. 未履行，拖欠;[法]未到庭;弃权;[计] 缺省，默认
+        default\n
+        　英 [dɪˈfɔ:lt] 美 [dɪˈfɔlt]\n
+        　vi. 未履行任务或责任;受传唤时未出庭;由于不到庭而败诉;弃权\n
+        　vt. 未履行，拖欠;未参加或完成（例如，比赛）;[法]因未到庭而败（诉）\n
+        　n. 未履行，拖欠;[法]未到庭;弃权;[计] 缺省，默认\n
         executor\n
         　英 [ɪgˈzekjətə(r)] 美 [ɪɡˈzɛkjətɚ, ˈɛksɪˌkjutɚ]\n
         　n. 遗嘱执行人;执行者;实行者\n
@@ -8833,33 +8833,33 @@
         logistics\n
         　英 [ləˈdʒɪstɪks] 美 [loˈdʒɪstɪks]\n
         　n. 物流;后勤;逻辑学;组织工作\n
-        observable
-        　英 [əbˈzɜ:vəbl] 美 [əbˈzɜ:rvəbl]
-        　adj. 观察得到的，应遵守的，应庆祝的
+        observable\n
+        　英 [əbˈzɜ:vəbl] 美 [əbˈzɜ:rvəbl]\n
+        　adj. 观察得到的，应遵守的，应庆祝的\n
         original\n
         　英 [əˈrɪdʒənl] 美 [əˈrɪdʒənəl]\n
         　adj. 原始的;最初的;独创的;新颖的\n
         　n. 原件;原文;原型;怪人\n
-        receiver
-        　英 [rɪˈsi:və(r)] 美 [rɪˈsivɚ]
-        　n. 接收器;接受者，收款员;无线电接收机;（破产公司的）官方接管人
+        receiver\n
+        　英 [rɪˈsi:və(r)] 美 [rɪˈsivɚ]\n
+        　n. 接收器;接受者，收款员;无线电接收机;（破产公司的）官方接管人\n
         recently\n
         　英 [ˈri:sntli] 美 [ˈrisṇtlɪ]\n
         　adv. 近日;新近;最近，近来;不久以前\n
-        subject
-        　英 [ˈsʌbdʒɪkt] 美 [ˈsʌbdʒekt]
-        　n. 主题，话题;学科，科目;[哲]主观
-        　adj. 须服从…的;（在君主等）统治下的
-        v. 提供，提出;使…隶属
+        subject\n
+        　英 [ˈsʌbdʒɪkt] 美 [ˈsʌbdʒekt]\n
+        　n. 主题，话题;学科，科目;[哲]主观\n
+        　adj. 须服从…的;（在君主等）统治下的\n
+        v. 提供，提出;使…隶属\n
         synchronized\n
         　英 [ˈsɪŋkrənaɪzd] 美 [ˈsɪŋkrənaɪzd]\n
         　同步的\n
-        tracker
-        　英 [ˈtrækə(r)] 美 ['trækər]
-        　n. 追踪者，追踪系统，纤夫
-        velocity
-        　英 [vəˈlɒsəti] 美 [vəˈlɑ:səti]
-        　n. 速率，速度;周转率;高速，快速
+        tracker\n
+        　英 [ˈtrækə(r)] 美 [ˈtrækər]\n
+        　n. 追踪者，追踪系统，纤夫\n
+        velocity\n
+        　英 [vəˈlɒsəti] 美 [vəˈlɑ:səti]\n
+        　n. 速率，速度;周转率;高速，快速\n
     </string>
 
     <!--编程笔记-->
@@ -8950,7 +8950,7 @@
         　　(1)disPatchTouchEvent(MotionEvent e)（分发事件，一般不用管）\n
         　　(2)onInterceptTouchEvent(MotionEvent e)， ViewGroup独有\n
         　　(3)onTouchEvent(MotionEvent e)\n
-        　　(4)触摸按钮时的回调机制：(A(B(C))\n
+        　　(4)触摸按钮时的回调机制：A包B包C\n
         　　A.disPatch -> A.intercept ->B.disPatch -> B.intercept ->C.disPatch -> C.touch -> B.touch -> A.touch\n
         ●09.Canvas方法：\n
         　　(1)translate(x,y)：将原点(0,0)移动(x,y)\n
@@ -9001,7 +9001,7 @@
         　　(4)scaleX、scaleY 缩放\n
         　　(5)x、y 最终位置\n
         　　(6)alpha 透明度 默认为1，不透明，0代表完全透明，即不可见\n
-        　　(7)PropertyValuesHolder，ObjectAnimator.ofPropertyValuesHolder(view,pro...)\n
+        　　(7)PropertyValuesHolder，ObjectAnimator.ofPropertyValuesHolder()\n
         　　(8)Value的主要方法：addUpdateListener()\n
         　　(9)过度动画（Transiton Animation）：属性动画的变种。\n
         ●13.AnimatorSet属性：palyTogether()，playSequentially()，play().with()、befor()、after();来控制动画的播放规则\n
@@ -9031,9 +9031,9 @@
         　　(5)solid：内部填充色\n
         　　(6)stroke：边框，以及虚边\n
         ●17.布局动画：LayoutAnimationController，在MainAdapter中有使用\n
-        　　(1)LayoutAnimationController.ORDER_NORMAL --顺序\n
-        　　(2)LayoutAnimationController.ORDER_RANDOM --随机\n
-        　　(3)LayoutAnimationController.ORDER_REVERSE --反序\n
+        　　(1)LayoutAnimationController.ORDER_NORMAL：顺序\n
+        　　(2)LayoutAnimationController.ORDER_RANDOM：随机\n
+        　　(3)LayoutAnimationController.ORDER_REVERSE：反序\n
         ●18.SVG:VectorDrawable（vector静态效果）、AnimatedVectorDrawable（animated-vector）：animated-vector组合objectAnimator与vector形成动态的动画效果\n
         ●19.handler执行\n
         　　(1)handler中执行enqueueMessage()方法将消息放入队列中，等待loop循环并找到此消息。\n
@@ -9110,9 +9110,9 @@
         　　val radians = Math.PI * angle / 180//转换成弧度\n
         　　val ix = 200 * Math.cos(radians)\n
         　　val iy = 200 * Math.sin(radians)\n
-        　　0-360 度，Cos取值范围1..0..-1..0..1，即+--+，Sin 取值范围0..1..0..-1..0,即++--\n
-        　　以x=Cos,y=Sin算为++，-+，--，+-，即一二三四象限，以X正轴1为起点，逆时针方向画圆，画布上Y轴正负颠倒，所以是顺时针方向画圆\n
-        　　以x=Sin,y=Cos算为++，+-，--，-+，即一四三二象限，以Y正轴1为起点，顺时针方向画圆，画布上Y轴正负颠倒，所以是逆时针方向画圆\n
+        　　0-360 度，Cos取值范围1..0..-1..0..1，即+- -+，Sin 取值范围0..1..0..-1..0,即++- -\n
+        　　以x=Cos,y=Sin算为++，-+，- -，+-，即一二三四象限，以X正轴1为起点，逆时针方向画圆，画布上Y轴正负颠倒，所以是顺时针方向画圆\n
+        　　以x=Sin,y=Cos算为++，+-，- -，-+，即一四三二象限，以Y正轴1为起点，顺时针方向画圆，画布上Y轴正负颠倒，所以是逆时针方向画圆\n
         　　val ix = 200 * Math.sin(radians)\n
         　　val iy = 200 * Math.cos(radians)\n
         ●34.排序算法：\n
@@ -9265,5 +9265,10 @@
         　　(4)\n
         　　(5)\n
         　　(6)\n
+    </string>
+    <string name="git命令">
+        <!--git命令-->
+        <!--git config &#45;&#45;global user.email "1136096189@qq.com"-->
+        <!--git config &#45;&#45;global user.name "df"-->
     </string>
 </resources>
