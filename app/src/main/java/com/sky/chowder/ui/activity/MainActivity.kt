@@ -69,6 +69,7 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
             //LogUtils.i("总长==${text.length}")
             //SingletonDemo.INSTANCE.otherMethods()
             //SingletonTest.test()
+            showToast("提示")
         }
     }
 
