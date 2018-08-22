@@ -17,6 +17,7 @@ import com.sky.chowder.R
 import com.sky.chowder.model.ChapterEntity
 import com.sky.chowder.ui.pop.CatalogPop
 import com.sky.chowder.utils.CatalogThread
+import com.sky.utils.FileUtils
 import com.sky.utils.ScreenUtils
 import com.sky.widget.BaseTitle
 import common.base.BaseNoPActivity
@@ -30,7 +31,7 @@ import java.util.*
 class PoetryActivity : BaseNoPActivity() {
     private var gravity = Gravity.LEFT
     private lateinit var adapter: RecyclerAdapter<ChapterEntity>
-    private val resId = ArrayList<Int>()
+    private val resId = ArrayList<String>()
     private lateinit var clipM: ClipboardManager
     override fun getLayoutResId(): Int = R.layout.activity_poetry
 
@@ -72,19 +73,25 @@ class PoetryActivity : BaseNoPActivity() {
             tv.width = resources.getDimensionPixelSize(R.dimen.wh_96)
             tv.textSize = 18f
             tv.text = array[0]
-            tv.setPadding(10,0,10,0)
+            tv.setPadding(10, 0, 10, 0)
 //            item_tv.tag = array[0]
             tv.id = index
             flow.addView(tv)
             tv.setOnClickListener(selectArticle)
-            resId.add(resources.getIdentifier(array[1], "string", packageName))
+            resId.add(array[1])
         }
 //        FileUtils.saveCharFile(SkyApp.getInstance().fileCacheDir+array[0]+".txt",getString(id).replace(" ","") )
 
-        val text = getString(resId[9])
+        val text = getDocument(resId[9])
 //        gravity = Gravity.CENTER
         setToolbarTitle(text.lines()[0])
         getCatalog(text)
+    }
+
+    fun getDocument(sign: String): String {
+        if (sign.startsWith("Documents"))
+            return FileUtils.readAssestToStr(this, sign)
+        return getString(resources.getIdentifier(sign, "string", packageName))
     }
 
     private fun initEvent() {
@@ -98,7 +105,7 @@ class PoetryActivity : BaseNoPActivity() {
             in 2..5 -> Gravity.CENTER
             else -> Gravity.LEFT
         }
-        val text = getString(resId[v!!.id])
+        val text = getDocument(resId[v!!.id])
 //        clipM.primaryClip = ClipData.newPlainText("",text.lines()[0])
         setToolbarTitle(text.lines()[0])
         getCatalog(text)
@@ -125,7 +132,7 @@ class PoetryActivity : BaseNoPActivity() {
     }
 
     private fun getCatalog(text: String) {
-        CatalogThread(text) { catalog-> adapter?.datas = catalog }
+        CatalogThread(text) { catalog -> adapter?.datas = catalog }
     }
 
     private fun showCatalogPop(floders: List<ChapterEntity>?) {

@@ -8,40 +8,39 @@
     </array>
 
     <array name="poetry">
-        <item>道德经,wangbiben</item>
-        <item>河上公,heshanggong</item>
-        <item>河上公注解 ,hsgzhujie</item>
-        <item>三字经,sanzijing</item>
-        <item>百家姓,baijiaxing</item>
-        <item>千字文,qianziwen</item>
-        <item>弟子规,dizigui</item>
-        <item>孝经,xiaojing</item>
-        <item>增广贤文,zgxw</item>
-        <item>朱子家训,zzjx</item>
+        <item>道德经,Documents/道德经.txt</item>
+        <item>河上公,Documents/河上公.txt</item>
+        <!--<item>河上公注解,Documents/河上公注解.txt</item>-->
+        <item>三字经,Documents/三字经.txt</item>
+        <item>百家姓,Documents/百家姓.txt</item>
+        <item>千字文,Documents/千字文.txt</item>
+        <item>弟子规,Documents/弟子规.txt</item>
+        <item>孝经,Documents/孝经.txt</item>
+        <item>增广贤文,Documents/增广贤文.txt</item>
+        <item>朱子家训,Documents/朱子家训.txt</item>
 
-        <item>大学,daxue</item>
-        <item>中庸,zhongyong</item>
-        <item>论语,lunyu</item>
-        <item>孟子,mengzi</item>
+        <item>大学,Documents/大学.txt</item>
+        <item>中庸,Documents/中庸.txt</item>
+        <item>论语,Documents/论语.txt</item>
+        <item>孟子,Documents/孟子.txt</item>
 
-        <item>诗经,shijing</item>
-        <item>尚书,shangshu</item>
-        <item>易经,yijing</item>
-        <item>礼记,liji</item>
-        <item>春秋,chunqiu</item>
+        <item>诗经,Documents/诗经.txt</item>
+        <item>尚书,Documents/尚书.txt</item>
+        <item>易经,Documents/易经.txt</item>
+        <item>礼记,Documents/礼记.txt</item>
+        <item>春秋,Documents/春秋.txt</item>
 
+        <item>庄子,Documents/庄子.txt</item>
 
-        <item>庄子,zhuangzi</item>
+        <item>七发,Documents/七发.txt</item>
+        <item>菜根谭,Documents/菜根谭.txt</item>
 
-        <item>七发,qifa</item>
-        <item>菜根谭,caigentan</item>
+        <item>唐诗,Documents/唐诗.txt</item>
+        <item>近代诗词,Documents/近代诗词.txt</item>
 
-        <item>唐诗,tangshi</item>
-        <item>近代诗词,jindaishici</item>
+        <item>围棋,Documents/围棋.txt</item>
 
-        <item>围棋,weiqi</item>
         <item>英语,yingyu</item>
-
         <item>随笔,suibi</item>
         <item>任务,renwu</item>
 
