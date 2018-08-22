@@ -44,23 +44,23 @@ android {
         }
     }
     signingConfigs {
-//        debug {
-//            keyAlias key['keyAlias']
-//            keyPassword key['keyPassword']
-//            storeFile file(key['storeFile'])
-//            storePassword key['storePassword']
-//        }
-//        release {
-//            keyAlias key['keyAlias']
-//            keyPassword key['keyPassword']
-//            storeFile file(key['storeFile'])
-//            storePassword key['storePassword']
-//        }
+        debug {
+            keyAlias key['keyAlias']
+            keyPassword key['keyPassword']
+            storeFile file(key['storeFile'])
+            storePassword key['storePassword']
+        }
+        release {
+            keyAlias key['keyAlias']
+            keyPassword key['keyPassword']
+            storeFile file(key['storeFile'])
+            storePassword key['storePassword']
+        }
     }
     buildTypes {
         debug {
             versionNameSuffix "-debug"
-//            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.debug
             minifyEnabled true //是否开启混淆
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             creatName()
@@ -69,7 +69,7 @@ android {
             versionNameSuffix "-release"
             minifyEnabled true //是否开启混淆
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-//            signingConfig signingConfigs.release  //签名
+            signingConfig signingConfigs.release  //签名
             zipAlignEnabled true //Zipalign优化
             creatName()
         }

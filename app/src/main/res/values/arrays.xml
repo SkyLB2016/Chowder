@@ -10,7 +10,7 @@
     <array name="poetry">
         <item>道德经,wangbiben</item>
         <item>河上公,heshanggong</item>
-        <!--<item>河上公注解 ,hsgzhujie</item>-->
+        <item>河上公注解 ,hsgzhujie</item>
         <item>三字经,sanzijing</item>
         <item>百家姓,baijiaxing</item>
         <item>千字文,qianziwen</item>
@@ -48,6 +48,6 @@
         <item>编程笔记,programming</item>
         <item>设计模式,designPattern</item>
         <item>Java编程思想,thinkInJava</item>
-        <item>git命令,git命令</item>
+        <item>git命令,gitCommand</item>
     </array>
 </resources>

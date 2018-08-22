@@ -79,6 +79,8 @@ class PoetryActivity : BaseNoPActivity() {
             tv.setOnClickListener(selectArticle)
             resId.add(resources.getIdentifier(array[1], "string", packageName))
         }
+//        FileUtils.saveCharFile(SkyApp.getInstance().fileCacheDir+array[0]+".txt",getString(id).replace(" ","") )
+
         val text = getString(resId[9])
 //        gravity = Gravity.CENTER
         setToolbarTitle(text.lines()[0])

@@ -9266,21 +9266,13 @@
         　　(5)\n
         　　(6)\n
     </string>
-    <string name="git命令">
+    <string name="gitCommand">
         git命令\n
-        git config --global user.email "1136096189@qq.com"\n
-        git config --global user.name "df"\n
-#enables colorin the terminal bash shell export
-export CLICOLOR=1
-#setsup thecolor scheme for list export
-export LSCOLORS=gxfxcxdxbxegedabagacad
-#sets up theprompt color (currently a green similar to linux terminal)
-export PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;36m\]\w\[\033[00m\]\$ '
-#enables colorfor iTerm
-export TERM=xterm-256color
+        git config --global user.email 邮箱\n
+        git config --global user.name 名字\n
+    </string>
+    <string name="gradle">
+        gralde结构
 
-syntax on
-set number
-set ruler
     </string>
 </resources>
