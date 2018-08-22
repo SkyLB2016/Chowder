@@ -513,7 +513,8 @@
         git diff --cache 查看已缓存的改动
         git diff head 查看已缓存的与未缓存的所有改动
         git diff --stat 显示摘要
-        git commit -m 双引号（注释）
+        git commit -m 双引号（注释） 提交到本地库
+        git push 提交到云端
         ls (-a) 文件夹内的文件列表
         vim 编辑器
         ?? 代表未添加到暂存区
