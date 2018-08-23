@@ -19,7 +19,6 @@ import com.sky.chowder.ui.adapter.MainAdapter
 import com.sky.chowder.ui.presenter.MainP
 import com.sky.chowder.utils.http.HttpUrl
 import com.sky.utils.AppUtils
-import com.sky.utils.FileUtils
 import com.sky.utils.JumpAct
 import com.sky.utils.LogUtils
 import common.base.BasePActivity
@@ -71,7 +70,6 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
             //SingletonDemo.INSTANCE.otherMethods()
             //SingletonTest.test()
             showToast("提示")
-            LogUtils.i(FileUtils.readAssestToStr(this, "Documents/道德经.txt"))
         }
     }
 
