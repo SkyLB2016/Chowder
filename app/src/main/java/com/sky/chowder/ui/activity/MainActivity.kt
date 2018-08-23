@@ -8,6 +8,7 @@ import android.speech.tts.TextToSpeech
 import android.support.annotation.LayoutRes
 import android.support.v4.view.ViewCompat.animate
 import android.support.v7.widget.Toolbar
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.WindowManager
@@ -69,10 +70,22 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
             //LogUtils.i("总长==${text.length}")
             //SingletonDemo.INSTANCE.otherMethods()
             //SingletonTest.test()
-            showToast("提示")
+            LogUtils.i("提示")
         }
     }
 
+    private fun generateTag(): String {
+        //        StackTraceElement stack = Thread.currentThread().getStackTrace()[4];//此方法取得的栈的前两个分别为vm和Thread
+        val stacks = Throwable().stackTrace
+        for (i in stacks.indices) {
+            val stack = stacks[i]
+            val tag = "%s.%s(L:%d)"
+            var className = stack.className
+            Log.i("name", "name==" + String.format(tag, className, stack.methodName, stack.lineNumber))
+        }
+        //        tag = TextUtils.isEmpty(TAG) ? tag : TAG + ":" + tag;
+        return ""
+    }
     private fun setObserver(@LayoutRes item: Int?) {
         //观察者
         val observer = Observer { o, arg -> LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}==$arg") }
