@@ -48,5 +48,6 @@
         <item>设计模式,designPattern</item>
         <item>Java编程思想,thinkInJava</item>
         <item>git命令,gitCommand</item>
+        <item>gradle,gradle</item>
     </array>
 </resources>
