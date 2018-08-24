@@ -1,9 +1,9 @@
 git命令行
 git分层：
 第一层：未缓存，也即未add前；
-第二层：缓存区，add后，commit前；
-第三层：暂存区，commit后，push前，本地版本库；
-第四层：云端，push后，github云端刷新。
+第二层：暂存区，add后，commit前；
+第三层：版本库，commit后，push前，本地版本库；
+第四层：远程仓库，push后，github云端刷新。
 (1)git clone <repo> <directory>
 　　rm -rf 删除文件
 (2)git config --global user.email "邮箱"。
