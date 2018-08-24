@@ -1,0 +1,282 @@
+编程笔记·李彬
+●01.Android的系统架构
+　　(1)操作系统层OS：linux内核
+　　(2)HAL,硬件抽象层，设备内核驱动的抽象接口
+　　(3)native C/C++ Libraries和Android运行环境RunTime
+　　(4)应用程序框架Application Framework
+　　(5)应用程序Application
+●02.小常识
+　　(1)File文件所在文件夹存在时，写入数据时自动创建；不存在，则需调用mkdir(),当父类的父类也不存在是应调用mkdirs(),创建父类文件夹。
+　　(2)从string中获取的文章字符串，有换行的情况下，会有空格，应先去除空格再用
+　　(3)MarginLayoutParams是viewGroup的父类
+　　(4)ViewDragHelper滑动控制类，子类有DrawerLayout与SlidingPaneLayout
+　　(5)dalvik是运行时编译，ART是安装时就进行编译。目前采用的是ART模式
+　　(6)drawable文件，true，false，不同时出现的话，true，必须在前，文件效果才有效
+　　(7)Makefile机制:组合文件，进行自动的可控制的编译（待加强）
+　　(8)multidex参见错误统计表.xlsx
+●03.ADB命令行：
+　　(1)安装apk：adb install 路径
+　　(2)向手机传输文件：
+　　adb push C:/WorkSpace/aa.txt /storage/emulated/0/AmapSdk
+　　(3)手机向电脑传输文件：
+　　adb pull /storage/emulated/0/AmapSdk C:/WorkSpace/aa.txt
+　　(4)录制视频：
+　　adb shell screenrecord /storage/emulated/0/AmapSdk/test.mp4
+　　(5)查看系统盘符：adb shell df
+●04.Intent：意图，分显式与隐式两种，显示是指定了component属性，明确启动哪个组件，
+　　(1)构造函数：可以是类名或者action（setClass）
+　　(2)操作类型action：Intent中只能存在一个，存在则必须有一个相同，setAction()，xml中可存在多个。
+　　(3)类别筛选category：Intent中存在几个匹配几个，xml中可存在多个。
+　　(4)数据类型data与type：setDataAandType()，地址有特定规则，要么同时设置，要么单独只设置一个。
+　　(5)启动模式LaunchMode四种（manifest中用）：standard（标准），singleTop（栈顶不创建），singleTask（单例，独一份，再次进入后，清空之前在其上的页面），singleInstance（独立栈中的独一份）
+　　(6)标志也即启动模式（Intent中用）：FLAG_ACTIVITY_NEW_TASK(需要搭配FLAG_ACTIVITY_CLEAR_TASK使用),FLAG_ACTIVITY_SINGLE_TOP,FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS(跳转页面后自动finish,android:excludeFromRecents="true"，目前未起作用)
+　　(7)数据传递bundle：Intent内部已经封装好，不用自己封了，serializable，parcelable，也可以转成json字符串传过去
+●05.页面跳转顺序:
+　　(1)A启动 A.onCreate->A.onStart->A.onResume->
+　　(2)在A中启动B A.onPause->B.onCreate->B.onStart->B.onResume->A.onStop
+　　(3)关闭B B.onPause->A.onRestart->A.onStart->A.onResume->B.onStop->B.onDestory
+●06.view的基础知识：屏幕的坐标原点是左上角，向右X轴正方向，向下Y轴正方向
+　　(1)View中提供的获取坐标方法：
+　　　　getLeft()与getRight()都是View自身到父布局左边的距离
+　　　　getTop()与getBottom()都是View自身到父布局顶边的距离
+　　　　x，y，translationX，translationY。
+　　(2)MotionEvent中的方法：
+　　　　GetX()与getY()是视图坐标，相对坐标，即是触摸点到它到父布局左边与顶边的距离
+　　　　GetRawX()与getRawY()是绝对坐标，即是触摸点到屏幕左边与顶边的距离
+　　(3)TouchSlop：最小滑动距离，获取方法：ViewConfiguration.get(this).scaledTouchSlop，zoom中有使用
+　　(4)VelocityTracker：速度跟踪器，只在move中有用，up抬起时为0
+　　(5)GestureDetector：手势检测，相关方法：单击，拖动，滑动，长按，双击。
+　　(6)Scroller（待深入研究）：弹性滑动对象，与view中的computeScroll方法配合。
+　　(7)View的OnTouchListener优先于onTouchEvent，返回true，onTouchEvent不会执行；平常调用的点击事件onClickListener也不会执行。
+　　(8)requestDisallowInterceptTouchEvent(boolean)强制请求分发触摸事件。
+　　(9)activity中获取宽高onWindowFocusChanged，view.post(runnable),viewTreeObserver.addOnGlobalLayoutListener()
+　　(10)onDraw()
+　　绘制背景 background.draw(canvas)
+　　绘制自己 onDraw
+　　绘制children dispatchDraw
+　　绘制装饰 onDrawScrollBars
+　　(11)view滑动：
+　　scrollTo/scrollBy：操作简单，适合对View内容的滑动；
+　　动画：操作简单，主要适用于实现复杂的动画效果；
+　　改变布局参数，操作稍微复杂，适用于有交互的View。
+●07.自定义View中比较重要的回调方法：
+　　第一次进入时的顺序回调
+　　(01)onFinishInflate()：从XML加载组件完成后回调；
+　　(02)onAttachedToWindow()：组件放入窗口时回调
+　　(03)onWindowVisibilityChanged(int)：当包含该组件的窗口可见性发生改变时回调
+　　(04)onMeasure()：测量view宽高
+　　EXACTLY,精确值模式，具体数字如100dp或者match_parent，默认即为EXACTLY；
+　　AT_MOST,自适应模式，warp_content,需要用setMeasureDimension(width,height)设置算好的宽高；
+　　UNSPECIFIED，想要多大即多大，所以可以超过屏幕尺寸，显示不下的在屏幕之外；用于系统内部，目前没用过。
+　　(05)onSizeChanged()：组件大小改变时回调；
+　　(06)onLayout()：控件内的子控件的显示位置，自定义ViewGroup时用
+　　(07)onDraw()：绘制所需要显示的内容
+　　(08)onWindowFocusChanged()：当包含该组件的窗口失去或的得到焦点时回调
+　　退出时的顺序回调onWindowVisibilityChanged->onWindowFocusChanged->onDetachedFromWindow
+
+　　非顺序回调：
+　　(09)onTouchEvent()：触摸事件，不消费ACTION_DOWN的话，之后的也不会消费，消费的话down，move，up，统一消耗。
+　　(10)onFocusChanged()：当该组件焦点发生改变时回调
+　　(11)onKeyDown()：键盘键按下
+　　(12)onKeyUp()：键盘键按下后后抬起
+　　(13)onTrackballEvent()：发生轨迹球事件时回调
+　　(14)onDetachedFromWindow()：组件从窗口移除时回调
+●08.触摸事件机制，传递顺序:activity->window->view,方法回调有：（默认返回false）
+　　(1)disPatchTouchEvent(MotionEvent e)（分发事件，一般不用管）
+　　(2)onInterceptTouchEvent(MotionEvent e)， ViewGroup独有
+　　(3)onTouchEvent(MotionEvent e)
+　　(4)触摸按钮时的回调机制：A包B包C
+　　A.disPatch -> A.intercept ->B.disPatch -> B.intercept ->C.disPatch -> C.touch -> B.touch -> A.touch
+●09.Canvas方法：
+　　(1)translate(x,y)：将原点(0,0)移动(x,y)
+　　(2)rotate(a,x,y)：将画布以(x,y)为中心旋转a度
+　　(2)scale(x,y,px,py)：将画布缩放
+　　(2)skew(x,y)：将画布倾斜
+　　(3)save(),saveLayer(),saveLayerAlpha():保存画布当前状态，并返回int值，方便移除此状态
+　　(4)restore():返回画布此次保存的初始状态
+　　(5)restoreToCount():移除画布此次保存的状态
+●10.Paint的重要属性：TextPaint.getFontMetricsInt()
+　　(1)setAntialias()与Paint(Paint.ANTI_ALIAS_FLAG) ：抗锯齿
+　　(2)setStrokeWidth(),宽度是从中间开始计算的
+　　(3)setARGB(),setAlpha(),setTextSize(),setStyle(),setColor().
+　　textHeight=paint.descent()-paint.ascent()
+　　(4)基准线是baseline
+　　(5)ascent：字体在baseline上方被推荐的距离（一些字体制作商需要参考这个）
+　　(6)descent：字体在是baseline下方被推荐的距离（一些字体制作商需要参考这个）
+　　(7)top：ascent的最大值
+　　(8)bottom：descent的最大值
+　　(9)getTextBounds(String text, int start, int end, Rect bounds):获取文字宽高
+　　(10)measureText(text)：获取文字宽度
+　　(11)ColorMatrix
+　　(12)PorterDuffXfermode（不好用），
+　　(13)Shader，着色器，渲染器：（TileMode三中模式：CLAMP拉伸；REPEAT重复；MIRROR镜像）
+　　　　BitmapShader：位图
+　　　　LinearGradient：线性
+　　　　RadiolGradient：光束
+　　　　SweepGradient：梯度
+　　　　ComposeShader：混合
+　　(14)PathEffect画线用，结合Path的lineTo来使用
+　　　　CornerPathEffect：拐角圆滑
+　　　　DiscretePathEffect：相当于画了一条毛茸茸的线
+　　　　DashPathEffect：画虚线
+　　　　PathDashPathEffect：升级的画虚线
+　　　　ComPosePathEffect与SunPathEffect：组合前几者
+●11.动画类型分为三种：逐帧动画，补间动画，属性动画：
+(1)逐帧动画（Frame Animation）：AnimationDrawable相对于animation-list
+(2)补间动画：
+位移：TranslateAnimation对应的xml：translate
+缩放：ScaleAnimation 对应的xml：scale
+旋转：RotateAnimation 对应的xml：ratate
+透明度：AlphaAnimation 对应的xml：alpha
+组合：AnimationSet 对应的xml：set
+●12.属性动画：ValueAnimator包括：ObjectAnimator，AnimatorSet组合，也有相应的xml对应字段，动画属性值：
+　　(1)translationX、translationY，增量平移
+　　(2)rotation、rotationX、rotationY 旋转
+　　(3)pivotX、pivotY没看出和rotation有什么区别
+　　(4)scaleX、scaleY 缩放
+　　(5)x、y 最终位置
+　　(6)alpha 透明度 默认为1，不透明，0代表完全透明，即不可见
+　　(7)PropertyValuesHolder，ObjectAnimator.ofPropertyValuesHolder()
+　　(8)Value的主要方法：addUpdateListener()
+　　(9)过度动画（Transiton Animation）：属性动画的变种。
+●13.AnimatorSet属性：palyTogether()，playSequentially()，play().with()、befor()、after();来控制动画的播放规则
+●14.动画插值器TimeInterpolator，计算时间流逝的百分比；类型估值器TypeEvaluaor,计算当前的属性值
+　　(1)LinearInterPolator：匀速
+　　(2)AccelerateInterpolator：匀加速
+　　(3)AccelerateDecelerateInterpolator：起始加速，末尾减速
+　　(4)CycleInterpolator：循环播放，正弦曲线
+　　(5)DecelerateInterpolator：匀减速
+●15.StateListDrawable属性值item:selector
+　　(1)android:state_active：代表是否处于激活状态
+　　(2)android:state_checkable：代表是否处于可勾选状态
+　　(3)android:state_checked：代表是否处于已勾选状态
+　　(4)android:state_enabled：代表是否处于可用状态
+　　(5)android:state_first：代表是否处于开始状态
+　　(6)android:state_focused：代表是否处于已得到焦点状态
+　　(7)android:state_last：代表是否处于结束状态
+　　(8)android:state_middle：代表是否处于中间状态
+　　(9)android:state_pressed：代表是否处于已被按下状态状态
+　　(10)android:state_selected：代表是否处于选中状态
+　　(11)android:state_window_focused：代表窗口是否处于已得到焦点状态
+●16.shape属性
+　　(1)corners：圆角
+　　(2)gradient：渐变色
+　　(3)padding：内边距
+　　(4)size：基本没用
+　　(5)solid：内部填充色
+　　(6)stroke：边框，以及虚边
+●17.布局动画：LayoutAnimationController，在MainAdapter中有使用
+　　(1)LayoutAnimationController.ORDER_NORMAL：顺序
+　　(2)LayoutAnimationController.ORDER_RANDOM：随机
+　　(3)LayoutAnimationController.ORDER_REVERSE：反序
+●18.SVG:VectorDrawable（vector静态效果）、AnimatedVectorDrawable（animated-vector）：animated-vector组合objectAnimator与vector形成动态的动画效果
+●19.handler执行
+　　(1)handler中执行enqueueMessage()方法将消息放入队列中，等待loop循环并找到此消息。
+　　(2)Looper.loop()方法是死循环，其中选取消息的方法Message msg = queue.next();也是一个死循环，直到取到消息，开始往下执行；
+　　(3)取到消息后开始执行handler的分发方法dispatchMessage()开始回调，方法执行完成后，此次消息处理完成。
+　　(4)handler分发dispatchMessage()：先检测message中的callback是否为空，不为空消费此消息；为空则检测handler自己的callback，返回出rue则消费此消息，终止传递；为false则执行handleMessage()。
+●20.IPC机制：多进程间通信
+　　会造成的问题：
+　　(1)静态成员和单例模式完全失效：不同进程间的静态和单例是互相独立的
+　　(2)线程同步机制完全失效：不同进程间的线程也是互相独立的
+　　(3)SharedPreferences可靠性下降：不支持两个进程同时读写，有一定几率会丢数据
+　　(4)application多次创建：新进程代表新的虚拟机的启动
+　　通信方式：序列化serializable与parcelable，Binder（待深入AIDL），Intent，共享文件，Messenger（待深入研究AIDL），ContentProvider，socket网络通信。
+●21.Serializable，java数据序列化，可自己重写序列化与反序列化过程
+　　(1)FileUtils中serialize(path,value)（序列化）与deserialize(path)（反序列化）运用
+　　(2)静态成员变量属于类不属于对象，不参与序列化
+　　(3)用transient关键字标记的成员变量不参与序列化
+●22.Parcelable，Android数据序列化，在CourseEntity中有应用
+●23.本地保存数据时以及简单的数据通讯可以使用serializable，Parcelable主要用在内存序列化上，建议比较大的数据对象传输是使用。
+●24.Binder实现IBinder接口（aidl快速实现Binder的工具），主要用在Service开发中，AIDL在PairServiceA中有应用
+●25.线程Thread：AsyncTask，HandlerThread，IntentService，ThreadPoolExecutor。
+　　(1)Executors.newFixedThreadPool()，都为核心线程，且数量固定的线程池，无超时机制。
+　　(2)Executors.newCachedThreadPool()，无核心，非核心线程数不限数量，有超时机制60s，适合多图加载这种文件小而多的任务。
+　　(3)Executors.newScheduledThreadPool()，核心固定，非核心不限，闲置时超时回收，主要用于执行定时任务和具有固定周期的重复任务。
+　　(4)Executors.newSingleThreadExecutor()，仅创建一个单核心线程，任务串行。
+●26.Bitmap，缓存机制LruCache与DiskLruCache，BitmapFactory.Options
+　　(1)inSampleSize，整数，最小为1，等比缩小原图宽高。
+　　(2)inJustDecodeBounds，true时只解析宽高不加载到内存中。
+●27.JNI和NDK编程，JNI是java的本地交互，NDK是Android提供得工具集合，可以在android中更加方便的通过JNI来访问本地代码，如C，C++，NDK
+还提供了交叉编译器，开发人员只需要简单的修改mk文件就可以生成特定的CPU平带的动态库，使用NDK有如下好处：
+　　(1)提高代码的安全性。so库反编译比较困难
+　　(2)可以使用目前已有的C/C++开源库
+　　(3)便于平台间的移植。
+　　(4)提高程序在某些特定情形下的执行效率，但是并不能明显提升Android程序的性能。
+　　(5)在cmd终端中进入到main目录下 cd (具体路径)/apiutils/src/main
+　　执行此语句  javah -d jni -classpath ../../build/intermediates/classes/debug com.sky.NDKString  会自动生成jni文件com_sky_NDKString.h,自定义.c的file
+●28.性能优化
+　　(1)布局优化：include，merge，ViewStub，减少层级嵌套，加强view复用。
+　　(2)绘制优化：在onDraw中不要创建新对象，不执行浩氏人物，view的绘制帧率保证60fps是最佳的，每帧所需时间不超过16ms（16ms=1000/60）.
+　　(3)内存泄漏：分析工具MAT。
+　　(4)属性动画导致的内存泄漏：无限循环需要关闭。
+　　(5)响应速度优化和ANR日志分析：避免在主线程中做耗时操作，日志所在：/data/anr/traces.txt
+　　(6)Recycler与bitmap优化
+　　(7)线程优化：灵活应用线程池，避免创建大量线程。
+　　(8)避免创建过多对象；
+　　　灵活并酌情使用枚举类型；
+　　　常量使用static final来修饰。
+　　　使用android特有的数据结构，比如SparseArray和Pair等；
+　　　适当使用软引用与弱引用；
+　　　采用内存加磁盘缓存；
+　　　尽量使用静态内部类，这样可以避免潜在的由于内部类而导致的内存泄漏。
+●29.window与WindowManager ipc机制
+　　(1)addView(v,layoutparam)
+　　(2)updateViewLayout(v,layoutparam)
+　　(3)rempveView(v)
+●30.ProGuard，参见app下的proguard文件，App研发录
+　　(1)压缩Shrink：侦测并移除代码中的无用类，字段，方法和特性。
+　　(2)优化Optimize：对字节码进行优化，移除无用的指令。
+　　(3)混淆Obfuscate：使用a、b、c、d这样简短而无意义的名称，对类、字段和方法进行重命名。
+　　(4)预检Preveirfy：在java平台上对处理后的代码进行预检。
+●31.
+　　(1)TelephonyManager：电话管理器；
+　　(2)SmsManager：短信管理器
+　　(3)AudioManager：音频管理器
+　　(4)Vibrator：振动器
+　　(5)AlarmManager：手机闹钟服务
+●32.
+　　(1)MediaPlayer：音频
+　　(2)SoundPool：音频
+　　(3)VideoView：播放视频
+　　(4)mediaRecorder：录制音频
+●33.Math的三角函数：
+　　var angle = 30.0//角度
+　　val radians = Math.PI * angle / 180//转换成弧度
+　　val ix = 200 * Math.cos(radians)
+　　val iy = 200 * Math.sin(radians)
+　　0-360 度，Cos取值范围1..0..-1..0..1，即+- -+，Sin 取值范围0..1..0..-1..0,即++- -
+　　以x=Cos,y=Sin算为++，-+，- -，+-，即一二三四象限，以X正轴1为起点，逆时针方向画圆，画布上Y轴正负颠倒，所以是顺时针方向画圆
+　　以x=Sin,y=Cos算为++，+-，- -，-+，即一四三二象限，以Y正轴1为起点，顺时针方向画圆，画布上Y轴正负颠倒，所以是逆时针方向画圆
+　　val ix = 200 * Math.sin(radians)
+　　val iy = 200 * Math.cos(radians)
+●34.排序算法：
+　　(1)冒泡排序：选定一端，两相比较，顺序错误则交换。
+　　(2)选择排序：每次选出最大或最小的放在队首，直到完成。
+　　(3)插入排序：排序头两个数据，然后每次增加一个数据来循环，直到完成。
+●35.java内存
+　　(1)寄存器：我们在程序中无法控制
+　　(2)栈：存放基本类型的数据和对象的引用，但对象本身不存放在栈中，而是存放在堆中，还有能确定的字符串
+　　(3)堆：存放用new产生的数据
+　　(4)静态域：存放在对象中用static定义的静态成员
+　　(5)常量池：存放常量
+　　(6)非RAM(随机存取存储器)存储：硬盘等永久存储空间
+●.linked与array做比
+　　(1)单纯顺序添加，array胜
+　　(2)随机添加array更胜
+　　(3)随机删除linked险胜
+　　(4)随机查array时间固定，link越靠后越耗时
+●.
+　　(1)
+　　(2)
+　　(3)
+　　(4)
+　　(5)
+　　(6)
+●.
+　　(1)
+　　(2)
+　　(3)
+　　(4)
+　　(5)
+　　(6)

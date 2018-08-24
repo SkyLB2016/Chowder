@@ -39,15 +39,15 @@
         <item>近代诗词,Documents/近代诗词.txt</item>
 
         <item>围棋,Documents/围棋.txt</item>
+        <item>随笔记忆,Documents/随笔记忆.txt</item>
 
-        <item>英语,yingyu</item>
-        <item>随笔,suibi</item>
-        <item>任务,renwu</item>
+        <item>任务,Documents/任务.txt</item>
 
-        <item>编程笔记,programming</item>
-        <item>设计模式,designPattern</item>
-        <item>Java编程思想,thinkInJava</item>
-        <item>git命令,gitCommand</item>
-        <item>gradle,gradle</item>
+        <item>编程笔记,Documents/编程笔记.txt</item>
+        <item>设计模式,Documents/设计模式.txt</item>
+        <item>Java编程思想,Documents/Java编程思想.txt</item>
+        <item>git命令行,Documents/git命令行.txt</item>
+        <item>gradle,Documents/gradle.txt</item>
+        <item>shutdown,Documents/shutdown.txt</item>
     </array>
 </resources>

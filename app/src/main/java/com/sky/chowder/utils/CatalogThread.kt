@@ -10,25 +10,26 @@ import java.util.*
  */
 class CatalogThread {
 
-    var catalog: ((MutableList<ChapterEntity>) -> Unit)? = null
+    var cataloglistener: ((MutableList<ChapterEntity>) -> Unit)? = null
 
     private val handler = object : Handler() {
         override fun handleMessage(msg: Message?) {
-            catalog?.invoke(msg?.obj as MutableList<ChapterEntity>)
+            cataloglistener?.invoke(msg?.obj as MutableList<ChapterEntity>)
         }
     }
 
-    constructor(text: String,catalog:((MutableList<ChapterEntity>) -> Unit)) {
-        this.catalog=catalog
+    constructor(source: String, catalogListener:((MutableList<ChapterEntity>) -> Unit)) {
+        this.cataloglistener=catalogListener
         Thread(Runnable {
-            val list = text.lines()
+            val list = source.lines()
             //目录
             val catalog = ArrayList<ChapterEntity>()
             //章节
             var chapter = ChapterEntity()
             chapter.chapter = list[0]
-            for (i in list) {
-                val text = if (i.startsWith(" ")) i.substring(1) else i
+            for (text in list) {
+                //放在string.xml里的文档，开头会有个空格，需要先去除
+//                val text = if (i.startsWith(" ")) i.substring(1) else i
                 if (text.startsWith("第") && text.contains("章")
                         || text.startsWith("第") && text.contains("卦")
                         || text.contains("篇") && text.contains("第")
@@ -49,8 +50,8 @@ class CatalogThread {
             var sign = -1
             if (catalog.isEmpty() && list.size > 30) {
                 chapter.content = StringBuilder()
-                for (i in list.indices) {
-                    val text = if (list[i].startsWith(" ")) list[i].substring(1) else list[i]
+                for ((i,text) in list.withIndex()) {
+//                    val text = if (list[i].startsWith(" ")) list[i].substring(1) else list[i]
                     //以，作为正文起始处
                     if (sign === -1 && text.contains("，")) sign = i % 10
                     //记录章节

@@ -1,0 +1,42 @@
+git命令行
+git分层：
+第一层：未缓存，也即未add前；
+第二层：缓存区，add后，commit前；
+第三层：暂存区，commit后，push前，本地版本库；
+第四层：云端，push后，github云端刷新。
+(1)git clone <repo> <directory>
+　　rm -rf 删除文件
+(2)git config --global user.email "邮箱"。
+(3)git config --global user.name "名字"。
+(4)git add  <file> 添加单个文件；
+　　git add . 缓存全部内容。
+(5)git status 显示内容在缓存区里的状态。
+　　git status -s 显示摘要内容。
+(6)git diff 尚未add缓存的改动，add前先diff一下，看一下未添加的缓存内容。
+　　git diff --cache 查看已add的缓存的内容
+　　git diff head 查看已缓存的与未缓存的所有改动
+　　git diff --stat 显示摘要
+(7)git commit -m "注释" 提交到本地库
+(8)git push 提交到云端
+(9)git reset head 取消全部add到缓存里的内容
+　　git reset head <file>  取消此文件add到缓存里的内容
+(9)git rm <file>删除文件，如果已经添加到add中，则需要加-f
+　　git rm --cached <file> 移除缓存区里的内容
+　　git rm -r * 在某个目录中执行词语句，会删除整个文件夹下的内容
+　　git mv <file> <file> 移动或者重命名
+分支管理
+(10)git branch name  创建分支
+　　git branch -d name 删除分支
+(11)git checkout name  切换分支
+　　git checkout -b name 创建并切换到此分支
+(12)git merge name  合并此分支到当前分支下
+
+
+
+
+ls (-a) 文件夹内的文件列表
+vim 编辑器
+?? 代表未添加到暂存区
+A 代表添加暂存区
+M 代表修改的文件
+红色代表未添加，绿色代表执行add之后

@@ -80,7 +80,6 @@ class PoetryActivity : BaseNoPActivity() {
             tv.setOnClickListener(selectArticle)
             resId.add(array[1])
         }
-//        FileUtils.saveCharFile(SkyApp.getInstance().fileCacheDir+array[0]+".txt",getString(id).replace(" ","") )
 
         val text = getDocument(resId[9])
 //        gravity = Gravity.CENTER
@@ -130,6 +129,21 @@ class PoetryActivity : BaseNoPActivity() {
         layoutManager.scrollToPositionWithOffset(position, 0)
         layoutManager.stackFromEnd = true
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     private fun getCatalog(text: String) {
         CatalogThread(text) { catalog -> adapter?.datas = catalog }
