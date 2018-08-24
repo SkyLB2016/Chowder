@@ -26,8 +26,10 @@ git分层：
 　　git mv <file> <file> 移动或者重命名
 分支管理
 (10)git branch name  创建分支
+　　git branch -d name 删除分支
 (11)git checkout name  切换分支
-(12)git merge
+　　git checkout -b name 创建并切换到此分支
+(12)git merge name  合并此分支到当前分支下
 
 
 
