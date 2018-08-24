@@ -26,15 +26,14 @@ git分层：
 　　git mv <file> <file> 移动或者重命名
 分支管理
 (10)git branch name  创建分支
-　　git branch -d name 删除分支
+　　git branch -d name 删除本地分支
+　　git push origin :name 删除远程分支
 (11)git checkout name  切换分支
 　　git checkout -b name 创建并切换到此分支
 (12)git merge name  合并此分支到当前分支下
 远程库
 (13)git remote 查看远程库
 　　git remote -v 远程库的地址
-
-
 
 ls (-a) 文件夹内的文件列表
 vim 编辑器
