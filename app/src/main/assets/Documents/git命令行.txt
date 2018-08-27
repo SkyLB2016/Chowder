@@ -37,7 +37,8 @@ git分层：
 　　git checkout name~<num> 从name的所在位置，向上移动num个提交记录。
 　　git checkout HEAD~<num> 从HEAD的所在位置，向上移动num个提交记录。
 (12)git merge name  合并此分支到当前分支下
-(13)git rebase name 把当前分支合并到此<name>分支之下
+(13)git rebase name  把当前分支合并到此<name>分支之下
+　　git rebase name name2 把name2合并到此<name>分支之下
 撤销提交
 (14)git reset HEAD~1 本地撤销到上一步记录
 　　git revert HEAD  远程撤销到上一步
