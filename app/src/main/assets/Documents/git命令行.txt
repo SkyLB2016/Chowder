@@ -17,6 +17,7 @@ git分层：
 　　git diff head 查看已缓存的与未缓存的所有改动
 　　git diff --stat 显示摘要
 (7)git commit -m "注释" 提交到本地库
+　　git commit --amend 修改最后一次提交的内容，先add需要提交的文件。
 (8)git push 提交到云端
 (9)git reset head 取消全部add到缓存里的内容
 　　git reset head <file>  取消此文件add到缓存里的内容
