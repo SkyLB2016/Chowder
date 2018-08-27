@@ -46,6 +46,12 @@ git分层：
 (15)git remote 查看远程库
 　　git remote -v 远程库的地址
 
+git rebase -i HEAD~2 交换提交记录的顺序
+git cherry-pick name 把指定记录移动到当前的记录之下
+git tag "describe" master
+git describe master
+git pull 拉去当前分支远程库中的内容
+
 ls (-a) 文件夹内的文件列表
 vim 编辑器
 ?? 代表未添加到暂存区
