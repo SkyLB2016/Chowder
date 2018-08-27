@@ -42,7 +42,7 @@ git分层：
 (14)git reset HEAD~1 本地撤销到上一步记录
 　　git revert HEAD  远程撤销到上一步
 远程库
-(14)git remote 查看远程库
+(15)git remote 查看远程库
 　　git remote -v 远程库的地址
 
 ls (-a) 文件夹内的文件列表
