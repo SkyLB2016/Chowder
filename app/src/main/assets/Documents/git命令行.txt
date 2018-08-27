@@ -21,10 +21,14 @@ git分层：
 (8)git push 提交到云端
 (9)git reset head 取消全部add到缓存里的内容
 　　git reset head <file>  取消此文件add到缓存里的内容
-(10)git stash
-git pull 拉去当前分支远程库中的内容
-
-
+(10)git stash 先将本地修改存储起来(后来居上)，在拉取文件,
+　　git pull 拉去当前分支远程库中的内容
+　　git stash list
+　　git stash pop stash@{0} 恢复编号里的本地内容，同时移除此编号
+　　git stash apply stash@{0} 恢复编号里的本地内容，不移除
+　　git stash stop stash@{0} 删除此编号存储
+　　git stash clear
+　　
 (11)git rm <file>删除文件，如果已经添加到add中，则需要加-f
 　　git rm --cached <file> 移除缓存区里的内容
 　　git rm -r * 在某个目录中执行词语句，会删除整个文件夹下的内容
