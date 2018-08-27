@@ -13,7 +13,7 @@ git分层：
 (5)git status 显示内容在缓存区里的状态。
 　　git status -s 显示摘要内容。
 (6)git diff 尚未add缓存的改动，add前先diff一下，看一下未添加的缓存内容。
-　　git diff --cache 查看已add的缓存的内容
+　　git diff --cached 查看已add的缓存的内容
 　　git diff head 查看已缓存的与未缓存的所有改动
 　　git diff --stat 显示摘要
 (7)git commit -m "注释" 提交到本地库

@@ -130,21 +130,6 @@ class PoetryActivity : BaseNoPActivity() {
         layoutManager.stackFromEnd = true
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     private fun getCatalog(text: String) {
         CatalogThread(text) { catalog -> adapter?.datas = catalog }
     }
