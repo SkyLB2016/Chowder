@@ -1,7 +1,6 @@
 package com.sky.chowder.ui.activity
 
 import android.os.Bundle
-import android.support.design.widget.AppBarLayout
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentPagerAdapter
@@ -22,8 +21,8 @@ class TabLayoutActivity : BaseNoPActivity() {
 
     override fun initialize(savedInstanceState: Bundle?) {
         setUpViewPager()
-        val mParams = findViewById<AppBarLayout>(R.id.appbar).getChildAt(0).layoutParams as AppBarLayout.LayoutParams
-        mParams.scrollFlags = 0//的时候AppBarLayout下的toolbar就不会随着滚动条折叠
+//        val mParams = findViewById<AppBarLayout>(R.id.appbar).getChildAt(0).layoutParams as AppBarLayout.LayoutParams
+//        mParams.scrollFlags = 0//的时候AppBarLayout下的toolbar就不会随着滚动条折叠
         //        mParams.setScrollFlags(5); //的时候AppBarLayout下的toolbar会随着滚动条折叠
     }
     override fun loadData() = Unit
@@ -55,7 +54,7 @@ class TabLayoutActivity : BaseNoPActivity() {
         }
         viewPager.adapter = adapter
         tabs.setupWithViewPager(viewPager)
-        tabs.setTabsFromPagerAdapter(adapter)
+//        tabs.setTabsFromPagerAdapter(adapter)
         tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 showToast(tab.text.toString())

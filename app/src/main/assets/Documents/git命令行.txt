@@ -29,12 +29,12 @@ git分层：
 　　git stash apply stash@{0} 恢复编号里的本地内容，不移除
 　　git stash stop stash@{0} 删除此编号存储
 　　git stash clear
-还可以这样
-1.把当前修改commit
-2.退回修改之前的节点
-3.拉取远程最新节点
-4.用rebase或者merge来合并自己的本地节点与远程节点
-5.提交push　
+　　还可以这样
+　　1.把当前修改commit
+　　2.退回修改之前的节点
+　　3.拉取远程最新节点
+　　4.用rebase或者merge来合并自己的本地节点与远程节点
+　　5.提交push　
 (11)git rm <file>删除文件，如果已经添加到add中，则需要加-f
 　　git rm --cached <file> 移除缓存区里的内容
 　　git rm -r * 在某个目录中执行词语句，会删除整个文件夹下的内容
@@ -50,6 +50,8 @@ git分层：
 　　git checkout name^ 从name的所在位置，向上移动一个提交记录，跟几个^，就向上移动几步
 　　git checkout name~<num> 从name的所在位置，向上移动num个提交记录。
 　　git checkout HEAD~<num> 从HEAD的所在位置，向上移动num个提交记录。
+git checkout -b 分支 origin/master 分支跟踪另一分支
+git branch -u origin/master 分支
 (14)git merge name  合并此分支到当前分支下
 (15)git rebase name  把当前分支合并到此<name>分支之下
 　　git rebase name name2 把name2合并到此<name>分支之下
@@ -59,7 +61,6 @@ git分层：
 远程库
 (17)git remote 查看远程库
 　　git remote -v 远程库的地址
-
 git rebase -i HEAD~2 交换提交记录的顺序
 git cherry-pick name 把指定记录移动到当前的记录之下
 git tag "describe" master
