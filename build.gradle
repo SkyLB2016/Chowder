@@ -65,3 +65,11 @@ task makeApk(type: Copy) {
 //    rename('MyDemo-sky-release-v1.1-20150909.apk', POM_ARTIFACT_ID + '_' + VERSION_NAME + '.apk')
     rename('app-sky-release.apk', "${buildTime()}.apk")
 }
+
+task removeFile(type: Copy) {
+    from('~/Documents/WorkSpace/Chowder/app/命名规则.txt')
+    into('~/Documents/WorkSpace/Chowder/app/src/main/assets/Documents/命名规则.txt')//从哪到哪
+//    include('app-sky-release.apk')//指定移动这个文件
+//    rename('MyDemo-sky-release-v1.1-20150909.apk', POM_ARTIFACT_ID + '_' + VERSION_NAME + '.apk')
+//    rename('命名规则.txt', "命名规则.txt")
+}

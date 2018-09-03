@@ -1,0 +1,11 @@
+Unstaged changes after reset:
+M	.idea/caches/build_file_checksums.ser
+M	.idea/misc.xml
+D	app/IO与HTTP
+M	app/src/main/assets/Documents/git命令行.txt
+M	app/src/main/assets/Documents/命名规则.txt
+M	app/src/main/assets/Documents/编程笔记.txt
+M	app/src/main/java/com/sky/chowder/ui/activity/PoetryActivity.kt
+M	app/src/main/res/values/arrays.xml
+D	app/命名规则.txt
+M	build.gradle

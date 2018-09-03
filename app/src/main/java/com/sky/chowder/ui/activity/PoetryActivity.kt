@@ -23,7 +23,6 @@ import com.sky.widget.BaseTitle
 import common.base.BaseNoPActivity
 import kotlinx.android.synthetic.main.activity_poetry.*
 import kotlinx.android.synthetic.main.item_tvdisplay.view.*
-import java.util.*
 
 /**
  * Created by SKY on 2018/3/16.
@@ -31,7 +30,7 @@ import java.util.*
 class PoetryActivity : BaseNoPActivity() {
     private var gravity = Gravity.LEFT
     private lateinit var adapter: RecyclerAdapter<ChapterEntity>
-    private val resId = ArrayList<String>()
+    private var poetry = arrayOf<String>()
     private lateinit var clipM: ClipboardManager
     override fun getLayoutResId(): Int = R.layout.activity_poetry
 
@@ -64,33 +63,31 @@ class PoetryActivity : BaseNoPActivity() {
     }
 
     override fun loadData() {
-        val poetry = resources.getStringArray(R.array.poetry)
+        poetry = resources.getStringArray(R.array.poetry)
         var tv: TextView
-        var array: List<String>
         for ((index, text) in poetry.withIndex()) {
-            array = text.split(",")
             tv = LayoutInflater.from(this).inflate(R.layout.item_tv, flow, false) as TextView
             tv.width = resources.getDimensionPixelSize(R.dimen.wh_96)
             tv.textSize = 18f
-            tv.text = array[0]
+            tv.maxLines=1
+            tv.text = text
             tv.setPadding(10, 0, 10, 0)
-//            item_tv.tag = array[0]
+//            item_tv.tag = poetry[0]
             tv.id = index
             flow.addView(tv)
             tv.setOnClickListener(selectArticle)
-            resId.add(array[1])
         }
 
-        val text = getDocument(resId[9])
+        val text = getDocument(poetry[9])
 //        gravity = Gravity.CENTER
         setToolbarTitle(text.lines()[0])
         getCatalog(text)
     }
 
     fun getDocument(sign: String): String {
-        if (sign.startsWith("Documents"))
-            return FileUtils.readAssestToStr(this, sign)
-        return getString(resources.getIdentifier(sign, "string", packageName))
+//        if (sign.startsWith("Documents"))
+        return FileUtils.readAssestToStr(this, "Documents/$sign.txt")
+//        return getString(resources.getIdentifier(sign, "string", packageName))
     }
 
     private fun initEvent() {
@@ -104,7 +101,7 @@ class PoetryActivity : BaseNoPActivity() {
             in 2..5 -> Gravity.CENTER
             else -> Gravity.LEFT
         }
-        val text = getDocument(resId[v!!.id])
+        val text = getDocument(poetry[v!!.id])
 //        clipM.primaryClip = ClipData.newPlainText("",text.lines()[0])
         setToolbarTitle(text.lines()[0])
         getCatalog(text)
