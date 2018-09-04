@@ -95,7 +95,7 @@
             android:background="@drawable/sel_shape_yellow"
             android:text="买入"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_small" />
+            android:textSize="@dimen/text_15" />
 
         <Button
             android:id="@+id/btnSell"
@@ -106,7 +106,7 @@
             android:background="@drawable/sel_shape_yellow"
             android:text="卖出"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_small" />
+            android:textSize="@dimen/text_15" />
 
     </LinearLayout>
 

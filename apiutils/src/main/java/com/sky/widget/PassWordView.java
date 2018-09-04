@@ -33,7 +33,7 @@ public class PassWordView extends android.support.v7.widget.AppCompatEditText {
         super(context, attrs, defStyleAttr);
         textPaint = new Paint();
         textPaint.setColor(Color.BLACK);
-        textPaint.setTextSize(getResources().getDimension(R.dimen.text_XXXXlarge));
+        textPaint.setTextSize(getResources().getDimension(R.dimen.text_50));
         textPaint.setAntiAlias(true);
 
         whitePaint = new Paint();

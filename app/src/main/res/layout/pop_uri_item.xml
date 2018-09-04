@@ -22,7 +22,7 @@
         android:layout_toRightOf="@id/image"
         android:text="@string/app_name"
         android:textColor="@color/black"
-        android:textSize="@dimen/text_large" />
+        android:textSize="@dimen/text_22" />
 
     <TextView
         android:id="@+id/tv_count"
@@ -33,7 +33,7 @@
         android:layout_marginRight="@dimen/wh_8"
         android:layout_toLeftOf="@id/image"
         android:text="@string/app_name"
-        android:textSize="@dimen/text_medium" />
+        android:textSize="@dimen/text_18" />
 
 
 </RelativeLayout>

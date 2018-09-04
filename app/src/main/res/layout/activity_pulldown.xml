@@ -104,7 +104,7 @@
                 android:gravity="center_vertical"
                 android:padding="10dp"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_small"/>
+                android:textSize="@dimen/text_15"/>
 
             <TextView
                 android:id="@+id/action_title"
@@ -113,7 +113,7 @@
                 android:layout_centerInParent="true"
                 android:text="mydemo"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_medium"/>
+                android:textSize="@dimen/text_18"/>
 
             <Button
                 android:id="@+id/actionMenu"
@@ -125,7 +125,7 @@
                 android:paddingRight="5dp"
                 android:text="立即登录"
                 android:textColor="@color/gray_dark"
-                android:textSize="@dimen/text_small"
+                android:textSize="@dimen/text_15"
                 android:visibility="visible"/>
         </RelativeLayout>
     </RelativeLayout>

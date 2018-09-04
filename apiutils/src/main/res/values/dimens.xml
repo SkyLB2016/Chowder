@@ -24,20 +24,20 @@
     <dimen name="wh_192">192dp</dimen>
 
     <!--字体-->
-    <dimen name="text_min">10sp</dimen>
-    <!--补充性内容-->
-    <dimen name="text_micro">12sp</dimen>
-    <!--次级正文-->
-    <dimen name="text_small">15sp</dimen>
+    <dimen name="text_10">10sp</dimen>
+    <!--补充性内容micro-->
+    <dimen name="text_12">12sp</dimen>
+    <!--次级正文small-->
+    <dimen name="text_15">15sp</dimen>
     <dimen name="text_16">16sp</dimen>
-    <!--正文-->
-    <dimen name="text_medium">18sp</dimen>
+    <!--正文medium-->
+    <dimen name="text_18">18sp</dimen>
     <!--导航栏-->
-    <dimen name="text_large">22sp</dimen>
-    <dimen name="text_Xlarge">26sp</dimen>
-    <dimen name="text_XXlarge">32sp</dimen>
-    <dimen name="text_XXXlarge">36sp</dimen>
-    <dimen name="text_XXXXlarge">50sp</dimen>
-    <dimen name="text_XXXXXlarge">100sp</dimen>
+    <dimen name="text_22">22sp</dimen>
+    <dimen name="text_26">26sp</dimen>
+    <dimen name="text_32">32sp</dimen>
+    <dimen name="text_36">36sp</dimen>
+    <dimen name="text_50">50sp</dimen>
+    <dimen name="text_100">100sp</dimen>
 
 </resources>

@@ -30,7 +30,7 @@ public class TabTextView extends View {
     //字体大小
     private int mTextSize = (int) TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_SP,
-            getResources().getDimension(R.dimen.text_small),
+            getResources().getDimension(R.dimen.text_15),
             getResources().getDisplayMetrics());
 
     private Canvas mCanvas;//画布
@@ -105,7 +105,7 @@ public class TabTextView extends View {
         mText = (String) style.getText(R.styleable.TabTextView_tab_text);
         mTextSize = (int) style.getDimension(R.styleable.TabTextView_tab_textsize, TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_SP,
-                getResources().getDimension(R.dimen.text_small),
+                getResources().getDimension(R.dimen.text_15),
                 getResources().getDisplayMetrics()));
         mTextColor = style.getColor(R.styleable.TabTextView_tab_textcolor, getResources().getColor(android.R.color.black));
 

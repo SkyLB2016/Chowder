@@ -332,7 +332,7 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
         val text = "天行健，君子以自强不息；地势坤，君子以厚德载物。"
 //        val span = SpannableString(text)
         val span = SpannableStringBuilder(text)
-        span.setSpan(AbsoluteSizeSpan(resources.getDimensionPixelSize(R.dimen.text_medium)), 0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        span.setSpan(AbsoluteSizeSpan(resources.getDimensionPixelSize(R.dimen.text_18)), 0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         span.setSpan(ForegroundColorSpan(Color.RED), 8, 17, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//字体颜色
         span.setSpan(BackgroundColorSpan(Color.rgb(55, 155, 200)), 17, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         span.setSpan(UnderlineSpan(), 0, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//下划线

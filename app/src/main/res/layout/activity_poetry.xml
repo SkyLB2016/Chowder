@@ -50,7 +50,7 @@
                         android:background="@drawable/sel_yellow"
                         android:gravity="center"
                         android:text="上一章"
-                        android:textSize="@dimen/text_medium" />
+                        android:textSize="@dimen/text_18" />
 
                     <Button
                         android:id="@+id/tvCatalog"
@@ -62,7 +62,7 @@
                         android:background="@drawable/sel_yellow"
                         android:gravity="center"
                         android:text="目录"
-                        android:textSize="@dimen/text_medium" />
+                        android:textSize="@dimen/text_18" />
 
                     <Button
                         android:id="@+id/tvNext"
@@ -72,7 +72,7 @@
                         android:background="@drawable/sel_yellow"
                         android:gravity="center"
                         android:text="下一章"
-                        android:textSize="@dimen/text_medium" />
+                        android:textSize="@dimen/text_18" />
 
                 </LinearLayout>
             </RelativeLayout>
