@@ -62,10 +62,12 @@ git branch -u origin/master 分支
 远程库
 (17)git remote 查看远程库
 　　git remote -v 远程库的地址
+
 git rebase -i HEAD~2 交换提交记录的顺序
 git cherry-pick name 把指定记录移动到当前的记录之下
 git tag "describe" master
 git describe master
+git log -num 查看提交记录
 
 ls (-a) 文件夹内的文件列表
 vim 编辑器
