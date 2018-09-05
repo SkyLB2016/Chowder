@@ -44,7 +44,8 @@ git分层：
 (12)git branch name  创建分支
 　　git branch -d name 删除本地分支
 　　git push origin :name 删除远程分支，两步相继执行，删除远程
-　　git branch -f master HEAD~<num> 从HEAD所在位置向上移动
+　　git branch -f master HEAD~<num> 把master移动到从HEAD所在位置向上移动num步
+　　git branch -f master hash码 把master移动到hash码所在的位置
 (13)git checkout name  切换分支
 　　git checkout -b name 创建并切换到此分支
 　　git checkout name^ 从name的所在位置，向上移动一个提交记录，跟几个^，就向上移动几步
