@@ -73,3 +73,38 @@ vim 编辑器
 A 代表添加暂存区
 M 代表修改的文件
 红色代表未添加，绿色代表执行add之后
+
+core.symlinks=true
+core.autocrlf=true
+core.fscache=true
+color.diff=auto
+color.status=auto
+color.branch=auto
+color.interactive=true
+help.format=html
+rebase.autosquash=true
+http.sslcainfo=C:/Program Files/Git/mingw64/ssl/certs/ca-bundle.crt
+http.sslbackend=openssl
+diff.astextplain.textconv=astextplain
+filter.lfs.clean=git-lfs clean -- %f
+filter.lfs.smudge=git-lfs smudge -- %f
+filter.lfs.process=git-lfs filter-process
+filter.lfs.required=true
+credential.helper=manager
+user.name=李彬
+user.email=1136096189@qq.com
+core.repositoryformatversion=0
+core.filemode=false
+core.bare=false
+core.logallrefupdates=true
+core.symlinks=false
+core.ignorecase=true
+remote.origin.url=https://github.com/SkyLB2016/Chowder.git
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+branch.master.remote=origin
+branch.master.merge=refs/heads/master
+
+rem alias cdc=cd /d "%ConEmuDir%"
+rem alias cd~=cd /d "%UserProfile%"
+rem alias gl=git-log
+rem alias glb=git-log --branches --date-order
