@@ -111,7 +111,7 @@ public  class CursorLoaderListFragment extends ListFragment implements SearchVie
 
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         // Swap the new cursor in.  (The framework will take care of closing the
-        // old cursor once we return.)
+        // old cursor isLeft we return.)
         mAdapter.swapCursor(data);
     }
 

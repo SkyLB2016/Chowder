@@ -52,14 +52,14 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 
         baseTitle.setLeftButton(-1)
         recycler?.setHasFixedSize(true)
-        adapter = MainAdapter(R.layout.adapter_main)
+        adapter = MainAdapter(R.layout.adapter_main_delete)
         recycler.adapter = adapter
 
         adapter.setOnItemClickListener { _, position -> JumpAct.jumpActivity(this, adapter.datas[position].componentName) }
-        adapter?.setOnItemLongClickListener { _, _ ->
-            showToast("长按监听已处理")
-            true
-        }
+//        adapter?.setOnItemLongClickListener { _, _ ->
+//            showToast("长按监听已处理")
+//            true
+//        }
         AppUtils.isPermissions(this,
                 arrayOf(Manifest.permission.WRITE_CONTACTS, Manifest.permission.READ_CONTACTS, Manifest.permission.READ_EXTERNAL_STORAGE),
                 intArrayOf(0, 0, 0)
