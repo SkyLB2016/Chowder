@@ -2,6 +2,7 @@ package com.sky.chowder.ui.activity
 
 import android.Manifest
 import android.content.ActivityNotFoundException
+import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
@@ -65,12 +66,23 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
                 intArrayOf(0, 0, 0)
         )
         tts = TextToSpeech(this, TextToSpeech.OnInitListener { status -> checkTTS(status) })
+        val rect = Rect(4, 4, 4, 4)
         fab.setOnClickListener {
             //var text = getString(R.string.cezi).trim().replace(" ", "")
             //LogUtils.i("总长==${text.length}")
             //SingletonDemo.INSTANCE.otherMethods()
             //SingletonTest.test()
-            LogUtils.i("提示")
+            val rr= Rect(rect)
+            rr.left=108
+            LogUtils.i("==${rr.left}")
+            LogUtils.i("==${rect.left}")
+            rect.left=8
+            rect.right=8
+            LogUtils.i("==${rect.right}")
+            LogUtils.i("==${rect.left}")
+            LogUtils.i("==${rr.left}")
+            LogUtils.i("==${rr.right}")
+
         }
     }
 
@@ -86,6 +98,7 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
         //        tag = TextUtils.isEmpty(TAG) ? tag : TAG + ":" + tag;
         return ""
     }
+
     private fun setObserver(@LayoutRes item: Int?) {
         //观察者
         val observer = Observer { o, arg -> LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}==$arg") }
@@ -94,6 +107,7 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
         val observable = object : Observable() {
             fun send(content: Any) {
                 setChanged()
+                //通知观察者
                 notifyObservers(content)
             }
         }

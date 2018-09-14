@@ -18,7 +18,7 @@ public class TestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_test);
         WorkProgress progress = findViewById(R.id.progressBar);
 
-        progress.setCurrent(0);
+        progress.setCurrent(70);
 //        progress.setBeyond(200);
     }
 }

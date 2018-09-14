@@ -297,11 +297,21 @@
 　　　404 not found      请求资源不存在，eg：输入了错误的URL
 　　　500 internal server error 服务器发生不可预期的错误
 　　　503 server unavailable 服务器当前不能处理客户端的请求，一段时间后可能恢复
-●.linked与array做比
-　　(1)单纯顺序添加，array胜
-　　(2)随机添加array更胜
-　　(3)随机删除linked险胜
-　　(4)随机查array时间固定，link越靠后越耗时
+●38.ViewTreeObserver：五个一组
+　　(1)OnWindowFocusChangeListener：window的焦点状态发生改变时,（view应该已注册，待测试）
+　　(2)OnWindowAttachListener：当View树绑定到window上的时候回调用，（view应该已注册，待测试）
+　　(3)OnGlobalFocusChangeListener：当一个视图树的焦点状态改变时，会调用的接口
+　　(4)OnTouchModeChangeListener：当视图树的触摸模式发生改变时，会调用的接口
+　　(5)OnEnterAnimationCompleteListener：
+
+　　(6)OnGlobalLayoutListener：当视图树的布局发生改变或者View在视图树的可见状态发生改变时会调用的接口
+　　(7)OnComputeInternalInsetsListener：
+　　(8)OnScrollChangedListener：当视图树的一些组件发生滚动时会调用的接口
+　　(9)OnPreDrawListener：当视图树将要被绘制时，会调用的接口
+　　(10)OnWindowShownListener：
+
+　　(11)OnDrawListener：视图树绘制时调用
+
 ●.
 　　(1)
 　　(2)

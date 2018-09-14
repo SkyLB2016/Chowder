@@ -8,6 +8,5 @@
     <com.sky.chowder.ui.widget.WorkProgress
         android:id="@+id/progressBar"
         android:layout_width="match_parent"
-        android:background="@color/color_E6E6E6"
         android:layout_height="wrap_content" />
 </LinearLayout>

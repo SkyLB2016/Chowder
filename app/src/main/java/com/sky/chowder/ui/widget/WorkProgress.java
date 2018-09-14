@@ -153,12 +153,12 @@ public class WorkProgress extends View {
         float textStartY = dashEndY + getResources().getDimension(R.dimen.wh_6);
 
 //        float start = paint.measureText(textStart);
-        canvas.drawText(textStart, 0, textStartY + paint.descent() - paint.ascent(), paint);
+        canvas.drawText(textStart, 0, textStartY - paint.ascent(), paint);
         if (current != 0) {
             float middle = paint.measureText(textCurrent);
-            canvas.drawText(textCurrent, currentWidth - middle / 3 * 2, textStartY + paint.descent() - paint.ascent(), paint);
+            canvas.drawText(textCurrent, currentWidth - middle / 3 * 2, textStartY - paint.ascent(), paint);
         }
         float end = paint.measureText(textEnd);
-        canvas.drawText(textEnd, width - end, textStartY + paint.descent() - paint.ascent(), paint);
+        canvas.drawText(textEnd, width - end, textStartY - paint.ascent(), paint);
     }
 }
