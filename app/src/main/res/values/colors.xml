@@ -8,5 +8,9 @@
     <color name="color_1AB394">#1AB394</color>
     <color name="color_E6E6E6">#E6E6E6</color>
     <color name="color_666666">#666666</color>
+
     <color name="color_CCCCCC">#CCCCCC</color>
+    <color name="schedule_year_month_color">#289bf0</color>
+    <color name="schedule_default_color">#000000</color>
+    <color name="schedule_year_selected_day_color">#289bf0</color>
 </resources>

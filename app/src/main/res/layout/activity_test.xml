@@ -5,8 +5,12 @@
     android:layout_margin="@dimen/wh_10"
     android:orientation="vertical">
 
-    <com.sky.chowder.ui.widget.WorkProgress
-        android:id="@+id/progressBar"
+    <com.sky.chowder.ui.widget.calendar.CalendarView
+        android:id="@+id/calendar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <!--<com.sky.chowder.ui.widget.WorkProgress-->
+        <!--android:id="@+id/progressBar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
 </LinearLayout>
