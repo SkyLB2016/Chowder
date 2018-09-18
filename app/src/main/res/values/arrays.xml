@@ -62,5 +62,6 @@
         <item>git命令行</item>
         <item>gradle</item>
         <item>shutdown</item>
+        <item>终端命令行</item>
     </array>
 </resources>

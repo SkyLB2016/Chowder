@@ -1,67 +1,98 @@
 git命令行
+红色代表add之前，
+绿色代表add之后
+
 git分层：
 第一层：未缓存，也即未add前；
 第二层：暂存区，add后，commit前；
 第三层：版本库，commit后，push前，本地版本库；
 第四层：远程仓库，push后，github云端刷新。
-(1)git clone <repo> <directory>
-　　rm -rf 删除文件
-(2)git config --global user.email "邮箱"。
-(3)git config --global user.name "名字"。
+
+(1)git config --global user.email "邮箱"。
+    git config --global user.name "名字"。
+    git config --list 显示Git的配置信息;
+    简拼：gcf
+(2)git clone <repo> <directory> 拉取远程仓库；
+    简拼：gcl
+(3)git status 显示内容在缓存区里的状态；
+    简拼：gst
+    git status -s 显示摘要内容；
+    简拼：gss
 (4)git add  <file> 添加单个文件；
-　　git add . 缓存全部内容。
-(5)git status 显示内容在缓存区里的状态。
-　　git status -s 显示摘要内容。
-(6)git diff 尚未add缓存的改动，add前先diff一下，看一下未添加的缓存内容。
-　　git diff --cached 查看已add的缓存的内容
-　　git diff head 查看已缓存的与未缓存的所有改动
-　　git diff --stat 显示摘要
-(7)git commit -m "注释" 提交到本地库
-　　git commit --amend 修改最后一次提交的内容，先add需要提交的文件。
-(8)git push 提交到云端
-(9)git reset head 取消全部add到缓存里的内容
-　　git reset head <file>  取消此文件add到缓存里的内容
-(10)git stash 先将本地修改存储起来(后来居上)，在拉取文件,
-　　git pull 拉取当前分支远程库中的内容 ==fetch merge
-　　git pull --rebase 拉取当前分支远程库中的内容 ==fetch rebase
-　　git stash list
-　　git stash pop stash@{0} 恢复编号里的本地内容，同时移除此编号
-　　git stash apply stash@{0} 恢复编号里的本地内容，不移除
-　　git stash stop stash@{0} 删除此编号存储
-　　git stash clear
-　　还可以这样
-　　1.把当前修改commit
-　　2.退回修改之前的节点
-　　3.拉取远程最新节点
-　　4.用rebase或者merge来合并自己的本地节点与远程节点
-　　5.提交push　
-(11)git rm <file>删除文件，如果已经添加到add中，则需要加-f
-　　git rm --cached <file> 移除缓存区里的内容，暂时感觉与git reser head 没什么不同
-　　git rm -r * 在某个目录中执行词语句，会删除整个文件夹下的内容
-　　git mv <file> <file> 移动或者重命名
+    简拼：ga
+    git add .（--all） 缓存全部内容;
+    简拼：gaa
+(5)git diff 尚未add缓存的改动，add前应该先diff一下，看一下修改的缓存内容；
+    简拼：gd
+    git diff --cached 查看已add的缓存的内容；
+    简拼：gdca
+    git diff head 查看已缓存的与未缓存的所有改动；
+    简拼：无
+    git diff --stat 显示摘要；
+    简拼：无
+(6)git reset head 取消全部add到缓存里的内容；
+    简拼：无
+    git reset head <file>  取消此文件add到缓存里的内容;
+    简拼：无
+(7)git commit -m "注释" 提交到本地库;
+    简拼：gcmsg
+    git commit --amend 修改最后一次提交的内容，先add需要提交的文件。
+    简拼：无
+(8)git push 提交到云端；
+    简拼：gp
+(9)git rm <file> 删除文件，如果已经添加到add中，则需要加-f
+    git rm --cached <file> 移除缓存区里的内容，暂时感觉与git reset head 没什么不同
+    git rm -r * 删除此目录下的内容
+    git mv <file> <file> 移动或者重命名
+
+更新远程的方式：
+(1)git stash 先将本地修改存储起来(后来居上)，再拉取文件,
+(2)拉取远程融合的两种方式：
+    git pull 拉取当前分支远程库中的内容 ==fetch merge；
+    简拼：gl
+    git pull --rebase 拉取当前分支远程库中的内容 ==fetch rebase；
+    简拼：gup
+(3)融合本地stash：
+    git stash list stash的列表；
+    简拼：gstl
+    git stash pop stash@{0} 恢复编号里的本地内容，同时移除此编号；
+    简拼：gstp stash@{0}
+    git stash apply stash@{0} 恢复编号里的本地内容，不移除此编号;
+    简拼：gstaa
+    git stash drop stash@{0} 删除此编号存储;
+    简拼：gstd
+    git stash clear 清空全部；
+    简拼：gstc
+(4)gp提交完
+还可以这样更新：
+    1.把当前修改commit
+    2.退回修改之前的节点
+    3.拉取远程最新节点
+    4.用rebase或者merge来合并自己的本地节点与远程节点
+    5.提交push
 
 分支管理
 (12)git branch name  创建分支
-　　git branch -d name 删除本地分支
-　　git push origin :name 删除远程分支，两步相继执行，删除远程
-　　git branch -f master HEAD~<num> 把master移动到从HEAD所在位置向上移动num步
-　　git branch -f master hash码 把master移动到hash码所在的位置
+    git branch -d name 删除本地分支
+    git push origin :name 删除远程分支，两步相继执行，删除远程
+    git branch -f master HEAD~<num> 把master移动到从HEAD所在位置向上移动num步
+    git branch -f master hash码 把master移动到hash码所在的位置
 (13)git checkout name  切换分支
-　　git checkout -b name 创建并切换到此分支
-　　git checkout name^ 从name的所在位置，向上移动一个提交记录，跟几个^，就向上移动几步
-　　git checkout name~<num> 从name的所在位置，向上移动num个提交记录。
-　　git checkout HEAD~<num> 从HEAD的所在位置，向上移动num个提交记录。
+    git checkout -b name 创建并切换到此分支
+    git checkout name^ 从name的所在位置，向上移动一个提交记录，跟几个^，就向上移动几步
+    git checkout name~<num> 从name的所在位置，向上移动num个提交记录。
+    git checkout HEAD~<num> 从HEAD的所在位置，向上移动num个提交记录。
 git checkout -b 分支 origin/master 分支跟踪另一分支
 git branch -u origin/master 分支
 (14)git merge name  合并此分支到当前分支下
 (15)git rebase name  把当前分支合并到此<name>分支之下
-　　git rebase name name2 把name2合并到此<name>分支之下
+    git rebase name name2 把name2合并到此<name>分支之下
 撤销提交
 (16)git reset HEAD~1 本地撤销到上一步记录
-　　git revert HEAD  远程撤销到上一步
+    git revert HEAD  远程撤销到上一步
 远程库
 (17)git remote 查看远程库
-　　git remote -v 远程库的地址
+    git remote -v 远程库的地址
 
 git rebase -i HEAD~2 交换提交记录的顺序
 git cherry-pick name 把指定记录移动到当前的记录之下
@@ -69,24 +100,12 @@ git tag "describe" master
 git describe master
 git log -num 查看提交记录
 
-ls (-a) 文件夹内的文件列表
 vim 编辑器
-?? 代表未添加到暂存区
-A 代表添加暂存区
-M 代表修改的文件
-红色代表未添加，绿色代表执行add之后
 
 
 
 
-
-
-
-
-
-
-
-
+ZSH快捷键
 #
 # Aliases
 # (sorted alphabetically)
