@@ -8,6 +8,7 @@ git分层：
 第三层：版本库，commit后，push前，本地版本库；
 第四层：远程仓库，push后，github云端刷新。
 
+一、Git提交的基本流程
 (1)git config --global user.email "邮箱"。
     git config --global user.name "名字"。
     git config --list 显示Git的配置信息;
@@ -27,17 +28,17 @@ git分层：
     git diff --cached 查看已add的缓存的内容；
     简拼：gdca
     git diff head 查看已缓存的与未缓存的所有改动；
-    简拼：无
+    简拼：gd head
     git diff --stat 显示摘要；
-    简拼：无
+    简拼：gd --stat
 (6)git reset head 取消全部add到缓存里的内容；
-    简拼：无
+    简拼：grh head
     git reset head <file>  取消此文件add到缓存里的内容;
-    简拼：无
+    简拼：grh head file
 (7)git commit -m "注释" 提交到本地库;
     简拼：gcmsg
     git commit --amend 修改最后一次提交的内容，先add需要提交的文件。
-    简拼：无
+    简拼：gcmsg --amend
 (8)git push 提交到云端；
     简拼：gp
 (9)git rm <file> 删除文件，如果已经添加到add中，则需要加-f
@@ -45,7 +46,7 @@ git分层：
     git rm -r * 删除此目录下的内容
     git mv <file> <file> 移动或者重命名
 
-更新远程的方式：
+二、更新远程的方式：
 (1)git stash 先将本地修改存储起来(后来居上)，再拉取文件,
 (2)拉取远程融合的两种方式：
     git pull 拉取当前分支远程库中的内容 ==fetch merge；
@@ -71,45 +72,73 @@ git分层：
     4.用rebase或者merge来合并自己的本地节点与远程节点
     5.提交push
 
-分支管理
-(12)git branch name  创建分支
-    git branch -d name 删除本地分支
-    git push origin :name 删除远程分支，两步相继执行，删除远程
-    git branch -f master HEAD~<num> 把master移动到从HEAD所在位置向上移动num步
-    git branch -f master hash码 把master移动到hash码所在的位置
-(13)git checkout name  切换分支
-    git checkout -b name 创建并切换到此分支
-    git checkout name^ 从name的所在位置，向上移动一个提交记录，跟几个^，就向上移动几步
+三、分支管理
+(1)git branch name  创建分支;
+    简拼：gb
+    git branch -d name 删除本地分支；
+    简拼：gbd
+    git push origin :name 删除远程分支，与-d配合，两步相继执行，删除远程；
+    简拼：gp origin :name
+    git branch -f master HEAD~<num> 把master移动到从HEAD所在位置向上移动num步；
+    简拼：gb -f master HEAD~<num>
+    git branch -f master hash码 -> 把master移动到hash码所在的位置；
+    简拼：gb -f -f master hash码
+(2)git checkout name  切换分支；
+    简拼：gco
+    特例：
+        alias gcm='git checkout master'
+        alias gcd='git checkout develop'
+    git checkout -b name 创建并切换到此分支；
+    简拼：gcb
+    git checkout name^ 从name的所在位置，向上移动一个提交记录，跟几个^，就向上移动几步；
     git checkout name~<num> 从name的所在位置，向上移动num个提交记录。
     git checkout HEAD~<num> 从HEAD的所在位置，向上移动num个提交记录。
-git checkout -b 分支 origin/master 分支跟踪另一分支
-git branch -u origin/master 分支
-(14)git merge name  合并此分支到当前分支下
-(15)git rebase name  把当前分支合并到此<name>分支之下
-    git rebase name name2 把name2合并到此<name>分支之下
-撤销提交
-(16)git reset HEAD~1 本地撤销到上一步记录
+    以下两个待理解：
+    git checkout -b 分支 origin/master 分支跟踪另一分支
+    git branch -u origin/master 分支
+(3)git merge name  合并此<name>分支到当前所在分支下；
+    简拼：gm
+    特例：
+        alias gmom='git merge origin/master'
+(4)git rebase name  把当前分支合并到此<name>分支之下；
+    简拼：grb
+    特例：
+        alias grbm='git rebase master'
+        alias grbd='git rebase develop'
+    git rebase name1 name2 把<name2>合并到此<name1>分支之下;
+    简拼：grb
+    git rebase -i HEAD~2 交换提交记录的顺序；
+    简拼：grbi
+
+四、撤销提交
+    git reset HEAD~1 本地撤销到上一步记录
+    简拼：grh
     git revert HEAD  远程撤销到上一步
-远程库
-(17)git remote 查看远程库
+    简拼：无
+
+五、远程库
+    git remote 查看远程库；
+    简拼：gr
     git remote -v 远程库的地址
+    简拼：grv
 
-git rebase -i HEAD~2 交换提交记录的顺序
-git cherry-pick name 把指定记录移动到当前的记录之下
-git tag "describe" master
-git describe master
-git log -num 查看提交记录
-
-vim 编辑器
-
-
+六、其他（重要）
+    git rebase -i HEAD~2 交换提交记录的顺序；
+    简拼：grbi
+    git cherry-pick name 把指定记录移动到当前的记录之下；
+    简拼：gcp
+    git tag "describe" master 为master设置tag；
+    简拼：
+    示例：
+        alias gts='git tag -s'
+        alias gtv='git tag | sort -V'
+    git describe master 对master的描述；
+    git log -num 查看提交记录；
 
 
 ZSH快捷键
-#
 # Aliases
 # (sorted alphabetically)
-#
 
 alias g='git'
 
