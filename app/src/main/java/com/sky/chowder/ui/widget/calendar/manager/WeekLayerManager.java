@@ -6,6 +6,7 @@ import android.graphics.Rect;
 import com.sky.chowder.ui.widget.calendar.CalendarView;
 import com.sky.chowder.ui.widget.calendar.common.CalendarInfo;
 import com.sky.chowder.ui.widget.calendar.common.CalendarMode;
+import com.sky.chowder.ui.widget.calendar.common.WeekInfo;
 import com.sky.chowder.ui.widget.calendar.impl.OnPageChangeListener;
 import com.sky.chowder.ui.widget.calendar.impl.OnTimeChange;
 import com.sky.chowder.ui.widget.calendar.layer.CalendarLayer;
@@ -27,7 +28,7 @@ public class WeekLayerManager extends BaseLayerManager implements OnPageChangeLi
         mMonth = info.getMonth();
         mDay = info.getDay();
         mLayer = (WeekLayer) layer;
-        mLayer.setSelectedDay(mDay);
+//        mLayer.setSelectedDay(mDay);
     }
 
     @Override
@@ -84,18 +85,18 @@ public class WeekLayerManager extends BaseLayerManager implements OnPageChangeLi
 
     @Override
     public void onClick(int x, int y) {
-        CalendarInfo info = mLayer.getYMDByLocation(x, y);
+        WeekInfo info = mLayer.getYMDByLocation(x, y);
         if (info == null) {
             return;
         }
-        mYear = info.getYear();
-        mMonth = info.getMonth();
-        mDay = info.getDay();
+//        mYear = info.getYear();
+//        mMonth = info.getMonth();
+//        mDay = info.getDay();
         WeekLayer layer = (WeekLayer) getCurLayer();
-        layer.setSelectedDay(mDay);
-        if (mTimeChangeListener != null) {
-            mTimeChangeListener.onTimeChange(info);
-        }
+        layer.setSelectedDay(info);
+//        if (mTimeChangeListener != null) {
+//            mTimeChangeListener.onTimeChange(info);
+//        }
     }
 
     @Override

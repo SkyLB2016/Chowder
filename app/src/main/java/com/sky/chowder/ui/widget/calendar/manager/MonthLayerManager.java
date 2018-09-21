@@ -26,7 +26,7 @@ public class MonthLayerManager extends BaseLayerManager implements OnPageChangeL
         mMonth = info.getMonth();
         mDay = info.getDay();
         mLayer = (MonthLayer) layer;
-        mLayer.setSelectedDay(mDay);
+//        mLayer.setSelectedDay(mDay);
     }
 
     public Rect getSelectedDayRect() {

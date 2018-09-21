@@ -22,6 +22,8 @@
     file （-b不显示名称）文件 显示文件信息
     which 名 显示$path里配置的信息
     who 显示系统中有哪些使用者
+    echo 输出
+    sleep 10 睡10秒
 3.ls：（List directory contents）列出目录下的文件和文件夹
     -l：列出详细的目录清单
     -a：连隐藏文件一起显示

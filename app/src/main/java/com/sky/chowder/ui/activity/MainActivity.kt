@@ -72,18 +72,26 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
             //LogUtils.i("总长==${text.length}")
             //SingletonDemo.INSTANCE.otherMethods()
             //SingletonTest.test()
-            val rr= Rect(rect)
-            rr.left=108
-            LogUtils.i("==${rr.left}")
-            LogUtils.i("==${rect.left}")
-            rect.left=8
-            rect.right=8
-            LogUtils.i("==${rect.right}")
-            LogUtils.i("==${rect.left}")
-            LogUtils.i("==${rr.left}")
-            LogUtils.i("==${rr.right}")
-
+            val calendar = Calendar.getInstance()
+            LogUtils.i("本日==${calendar.get(Calendar.DAY_OF_YEAR)}")
+            LogUtils.i("周几==${calendar.get(Calendar.DAY_OF_WEEK)}")
+            LogUtils.i("日期==${calendar.get(Calendar.MONTH) + 1}月${calendar.get(Calendar.DAY_OF_MONTH)}")
+            LogUtils.i("年周==${calendar.get(Calendar.WEEK_OF_YEAR)}")
+            LogUtils.i("月周==${calendar.get(Calendar.WEEK_OF_MONTH)}")
         }
+    }
+
+    fun changeRect(rect: Rect) {
+        val rr = Rect(rect)
+        rr.left = 108
+        LogUtils.i("==${rr.left}")
+        LogUtils.i("==${rect.left}")
+        rect.left = 8
+        rect.right = 8
+        LogUtils.i("==${rect.right}")
+        LogUtils.i("==${rect.left}")
+        LogUtils.i("==${rr.left}")
+        LogUtils.i("==${rr.right}")
     }
 
     private fun generateTag(): String {

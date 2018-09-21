@@ -29,13 +29,15 @@ public class WeekBarLayer implements CalendarLayer {
     private List<Rect> mWeekRectList = new ArrayList<>();
     private HashMap<String, Float> mTextWidthMap;
 
-    private Rect mRect;              //允许的绘制区域
+    private Rect mainRect;              //允许的绘制区域
     private Rect mBorderRect;        //绘制的边界
     private boolean mIsShow;
 
+    private int interval = 1;                                  //方块之间的间隔,单位 dp
     private float mWeekTextSize = 12;                       //星期的字体大小,单位 sp
-    private int mWeekBarHeight = 30;                        //星期高度,单位 dp
-    private int mWeekAreaColor = CalendarColor.WHITE;       //星期导航条的背景色
+    //    private int mWeekBarHeight = 30;                        //星期高度,单位 dp
+    private int mWeekAreaColor = CalendarColor.D8D8D8;       //星期导航条的背景色
+    private int mWeekBGColor = CalendarColor.FAFAFA;       //文字所在背景框的颜色
     private int mWeekTextColor = CalendarColor.TITLE_GRAY;  //星期的文字颜色
     private float mWeekTextHeight;                          //代码自动计算
     private float mWeekTextAscent;                          //代码自动计算
@@ -45,7 +47,7 @@ public class WeekBarLayer implements CalendarLayer {
         mModeInfo = info;
         DisplayMetrics metrics = resources.getDisplayMetrics();
         mWeekTextSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mWeekTextSize, metrics);
-        mWeekBarHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mWeekBarHeight, metrics);
+//        mWeekBarHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mWeekBarHeight, metrics);
 
         //动态设置第一天开始的星期
         int weekStart = (CalendarView.FIRST_DAY + COL_COUNT - 2) % 7;
@@ -54,16 +56,17 @@ public class WeekBarLayer implements CalendarLayer {
             WEEK[i] = BASE_WEEK[index];
         }
 
-        mRect = info.getRect();
-        mWeekItemWidth = mRect.width() / COL_COUNT;
+        mainRect = info.getRect();
+        mWeekItemWidth = (mainRect.width() - interval * (COL_COUNT - 1)) / COL_COUNT;
+
         mBorderRect = info.getBorderRect();
         //每星期的数字显示区域
         for (int i = 0; i < COL_COUNT; i++) {
             Rect item = new Rect();
-            item.left = mRect.left + i * mWeekItemWidth;
-            item.top = mRect.top;
+            item.left = mainRect.left + i * (mWeekItemWidth + interval);
+            item.top = mainRect.top;
             item.right = item.left + mWeekItemWidth;
-            item.bottom = mRect.top + mWeekBarHeight;
+            item.bottom = mainRect.bottom - interval;
             mWeekRectList.add(item);
         }
         //初始化画笔
@@ -88,15 +91,18 @@ public class WeekBarLayer implements CalendarLayer {
         }
         //绘制星期导航条背景
         mPaint.setColor(mWeekAreaColor);
-        canvas.drawRect(mRect, mPaint);
+        canvas.drawRect(mainRect, mPaint);
         //绘制星期导航条文字
-        mPaint.setColor(mWeekTextColor);
         mPaint.setTextSize(mWeekTextSize);
         for (int i = 0; i < mWeekRectList.size(); i++) {
             Rect rect = mWeekRectList.get(i);
             String text = WEEK[i];
             float x = rect.left + (rect.width() - mTextWidthMap.get(text)) / 2;
             float y = rect.top + (rect.height() - mWeekTextHeight) / 2 - mWeekTextAscent;
+
+            mPaint.setColor(mWeekBGColor);
+            canvas.drawRect(rect, mPaint);
+            mPaint.setColor(mWeekTextColor);
             canvas.drawText(text, x, y, mPaint);
         }
     }
@@ -112,7 +118,7 @@ public class WeekBarLayer implements CalendarLayer {
 
     @Override
     public void scrollBy(int dx, int dy) {
-        mRect.offset(dx, dy);
+        mainRect.offset(dx, dy);
         mBorderRect.offset(dx, dy);
         for (int i = 0; i < mWeekRectList.size(); i++) {
             mWeekRectList.get(i).offset(dx, dy);
@@ -121,7 +127,7 @@ public class WeekBarLayer implements CalendarLayer {
 
     @Override
     public Rect getBorderRect() {
-        return mRect;
+        return mainRect;
     }
 
     @Override

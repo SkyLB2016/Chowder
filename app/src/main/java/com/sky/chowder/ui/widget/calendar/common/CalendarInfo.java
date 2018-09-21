@@ -104,7 +104,7 @@ public class CalendarInfo implements Parcelable {
             case MONTH:
                 return year + "_" + month;
             case WEEK:
-                return year + "_" + month + "_" + day;
+                return year + "_-" + month + "_" + day;
             case DAY:
                 return year + "_" + month + "_" + day + "_data";
             default:

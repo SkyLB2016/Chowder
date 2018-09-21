@@ -105,7 +105,7 @@ public class CalendarView extends View {
     public CalendarView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
-        CalendarColor.setCalendarPrimaryColor(CalendarColor.BLUE);
+        CalendarColor.setCalendarPrimaryColor(CalendarColor.PROJECT);
     }
 
     private void init() {
@@ -188,7 +188,7 @@ public class CalendarView extends View {
             }
         });
         //周模式视图
-        Rect weekRect = new Rect(0, weekBarRect.bottom, getWidth(), weekBarRect.bottom + monthItemHeight);
+        Rect weekRect = new Rect(0, weekBarRect.bottom, getWidth(), weekBarRect.bottom + monthItemHeight * MONTH_OF_DAY_ROW);
         CalendarInfo weekInfo = new CalendarInfo(weekRect, mYear, mMonth, mDay, CalendarMode.WEEK);
         mWeekLayerManager = new WeekLayerManager(this, weekRect, new WeekLayer(weekInfo, getResources()));
         mWeekLayerManager.setOnTimeChangeListener(new DefaultOnTimeChangeListener());
@@ -237,6 +237,7 @@ public class CalendarView extends View {
         if (mInitListener != null) {
             mInitListener.onInitFinished(this);
         }
+        mWeekLayerManager.setShow(true);
     }
 
     /**

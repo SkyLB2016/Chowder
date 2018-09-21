@@ -2,7 +2,9 @@ package com.sky.chowder.ui.widget.calendar.common;
 
 import com.sky.chowder.ui.widget.calendar.CalendarView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class CalendarUtil {
 
@@ -61,6 +63,77 @@ public class CalendarUtil {
         array[0] = monthStart;
         array[1] = end - 1;
         return result;
+    }
+
+    /**
+     * @param year
+     * @param month
+     * @param day
+     * @return
+     */
+    public static List<WeekInfo> getWeekOfMonth(int year, int month, int day) {
+        List<WeekInfo> weeks = new ArrayList<>();//周数据
+        int weekOfYear = 0;
+        int weekOfMonth = 0;
+
+        Calendar cal = Calendar.getInstance();
+        cal.clear();
+        cal.set(year, month, 1);
+        int monthStart = cal.get(Calendar.DAY_OF_WEEK);
+        weekOfYear = cal.get(Calendar.WEEK_OF_YEAR);
+        //系统内1为周日，系统以周日为一周的开始，APP内需要以周一开始，所以weekOfYear需要减1
+        if (monthStart == 1) {
+            weekOfYear--;
+        }
+        //动态计算每周开始的星期
+        //计算在APP内本月1号在星期中所占的位置
+        monthStart = (monthStart + 7 - CalendarView.FIRST_DAY) % 7;
+
+        //填充上月数据
+        cal.set(Calendar.DAY_OF_MONTH, 0);              //将日期设置为上一个月
+        int dayInMonth = cal.get(Calendar.DAY_OF_MONTH);//获取上一个月的最后一天
+
+        //一周所包含的日期
+        List<CalendarInfo> info = new ArrayList<>();
+        for (int i = 0; i < monthStart; i++) {
+            info.add(0, new CalendarInfo(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), dayInMonth));
+            dayInMonth--;
+        }
+        //填充本月数据
+        cal.clear();
+        cal.set(year, month, 1);
+        cal.add(Calendar.MONTH, 1);
+        cal.set(Calendar.DAY_OF_MONTH, 0);
+        int monthDay = cal.get(Calendar.DAY_OF_MONTH);
+
+        Boolean isThisWeek = false;
+        for (int i = 1; i <= monthDay; i++) {
+            if (day == i) {
+                isThisWeek = true;
+            }
+            info.add(new CalendarInfo(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), i));
+
+            //够七个数据里，填充，并初始化。
+            if (info.size() == 7) {
+                weeks.add(new WeekInfo(info, weekOfYear++, weekOfMonth++, isThisWeek));
+                info = new ArrayList<>();
+                isThisWeek = false;
+            }
+        }
+        if (info.isEmpty()) {
+            return weeks;
+        } else {
+            //不为空，填补下月数据
+            cal.add(Calendar.DAY_OF_MONTH, 1);
+//            for (int i = 1; i <= 7 - info.size(); i++) {
+//                info.add(new CalendarInfo(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), i));
+//            }
+            int temp = 1;
+            while (info.size() < 7) {
+                info.add(new CalendarInfo(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), temp++));
+            }
+        }
+        return weeks;
     }
 
     /**

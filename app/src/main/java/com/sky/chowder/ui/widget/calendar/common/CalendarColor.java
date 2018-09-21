@@ -20,8 +20,10 @@ public class CalendarColor {
     public static final int TITLE_GRAY = 0xFF666666;   //深黑色
     public static final int STATUS_GRAY = 0xFF999999;  //深黑色
     public static final int FINISH_GRAY = 0xFFCCCCCC;  //深黑色
+    public static final int FAFAFA = 0xFFFAFAFA;  //深黑色
     public static final int DARK_GRAY = 0xFF333333;    //深黑色
     public static final int LIGHT_GRAY = 0xFFB3B3B3;   //浅黑色
+    public static final int D8D8D8 = 0xFFD8D8D8;   //浅黑色
     public static final int ORIGIN = 0xFFF5A623;       //橘黄色
     public static final int ORIGIN_BORDER = 0xFFE6A020; //橘黄色边框
     public static final int WHITE = 0xFFFFFFFF;        //白色
