@@ -174,7 +174,11 @@ public class WeekLayer implements CalendarLayer {
         return mModeInfo;
     }
 
-//    public int getDayByIndex(int index) {
+    public List<WeekInfo> getWeekList() {
+        return weekList;
+    }
+
+    //    public int getDayByIndex(int index) {
 //        return dayArray[index];
 //    }
 
@@ -207,6 +211,7 @@ public class WeekLayer implements CalendarLayer {
 //    }
 
     public void setSelectedDay(WeekInfo info) {
+        if (info==null)return;
 //        if (day < 0) {
 //            mSelectedDay = -1;
 //            mSelectedDayIndex = -1;

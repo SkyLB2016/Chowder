@@ -1,6 +1,5 @@
 package com.sky.chowder.ui.widget.calendar.manager;
 
-
 import android.graphics.Rect;
 
 import com.sky.chowder.ui.widget.calendar.CalendarView;
@@ -13,6 +12,7 @@ import com.sky.chowder.ui.widget.calendar.layer.CalendarLayer;
 import com.sky.chowder.ui.widget.calendar.layer.WeekLayer;
 
 import java.util.Calendar;
+import java.util.List;
 
 public class WeekLayerManager extends BaseLayerManager implements OnPageChangeListener {
 
@@ -38,7 +38,7 @@ public class WeekLayerManager extends BaseLayerManager implements OnPageChangeLi
         mMonth = curInfo.getMonth();
         mDay = curInfo.getDay();
         mLayer = (WeekLayer) getCurLayer();
-        mLayer.setSelectedDay(mDay);
+//        mLayer.setSelectedDay(mDay);
     }
 
     @Override
@@ -53,34 +53,26 @@ public class WeekLayerManager extends BaseLayerManager implements OnPageChangeLi
     public CalendarInfo getNextModeInfo(CalendarInfo curInfo) {
         int year = curInfo.getYear();
         int month = curInfo.getMonth();
-        int day = curInfo.getDay();
-        WeekLayer curLayer = (WeekLayer) getCurLayer();
-        int index = curLayer.getDayIndex();
-        Calendar calendar = Calendar.getInstance();
-        calendar.clear();
-        calendar.set(year, month, day);
-        calendar.add(Calendar.DAY_OF_MONTH, 7 - index);
-        year = calendar.get(Calendar.YEAR);
-        month = calendar.get(Calendar.MONTH);
-        day = calendar.get(Calendar.DAY_OF_MONTH);
-        return new CalendarInfo(curInfo.getRect(), year, month, day, curInfo.getMode());
+        if (month + 1 > Calendar.DECEMBER) {
+            month = Calendar.JANUARY;
+            year += 1;
+        } else {
+            month += 1;
+        }
+        return new CalendarInfo(curInfo.getRect(), year, month, curInfo.getDay(), curInfo.getMode());
     }
 
     @Override
     public CalendarInfo getPreModeInfo(CalendarInfo curInfo) {
         int year = curInfo.getYear();
         int month = curInfo.getMonth();
-        int day = curInfo.getDay();
-        Calendar calendar = Calendar.getInstance();
-        calendar.clear();
-        calendar.set(year, month, day);
-        WeekLayer curLayer = (WeekLayer) getCurLayer();
-        int index = curLayer.getDayIndex();
-        calendar.add(Calendar.DAY_OF_MONTH, -7 - index);
-        year = calendar.get(Calendar.YEAR);
-        month = calendar.get(Calendar.MONTH);
-        day = calendar.get(Calendar.DAY_OF_MONTH);
-        return new CalendarInfo(curInfo.getRect(), year, month, day, curInfo.getMode());
+        if (month - 1 < Calendar.JANUARY) {
+            month = Calendar.DECEMBER;
+            year -= 1;
+        } else {
+            month -= 1;
+        }
+        return new CalendarInfo(curInfo.getRect(), year, month, curInfo.getDay(), curInfo.getMode());
     }
 
     @Override
@@ -112,12 +104,27 @@ public class WeekLayerManager extends BaseLayerManager implements OnPageChangeLi
         if (mLayer == getCurLayer()) {
             return;
         }
-        mLayer.setSelectedDay(-1);
+        mLayer.setSelectedDay(null);
         mDay = info.getDay();
         mYear = info.getYear();
         mMonth = info.getMonth();
         mLayer = (WeekLayer) getCurLayer();
-        mLayer.setSelectedDay(mDay);
+        Calendar cal = Calendar.getInstance();
+        cal.set(mYear, mMonth, mDay);
+        int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+        int weekOfYear = cal.get(Calendar.WEEK_OF_YEAR);
+        if (dayOfWeek == 1) {
+            weekOfYear--;
+        }
+        List<WeekInfo> weeks = mLayer.getWeekList();
+        WeekInfo weekInfo=null;
+        for (int i = 0; i < weeks.size(); i++) {
+            if (weeks.get(i).getWeekOfYear() == weekOfYear) {
+                weekInfo = weeks.get(i);
+            }
+        }
+
+        mLayer.setSelectedDay(weekInfo);
         if (mTimeChangeListener != null) {
             mTimeChangeListener.onTimeChange(info);
         }
@@ -127,7 +134,7 @@ public class WeekLayerManager extends BaseLayerManager implements OnPageChangeLi
         mDay = day;
         mYear = year;
         mMonth = month;
-        mLayer.setSelectedDay(mDay);
+//        mLayer.setSelectedDay(mDay);
         if (mTimeChangeListener != null) {
             mTimeChangeListener.onTimeChange(new CalendarInfo(year, month, day, CalendarMode.WEEK));
         }

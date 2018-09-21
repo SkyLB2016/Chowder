@@ -133,6 +133,7 @@ public class CalendarUtil {
                 info.add(new CalendarInfo(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), temp++));
             }
         }
+        weeks.add(new WeekInfo(info, weekOfYear++, weekOfMonth++, isThisWeek));
         return weeks;
     }
 
