@@ -47,26 +47,26 @@ class CatalogThread {
                 chapter.content.append("$text\n")
             }
             //如章节还是没有拆分且文章大于30行，则按10行一组拆分
-            var sign = -1
-            if (catalog.isEmpty() && list.size > 30) {
-                chapter.content = StringBuilder()
-                for ((i,text) in list.withIndex()) {
-//                    val text = if (list[i].startsWith(" ")) list[i].substring(1) else list[i]
-                    //以，作为正文起始处
-                    if (sign === -1 && text.contains("，")) sign = i % 10
-                    //记录章节
-                    if (i % 10 === sign) {
-                        //保存上一章节的内容
-                        chapter.content.setLength(chapter.content.length - 1)
-                        catalog.add(chapter)
-                        //创建新的章节
-                        chapter = ChapterEntity()
-                        chapter.chapter = text
-                    }
-                    //保存内容
-                    chapter.content.append("$text\n")
-                }
-            }
+//            var sign = -1
+//            if (catalog.isEmpty() && list.size > 30) {
+//                chapter.content = StringBuilder()
+//                for ((i,text) in list.withIndex()) {
+////                    val text = if (list[i].startsWith(" ")) list[i].substring(1) else list[i]
+//                    //以，作为正文起始处
+//                    if (sign === -1 && text.contains("，")) sign = i % 10
+//                    //记录章节
+//                    if (i % 10 === sign) {
+//                        //保存上一章节的内容
+//                        chapter.content.setLength(chapter.content.length - 1)
+//                        catalog.add(chapter)
+//                        //创建新的章节
+//                        chapter = ChapterEntity()
+//                        chapter.chapter = text
+//                    }
+//                    //保存内容
+//                    chapter.content.append("$text\n")
+//                }
+//            }
             //保存最后一章的内容
             chapter.content.setLength(chapter.content.length - 1)
             catalog.add(chapter)
