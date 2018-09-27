@@ -5,14 +5,13 @@ import android.graphics.Rect;
 import com.sky.chowder.ui.widget.calendar.CalendarView;
 import com.sky.chowder.ui.widget.calendar.common.CalendarInfo;
 import com.sky.chowder.ui.widget.calendar.common.CalendarMode;
-import com.sky.chowder.ui.widget.calendar.common.WeekInfo;
 import com.sky.chowder.ui.widget.calendar.impl.OnPageChangeListener;
 import com.sky.chowder.ui.widget.calendar.impl.OnTimeChange;
 import com.sky.chowder.ui.widget.calendar.layer.CalendarLayer;
 import com.sky.chowder.ui.widget.calendar.layer.WeekLayer;
+import com.sky.chowder.ui.widget.calendar.selecttime.WeekInfo;
 
 import java.util.Calendar;
-import java.util.List;
 
 public class WeekLayerManager extends BaseLayerManager implements OnPageChangeListener {
 
@@ -85,7 +84,7 @@ public class WeekLayerManager extends BaseLayerManager implements OnPageChangeLi
 //        mMonth = info.getMonth();
 //        mDay = info.getDay();
         WeekLayer layer = (WeekLayer) getCurLayer();
-        layer.setSelectedDay(info);
+        layer.setSelectedWeek(info);
 //        if (mTimeChangeListener != null) {
 //            mTimeChangeListener.onTimeChange(info);
 //        }
@@ -104,27 +103,26 @@ public class WeekLayerManager extends BaseLayerManager implements OnPageChangeLi
         if (mLayer == getCurLayer()) {
             return;
         }
-        mLayer.setSelectedDay(null);
         mDay = info.getDay();
         mYear = info.getYear();
         mMonth = info.getMonth();
         mLayer = (WeekLayer) getCurLayer();
-        Calendar cal = Calendar.getInstance();
-        cal.set(mYear, mMonth, mDay);
-        int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-        int weekOfYear = cal.get(Calendar.WEEK_OF_YEAR);
-        if (dayOfWeek == 1) {
-            weekOfYear--;
-        }
-        List<WeekInfo> weeks = mLayer.getWeekList();
-        WeekInfo weekInfo=null;
-        for (int i = 0; i < weeks.size(); i++) {
-            if (weeks.get(i).getWeekOfYear() == weekOfYear) {
-                weekInfo = weeks.get(i);
-            }
-        }
+//        Calendar cal = Calendar.getInstance();
+//        cal.set(mYear, mMonth, mDay);
+//        int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+//        int weekOfYear = cal.get(Calendar.WEEK_OF_YEAR);
+//        if (dayOfWeek == 1) {
+//            weekOfYear--;
+//        }
+//        List<WeekInfo> weeks = mLayer.getWeekList();
+//        WeekInfo weekInfo=null;
+//        for (int i = 0; i < weeks.size(); i++) {
+//            if (weeks.get(i).getWeekOfYear() == weekOfYear) {
+//                weekInfo = weeks.get(i);
+//            }
+//        }
 
-        mLayer.setSelectedDay(weekInfo);
+//        mLayer.setSelectedDay(weekInfo);
         if (mTimeChangeListener != null) {
             mTimeChangeListener.onTimeChange(info);
         }

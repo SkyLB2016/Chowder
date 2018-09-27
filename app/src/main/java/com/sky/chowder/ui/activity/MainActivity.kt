@@ -72,13 +72,30 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
             //LogUtils.i("总长==${text.length}")
             //SingletonDemo.INSTANCE.otherMethods()
             //SingletonTest.test()
-            val calendar = Calendar.getInstance()
-            LogUtils.i("本日==${calendar.get(Calendar.DAY_OF_YEAR)}")
-            LogUtils.i("周几==${calendar.get(Calendar.DAY_OF_WEEK)}")
-            LogUtils.i("日期==${calendar.get(Calendar.MONTH) + 1}月${calendar.get(Calendar.DAY_OF_MONTH)}")
-            LogUtils.i("年周==${calendar.get(Calendar.WEEK_OF_YEAR)}")
-            LogUtils.i("月周==${calendar.get(Calendar.WEEK_OF_MONTH)}")
+            calendar()
         }
+    }
+
+    fun calendar() {
+        val calendar = Calendar.getInstance()
+        calendar.set(2018, 8, 1)
+        LogUtils.i("年周==${calendar.get(Calendar.WEEK_OF_MONTH)}")
+        calendar.set(2018, 8, 2)
+        LogUtils.i("年周==${calendar.get(Calendar.WEEK_OF_MONTH)}")
+        calendar.set(2018, 8, 9)
+        LogUtils.i("年周==${calendar.get(Calendar.WEEK_OF_MONTH)}")
+        calendar.set(2018, 8, 16)
+        LogUtils.i("年周==${calendar.get(Calendar.WEEK_OF_MONTH)}")
+        calendar.set(2018, 8, 23)
+        LogUtils.i("年周==${calendar.get(Calendar.WEEK_OF_MONTH)}")
+        calendar.set(2018, 8, 30)
+        LogUtils.i("年周==${calendar.get(Calendar.WEEK_OF_MONTH)}")
+
+//        LogUtils.i("本日==${calendar.get(Calendar.DAY_OF_YEAR)}")
+//        LogUtils.i("周几==${calendar.get(Calendar.DAY_OF_WEEK)}")
+//        LogUtils.i("日期==${calendar.get(Calendar.MONTH) + 1}月${calendar.get(Calendar.DAY_OF_MONTH)}")
+//        LogUtils.i("年周==${calendar.get(Calendar.WEEK_OF_YEAR)}")
+//        LogUtils.i("月周==${calendar.get(Calendar.WEEK_OF_MONTH)}")
     }
 
     fun changeRect(rect: Rect) {

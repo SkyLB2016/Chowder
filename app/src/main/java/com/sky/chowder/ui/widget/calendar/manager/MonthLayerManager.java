@@ -14,7 +14,7 @@ import java.util.Calendar;
 
 public class MonthLayerManager extends BaseLayerManager implements OnPageChangeListener {
 
-    private int mYear, mMonth, mDay;
+    private int year, month, day;
     private MonthLayer mLayer;
     private OnTimeChange mTimeChangeListener;
 
@@ -22,25 +22,20 @@ public class MonthLayerManager extends BaseLayerManager implements OnPageChangeL
         super(view, defRect, layer);
         registerOnPageChangeListener(this);
         CalendarInfo info = layer.getModeInfo();
-        mYear = info.getYear();
-        mMonth = info.getMonth();
-        mDay = info.getDay();
+        year = info.getYear();
+        month = info.getMonth();
+        day = info.getDay();
         mLayer = (MonthLayer) layer;
-//        mLayer.setSelectedDay(mDay);
-    }
-
-    public Rect getSelectedDayRect() {
-        return mLayer.getSelectedRect();
     }
 
     @Override
     public void setCurLayerMode(CalendarInfo curInfo) {
         super.setCurLayerMode(curInfo);
-        mYear = curInfo.getYear();
-        mMonth = curInfo.getMonth();
-        mDay = curInfo.getDay();
+        year = curInfo.getYear();
+        month = curInfo.getMonth();
+        day = curInfo.getDay();
         mLayer = (MonthLayer) getCurLayer();
-        mLayer.setSelectedDay(mDay);
+//        mLayer.setSelectedDay(day);
     }
 
     @Override
@@ -55,11 +50,11 @@ public class MonthLayerManager extends BaseLayerManager implements OnPageChangeL
     public CalendarInfo getNextModeInfo(CalendarInfo curInfo) {
         int year = curInfo.getYear();
         int month = curInfo.getMonth();
-        if (month + 1 > Calendar.DECEMBER) {
+        if (++month > Calendar.DECEMBER) {
             month = Calendar.JANUARY;
-            year += 1;
-        } else {
-            month += 1;
+            year++;
+//        } else {
+//            month++;
         }
         return new CalendarInfo(curInfo.getRect(), year, month, 1, curInfo.getMode());
     }
@@ -68,11 +63,11 @@ public class MonthLayerManager extends BaseLayerManager implements OnPageChangeL
     public CalendarInfo getPreModeInfo(CalendarInfo curInfo) {
         int year = curInfo.getYear();
         int month = curInfo.getMonth();
-        if (month - 1 < Calendar.JANUARY) {
+        if (--month < Calendar.JANUARY) {
             month = Calendar.DECEMBER;
-            year -= 1;
-        } else {
-            month -= 1;
+            year--;
+//        } else {
+//            month--;
         }
         return new CalendarInfo(curInfo.getRect(), year, month, 1, curInfo.getMode());
     }
@@ -83,11 +78,11 @@ public class MonthLayerManager extends BaseLayerManager implements OnPageChangeL
         if (info == null) {
             return;
         }
-        mYear = info.getYear();
-        mMonth = info.getMonth();
-        mDay = info.getDay();
+        year = info.getYear();
+        month = info.getMonth();
+        day = info.getDay();
         MonthLayer layer = (MonthLayer) getCurLayer();
-        layer.setSelectedDay(mDay);
+        layer.setSelectedDay(day);
 
         if (mTimeChangeListener != null) {
             mTimeChangeListener.onTimeChange(info);
@@ -108,14 +103,14 @@ public class MonthLayerManager extends BaseLayerManager implements OnPageChangeL
         if (mLayer == getCurLayer()) {
             return;
         }
-        mLayer.setSelectedDay(1);
+//        mLayer.setSelectedDay(1);
         MonthLayer layer = (MonthLayer) getCurLayer();
 
-        mYear = info.getYear();
-        mMonth = info.getMonth();
-        mDay = 1;
-        info.setDay(mDay);
-        layer.setSelectedDay(mDay);//默认为第一天
+        year = info.getYear();
+        month = info.getMonth();
+        day = 1;
+        info.setDay(day);
+//        layer.setSelectedDay(day);//默认为第一天
         mLayer = layer;
         if (mTimeChangeListener != null) {
             mTimeChangeListener.onTimeChange(info);
@@ -123,15 +118,15 @@ public class MonthLayerManager extends BaseLayerManager implements OnPageChangeL
     }
 
     public int getYear() {
-        return mYear;
+        return year;
     }
 
     public int getMonth() {
-        return mMonth;
+        return month;
     }
 
     public int getDay() {
-        return mDay;
+        return day;
     }
 
     public MonthLayer getLayer() {

@@ -422,6 +422,7 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
         private val collator = Collator.getInstance()
         //升序
         private val ascending = Comparator<SortModel> { first, second -> collator.compare(first.className, second.className) }
+        private val ascending1 = Comparator<SortModel> { first, second -> first.className!!.compareTo(second.className!!) }
         //降序
         private val descending = Comparator<SortModel> { first, second -> collator.compare(second.className, first.className) }
     }

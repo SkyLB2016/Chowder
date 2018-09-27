@@ -7,12 +7,21 @@ import android.view.View;
 
 import com.sky.chowder.R;
 import com.sky.chowder.ui.widget.calendar.CalendarView;
+import com.sky.chowder.ui.widget.calendar.common.CalendarMode;
 import com.sky.chowder.ui.widget.calendar.impl.OnInitListener;
-import com.sky.chowder.ui.widget.calendar.layer.MonthLayer;
+import com.sky.chowder.ui.widget.calendar.selecttime.DayInfo;
+import com.sky.chowder.ui.widget.calendar.selecttime.SelectTime;
+import com.sky.chowder.ui.widget.calendar.selecttime.WeekInfo;
+import com.sky.chowder.ui.widget.calendar.selecttime.YearInfo;
 import com.sky.utils.LogUtils;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by libin on 2018/9/6 上午10:41.
@@ -20,17 +29,20 @@ import java.util.List;
 public class TestActivity extends AppCompatActivity {
 
     CalendarView calendar;
+    CalendarMode mode;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
         calendar = findViewById(R.id.calendar);
+        mode = CalendarMode.MONTH;
         calendar.setOnInitListener(new OnInitListener() {
             @Override
             public void onInitBefore(CalendarView view) {
+                SelectTime.getInstance().setSelectTime(mode);
                 Calendar cal = Calendar.getInstance();
-                view.setTime(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH));
+                view.setTime(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), mode);
             }
 
             @Override
@@ -42,13 +54,81 @@ public class TestActivity extends AppCompatActivity {
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                List<MonthLayer.SelectDay> list = calendar.getMonthLayerManager().getLayer().getSelectDayList();
-                for (int i = 0; i < list.size(); i++) {
-                    LogUtils.i(list.get(i).lable);
-                }
+
+//                selectMonth();
+                selectDay();
 
             }
         });
+    }
+
+    private void selectMonth() {
+        Map<String, List<YearInfo>> maps = (Map<String, List<YearInfo>>) SelectTime.getInstance().getSelectTime().getSelectMap();
+        Set<Map.Entry<String, List<YearInfo>>> sets = maps.entrySet();
+        ArrayList<YearInfo> all = new ArrayList<>();
+        for (Map.Entry<String, List<YearInfo>> map : sets) {
+            map.getKey();
+            all.addAll(map.getValue());
+//                    list = map.getValue();
+        }
+        Collections.sort(all, new Comparator<YearInfo>() {
+            @Override
+            public int compare(YearInfo o1, YearInfo o2) {
+                return o1.getLable().compareTo(o2.getLable());
+            }
+        });
+        for (int i = 0; i < all.size(); i++) {
+            LogUtils.i(all.get(i).getLable());
+        }
+    }
+
+    private void selectWeek() {
+        Map<String, List<WeekInfo>> maps = (Map<String, List<WeekInfo>>) SelectTime.getInstance().getSelectTime().getSelectMap();
+        Set<Map.Entry<String, List<WeekInfo>>> sets = maps.entrySet();
+        ArrayList<WeekInfo> all = new ArrayList<>();
+        for (Map.Entry<String, List<WeekInfo>> map : sets) {
+            map.getKey();
+            all.addAll(map.getValue());
+//                    list = map.getValue();
+        }
+        Collections.sort(all, new Comparator<WeekInfo>() {
+            @Override
+            public int compare(WeekInfo o1, WeekInfo o2) {
+                return o1.getFormatDate().compareTo(o2.getFormatDate());
+            }
+        });
+        for (int i = 0; i < all.size(); i++) {
+            LogUtils.i(all.get(i).getFormatDate());
+        }
+    }
+
+    private void selectDay() {
+        Map<String, List<DayInfo>> maps = (Map<String, List<DayInfo>>) SelectTime.getInstance().getSelectTime().getSelectMap();
+        Set<Map.Entry<String, List<DayInfo>>> sets = maps.entrySet();
+        List<DayInfo> all = new ArrayList<>();
+        for (Map.Entry<String, List<DayInfo>> map : sets) {
+            map.getKey();
+            all.addAll(map.getValue());
+//                    list = map.getValue();
+        }
+//                Collections.sort(all, new Comparator<DayInfo>() {
+//                    @Override
+//                    public int compare(DayInfo o1, DayInfo o2) {
+//                        return Collator.getInstance().compare(o1.getLable(), o2.getLable());
+//                    }
+//                });
+//                for (int i = 0; i < all.size(); i++) {
+//                    LogUtils.i(all.get(i).getLable());
+//                }
+        Collections.sort(all, new Comparator<DayInfo>() {
+            @Override
+            public int compare(DayInfo o1, DayInfo o2) {
+                return o1.getLable().compareTo(o2.getLable());
+            }
+        });
+        for (int i = 0; i < all.size(); i++) {
+            LogUtils.i(all.get(i).getLable());
+        }
     }
 
 }

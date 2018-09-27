@@ -1,4 +1,6 @@
-package com.sky.chowder.ui.widget.calendar.common;
+package com.sky.chowder.ui.widget.calendar.selecttime;
+
+import com.sky.chowder.ui.widget.calendar.common.CalendarInfo;
 
 import java.util.List;
 
@@ -7,22 +9,14 @@ import java.util.List;
  */
 public class WeekInfo {
 
-    List<CalendarInfo> infos;//本周所包含的日期
-    int weekOfYear;//
-    int weekOfMonth;//
-    boolean isThisWeek = false;
+    private List<CalendarInfo> infos;//本周所包含的日期
+    private int weekOfYear;//
+    private int weekOfMonth;//
 
     public WeekInfo(List<CalendarInfo> infos, int weekOfYear, int weekOfMonth) {
         this.infos = infos;
         this.weekOfYear = weekOfYear;
         this.weekOfMonth = weekOfMonth;
-    }
-
-    public WeekInfo(List<CalendarInfo> infos, int weekOfYear, int weekOfMonth, boolean isThisWeek) {
-        this.infos = infos;
-        this.weekOfYear = weekOfYear;
-        this.weekOfMonth = weekOfMonth;
-        this.isThisWeek = isThisWeek;
     }
 
     public List<CalendarInfo> getInfos() {
@@ -49,14 +43,6 @@ public class WeekInfo {
         this.weekOfMonth = weekOfMonth;
     }
 
-    public boolean isThisWeek() {
-        return isThisWeek;
-    }
-
-    public void setThisWeek(boolean thisWeek) {
-        isThisWeek = thisWeek;
-    }
-
     //第33周（ 2018-08-20至2018-08-27 ）
     public String getFormatDate() {
         if (infos.size() < 7) return "";
@@ -64,7 +50,7 @@ public class WeekInfo {
     }
 
     private String getDate(CalendarInfo info) {
-        return info.getYear() + "-" + setDouble(info.getMonth()+1) + "-" + setDouble(info.getDay());
+        return info.getYear() + "-" + setDouble(info.getMonth() + 1) + "-" + setDouble(info.getDay());
     }
 
     private String setDouble(int value) {

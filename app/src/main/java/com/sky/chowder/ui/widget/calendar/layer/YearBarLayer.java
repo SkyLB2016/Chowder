@@ -239,36 +239,28 @@ public class YearBarLayer implements CalendarLayer {
     }
 
     private void onClick(int x, int y) {
+        //同一时间点击一个位置
         if (mTodayRect.contains(x, y) && mTodayClick != null) {
             Calendar now = Calendar.getInstance();
-            int year = now.get(Calendar.YEAR);
-            int month = now.get(Calendar.MONTH);
-            int day = now.get(Calendar.DAY_OF_MONTH);
-            mTodayClick.onClick(new CalendarInfo(year, month, day));
-        }
-        if (mYearRect.contains(x, y) && mYearClick != null) {
+            mTodayClick.onClick(new CalendarInfo(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH)));
+        } else if (mYearRect.contains(x, y) && mYearClick != null) {
             mYearClick.onClick(new CalendarInfo(mYear, mMonth, 1, CalendarMode.MONTH));
+        } else if (mLeftArrowRect != null && mLeftArrowRect.contains(x, y)) {
+            mLeftArrowClick.onClick(getCalendar(-1));
+        } else if (mRightArrowRect != null && mRightArrowRect.contains(x, y)) {
+            mRightArrowClick.onClick(getCalendar(1));
         }
-        if (mLeftArrowRect.contains(x, y) && mLeftArrowRect != null) {
-            Calendar instance = Calendar.getInstance();
-            instance.set(mYear, mMonth, 1);
-            if (mMode == CalendarMode.MONTH) {
-                instance.add(Calendar.MONTH, -1);
-            } else {
-                instance.add(Calendar.YEAR, -1);
-            }
-            mLeftArrowClick.onClick(new CalendarInfo(instance.get(Calendar.YEAR), instance.get(Calendar.MONTH), 1, CalendarMode.MONTH));
+    }
+
+    private CalendarInfo getCalendar(int temp) {
+        Calendar instance = Calendar.getInstance();
+        instance.set(mYear, mMonth, 1);
+        if (mMode == CalendarMode.MONTH) {
+            instance.add(Calendar.MONTH, temp);
+        } else {
+            instance.add(Calendar.YEAR, temp);
         }
-        if (mRightArrowRect.contains(x, y) && mRightArrowRect != null) {
-            Calendar instance = Calendar.getInstance();
-            instance.set(mYear, mMonth, 1);
-            if (mMode == CalendarMode.MONTH) {
-                instance.add(Calendar.MONTH, 1);
-            } else {
-                instance.add(Calendar.YEAR, 1);
-            }
-            mRightArrowClick.onClick(new CalendarInfo(instance.get(Calendar.YEAR), instance.get(Calendar.MONTH), 1, CalendarMode.MONTH));
-        }
+        return new CalendarInfo(instance.get(Calendar.YEAR), instance.get(Calendar.MONTH), 1, mMode);
     }
 
     @Override

@@ -1,16 +1,20 @@
 package com.sky.chowder.ui.widget.calendar.layer;
 
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
+import android.graphics.RectF;
 import android.view.MotionEvent;
 
+import com.sky.chowder.R;
+import com.sky.chowder.ui.widget.calendar.common.CalendarColor;
 import com.sky.chowder.ui.widget.calendar.common.CalendarInfo;
 import com.sky.chowder.ui.widget.calendar.common.CalendarMode;
+import com.sky.chowder.ui.widget.calendar.selecttime.SelectTime;
+import com.sky.chowder.ui.widget.calendar.selecttime.YearInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,82 +22,126 @@ import java.util.List;
 public class YearLayer implements CalendarLayer {
 
     private static final String YEAR = "年";
-    private static final int ROW_COUNT = 4;
-    private static final int COL_COUNT = 3;
+    private static final int ROW_COUNT = 2;//2行
+    private static final int COL_COUNT = 6;//6列
 
     private CalendarInfo mModeInfo;
-    private Rect mRect;
+    private Rect mainRect;
     private Rect mBorderRect;
-    private Resources mResources;
-    private Paint mPaint;
+    private Paint paint;
     private int mYear;
 
-    private int monthToLeftRightPadding = 8;
-    private int monthToTopBottomPadding = 10;
-    private int colSpace = 10;
-    private int rowSpace = 15;
+    private int interval = 1;                       //年与年之间的间隔,单位 dp
+    private int yearTextSize = 14;                  //字体大小
 
-    private List<MonthOfYearLayer> mMonthLayerList = new ArrayList<>(); //年份中每月的显示层
+    private int textColor = CalendarColor.DARK_GRAY;  //字体默认颜色
+
+    private int thisMonth = -1;//本月
+
+    private Bitmap bitmap;
+    private int bitmapPad = 6;
+
+    private List<String> years = new ArrayList<>(); //年份中的月
+    private List<RectF> yearRects = new ArrayList<>(); //年的空间
 
     public YearLayer(CalendarInfo info, Resources resources) {
         mModeInfo = info;
-        mRect = mModeInfo.getRect();
+        mainRect = mModeInfo.getRect();
         mYear = mModeInfo.getYear();
         mBorderRect = info.getBorderRect();
-        mResources = resources;
-        DisplayMetrics metrics = resources.getDisplayMetrics();
-        monthToLeftRightPadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, monthToLeftRightPadding, metrics);
-        monthToTopBottomPadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, monthToTopBottomPadding, metrics);
-        colSpace = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, colSpace, metrics);
-        rowSpace = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, rowSpace, metrics);
+        yearTextSize = resources.getDimensionPixelSize(R.dimen.text_14);
+        bitmap = BitmapFactory.decodeResource(resources, R.mipmap.ic_sure_white);
+
         init();
     }
 
     private void init() {
-        mPaint = new Paint();
-        mPaint.setAntiAlias(true);
+        paint = new Paint();
+        paint.setAntiAlias(true);
+        //宽高
+        int itemWidth = (mainRect.width() - interval * (COL_COUNT - 1)) / COL_COUNT;
+        int itemHeight = (mainRect.height() - interval * (ROW_COUNT - 1)) / ROW_COUNT;
+
         //年份中每月的显示区域
-        int colWidth = (mRect.width() - monthToLeftRightPadding * 2 - colSpace * (COL_COUNT - 1)) / COL_COUNT;
-        int rowHeight = (mRect.height() - monthToTopBottomPadding * 2 - rowSpace * (ROW_COUNT - 1)) / ROW_COUNT;
         for (int i = 0; i < 12; i++) {
-            Rect rect = new Rect();
-            rect.left = mRect.left + (i % COL_COUNT) * (colWidth + colSpace) + monthToLeftRightPadding;
-            rect.top = mRect.top + (i / COL_COUNT) * (rowHeight + rowSpace) + monthToTopBottomPadding;
-            rect.right = rect.left + colWidth;
-            rect.bottom = rect.top + rowHeight;
-            mMonthLayerList.add(new MonthOfYearLayer(new CalendarInfo(rect, rect, mYear, i, 1, CalendarMode.MONTH), mResources));
+            RectF rect = new RectF();
+            rect.left = mainRect.left + (i % COL_COUNT) * (itemWidth + interval);
+            rect.top = mainRect.top + (i / COL_COUNT) * (itemHeight + interval);
+            rect.right = rect.left + itemWidth;
+            rect.bottom = rect.top + itemHeight;
+            yearRects.add(rect);
+            years.add((i + 1) + "月");
         }
     }
 
     @Override
     public void onDraw(Canvas canvas) {
-        if (isOutOfBorder(mRect)) {
-            return;
-        }
-        Paint paint = mPaint;
-        paint.setColor(Color.WHITE);
+//        if (isOutOfBorder(mainRect)) {
+//            return;
+//        }
+        paint.setColor(CalendarColor.D8D8D8);
         //绘制白色背景
-        canvas.drawRect(mRect, paint);
+        canvas.drawRect(mainRect, paint);
+
+        paint.setTextSize(yearTextSize);
         //绘制每月
-        for (int i = 0; i < mMonthLayerList.size(); i++) {
-            if (isOutOfBorder(mMonthLayerList.get(i).getBorderRect())) {
+        for (int i = 0; i < yearRects.size(); i++) {
+            if (isOutOfBorder(yearRects.get(i))) {
                 continue;
             }
-            mMonthLayerList.get(i).onDraw(canvas);
+            RectF rect = yearRects.get(i);
+            paint.setColor(CalendarColor.WHITE);
+            canvas.drawRect(rect, paint);
+
+            if (i == thisMonth) {
+                textColor = CalendarColor.PROJECT;
+            } else {
+                textColor = CalendarColor.DARK_GRAY;
+            }
+            paint.setColor(textColor);
+            String text = years.get(i);
+            float tw = paint.measureText(text);
+            float th = paint.descent() - paint.ascent();
+
+            float x = rect.left + (rect.width() - tw) / 2;
+            float baseline = rect.bottom - (rect.height() - th) / 2 - paint.descent();
+            canvas.drawText(text, x, baseline, paint);
         }
+
+        List<YearInfo> selectYears = (List<YearInfo>) SelectTime.getInstance().getSelectTime().getList(mYear, 0);
+        if (selectYears == null) return;
+        for (int i = 0; i < selectYears.size(); i++) {
+            int index = selectYears.get(i).getIndex();
+            RectF rect = yearRects.get(index);
+            paint.setColor(CalendarColor.PROJECT);
+            canvas.drawRect(rect, paint);
+
+            textColor = CalendarColor.WHITE;
+            paint.setColor(textColor);
+            String text = years.get(index);
+            float tw = paint.measureText(text);
+            float th = paint.descent() - paint.ascent();
+
+            float x = rect.left + (rect.width() - tw) / 2;
+            float baseline = rect.bottom - (rect.height() - th) / 2 - paint.descent();
+            canvas.drawText(text, x, baseline, paint);
+            //画对号
+            canvas.drawBitmap(bitmap, rect.right - bitmap.getWidth() - bitmapPad, rect.bottom - bitmap.getHeight() - bitmapPad, null);
+        }
+
     }
 
     @Override
     public void scrollBy(int dx, int dy) {
-        mRect.offset(dx, dy);
-        for (int i = 0; i < mMonthLayerList.size(); i++) {
-            mMonthLayerList.get(i).scrollBy(dx, dy);
+        mainRect.offset(dx, dy);
+        for (int i = 0; i < yearRects.size(); i++) {
+            yearRects.get(i).offset(dx, dy);
         }
     }
 
     @Override
     public Rect getBorderRect() {
-        return mRect;
+        return mainRect;
     }
 
     @Override
@@ -106,14 +154,14 @@ public class YearLayer implements CalendarLayer {
         return false;
     }
 
-    private boolean isOutOfBorder(Rect rect) {
+    private boolean isOutOfBorder(RectF rect) {
         return mBorderRect != null && (rect.left > mBorderRect.right || rect.right < mBorderRect.left || rect.top > mBorderRect.bottom || rect.bottom < mBorderRect.top);
     }
 
     public CalendarInfo getYMByLocation(int x, int y) {
         int index = -1;
-        for (int i = 0; i < mMonthLayerList.size(); i++) {
-            if (mMonthLayerList.get(i).getBorderRect().contains(x, y)) {
+        for (int i = 0; i < yearRects.size(); i++) {
+            if (yearRects.get(i).contains(x, y)) {
                 index = i;
                 break;
             }
@@ -121,8 +169,18 @@ public class YearLayer implements CalendarLayer {
         if (index < 0) {
             return null;
         }
-        int year = mMonthLayerList.get(index).getModeInfo().getYear();
-        int month = mMonthLayerList.get(index).getModeInfo().getMonth();
+        int year = mYear;
+        int month = index;
         return new CalendarInfo(year, month, 1, CalendarMode.MONTH);
+    }
+
+    public void selectMonth(int x, int y) {
+        CalendarInfo info = getYMByLocation(x, y);
+        SelectTime.getInstance().getSelectTime().add(new YearInfo(info, "", info.getMonth()));
+
+    }
+
+    public void setThisMonth(int thisMonth) {
+        this.thisMonth = thisMonth;
     }
 }

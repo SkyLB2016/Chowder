@@ -207,7 +207,7 @@
 　　执行此语句  javah -d jni -classpath ../../build/intermediates/classes/debug com.sky.NDKString  会自动生成jni文件com_sky_NDKString.h,自定义.c的file
 ●28.性能优化
 　　(1)布局优化：include，merge，ViewStub，减少层级嵌套，加强view复用。
-　　(2)绘制优化：在onDraw中不要创建新对象，不执行浩氏人物，view的绘制帧率保证60fps是最佳的，每帧所需时间不超过16ms（16ms=1000/60）.
+　　(2)绘制优化：在onDraw中不要创建新对象，不执行耗时任务，view的绘制帧率保证60fps是最佳的，每帧所需时间不超过16ms（16ms=1000/60）.
 　　(3)内存泄漏：分析工具MAT。
 　　(4)属性动画导致的内存泄漏：无限循环需要关闭。
 　　(5)响应速度优化和ANR日志分析：避免在主线程中做耗时操作，日志所在：/data/anr/traces.txt
@@ -312,8 +312,8 @@
 
 　　(11)OnDrawListener：视图树绘制时调用
 
-●.
-　　(1)
+●39.Collections：排序
+　　(1)reverse():
 　　(2)
 　　(3)
 　　(4)

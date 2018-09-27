@@ -48,11 +48,7 @@ public class YearLayerManager extends BaseLayerManager implements OnPageChangeLi
 
     @Override
     public void onClick(int x, int y) {
-        CalendarInfo info = mLayer.getYMByLocation(x, y);
-        if (info == null) {
-            return;
-        }
-        mLayerClick.onClick(info);
+        mLayer.selectMonth(x,y);
     }
 
     public void setOnYearLayerClickListener(OnLayerClickListener click) {
@@ -82,6 +78,10 @@ public class YearLayerManager extends BaseLayerManager implements OnPageChangeLi
         if (listener != null) {
             listener.onPageScrollEnd(info);
         }
+    }
+
+    public YearLayer getLayer() {
+        return mLayer;
     }
 
     public void setOnPageChangeListener(OnPageChangeListener listener) {
