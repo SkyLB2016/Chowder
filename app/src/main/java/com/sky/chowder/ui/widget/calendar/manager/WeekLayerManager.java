@@ -9,7 +9,6 @@ import com.sky.chowder.ui.widget.calendar.impl.OnPageChangeListener;
 import com.sky.chowder.ui.widget.calendar.impl.OnTimeChange;
 import com.sky.chowder.ui.widget.calendar.layer.CalendarLayer;
 import com.sky.chowder.ui.widget.calendar.layer.WeekLayer;
-import com.sky.chowder.ui.widget.calendar.selecttime.WeekInfo;
 
 import java.util.Calendar;
 
@@ -76,18 +75,7 @@ public class WeekLayerManager extends BaseLayerManager implements OnPageChangeLi
 
     @Override
     public void onClick(int x, int y) {
-        WeekInfo info = mLayer.getYMDByLocation(x, y);
-        if (info == null) {
-            return;
-        }
-//        mYear = info.getYear();
-//        mMonth = info.getMonth();
-//        mDay = info.getDay();
-        WeekLayer layer = (WeekLayer) getCurLayer();
-        layer.setSelectedWeek(info);
-//        if (mTimeChangeListener != null) {
-//            mTimeChangeListener.onTimeChange(info);
-//        }
+        mLayer.setSelectedWeek(x, y);
     }
 
     @Override

@@ -255,7 +255,7 @@ public class YearBarLayer implements CalendarLayer {
     private CalendarInfo getCalendar(int temp) {
         Calendar instance = Calendar.getInstance();
         instance.set(mYear, mMonth, 1);
-        if (mMode == CalendarMode.MONTH) {
+        if (mMode == CalendarMode.MONTH || mMode == CalendarMode.WEEK) {
             instance.add(Calendar.MONTH, temp);
         } else {
             instance.add(Calendar.YEAR, temp);

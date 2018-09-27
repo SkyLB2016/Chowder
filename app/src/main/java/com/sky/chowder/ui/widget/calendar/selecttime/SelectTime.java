@@ -1,5 +1,6 @@
 package com.sky.chowder.ui.widget.calendar.selecttime;
 
+import com.sky.chowder.ui.widget.calendar.common.CalendarInfo;
 import com.sky.chowder.ui.widget.calendar.common.CalendarMode;
 import com.sky.chowder.ui.widget.calendar.impl.ISelectTime;
 
@@ -9,6 +10,8 @@ import com.sky.chowder.ui.widget.calendar.impl.ISelectTime;
  */
 public class SelectTime {
     private ISelectTime select = new DayTime();//默认月视图
+    private CalendarInfo today;
+    private int limit=0;//限制时间
 
     private static class singletonHolder {
         private static SelectTime instance = new SelectTime();
@@ -19,6 +22,22 @@ public class SelectTime {
     }
 
     private SelectTime() {
+    }
+
+    public int getLimit() {
+        return limit;
+    }
+
+    public void setLimit(int limit) {
+        this.limit = limit;
+    }
+
+    public CalendarInfo getToday() {
+        return today;
+    }
+
+    public void setToday(CalendarInfo today) {
+        this.today = today;
     }
 
     public ISelectTime getSelectTime() {

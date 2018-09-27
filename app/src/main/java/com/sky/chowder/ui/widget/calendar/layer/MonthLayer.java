@@ -15,6 +15,7 @@ import com.sky.chowder.ui.widget.calendar.common.CalendarColor;
 import com.sky.chowder.ui.widget.calendar.common.CalendarInfo;
 import com.sky.chowder.ui.widget.calendar.common.CalendarMode;
 import com.sky.chowder.ui.widget.calendar.common.CalendarUtil;
+import com.sky.chowder.ui.widget.calendar.impl.OnClickListener;
 import com.sky.chowder.ui.widget.calendar.selecttime.DayInfo;
 import com.sky.chowder.ui.widget.calendar.selecttime.SelectTime;
 
@@ -35,11 +36,11 @@ public class MonthLayer implements CalendarLayer {
     private int[] mIndexArea = new int[2];//所选月份起终日所在位置
     private List<RectF> mDayRectList = new ArrayList<>();           //包含的天数所占的区域rect
     private HashMap<String, Float> mDayTextWidth = new HashMap<>();
-    private int today = -1;//今天
-    private int todayIndex = -1;//今天天在数据中的所在位置
+    private int todayText = -1;//今天
+    private int thisToday = -1;//今天天在数据中的所在位置
 
     private int lastSelectedDay = -1;//最后一次选中的日期
-    private int lastDayIndex = -1;//最后一次选中的日期在数据中的所在位置
+    private int lastSelectDayIndex = -1;//最后一次选中的日期在数据中的所在位置
 
     private int saturday, sunday;//周六日
 
@@ -48,7 +49,7 @@ public class MonthLayer implements CalendarLayer {
     private int mDayHeight;                                     //小方格的高度(代码自动算出)
     private float mDayTextSize = 14;                            //小方格内数字的大小,单位 sp
 
-    private int mTextColor;                                     //数字显示颜色
+    private int textColor;                                     //数字显示颜色
     private float mTextHeight;                                  //文字总高度(代码自动计算)
 
     private Bitmap bitmap;
@@ -127,6 +128,9 @@ public class MonthLayer implements CalendarLayer {
         //绘制月份背景
         paint.setColor(CalendarColor.D8D8D8);
         canvas.drawRect(mainRect, paint);
+
+        int limit = SelectTime.getInstance().getLimit();//时间选择限制
+        int start = getStart(limit);        //判断上个月是否有需要选中的
         //绘制每日
         for (int i = 0; i < mDayRectList.size(); i++) {
             RectF rect = mDayRectList.get(i);
@@ -139,15 +143,19 @@ public class MonthLayer implements CalendarLayer {
             //选中月日期的颜色
             if (i >= mIndexArea[0] && i <= mIndexArea[1]) {
                 //当天日期的颜色
-                if (today > 0 && todayIndex == i) {
-                    mTextColor = CalendarColor.PROJECT;
+                if (todayText > 0 && thisToday == i) {
+                    textColor = CalendarColor.PROJECT;
                 } else if (i % 7 == saturday || i % 7 == sunday) {
-                    mTextColor = CalendarColor.LIGHT_GRAY;
+                    textColor = CalendarColor.LIGHT_GRAY;
+                } else if (thisToday > 0 && thisToday - limit <= i && i < thisToday) {//当前月份可选的日期
+                    textColor = CalendarColor.DARK_GRAY;
+                } else if (start > 0 && i >= start) {//上个月可选择的日期
+                    textColor = CalendarColor.DARK_GRAY;
                 } else {
-                    mTextColor = CalendarColor.DARK_GRAY;
+                    textColor = CalendarColor.LIGHT_GRAY;
                 }
             } else {
-                mTextColor = CalendarColor.LIGHT_GRAY;
+                textColor = CalendarColor.LIGHT_GRAY;
             }
             //绘制文字
             drawText(canvas, daysArray[i], rect);
@@ -165,11 +173,23 @@ public class MonthLayer implements CalendarLayer {
             canvas.drawRect(rect, paint);
 
             //绘制文字
-            mTextColor = CalendarColor.WHITE;
+            textColor = CalendarColor.WHITE;
             drawText(canvas, selectDay.getInfo().getDay(), rect);
             //画对号
             canvas.drawBitmap(bitmap, rect.right - bitmap.getWidth() - bitmapPad, rect.bottom - bitmap.getHeight() - bitmapPad, null);
         }
+    }
+
+    //判断上个月是否有需要选中的
+    private int getStart(int limit) {
+        int start = -1;
+        if (thisToday < 0) {
+            CalendarInfo today = SelectTime.getInstance().getToday();
+            if (year == today.getYear() && month+1==today.getMonth()&& today.getDay() - limit < 0) {
+                start = mIndexArea[1] + (today.getDay() - limit) + 1;//去年需要选中的开始月份（去年可选择的个数，）
+            }
+        }
+        return start;
     }
 
     //绘制天单元格里的天
@@ -177,7 +197,7 @@ public class MonthLayer implements CalendarLayer {
         String day = String.valueOf(i);
         float x = rect.left + (rect.width() - mDayTextWidth.get(day)) / 2;
         float baseline = rect.bottom - (rect.height() - mTextHeight) / 2 - paint.descent();
-        paint.setColor(mTextColor);
+        paint.setColor(textColor);
         canvas.drawText(day, x, baseline, paint);
     }
 
@@ -215,15 +235,15 @@ public class MonthLayer implements CalendarLayer {
 
     public void setToday(int day) {
         if (day < 0) {
-            today = -1;
-            todayIndex = -1;
+            todayText = -1;
+            thisToday = -1;
             return;
         }
-        today = day;
-        todayIndex = 0;
+        todayText = day;
+        thisToday = 0;
         for (int i = mIndexArea[0]; i <= mIndexArea[1]; i++) {
             if (day == daysArray[i]) {
-                todayIndex = i;
+                thisToday = i;
                 break;
             }
         }
@@ -232,25 +252,41 @@ public class MonthLayer implements CalendarLayer {
     public void setSelectedDay(int day) {
         if (day < 0) {
             lastSelectedDay = -1;
-            lastDayIndex = -1;
+            lastSelectDayIndex = -1;
             return;
         }
         lastSelectedDay = day;
-        lastDayIndex = 0;
+        lastSelectDayIndex = 0;
         for (int i = mIndexArea[0]; i <= mIndexArea[1]; i++) {
             if (day == daysArray[i]) {
-                lastDayIndex = i;
+                lastSelectDayIndex = i;
                 break;
             }
         }
-        SelectTime.getInstance().getSelectTime().add(new DayInfo(new CalendarInfo(year, month, day), "", lastDayIndex));
+        SelectTime.getInstance().getSelectTime().add(new DayInfo(new CalendarInfo(year, month, day), "", lastSelectDayIndex));
+    }
+    public void setSelectedDay(int x,int y) {
+        int index = getOnClickIndex(x, y);
+        if (index<0)return;
+        lastSelectDayIndex = index;
+        int limit = SelectTime.getInstance().getLimit();
+        int start = getStart(limit);
+        //今年和去年可选择的月份
+        if ((thisToday >= 0 && thisToday - limit <= index && index <= thisToday)
+                || (start > 0 && index >= start)) {
+            SelectTime.getInstance().getSelectTime().add(new DayInfo(new CalendarInfo(year, month, daysArray[index]), "", lastSelectDayIndex));
+        } else {
+            if (onClick != null) {
+                onClick.onClick("超出选择范围");
+            }
+        }
     }
 
     /**
      * 根据点获取时间
      */
     public CalendarInfo getYMDByLocation(int x, int y) {
-        int locIndex = getDayIndex(x, y);
+        int locIndex = getOnClickIndex(x, y);
         if (locIndex <= 0) {
             return null;
         }
@@ -260,7 +296,7 @@ public class MonthLayer implements CalendarLayer {
     /**
      * 根据点击位置获取索引
      */
-    public int getDayIndex(int x, int y) {
+    public int getOnClickIndex(int x, int y) {
         int index = -1;
         for (int i = 0; i < mDayRectList.size(); i++) {
             if (mDayRectList.get(i).contains(x, y)) {
@@ -277,4 +313,10 @@ public class MonthLayer implements CalendarLayer {
     public boolean onTouchEvent(MotionEvent evrtbent) {
         return false;
     }
+    private OnClickListener onClick;
+
+    public void setOnClickListener(OnClickListener onClickListener) {
+        onClick = onClickListener;
+    }
+
 }

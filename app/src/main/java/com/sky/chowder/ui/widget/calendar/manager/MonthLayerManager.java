@@ -74,19 +74,20 @@ public class MonthLayerManager extends BaseLayerManager implements OnPageChangeL
 
     @Override
     public void onClick(int x, int y) {
-        CalendarInfo info = mLayer.getYMDByLocation(x, y);
-        if (info == null) {
-            return;
-        }
-        year = info.getYear();
-        month = info.getMonth();
-        day = info.getDay();
-        MonthLayer layer = (MonthLayer) getCurLayer();
-        layer.setSelectedDay(day);
+//        CalendarInfo info = mLayer.getYMDByLocation(x, y);
+//        if (info == null) {
+//            return;
+//        }
+//        year = info.getYear();
+//        month = info.getMonth();
+//        day = info.getDay();
+//        MonthLayer layer = (MonthLayer) getCurLayer();
+//        layer.setSelectedDay(day);
+        mLayer.setSelectedDay(x,y);
 
-        if (mTimeChangeListener != null) {
-            mTimeChangeListener.onTimeChange(info);
-        }
+//        if (mTimeChangeListener != null) {
+//            mTimeChangeListener.onTimeChange(info);
+//        }
     }
 
     //周改变的时候,月根据情况变化

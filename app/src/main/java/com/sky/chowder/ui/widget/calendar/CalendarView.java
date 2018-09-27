@@ -130,6 +130,14 @@ public class CalendarView extends View {
         yearBarLayer.setTodayShow(false);
 
 
+//        initYear(year, month, yearBarHeight, rowHeight);
+//        initMonth(year, month, today, yearBarHeight, rowHeight);
+//        initWeek(year, month, today, yearBarHeight, rowHeight);
+//
+//        weekBarLayer.setShow(false);
+//        monthLayerManager.setShow(false);
+//        weekLayerManager.setShow(false);
+//        yearLayerManager.setShow(false);
         //视图的显示与隐藏
         if (curMode == CalendarMode.MONTH) {
             initMonth(year, month, today, yearBarHeight, rowHeight);
@@ -335,5 +343,10 @@ public class CalendarView extends View {
 
     public YearLayerManager getYearLayerManager() {
         return yearLayerManager;
+    }
+
+
+    public CalendarInfo getTodayInfo() {
+        return todayInfo;
     }
 }

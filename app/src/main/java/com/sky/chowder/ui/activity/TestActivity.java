@@ -8,12 +8,14 @@ import android.view.View;
 import com.sky.chowder.R;
 import com.sky.chowder.ui.widget.calendar.CalendarView;
 import com.sky.chowder.ui.widget.calendar.common.CalendarMode;
+import com.sky.chowder.ui.widget.calendar.impl.OnClickListener;
 import com.sky.chowder.ui.widget.calendar.impl.OnInitListener;
 import com.sky.chowder.ui.widget.calendar.selecttime.DayInfo;
 import com.sky.chowder.ui.widget.calendar.selecttime.SelectTime;
 import com.sky.chowder.ui.widget.calendar.selecttime.WeekInfo;
 import com.sky.chowder.ui.widget.calendar.selecttime.YearInfo;
 import com.sky.utils.LogUtils;
+import com.sky.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -43,11 +45,36 @@ public class TestActivity extends AppCompatActivity {
                 SelectTime.getInstance().setSelectTime(mode);
                 Calendar cal = Calendar.getInstance();
                 view.setTime(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), mode);
+                SelectTime.getInstance().setToday(view.getTodayInfo());
             }
 
             @Override
             public void onInitFinished(CalendarView view) {
-
+                if (mode == CalendarMode.MONTH) {
+                    SelectTime.getInstance().setLimit(40);
+                    view.getMonthLayerManager().getLayer().setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(String hint) {
+                            ToastUtils.showShort(TestActivity.this, hint);
+                        }
+                    });
+                } else if (mode == CalendarMode.WEEK) {
+                    SelectTime.getInstance().setLimit(4);
+                    view.getWeekLayerManager().getLayer().setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(String hint) {
+                            ToastUtils.showShort(TestActivity.this, hint);
+                        }
+                    });
+                } else if (mode == CalendarMode.YEAR) {
+                    SelectTime.getInstance().setLimit(2);
+                    view.getYearLayerManager().getLayer().setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(String hint) {
+                            ToastUtils.showShort(TestActivity.this, hint);
+                        }
+                    });
+                }
             }
         });
 
@@ -55,9 +82,13 @@ public class TestActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-//                selectMonth();
-                selectDay();
-
+                if (mode == CalendarMode.MONTH) {
+                    selectDay();
+                } else if (mode == CalendarMode.WEEK) {
+                    selectWeek();
+                } else if (mode == CalendarMode.YEAR) {
+                    selectMonth();
+                }
             }
         });
     }

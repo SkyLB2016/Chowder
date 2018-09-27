@@ -13,6 +13,7 @@ import com.sky.chowder.R;
 import com.sky.chowder.ui.widget.calendar.common.CalendarColor;
 import com.sky.chowder.ui.widget.calendar.common.CalendarInfo;
 import com.sky.chowder.ui.widget.calendar.common.CalendarMode;
+import com.sky.chowder.ui.widget.calendar.impl.OnClickListener;
 import com.sky.chowder.ui.widget.calendar.selecttime.SelectTime;
 import com.sky.chowder.ui.widget.calendar.selecttime.YearInfo;
 
@@ -80,10 +81,13 @@ public class YearLayer implements CalendarLayer {
 //            return;
 //        }
         paint.setColor(CalendarColor.D8D8D8);
+        paint.setTextSize(yearTextSize);
         //绘制白色背景
         canvas.drawRect(mainRect, paint);
 
-        paint.setTextSize(yearTextSize);
+
+        int limit = SelectTime.getInstance().getLimit();//时间选择限制
+        int start = getlastYearStart(limit);//去年需要选中的开始月份
         //绘制每月
         for (int i = 0; i < yearRects.size(); i++) {
             if (isOutOfBorder(yearRects.get(i))) {
@@ -95,9 +99,15 @@ public class YearLayer implements CalendarLayer {
 
             if (i == thisMonth) {
                 textColor = CalendarColor.PROJECT;
-            } else {
+            } else if (thisMonth > 0 && thisMonth - limit <= i && i < thisMonth) {
                 textColor = CalendarColor.DARK_GRAY;
+            } else if (start > 0 && i >= start) {//去年是否有可选择的月份
+                textColor = CalendarColor.DARK_GRAY;
+            } else {
+                textColor = CalendarColor.LIGHT_GRAY;
             }
+
+
             paint.setColor(textColor);
             String text = years.get(i);
             float tw = paint.measureText(text);
@@ -107,7 +117,7 @@ public class YearLayer implements CalendarLayer {
             float baseline = rect.bottom - (rect.height() - th) / 2 - paint.descent();
             canvas.drawText(text, x, baseline, paint);
         }
-
+        //绘制选中的月份
         List<YearInfo> selectYears = (List<YearInfo>) SelectTime.getInstance().getSelectTime().getList(mYear, 0);
         if (selectYears == null) return;
         for (int i = 0; i < selectYears.size(); i++) {
@@ -129,6 +139,18 @@ public class YearLayer implements CalendarLayer {
             canvas.drawBitmap(bitmap, rect.right - bitmap.getWidth() - bitmapPad, rect.bottom - bitmap.getHeight() - bitmapPad, null);
         }
 
+    }
+
+    private int getlastYearStart(int limit) {
+        int start = -1;
+        //判断去年是否有需要选中的月份
+        if (thisMonth < 0) {
+            CalendarInfo today = SelectTime.getInstance().getToday();
+            if (mYear + 1 == today.getYear() && today.getMonth() - limit < 0) {
+                start = 11 + (today.getMonth() - limit) + 1;//去年需要选中的开始月份（去年可选择的个数，）
+            }
+        }
+        return start;
     }
 
     @Override
@@ -158,7 +180,7 @@ public class YearLayer implements CalendarLayer {
         return mBorderRect != null && (rect.left > mBorderRect.right || rect.right < mBorderRect.left || rect.top > mBorderRect.bottom || rect.bottom < mBorderRect.top);
     }
 
-    public CalendarInfo getYMByLocation(int x, int y) {
+    public int getOnClickIndex(int x, int y) {
         int index = -1;
         for (int i = 0; i < yearRects.size(); i++) {
             if (yearRects.get(i).contains(x, y)) {
@@ -166,21 +188,38 @@ public class YearLayer implements CalendarLayer {
                 break;
             }
         }
-        if (index < 0) {
-            return null;
-        }
+        return index;
+    }
+
+    public CalendarInfo getYMByLocation(int x, int y) {
         int year = mYear;
-        int month = index;
+        int month = getOnClickIndex(x, y);
         return new CalendarInfo(year, month, 1, CalendarMode.MONTH);
     }
 
     public void selectMonth(int x, int y) {
-        CalendarInfo info = getYMByLocation(x, y);
-        SelectTime.getInstance().getSelectTime().add(new YearInfo(info, "", info.getMonth()));
-
+        int index = getOnClickIndex(x, y);
+        int limit = SelectTime.getInstance().getLimit();
+        int start = getlastYearStart(limit);
+        //今年和去年可选择的月份
+        if ((thisMonth >= 0 && thisMonth - limit <= index && index <= thisMonth)
+                || (start > 0 && index >= start)) {
+            CalendarInfo info = new CalendarInfo(mYear, index, 1, CalendarMode.MONTH);
+            SelectTime.getInstance().getSelectTime().add(new YearInfo(info, "", index));
+        } else {
+            if (onClick != null) {
+                onClick.onClick("超出选择范围");
+            }
+        }
     }
 
     public void setThisMonth(int thisMonth) {
         this.thisMonth = thisMonth;
+    }
+
+    private OnClickListener onClick;
+
+    public void setOnClickListener(OnClickListener onClickListener) {
+        onClick = onClickListener;
     }
 }
