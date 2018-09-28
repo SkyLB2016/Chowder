@@ -52,28 +52,13 @@ public class TestActivity extends AppCompatActivity {
             public void onInitFinished(CalendarView view) {
                 if (mode == CalendarMode.MONTH) {
                     SelectTime.getInstance().setLimit(40);
-                    view.getMonthLayerManager().getLayer().setOnClickListener(new OnClickListener() {
-                        @Override
-                        public void onClick(String hint) {
-                            ToastUtils.showShort(TestActivity.this, hint);
-                        }
-                    });
+                    view.getMonthLayerManager().getLayer().setOnClickListener(hint);
                 } else if (mode == CalendarMode.WEEK) {
                     SelectTime.getInstance().setLimit(4);
-                    view.getWeekLayerManager().getLayer().setOnClickListener(new OnClickListener() {
-                        @Override
-                        public void onClick(String hint) {
-                            ToastUtils.showShort(TestActivity.this, hint);
-                        }
-                    });
+                    view.getWeekLayerManager().getLayer().setOnClickListener(hint);
                 } else if (mode == CalendarMode.YEAR) {
                     SelectTime.getInstance().setLimit(2);
-                    view.getYearLayerManager().getLayer().setOnClickListener(new OnClickListener() {
-                        @Override
-                        public void onClick(String hint) {
-                            ToastUtils.showShort(TestActivity.this, hint);
-                        }
-                    });
+                    view.getYearLayerManager().getLayer().setOnClickListener(hint);
                 }
             }
         });
@@ -81,7 +66,6 @@ public class TestActivity extends AppCompatActivity {
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (mode == CalendarMode.MONTH) {
                     selectDay();
                 } else if (mode == CalendarMode.WEEK) {
@@ -92,6 +76,13 @@ public class TestActivity extends AppCompatActivity {
             }
         });
     }
+
+    OnClickListener hint = new OnClickListener() {
+        @Override
+        public void onClick(String hint) {
+            ToastUtils.showShort(TestActivity.this, hint);
+        }
+    };
 
     private void selectMonth() {
         Map<String, List<YearInfo>> maps = (Map<String, List<YearInfo>>) SelectTime.getInstance().getSelectTime().getSelectMap();

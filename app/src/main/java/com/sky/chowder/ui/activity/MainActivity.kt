@@ -72,7 +72,11 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
             //LogUtils.i("总长==${text.length}")
             //SingletonDemo.INSTANCE.otherMethods()
             //SingletonTest.test()
-            calendar()
+//            calendar()
+            val array =assets.list("Documents")
+            for (i in array){
+                LogUtils.i(i)
+            }
         }
     }
 

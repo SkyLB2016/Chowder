@@ -1,19 +1,18 @@
 待完成任务
-(1)文本搜索，算数，目录筛选拆分
-(2)拼图拉伸优化
-(3)位移运算
-(4)通知pendingIntent，notification
-(5)重构apputils
-(6)整理笔记顺序
-(7)插件拆分第九章第九节，第四小节
-(8)第九章第十一节h5篇安卓片上面应用的技术分析。
-(9)monkey
-(10)插件拆分第九章第九节，第四小节。
-(11)第九章第十一节h5篇安卓片上面应用的技术分析。
-(12)总结知识框架
-(13)annotation使用
-(14)Percent 百分比使用：com.android.suport:percent:23.2.0，包含PercentFrameLayout，PercentRelativeLayout，PercentLayoutHoper
-(15)Design兼容库
-(16)TCP/IP，URLConnection，webView使用，疯狂讲义第十三章
-(17)加密，rsa
-()
+一、JAVA编程思想
+	Java的原子性和可见性
+	锁机制
+	多线程交互模型：
+	1.Producer-Consumer模型
+	2.Read-Write Lock模型
+	3.Future模型
+	4.Worker Thread模型
+	并发编程工具：
+	1.concurrent
+	2.线程池ExecutorService
+	3.Callable & Future
+	4.BlockingQueue
+二、错误种类：
+三、加密算法：
+	
+四、注解：@interface

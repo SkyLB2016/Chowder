@@ -194,6 +194,19 @@
 　　(2)Executors.newCachedThreadPool()，无核心，非核心线程数不限数量，有超时机制60s，适合多图加载这种文件小而多的任务。
 　　(3)Executors.newScheduledThreadPool()，核心固定，非核心不限，闲置时超时回收，主要用于执行定时任务和具有固定周期的重复任务。
 　　(4)Executors.newSingleThreadExecutor()，仅创建一个单核心线程，任务串行。
+　　(5)Thread方法：
+	启动线程：	void start()
+	线程休眠：
+	static void sleep(long millis)
+	static void sleep(long millis,int nanos)
+	使其他线程等待当前线程终止：
+	void join() 
+	void join(long millis)
+	void join(long millis,int nanos)
+	当前运行线程释放处理器资源：
+	static void yield()
+	获取当前运行的线程引用：
+	static Thread currentThread() 
 ●26.Bitmap，缓存机制LruCache与DiskLruCache，BitmapFactory.Options
 　　(1)inSampleSize，整数，最小为1，等比缩小原图宽高。
 　　(2)inJustDecodeBounds，true时只解析宽高不加载到内存中。
@@ -314,6 +327,13 @@
 
 ●39.Collections：排序
 　　(1)reverse():
+　　(2)
+　　(3)
+　　(4)
+　　(5)
+　　(6)
+●40.JAVA锁机制，原子性
+　　(1)
 　　(2)
 　　(3)
 　　(4)
