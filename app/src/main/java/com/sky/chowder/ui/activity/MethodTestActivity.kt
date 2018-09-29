@@ -221,8 +221,8 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
     }
 
     private fun changeStrToId(): CharSequence? {
-        val id = R.string::class.java.getField("loushiming").getInt(R.string())
-        val id1 = resources.getIdentifier("xue", "string", packageName)
+        val id = R.string::class.java.getField("jsonobj").getInt(R.string())
+        val id1 = resources.getIdentifier("jsonobj", "string", packageName)
         val text = StringBuilder()
         text.append(getString(id).replace(" ", ""))
         text.append(getString(id1).replace(" ", ""))

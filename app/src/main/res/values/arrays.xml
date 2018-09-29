@@ -7,15 +7,6 @@
         <item>@color/yellow</item>
     </array>
 
-    <array name="poetry1">
-        <item>道德经,Documents/道德经.txt</item>
-
-        <item>大学,Documents/大学.txt</item>
-        <item>中庸,Documents/中庸.txt</item>
-        <item>论语,Documents/论语.txt</item>
-        <item>孟子,Documents/孟子.txt</item>
-    </array>
-
     <array name="poetry">
         <item>道德经</item>
         <item>河上公</item>

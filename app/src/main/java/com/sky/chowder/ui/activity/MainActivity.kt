@@ -28,6 +28,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import java.io.File
 import java.net.URL
+import java.text.Collator
 import java.util.*
 
 /**
@@ -73,8 +74,34 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
             //SingletonDemo.INSTANCE.otherMethods()
             //SingletonTest.test()
 //            calendar()
-            val array =assets.list("Documents")
-            for (i in array){
+//            val array1 =assets.list("Documents")
+//            for (i in array1){
+//                LogUtils.i(i)
+//            }
+            var dir = "Documents"//路径
+            var array: Array<String>? = null
+            val poetry = ArrayList<String>();
+            val link = LinkedList<String>();
+//            val stack = Stack<String>();
+//            stack.add(dir)
+            link.add(dir)
+            while (link.isNotEmpty()) {
+                dir = link.removeFirst()
+                array = assets.list(dir)
+                for (i in array) {
+                    if (i.endsWith(".txt")) {
+                        poetry.add("$dir/$i")
+                    } else {
+                        link.add("$dir/$i")
+                    }
+                }
+            }
+//            poetry.sort()
+//            for (i in poetry) LogUtils.i(i)
+            val collator = Collator.getInstance(Locale.CHINA)
+            poetry.sortWith(Comparator { o1, o2 -> collator.compare(o1, o2) })
+            for (i in poetry){
+//                LogUtils.i(i.substringAfterLast("/", "").substringBefore(".",""))
                 LogUtils.i(i)
             }
         }
