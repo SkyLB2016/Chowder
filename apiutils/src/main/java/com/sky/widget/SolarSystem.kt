@@ -14,6 +14,16 @@ import com.sky.R
 /**
  * Created by SKY on 2015/4/9 21:10:39.
  * 卫星式菜单
+ * Math的三角函数算法：
+　　var angle = 30.0//角度
+　　val radians = Math.PI * angle / 180//转换成弧度
+　　val ix = 200 * Math.cos(radians)
+　　val iy = 200 * Math.sin(radians)
+　　0-360 度，Cos取值范围1..0..-1..0..1，即+- -+，Sin 取值范围0..1..0..-1..0,即++- -
+　　以x=Cos,y=Sin算为++，-+，- -，+-，即一二三四象限，以X正轴1为起点，逆时针方向画圆，画布上Y轴正负颠倒，所以是顺时针方向画圆
+　　以x=Sin,y=Cos算为++，+-，- -，-+，即一四三二象限，以Y正轴1为起点，顺时针方向画圆，画布上Y轴正负颠倒，所以是逆时针方向画圆
+　　val ix = 200 * Math.sin(radians)
+　　val iy = 200 * Math.cos(radians)
  */
 class SolarSystem @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : FrameLayout(context, attrs, defStyleAttr) {
 
