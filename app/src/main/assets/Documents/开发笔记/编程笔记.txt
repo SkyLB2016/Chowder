@@ -1,60 +1,65 @@
 编程笔记·李彬
 ●01.Android的系统架构
 　　1）操作系统层OS：linux内核。
-　　2）HAL,硬件抽象层，设备内核驱动的抽象接口。
+　　2）硬件抽象层：HAL（Hardware Abstraction Layer），内核与硬件电路之间的抽象接口层。
 　　3）native C/C++ Libraries和Android运行环境RunTime。
 　　4）应用程序框架Application Framework。
 　　5）应用程序Application。
 ●02.小常识
-　　1）File文件所在文件夹存在时，写入数据时自动创建；不存在，则需调用mkdir(),当父类的父类也不存在是应调用mkdirs(),创建父类文件夹。
-　　2）从string中获取的文章字符串，有换行的情况下，会有空格，应先去除空格再用
-　　3）viewGroup的LayoutParams是所有params的父类
-　　4）ViewDragHelper滑动控制类，子类有DrawerLayout与SlidingPaneLayout
-　　5）dalvik是运行时编译，ART是安装时就进行编译。目前采用的是ART模式
-　　6）drawable文件，true，false，不同时出现的话，true，必须在前，文件效果才有效
-　　7）Makefile机制:组合文件，进行自动的可控制的编译（待加强）
-　　8）multidex参见错误统计表.xlsx
+　　1）File所在路径的文件夹（Floder）存在时，写入数据时自动创建File；
+Folder不存在，则需调用mkdir()；
+当Folder的父类文件夹也不存在时，应调用mkdirs(),创建父类文件夹。
+总结：为保险起见，需检查。
+　　2）从XML中获取的有换行的字符串，会有空格，应先去除空格再使用。
+　　3）viewGroup的LayoutParams是所有params的父类。
+　　4）ViewDragHelper滑动控制类，子类有DrawerLayout与SlidingPaneLayout。
+　　5）dalvik是运行时编译，ART是安装时就进行编译。目前采用的是ART模式。
+　　6）multidex参见错误统计表.xlsx。
 ●03.事件监听的几种形式
 　　1）匿名内部类，推荐的主要用法。
-　　2）内外部实现类形式.
-　　3）实现点击事件的接口.
+　　2）内、外部实现类形式.
+　　3）自身实现点击事件的接口.
 　　4）xml中的onclick属性。
-●04.Intent：意图，分显式与隐式两种，显示是指定了component属性，明确启动哪个组件，
-　　1）构造函数：可以是类名、action、Component（setClass）
-　　2）操作类型action：Java代码中只能存在一个，存在则必须有一个相同，setAction()；xml中可存在多个。
-　　3）类别筛选category：Java代码中存在几个匹配几个，xml中可存在多个。
+●04.Intent：意图，分显式与隐式两种，显式为指定了component属性，明确启动哪个组件；隐式是搜索符合条件的组件，供用户选择。
+　　1）构造函数：可以是类名、action、Component（setClass）。
+　　2）操作类型action（setAction()）：Java代码中只能存在一个，存在则必须有一个相同；xml中可存在多个。
+　　3）类别筛选category（addCategory()）：Java代码中存在几个匹配几个，xml中可存在多个。
 　　4）数据类型data与type：setDataAandType()，地址有特定规则，要么同时设置，要么单独只设置一个。
-　　5）启动模式LaunchMode四种（manifest中用）：standard（标准），singleTop（栈顶不创建），singleTask（单例，独一份，再次进入后，清空之前在其上的页面），singleInstance（独立栈中的独一份）
-　　6）标志也即启动模式（Intent中用）：FLAG_ACTIVITY_NEW_TASK(需要搭配FLAG_ACTIVITY_CLEAR_TASK使用),FLAG_ACTIVITY_SINGLE_TOP,FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS(跳转页面后自动finish,android:excludeFromRecents="true"，目前未起作用)
-　　7）数据传递bundle：Intent内部已经封装好，不用自己封了，serializable，parcelable，也可以转成json字符串传过去
+　　5）启动模式LaunchMode四种（manifest中用）：standard（标准），singleTop（栈顶复用），singleTask（类似于单例，独一份，再次进入后清空在其之上的实例），singleInstance（每次启动都是独立栈中的独一份）
+　　6）标志也即启动模式（Intent中用）：
+FLAG_ACTIVITY_NEW_TASK(需要搭配FLAG_ACTIVITY_CLEAR_TASK使用)；
+FLAG_ACTIVITY_SINGLE_TOP,FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS(跳转页面后自动finish）；
+android:excludeFromRecents="true"，目前未起作用)。
+　　7）数据传递bundle：Intent内部已经封装好，不用自己封了，serializable，parcelable，也可以转成json字符串传过去。
 ●05.页面跳转顺序:
 　　1）A启动 A.onCreate->A.onStart->A.onResume->
 　　2）在A中启动B A.onPause->B.onCreate->B.onStart->B.onResume->A.onStop
 　　3）关闭B B.onPause->A.onRestart->A.onStart->A.onResume->B.onStop->B.onDestory
 ●06.view的基础知识：屏幕的坐标原点是左上角，向右X轴正方向，向下Y轴正方向
 　　1）View中提供的获取坐标方法：
-　　　　getLeft()与getRight()都是View自身到父布局左边的距离
-　　　　getTop()与getBottom()都是View自身到父布局顶边的距离
-　　　　x，y，translationX，translationY。
-　　2）MotionEvent中的方法：
-　　　　GetX()与getY()是视图坐标，相对坐标，即是触摸点到它到父布局左边与顶边的距离
-　　　　GetRawX()与getRawY()是绝对坐标，即是触摸点到屏幕左边与顶边的距离
-　　3）TouchSlop：最小滑动距离，获取方法：ViewConfiguration.get(this).scaledTouchSlop，zoom中有使用
-　　4）VelocityTracker：速度跟踪器，只在move中有用，up抬起时为0
-　　5）GestureDetector：手势检测，相关方法：单击，拖动，滑动，长按，双击。
-　　6）Scroller（待深入研究）：弹性滑动对象，与view中的computeScroll方法配合。
-　　7）View的OnTouchListener优先于onTouchEvent，返回true，onTouchEvent不会执行；平常调用的点击事件onClickListener也不会执行。
-　　8）requestDisallowInterceptTouchEvent(boolean)强制请求分发触摸事件。
-　　9）activity中获取宽高onWindowFocusChanged，view.post(runnable),viewTreeObserver.addOnGlobalLayoutListener()
-　　10）onDraw()
-　　  绘制背景 background.draw(canvas)
-　　  绘制自己 onDraw
-　　  绘制children dispatchDraw
-　　  绘制装饰 onDrawScrollBars
-　　11）view滑动：
-　　  scrollTo/scrollBy：操作简单，适合对View内容的滑动；
-　　  动画：操作简单，主要适用于实现复杂的动画效果；
-　　  改变布局参数，操作稍微复杂，适用于有交互的View。
+　　　　getLeft()与getRight()都是View自身到父布局左边的距离。
+　　　　getTop()与getBottom()都是View自身到父布局顶边的距离。
+　　　　getX()=getLeft()+getTranslationX()
+　　　　getY()=getTop()+getTranslationY()。
+　　2）TouchSlop：最小滑动距离，获取方法：ViewConfiguration.get(this).scaledTouchSlop，zoom中有使用
+　　3）VelocityTracker：速度跟踪器，只在move中有用，up抬起时为0
+　　4）GestureDetector：手势检测，相关方法：单击，拖动，滑动，长按，双击。
+　　5）Scroller（待深入研究）：弹性滑动对象，与view中的computeScroll方法配合。
+　　6）View的OnTouchListener优先于onTouchEvent，返回true，onTouchEvent不会执行，up事件不执行的话，平常调用的点击事件onClickListener也不会执行。
+　　7）requestDisallowInterceptTouchEvent(boolean)强制请求分发触摸事件。
+　　8）activity中获取宽高：
+　　　　onWindowFocusChanged()
+　　　　view.post(runnable)
+　　　　viewTreeObserver.addOnGlobalLayoutListener()
+　　9）onDraw()：
+　　　　绘制背景：background.draw(canvas)
+　　　　绘制自己：onDraw()
+　　　　绘制children：dispatchDraw()
+　　　　绘制装饰：onDrawScrollBars()
+　　10）view滑动：
+　　　　scrollTo/scrollBy：操作简单，适合对View内容的滑动；
+　　　　动画：操作简单，主要适用于实现复杂的动画效果；
+　　　　改变布局参数，操作稍微复杂，适用于有交互的View。
 ●07.自定义View中比较重要的回调方法：
 　　第一次进入时的顺序回调
 　　1）onFinishInflate()：从XML加载组件完成后回调；
@@ -77,26 +82,29 @@
 　　12）onKeyUp()：键盘键按下后后抬起
 　　13）onTrackballEvent()：发生轨迹球事件时回调
 　　14）onDetachedFromWindow()：组件从窗口移除时回调
-●08.触摸事件机制，传递顺序:activity->window->view,方法回调有：（默认返回false）
-　　1）disPatchTouchEvent(MotionEvent e)（分发事件，一般不用管）
-　　2）onInterceptTouchEvent(MotionEvent e)， ViewGroup独有
-　　3）onTouchEvent(MotionEvent e)
-　　4）触摸按钮时的回调机制：A包B包C
-　　A.disPatch -> A.intercept ->B.disPatch -> B.intercept ->C.disPatch -> C.touch -> B.touch -> A.touch
-●09.ViewTreeObserver：五个一组
-    　　1）OnWindowFocusChangeListener：window的焦点状态发生改变时,（view应该已注册，待测试）
-    　　2）OnWindowAttachListener：当View树绑定到window上的时候回调用，（view应该已注册，待测试）
-    　　3）OnGlobalFocusChangeListener：当一个视图树的焦点状态改变时，会调用的接口
-    　　4）OnTouchModeChangeListener：当视图树的触摸模式发生改变时，会调用的接口
-    　　5）OnEnterAnimationCompleteListener：
+●08.ViewTreeObserver：
+　　1）OnWindowFocusChangeListener：window的焦点状态发生改变时,（view已注册）
+　　2）OnWindowAttachListener：当View树绑定到window上的时候回调用，（view已注册）
+　　3）OnGlobalFocusChangeListener：当一个视图树的焦点状态改变时，会调用的接口
+　　4）OnTouchModeChangeListener：当视图树的触摸模式发生改变时，会调用的接口
+　　5）OnEnterAnimationCompleteListener：
 
-    　　6）OnGlobalLayoutListener：当视图树的布局发生改变或者View在视图树的可见状态发生改变时会调用的接口
-    　　7）OnComputeInternalInsetsListener：
-    　　8）OnScrollChangedListener：当视图树的一些组件发生滚动时会调用的接口
-    　　9）OnPreDrawListener：当视图树将要被绘制时，会调用的接口
-    　　10）OnWindowShownListener：
+　　6）OnGlobalLayoutListener：当视图树的布局发生改变或者View在视图树的可见状态发生改变时会调用的接口
+　　7）OnComputeInternalInsetsListener：
+　　8）OnScrollChangedListener：当视图树的一些组件发生滚动时会调用的接口
+　　9）OnPreDrawListener：当视图树将要被绘制时，会调用的接口
+　　10）OnWindowShownListener：
 
-    　　11）OnDrawListener：视图树绘制时调用
+　　11）OnDrawListener：视图树绘制时调用
+●09.触摸事件机制，传递顺序:activity->window->view,方法回调有：（默认返回false）
+    　　1）disPatchTouchEvent(MotionEvent e)（分发事件，一般不用管）
+    　　2）onInterceptTouchEvent(MotionEvent e)， ViewGroup独有
+    　　3）onTouchEvent(MotionEvent e)
+    　　4）MotionEvent中的方法：
+    　　　　GetX()与getY()是视图坐标，相对坐标，即是触摸点到它到父布局左边与顶边的距离
+    　　　　GetRawX()与getRawY()是绝对坐标，即是触摸点到屏幕左边与顶边的距离
+    　　5）触摸按钮时的回调机制：A包B包C
+    　　A.disPatch -> A.intercept ->B.disPatch -> B.intercept ->C.disPatch -> C.touch -> B.touch -> A.touch
 ●10.Canvas方法：
 　　1）translate(x,y)：将原点(0,0)移动(x,y)
 　　2）rotate(a,x,y)：将画布以(x,y)为中心旋转a度
@@ -109,12 +117,12 @@
 　　1）setAntialias()与Paint(Paint.ANTI_ALIAS_FLAG) ：抗锯齿
 　　2）setStrokeWidth(),宽度是从中间开始计算的
 　　3）setARGB(),setAlpha(),setTextSize(),setStyle(),setColor().
-　　textHeight=paint.descent()-paint.ascent()
 　　4）基准线是baseline
 　　5）ascent：字体在baseline上方被推荐的距离（一些字体制作商需要参考这个）
 　　6）descent：字体在是baseline下方被推荐的距离（一些字体制作商需要参考这个）
 　　7）top：ascent的最大值
 　　8）bottom：descent的最大值
+　　textHeight=paint.descent()-paint.ascent()
 　　9）getTextBounds(String text, int start, int end, Rect bounds):获取文字宽高
 　　10）measureText(text)：获取文字宽度
 　　11）ColorMatrix
@@ -260,10 +268,10 @@ Looper.loop().
 　　static Thread currentThread()
 ●24.JNI和NDK编程，JNI是java的本地交互，NDK是Android提供得工具集合，可以在android中更加方便的通过JNI来访问本地代码，如C，C++，NDK
 还提供了交叉编译器，开发人员只需要简单的修改mk文件就可以生成特定的CPU平带的动态库，使用NDK有如下好处：
-　　1）提高代码的安全性。so库反编译比较困难
-　　2）可以使用目前已有的C/C++开源库
-　　3）便于平台间的移植。
-　　4）提高程序在某些特定情形下的执行效率，但是并不能明显提升Android程序的性能。
+　　1）提高代码的安全性，so库反编译比较困难；
+　　2）可以使用目前已有的C/C++开源库；
+　　3）便于平台间的移植；
+　　4）提高程序在某些特定情形下的执行效率，但是并不能明显提升Android程序的性能；
 　　5）在cmd终端中进入到main目录下 cd (具体路径)/apiutils/src/main
 　　执行此语句  javah -d jni -classpath ../../build/intermediates/classes/debug com.sky.NDKString  会自动生成jni文件com_sky_NDKString.h,自定义.c的file
 ●25.ProGuard，参见app下的proguard文件，App研发录
@@ -271,28 +279,28 @@ Looper.loop().
 　　2）优化Optimize：对字节码进行优化，移除无用的指令。
 　　3）混淆Obfuscate：使用a、b、c、d这样简短而无意义的名称，对类、字段和方法进行重命名。
 　　4）预检Preveirfy：在java平台上对处理后的代码进行预检。
-●26.window与WindowManager是ipc机制的应用
-　　1）addView(v,layoutparam)
-　　2）updateViewLayout(v,layoutparam)
-　　3）rempveView(v)
-●27.系统自带的各种管理器与多媒体处理
+●26.window与WindowManager是ipc机制的应用：
+　　1）addView(v,layoutparam)；
+　　2）updateViewLayout(v,layoutparam)；
+　　3）rempveView(v)；
+●27.系统自带的各种管理器与多媒体处理：
 　　1）TelephonyManager：电话管理器；
-　　2）SmsManager：短信管理器
-　　3）AudioManager：音频管理器
-　　4）Vibrator：振动器
-　　5）AlarmManager：手机闹钟服务
+　　2）SmsManager：短信管理器；
+　　3）AudioManager：音频管理器；
+　　4）Vibrator：振动器；
+　　5）AlarmManager：手机闹钟服务；
 
-　　6）MediaPlayer：音频
-　　7）SoundPool：音频
-　　8）VideoView：播放视频
-　　9）mediaRecorder：录制音频
+　　6）MediaPlayer：音频；
+　　7）SoundPool：音频；
+　　8）VideoView：播放视频；
+　　9）mediaRecorder：录制音频；
 ●28.java内存
-　　1）寄存器：我们在程序中无法控制
-　　2）栈：存放基本类型的数据和对象的引用，但对象本身不存放在栈中，而是存放在堆中，还有能确定的字符串
-　　3）堆：存放用new产生的数据
-　　4）静态域：存放在对象中用static定义的静态成员
-　　5）常量池：存放常量
-　　6）非RAM(随机存取存储器)存储：硬盘等永久存储空间
+　　1）寄存器：我们在程序中无法控制。
+　　2）栈：存放基本类型的数据和对象的引用，但对象本身不存放在栈中，而是存放在堆中，还有能确定的字符串。
+　　3）堆：存放用new产生的数据。
+　　4）静态域：存放在对象中用static定义的静态成员。
+　　5）常量池：存放常量。
+　　6）非RAM(随机存取存储器)存储：硬盘等永久存储空间。
 ●29.IO流
 　　一、Java流的分类
 　　1）按流向分:

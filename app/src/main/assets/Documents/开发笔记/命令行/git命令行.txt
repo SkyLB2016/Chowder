@@ -31,10 +31,10 @@ git分层：
     简拼：gd head
     git diff --stat 显示摘要；
     简拼：gd --stat
-(6)git reset head 取消全部add到缓存里的内容；
-    简拼：grh head
-    git reset head <file>  取消此文件add到缓存里的内容;
-    简拼：grh head file
+(6)git reset 取消全部add到缓存里的内容；
+    简拼：grh
+    git reset <file>  取消此文件add到缓存里的内容;
+    简拼：grh file
 (7)git commit -m "注释" 提交到本地库;
     简拼：gcmsg
     git commit --amend 修改最后一次提交的内容，先add需要提交的文件。

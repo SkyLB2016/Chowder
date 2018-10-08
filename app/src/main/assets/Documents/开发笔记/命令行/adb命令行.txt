@@ -1,12 +1,12 @@
 ADB（Android Debug Bridge）命令行：
-　　1)adb debice 查看当前运行设备
-　　2)安装apk：adb install apk路径
-	-r：重新安装apk
-	-s：安装到sd卡（基本没用了）
-　　3)adb uninstall package（apk的包名）
-	-k：表示只删除该程序，保留它的缓存目录和数据
-　　4)电脑向手机推送文件：adb push 电脑文件绝对路径 手机绝对路径
-　　5)电脑从手机拉取文件：adb pull 手机文件绝对路径 电脑绝对路径
-　　6)录制视频：adb shell screenrecord 需要保存的文件的绝对路径（MP4格式）
-　　7)查看系统盘符：adb shell df
-　　8) 
+1.adb device 查看当前运行设备
+2.安装apk：adb install apk路径
+　　-r：重新安装apk
+　　-s：安装到sd卡（基本没用了）
+3.adb uninstall package（apk的包名）
+　　-k：表示只删除该程序，保留它的缓存目录和数据
+4.电脑向手机推送文件：adb push 电脑文件绝对路径 手机绝对路径
+5.电脑从手机拉取文件：adb pull 手机文件绝对路径 电脑绝对路径
+6.录制视频：adb shell screenrecord 需要保存的文件的绝对路径（MP4格式）
+7.查看系统盘符：adb shell df
+8.

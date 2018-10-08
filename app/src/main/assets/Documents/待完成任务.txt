@@ -16,3 +16,6 @@
 三、加密算法：
 	
 四、注解：@interface
+五、Makefile机制:组合文件，进行自动的可控制的编译（待加强）。
+六、drawable文件，true，false，不同时出现的话，true，必须在前，文件效果才有效。
+七、Scroller（待深入研究）：弹性滑动对象，与view中的computeScroll方法配合。									
