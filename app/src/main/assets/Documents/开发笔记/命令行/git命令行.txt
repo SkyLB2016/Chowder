@@ -38,7 +38,7 @@ git分层：
 (7)git commit -m "注释" 提交到本地库;
     简拼：gcmsg
     git commit --amend 修改最后一次提交的内容，先add需要提交的文件。
-    简拼：gcmsg --amend
+    简拼：无
 (8)git push 提交到云端；
     简拼：gp
 (9)git rm <file> 删除文件，如果已经添加到add中，则需要加-f
