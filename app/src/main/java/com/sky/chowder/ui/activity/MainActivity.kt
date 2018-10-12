@@ -78,6 +78,7 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 //            for (i in array1){
 //                LogUtils.i(i)
 //            }
+            //Rw2 B2 U2 Lw U2 Rw' U2 Rw U2 F2 Rw F2 Lw' B2 Rw2
             var dir = "Documents"//路径
             var array: Array<String>? = null
             val poetry = ArrayList<String>();

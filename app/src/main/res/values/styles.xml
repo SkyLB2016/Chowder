@@ -3,16 +3,19 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <!--标题背景色，toolbar（actionbar）颜色 -->
-        <item name="colorPrimary">@color/colorPrimary</item>
         <!--状态栏背景色-->
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <!--控件颜色-->
-        <item name="colorAccent">@color/colorAccent</item>
+        <!--标题背景色，toolbar（actionbar）颜色 -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <!--toolbar的标题颜色；与drawerlayout共用会崩溃 -->
+        <!--<item name="android:textColorPrimary">@color/color_E6E6E6</item>-->
         <!-- 窗口的背景颜色 -->
         <item name="android:windowBackground">@color/white</item>
-        <!-- 标题颜色；与drawerlayout共用会崩溃 -->
-        <!--<item name="android:textColorPrimary">#FF00FF</item>-->
+        <!--控件颜色-->
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!--底部栏的颜色-->
+        <!--<item name="navigationBarColor">@color/color_E6E6E6</item>-->
         <!-- 箭头 -->
         <!--<item name="drawerArrowStyle">@style/AppTheme.DrawerArrowToggle</item>-->
         <!-- 菜单按钮 -->
