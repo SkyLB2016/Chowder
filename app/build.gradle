@@ -27,7 +27,7 @@ def key = new Properties()
 key.load(new FileInputStream(keyPass))
 android {
     compileSdkVersion 27
-    buildToolsVersion '28.0.2'
+    buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "com.sky.chowder"
         minSdkVersion 19
