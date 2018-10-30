@@ -79,34 +79,39 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 //                LogUtils.i(i)
 //            }
             //Rw2 B2 U2 Lw U2 Rw' U2 Rw U2 F2 Rw F2 Lw' B2 Rw2
-            var dir = "Documents"//路径
-            var array: Array<String>? = null
-            val poetry = ArrayList<String>();
-            val link = LinkedList<String>();
-//            val stack = Stack<String>();
-//            stack.add(dir)
-            link.add(dir)
-            while (link.isNotEmpty()) {
-                dir = link.removeFirst()
-                array = assets.list(dir)
-                for (i in array) {
-                    if (i.endsWith(".txt")) {
-                        poetry.add("$dir/$i")
-                    } else {
-                        link.add("$dir/$i")
-                    }
-                }
-            }
-//            poetry.sort()
-//            for (i in poetry) LogUtils.i(i)
-            val collator = Collator.getInstance(Locale.CHINA)
-            poetry.sortWith(Comparator { o1, o2 -> collator.compare(o1, o2) })
-            for (i in poetry){
-//                LogUtils.i(i.substringAfterLast("/", "").substringBefore(".",""))
-                LogUtils.i(i)
-            }
+
         }
     }
+
+    fun assetsDir() {
+        var dir = "Documents"//路径
+        var array: Array<String>? = null
+        val poetry = ArrayList<String>();
+        val link = LinkedList<String>();
+//            val stack = Stack<String>();
+//            stack.add(dir)
+        link.add(dir)
+        while (link.isNotEmpty()) {
+            dir = link.removeFirst()
+            array = assets.list(dir)
+            for (i in array) {
+                if (i.endsWith(".txt")) {
+                    poetry.add("$dir/$i")
+                } else {
+                    link.add("$dir/$i")
+                }
+            }
+        }
+//            poetry.sort()
+//            for (i in poetry) LogUtils.i(i)
+        val collator = Collator.getInstance(Locale.CHINA)
+        poetry.sortWith(Comparator { o1, o2 -> collator.compare(o1, o2) })
+        for (i in poetry) {
+//                LogUtils.i(i.substringAfterLast("/", "").substringBefore(".",""))
+            LogUtils.i(i)
+        }
+    }
+
 
     fun calendar() {
         val calendar = Calendar.getInstance()
@@ -271,4 +276,16 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 //        super.onRestart()
 //        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
 //    }
+
+    fun reimburse(){
+        //10.8；10.9；10.10；10.11；10.12；10.15；10.16；10.17；10.18；10.19；10.22；10.23；10.24；10.25；10.26；10.29；10.30；10.31；18天。
+        //10.27
+        //18*50+100=1000
+
+        //11.1；11.2；11.5；11.6；11.7；11.8；11.9；11.12；11.13；11.14；11.15；11.16；11.19；11.20；11.21；11.22；11.23；11.26；11.27；11.28；11.29；11.30；22天。
+        //22*50=1100
+
+        //12.3；12.4；12.5；12.6；12.7；12.10；12.11；12.12；12.13；12.14；12.17；12.18；12.19；12.20；12.21；12.24；12.25；12.26；12.27；12.28；12.31；21天。
+        //21*50=1050
+    }
 }

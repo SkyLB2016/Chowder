@@ -10,3 +10,9 @@ ADB（Android Debug Bridge）命令行：
 6.录制视频：adb shell screenrecord 需要保存的文件的绝对路径（MP4格式）
 7.查看系统盘符：adb shell df
 8.
+
+vpn配置:L2TP
+vpn.weibangong.me
+libin
+qzqwzz
+Admin@123

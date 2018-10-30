@@ -13,3 +13,25 @@ gradlew assemble渠道名Release  渠道release版本
 gradlew assemble渠道名Release -p app 打包app工程下渠道名的release版本（-p 决定执行哪个）
 gradlew installRelease 打包Release版本并安装
 gradlew uninstallRelease 写在Release版本包
+
+
+删除Android开发缓存
+1.AndroidStudio所在目录
+rm -rf /Applications/Android\ Studio.app
+SDK所在目录
+rm -rf ~/Library/Android/sdk
+或者也可以这么写：
+rm -rf ~/Library/Android*
+
+2.AndroidStudio的缓存
+rm -rf ~/Library/Preferences/AndroidStudio*
+rm ~/Library/Preferences/com.google.android.studio.plist
+rm -rf ~/Library/Application\ Support/AndroidStudio*
+rm -rf ~/Library/Logs/AndroidStudio*
+rm -rf ~/Library/Caches/AndroidStudio*
+
+3.删除gradle关联文件 (caches & wrapper)
+rm -rf ~/.gradle
+
+4.删除模拟器
+rm -rf ~/.android
