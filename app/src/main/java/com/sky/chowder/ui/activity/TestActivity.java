@@ -51,7 +51,7 @@ public class TestActivity extends AppCompatActivity {
             @Override
             public void onInitFinished(CalendarView view) {
                 if (mode == CalendarMode.MONTH) {
-                    SelectTime.getInstance().setLimit(40);
+                    SelectTime.getInstance().setLimit(20);
                     view.getMonthLayerManager().getLayer().setOnClickListener(hint);
                 } else if (mode == CalendarMode.WEEK) {
                     SelectTime.getInstance().setLimit(4);

@@ -78,7 +78,12 @@ class MainActivity : BasePActivity<MainP>(), Toolbar.OnMenuItemClickListener, IM
 //            for (i in array1){
 //                LogUtils.i(i)
 //            }
-            //Rw2 B2 U2 Lw U2 Rw' U2 Rw U2 F2 Rw F2 Lw' B2 Rw2
+            //Rw2 B2 U2 Lw U2 Rw' U2 Rw U2 F2 Rw F2 Lw' B2 Rw26
+
+            //drawable-hdpi notification_default_icon.png
+            //drawable-xhdpi notification_default_icon.png,landing_center
+            //drawable-xhdpi ic_splash_indicator_selected
+            //lib.account drawable ic_splash_indicator_selected
 
         }
     }
