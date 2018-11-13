@@ -74,6 +74,13 @@
         {"className":"习", "componentName":"相", "img":3, "describe":"远"}
         ]}
     </string>
+    <string name="jsonlistnull">{ "objList":[
+        {"className":null, "componentName":"之", "img":null, "describe":"初"},
+        {"className":"性", "componentName":"本", "img":2, "describe":"善"},
+        {"className":"性", "componentName":"相", "img":2, "describe":"近"},
+        {"className":"习", "componentName":"相", "img":3, "describe":"远"}
+        ]}
+    </string>
     <string name="jsonarray"> [
         {"className":"人", "componentName":"之", "img":1, "describe":"初"},
         {"className":"性", "componentName":"本", "img":2, "describe":"善"},
@@ -87,7 +94,6 @@
     <string name="format02">组合替换字符%s与数字%d %n</string>
     <string name="format03">转四位数的的数%04d %n</string>
     <string name="format04">以,分隔整数%,d与浮点数%,.2f %n</string>
-
 
 
     <!--icomoon字体应用-->

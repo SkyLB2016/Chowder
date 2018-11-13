@@ -1,5 +1,6 @@
 package com.sky.chowder.ui.activity;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import com.sky.chowder.ui.widget.calendar.selecttime.DayInfo;
 import com.sky.chowder.ui.widget.calendar.selecttime.SelectTime;
 import com.sky.chowder.ui.widget.calendar.selecttime.WeekInfo;
 import com.sky.chowder.ui.widget.calendar.selecttime.YearInfo;
+import com.sky.utils.AppUtils;
 import com.sky.utils.LogUtils;
 import com.sky.utils.ToastUtils;
 
@@ -36,6 +38,9 @@ public class TestActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String[] aa = new String[]{Manifest.permission.WRITE_CONTACTS, Manifest.permission.READ_CONTACTS, Manifest.permission.READ_EXTERNAL_STORAGE};
+        int[] aaaa = new int[]{2, 2, 2};
+        AppUtils.isPermissions(this,aa,aaaa);
         setContentView(R.layout.activity_test);
         calendar = findViewById(R.id.calendar);
         mode = CalendarMode.MONTH;

@@ -18,6 +18,12 @@ class ActivityModel(var className: String?//activity的名称
 
     //    @Transient
 //    val objList: List<ActivityModel>? = null;
+    val aaa: Int = 0
+        get() {
+            if (field === 2)
+                return 0
+            return field
+        }
 
     /**
      *  排序

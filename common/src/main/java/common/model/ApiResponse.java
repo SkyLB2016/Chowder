@@ -15,6 +15,8 @@
  */
 package common.model;
 
+import com.google.gson.annotations.Expose;
+
 import java.util.List;
 
 /**
@@ -25,6 +27,7 @@ public class ApiResponse<T> {
     private int code;    // 返回状态码,"0"代表成功
     private String msg;  // 返回信息
     private T obj;           // 单个对象
+    @Expose
     private T objList;       // 数组对象
     private int currentPage; // 当前页数
     private int pageSize;    // 每页显示数量

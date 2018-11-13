@@ -9,7 +9,6 @@
       <module fileurl="file://$PROJECT_DIR$/g2048/g2048.iml" filepath="$PROJECT_DIR$/g2048/g2048.iml" />
       <module fileurl="file://$PROJECT_DIR$/jnilib/jnilib.iml" filepath="$PROJECT_DIR$/jnilib/jnilib.iml" />
       <module fileurl="file://$PROJECT_DIR$/puzzle/puzzle.iml" filepath="$PROJECT_DIR$/puzzle/puzzle.iml" />
-      <module fileurl="file://$PROJECT_DIR$/tetris/tetris.iml" filepath="$PROJECT_DIR$/tetris/tetris.iml" />
     </modules>
   </component>
 </project>

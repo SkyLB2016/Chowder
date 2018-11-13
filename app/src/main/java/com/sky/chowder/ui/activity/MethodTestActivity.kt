@@ -16,6 +16,8 @@ import android.os.BatteryManager
 import android.os.Build
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.speech.tts.TextToSpeech
+import android.support.annotation.LayoutRes
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.*
@@ -25,6 +27,7 @@ import android.view.animation.AnimationUtils
 import android.view.animation.LayoutAnimationController
 import android.widget.TextView
 import com.google.gson.reflect.TypeToken
+import com.sky.SkyApp
 import com.sky.chowder.R
 import com.sky.chowder.model.ActivityModel
 import com.sky.chowder.other.factory.abstractfactory.HNFactory
@@ -33,15 +36,14 @@ import com.sky.chowder.other.factory.factory.HairFactory
 import com.sky.chowder.other.factory.factory.hair.LeftHair
 import com.sky.chowder.ui.fragment.AddressFragment
 import com.sky.chowder.ui.fragment.TimeFragment
-import com.sky.utils.AppUtils
-import com.sky.utils.DateUtil
-import com.sky.utils.GsonUtils
-import com.sky.utils.MD5Utils
+import com.sky.chowder.utils.http.HttpUrl
+import com.sky.utils.*
 import common.base.BaseNoPActivity
 import common.base.BasePActivity
 import common.model.ApiResponse
 import kotlinx.android.synthetic.main.activity_method.*
-import java.lang.StringBuilder
+import java.io.File
+import java.net.URL
 import java.text.Collator
 import java.util.*
 import kotlin.collections.ArrayList
@@ -50,7 +52,7 @@ import kotlin.coroutines.experimental.buildSequence
 /**
  * Created by SKY on 2018/3/6 16:43.
  */
-class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
+class MethodTestActivity : BaseNoPActivity(), View.OnClickListener, Observer {
     override fun getLayoutResId(): Int = R.layout.activity_method
     override fun loadData() = Unit
     override fun initialize(savedInstanceState: Bundle?) {
@@ -110,6 +112,32 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
             "" -> ""
         }
     }
+
+    //观察者模式
+    private fun setObserver(@LayoutRes item: Int?) {
+        //观察者
+        val observer = Observer { o, arg -> LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}==$arg") }
+
+        //被观察者
+        val observable = object : Observable() {
+            fun send(content: Any) {
+                setChanged()
+                //通知观察者
+                notifyObservers(content)
+            }
+        }
+        //把观察者注册到被观察者中
+        observable.addObserver(observer)
+        observable.addObserver(this)
+
+        //被观察者发送消息
+        observable.send("观察者模式")
+    }
+
+    override fun update(o: Observable?, arg: Any?) {
+        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}==$arg")
+    }
+
 
     //一组数据从1开始数，到13时移除此数，之后继续从1开始数
     private fun getNum(): String {
@@ -261,7 +289,7 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
 //        value.setTarget(image)
         animator.duration = 2000
         animator.addUpdateListener { animation ->
-//            animation!!.animatedFraction//当前百分比
+            //            animation!!.animatedFraction//当前百分比
             val lp = image.layoutParams
             lp.height = animation!!.animatedValue.toString().toFloat().toInt()
             image.layoutParams = lp
@@ -292,7 +320,7 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
         hair?.draw()
         val ddddd = factory.create(LeftHair::class.java)
         ddddd.draw()
-        
+
         //抽象工厂模式
         val facoty = MCFctory()
         val girl = facoty.girl
@@ -544,5 +572,49 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener {
                 "Java Vendor 属性==${System.getProperty("java.vendor")}\n" +
                 "Java 版本==${System.getProperty("java.version")}\n" +
                 "Java Home 属性==${System.getProperty("java.home")}\n"
+    }
+
+    private fun getURL() {
+        val url = URL(HttpUrl.URL_MUKE + HttpUrl.URL_MUKE1)
+        LogUtils.i("资源名==${url.file}")
+        LogUtils.i("主机名==${url.host}")
+        LogUtils.i("路径==${url.path}")
+        LogUtils.i("端口==${url.port}")
+        LogUtils.i("协议名称==${url.protocol}")
+        LogUtils.i("查询字符串==${url.query}")
+    }
+
+    private fun ttsTest() {
+        tts = TextToSpeech(this, TextToSpeech.OnInitListener { status -> checkTTS(status) })
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            tts?.speak("gesture", TextToSpeech.QUEUE_ADD, null, "speech")
+            //                tts?.synthesizeToFile("gesture",null,File(""),"record")
+        }
+    }
+
+    var tts: TextToSpeech? = null
+    private fun checkTTS(status: Int) {
+
+    }
+    /**
+     * 文件属性
+     */
+    private fun fileTest() {
+        val f = File(SkyApp.getInstance().fileCacheDir + "pass.txt")
+        LogUtils.i(f.getParent())//返回此抽象路径名父目录的路径名字符串；如果此路径名没有指定父目录，则返回 null
+        LogUtils.i(f.getName())//返回由此抽象路径名表示的文件或目录的名称
+        LogUtils.i("${f.exists()}")//测试此抽象路径名表示的文件或目录是否存在
+        LogUtils.i("${f.getAbsoluteFile()}")// 返回此抽象路径名的绝对路径名形式
+        LogUtils.i(f.getAbsolutePath())//返回此抽象路径名的规范路径名字符串
+        LogUtils.i(f.getPath())//将此抽象路径名转换为一个路径名字符串
+        LogUtils.i("${f.hashCode()}")//计算此抽象路径名的哈希码
+        LogUtils.i("${f.length()}")//返回由此抽象路径名表示的文件的长度
+        LogUtils.i("${f.list()}")// 返回一个字符串数组，这些字符串指定此抽象路径名表示的目录中的文件和目录
+        LogUtils.i("${f.mkdir()}")//创建此抽象路径名指定的目录
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        tts?.shutdown()
     }
 }

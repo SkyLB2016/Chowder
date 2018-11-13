@@ -61,6 +61,8 @@ dependencies {
     //retrofit2
     api "com.squareup.retrofit2:retrofit:$retrofit2"
     api "com.squareup.retrofit2:converter-gson:$retrofit2"
+    api 'com.google.code.gson:gson:2.8.5'
+
     api "com.squareup.retrofit2:adapter-rxjava2:$retrofit2"
     //retrofit2
     api 'com.squareup.okhttp3:okhttp:3.10.0'

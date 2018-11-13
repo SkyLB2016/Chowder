@@ -48,7 +48,6 @@ public class CalendarView extends View {
 
     protected OnInitListener initListener;
     protected OnEveryDayClickListener onEveryDayClickListener;
-    protected boolean isDetached;
 
     /**
      * 该接口主要用于埋点统计
