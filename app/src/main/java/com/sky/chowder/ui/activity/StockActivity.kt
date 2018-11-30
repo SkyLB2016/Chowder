@@ -2,9 +2,11 @@ package com.sky.chowder.ui.activity
 
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputFilter
 import android.widget.EditText
 import com.sky.api.TextWatcherAdapter
 import com.sky.chowder.R
+import com.sky.chowder.utils.EditInputFilter
 import com.sky.utils.TextUtil
 import common.base.BaseNoPActivity
 import kotlinx.android.synthetic.main.activity_stock.*
@@ -31,6 +33,8 @@ class StockActivity : BaseNoPActivity() {
                 else calculationCounter(0.0)
             }
         })
+        etTotal.filters=arrayOf<InputFilter>(EditInputFilter())
+
         btnBuy.setOnClickListener {
             buyOrSell = "1"
             setTotal()

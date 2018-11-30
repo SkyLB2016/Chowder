@@ -14,6 +14,9 @@ gradlew assemble渠道名Release -p app 打包app工程下渠道名的release版
 gradlew installRelease 打包Release版本并安装
 gradlew uninstallRelease 写在Release版本包
 
+gradlew错误
+zsh: permission denied: ./gradlew
+运行 chmod +x gradlew
 
 删除Android开发缓存
 1.AndroidStudio所在目录

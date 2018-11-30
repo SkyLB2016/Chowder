@@ -12,9 +12,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toolbar;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.internal.bind.TypeAdapters;
 import com.google.gson.reflect.TypeToken;
 import com.sky.adapter.RecyclerAdapter;
 import com.sky.chowder.R;
@@ -23,15 +20,16 @@ import com.sky.chowder.model.ActivityEntity;
 import com.sky.chowder.model.ActivityModel;
 import com.sky.chowder.ui.adapter.MainAdapter;
 import com.sky.chowder.ui.presenter.MainP;
-import com.sky.chowder.utils.NullStringToEmptyAdapterFactory;
-import com.sky.chowder.utils.StringNullAdapter;
 import com.sky.utils.AppUtils;
+import com.sky.utils.GsonUtils;
 import com.sky.utils.JumpAct;
 import com.sky.utils.LogUtils;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import common.base.BasePActivity;
@@ -78,34 +76,48 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
                 new String[]{Manifest.permission.WRITE_CONTACTS, Manifest.permission.READ_CONTACTS, Manifest.permission.READ_EXTERNAL_STORAGE},
                 new int[]{0, 0, 0}
         );
-
-        //        LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
+        //Rw2 B2 U2 Lw U2 Rw' U2 Rw U2 F2 Rw F2 Lw' B2 Rw2
+        final double dou = 82973.908;
+        //LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                ApiResponse<List<ActivityEntity>> entity = GsonUtils.jsonToEntity(getString(R.string.jsonlist), new TypeToken<ApiResponse<List<ActivityEntity>>>() {
-//                }.getType());
-//                ApiResponse<List<ActivityEntity>> entity1 = GsonUtils.jsonToEntity(getString(R.string.jsonlistnull), new TypeToken<ApiResponse<List<com.sky.chowder.model.ActivityEntity>>>() {
-//                }.getType());
-//                LogUtils.i(entity.getObjList().toString());
-//                LogUtils.i(entity1.getObjList().toString());
-                Gson gson = new GsonBuilder()
-                        .excludeFieldsWithoutExposeAnnotation()//序列化
-                        .registerTypeAdapterFactory(new NullStringToEmptyAdapterFactory<String>())
-//                        .registerTypeAdapterFactory(NullStringToEmptyAdapterFactory.getInstance())
-                        .registerTypeAdapterFactory(TypeAdapters.newFactory(String.class, new StringNullAdapter()))
-//                        .registerTypeAdapter(String.class, new StringNullAdapter())
-                        .serializeNulls()
-                        .create();
-                ApiResponse<List<ActivityEntity>> entity2 = new GsonBuilder().create().fromJson(getString(R.string.jsonlistnull), new TypeToken<ApiResponse<List<ActivityEntity>>>() {
-                }.getType());
-                ApiResponse<List<ActivityEntity>> entity3 = gson.fromJson(getString(R.string.jsonlistnull), new TypeToken<ApiResponse<List<ActivityEntity>>>() {
-                }.getType());
-                LogUtils.i(entity2.getObjList().toString());
-                LogUtils.i(entity3.getObjList().toString());
-                LogUtils.i(gson.toJson(entity3.getObjList()));
+                LogUtils.i("==真假==" + new DecimalFormat("#,###.00").format(dou));
+                LogUtils.i("==真假==" + new BigDecimal(dou).setScale(2,BigDecimal.ROUND_UP));
+                LogUtils.i("==真假==" + new BigDecimal(dou).toString());
+//                gsonBuilder();
             }
         });
+    }
+
+    String AA = "ABCD";
+
+    private void gsonBuilder() {
+
+//        models = GsonUtils.jsonToEntity(gson.toJson(option.getValue()), new TypeToken<WorkProjectModel>() {
+//        }.getType());
+
+        ApiResponse<List<ActivityEntity>> entity = GsonUtils.jsonToEntity(getString(R.string.jsonlist), new TypeToken<ApiResponse<List<ActivityEntity>>>() {
+        }.getType());
+        ApiResponse<List<ActivityEntity>> entity1 = GsonUtils.jsonToEntity(getString(R.string.jsonlistnull), new TypeToken<ApiResponse<List<ActivityEntity>>>() {
+        }.getType());
+        LogUtils.i(entity.getObjList().toString());
+        LogUtils.i(entity1.getObjList().toString());
+//        Gson gson = new GsonBuilder()
+//     .excludeFieldsWithoutExposeAnnotation()//序列化
+//     .registerTypeAdapterFactory(new NullStringToEmptyAdapterFactory<String>())
+////  .registerTypeAdapterFactory(NullStringToEmptyAdapterFactory.getInstance())
+//     .registerTypeAdapterFactory(TypeAdapters.newFactory(String.class, new StringNullAdapter()))
+////  .registerTypeAdapter(String.class, new StringNullAdapter())
+//     .serializeNulls()
+//     .create();
+//        ApiResponse<List<ActivityEntity>> entity2 = new GsonBuilder().create().fromJson(getString(R.string.jsonlistnull), new TypeToken<ApiResponse<List<ActivityEntity>>>() {
+//        }.getType());
+//        ApiResponse<List<ActivityEntity>> entity3 = gson.fromJson(getString(R.string.jsonlistnull), new TypeToken<ApiResponse<List<ActivityEntity>>>() {
+//        }.getType());
+//        LogUtils.i(entity2.getObjList().toString());
+//        LogUtils.i(entity3.getObjList().toString());
+//        LogUtils.i(gson.toJson(entity3.getObjList()));
     }
 
     @Override
