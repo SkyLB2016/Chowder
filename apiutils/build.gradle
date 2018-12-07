@@ -28,11 +28,11 @@ ext {
 group = publishedGroupId// Maven Group ID for the artifact
 version = libraryVersion
 android {
-    compileSdkVersion 27
+    compileSdkVersion COMPILE_SDK_VERSION as int
     buildToolsVersion '28.0.3'
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 27
+        minSdkVersion MIN_SDK_VERSION as int
+        targetSdkVersion TARGET_SDK_VERSION as int
         versionCode 20171027
         versionName libraryVersion
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -50,9 +50,9 @@ android {
 def retrofit2 = '2.4.0'
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
-    api "com.android.support:appcompat-v7:$googleVer"
-    api "com.android.support:recyclerview-v7:$googleVer"
-    api "com.android.support:design:$googleVer"
+    api "com.android.support:appcompat-v7:$SUPPORT_LIBRARY"
+    api "com.android.support:recyclerview-v7:$SUPPORT_LIBRARY"
+    api "com.android.support:design:$SUPPORT_LIBRARY"
     api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     //rxjava
     api 'io.reactivex.rxjava2:rxjava:2.1.5'

@@ -4,12 +4,12 @@ else apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 android {
-    compileSdkVersion 27
+    compileSdkVersion COMPILE_SDK_VERSION as int
 
     defaultConfig {
         if (puzzle.toBoolean()) applicationId "com.sky.puzzle"
-        minSdkVersion 19
-        targetSdkVersion 27
+        minSdkVersion MIN_SDK_VERSION as int
+        targetSdkVersion TARGET_SDK_VERSION as int
         versionCode 1
         versionName "1.0"
     }
