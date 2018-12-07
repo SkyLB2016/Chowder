@@ -77,15 +77,16 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
                 new int[]{0, 0, 0}
         );
         //Rw2 B2 U2 Lw U2 Rw' U2 Rw U2 F2 Rw F2 Lw' B2 Rw2
+        // 推荐一个新人的《大唐昏君》，也是轻松向的，新人不容易，嗯，就这样。
         final double dou = 82973.908;
         //LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LogUtils.i("==真假==" + new DecimalFormat("#,###.00").format(dou));
-                LogUtils.i("==真假==" + new BigDecimal(dou).setScale(2,BigDecimal.ROUND_UP));
+                LogUtils.i("==真假==" + new BigDecimal(dou).setScale(2, BigDecimal.ROUND_UP));
                 LogUtils.i("==真假==" + new BigDecimal(dou).toString());
-//                gsonBuilder();
+//  gsonBuilder();
             }
         });
     }
@@ -94,8 +95,8 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
 
     private void gsonBuilder() {
 
-//        models = GsonUtils.jsonToEntity(gson.toJson(option.getValue()), new TypeToken<WorkProjectModel>() {
-//        }.getType());
+// models = GsonUtils.jsonToEntity(gson.toJson(option.getValue()), new TypeToken<WorkProjectModel>() {
+// }.getType());
 
         ApiResponse<List<ActivityEntity>> entity = GsonUtils.jsonToEntity(getString(R.string.jsonlist), new TypeToken<ApiResponse<List<ActivityEntity>>>() {
         }.getType());
@@ -103,21 +104,21 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         }.getType());
         LogUtils.i(entity.getObjList().toString());
         LogUtils.i(entity1.getObjList().toString());
-//        Gson gson = new GsonBuilder()
-//     .excludeFieldsWithoutExposeAnnotation()//序列化
-//     .registerTypeAdapterFactory(new NullStringToEmptyAdapterFactory<String>())
+// Gson gson = new GsonBuilder()
+//  .excludeFieldsWithoutExposeAnnotation()//序列化
+//  .registerTypeAdapterFactory(new NullStringToEmptyAdapterFactory<String>())
 ////  .registerTypeAdapterFactory(NullStringToEmptyAdapterFactory.getInstance())
-//     .registerTypeAdapterFactory(TypeAdapters.newFactory(String.class, new StringNullAdapter()))
+//  .registerTypeAdapterFactory(TypeAdapters.newFactory(String.class, new StringNullAdapter()))
 ////  .registerTypeAdapter(String.class, new StringNullAdapter())
-//     .serializeNulls()
-//     .create();
-//        ApiResponse<List<ActivityEntity>> entity2 = new GsonBuilder().create().fromJson(getString(R.string.jsonlistnull), new TypeToken<ApiResponse<List<ActivityEntity>>>() {
-//        }.getType());
-//        ApiResponse<List<ActivityEntity>> entity3 = gson.fromJson(getString(R.string.jsonlistnull), new TypeToken<ApiResponse<List<ActivityEntity>>>() {
-//        }.getType());
-//        LogUtils.i(entity2.getObjList().toString());
-//        LogUtils.i(entity3.getObjList().toString());
-//        LogUtils.i(gson.toJson(entity3.getObjList()));
+//  .serializeNulls()
+//  .create();
+// ApiResponse<List<ActivityEntity>> entity2 = new GsonBuilder().create().fromJson(getString(R.string.jsonlistnull), new TypeToken<ApiResponse<List<ActivityEntity>>>() {
+// }.getType());
+// ApiResponse<List<ActivityEntity>> entity3 = gson.fromJson(getString(R.string.jsonlistnull), new TypeToken<ApiResponse<List<ActivityEntity>>>() {
+// }.getType());
+// LogUtils.i(entity2.getObjList().toString());
+// LogUtils.i(entity3.getObjList().toString());
+// LogUtils.i(gson.toJson(entity3.getObjList()));
     }
 
     @Override
