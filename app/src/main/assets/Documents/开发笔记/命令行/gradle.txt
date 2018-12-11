@@ -18,6 +18,11 @@ gradlew错误
 zsh: permission denied: ./gradlew
 运行 chmod +x gradlew
 
+compileSdkVersion 依赖的Android版本
+minSDKVersion xx --  targetSDKVersion xx：兼容从最小版本到目标版本之间所有api的变化；
+三者关系：minsdkVersion<=TargetSdkVersion<=compileSdkVersion;
+理想关系：minsdkVersion<=TargetSdkVersion==compileSdkVersion，目标与依赖相同
+
 删除Android开发缓存
 1.AndroidStudio所在目录
 rm -rf /Applications/Android\ Studio.app

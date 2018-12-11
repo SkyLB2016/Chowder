@@ -77,7 +77,6 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
                 new int[]{0, 0, 0}
         );
         //Rw2 B2 U2 Lw U2 Rw' U2 Rw U2 F2 Rw F2 Lw' B2 Rw2
-        // 推荐一个新人的《大唐昏君》，也是轻松向的，新人不容易，嗯，就这样。
         final double dou = 82973.908;
         //LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {

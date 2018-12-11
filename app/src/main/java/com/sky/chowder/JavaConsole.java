@@ -139,7 +139,6 @@ public class JavaConsole {
             try {
 
                 if (writer != null) writer.close();
-
                 if (bufferedIn != null) bufferedIn.close();
                 if (fileIn != null) fileIn.close();
             } catch (IOException e) {
@@ -149,8 +148,14 @@ public class JavaConsole {
     }
 
     void reimburse() {
-        //11.27；11.28；
+        //11.28；
         //12.3；12.4；12.5；12.6；12.7；12.10；12.11；12.12；12.13；12.14；12.17；12.18；12.19；12.20；12.21；12.24；12.25；12.26；12.27；12.28；12.31；21天。
         //21*50=1050
+        //目前可报销：350
+        //发票：61+47+164             =272
+        //云尊府：61+66+65            =192
+        //福海居：48+38+41+41+41      =209
+        //食味坊：18+14+18+13+18+12   =93
+        //总计：                      =766
     }
 }
