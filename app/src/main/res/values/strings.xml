@@ -67,6 +67,14 @@
         ]
         }
     </string>
+    <string name="jsonobject">{
+        "className":"天",
+        "componentName":"地",
+        "img":1,
+        "describe":"玄黄",
+        "version":4.4
+        }
+    </string>
     <string name="jsonlist">{ "objList":[
         {"className":"人", "componentName":"之", "img":1, "describe":"初"},
         {"className":"性", "componentName":"本", "img":2, "describe":"善"},
@@ -75,17 +83,16 @@
         ]}
     </string>
     <string name="jsonlistnull">{ "objList":[
-        {"className":null, "componentName":"之", "img":null, "describe":"初"},
-        {"className":"性", "componentName":"本", "img":2, "describe":"善"},
-        {"className":"性", "componentName":"相", "img":2, "describe":"近"},
-        {"className":"习", "componentName":"相", "img":3, "describe":"远"}
+        {"className":null, "componentName":"之", "img":null, "describe":"初","version":3},
+        {"className":"性", "componentName":"本", "img":2, "describe":"善","version":6.6},
+        {"className":"性", "componentName":"本", "img":2, "describe":"善","version":6.6}
         ]}
     </string>
     <string name="jsonarray"> [
-        {"className":"人", "componentName":"之", "img":1, "describe":"初"},
-        {"className":"性", "componentName":"本", "img":2, "describe":"善"},
-        {"className":"性", "componentName":"相", "img":2, "describe":"近"},
-        {"className":"习", "componentName":"相", "img":3, "describe":"远"}
+        {"className":"人", "componentName":"之", "img":1, "describe":"初","version":3},
+        {"className":"性", "componentName":"本", "img":2, "describe":"善","version":3.3},
+        {"className":"性", "componentName":"相", "img":2, "describe":"近","version":3.5},
+        {"className":"习", "componentName":"相", "img":3, "describe":"远","version":5.3}
         ]
     </string>
     <string name="work">

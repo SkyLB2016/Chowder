@@ -3,7 +3,7 @@ package com.sky.chowder.utils.http
 import com.sky.chowder.BuildConfig
 import com.sky.chowder.C
 import com.sky.utils.LogUtils
-import com.sky.utils.TextUtil
+import com.sky.utils.StringUtils
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okio.Buffer
@@ -101,7 +101,7 @@ open class BaseHttp {
         var responseStr = buffer.clone().readString(charset!!)
         if (responseBody.contentLength() != 0L) {
             responseStr = responseStr.replace(" ".toRegex(), "")
-            LogUtils.i(TextUtil.stripHtml(responseStr))
+            LogUtils.i(StringUtils.stripHtml(responseStr))
         }
         response
     }

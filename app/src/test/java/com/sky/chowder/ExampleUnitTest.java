@@ -1,6 +1,6 @@
 package com.sky.chowder;
 
-import com.sky.utils.TextUtil;
+import com.sky.utils.StringUtils;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -16,7 +16,7 @@ public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() throws Exception {
         assertEquals(4, 2 + 2);
-        Assert.assertEquals("88.00", TextUtil.formatDou().format(88));
-        Assert.assertEquals("空指针", TextUtil.getText(null));
+        Assert.assertEquals("88.00", StringUtils.keepTwoDecimalPlaces(88d));
+        Assert.assertEquals("空指针", StringUtils.getText(null));
     }
 }

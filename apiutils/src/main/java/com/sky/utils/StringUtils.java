@@ -8,13 +8,13 @@ import java.text.DecimalFormat;
 /**
  * Created by SKY on 16/5/10 下午3:50.
  */
-public class TextUtil {
+public class StringUtils {
     /**
      * @param text 控件
      * @return 获取控件中的内容
      */
     public static String getText(TextView text) {
-        if (text==null)return "";
+        if (text == null) return "";
         return text.getText().toString().trim();
     }
 
@@ -35,37 +35,26 @@ public class TextUtil {
         return true;
     }
 
-    /**
-     * 返回格式化成整数的数字
-     */
-    public static DecimalFormat formatInt() {
-        return new DecimalFormat("#0");
+    public static String keepTwoDecimalPlaces(String num) {
+        if (TextUtils.isEmpty(num)) return "";
+        return keepTwoDecimalPlaces(Double.parseDouble(num));
+    }
+
+    public static String keepTwoDecimalPlaces(Double num) {
+        //new BigDecimal(dou).setScale(2, BigDecimal.ROUND_UP));
+        return format(num, "#0.00");
     }
 
     /**
-     * 格式化成两位小数的数字
+     * @param num
+     * @param type #与0以及小数点三者自由组合，举例：
+     *             两位小数： #0.00；
+     *             整数：    #0；
+     *             科学技术： #,###.00"
+     * @return
      */
-    public static DecimalFormat formatDou() {
-        return new DecimalFormat("#0.00");
-    }
-
-    /**
-     * 单位换算
-     *
-     * @param size 单位为B
-     * @return 转换后的单位
-     */
-    public static String formatSize(long size) {
-        if (size < 1024)
-            return size + "B";
-        else if (size < 1024 * 1024)
-            return formatDou().format(size / 1024d) + "K";
-        else if (size < 1024 * 1024 * 1024)
-            return formatDou().format(size / (1024 * 1024d)) + "M";
-        else if (size < 1024 * 1024 * 1024 * 1024)
-            return formatDou().format(size / (1024 * 1024 * 1024d)) + "G";
-        else
-            return formatDou().format(size / (1024 * 1024 * 1024 * 1024d)) + "T";
+    public static String format(double num, String type) {
+        return new DecimalFormat(type).format(num);
     }
 
     /**

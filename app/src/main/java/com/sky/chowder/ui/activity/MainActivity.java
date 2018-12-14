@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toolbar;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.sky.adapter.RecyclerAdapter;
 import com.sky.chowder.R;
@@ -21,15 +23,12 @@ import com.sky.chowder.model.ActivityModel;
 import com.sky.chowder.ui.adapter.MainAdapter;
 import com.sky.chowder.ui.presenter.MainP;
 import com.sky.utils.AppUtils;
-import com.sky.utils.GsonUtils;
 import com.sky.utils.JumpAct;
 import com.sky.utils.LogUtils;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.List;
 
 import common.base.BasePActivity;
@@ -82,42 +81,55 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LogUtils.i("==真假==" + new DecimalFormat("#,###.00").format(dou));
-                LogUtils.i("==真假==" + new BigDecimal(dou).setScale(2, BigDecimal.ROUND_UP));
-                LogUtils.i("==真假==" + new BigDecimal(dou).toString());
-//  gsonBuilder();
+                gsonBuilder();
             }
         });
     }
 
-    String AA = "ABCD";
-
     private void gsonBuilder() {
+        GsonBuilder builder = new GsonBuilder();
+//        builder.excludeFieldsWithoutExposeAnnotation();//需要与@Expose搭配使用
+//        builder.serializeNulls();//属性值为空时输出 key:null
+//        builder.setPrettyPrinting();//tojson输出时，格式化json字符串
+//        builder.setVersion(1);//与@Since(1.2)或@Until(1.4)搭配使用才有效果
 
-// models = GsonUtils.jsonToEntity(gson.toJson(option.getValue()), new TypeToken<WorkProjectModel>() {
-// }.getType());
+        //自定义的序列化JsonSerializer与反序列化JsonDeserializer，定点适配，局限性很大，需要做费控判定。适用于单独解析特定的json语句
+//        builder.registerTypeAdapter(ActivityModel.class, new ModelSerial());//自定义的序列化
+//        builder.registerTypeAdapter(ActivityEntity.class, new ModelListSerial());//自定义序列化
+//        builder.registerTypeAdapter(new TypeToken<List<ActivityModel>>() {}.getRawType(), new ModelDeserial());//自定义反序列化，fromJson时会用，注意实体类不匹配的话会崩溃
 
-        ApiResponse<List<ActivityEntity>> entity = GsonUtils.jsonToEntity(getString(R.string.jsonlist), new TypeToken<ApiResponse<List<ActivityEntity>>>() {
+        //另一种自定义的序列化与反序列化，自定义TypeAdapter，重写read与write方法，定点适配，局限性很大，需要做费控判定。也只适用于单独解析特定的json数据
+//        builder.registerTypeAdapter(String.class, new StringNullAdapter());
+//        builder.registerTypeAdapter(ActivityEntity.class, new ActivityAdapter());
+
+//        builder.registerTypeAdapterFactory(new NullStringToEmptyAdapterFactory<String>());
+//        builder.registerTypeAdapterFactory(NullStringToEmptyAdapterFactory.getInstance());
+//        builder.registerTypeAdapterFactory(TypeAdapters.newFactory(String.class, new StringNullAdapter()));
+        Gson gson = builder.create();
+        TypeToken<ActivityEntity> type = new TypeToken<ActivityEntity>() {
+        };
+        LogUtils.i("type==" + type.getRawType());
+        LogUtils.i("type==" + type.getType());
+        TypeToken<List<ActivityEntity>> type1 = new TypeToken<List<ActivityEntity>>() {
+        };
+        LogUtils.i("type1==" + type1.getRawType());
+        LogUtils.i("type1==" + type1.getType());
+        TypeToken<ApiResponse<List<ActivityEntity>>> type2 = new TypeToken<ApiResponse<List<ActivityEntity>>>() {
+        };
+        LogUtils.i("type2==" + type2.getRawType());
+        LogUtils.i("type2==" + type2.getType());
+
+
+        ActivityEntity entitye = gson.fromJson(getString(R.string.jsonobj), ActivityEntity.class);
+        LogUtils.i(entitye.toString());
+        LogUtils.i(gson.toJson(entitye));
+        ApiResponse<List<ActivityEntity>> entity = gson.fromJson(getString(R.string.jsonlistnull), new TypeToken<ApiResponse<List<ActivityEntity>>>() {
         }.getType());
-        ApiResponse<List<ActivityEntity>> entity1 = GsonUtils.jsonToEntity(getString(R.string.jsonlistnull), new TypeToken<ApiResponse<List<ActivityEntity>>>() {
+        LogUtils.i(gson.toJson(entity.getObjList()));
+
+        ApiResponse<List<ActivityModel>> entity1 = gson.fromJson(getString(R.string.jsonlistnull), new TypeToken<ApiResponse<List<ActivityModel>>>() {
         }.getType());
-        LogUtils.i(entity.getObjList().toString());
-        LogUtils.i(entity1.getObjList().toString());
-// Gson gson = new GsonBuilder()
-//  .excludeFieldsWithoutExposeAnnotation()//序列化
-//  .registerTypeAdapterFactory(new NullStringToEmptyAdapterFactory<String>())
-////  .registerTypeAdapterFactory(NullStringToEmptyAdapterFactory.getInstance())
-//  .registerTypeAdapterFactory(TypeAdapters.newFactory(String.class, new StringNullAdapter()))
-////  .registerTypeAdapter(String.class, new StringNullAdapter())
-//  .serializeNulls()
-//  .create();
-// ApiResponse<List<ActivityEntity>> entity2 = new GsonBuilder().create().fromJson(getString(R.string.jsonlistnull), new TypeToken<ApiResponse<List<ActivityEntity>>>() {
-// }.getType());
-// ApiResponse<List<ActivityEntity>> entity3 = gson.fromJson(getString(R.string.jsonlistnull), new TypeToken<ApiResponse<List<ActivityEntity>>>() {
-// }.getType());
-// LogUtils.i(entity2.getObjList().toString());
-// LogUtils.i(entity3.getObjList().toString());
-// LogUtils.i(gson.toJson(entity3.getObjList()));
+        LogUtils.i(gson.toJson(entity1.getObjList()));
     }
 
     @Override

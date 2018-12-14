@@ -10,12 +10,14 @@ import java.lang.reflect.InvocationTargetException;
 
 public class NullStringToEmptyAdapterFactory<T> implements TypeAdapterFactory {
 
-    public static  NullStringToEmptyAdapterFactory getInstance(){
-        return  new NullStringToEmptyAdapterFactory();
+    public static NullStringToEmptyAdapterFactory getInstance() {
+        return new NullStringToEmptyAdapterFactory();
     }
+
     public static String getTypeAdapterFactoryName(String modelClassName) {
         return modelClassName + "TypeAdapter";
     }
+
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
 //        Class<T> rawType = (Class<T>) type.getRawType();
 //        if (rawType == String.class) {

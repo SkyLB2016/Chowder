@@ -12,20 +12,18 @@ dependencies {
     implementation "com.android.support:appcompat-v7:$SUPPORT_LIBRARY"
     implementation "com.android.support:design:$SUPPORT_LIBRARY"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-
-//    implementation 'com.facebook.fresco:fresco:1.4.0'
-    implementation("com.facebook.fresco:imagepipeline-okhttp3:${FRESCO_VERSION}") {
+    //    implementation 'com.facebook.fresco:fresco:1.4.0'
+//    implementation("com.facebook.fresco:imagepipeline-okhttp3:${FRESCO_VERSION}") {
 //        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
-    }
-
+//    }
     implementation project(':common')
     if (!puzzle.toBoolean()) {
         implementation project(':puzzle')
         implementation project(':g2048')
     }
     //butterknife
-//    annotationProcessor "com.jakewharton:butterknife-compiler:$bknifeVer"
-//    kapt "com.jakewharton:butterknife-compiler:$bknifeVer"
+    //    annotationProcessor "com.jakewharton:butterknife-compiler:$bknifeVer"
+    //    kapt "com.jakewharton:butterknife-compiler:$bknifeVer"
     //butterknife
 }
 def keyPass = rootProject.file("local.properties")

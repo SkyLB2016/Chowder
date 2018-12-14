@@ -7,7 +7,7 @@ import android.widget.EditText
 import com.sky.api.TextWatcherAdapter
 import com.sky.chowder.R
 import com.sky.chowder.utils.EditInputFilter
-import com.sky.utils.TextUtil
+import com.sky.utils.StringUtils
 import common.base.BaseNoPActivity
 import kotlinx.android.synthetic.main.activity_stock.*
 
@@ -55,9 +55,9 @@ class StockActivity : BaseNoPActivity() {
     }
 
     private fun setTotal() {
-        val strUnit = TextUtil.getText(etUnit)
-        val strNum = TextUtil.getText(etNum)
-        val strTotal = TextUtil.getText(etTotal)
+        val strUnit = StringUtils.getText(etUnit)
+        val strNum = StringUtils.getText(etNum)
+        val strTotal = StringUtils.getText(etTotal)
 
         val unit = if (strUnit.isNotEmpty()) strUnit?.toDouble() else 0.0
         val num = if (strNum.isNotEmpty()) strNum?.toDouble() else 0.0
@@ -102,5 +102,5 @@ class StockActivity : BaseNoPActivity() {
             else getDecimalFormat(num)
 
 
-    private fun getDecimalFormat(num: Double) = TextUtil.formatDou().format(num).toDouble()
+    private fun getDecimalFormat(num: Double) = StringUtils.keepTwoDecimalPlaces(num).toDouble()
 }

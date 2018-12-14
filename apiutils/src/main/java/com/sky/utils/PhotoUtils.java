@@ -116,7 +116,7 @@ public class PhotoUtils {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != Activity.RESULT_OK) return;
         String error = activity.getString(R.string.photo_fail);
-        if (TextUtil.notNull(photoPath, error)) return;
+        if (StringUtils.notNull(photoPath, error)) return;
         Bitmap bitmap = null;
         switch (requestCode) {
             case PHOTO: //拍照
@@ -125,9 +125,9 @@ public class PhotoUtils {
             case LOCAL_PHOTO: //图库选择
                 if (data == null) return;
                 Uri uri = data.getData(); //获得图片的uri
-                if (TextUtil.notNullObj(uri, error)) return;
+                if (StringUtils.notNullObj(uri, error)) return;
                 String path = BitmapUtils.getRealPathFromURI(activity, uri);//获取路径
-                if (TextUtil.notNull(path, error)) return;
+                if (StringUtils.notNull(path, error)) return;
                 bitmap = BitmapUtils.getBitmapFromPath(path, 600, 600);//获取bitmap
                 break;
         }

@@ -4,16 +4,17 @@ import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextUtils;
 
-import com.sky.utils.LogUtils;
-
 import java.text.DecimalFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * 长度为12为，包含两位小数以及小数点
+ */
 public class EditInputFilter implements InputFilter {
 
     Pattern mPattern;
-    //输入的最大金额
+    //输入的最大数字
     private static final double MAX_VALUE = Double.MAX_VALUE;
     //小数点后的位数
     private static final int POINTER_LENGTH = 2;
@@ -69,15 +70,14 @@ public class EditInputFilter implements InputFilter {
                 }
             }
         }
-        //验证输入金额的大小
+        //验证输入熟悉的大小
         double sumText = Double.parseDouble(destText + sourceText);
         if (sumText > MAX_VALUE) {
             return dest.subSequence(dstart, dend);
         }
-        LogUtils.i("source==" + dest.subSequence(dstart, dend));
-        LogUtils.i("长度==" + dend);
-        if (dest.toString().length() == 12)
+        if (dest.toString().length() == 12) {
             return "";
+        }
         return dest.subSequence(dstart, dend) + sourceText;
     }
 

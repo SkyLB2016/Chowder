@@ -7,6 +7,10 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 
+/**
+ * 字符串解析返回  ""
+ * Created by libin on 2018/12/13 9:15 PM.
+ */
 public class StringNullAdapter extends TypeAdapter<String> {
     @Override
     public String read(JsonReader reader) throws IOException {

@@ -8,7 +8,7 @@ import android.os.Message
 import com.sky.utils.BitmapUtils
 import com.sky.utils.PhotoUtils
 import com.sky.utils.ScreenUtils
-import com.sky.utils.TextUtil
+import com.sky.utils.StringUtils
 import common.base.BaseNoPActivity
 import kotlinx.android.synthetic.main.activity_puzzle.*
 
@@ -61,9 +61,9 @@ class PuzzleActivity : BaseNoPActivity() {
             PhotoUtils.LOCAL_PHOTO -> {
                 if (data == null) return
                 val uri = data.data //获得图片的uri
-                if (TextUtil.notNullObj(uri, error)) return
+                if (StringUtils.notNullObj(uri, error)) return
                 val path = BitmapUtils.getRealPathFromURI(this, uri)//获取路径
-                if (TextUtil.notNull(path, error)) return
+                if (StringUtils.notNull(path, error)) return
                 puzzle.bitmap = BitmapUtils.getBitmapFromPath(path, 2048, 2048)//获取bitmap
                 ImgOriginal.setImageBitmap(puzzle.bitmap)
                 setObject("puzzle", path)

@@ -1,4 +1,21 @@
-算法
-1）冒泡排序：选定一端，两相比较，顺序错误则交换。
-2）选择排序：每次选出最大或最小的放在队首，直到完成。
-3）插入排序：排序头两个数据，然后每次增加一个数据来循环，直到完成。
+Gson解析汇总
+1.基类JSonElement，四种类型：
+　　1）JsonPrimitive：八中基本类型与String最后都是以JsonPrimitive（也就是JsonElemen　　t）存入json中的。
+　　2）JsonObject：其中的存在形式都是：key:JsonElement，经过addProperty方法，所有类型都会封装进JsonPrimitive中。
+　　3）JsonArray：JsonElement的集合。
+　　4）JsonNull：值为空。
+2.注解：
+　　1）@SerializedName：Gson解析时会把name识别成className，alternate：其他名称。
+@SerializedName(value = "className")
+private String name;
+　　2）@Expose：是否可序列化，搭配GsonBuilder中的 excludeFieldsWithoutExposeAnnotation() 方法使用,默认为true，序列化与反序列化可单独设置。
+　　3）JsonAdapter
+　　4）@Since(1.2)与@Until(1.4)
+　　从1.2这个版本开始使用；到1.4这个版本为止停止使用
+　　这两个注解需要搭配GsonBuilder的serVersion(1.0)来使用。
+3.JsonSerializer与JsonDeserializer：序列化（实体转json）与反序列化（json转实体），两者合起来就是@SerializedName，需要搭配GsonBuilder的registerTypeAdapter来使用。
+
+
+
+
+
