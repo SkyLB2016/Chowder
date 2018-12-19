@@ -11,7 +11,7 @@ import java.lang.reflect.Type;
 /**
  * 序列化成json
  */
-public class ModelSerial implements JsonSerializer<ActivityModel> {
+public class ActivitySerial implements JsonSerializer<ActivityModel> {
 
     @Override
     public JsonElement serialize(ActivityModel model, Type typeOfSrc, JsonSerializationContext context) {

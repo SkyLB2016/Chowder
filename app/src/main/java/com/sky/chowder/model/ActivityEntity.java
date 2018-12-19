@@ -8,24 +8,27 @@ import com.google.gson.annotations.SerializedName;
 import com.sky.utils.GsonUtils;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
+//@JsonAdapter(ActivityEntityTypeAdapter.class)
 public class ActivityEntity implements Serializable, Comparable<ActivityEntity>, Cloneable {
     private static final long serialVersionUID = -7780617194676472734L;
     @Expose
-    @SerializedName(value = "className",alternate = {"cla","ca"})
+    @SerializedName(value = "className", alternate = {"cla", "ca"})
     private String name;
     @Expose
-    @SerializedName(value = "describe")
+    @SerializedName("describe")
     private String des;
     @Expose
-    @SerializedName(value = "componentName")
+    @SerializedName("componentName")
     private String component;
 
-    @SerializedName(value = "img")
+    @SerializedName("img")
     private int image;
 
     private double version = 99.9;
+    private List<ActivityEntity> objList;
 
     public ActivityEntity() {
     }
@@ -115,5 +118,13 @@ public class ActivityEntity implements Serializable, Comparable<ActivityEntity>,
 
     public void setVersion(double version) {
         this.version = version;
+    }
+
+    public List<ActivityEntity> getObjList() {
+        return objList;
+    }
+
+    public void setObjList(List<ActivityEntity> objList) {
+        this.objList = objList;
     }
 }

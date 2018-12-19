@@ -16,8 +16,8 @@
 //import com.sky.chowder.model.ActivityModel
 //import com.sky.chowder.ui.adapter.MainAdapter
 //import com.sky.chowder.ui.presenter.MainP
-//import com.sky.chowder.utils.NullStringToEmptyAdapterFactory
-//import com.sky.chowder.utils.StringNullAdapter
+//import com.sky.chowder.model.gson.NullStringToEmptyAdapterFactory
+//import com.sky.chowder.model.gson.StringNullAdapter
 //import com.sky.utils.AppUtils
 //import com.sky.utils.GsonUtils
 //import com.sky.utils.JumpAct

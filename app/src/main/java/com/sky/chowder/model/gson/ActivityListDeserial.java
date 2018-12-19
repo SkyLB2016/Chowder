@@ -16,7 +16,7 @@ import java.util.List;
  * json转实体
  * Created by libin on 2018/12/13 8:04 PM.
  */
-public class ModelDeserial implements JsonDeserializer<List<ActivityModel>> {
+public class ActivityListDeserial implements JsonDeserializer<List<ActivityModel>> {
 
     @Override
     public List<ActivityModel> deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {

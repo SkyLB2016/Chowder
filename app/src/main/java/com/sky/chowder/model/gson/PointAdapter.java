@@ -1,4 +1,4 @@
-package com.sky.chowder.utils;
+package com.sky.chowder.model.gson;
 
 import android.graphics.Point;
 

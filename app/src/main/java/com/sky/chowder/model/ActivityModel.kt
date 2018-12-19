@@ -1,5 +1,7 @@
 package com.sky.chowder.model
 
+import com.google.gson.annotations.JsonAdapter
+import com.sky.chowder.model.gson.ActivityDeserial
 import com.sky.utils.GsonUtils
 import java.io.Serializable
 
@@ -7,6 +9,7 @@ import java.io.Serializable
  * Created by SKY on 15/12/9 下午8:54.
  * activity信息类
  */
+@JsonAdapter(ActivityDeserial::class)
 class ActivityModel(var className: String?//activity的名称
                     , var describe: String?//activity的描述
                     , var img: Int//代表图片

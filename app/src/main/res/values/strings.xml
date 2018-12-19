@@ -95,63 +95,6 @@
         {"className":"习", "componentName":"相", "img":3, "describe":"远","version":5.3}
         ]
     </string>
-    <string name="work">
-        [
-                            {
-                                "reportWork_dayWorkTime": [
-                                    {
-                                        "reportWork_workDate": "1542790382970",
-                                        "reportWork_overtimeTotal": "9.0",
-                                        "reportWork_normalTotal": "6.0"
-                                    }
-                                ],
-                                "reportWork_project": [
-                                    {
-                                        "id": "10000029324",
-                                        "reportWork_overtimeTotal": "9",
-                                        "reportWork_task": [
-                                            {
-                                                "id": "1500014724175",
-                                                "name": "222",
-                                                "reportWork_workTime": [
-                                                    {
-                                                        "reportWork_overtime": "9",
-                                                        "reportWork_workDate": "1542556800000",
-                                                        "reportWork_normal": "6"
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                "id": "1500014724175",
-                                                "name": "222",
-                                                "reportWork_workTime": [
-                                                    {
-                                                        "reportWork_overtime": "0",
-                                                        "reportWork_workDate": "1542643200000",
-                                                        "reportWork_normal": "0"
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                "id": "1500014724175",
-                                                "name": "222",
-                                                "reportWork_workTime": [
-                                                    {
-                                                        "reportWork_overtime": "0",
-                                                        "reportWork_workDate": "1542729600000",
-                                                        "reportWork_normal": "0"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        "name": "时间成本",
-                                        "reportWork_normalTotal": "6"
-                                    }
-                                ],
-                                "reportWork_timeType": "0"
-                            }
-                        ]
-    </string>
 
     <string name="format00">替换%d比%d大还是小 %n</string>
     <string name="format01">顺序替换%2$d比%1$d大还是小 %n</string>

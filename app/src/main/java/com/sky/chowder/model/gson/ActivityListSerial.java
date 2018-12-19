@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * 序列化成json
  */
-public class ModelListSerial implements JsonSerializer<List<ActivityModel>> {
+public class ActivityListSerial implements JsonSerializer<List<ActivityModel>> {
 
     @Override
     public JsonElement serialize(List<ActivityModel> src, Type typeOfSrc, JsonSerializationContext context) {
