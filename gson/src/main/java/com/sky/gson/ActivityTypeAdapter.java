@@ -1,4 +1,4 @@
-package com.sky.chowder.model.gson;
+package com.sky.gson;
 
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by libin on 2018/12/13 9:31 PM.
  */
-public class ActivityEntityTypeAdapter extends TypeAdapter<ActivityEntity> {
+public class ActivityTypeAdapter extends TypeAdapter<ActivityEntity> {
     @Override
     public ActivityEntity read(JsonReader in) throws IOException {
         if (in.peek() == JsonToken.NULL) {

@@ -9,9 +9,9 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.NumberPicker
 import com.sky.chowder.R
+import com.sky.chowder.gson.GsonUtils
 import com.sky.chowder.model.AreaEntity
 import com.sky.utils.FileUtils
-import com.sky.utils.GsonUtils
 import com.sky.utils.ScreenUtils
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -48,7 +48,7 @@ class AddressFragment : DialogFragment() {
     private fun initData() {
 //        Observable.just(FileUtils.readAssestToStr(activity, "address.json"))
         Observable.just(FileUtils.readInput(activity?.assets?.open("address.json")))
-                .map { s -> GsonUtils.jsonToArray(s, Array<AreaEntity>::class.java) }
+                .map { s -> GsonUtils.fromJson(s, Array<AreaEntity>::class.java) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { areaEntities ->

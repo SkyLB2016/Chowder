@@ -1,6 +1,6 @@
 Gson解析汇总
 1.基类JSonElement，四种类型：
-　　1）JsonPrimitive：八中基本类型与String最后都是以JsonPrimitive（也就是JsonElemen　　t）存入json中的。
+　　1）JsonPrimitive：八中基本类型与String最后都是以JsonPrimitive（也就是JsonElement）存入json中的。
 　　2）JsonObject：其中的存在形式都是：key:JsonElement，经过addProperty方法，所有类型都会封装进JsonPrimitive中。
 　　3）JsonArray：JsonElement的集合。
 　　4）JsonNull：值为空。
@@ -10,8 +10,7 @@ Gson解析汇总
 　　3）@Since(1.2)与@Until(1.4)：从1.2这个版本开始使用；到1.4这个版本为止停止使用，这两个注解需要搭配GsonBuilder的serVersion(1.0)来使用。
 　　4）@JsonAdapter：类的注解，支持TypeAdapter，TypeAdapterFactory，JsonSerializer，JsonDeserializer；使用此注解后就无需registerTypeAdapter等注册，他会自动注册的，且优先级更高。
 3.JsonSerializer与JsonDeserializer：序列化（实体转json）与反序列化（json转实体），两者合起来就是@SerializedName，需要搭配GsonBuilder的registerTypeAdapter来使用。
-
-
+4.使用方法介绍，参考GsonUtils类
 
 
 

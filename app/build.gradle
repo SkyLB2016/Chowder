@@ -16,6 +16,7 @@ dependencies {
 //    implementation("com.facebook.fresco:imagepipeline-okhttp3:${FRESCO_VERSION}") {
 //        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
 //    }
+    api "com.google.code.gson:gson:$GSON_VERSION"
     implementation project(':common')
     if (!puzzle.toBoolean()) {
         implementation project(':puzzle')

@@ -1,4 +1,4 @@
-package com.sky.chowder.model.gson;
+package com.sky.chowder.gson;
 
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;

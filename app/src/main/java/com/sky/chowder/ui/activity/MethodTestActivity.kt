@@ -26,9 +26,11 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import android.view.animation.LayoutAnimationController
 import android.widget.TextView
+import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.sky.SkyApp
 import com.sky.chowder.R
+import com.sky.chowder.gson.GsonUtils
 import com.sky.chowder.model.ActivityModel
 import com.sky.chowder.other.factory.abstractfactory.HNFactory
 import com.sky.chowder.other.factory.abstractfactory.MCFctory
@@ -37,7 +39,10 @@ import com.sky.chowder.other.factory.factory.hair.LeftHair
 import com.sky.chowder.ui.fragment.AddressFragment
 import com.sky.chowder.ui.fragment.TimeFragment
 import com.sky.chowder.utils.http.HttpUrl
-import com.sky.utils.*
+import com.sky.utils.AppUtils
+import com.sky.utils.DateUtil
+import com.sky.utils.LogUtils
+import com.sky.utils.MD5Utils
 import common.base.BaseNoPActivity
 import common.base.BasePActivity
 import common.model.ApiResponse
@@ -390,14 +395,14 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener, Observer {
                 .sortedBy { it }
                 .map { it.toUpperCase() }
                 .forEach { text.append(it + "\n") }
-        val array = GsonUtils.jsonToArray(getString(R.string.jsonarray), Array<ActivityModel>::class.java)
+        val array = GsonUtils.fromJson(getString(R.string.jsonarray), Array<ActivityModel>::class.java)
         array.sortedByDescending { it }
                 .forEach { text.append(it.className + "\n") }
         return text.toString()
     }
 
     private fun iterator(): String {
-        val list = GsonUtils.jsonToList(getString(R.string.jsonarray), Array<ActivityModel>::class.java)
+        val list = GsonUtils.fromJson(getString(R.string.jsonarray), Array<ActivityModel>::class.java)
         val iter = list.iterator()
         val text = StringBuilder()
         for (i in iter) text.append(i.toString())
@@ -409,10 +414,10 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener, Observer {
     }
 
     private fun changeJson(): String {
-        val model = GsonUtils.jsonToEntity(getString(R.string.jsonobj), ActivityModel::class.java)
-        val entity = GsonUtils.jsonToEntity<ApiResponse<List<ActivityModel>>>(getString(R.string.jsonlist), object : TypeToken<ApiResponse<List<ActivityModel>>>() {}.type)
-        val list = GsonUtils.jsonToList(getString(R.string.jsonarray), Array<ActivityModel>::class.java)
-        val array = GsonUtils.jsonToArray(getString(R.string.jsonarray), Array<ActivityModel>::class.java)
+        val model = GsonUtils.fromJson(getString(R.string.jsonobj), ActivityModel::class.java)
+        val entity = GsonUtils.fromJson<ApiResponse<List<ActivityModel>>>(getString(R.string.jsonlist), object : TypeToken<ApiResponse<List<ActivityModel>>>() {}.type)
+        val list = Gson().fromJson(getString(R.string.jsonarray), Array<ActivityModel>::class.java)
+        val array = Gson().fromJson(getString(R.string.jsonarray), Array<ActivityModel>::class.java)
         val text = StringBuilder()
         text.append(model.toString() + "\n")
         text.append(entity.objList.toString() + "\n")

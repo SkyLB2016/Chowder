@@ -47,7 +47,6 @@ android {
         abortOnError false
     }
 }
-def retrofit2 = '2.4.0'
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     api "com.android.support:appcompat-v7:$SUPPORT_LIBRARY"
@@ -55,17 +54,17 @@ dependencies {
     api "com.android.support:design:$SUPPORT_LIBRARY"
     api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     //rxjava
-    api 'io.reactivex.rxjava2:rxjava:2.1.5'
-    api 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    api "io.reactivex.rxjava2:rxjava:$RXJAVA_VERSION"
+    api "io.reactivex.rxjava2:rxandroid:$RXANDROID_VERSION"
     //rxjava
     //retrofit2
-    api "com.squareup.retrofit2:retrofit:$retrofit2"
-    api "com.squareup.retrofit2:converter-gson:$retrofit2"
-    api 'com.google.code.gson:gson:2.8.5'
-
-    api "com.squareup.retrofit2:adapter-rxjava2:$retrofit2"
+    api "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
+    api("com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION") {
+        exclude group: 'com.google.code.gson', module: 'gson'
+    }
+    api "com.squareup.retrofit2:adapter-rxjava2:$RETROFIT_VERSION"
     //retrofit2
-    api 'com.squareup.okhttp3:okhttp:3.10.0'
+    api "com.squareup.okhttp3:okhttp:$OKHTTP_VERSION"
 //    api "com.jakewharton:butterknife:$bknifeVer"
     //工具类
     //    api 'com.blankj:utilcode:1.6.3'

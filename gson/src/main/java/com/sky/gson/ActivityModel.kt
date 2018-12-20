@@ -1,8 +1,8 @@
 package com.sky.chowder.model
 
 import com.google.gson.annotations.JsonAdapter
-import com.sky.chowder.gson.ActivityDeserial
-import com.sky.chowder.gson.GsonUtils
+import com.sky.chowder.model.gson.ActivityDeserial
+import com.sky.utils.GsonUtils
 import java.io.Serializable
 
 /**
