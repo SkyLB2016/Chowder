@@ -2,10 +2,12 @@ package com.sky.chowder.model;
 
 import android.support.annotation.NonNull;
 
+import com.google.gson.JsonObject;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.sky.chowder.gson.ActivityTypeAdapter;
+import com.sky.chowder.gson.GsonUtils;
 
 import java.io.Serializable;
 import java.util.List;
@@ -33,20 +35,20 @@ public class ActivityEntity implements Serializable, Comparable<ActivityEntity>,
     public ActivityEntity() {
     }
 
-//    @Override
-//    public String toString() {
-//        return GsonUtils.toJson(this);
-//    }
-//
-//    public String toString1() {
-//        JsonObject json = new JsonObject();
-//        json.addProperty("name", getName());
-//        json.addProperty("des", getDes());
-//        json.addProperty("component", getComponent());
-//        json.addProperty("image", getImage());
-//        json.addProperty("version", getVersion());
-//        return json.toString();
-//    }
+    @Override
+    public String toString() {
+        return GsonUtils.toJson(this);
+    }
+
+    public String toString1() {
+        JsonObject json = new JsonObject();
+        json.addProperty("name", getName());
+        json.addProperty("des", getDes());
+        json.addProperty("component", getComponent());
+        json.addProperty("image", getImage());
+        json.addProperty("version", getVersion());
+        return json.toString();
+    }
 
     @Override
     public boolean equals(Object o) {

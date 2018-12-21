@@ -3,7 +3,7 @@ gradle命令行
 gradlew -v 查询版本号
 gradlew clean 清除项目的output文件
 gradlew check 运行检测和测试任务 
-gradlew build 运行check和assemble，检查依赖并便已打包（debug、release环境的包）
+gradlew build 运行check和assemble，检查依赖并打包（debug、release环境的包）
 gradlew clean build 运行clean和build两个task
 gradlew assemble 编译并打Debug和Release包
 gradlew assembleDebug 编译并把本项目下所有模块所有渠道的Debug版本打包
@@ -18,12 +18,20 @@ gradlew错误
 zsh: permission denied: ./gradlew
 运行 chmod +x gradlew
 
-compileSdkVersion 依赖的Android版本
-minSDKVersion xx --  targetSDKVersion xx：兼容从最小版本到目标版本之间所有api的变化；
+compileSdkVersion 依赖的Android SDK版本
+minSDKVersion xx --  targetSDKVersion xx：兼容从xx到xx之间所有api的变化；
 三者关系：minsdkVersion<=TargetSdkVersion<=compileSdkVersion;
 理想关系：minsdkVersion<=TargetSdkVersion==compileSdkVersion，目标与依赖相同
 
-删除Android开发缓存
+
+
+
+
+
+
+
+
+MAC下删除Android开发缓存
 1.AndroidStudio所在目录
 rm -rf /Applications/Android\ Studio.app
 SDK所在目录

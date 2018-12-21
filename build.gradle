@@ -49,7 +49,9 @@ def buildTime() {
 //运行 gradlew hello (-q只显示有用的信息)
 task hello {
     doLast {
-        println 'Hello world!'
+        println('Hello world!')
+//        println(project.getAllprojects())
+        println(project.path)
     }
 }
 //clearApk,makeApk分别是删除，拷贝，以及将其连接起来的一个设置。
