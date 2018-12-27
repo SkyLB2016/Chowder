@@ -2,12 +2,14 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+//apply plugin: 'grovvy'
+description = "程序集合的主项目"
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    testImplementation 'junit:junit:4.12'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+//    testImplementation 'junit:junit:4.12'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation "com.android.support:cardview-v7:$SUPPORT_LIBRARY"
     implementation "com.android.support:appcompat-v7:$SUPPORT_LIBRARY"
     implementation "com.android.support:design:$SUPPORT_LIBRARY"
@@ -22,6 +24,9 @@ dependencies {
         implementation project(':puzzle')
         implementation project(':g2048')
     }
+    implementation (name:'apiutils',ext:'aar')
+
+//    implementation 'org.codehaus.groovy:groovy-all:2.5.5'
     //butterknife
     //    annotationProcessor "com.jakewharton:butterknife-compiler:$bknifeVer"
     //    kapt "com.jakewharton:butterknife-compiler:$bknifeVer"
@@ -34,14 +39,14 @@ android {
     compileSdkVersion COMPILE_SDK_VERSION as int
     buildToolsVersion '28.0.3'
     defaultConfig {
-        applicationId "com.sky.chowder"
+        applicationId "com.sky"
         minSdkVersion MIN_SDK_VERSION as int
         targetSdkVersion TARGET_SDK_VERSION as int
         versionCode 3
         versionName "3.0"
         // dex突破65535的限制
 //        multiDexEnabled true
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+//        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [CHANNEL_VALUE: "umeng"]//默认是umeng的渠道
         ndk {
             //添加对应cpu类型的.so库。
@@ -94,15 +99,26 @@ android {
 //        umeng {}
     }
     productFlavors.all { flavor -> flavor.manifestPlaceholders = [CHANNEL_VALUE: name] }
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
 }
 
 def creatName() {
     android.applicationVariants.all { variant ->
         variant.outputs.all {
             if (variant.buildType.name == "debug") outputFileName = "${variant.baseName}_${variant.versionName}.apk"
-            else outputFileName = "${variant.baseName}_${variant.versionName}_${buildTime()}.apk"
+            else outputFileName = "${variant.baseName}_${variant.versionName}.apk"//_${buildTime()}
         }
     }
+}
+
+def buildTime() {
+    def date = new Date()
+    def formattedDate = date.format('yyyy年MM月dd日HH时mm分ss秒')
+    return formattedDate
 }
 //            applicationVariants.all { variant ->
 //                variant.outputs.all { output ->
@@ -119,3 +135,45 @@ def creatName() {
 //
 //                }
 //            }
+
+task hello <<{
+    println "app的 hello World"
+}
+task projectInfo << {
+    println "name            ==" + project.name            //String 	项目目录的名称。
+    println "path            ==" + project.path            //String 	项目的绝对路径。
+    println "description     ==" + project.description     //String 	项目的描述。
+    println "projectDir      ==" + project.projectDir      //File 	包含生成脚本的目录。
+    println "buildDir        ==" + project.buildDir        //File 	projectDir/build
+    println "group           ==" + project.group           //Object 	未指定
+    println "version         ==" + project.version         //Object 	未指定
+    println "ant             ==" + project.ant             //AntBuilder 	AntBuilder实例
+}
+
+
+ext {
+    springVersion = "3.3.3"
+    emailNotification = "abcdefghijklmn"
+}
+sourceSets.all {
+    ext.purpose = null
+}
+sourceSets {
+    main {
+        purpose = "production"
+    }
+    test {
+        purpose = "test"
+    }
+    plugin {
+        purpose = "production"
+    }
+}
+
+task printProperties << {
+    println springVersion
+    println emailNotification
+    sourceSets.matching { it.purpose == "production" }.each { println it.getName() }
+}
+configurations.runtime.each {f->println f.path}
+

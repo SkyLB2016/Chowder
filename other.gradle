@@ -1,0 +1,7 @@
+//beginIndex = 1;
+//endIndex = 5;
+
+
+//task hello
+//println tasks.getByPath('hello').path
+//println tasks.getByPath(':hello').path

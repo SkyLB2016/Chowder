@@ -36,42 +36,182 @@ allprojects {
         }
     }
 }
+description = "项目的根目录"
 
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-def buildTime() {
-    def date = new Date()
-    def formattedDate = date.format('yyyy年MM月dd日HH时mm分ss秒')
-    return formattedDate
-}
 //运行 gradlew hello (-q只显示有用的信息)
 task hello {
     doLast {
         println('Hello world!')
-//        println(project.getAllprojects())
-        println(project.path)
     }
 }
-//clearApk,makeApk分别是删除，拷贝，以及将其连接起来的一个设置。
-// 其目的是拷贝 build/outputs/apk下面的debug apk文件到项目根目录的 release 文件夹下，并且更名。与featureCompile冲突
-task clearApk(type: Delete) {
-//    delete '../release/' + POM_ARTIFACT_ID + '_' + VERSION_NAME + '.apk'
-    delete 'app-sky-release.apk'
+//增加任务的行为功能（短标记法）
+hello << {
+    println('<<相当于doLast!')
 }
-task makeApk(type: Copy) {
-    from('/sky/release/')
-    into('/sky/release/')//从哪到哪
-//    include('app-sky-release.apk')//指定移动这个文件
-//    rename('MyDemo-sky-release-v1.1-20150909.apk', POM_ARTIFACT_ID + '_' + VERSION_NAME + '.apk')
-    rename('app-sky-release.apk', "${buildTime()}.apk")
+//增加任务的行为功能
+hello.doFirst {
+    println "增加doFirst"
+}
+task upper << {
+    String text = "text"
+    println text.toUpperCase()
+}
+//任务依赖，兼延迟依赖
+task count(dependsOn: 'delay') << {
+    4.times { count ->
+        println "$count"
+    }
+}
+task delay << {
+    println "delay" + upper.path
+}
+//创建动态任务
+4.times { count ->
+    task "task$count" << {
+        println "输出数据$count"
+    }
+}
+//动态依赖
+task1.dependsOn task2, task3
+
+//自定义属性，在dolast，doFirst中不起作用
+task customProper {
+    ext.myProperties = "测试"
+}
+task proper << {
+    println customProper.myProperties
+    println "执行的任务为$version"
 }
 
-task removeFile(type: Copy) {
-    from('~/Documents/WorkSpace/Chowder/app/命名规则.txt')
-    into('~/Documents/WorkSpace/Chowder/app/src/main/assets/Documents/命名规则.txt')//从哪到哪
-//    include('app-sky-release.apk')//指定移动这个文件
-//    rename('MyDemo-sky-release-v1.1-20150909.apk', POM_ARTIFACT_ID + '_' + VERSION_NAME + '.apk')
-//    rename('命名规则.txt', "命名规则.txt")
+//Ant调用
+def dir = 'app/src/main/assets/Documents'
+task loadFile << {
+    def files = file(dir).listFiles().sort()
+    files.each { File file ->
+        if (file.isFile()) {
+            ant.loadfile(srcFile: file, property: file.name)
+            println " *** $file.name ***"
+            println "${ant.properties[file.name]}"
+        }
+    }
+}
+task checkSum << {
+    fileList(dir).each { File file ->
+        ant.checksum(file: file, property: "cs_$file.name")
+        println "$file.name Checksum: ${ant.properties["cs_$file.name"]}"
+    }
+}
+loadFile << {
+    fileList(dir).each { File file ->
+        ant.loadfile(srcFile: file, property: file.name)
+        println "I'm fond of $file.name"
+    }
+}
+
+File[] fileList(String dir) {
+    file(dir).listFiles({ file -> file.isFile() } as FileFilter).sort()
+}
+
+//设置默认任务
+defaultTasks 'a', 'b', 'c'
+task a << {
+    println "默认任务：$version"
+}
+task b(dependsOn: a) << {
+    println "默认任务：$version"
+}
+task c << {
+    println "默认任务：$version"
+}
+//所以来任务的不同输出，每次执行任务都会执行以下方法
+gradle.taskGraph.whenReady {
+    taskGraph ->
+        if (taskGraph.hasTask(b)) {
+            version = 'b'
+        } else {
+            version = taskGraph.allTasks[0]
+        }
+//        println "执行的任务为$version"
+}
+//project的信息
+task projectInfo << {
+    println "name            ==" + project.name            //String 	项目目录的名称。
+    println "path            ==" + project.path            //String 	项目的绝对路径。
+    println "description     ==" + project.description     //String 	项目的描述。
+    println "projectDir      ==" + project.projectDir      //File 	包含生成脚本的目录。
+    println "buildDir        ==" + project.buildDir        //File 	projectDir/build
+    println "group           ==" + project.group           //Object 	未指定
+    println "version         ==" + project.version         //Object 	未指定
+    println "ant             ==" + project.ant             //AntBuilder 	AntBuilder实例
+}
+
+//-p：增加新的属性；
+//-d：增加新的系统属性
+//gradle -q -P commandLineProjectProp=properties -D org.gradle.project.systemProjectProp=systemPropertyValue printProps
+task printPropers << {
+//    println commandLineProjectProp
+    println gradlePropertiesProp
+//    println systemProjectProp
+    println envProjectProp
+    println System.properties['system']
+    println project.hasProperty('puzzle')
+}
+//外部脚本配置
+task outGradleConfigure << {
+    def pos = new java.text.FieldPosition(10)
+    // Apply the script
+    apply from: 'other.gradle', to: pos
+    println pos.beginIndex
+    println pos.endIndex
+}
+//定位任务的方法
+project.task("custom")
+//task custom
+custom << {
+    println custom.name
+    println tasks.custom.name
+    println tasks['custom'].name
+    println project.custom.name
+    println project.name
+    println project.getTasksByName("custom", false).name
+    println tasks.getByPath("custom")
+    println tasks.getByPath("custom").path
+    println tasks.getByPath("custom").name
+}
+
+//任务配置的几种方式
+//第一种：直接使用闭包定义任，最常用，最直接的
+//task copyFile(type: Copy) {
+//    from('./test')
+//    into('./sky/')//从哪到哪
+////    include('test')//指定复制这个文件
+//    rename('test', "命名规则.txt")//重命名
+//}
+
+//第二种
+//Copy copyFile = task('copyFile', type: Copy)
+//copyFile.from './test'
+//copyFile.into './sky'
+//copyFile.include('**/*.txt', '**/*.xml', '**/*.properties')
+
+//第三种:配置任务，之后使用闭包
+task copyFile(type: Copy)
+copyFile {
+    from './test'
+    into './sky'
+//    include('**/*.txt', '**/*.xml', '**/*.properties')
+    rename('test', "命名规则.txt")
+}
+
+
+File classesDir = new File('测试/1')
+task dependAll << {
+    classesDir.mkdirs()
+}
+dependAll.dependsOn {
+    tasks.findAll { task -> task.name != 'dependAll' }
 }
