@@ -31,9 +31,9 @@ allprojects {
 //        maven {
 //            url 'https://dl.bintray.com/skycx/maven'
 //        }
-        flatDir {
-            dirs 'libs'
-        }
+//        flatDir {
+//            dirs 'libs'
+//        }
     }
 }
 description = "项目的根目录"

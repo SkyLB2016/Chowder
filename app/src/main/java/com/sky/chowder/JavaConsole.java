@@ -1,7 +1,8 @@
 package com.sky.chowder;
 
-import com.sky.utils.LogUtils;
+import com.sky.utils.RegexUtils;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,29 +13,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JavaConsole {
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    static String ac ="hh";
+    private static  String anInt = ac;
 
-//        int count;
-//        String content;
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-//        char[] chars = new char[1024];
-//        while ((count = reader.read(chars)) != -1) {
-//            content = new String(chars, 0, count);
-//            if (RegexUtils.isEmail(content.trim())) {
-//                System.out.println("成功");
-//            } else System.out.println("失败");
-//        }
-//        reader.reset();
-
-//        BufferedInputStream inputStream = new BufferedInputStream(System.in);
-//        byte[] butes = new byte[1024];
-//        while ((count = inputStream.read(butes)) != -1) {
-//            content = new String(butes, 0, count);
-//            content = content.replace('\n', ' ');
-//            System.out.println("第" + content + "个=");
-//        }
+    public static void main(String[] args) {
+        System.out.println("anInt==" + anInt);
+        ac = "aa";
+        System.out.println("anInt==" + anInt);
+//        IOTest();
 //        readSdFile(new File("C:\\WorkSpace\\Chowder\\app\\total"));
-        readS();
+//        readS();
+    }
+
+    private static void IOTest() throws IOException {
+        int count;
+        String content;
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        char[] chars = new char[1024];
+        while ((count = reader.read(chars)) != -1) {
+            content = new String(chars, 0, count);
+            if (RegexUtils.isEmail(content.trim())) {
+                System.out.println("成功");
+            } else System.out.println("失败");
+        }
+        reader.reset();
+//
+        BufferedInputStream inputStream = new BufferedInputStream(System.in);
+        byte[] butes = new byte[1024];
+        while ((count = inputStream.read(butes)) != -1) {
+            content = new String(butes, 0, count);
+            content = content.replace('\n', ' ');
+            System.out.println("第" + content + "个=");
+        }
     }
 
     private static void readS() {
@@ -45,7 +55,7 @@ public class JavaConsole {
         for (int i = 0; i < chars.length; i++) {
             builder.append(chars[i]);
             if ((i + 1) % 16 == 0) builder.append("\n");
-            LogUtils.i(builder.toString());
+//            LogUtils.i(builder.toString());
 
         }
         FileWriter writer = null;
@@ -151,8 +161,6 @@ public class JavaConsole {
         //目前可报销：17*50=850
         //发票：47+168+306+186+159                    =866
 
-        //发票：61
-        //食味坊：18*4 +13*3 +14 +12 +16*6 +15*2         =263
 
         //1.2；1.3；1.4；
         //1.7；1.8；1.9；1.10；1.11；
@@ -163,10 +171,10 @@ public class JavaConsole {
         //目前可报销：22*50=1100
         //发票：
         //云尊府：26                                     =26
-        //福海居：34
+        //福海居：34                                     =34
+        //食味坊：18*5 +13*3 +14 +12 +16*7 +15*2         =297
         //食味坊：
-        //总计：                                         =60
-
+        //总计：                                         =357
 
     }
 }

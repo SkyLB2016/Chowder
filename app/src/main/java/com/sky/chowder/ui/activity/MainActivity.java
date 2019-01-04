@@ -20,6 +20,7 @@ import com.sky.chowder.ui.adapter.MainAdapter;
 import com.sky.chowder.ui.presenter.MainP;
 import com.sky.utils.AppUtils;
 import com.sky.utils.JumpAct;
+import com.sky.utils.LogUtils;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -82,7 +83,14 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
     }
 
     private void gsonBuilder() {
-
+        double a = 1.10000000000000001;
+        double b = 1.10000000000000002;
+        double c = 1.1000000000000001;
+        double d = 1.1000000000000002;
+        LogUtils.i("a>b="+(a>b));
+        LogUtils.i("a<b="+(a<b));
+        LogUtils.i("c<d="+(c<d));
+        LogUtils.i("c>d="+(c>d));
     }
 
     @Override

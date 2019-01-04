@@ -24,7 +24,7 @@ dependencies {
         implementation project(':puzzle')
         implementation project(':g2048')
     }
-    implementation (name:'apiutils',ext:'aar')
+//    implementation (name:'apiutils',ext:'aar')
 
 //    implementation 'org.codehaus.groovy:groovy-all:2.5.5'
     //butterknife
@@ -59,12 +59,14 @@ android {
             keyPassword key['keyPassword']
             storeFile file(key['storeFile'])
             storePassword key['storePassword']
+            println "未签名"
         }
         release {
             keyAlias key['keyAlias']
             keyPassword key['keyPassword']
             storeFile file(key['storeFile'])
             storePassword key['storePassword']
+            println "已签名"
         }
     }
     buildTypes {
@@ -99,11 +101,11 @@ android {
 //        umeng {}
     }
     productFlavors.all { flavor -> flavor.manifestPlaceholders = [CHANNEL_VALUE: name] }
-    repositories {
-        flatDir {
-            dirs 'libs'
-        }
-    }
+//    repositories {
+//        flatDir {
+//            dirs 'libs'
+//        }
+//    }
 }
 
 def creatName() {

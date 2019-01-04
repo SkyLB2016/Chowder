@@ -227,7 +227,6 @@
     <orderEntry type="library" name="Gradle: __local_aars__:/Users/sky/Documents/WorkSpace/Chowder/app/libs/universal-image-loader-1.9.5.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: org.reactivestreams:reactive-streams:1.0.1@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:design-28.0.0" level="project" />
-    <orderEntry type="library" name="Gradle: apiutils:@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:recyclerview-v7-28.0.0" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:cursoradapter-28.0.0" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:asynclayoutinflater-28.0.0" level="project" />
