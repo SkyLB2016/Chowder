@@ -13,16 +13,52 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JavaConsole {
-    static String ac ="hh";
-    private static  String anInt = ac;
 
     public static void main(String[] args) {
-        System.out.println("anInt==" + anInt);
-        ac = "aa";
-        System.out.println("anInt==" + anInt);
+
+        String bb = "";
+//        System.out.println("字符串==" + Integer.parseInt(a));
+        System.out.println("字符串==" +bb);
+
 //        IOTest();
 //        readSdFile(new File("C:\\WorkSpace\\Chowder\\app\\total"));
 //        readS();
+    }
+
+    private static void getClassmax() {
+        System.out.println("byte==" + Byte.SIZE);
+        System.out.println("byte==" + Byte.MAX_VALUE);
+        System.out.println("byte==" + Byte.MIN_VALUE);
+        System.out.println();
+
+        System.out.println("Short==" + Short.SIZE);
+        System.out.println("Short==" + Short.MAX_VALUE);
+        System.out.println("Short==" + Short.MIN_VALUE);
+        System.out.println();
+
+        System.out.println("Integer==" + Integer.SIZE);
+        System.out.println("Integer==" + Integer.MAX_VALUE);
+        System.out.println("Integer==" + Integer.MIN_VALUE);
+        System.out.println();
+
+        System.out.println("Long==" + Long.SIZE);
+        System.out.println("Long==" + Long.MAX_VALUE);
+        System.out.println("Long==" + Long.MIN_VALUE);
+        System.out.println();
+
+        System.out.println("Float==" + Float.SIZE);
+        System.out.println("Float==" + Float.MAX_VALUE);
+        System.out.println("Float==" + Float.MIN_VALUE);
+        System.out.println();
+
+        System.out.println("Double==" + Double.SIZE);
+        System.out.println("Double==" + Double.MAX_VALUE);
+        System.out.println("Double==" + Double.MIN_VALUE);
+        System.out.println();
+
+        System.out.println("Character==" + Character.SIZE);
+        System.out.println("Character==" + (int) Character.MAX_VALUE);
+        System.out.println("Character==" + (int) Character.MIN_VALUE);
     }
 
     private static void IOTest() throws IOException {
@@ -157,24 +193,27 @@ public class JavaConsole {
     }
 
     void reimburse() {
-        //11.28；12.3；12.4；12.5；12.6；12.7；12.10；12.11；12.12；12.13；12.14；12.17；12.19；12.20；12.25；12.26；12.27；17天。
-        //目前可报销：17*50=850
-        //发票：47+168+306+186+159                    =866
-
-
-        //1.2；1.3；1.4；
-        //1.7；1.8；1.9；1.10；1.11；
-        //1.14；1.15；1.16；1.17；1.18；
+        //1.3； 1.8；1.9；1.10； 1.15；1.16；1.17；1.18；
         //1.21；1.22；1.23；1.24；1.25；
         //1.28；1.29；1.30；1.31；
         //22天。
-        //目前可报销：22*50=1100
-        //发票：
-        //云尊府：26                                     =26
-        //福海居：34                                     =34
-        //食味坊：18*5 +13*3 +14 +12 +16*7 +15*2         =297
+        //目前可报销：22*50=1100；7
+        //发票：300
+        //云尊府：26+34+52+20+42+20            =194
+        //福海居：34+24+41+18                  =117
+        //食味坊：18+15+18+17+18+18+22         =126
         //食味坊：
-        //总计：                                         =357
+        //总计：                               =717
 
+    }
+    void sport(){
+        //1.4，活动了一下
+        //1.6，第一次上课；两小时
+        //1.8，第二次上课；两小时多
+        //1.11，第三次上课；两小时多
+        //1.14，第四次上课；两小时多
+        //1.16，自己锻炼;
+        //1.18，第五次上课；两小时多
+        //1.20，自己活动；
     }
 }
