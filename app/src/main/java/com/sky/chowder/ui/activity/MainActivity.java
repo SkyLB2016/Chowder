@@ -20,11 +20,16 @@ import com.sky.chowder.ui.adapter.MainAdapter;
 import com.sky.chowder.ui.presenter.MainP;
 import com.sky.utils.AppUtils;
 import com.sky.utils.JumpAct;
+import com.sky.utils.LogUtils;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import common.base.BasePActivity;
 
@@ -81,8 +86,25 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         });
     }
 
-    private void gsonBuilder() {
+    private static final String EMAIL = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
 
+    private void gsonBuilder() {
+        pattern("1136096189@qq.com",EMAIL);
+        pattern("n.(/","n\\.\\(\\/");
+    }
+
+    private void pattern(String text, String pattern) {
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(text);
+        if (m.find()) {
+//            int size = m.groupCount();
+//            LogUtils.i("正则==" + m.group(0));
+            LogUtils.i("正则==" + m.matches());
+//            LogUtils.i("正则==" + size);
+//            for (int i = 0; i < size; i++) {
+//                LogUtils.i("正则==" + m.group(i));
+//            }
+        }
     }
 
     @Override
