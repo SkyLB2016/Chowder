@@ -1,5 +1,6 @@
 package com.sky.chowder;
 
+import com.sky.utils.LogUtils;
 import com.sky.utils.RegexUtils;
 
 import java.io.BufferedInputStream;
@@ -15,14 +16,33 @@ import java.util.List;
 public class JavaConsole {
 
     public static void main(String[] args) {
-
-        String bb = "";
-//        System.out.println("字符串==" + Integer.parseInt(a));
-        System.out.println("字符串==" + bb);
+        char uniChar = '\u039A';
+        System.out.println("字符串==" + uniChar);
+        System.out.println("字符串==" + uniChar);
+//        leftmove();
 
 //        IOTest();
 //        readSdFile(new File("C:\\WorkSpace\\Chowder\\app\\total"));
 //        readS();
+    }
+
+    private static void leftmove() {
+        int a5 = 1 << 9;
+        int b5 = 61311999 & (a5);
+        int e1 = 125882793 & a5;
+        System.out.println("字符串==" + b5);
+        System.out.println("字符串==" + e1);
+        System.out.println("字符串==" + (5 & 1));
+        System.out.println("字符串==" + (4 & 1));
+        System.out.println("字符串==" + (true & false));
+        System.out.println("字符串==" + (true & true));
+    }
+
+    @Override
+
+    protected void finalize() throws Throwable {
+        super.finalize();
+        System.out.println("字符lksjdfljaldjflajsdkjflksjdlkjflkalk LJFLJLKDJLKAJFKJ JFLKJAKDJL ljljafjlJLKJFDLJLljdafjflldkjflajkdlfjl啦啦啦啦");
     }
 
     private static void getClassmax() {
@@ -193,25 +213,20 @@ public class JavaConsole {
     }
 
     void reimburse() {
-        //1.3；1.8；1.9；1.10；1.15；1.16；1.17；1.18；1.21；1.23；
-        //1.25；
-        //1.28；1.29；1.30；1.31；
+        //1.29；1.30；
         //22天。
-        //总报销：22*50=1100；
-        //目前加班天数：10
-        //周六日：1.19；
-        //目前可报销：10*50+1*100=600
-        //发票：300+292+56+167=815
+        //总报销：650
+        //发票：292
         //云尊府：
         //福海居：
-        //食味坊：18+15+18+17+18+18+22         =126
+        //食味坊：18*9+22*2+15+17         =238
         //食味坊：
         //总计：                               =717
 
     }
 
     void sport() {
-        //52节课
+        //40节常规，12节拳击
         //1.4，活动了一下
         //1.6，第一次上课；两小时
         //1.8，第二次上课；两小时多
@@ -222,9 +237,8 @@ public class JavaConsole {
         //1.20，第六次上课，第一次拳击；
         //1.22，第七次上课，
         //1.24，自己锻炼，
-        //1.26，第八次上课，
-        //1.27，自己锻炼，
-        //1.29，第九次，
-        //1.30，自己锻炼
+        //1.26，第八次上课，一节常规，一节拳击。  8节常规，一节拳击。
+        //1.29，自己锻炼
+
     }
 }

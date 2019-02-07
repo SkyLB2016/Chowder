@@ -26,13 +26,14 @@
         <compilerSettings />
         <compilerArguments>
           <option name="destination" value="$MODULE_DIR$/build/tmp/kotlin-classes/skyDebug" />
+          <option name="classpath" value="$MODULE_DIR$/libs/universal-image-loader-1.9.5.jar:/Users/sky/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.5/f645ed69d595b24d4cf8b3fbb64cc505bede8829/gson-2.8.5.jar:/Users/sky/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/7d60db28823f850643187f296fdc4e8c/jars/classes.jar:/Users/sky/Documents/WorkSpace/Chowder/common/build/intermediates/intermediate-jars/debug/classes.jar:/Users/sky/Documents/WorkSpace/Chowder/apiutils/build/intermediates/intermediate-jars/debug/classes.jar:/Users/sky/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/406cabaffba1fea4f20b72a6ca072554/jars/classes.jar:/Users/sky/.gradle/caches/transforms-1/files-1.1/cardview-v7-28.0.0.aar/9839428a8bfc65230a2ce1538746ee0a/jars/classes.jar:/Users/sky/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/86b00901825363ea315fe2ba52c4f853/jars/classes.jar:/Users/sky/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.3.21/4bcc2012b84840e19e1e28074284cac908be0295/kotlin-stdlib-1.3.21.jar:/Users/sky/Documents/WorkSpace/Chowder/puzzle/build/intermediates/intermediate-jars/debug/classes.jar:/Users/sky/Documents/WorkSpace/Chowder/g2048/build/intermediates/intermediate-jars/debug/classes.jar:/Users/sky/.gradle/caches/modules-2/files-2.1/com.android.support.constraint/constraint-layout-solver/1.1.3/bde0667d7414c16ed62d3cfe993cff7f9d732373/constraint-layout-solver-1.1.3.jar:/Users/sky/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/33bce3aac64f876aa3f53b785b06ed5f/jars/classes.jar:/Users/sky/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/08f42362cb01f6538b4606fd23acc0f4/jars/classes.jar:/Users/sky/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0.aar/2390e438c7bed212667f08a63f405f00/jars/classes.jar:/Users/sky/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/b46ce35a7fdae143e7275f7aebd9adc1/jars/classes.jar:/Users/sky/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/363a2934404b92f9ad9caef81352eab6/jars/classes.jar:/Users/sky/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/87bc4ee33a3cdd5d92e25f26820545d0/jars/classes.jar:/Users/sky/.gradle/caches/transforms-1/files-1.1/transition-28.0.0.aar/42a8ae80b2507168af5700a295dd28a6/jars/classes.jar:/Users/sky/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/0b0aee796d70b9beda7fdd8ee1b602b1/jars/classes.jar:/Users/sky/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/878ed83621052b09449597d922b767c5/jars/classes.jar:/Users/sky/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/0c3b7ce4aa233dc1aae4790300e89260/jars/classes.jar:/Users/sky/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/80fe2c591d56e8f28bda3fc6a87bf411/jars/classes.jar:/Users/sky/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/6cfeabe53b632cfb4605fc20b6ef1505/jars/classes.jar:/Users/sky/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/49aa1cff9fbc86df7dc2d2770814fd2a/jars/classes.jar:/Users/sky/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/1465171c700160680e1761d84f4b3f4e/jars/classes.jar:/Users/sky/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/a5bc30534a19fe8be7985087a0e26820/jars/classes.jar:/Users/sky/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/cb7702ca392366fe8ce9ffa0964d3a9e/jars/classes.jar:/Users/sky/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/0896e35d6badd9477e71afc4d0c1937d/jars/classes.jar:/Users/sky/.gradle/caches/modules-2/files-2.1/com.android.support/collections/28.0.0/c1bcdade4d3cc2836130424a3f3e4182c666a745/collections-28.0.0.jar:/Users/sky/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/695656f058ee4d2063445e0cf8ba1cdb/jars/classes.jar:/Users/sky/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/2bcd1e181caae5478fe1f34c500bf59c/jars/classes.jar:/Users/sky/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/2dcc41a7e19e3f6417c4e13a331f84ee/jars/classes.jar:/Users/sky/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/f49675a624cc1f20ca9d599511cbe942/jars/classes.jar:/Users/sky/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/08d60fe6762b0aef7d8b23a5bf9e934b/jars/classes.jar:/Users/sky/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/c7aeed644b302d9feedfe3a2fa3a4223/jars/classes.jar:/Users/sky/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/8e58a5bfcab5887b3fa9ca2fa610a4a6/jars/classes.jar:/Users/sky/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/91dd82866742186f729e9c0fadf18494/jars/classes.jar:/Users/sky/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/0069073752fec74dc9ec503409048c1c/jars/classes.jar:/Users/sky/.gradle/caches/modules-2/files-2.1/android.arch.lifecycle/common/1.1.1/207a6efae6a3555e326de41f76bdadd9a239cbce/common-1.1.1.jar:/Users/sky/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/5073823895d51fdb1d496d4a1ab49c98/jars/classes.jar:/Users/sky/.gradle/caches/modules-2/files-2.1/android.arch.core/common/1.1.1/e55b70d1f5620db124b3e85a7f4bdc7bd48d9f95/common-1.1.1.jar:/Users/sky/.gradle/caches/modules-2/files-2.1/com.android.support/support-annotations/28.0.0/ed73f5337a002d1fd24339d5fb08c2c9d9ca60d8/support-annotations-28.0.0.jar:/Users/sky/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.3.21/f30e4a9897913e53d778f564110bafa1fef46643/kotlin-stdlib-common-1.3.21.jar:/Users/sky/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar:/Users/sky/.gradle/caches/transforms-1/files-1.1/rxandroid-2.0.1.aar/67eda12b0d4985f30512faa678a7b389/jars/classes.jar:/Users/sky/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/adapter-rxjava2/2.4.0/9286ea8ac29dc3822cca03291259db825e118506/adapter-rxjava2-2.4.0.jar:/Users/sky/.gradle/caches/modules-2/files-2.1/io.reactivex.rxjava2/rxjava/2.1.5/1de589f16cd088be91ca6877cb836529276a6bb2/rxjava-2.1.5.jar:/Users/sky/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/converter-gson/2.4.0/15d7790ee311d961379c51b00aba12d5967cb7ea/converter-gson-2.4.0.jar:/Users/sky/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/retrofit/2.4.0/fc4aa382632bfaa7be7b41579efba41d5a71ecf3/retrofit-2.4.0.jar:/Users/sky/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.10.0/7ef0f1d95bf4c0b3ba30bbae25e0e562b05cf75e/okhttp-3.10.0.jar:/Users/sky/.gradle/caches/modules-2/files-2.1/org.reactivestreams/reactive-streams/1.0.1/1b1c911686eb40179219466e6a59b634b9d7a748/reactive-streams-1.0.1.jar:/Users/sky/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.14.0/102d7be47241d781ef95f1581d414b0943053130/okio-1.14.0.jar:/Users/sky/Library/Android/sdk/platforms/android-28/android.jar" />
           <option name="noStdlib" value="true" />
           <option name="noReflect" value="true" />
           <option name="moduleName" value="app_skyDebug" />
           <option name="addCompilerBuiltIns" value="true" />
           <option name="loadBuiltInsFromDependencies" value="true" />
-          <option name="languageVersion" value="1.2" />
-          <option name="apiVersion" value="1.2" />
+          <option name="languageVersion" value="1.3" />
+          <option name="apiVersion" value="1.3" />
           <option name="pluginOptions">
             <array>
               <option value="plugin:org.jetbrains.kotlin.android:experimental=false" />
@@ -42,10 +43,12 @@
           </option>
           <option name="pluginClasspaths">
             <array>
-              <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-android-extensions/1.2.60/69596054ff0e04bb3f38cd906dce6854a9d3438d/kotlin-android-extensions-1.2.60.jar" />
+              <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-android-extensions/1.3.21/311c0d1cbb0a194e8712edaef7b92a8f0919ca26/kotlin-android-extensions-1.3.21.jar" />
             </array>
           </option>
-          <option name="coroutinesState" value="warn" />
+          <option name="errors">
+            <ArgumentParseErrors />
+          </option>
         </compilerArguments>
       </configuration>
     </facet>
@@ -57,9 +60,9 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/kapt/skyDebug" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/sky/debug" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/sky/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/aidl_source_output_dir/skyDebug/compileSkyDebugAidl/out" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/sky/debug" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/sky/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/renderscript_source_output_dir/skyDebug/compileSkyDebugRenderscript/out" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/sky/debug" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/sky/debug" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/skyDebug/res" type="java-resource" />
@@ -71,9 +74,9 @@
       <sourceFolder url="file://$MODULE_DIR$/src/skyDebug/shaders" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/kapt/skyDebugAndroidTest" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/androidTest/sky/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/androidTest/sky/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/aidl_source_output_dir/skyDebugAndroidTest/compileSkyDebugAndroidTestAidl/out" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/androidTest/sky/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/androidTest/sky/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/renderscript_source_output_dir/skyDebugAndroidTest/compileSkyDebugAndroidTestRenderscript/out" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/androidTest/sky/debug" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/androidTest/sky/debug" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestSkyDebug/res" type="java-test-resource" />
@@ -161,43 +164,31 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/apk_list" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/app_classes" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/blame" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/build-info" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/check-libraries" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/check-manifest" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/checkSkyDebugAndroidTestClasspath" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/checkSkyDebugClasspath" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/checkSkyReleaseClasspath" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/check_manifest_result" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/compatible_screen_manifest" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-classes" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-runtime-classes" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-verifier" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/instant-run-apk" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/instant-run-resources" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/instant_run_merged_manifests" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/instant_run_split_apk_resources" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/javac" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jniLibs" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifest-checker" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/lint_jar" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/merged_assets" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/merged_manifests" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/prebuild" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/processed_res" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/proguard-rules" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/reload-dex" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/res" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/resources" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/rs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/shader_assets" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/shaders" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/split-apk" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/split_list" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/symbols" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/tmp" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/transforms" />
       <excludeFolder url="file://$MODULE_DIR$/build/kotlin" />
       <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
-      <excludeFolder url="file://$MODULE_DIR$/build/reports" />
       <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 28 Platform" jdkType="Android SDK" />
@@ -205,6 +196,7 @@
     <orderEntry type="library" name="Gradle: com.android.support:design:28.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-fragment:28.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:localbroadcastmanager:28.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.3.21@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:animated-vector-drawable:28.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: android.arch.lifecycle:viewmodel:1.1.1@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.android.support.test.espresso:espresso-idling-resource:3.0.2@aar" level="project" />
@@ -222,7 +214,6 @@
     <orderEntry type="library" name="Gradle: org.jetbrains:annotations:13.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.okio:okio:1.14.0@jar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: javax.inject:javax.inject:1@jar" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.2.60@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.retrofit2:adapter-rxjava2:2.4.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-vector-drawable:28.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-core-utils:28.0.0@aar" level="project" />
@@ -232,6 +223,7 @@
     <orderEntry type="library" name="Gradle: com.android.support:support-annotations:28.0.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:interpolator:28.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:transition:28.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.3.21@jar" level="project" />
     <orderEntry type="library" name="Gradle: android.arch.lifecycle:livedata:1.1.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:drawerlayout:28.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support.constraint:constraint-layout-solver:1.1.3@jar" level="project" />
@@ -258,7 +250,6 @@
     <orderEntry type="library" name="Gradle: io.reactivex.rxjava2:rxjava:2.1.5@jar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.hamcrest:hamcrest-integration:1.3@jar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.hamcrest:hamcrest-library:1.3@jar" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.2.60@jar" level="project" />
     <orderEntry type="library" name="Gradle: android.arch.lifecycle:common:1.1.1@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:coordinatorlayout:28.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:customview:28.0.0@aar" level="project" />

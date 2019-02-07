@@ -89,8 +89,9 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
     private static final String EMAIL = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
 
     private void gsonBuilder() {
-        pattern("1136096189@qq.com",EMAIL);
-        pattern("n.(/","n\\.\\(\\/");
+//        pattern("1136096189@qq.com",EMAIL);
+//        pattern("n.(/","n\\.\\(\\/");
+        presenter.getActi();
     }
 
     private void pattern(String text, String pattern) {
