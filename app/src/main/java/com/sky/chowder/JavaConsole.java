@@ -7,23 +7,53 @@ import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 public class JavaConsole {
 
-    public static void main(String[] args) {
-        char uniChar = '\u039A';
-        System.out.println("字符串==" + uniChar);
-        System.out.println("字符串==" + uniChar);
+    public static void main(String[] args) throws IOException {
+        BigDecimal num2 = new BigDecimal(0.88);
+
+        System.out.println("字符串==" + num2.intValue());
+        System.out.println("字符串==" + (num2.doubleValue() != 0));
+        System.out.println("字符串==" + (num2.doubleValue() != 0));
+
+
+//        char uniChar = '\u039A';
+//        System.out.println("字符串==" + uniChar);
+//        System.out.println("字符串==" + uniChar);
+
+//        IO();
 //        leftmove();
 
 //        IOTest();
 //        readSdFile(new File("C:\\WorkSpace\\Chowder\\app\\total"));
 //        readS();
+    }
+
+    private static void IO() throws IOException {
+        char c;
+        String d;
+
+        // 使用 System.in 创建 BufferedReader
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Enter characters, 'q' to quit.");
+        System.out.write('A');
+        // 读取字符
+        do {
+//            c = (char) br.read();
+            d = br.readLine();
+//            System.out.println(c);
+            System.out.write('A');
+            System.out.println(d);
+            System.out.write('A');
+        } while (!d.equals("q"));
     }
 
     private static void leftmove() {

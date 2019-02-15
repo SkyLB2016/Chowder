@@ -91,7 +91,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
     private void gsonBuilder() {
 //        pattern("1136096189@qq.com",EMAIL);
 //        pattern("n.(/","n\\.\\(\\/");
-        presenter.getActi();
+//        presenter.getActi();
     }
 
     private void pattern(String text, String pattern) {
