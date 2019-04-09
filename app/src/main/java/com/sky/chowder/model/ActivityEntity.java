@@ -17,7 +17,8 @@ import java.util.Objects;
 public class ActivityEntity implements Serializable, Comparable<ActivityEntity>, Cloneable {
     private static final long serialVersionUID = -7780617194676472734L;
     @Expose
-    @SerializedName(value = "className", alternate = {"cla", "ca"})
+//    @SerializedName(value = "className", alternate = {"cla", "ca"})
+    @SerializedName(value = "className")
     private String name;
     @Expose
     @SerializedName("describe")

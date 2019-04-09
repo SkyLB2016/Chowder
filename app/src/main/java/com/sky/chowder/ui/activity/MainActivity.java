@@ -3,8 +3,10 @@ package com.sky.chowder.ui.activity;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,8 +27,6 @@ import com.sky.utils.LogUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -74,6 +74,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
                 new String[]{Manifest.permission.WRITE_CONTACTS, Manifest.permission.READ_CONTACTS, Manifest.permission.READ_EXTERNAL_STORAGE},
                 new int[]{0, 0, 0}
         );
+//天火大道
         //Rw2 B2 U2 Lw U2 Rw' U2 Rw U2 F2 Rw F2 Lw' B2 Rw2
         final double dou = 82973.908;
         //LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
@@ -92,6 +93,66 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
 //        pattern("1136096189@qq.com",EMAIL);
 //        pattern("n.(/","n\\.\\(\\/");
 //        presenter.getActi();
+//        video();
+        long start = System.currentTimeMillis();
+        LogUtils.i("值为==" + getNumber(40));
+        long end = System.currentTimeMillis();
+        LogUtils.i("所耗时间==" + (end - start));
+
+        start = System.currentTimeMillis();
+        LogUtils.i("40值为==" + getNumber1(40));
+        LogUtils.i("50值为==" + getNumber1(50));
+        end = System.currentTimeMillis();
+        LogUtils.i("所耗时间==" + (end - start));
+
+    }
+
+    public int getNumber(int num) {
+        if (num == 1 || num == 2) {
+            return 1;
+        } else {
+            return getNumber(num - 1) + getNumber(num - 2);
+        }
+    }
+
+    public int getNumber1(int num) {
+        if (num == 1 || num == 2) {
+            return 1;
+        }
+        int temp = 0;
+        int n_1 = 1;//前一个
+        int n_2 = 1;//前二个
+        for (int i = 3; i <= num; i++) {
+            temp = n_1 + n_2;
+            n_2 = n_1;
+            n_1 = temp;
+        }
+        return temp;
+    }
+
+//    String text = "aaa";
+//        LogUtils.i("aaa==" + isNumerEX("aaa"));
+//        LogUtils.i("-a=" + isNumerEX("-a"));
+//        LogUtils.i("12a==" + isNumerEX("12a"));
+//        LogUtils.i("a12==" + isNumerEX("a12"));
+//        LogUtils.i("111==" + isNumerEX("111"));
+//        LogUtils.i("1.11==" + isNumerEX("1.11"));
+//        LogUtils.i("1.11342==" + isNumerEX("1.11342"));
+//        LogUtils.i("-2==" + isNumerEX("-2"));
+//        LogUtils.i("-1==" + isNumerEX("-"));
+//        LogUtils.i("-1.22222==" + isNumerEX("-1.22222"));
+
+    /**
+     * 判断字符串是否为数字
+     * 包括负数
+     *
+     * @param str
+     * @return
+     */
+    public static boolean isNumerEX(String str) {
+        Pattern pattern = Pattern.compile("-?[0-9]+.?[0-9]+");
+        Pattern pattern1 = Pattern.compile("-?[0-9]*");
+        return pattern.matcher(str).matches() || pattern1.matcher(str).matches();
     }
 
     private void pattern(String text, String pattern) {

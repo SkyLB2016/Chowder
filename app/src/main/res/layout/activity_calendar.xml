@@ -5,17 +5,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv"
+    <com.sky.chowder.ui.widget.calendar.CalendarView
+        android:id="@+id/calendar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
+    <!--<com.sky.chowder.ui.widget.WorkProgress-->
+    <!--android:id="@+id/progressBar"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content" />-->
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/wh_16"
         app:rippleColor="@color/colorPrimaryDark"

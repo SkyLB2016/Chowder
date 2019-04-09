@@ -85,8 +85,8 @@ public class ActivityTypeAdapter extends TypeAdapter<ActivityEntity> {
         out.name("debe").value(value.getDes());
         out.name("img").value(value.getImage());
         out.name("v§ion").value(value.getVersion());
-        if (value.getObjList() != null)
-            out.name("objList").jsonValue(value.getObjList().toString());
+//        if (value.getObjList() != null)
+//            out.name("objList").jsonValue(value.getObjList().toString());
         out.endObject();
     }
 }

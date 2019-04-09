@@ -5,9 +5,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv"
-        android:layout_width="match_parent"
+    <com.sky.chowder.ui.widget.PassWordView
+        android:id="@+id/progress"
+        android:maxLength="6"
+        android:inputType="number"
+        android:layout_width="200dp"
         android:layout_height="wrap_content" />
 
     <android.support.design.widget.FloatingActionButton

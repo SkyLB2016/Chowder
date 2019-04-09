@@ -17,13 +17,12 @@ import java.util.List;
 
 public class JavaConsole {
 
-    public static void main(String[] args) throws IOException {
-        BigDecimal num2 = new BigDecimal(0.88);
+    public static void main(String[] args) {
+//        BigDecimal num2 = new BigDecimal(0.88);
 
-        System.out.println("字符串==" + num2.intValue());
-        System.out.println("字符串==" + (num2.doubleValue() != 0));
-        System.out.println("字符串==" + (num2.doubleValue() != 0));
-
+        for (int i = 0; i < 0; i++) {
+            System.out.println("字符串==");
+        }
 
 //        char uniChar = '\u039A';
 //        System.out.println("字符串==" + uniChar);
@@ -232,6 +231,7 @@ public class JavaConsole {
             }
         } catch (IOException e) {
         } finally {
+
             try {
                 if (writer != null) writer.close();
                 if (bufferedIn != null) bufferedIn.close();
@@ -243,32 +243,38 @@ public class JavaConsole {
     }
 
     void reimburse() {
-        //1.29；1.30；
-        //22天。
-        //总报销：650
-        //发票：292
+        //1.29；1.30；2.13；2.18；2.20；2.21；2.26
+        //7天。
+        //总报销：350；
+        //发票：200+92+67=359
         //云尊府：
         //福海居：
-        //食味坊：18*9+22*2+15+17         =238
+        //食味坊：32+28+18*5                   =150
         //食味坊：
-        //总计：                               =717
+        //总计：
 
     }
 
     void sport() {
         //40节常规，12节拳击
         //1.4，活动了一下
-        //1.6，第一次上课；两小时
-        //1.8，第二次上课；两小时多
-        //1.11，第三次上课；两小时多
-        //1.14，第四次上课；两小时多
+        //1.6，第一节常规；
+        //1.8，第二节常规；
+        //1.11，第三节常规；
+        //1.14，第四节常规；
         //1.16，自己锻炼;
-        //1.18，第五次上课；两小时多
-        //1.20，第六次上课，第一次拳击；
-        //1.22，第七次上课，
+        //1.18，第五节常规；
+        //1.20，第六节常规，转第一次拳击，按常规算；
+        //1.22，第七节常规，
         //1.24，自己锻炼，
-        //1.26，第八次上课，一节常规，一节拳击。  8节常规，一节拳击。
-        //1.29，自己锻炼
-
+        //1.26，第八节常规，第一节拳击。
+        //2.25，第九节常规；
+        //3.03，第十节常规；
+        //3.06，第11节常规，第二节拳击。
+        //3.08，自由锻炼；
+        //3.11，自由锻炼；
+        //4.10，第12节常规；
+        //4.12，自由锻炼；
+        //4.14，第13节常规，第三节拳击。
     }
 }

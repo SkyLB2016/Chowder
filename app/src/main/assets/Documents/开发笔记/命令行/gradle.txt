@@ -50,7 +50,7 @@ app:dDependencies 查看app的依赖关系
 
 assemble：编译并打Debug和Release包
 assembleDebug：编译并把本项目下所有模块所有渠道的Debug版本打包
-assembleRelease编译并把本项目下所有模块所有渠道的Release版本打包
+assembleRelease 编译并把本项目下所有模块所有渠道的Release版本打包
 assemble渠道名：生成渠道名的Debug和Release版本
 assemble渠道名Release：渠道release版本
 assemble渠道名Release -p app：打包app工程下渠道名的release版本（-p 决定执行哪个）
