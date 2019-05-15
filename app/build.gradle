@@ -138,18 +138,22 @@ def buildTime() {
 //                }
 //            }
 
-task hello <<{
-    println "app的 hello World"
+task hello {
+    doLast {
+        println "app的 hello World"
+    }
 }
-task projectInfo << {
-    println "name            ==" + project.name            //String 	项目目录的名称。
-    println "path            ==" + project.path            //String 	项目的绝对路径。
-    println "description     ==" + project.description     //String 	项目的描述。
-    println "projectDir      ==" + project.projectDir      //File 	包含生成脚本的目录。
-    println "buildDir        ==" + project.buildDir        //File 	projectDir/build
-    println "group           ==" + project.group           //Object 	未指定
-    println "version         ==" + project.version         //Object 	未指定
-    println "ant             ==" + project.ant             //AntBuilder 	AntBuilder实例
+task projectInfo {
+    doLast {
+        println "name            ==" + project.name            //String 	项目目录的名称。
+        println "path            ==" + project.path            //String 	项目的绝对路径。
+        println "description     ==" + project.description     //String 	项目的描述。
+        println "projectDir      ==" + project.projectDir      //File 	包含生成脚本的目录。
+        println "buildDir        ==" + project.buildDir        //File 	projectDir/build
+        println "group           ==" + project.group           //Object 	未指定
+        println "version         ==" + project.version         //Object 	未指定
+        println "ant             ==" + project.ant             //AntBuilder 	AntBuilder实例
+    }
 }
 
 
@@ -172,10 +176,11 @@ sourceSets {
     }
 }
 
-task printProperties << {
-    println springVersion
-    println emailNotification
-    sourceSets.matching { it.purpose == "production" }.each { println it.getName() }
+task printProperties {
+    doLast {
+        println springVersion
+        println emailNotification
+        sourceSets.matching { it.purpose == "production" }.each { println it.getName() }
+    }
 }
-configurations.runtime.each {f->println f.path}
-
+configurations.runtime.each { f -> println f.path }

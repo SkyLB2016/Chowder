@@ -74,7 +74,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
                 new String[]{Manifest.permission.WRITE_CONTACTS, Manifest.permission.READ_CONTACTS, Manifest.permission.READ_EXTERNAL_STORAGE},
                 new int[]{0, 0, 0}
         );
-//天火大道
+
         //Rw2 B2 U2 Lw U2 Rw' U2 Rw U2 F2 Rw F2 Lw' B2 Rw2
         final double dou = 82973.908;
         //LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
@@ -214,3 +214,28 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
             super.onBackPressed();
     }
 }
+//大地之毁灭 	地 	地14空12 	敌方·全体 	攻击 	160 	90 	　 	20 	20 	7
+
+//冰狱冥嚎 	水 	水25风12空5 	敌方·全体 	攻击 	150 	60 	20%几率冻结（400AT） 	20 	20 	1
+
+//弧形日珥 	火 	地4火15风8空8 	敌方·全体 	攻击 	180 	130 	　 	20 	20 	1
+
+//天龙卷 	风 	地3风20空5 	敌方·全体 	攻击 	140 	65 	　 	20 	20 	1
+//审判之雷 	风 	风15空8 	敌方·地点指定直线2 	攻击 	80 	65 	20%几率封技（400AT） 	15 	20 	1
+
+//死亡咆哮 	时 	时15空10幻10 	敌方·全体 	攻击 	120 	25 	20%几率战斗不能 	20 	20 	1
+//堕落深渊 	时 	风6时18空6幻6 	敌方·目标指定圆5 	攻击 	90 	80 	20%几率气绝（300AT） 	25 	20 	1
+
+//暗物质 	空 	空4 	敌方·单体 	攻击 	40 	90 	　 	15 	25 	1
+//破碎虚空 	空 	地3火3风5空12 	敌方·地点指定圆4 	攻击 	100 	120 	吸引 	20 	25 	1
+
+//银色荆棘 	幻 	时4空12幻20 	敌方·地点指定圆3 	攻击 	90 	0 	90%几率混乱（200AT） 	13 	30 	1
+
+//大地之墙 	地 	地8空4 	我方·目标指定圆2 	辅助 	75 	- 	完全防御1次 	20 	20 	-
+//盖亚之盾 	地 	地16空15 	我方·全体 	辅助 	220 	- 	完全防御1次 	28 	30 	-
+
+//中回复术·复 	水 	水8风2空2 	我方·目标指定圆4 	回复 	55 	- 	HP回复3000 	7 	20 	-
+//大回复术·复 	水 	水16风8空4 	我方·目标指定圆6 	回复 	200 	- 	HP回复6500 	10 	20 	-
+//全回复术·复 	水 	水22风12空6 	我方·全体 	回复 	300 	- 	HP回复至满 	10 	20 	-
+//治愈术·复 	水 	水8空2幻4 	我方·目标指定圆5 	回复 	30 	- 	解除异常状态 	10 	20 	-
+//圣灵术 	水 	地8水18幻4 	我方·单体 	回复 	180 	- 	解除战斗不能、 	10 	20 	-

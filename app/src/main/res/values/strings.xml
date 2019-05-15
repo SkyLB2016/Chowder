@@ -40,6 +40,9 @@
     <string name="act_IPC">15.综合</string>
     <string name="act_IPC_d">surfaceView，IPC（待深入研究）</string>
 
+    <string name="act_progress">15.进度条</string>
+    <string name="act_progress_d">进度条</string>
+
     <string name="act_test">00.测试类</string>
 
     <string name="ibu"><i><b><u>下划线加粗斜体</u></b></i></string>

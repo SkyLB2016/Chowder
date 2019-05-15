@@ -49,30 +49,38 @@ task hello {
     }
 }
 //增加任务的行为功能（短标记法）
-hello << {
+hello.doLast {
     println('<<相当于doLast!')
 }
 //增加任务的行为功能
 hello.doFirst {
     println "增加doFirst"
 }
-task upper << {
-    String text = "text"
-    println text.toUpperCase()
-}
-//任务依赖，兼延迟依赖
-task count(dependsOn: 'delay') << {
-    4.times { count ->
-        println "$count"
+task upper {
+    doLast {
+        String text = "text"
+        println text.toUpperCase()
     }
 }
-task delay << {
-    println "delay" + upper.path
+//任务依赖，兼延迟依赖
+task count(dependsOn: 'delay') {
+    doLast {
+        4.times { count ->
+            println "$count"
+        }
+    }
+}
+task delay {
+    doLast {
+        println "delay" + upper.path
+    }
 }
 //创建动态任务
 4.times { count ->
-    task "task$count" << {
-        println "输出数据$count"
+    task "task$count" {
+        doLast {
+            println "输出数据$count"
+        }
     }
 }
 //动态依赖
@@ -82,33 +90,41 @@ task1.dependsOn task2, task3
 task customProper {
     ext.myProperties = "测试"
 }
-task proper << {
-    println customProper.myProperties
-    println "执行的任务为$version"
+task proper {
+    doLast {
+        println customProper.myProperties
+        println "执行的任务为$version"
+    }
 }
 
 //Ant调用
 def dir = 'app/src/main/assets/Documents'
-task loadFile << {
-    def files = file(dir).listFiles().sort()
-    files.each { File file ->
-        if (file.isFile()) {
-            ant.loadfile(srcFile: file, property: file.name)
-            println " *** $file.name ***"
-            println "${ant.properties[file.name]}"
+task loadFile {
+    doLast {
+        def files = file(dir).listFiles().sort()
+        files.each { File file ->
+            if (file.isFile()) {
+                ant.loadfile(srcFile: file, property: file.name)
+                println " *** $file.name ***"
+                println "${ant.properties[file.name]}"
+            }
         }
     }
 }
-task checkSum << {
-    fileList(dir).each { File file ->
-        ant.checksum(file: file, property: "cs_$file.name")
-        println "$file.name Checksum: ${ant.properties["cs_$file.name"]}"
+task checkSum {
+    doLast {
+        fileList(dir).each { File file ->
+            ant.checksum(file: file, property: "cs_$file.name")
+            println "$file.name Checksum: ${ant.properties["cs_$file.name"]}"
+        }
     }
 }
-loadFile << {
-    fileList(dir).each { File file ->
-        ant.loadfile(srcFile: file, property: file.name)
-        println "I'm fond of $file.name"
+loadFile {
+    doLast {
+        fileList(dir).each { File file ->
+            ant.loadfile(srcFile: file, property: file.name)
+            println "I'm fond of $file.name"
+        }
     }
 }
 
@@ -118,14 +134,20 @@ File[] fileList(String dir) {
 
 //设置默认任务
 defaultTasks 'a', 'b', 'c'
-task a << {
-    println "默认任务：$version"
+task a {
+    doLast {
+        println "默认任务：$version"
+    }
 }
-task b(dependsOn: a) << {
-    println "默认任务：$version"
+task b(dependsOn: a) {
+    doLast {
+        println "默认任务：$version"
+    }
 }
-task c << {
-    println "默认任务：$version"
+task c {
+    doLast {
+        println "默认任务：$version"
+    }
 }
 //所以来任务的不同输出，每次执行任务都会执行以下方法
 gradle.taskGraph.whenReady {
@@ -138,49 +160,57 @@ gradle.taskGraph.whenReady {
 //        println "执行的任务为$version"
 }
 //project的信息
-task projectInfo << {
-    println "name            ==" + project.name            //String 	项目目录的名称。
-    println "path            ==" + project.path            //String 	项目的绝对路径。
-    println "description     ==" + project.description     //String 	项目的描述。
-    println "projectDir      ==" + project.projectDir      //File 	包含生成脚本的目录。
-    println "buildDir        ==" + project.buildDir        //File 	projectDir/build
-    println "group           ==" + project.group           //Object 	未指定
-    println "version         ==" + project.version         //Object 	未指定
-    println "ant             ==" + project.ant             //AntBuilder 	AntBuilder实例
+task projectInfo {
+    doLast {
+        println "name            ==" + project.name            //String 	项目目录的名称。
+        println "path            ==" + project.path            //String 	项目的绝对路径。
+        println "description     ==" + project.description     //String 	项目的描述。
+        println "projectDir      ==" + project.projectDir      //File 	包含生成脚本的目录。
+        println "buildDir        ==" + project.buildDir        //File 	projectDir/build
+        println "group           ==" + project.group           //Object 	未指定
+        println "version         ==" + project.version         //Object 	未指定
+        println "ant             ==" + project.ant             //AntBuilder 	AntBuilder实例
+    }
 }
 
 //-p：增加新的属性；
 //-d：增加新的系统属性
 //gradle -q -P commandLineProjectProp=properties -D org.gradle.project.systemProjectProp=systemPropertyValue printProps
-task printPropers << {
+task printPropers {
+    doLast {
 //    println commandLineProjectProp
-    println gradlePropertiesProp
+        println gradlePropertiesProp
 //    println systemProjectProp
-    println envProjectProp
-    println System.properties['system']
-    println project.hasProperty('puzzle')
+        println envProjectProp
+        println System.properties['system']
+        println project.hasProperty('puzzle')
+    }
 }
 //外部脚本配置
-task outGradleConfigure << {
-    def pos = new java.text.FieldPosition(10)
-    // Apply the script
-    apply from: 'other.gradle', to: pos
-    println pos.beginIndex
-    println pos.endIndex
+task outGradleConfigure {
+    doLast {
+        def pos = new java.text.FieldPosition(10)
+        // Apply the script
+        apply from: 'other.gradle', to: pos
+        println pos.beginIndex
+        println pos.endIndex
+    }
 }
 //定位任务的方法
 project.task("custom")
 //task custom
-custom << {
-    println custom.name
-    println tasks.custom.name
-    println tasks['custom'].name
-    println project.custom.name
-    println project.name
-    println project.getTasksByName("custom", false).name
-    println tasks.getByPath("custom")
-    println tasks.getByPath("custom").path
-    println tasks.getByPath("custom").name
+custom {
+    doLast {
+        println custom.name
+        println tasks.custom.name
+        println tasks['custom'].name
+        println project.custom.name
+        println project.name
+        println project.getTasksByName("custom", false).name
+        println tasks.getByPath("custom")
+        println tasks.getByPath("custom").path
+        println tasks.getByPath("custom").name
+    }
 }
 
 //任务配置的几种方式
@@ -209,8 +239,10 @@ copyFile {
 
 
 File classesDir = new File('测试/1')
-task dependAll << {
-    classesDir.mkdirs()
+task dependAll {
+    doLast {
+        classesDir.mkdirs()
+    }
 }
 dependAll.dependsOn {
     tasks.findAll { task -> task.name != 'dependAll' }

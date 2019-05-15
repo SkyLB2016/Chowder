@@ -185,7 +185,7 @@ class SolarSystem @JvmOverloads constructor(context: Context, attrs: AttributeSe
             CENTER_TOP, CENTER_BOTTOM, CENTER_LEFT, CENTER_RIGHT -> Math.PI / num
             else -> Math.PI * 2 / ++num//居中时，相当于画了一个圆，份数多一份
         }
-        //偏移弧度
+        //偏移弧度+起始角度
         var offsetR = when (position) {
             LEFT_BOTTOM, CENTER_LEFT -> Math.PI * 3 / 2
             RIGHT_TOP, CENTER_RIGHT -> Math.PI / 2

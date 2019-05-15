@@ -22,4 +22,8 @@
     <color name="color_858585">#858585</color>
     <color name="color_C2C2C1">#C2C2C1</color>
     <color name="video_green">#FF00FF29</color>
+    <color name="color_999999">#999999</color>
+    <color name="color_333333">#333333</color>
+    <color name="color_ff6324">#ff6324</color>
+    <color name="color_d4d4d4">#D4D4D4</color>
 </resources>
