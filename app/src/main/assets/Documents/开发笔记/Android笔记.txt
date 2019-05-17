@@ -118,9 +118,9 @@ android:excludeFromRecents="true"，目前未起作用)。
 　　2）setStrokeWidth(),宽度是从中间开始计算的
 　　3）setARGB(),setAlpha(),setTextSize(),setStyle(),setColor().
 　　4）基准线是baseline
-　　5）ascent：字体在baseline上方被推荐的距离（一些字体制作商需要参考这个）
-　　6）descent：字体在是baseline下方被推荐的距离（一些字体制作商需要参考这个）
-　　7）top：ascent的最大值
+　　5）top：ascent的最大值
+　　6）ascent：字体在baseline上方被推荐的距离（一些字体制作商需要参考这个）
+　　7）descent：字体在是baseline下方被推荐的距离（一些字体制作商需要参考这个）
 　　8）bottom：descent的最大值
 　　textHeight=paint.descent()-paint.ascent()
 　　9）getTextBounds(String text, int start, int end, Rect bounds):获取文字宽高

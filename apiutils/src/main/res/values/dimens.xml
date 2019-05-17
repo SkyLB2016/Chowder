@@ -26,6 +26,8 @@
     <dimen name="wh_144">144dp</dimen>
     <dimen name="wh_192">192dp</dimen>
 
+    <dimen name="text_2">2sp</dimen>
+    <dimen name="text_8">8sp</dimen>
     <!--字体-->
     <dimen name="text_10">10sp</dimen>
     <!--补充性内容micro-->

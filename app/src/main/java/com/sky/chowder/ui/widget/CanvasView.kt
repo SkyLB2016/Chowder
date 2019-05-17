@@ -297,8 +297,8 @@ class CanvasView @JvmOverloads constructor(
         textbg?.draw(canvas)//画入画布中
         //让文字居于背景中间，计算文字的左距离与底部距离
         val offset = textP.fontMetricsInt.ascent - textP.fontMetricsInt.top
-        val tY = textRect.exactCenterY() + textBound.height() / 2 - offset / 2
-        canvas.drawText(text, textRect.exactCenterX(), tY, textP)//画入画布中
+        val baseline = textRect.exactCenterY() + textBound.height() / 2 - offset / 2
+        canvas.drawText(text, textRect.exactCenterX(), baseline, textP)//画入画布中
     }
 
     /**

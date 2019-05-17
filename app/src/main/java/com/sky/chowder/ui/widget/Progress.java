@@ -11,11 +11,15 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
 import android.text.TextPaint;
+import android.text.style.AbsoluteSizeSpan;
 import android.util.AttributeSet;
 import android.view.View;
 
 import com.sky.chowder.R;
+import com.sky.utils.LogUtils;
 
 /**
  * 合同进度条
@@ -121,11 +125,18 @@ public class Progress extends View {
         double iy = radius * Math.sin(radians);
         canvas.drawCircle(centerX + Float.parseFloat(ix + ""), centerY + Float.parseFloat(iy + ""), circleLineOut / 2, paint);
 
+//        String text = progress + "%";
+
+//        SpannableStringBuilder span = new SpannableStringBuilder();
+//        span.append(progress + "");
+//        span.setSpan(new AbsoluteSizeSpan(getResources().getDimensionPixelSize(R.dimen.text_18)), 0, span.length() - 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        span.append("%");
+//        span.setSpan(new AbsoluteSizeSpan(getResources().getDimensionPixelSize(R.dimen.text_2)), span.length() - 3, span.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        String text = progress + "%";
         TextPaint textP = new TextPaint();
         textP.setTextSize(getResources().getDimensionPixelSize(R.dimen.text_14));
-        textP.setTextAlign(Paint.Align.CENTER);
+        textP.setTextAlign(Paint.Align.LEFT);
         textP.setTypeface(Typeface.DEFAULT_BOLD);
-        String text = progress + "%";
         Rect textBound = new Rect();
         textP.getTextBounds(text, 0, text.length(), textBound);
 
@@ -141,8 +152,20 @@ public class Progress extends View {
 //        textbg.draw(canvas);//画入画布中
         //让文字居于背景中间，计算文字的左距离与底部距离
         int offset = textP.getFontMetricsInt().ascent - textP.getFontMetricsInt().top;
-        float tY = textRect.exactCenterY() + textBound.height() / 2 - offset / 2;
-        canvas.drawText(text, textRect.exactCenterX(), tY, textP);//画入画布中
+        float baseline = textRect.exactCenterY() + textBound.height() / 2 - offset / 2;
+        canvas.drawText(text, 0, text.length() - 1, textRect.left, baseline, textP);//画入画布中
+
+        LogUtils.i(textRect.centerY() + "XY" + textRect.exactCenterY());
+        LogUtils.i("top==" + textP.getFontMetricsInt().top);
+        LogUtils.i("ascent==" + textP.getFontMetricsInt().ascent);
+        LogUtils.i("descent==" + textP.getFontMetricsInt().descent);
+        LogUtils.i("bottom==" + textP.getFontMetricsInt().bottom);
+
+        String textEnd = "%";
+        Rect textBoundEnd = new Rect();
+        textP.getTextBounds(textEnd, 0, textEnd.length(), textBoundEnd);
+        textP.setTextSize(getResources().getDimensionPixelSize(R.dimen.text_8));
+        canvas.drawText("%", textRect.right - textBoundEnd.width() + 4, baseline, textP);
 
     }
 }

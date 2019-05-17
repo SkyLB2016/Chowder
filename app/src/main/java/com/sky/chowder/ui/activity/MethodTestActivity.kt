@@ -50,6 +50,7 @@ import kotlinx.android.synthetic.main.activity_method.*
 import java.io.File
 import java.net.URL
 import java.text.Collator
+import java.text.DecimalFormat
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.coroutines.experimental.buildSequence
@@ -67,7 +68,7 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener, Observer {
                 , "Intent测试", "时间选择", "地址选择", "工厂模式"
                 , "SVG与Value", "渐变的文字", "音频处理", "字符串转id"
                 , "排序算法", "LinkedList使用"
-                , "MD5加密"
+                , "MD5加密", "科学计数法"
         )
         for (i in method) {
             val tvText = LayoutInflater.from(this).inflate(R.layout.item_tv, flow, false) as TextView
@@ -101,7 +102,7 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener, Observer {
             "排序算法" -> sort()
             "LinkedList使用" -> getNum()
             "MD5加密" -> MD5Utils.encryption("http://img.mukewang.com/55237dcc0001128c06000338.jpg")
-            "" -> ""
+            "科学计数法" -> format("0")
             else -> ""
         }
         image.visibility = View.GONE
@@ -116,6 +117,19 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener, Observer {
             "音频处理" -> makePlayer()
             "" -> ""
         }
+    }
+
+    /**
+     * @param num 科学技术： #,###.00"
+     * 0 表示如果位数不足则以 0 填充，# 表示只要有可能就把数字拉上这个位置
+     * @return
+     */
+    fun format(num: Double): String {
+        return DecimalFormat("#,##0.00").format(num)
+    }
+
+    fun format(num: String): String {
+        return format(num.toDouble())
     }
 
     //观察者模式
@@ -601,6 +615,7 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener, Observer {
     private fun checkTTS(status: Int) {
 
     }
+
     /**
      * 文件属性
      */
