@@ -29,6 +29,7 @@ class CanvasActivity : Activity() {
         val video = findViewById<VideoView>(0)
         val mediaController = MediaController(this)
         val file = File("/storage/emulated/0/QQBrowser/视频/时光.mp4")
+
         if (file.exists()) {
             video?.setVideoPath(file.absolutePath)
             video?.setMediaController(mediaController)

@@ -3,10 +3,9 @@ package com.sky.chowder.ui.activity;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.ActivityNotFoundException;
-import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -43,7 +42,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
     //drawable-xhdpi notification_default_icon.png,landing_center
     //drawable-xhdpi ic_splash_indicator_selected
     //lib.account drawable ic_splash_indicator_selected
-
+    //易筋经、五禽戏、六字诀和八段锦
     private MainAdapter adapter;
 
     @Override
@@ -78,7 +77,6 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         //Rw2 B2 U2 Lw U2 Rw' U2 Rw U2 F2 Rw F2 Lw' B2 Rw2
         final double dou = 82973.908;
         //LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
-
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -212,5 +210,33 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
             lastBack = now;
         } else
             super.onBackPressed();
+    }
+    public int[] getLocation(View view) {
+        int[] location = new int[2];
+        view.getLocationOnScreen(location);
+        LogUtils.i(location[0] + "==xy==" + location[1]);
+
+        Rect rect = new Rect();
+        view.getLocalVisibleRect(rect);
+        LogUtils.i("getLocalVisibleRect==");
+        LogUtils.i("left=="+rect.left);
+        LogUtils.i("top=="+rect.top);
+        LogUtils.i("right=="+rect.right);
+        LogUtils.i("bottom=="+rect.bottom);
+        LogUtils.i("width=="+rect.width());
+        LogUtils.i("height=="+rect.height());
+        view.getGlobalVisibleRect(rect);
+
+        LogUtils.i("getGlobalVisibleRect==");
+        LogUtils.i("left=="+rect.left);
+        LogUtils.i("top=="+rect.top);
+        LogUtils.i("right=="+rect.right);
+        LogUtils.i("bottom=="+rect.bottom);
+        LogUtils.i("width=="+rect.width());
+        LogUtils.i("height=="+rect.height());
+
+        view.getLocationInWindow(location);
+        LogUtils.i(location[0] + "==xy==" + location[1]);
+        return location;
     }
 }

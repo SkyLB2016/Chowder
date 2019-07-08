@@ -79,6 +79,7 @@ git层级：
     git mv <file> <file> 移动或者重命名
 
 二、更新远程的方式：
+第一种
 (1)git stash 先将本地修改存储起来(后来居上)，再拉取文件,
 (2)拉取远程融合的两种方式：
     git pull 拉取当前分支远程库中的内容 ==fetch merge；
@@ -97,12 +98,18 @@ git层级：
     git stash clear 清空全部；
     简拼：gstc
 (4)gp提交完
-还可以这样更新：
+第二种
     1.把当前修改commit
     2.退回修改之前的节点
     3.拉取远程最新节点
     4.用rebase或者merge来合并自己的本地节点与远程节点
     5.提交push
+我用的：
+(1)直接gl，修改过于多，先提交
+(2)gaa
+(3)gcmsg
+(4)gp
+
 
 三、分支管理
 (1)git branch name  创建分支;
