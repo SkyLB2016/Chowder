@@ -16,7 +16,7 @@ class CanvasActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_canvas)
-//        setContentView(CanvasView(this))
+//        setContentView(CanvasView6(this))
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
