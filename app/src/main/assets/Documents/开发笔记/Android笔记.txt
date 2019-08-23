@@ -76,7 +76,7 @@ android:excludeFromRecents="true"，目前未起作用)。
 　　退出时的顺序回调onWindowVisibilityChanged->onWindowFocusChanged->onDetachedFromWindow
 
 　　非顺序回调：
-　　9）onTouchEvent()：触摸事件，不消费ACTION_DOWN的话，之后的也不会消费，消费的话down，move，up，统一消耗。
+　　9）onTouchEvent()：触摸事件，不消费ACTION_DOWN的话，之后的也不会消费，消费的话down，move，up，统一消费。
 　　10）onFocusChanged()：当该组件焦点发生改变时回调
 　　11）onKeyDown()：键盘键按下
 　　12）onKeyUp()：键盘键按下后后抬起

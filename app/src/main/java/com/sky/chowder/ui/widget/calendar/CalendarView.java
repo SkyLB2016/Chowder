@@ -37,7 +37,7 @@ public class CalendarView extends View {
 
     protected YearBarLayer yearBarLayer;//年bar
 
-    protected WeekBarLayer weekBarLayer;//星期
+    protected WeekBarLayer weekBarLayer;//星期头
     protected MonthLayerManager monthLayerManager;//月历
     private WeekLayerManager weekLayerManager;//周历
     private YearLayerManager yearLayerManager;//年历

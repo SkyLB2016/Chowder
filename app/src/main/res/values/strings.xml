@@ -42,6 +42,8 @@
 
     <string name="act_progress">15.进度条</string>
     <string name="act_progress_d">进度条</string>
+    <string name="act_calendar">16.日历</string>
+    <string name="act_calendar_d">日历</string>
 
     <string name="act_test">00.测试类</string>
 

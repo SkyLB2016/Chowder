@@ -32,7 +32,10 @@ public class JavaConsole {
 
 //        IOTest();
 //        readSdFile(new File("C:\\WorkSpace\\Chowder\\app\\total"));
-//        readS();
+//        readS();语数外理化生史地政
+        double a = Math.pow(1.06, 12);
+        System.out.println("a=" + a);
+
     }
 
     private static void IO() throws IOException {
@@ -242,7 +245,9 @@ public class JavaConsole {
     }
 
     void reimburse() {
-        //6.27；7.04；7.0；,7.11；7.16；7.23；7.25；
+        //6.27；7.04；7.09；,7.11；7.16；7.23；7.25；
+        //总报销：350
+        //8.01；8.06；
         //周六日：
         //总报销：
         //发票：

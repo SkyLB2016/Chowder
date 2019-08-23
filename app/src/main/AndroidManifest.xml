@@ -243,6 +243,17 @@
                 <category android:name="android.intent.category.CAR_MODE" />
             </intent-filter>
         </activity>
+<activity
+            android:name=".ui.activity.CalendarActivity"
+            android:description="@string/act_calendar"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/act_calendar_d"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.sky.coustom" />
+                <category android:name="android.intent.category.CAR_MODE" />
+            </intent-filter>
+        </activity>
 
         <service android:name=".ui.service.IntentTest" />
         <service
