@@ -7,6 +7,7 @@ import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableStringBuilder;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,7 +27,10 @@ import com.sky.utils.LogUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -77,13 +81,36 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         //Rw2 B2 U2 Lw U2 Rw' U2 Rw U2 F2 Rw F2 Lw' B2 Rw2
         final double dou = 82973.908;
         //LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
+
+        builder.append("天地玄黄");
+        builder.append("\n\n");
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gsonBuilder();
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(Calendar.DATE, 1);
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+
+                LogUtils.i("时间==" + calendar.getTimeInMillis());
+                calendar.set(year, month, 1, 0, 0, 0);
+                LogUtils.i("时间==" + calendar.getTimeInMillis());
+                calendar.set(year, month + 1, 1, 0, 0, 0);
+                LogUtils.i("时间==" + calendar.getTimeInMillis());
+                LogUtils.i("时间==" + calendar.get(Calendar.MONTH));
+                LogUtils.i("时间==" + calendar.get(Calendar.DATE));
+
+                calendar.setTimeInMillis(calendar.getTimeInMillis() - 1000);
+
+                LogUtils.i("时间==" + calendar.get(Calendar.MONTH));
+                LogUtils.i("时间==" + calendar.get(Calendar.DATE));
+
             }
         });
     }
+
+    SpannableStringBuilder builder = new SpannableStringBuilder();
 
     private static final String EMAIL = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
 
@@ -211,6 +238,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         } else
             super.onBackPressed();
     }
+
     public int[] getLocation(View view) {
         int[] location = new int[2];
         view.getLocationOnScreen(location);
@@ -219,21 +247,21 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         Rect rect = new Rect();
         view.getLocalVisibleRect(rect);
         LogUtils.i("getLocalVisibleRect==");
-        LogUtils.i("left=="+rect.left);
-        LogUtils.i("top=="+rect.top);
-        LogUtils.i("right=="+rect.right);
-        LogUtils.i("bottom=="+rect.bottom);
-        LogUtils.i("width=="+rect.width());
-        LogUtils.i("height=="+rect.height());
+        LogUtils.i("left==" + rect.left);
+        LogUtils.i("top==" + rect.top);
+        LogUtils.i("right==" + rect.right);
+        LogUtils.i("bottom==" + rect.bottom);
+        LogUtils.i("width==" + rect.width());
+        LogUtils.i("height==" + rect.height());
         view.getGlobalVisibleRect(rect);
 
         LogUtils.i("getGlobalVisibleRect==");
-        LogUtils.i("left=="+rect.left);
-        LogUtils.i("top=="+rect.top);
-        LogUtils.i("right=="+rect.right);
-        LogUtils.i("bottom=="+rect.bottom);
-        LogUtils.i("width=="+rect.width());
-        LogUtils.i("height=="+rect.height());
+        LogUtils.i("left==" + rect.left);
+        LogUtils.i("top==" + rect.top);
+        LogUtils.i("right==" + rect.right);
+        LogUtils.i("bottom==" + rect.bottom);
+        LogUtils.i("width==" + rect.width());
+        LogUtils.i("height==" + rect.height());
 
         view.getLocationInWindow(location);
         LogUtils.i(location[0] + "==xy==" + location[1]);

@@ -28,8 +28,8 @@ dependencies {
 
 //    implementation 'org.codehaus.groovy:groovy-all:2.5.5'
     //butterknife
-    //    annotationProcessor "com.jakewharton:butterknife-compiler:$bknifeVer"
-    //    kapt "com.jakewharton:butterknife-compiler:$bknifeVer"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$bknifeVer"
+    kapt "com.jakewharton:butterknife-compiler:$bknifeVer"
     //butterknife
 }
 def keyPass = rootProject.file("local.properties")

@@ -243,7 +243,7 @@
                 <category android:name="android.intent.category.CAR_MODE" />
             </intent-filter>
         </activity>
-<activity
+        <activity
             android:name=".ui.activity.CalendarActivity"
             android:description="@string/act_calendar"
             android:icon="@mipmap/ic_launcher"
@@ -254,6 +254,11 @@
                 <category android:name="android.intent.category.CAR_MODE" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.activity.WorkerChartActivity"
+            android:hardwareAccelerated="false"
+            android:screenOrientation="portrait" />
 
         <service android:name=".ui.service.IntentTest" />
         <service

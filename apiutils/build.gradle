@@ -65,7 +65,7 @@ dependencies {
     api "com.squareup.retrofit2:adapter-rxjava2:$RETROFIT_VERSION"
     //retrofit2
     api "com.squareup.okhttp3:okhttp:$OKHTTP_VERSION"
-//    api "com.jakewharton:butterknife:$bknifeVer"
+    api "com.jakewharton:butterknife:$bknifeVer"
     //工具类
     //    api 'com.blankj:utilcode:1.6.3'
 }

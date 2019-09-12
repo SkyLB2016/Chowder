@@ -122,7 +122,9 @@ android:excludeFromRecents="true"，目前未起作用)。
 　　6）ascent：字体在baseline上方被推荐的距离（一些字体制作商需要参考这个）
 　　7）descent：字体在是baseline下方被推荐的距离（一些字体制作商需要参考这个）
 　　8）bottom：descent的最大值
-　　textHeight=paint.descent()-paint.ascent()
+　　textHeight=paint.descent()-paint.ascent();//文字高度
+　　bottomY=bgHeight/2+textHeight/2;//文字底部位置
+　　baseY=bottomY-paint.descent();//文字baseline
 　　9）getTextBounds(String text, int start, int end, Rect bounds):获取文字宽高
 　　10）measureText(text)：获取文字宽度
 　　11）ColorMatrix

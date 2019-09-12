@@ -33,8 +33,20 @@ public class JavaConsole {
 //        IOTest();
 //        readSdFile(new File("C:\\WorkSpace\\Chowder\\app\\total"));
 //        readS();语数外理化生史地政
-        double a = Math.pow(1.06, 12);
+        double a = 1631.10 + 1954 + 11414.9;
+        double b = 1631.10 + 1954 + 10923.41 + 491.49;
+
+        double c = 1503 + 1800 + 11697;
+        double d = 1503 + 1800 + 11237.3 + 459.7;
+
+        double e = 16281 - 1631.10 - 1954;
+        double f = 16281 - 1631.10 - 1954 - 11414.9;
+
         System.out.println("a=" + a);
+        System.out.println("a=" + c);
+        System.out.println("a=" + d);
+        System.out.println("a=" + e);
+        System.out.println("a=" + f);
 
     }
 

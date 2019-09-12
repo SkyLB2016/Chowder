@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:divider="@color/color_999999"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/wh_1"
+    android:paddingRight="@dimen/wh_1"
+    android:id="@+id/linear"
+    android:showDividers="beginning|middle|end">
+    <!--android:showDividers = "middle|end|beginning|none"-->
+    <TextView
+        android:id="@+id/tv01"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingTop="@dimen/wh_10"
+        android:paddingBottom="@dimen/wh_10"
+        android:text="统计维度"
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/text_14" />
+
+    <TextView
+        android:id="@+id/tv02"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="人数"
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/text_14" />
+
+    <TextView
+        android:id="@+id/tv03"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="次数"
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/text_14" />
+
+</LinearLayout>

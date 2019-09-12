@@ -67,7 +67,6 @@ public class CalendarActivity extends AppCompatActivity {
                 }
             }
         });
-
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

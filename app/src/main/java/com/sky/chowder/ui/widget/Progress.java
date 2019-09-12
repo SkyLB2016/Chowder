@@ -151,8 +151,7 @@ public class Progress extends View {
 //        textbg.setBounds(textRect);//为文字设置背景
 //        textbg.draw(canvas);//画入画布中
         //让文字居于背景中间，计算文字的左距离与底部距离
-        int offset = textP.getFontMetricsInt().ascent - textP.getFontMetricsInt().top;
-        float baseline = textRect.exactCenterY() + textBound.height() / 2 - offset / 2;
+        float baseline = textRect.exactCenterY() + textBound.height() / 2 - textP.getFontMetricsInt().descent;
         canvas.drawText(text, 0, text.length() - 1, textRect.left, baseline, textP);//画入画布中
 
         LogUtils.i(textRect.centerY() + "XY" + textRect.exactCenterY());
