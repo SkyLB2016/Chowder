@@ -92,8 +92,14 @@ public class HrmActivity extends AppCompatActivity {
         workerInOfficeAge.setData(getWorkers(24, 18, 12, 6));
         workerEducation.setData(getWorkers(12, 18, 24, 18));
         workerAge.setData(getWorkers(6, 12, 18, 24));
-        workerGender.setProgress(30);
-        workerMarriage.setProgress(60);
+        List<PCommon> data = new ArrayList<>();
+        data.add(new PCommon("未婚", 10));
+        data.add(new PCommon("已婚", 15));
+        data.add(new PCommon("离异", 5));
+        data.add(new PCommon("丧偶", 20));
+
+        workerGender.setData(data);
+        workerMarriage.setData(data);
 
 
         List<PCommon> workers = new ArrayList<>();

@@ -34,7 +34,7 @@ public class WorkerView extends View {
     private List<PCommon> workers = new ArrayList<>();//员工集合
     private int workerColor = getResources().getColor(R.color.color_7d91e2);//在职的颜色
     private int joinColor = getResources().getColor(R.color.color_b1bdee);//入职的颜色
-    private int leaveColor = getResources().getColor(R.color.color_5d75db);//离职的颜色
+    private int leaveColor = getResources().getColor(R.color.color_5D75DB);//离职的颜色
 
     private int LinePadLeft = getResources().getDimensionPixelOffset(R.dimen.wh_22);//横线X的起始位置，也就是左间距
     private int columnPad = getResources().getDimensionPixelOffset(R.dimen.wh_32);//柱状图X的起始位置，柱状图的左间距，
@@ -235,7 +235,7 @@ public class WorkerView extends View {
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(getResources().getColor(android.R.color.white));
         canvas.drawCircle(leftR, topR, radiusOut, paint);
-        paint.setColor(getResources().getColor(R.color.color_5d75db));
+        paint.setColor(getResources().getColor(R.color.color_5D75DB));
         canvas.drawCircle(leftR, topR, radiusIn, paint);
     }
 

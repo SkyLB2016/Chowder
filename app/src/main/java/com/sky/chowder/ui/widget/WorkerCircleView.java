@@ -15,7 +15,6 @@ import android.view.View;
 
 import com.sky.chowder.R;
 import com.sky.chowder.model.PCommon;
-import com.sky.utils.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,15 +26,16 @@ import java.util.List;
 public class WorkerCircleView extends View {
 
     private Paint paint;
+    private Paint textP;
     private float startAngle = -90;//起始角度,12点位置
     private float sweepAngle;//需要旋转的角度，
     private int padding = getResources().getDimensionPixelOffset(R.dimen.wh_20);//外圆半径
+    private List<Integer> colors;
 
-    List<Float> angles = new ArrayList<>();
+    private List<PCommon> data = new ArrayList<>();
+    private int maxPerson = 0;
+    private List<Float> angles = new ArrayList<>();
     private int touchIndex = -1;//点击的位置
-
-    List<PCommon> data = new ArrayList<>();
-    private Paint textP;
 
     public WorkerCircleView(Context context) {
         this(context, null);
@@ -50,13 +50,15 @@ public class WorkerCircleView extends View {
         init();
     }
 
-    private int maxPerson = 0;
-
     private void init() {
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         textP = new Paint();
+        colors = new ArrayList<>();
+        colors.add(R.color.color_5D75DB);
+        colors.add(R.color.color_49F2d4);
+        colors.add(R.color.color_35BEF8);
+        colors.add(R.color.color_C3EBFF);
     }
-
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -65,25 +67,14 @@ public class WorkerCircleView extends View {
         setMeasuredDimension(layoutWidth, layoutWidth);
     }
 
-    /**
-     * 0-100
-     *
-     * @param progress
-     */
-    public void setProgress(int progress) {
+    public void setData(List<PCommon> data) {
+        this.data = data;
         maxPerson = 0;
-        data.clear();
-        data.add(new PCommon("未婚", 10));
-        data.add(new PCommon("已婚", 15));
-        data.add(new PCommon("离异", 5));
-        data.add(new PCommon("丧偶", 20));
         for (int i = 0; i < data.size(); i++) {
             maxPerson += data.get(i).getValue();
         }
-//        postInvalidate();
         invalidate();
     }
-
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -97,11 +88,9 @@ public class WorkerCircleView extends View {
         int radiusIn = radiusOut / 2;//内圆半径
         int lineWidth = radiusIn;//圆线的半径
 
-//        paint.setColor(getResources().getColor(R.color.color_b1bdee));
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(getResources().getColor(android.R.color.white));
         canvas.drawCircle(centerX, centerY, radiusOut, paint);
-//        canvas.drawCircle(centerX, centerY, radiusIn, paint);
 
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(lineWidth);
@@ -111,11 +100,7 @@ public class WorkerCircleView extends View {
         angles.clear();
         startAngle = -90;
         for (int i = 0; i < data.size(); i++) {
-            if (i % 2 == 0) {
-                paint.setColor(getResources().getColor(R.color.color_7d91e2));
-            } else {
-                paint.setColor(getResources().getColor(R.color.color_b1bdee));
-            }
+            paint.setColor(getResources().getColor(colors.get(i % 4)));//对4取余，省的越界了
 
             int value = data.get(i).getValue();
             sweepAngle = value * 1.0f / maxPerson * 360;
@@ -128,7 +113,6 @@ public class WorkerCircleView extends View {
 
     private void drawMark(Canvas canvas) {
         if (touchIndex == -1) return;
-
         textP.reset();
         textP.setFlags(Paint.ANTI_ALIAS_FLAG);
         textP.setTextSize(getResources().getDimension(R.dimen.text_10));
@@ -141,19 +125,13 @@ public class WorkerCircleView extends View {
         rectBg.draw(canvas);//划出矩形背景
         //绘制文字，先计算三行文字所占高度，
         Paint.FontMetrics metrics = textP.getFontMetrics();
-//
         float textHeight = metrics.descent - metrics.ascent;
         float baseline = rectBounds.top + rectBounds.height() / 2 + textHeight / 2 - metrics.descent;                                          //计算baseline
 
         int leftX = rectBounds.width() / 4;                                                                 //文字X的起始位置，默认设为矩形宽的四分之一
-//        int centerX = rectBounds.width() / 8;                                                               //小圆心X即为四分之一宽的中心
-//        int centerY = new Float(paddingTop + textHeight / 2).intValue();                              //小圆心Y即为此行文字的中心
-//        int radius = getResources().getDimensionPixelOffset(R.dimen.wh_2half);                              //小圆的半径
-        PCommon item = data.get(touchIndex);
-
         textP.setColor(getResources().getColor(R.color.color_c8c8c8));
         canvas.drawText(data.get(touchIndex).getName(), leftX, baseline, textP);
-        //职工的具体人数
+        //具体人数
         textP.setTextSize(getResources().getDimension(R.dimen.text_12));
         textP.setColor(getResources().getColor(android.R.color.white));
         textP.setTextAlign(Paint.Align.RIGHT);//右对齐
@@ -194,8 +172,6 @@ public class WorkerCircleView extends View {
                         clickAngle = Math.atan(tempY / tempX) + Math.PI;
                     }
                     clickAngle = clickAngle / Math.PI * 180;
-                    LogUtils.i("角度==" + clickAngle);
-
                     for (int i = 0; i < angles.size(); i++) {
                         if (clickAngle < angles.get(i)) {
                             touchIndex = i;
