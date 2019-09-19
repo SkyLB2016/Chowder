@@ -87,27 +87,32 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Calendar calendar = Calendar.getInstance();
-                calendar.set(Calendar.DATE, 1);
-                int year = calendar.get(Calendar.YEAR);
-                int month = calendar.get(Calendar.MONTH);
-
-                LogUtils.i("时间==" + calendar.getTimeInMillis());
-                calendar.set(year, month, 1, 0, 0, 0);
-                LogUtils.i("时间==" + calendar.getTimeInMillis());
-                calendar.set(year, month + 1, 1, 0, 0, 0);
-                LogUtils.i("时间==" + calendar.getTimeInMillis());
-                LogUtils.i("时间==" + calendar.get(Calendar.MONTH));
-                LogUtils.i("时间==" + calendar.get(Calendar.DATE));
-
-                calendar.setTimeInMillis(calendar.getTimeInMillis() - 1000);
-
-                LogUtils.i("时间==" + calendar.get(Calendar.MONTH));
-                LogUtils.i("时间==" + calendar.get(Calendar.DATE));
+                long a = 0l;
+                LogUtils.i("真假==" + (a == 0));
+                LogUtils.i("真假==" + (a == 0l));
 
             }
         });
+    }
+
+    private void checkCalendar() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DATE, 1);
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+
+        LogUtils.i("时间==" + calendar.getTimeInMillis());
+        calendar.set(year, month, 1, 0, 0, 0);
+        LogUtils.i("时间==" + calendar.getTimeInMillis());
+        calendar.set(year, month + 1, 1, 0, 0, 0);
+        LogUtils.i("时间==" + calendar.getTimeInMillis());
+        LogUtils.i("时间==" + calendar.get(Calendar.MONTH));
+        LogUtils.i("时间==" + calendar.get(Calendar.DATE));
+
+        calendar.setTimeInMillis(calendar.getTimeInMillis() - 1000);
+
+        LogUtils.i("时间==" + calendar.get(Calendar.MONTH));
+        LogUtils.i("时间==" + calendar.get(Calendar.DATE));
     }
 
     SpannableStringBuilder builder = new SpannableStringBuilder();

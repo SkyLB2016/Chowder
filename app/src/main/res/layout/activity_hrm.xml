@@ -1,0 +1,690 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroller"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:focusable="true"
+        android:background="@color/color_F0F0F0"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_worker_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:drawableLeft="@drawable/ic_vertical_line_blue"
+            android:drawableRight="@mipmap/ic_date_gray"
+            android:drawablePadding="@dimen/wh_8"
+            android:padding="@dimen/wh_14"
+            android:text="2019年7月人员动态"
+            android:textColor="@color/color_333333"
+            android:textSize="@dimen/text_14" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/wh_16">
+
+            <LinearLayout
+                android:id="@+id/linear_entry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_entry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/text_20"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/wh_8"
+                    android:text="入职"
+                    android:textColor="@color/color_999999"
+                    android:textSize="@dimen/text_12" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="34dp"
+                android:layout_gravity="center_vertical"
+                android:background="@color/color_E6E6E6" />
+
+            <LinearLayout
+                android:id="@+id/linear_worker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_toworker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/text_20"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/wh_8"
+                    android:text="转正"
+                    android:textColor="@color/color_999999"
+                    android:textSize="@dimen/text_12" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="34dp"
+                android:layout_gravity="center_vertical"
+                android:background="@color/color_E6E6E6" />
+
+            <LinearLayout
+                android:id="@+id/linear_quit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_quit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/text_20"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/wh_8"
+                    android:text="离职"
+                    android:textColor="@color/color_999999"
+                    android:textSize="@dimen/text_12" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_attendance_statistics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/wh_10"
+            android:background="@android:color/white"
+            android:drawableLeft="@drawable/ic_vertical_line_blue"
+            android:drawablePadding="@dimen/wh_8"
+            android:padding="@dimen/wh_14"
+            android:text="2019年7月出勤统计"
+            android:textColor="@color/color_333333"
+            android:textSize="@dimen/text_14" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:drawablePadding="@dimen/wh_8"
+            android:paddingLeft="@dimen/wh_26"
+            android:text="考勤统计"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/text_12" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/wh_10"
+            android:paddingBottom="@dimen/wh_16">
+
+            <LinearLayout
+                android:id="@+id/linear_attendance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/wh_20"
+                android:layout_marginRight="@dimen/wh_20"
+                android:divider="@color/color_999999"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/wh_16"
+                android:showDividers="middle|end" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/wh_1"
+            android:background="@android:color/white"
+            android:drawablePadding="@dimen/wh_8"
+            android:paddingLeft="@dimen/wh_26"
+            android:paddingTop="@dimen/wh_14"
+            android:text="请假统计"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/text_12" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/wh_10"
+            android:paddingBottom="@dimen/wh_16">
+
+            <LinearLayout
+                android:id="@+id/linear_leave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/wh_20"
+                android:layout_marginRight="@dimen/wh_20"
+                android:divider="@color/color_999999"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/wh_16"
+                android:showDividers="middle|end" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/wh_1"
+            android:background="@android:color/white"
+            android:paddingTop="@dimen/wh_14">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/wh_26"
+                android:text="加班统计"
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/text_12" />
+
+            <TextView
+                android:id="@+id/tv_over_time_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/wh_14"
+                android:drawableRight="@mipmap/ic_attendance_more_right"
+                android:text="查看全部"
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/text_12" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/wh_10"
+            android:paddingBottom="@dimen/wh_16">
+
+            <LinearLayout
+                android:id="@+id/linear_over_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/wh_20"
+                android:layout_marginRight="@dimen/wh_20"
+                android:divider="@color/color_999999"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/wh_16"
+                android:showDividers="middle|end" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/wh_1"
+            android:background="@android:color/white"
+            android:paddingTop="@dimen/wh_14">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/wh_26"
+                android:text="调休统计"
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/text_12" />
+
+            <TextView
+                android:id="@+id/tv_rest_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/wh_14"
+                android:drawableRight="@mipmap/ic_attendance_more_right"
+                android:text="查看全部"
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/text_12" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/wh_10"
+            android:paddingBottom="@dimen/wh_16">
+
+            <LinearLayout
+                android:id="@+id/linear_rest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/wh_20"
+                android:layout_marginRight="@dimen/wh_20"
+                android:divider="@color/color_999999"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/wh_16"
+                android:showDividers="middle|end" />
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/wh_10"
+            android:background="@android:color/white">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/wh_14"
+                android:paddingTop="@dimen/wh_10"
+                android:paddingBottom="@dimen/wh_10"
+                android:text="数据范围"
+                android:textColor="@color/color_666666"
+                android:textSize="@dimen/text_13" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:paddingTop="@dimen/wh_10"
+                android:paddingRight="@dimen/wh_14"
+                android:paddingBottom="@dimen/wh_10"
+                android:text="全公司"
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/text_13" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/wh_1"
+            android:background="@android:color/white"
+            android:paddingBottom="@dimen/wh_4">
+
+            <TextView
+                android:id="@+id/tv_worker_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_vertical_line_blue"
+                android:drawablePadding="@dimen/wh_8"
+                android:paddingLeft="@dimen/wh_14"
+                android:paddingTop="@dimen/wh_10"
+                android:paddingBottom="@dimen/wh_10"
+                android:text="人员走势分析"
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/text_14" />
+
+            <TextView
+                android:id="@+id/tv_date_zhouqi_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:drawableLeft="@mipmap/ic_date_zhouqi"
+                android:drawablePadding="@dimen/wh_4"
+                android:paddingTop="@dimen/wh_10"
+                android:paddingRight="@dimen/wh_14"
+                android:text="统计周期"
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/text_12" />
+
+            <TextView
+                android:id="@+id/tv_date_zhouqi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_date_zhouqi_title"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="@dimen/wh_4"
+                android:paddingRight="@dimen/wh_14"
+                android:text="2019.01-2019.06"
+                android:textColor="@color/color_5d75db"
+                android:textSize="@dimen/text_14"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:paddingLeft="17dp"
+            android:paddingTop="@dimen/wh_14"
+            android:paddingRight="26dp"
+            android:paddingBottom="@dimen/wh_8">
+
+            <com.sky.chowder.ui.widget.WorkerView
+                android:id="@+id/workerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/wh_1"
+            android:background="@android:color/white"
+            android:drawableLeft="@drawable/ic_vertical_line_blue"
+            android:drawablePadding="@dimen/wh_8"
+            android:padding="@dimen/wh_14"
+            android:text="人事概况"
+            android:textColor="@color/color_333333"
+            android:textSize="@dimen/text_14" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/wh_16">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_worker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/text_20"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/wh_8"
+                    android:text="在职"
+                    android:textColor="@color/color_999999"
+                    android:textSize="@dimen/text_12" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="34dp"
+                android:layout_gravity="center_vertical"
+                android:background="@color/color_E6E6E6" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_worker_offical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/text_20"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/wh_8"
+                    android:text="正式"
+                    android:textColor="@color/color_999999"
+                    android:textSize="@dimen/text_12" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="34dp"
+                android:layout_gravity="center_vertical"
+                android:background="@color/color_E6E6E6" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_worker_on_trial"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/text_20"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/wh_8"
+                    android:text="试用"
+                    android:textColor="@color/color_999999"
+                    android:textSize="@dimen/text_12" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="34dp"
+                android:layout_gravity="center_vertical"
+                android:background="@color/color_E6E6E6" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_worker_dispatch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/text_20"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/wh_8"
+                    android:text="派遣"
+                    android:textColor="@color/color_999999"
+                    android:textSize="@dimen/text_12" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/wh_1"
+            android:background="@android:color/white"
+            android:drawableLeft="@drawable/ic_vertical_line_blue"
+            android:drawablePadding="@dimen/wh_8"
+            android:padding="@dimen/wh_14"
+            android:text="人事统计"
+            android:textColor="@color/color_333333"
+            android:textSize="@dimen/text_14" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/wh_10"
+            android:paddingRight="@dimen/wh_10"
+            android:paddingBottom="@dimen/wh_10">
+
+            <com.sky.chowder.ui.widget.WorkerColumnView
+                android:id="@+id/worker_in_office_age"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <com.sky.chowder.ui.widget.WorkerColumnView
+                android:id="@+id/worker_education"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <com.sky.chowder.ui.widget.WorkerColumnView
+                android:id="@+id/worker_age"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/wh_10"
+            android:paddingRight="@dimen/wh_10"
+            android:paddingBottom="@dimen/wh_14">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="司龄分布"
+                android:textColor="@color/color_666666"
+                android:textSize="@dimen/text_12" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="学历分布"
+                android:textColor="@color/color_666666"
+                android:textSize="@dimen/text_12" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="年龄分布"
+                android:textColor="@color/color_666666"
+                android:textSize="@dimen/text_12" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/wh_10"
+            android:paddingRight="@dimen/wh_10">
+
+            <com.sky.chowder.ui.widget.WorkerCircleView
+                android:id="@+id/worker_gender"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <com.sky.chowder.ui.widget.WorkerCircleView
+                android:id="@+id/worker_marriage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <com.sky.chowder.ui.widget.WorkerCircleView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:visibility="invisible" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/wh_10"
+            android:paddingRight="@dimen/wh_10"
+            android:paddingBottom="@dimen/wh_14">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="性别比例"
+                android:textColor="@color/color_666666"
+                android:textSize="@dimen/text_12" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="婚姻比例"
+                android:textColor="@color/color_666666"
+                android:textSize="@dimen/text_12" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:textColor="@color/color_666666"
+                android:textSize="@dimen/text_12" />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

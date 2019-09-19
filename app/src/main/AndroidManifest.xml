@@ -103,21 +103,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.StockActivity"
-            android:description="@string/act_stock_d"
+            android:name=".ui.activity.PoetryActivity"
+            android:description="@string/act_poetry_d"
             android:icon="@mipmap/ic_launcher"
-            android:label="@string/act_stock"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.sky.coustom" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.activity.CanvasActivity"
-            android:description="@string/act_canvas_d"
-            android:hardwareAccelerated="false"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/act_canvas"
+            android:label="@string/act_poetry"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.sky.coustom" />
@@ -144,10 +133,43 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.PullDownActivity"
-            android:description="@string/act_pull_d"
+            android:name=".ui.activity.CanvasActivity"
+            android:description="@string/act_canvas_d"
+            android:hardwareAccelerated="false"
             android:icon="@mipmap/ic_launcher"
-            android:label="@string/act_pull"
+            android:label="@string/act_canvas"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.sky.coustom" />
+            </intent-filter>
+        </activity>
+        <!--android:process=":ninthPalace"-->
+        <activity
+            android:name=".ui.activity.NinthPalaceActivity"
+            android:description="@string/act_ninth"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/act_ninth"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.sky.coustom" />
+                <category android:name="android.intent.category.CAR_MODE" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.TabLayoutActivity"
+            android:description="@string/act_tab_b"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/act_tab"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.sky.coustom" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.SVGActivity"
+            android:description="@string/act_svg_d"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/act_svg"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.sky.coustom" />
@@ -168,45 +190,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.SVGActivity"
-            android:description="@string/act_svg_d"
+            android:name=".ui.activity.StockActivity"
+            android:description="@string/act_stock_d"
             android:icon="@mipmap/ic_launcher"
-            android:label="@string/act_svg"
+            android:label="@string/act_stock"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.sky.coustom" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.TabLayoutActivity"
-            android:description="@string/act_tab_b"
+            android:name=".ui.activity.PullDownActivity"
+            android:description="@string/act_pull_d"
             android:icon="@mipmap/ic_launcher"
-            android:label="@string/act_tab"
+            android:label="@string/act_pull"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.sky.coustom" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.activity.PoetryActivity"
-            android:description="@string/act_poetry_d"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/act_poetry"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.sky.coustom" />
-            </intent-filter>
-        </activity>
-        <!--android:process=":ninthPalace"-->
-        <activity
-            android:name=".ui.activity.NinthPalaceActivity"
-            android:description="@string/act_ninth"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/act_ninth"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.sky.coustom" />
-                <category android:name="android.intent.category.CAR_MODE" />
             </intent-filter>
         </activity>
         <activity
@@ -234,9 +234,9 @@
         </activity>
         <activity
             android:name=".ui.activity.ProgressActivity"
-            android:description="@string/act_progress"
+            android:description="@string/act_progress_d"
             android:icon="@mipmap/ic_launcher"
-            android:label="@string/act_progress_d"
+            android:label="@string/act_progress"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.sky.coustom" />
@@ -245,9 +245,20 @@
         </activity>
         <activity
             android:name=".ui.activity.CalendarActivity"
-            android:description="@string/act_calendar"
+            android:description="@string/act_calendar_d"
             android:icon="@mipmap/ic_launcher"
-            android:label="@string/act_calendar_d"
+            android:label="@string/act_calendar"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.sky.coustom" />
+                <category android:name="android.intent.category.CAR_MODE" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.HrmActivity"
+            android:description="@string/act_hrm_d"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/act_hrm"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.sky.coustom" />

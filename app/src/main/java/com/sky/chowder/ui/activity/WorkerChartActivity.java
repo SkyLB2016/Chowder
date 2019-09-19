@@ -11,9 +11,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.sky.chowder.R;
-import com.sky.chowder.model.WorkerTypeModel;
+import com.sky.chowder.model.PCommon;
 import com.sky.chowder.ui.widget.WorkerColumnHorizontalView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,7 +73,7 @@ public class WorkerChartActivity extends AppCompatActivity {
 //            tvWorkerSwitch.setVisibility(View.VISIBLE);
 //            workerChart.setVisibility(View.VISIBLE);
 //            linearBiaoge.setVisibility(View.GONE);
-            setChart();
+        setChart();
 //        }
     }
 
@@ -100,63 +101,35 @@ public class WorkerChartActivity extends AppCompatActivity {
         });
     }
 
-    List<WorkerTypeModel> workers = new ArrayList<>();//员工集合
+    List<PCommon> workers = new ArrayList<>();//员工集合
 
     private void setData() {
-        WorkerTypeModel worker = new WorkerTypeModel();
-        worker.setName("3个月内");
-        worker.setValue(50);
-        worker.setScale("0.00%");
-        workers.add(worker);
-        WorkerTypeModel worker02 = new WorkerTypeModel();
-        worker02.setName("6个月内");
-        worker02.setValue(98);
-        worker02.setScale("1.00%");
-        workers.add(worker02);
-        WorkerTypeModel worker03 = new WorkerTypeModel();
-        worker03.setName("6个月内-1年");
-        worker03.setValue(78);
-        worker03.setScale("10.00%");
-        workers.add(worker03);
-        WorkerTypeModel worker04 = new WorkerTypeModel();
-        worker04.setName("1年-3年");
-        worker04.setValue(60);
-        worker04.setScale("20.00%");
-        workers.add(worker04);
-        WorkerTypeModel worker05 = new WorkerTypeModel();
-        worker05.setName("3年-5年");
-        worker05.setValue(60);
-        worker05.setScale("30.00%");
-        workers.add(worker05);
-        WorkerTypeModel worker06 = new WorkerTypeModel();
-        worker06.setName("5年-10年");
-        worker06.setValue(60);
-        worker06.setScale("0.08%");
-        workers.add(worker06);
-        WorkerTypeModel worker07 = new WorkerTypeModel();
-        worker07.setName("10年以上");
-        worker07.setValue(60);
-        worker07.setScale("0.10%");
-        workers.add(worker07);
-        WorkerTypeModel worker08 = new WorkerTypeModel();
-        worker08.setName("未填写");
-        worker08.setValue(60);
-        worker08.setScale("10.00%");
-        workers.add(worker08);
-        workerChart.setWorkers(workers);
+        workers.add(new PCommon("3个月内",50));
+        workers.add(new PCommon("6个月内",98));
+        workers.add(new PCommon("6个月内-1年",78));
+        workers.add(new PCommon("1年-3年",60));
+        workers.add(new PCommon("3年-5年",60));
+        workers.add(new PCommon("5年-10年",60));
+        workers.add(new PCommon("10年以上",60));
+        workers.add(new PCommon("未填写",60));
+        workerChart.setData(workers);
     }
 
     private void setWorkerChart() {
-        workerChart.setWorkers(workers);
+        workerChart.setData(workers);
     }
 
     private void setWorkerBiaoGe() {
+        int max = 0;
+        for (int i = 0; i < workers.size(); i++) {
+            max += workers.get(i).getValue();
+        }
         View view;
         LinearLayout linear;
         TextView tv01;
         TextView tv02;
         TextView tv03;
-        WorkerTypeModel worker;
+        PCommon worker;
         for (int i = 0; i < workers.size(); i++) {
             view = LayoutInflater.from(this).inflate(R.layout.adapter_hrm, null);
             linear = view.findViewById(R.id.linear);
@@ -173,10 +146,15 @@ public class WorkerChartActivity extends AppCompatActivity {
                 worker = workers.get(i);
                 tv01.setText(worker.getName());
                 tv02.setText("" + worker.getValue());
-                tv03.setText(worker.getScale());
+                tv03.setText(saveTwo(worker.getValue() * 100.0 / max) + "%");
             }
             linearBiaoge.addView(view);
         }
     }
+
+    public String saveTwo(double num) {
+        return new DecimalFormat("#0.00").format(num);
+    }
+
 
 }

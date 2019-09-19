@@ -40,10 +40,13 @@
     <string name="act_IPC">15.综合</string>
     <string name="act_IPC_d">surfaceView，IPC（待深入研究）</string>
 
-    <string name="act_progress">15.进度条</string>
+    <string name="act_progress">16.进度条</string>
     <string name="act_progress_d">进度条</string>
-    <string name="act_calendar">16.日历</string>
+    <string name="act_calendar">17.日历</string>
     <string name="act_calendar_d">日历</string>
+    <string name="act_hrm">18.页面UI图</string>
+    <string name="act_hrm_d">页面UI图</string>
+
 
     <string name="act_test">00.测试类</string>
 
