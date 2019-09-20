@@ -53,7 +53,7 @@ public class WorkerColumnView extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         int layoutWidth = MeasureSpec.getSize(widthMeasureSpec);
-        setMeasuredDimension(layoutWidth, layoutWidth);
+        setMeasuredDimension(layoutWidth, layoutWidth / 5 * 4);
     }
 
     private void init() {
