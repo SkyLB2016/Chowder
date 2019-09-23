@@ -1,17 +1,14 @@
 package com.sky.chowder;
 
-import com.sky.utils.LogUtils;
 import com.sky.utils.RegexUtils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,21 +30,6 @@ public class JavaConsole {
 //        IOTest();
 //        readSdFile(new File("C:\\WorkSpace\\Chowder\\app\\total"));
 //        readS();语数外理化生史地政
-        double a = 1631.10 + 1954 + 11414.9;
-        double b = 1631.10 + 1954 + 10923.41 + 491.49;
-
-        double c = 1503 + 1800 + 11697;
-        double d = 1503 + 1800 + 11237.3 + 459.7;
-
-        double e = 16281 - 1631.10 - 1954;
-        double f = 16281 - 1631.10 - 1954 - 11414.9;
-
-        System.out.println("a=" + a);
-        System.out.println("a=" + c);
-        System.out.println("a=" + d);
-        System.out.println("a=" + e);
-        System.out.println("a=" + f);
-
     }
 
     private static void IO() throws IOException {
@@ -260,6 +242,6 @@ public class JavaConsole {
         //9.03；9.04；9.05；9.06；9.10；9.17；9.19；9.24；9.26；
         //周六日：9.07；9.08；
         //总报销：50*9+200=650
-        //发票：300
+        //发票：400
     }
 }

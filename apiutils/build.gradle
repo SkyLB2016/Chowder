@@ -29,7 +29,7 @@ group = publishedGroupId// Maven Group ID for the artifact
 version = libraryVersion
 android {
     compileSdkVersion COMPILE_SDK_VERSION as int
-    buildToolsVersion '28.0.3'
+    buildToolsVersion BUILD_TOOLS_VERSION
     defaultConfig {
         minSdkVersion MIN_SDK_VERSION as int
         targetSdkVersion TARGET_SDK_VERSION as int
@@ -52,7 +52,7 @@ dependencies {
     api "com.android.support:appcompat-v7:$SUPPORT_LIBRARY"
     api "com.android.support:recyclerview-v7:$SUPPORT_LIBRARY"
     api "com.android.support:design:$SUPPORT_LIBRARY"
-    api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    api "org.jetbrains.kotlin:kotlin-stdlib:$KOTLIN_VERSION"
     //rxjava
     api "io.reactivex.rxjava2:rxjava:$RXJAVA_VERSION"
     api "io.reactivex.rxjava2:rxandroid:$RXANDROID_VERSION"
@@ -65,7 +65,7 @@ dependencies {
     api "com.squareup.retrofit2:adapter-rxjava2:$RETROFIT_VERSION"
     //retrofit2
     api "com.squareup.okhttp3:okhttp:$OKHTTP_VERSION"
-    api "com.jakewharton:butterknife:$bknifeVer"
+    api "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
     //工具类
     //    api 'com.blankj:utilcode:1.6.3'
 }

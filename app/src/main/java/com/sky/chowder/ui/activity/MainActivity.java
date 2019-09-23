@@ -39,7 +39,6 @@ import common.base.BasePActivity;
 /**
  * Created by libin on 2018/11/13 4:26 PM.
  */
-@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenuItemClickListener, IMainView {
     //需要替换的图片
     //drawable-hdpi notification_default_icon.png
