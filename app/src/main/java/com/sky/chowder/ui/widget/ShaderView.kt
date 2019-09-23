@@ -20,7 +20,7 @@ class ShaderView @JvmOverloads constructor(context: Context, attrs: AttributeSet
         bitmap = BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher)
         val matrix = Matrix()
         matrix.setScale(1f, -1f)
-        refBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap!!.width, bitmap!!.height, matrix, true)
+        refBitmap = Bitmap.createBitmap(bitmap!!, 0, 0, bitmap!!.width, bitmap!!.height, matrix, true)
         paint = Paint()
         paint!!.shader = LinearGradient(0f, bitmap!!.height.toFloat(), 0f, bitmap!!.height * 1.8f, 0xEE000000.toInt(), 0x10000000, Shader.TileMode.CLAMP)
 //        paint!!.shader = LinearGradient(0f, bitmap!!.height.toFloat(), 0f, bitmap!!.height * 1.8f, Color.RED, Color.BLUE, Shader.TileMode.CLAMP)

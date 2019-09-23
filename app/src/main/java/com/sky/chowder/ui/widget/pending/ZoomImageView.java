@@ -18,7 +18,7 @@ import android.view.ViewTreeObserver;
  * Created by SKY on 2015/8/17 15:30.
  * 图片缩放
  */
-public class ZoomImageView extends android.support.v7.widget.AppCompatImageView implements
+public class ZoomImageView extends androidx.appcompat.widget.AppCompatImageView implements
         ViewTreeObserver.OnGlobalLayoutListener, View.OnTouchListener, ScaleGestureDetector.OnScaleGestureListener {
 
     private boolean once = true;//只执行一次

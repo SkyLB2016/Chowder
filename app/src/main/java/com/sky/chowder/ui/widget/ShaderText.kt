@@ -6,11 +6,12 @@ import android.graphics.Color
 import android.graphics.LinearGradient
 import android.graphics.Shader
 import android.util.AttributeSet
+import androidx.appcompat.widget.AppCompatTextView
 
 /**
  * Created by SKY on 2018/2/24 14:49.
  */
-class ShaderText @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : android.support.v7.widget.AppCompatTextView(context, attrs, defStyleAttr) {
+class ShaderText @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : AppCompatTextView(context, attrs, defStyleAttr) {
 
     internal var width: Int = 0
     private var linear: LinearGradient? = null

@@ -1,10 +1,10 @@
 package com.sky.base
 
 import android.os.Bundle
-import android.support.annotation.CheckResult
-import android.support.annotation.StringRes
-import android.support.v7.app.AppCompatActivity
+import androidx.annotation.CheckResult
+import androidx.annotation.StringRes
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.sky.api.IBaseView
 import com.sky.utils.ToastUtils
 import com.sky.widget.BaseTitle

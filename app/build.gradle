@@ -8,13 +8,16 @@ description = "程序集合的主项目"
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
 //    testImplementation 'junit:junit:4.12'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    implementation "com.android.support:cardview-v7:$SUPPORT_LIBRARY"
-    implementation "com.android.support:appcompat-v7:$SUPPORT_LIBRARY"
-    implementation "com.android.support:design:$SUPPORT_LIBRARY"
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$KOTLIN_VERSION"
+    implementation 'androidx.core:core-ktx:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+//    implementation 'androidx.cardview:cardview:1.0.0'
+
     //    implementation 'com.facebook.fresco:fresco:1.4.0'
 //    implementation("com.facebook.fresco:imagepipeline-okhttp3:${FRESCO_VERSION}") {
 //        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
@@ -30,8 +33,12 @@ dependencies {
 //    implementation 'org.codehaus.groovy:groovy-all:2.5.5'
     //butterknife
     annotationProcessor "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
+    implementation "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
     kapt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
     //butterknife
+
+
+
 }
 def keyPass = rootProject.file("local.properties")
 def key = new Properties()
@@ -184,4 +191,4 @@ task printProperties {
         sourceSets.matching { it.purpose == "production" }.each { println it.getName() }
     }
 }
-configurations.runtime.each { f -> println f.path }
+//configurations.runtime.each { f -> println f.path }

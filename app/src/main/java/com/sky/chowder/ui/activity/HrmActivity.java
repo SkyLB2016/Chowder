@@ -1,7 +1,7 @@
 package com.sky.chowder.ui.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -252,7 +252,7 @@ public class HrmActivity extends AppCompatActivity {
 
     @OnClick({R.id.linear_entry, R.id.linear_worker, R.id.linear_quit,
             R.id.tv_over_time_more, R.id.tv_rest_more, R.id.worker_in_office_age, R.id.worker_education, R.id.worker_age})
-    public void onclick(View v) {
+    public void onClick(View v) {
         switch (v.getId()) {
             case R.id.linear_entry:
                 break;

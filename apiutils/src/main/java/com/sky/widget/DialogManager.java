@@ -3,7 +3,7 @@ package com.sky.widget;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
-import android.support.v7.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.widget.ImageView;
 
 import com.sky.R;

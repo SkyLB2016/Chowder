@@ -1,7 +1,7 @@
 package com.sky.chowder.ui.fragment
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.sky.base.BaseFragment
 import com.sky.chowder.R
 import com.sky.chowder.ui.adapter.CollapsingAdapter

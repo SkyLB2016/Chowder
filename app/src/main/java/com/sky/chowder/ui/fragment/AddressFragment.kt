@@ -2,12 +2,12 @@ package com.sky.chowder.ui.fragment
 
 import android.content.DialogInterface
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.NumberPicker
+import androidx.fragment.app.DialogFragment
 import com.sky.chowder.R
 import com.sky.chowder.gson.GsonUtils
 import com.sky.chowder.model.AreaEntity
@@ -16,6 +16,7 @@ import com.sky.utils.ScreenUtils
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+
 import kotlinx.android.synthetic.main.fragment_address.*
 
 /**
@@ -30,7 +31,7 @@ class AddressFragment : DialogFragment() {
     lateinit var onClick: OnClickListener
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
         return inflater!!.inflate(R.layout.fragment_address, container)
     }
 
@@ -48,13 +49,13 @@ class AddressFragment : DialogFragment() {
     private fun initData() {
 //        Observable.just(FileUtils.readAssestToStr(activity, "address.json"))
         Observable.just(FileUtils.readInput(activity?.assets?.open("address.json")))
-                .map { s -> GsonUtils.fromJson(s, Array<AreaEntity>::class.java) }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { areaEntities ->
-                    provinceA = areaEntities
-                    setAddress()
-                }
+            .map { s -> GsonUtils.fromJson(s, Array<AreaEntity>::class.java) }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { areaEntities ->
+                provinceA = areaEntities
+                setAddress()
+            }
         tvLeft.setOnClickListener { dismiss() }
         tvRight.setOnClickListener {
             onClick?.onClick("$province-$city-$county")
@@ -146,10 +147,10 @@ class AddressFragment : DialogFragment() {
 
     override fun onStart() {
         super.onStart()
-        dialog.window.setLayout(ScreenUtils.getWidthPX(activity) / 8 * 7, dialog.window.attributes.height)
+        dialog?.window?.setLayout(ScreenUtils.getWidthPX(activity) / 8 * 7, dialog?.window?.attributes!!.height)
     }
 
-    override fun onDismiss(dialog: DialogInterface?) {
+    override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
         disOnClick?.onDismiss()
     }

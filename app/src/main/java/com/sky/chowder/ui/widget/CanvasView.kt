@@ -2,7 +2,7 @@ package com.sky.chowder.ui.widget
 
 import android.content.Context
 import android.graphics.*
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.KeyEvent

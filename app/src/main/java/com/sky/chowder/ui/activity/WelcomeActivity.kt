@@ -2,10 +2,10 @@ package com.sky.chowder.ui.activity
 
 import android.os.Bundle
 import android.os.Handler
-import android.support.v7.app.AppCompatActivity
 import android.view.WindowManager
 import android.view.animation.*
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import com.sky.Common
 import com.sky.chowder.R
 import com.sky.utils.JumpAct
@@ -20,7 +20,10 @@ class WelcomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //requestWindowFeature(Window.FEATURE_NO_TITLE);//去掉标题栏,在v7中AppCompatActivity下无用
-        this.window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)//去掉信息栏
+        this.window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )//去掉信息栏
         super.onCreate(savedInstanceState)
         val view = ImageView(this)
         view.setBackgroundResource(R.mipmap.ic_bg)
@@ -29,7 +32,8 @@ class WelcomeActivity : AppCompatActivity() {
         val set = AnimationSet(true)
         val alpha = AlphaAnimation(0.1f, 1f)
         alpha.duration = TIME
-        val rotate = RotateAnimation(0f, 360f, RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f)
+        val rotate =
+            RotateAnimation(0f, 360f, RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f)
         rotate.duration = TIME
         val tran = TranslateAnimation(200f, 0f, 200f, 0f)
         tran.duration = TIME

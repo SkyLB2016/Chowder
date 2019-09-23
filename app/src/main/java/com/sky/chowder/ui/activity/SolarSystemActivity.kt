@@ -4,10 +4,10 @@ import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
-import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.FrameLayout
+import androidx.appcompat.widget.Toolbar
 import com.sky.chowder.C
 import com.sky.chowder.R
 import com.sky.chowder.ui.presenter.SolarP

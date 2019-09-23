@@ -3,7 +3,7 @@ package com.sky.chowder.ui.service;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 /**
  * Created by SKY on 2018/5/8 11:33.

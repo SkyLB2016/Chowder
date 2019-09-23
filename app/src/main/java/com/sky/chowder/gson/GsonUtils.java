@@ -1,6 +1,6 @@
 package com.sky.chowder.gson;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;

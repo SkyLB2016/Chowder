@@ -132,11 +132,9 @@
 #处理反射参见《App研发录》第七章
 
 # 如果有引用v4
--dontwarn android.support.v4.**
--keep class android.support.v4.** { *; }
--keep interface android.support.v4.app.** { *; }
--keep public class * extends android.support.v4.**
--keep public class * extends android.support.v4.app.Fragment
+-dontwarn androidx.viewpager.widget.**
+-keep class androidx.viewpager.widget.** { *; }
+-keep public class * extends androidx.viewpager.widget.**
 # 自己的包下的fragment
 -keep public class com.sky.chowder.ui.fragment.** {*;}
 

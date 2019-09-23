@@ -22,7 +22,7 @@ class DoubleCacheView @JvmOverloads constructor(context: Context, attrs: Attribu
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         //创建一个与该view具有相同大小的缓冲区
         cacheBitmap = Bitmap.createBitmap(measuredWidth, measuredHeight, Bitmap.Config.ARGB_8888)
-        cacheCanvas = Canvas(cacheBitmap)
+        cacheCanvas = Canvas(cacheBitmap!!)
         cachePath = Path()
         //设置画笔
         cachePaint = Paint(Paint.DITHER_FLAG)
@@ -58,7 +58,7 @@ class DoubleCacheView @JvmOverloads constructor(context: Context, attrs: Attribu
             }
             MotionEvent.ACTION_UP -> {
                 //只在抬起的时候向缓冲区中绘图
-                cacheCanvas?.drawPath(cachePath, cachePaint)
+                cacheCanvas?.drawPath(cachePath!!, cachePaint!!)
                 cachePath?.reset()//清空path
             }
         }
@@ -69,8 +69,8 @@ class DoubleCacheView @JvmOverloads constructor(context: Context, attrs: Attribu
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         //将缓冲区中的bitmap对象会知道view上
-        canvas.drawBitmap(cacheBitmap, 0f, 0f, cachePaint)
+        canvas.drawBitmap(cacheBitmap!!, 0f, 0f, cachePaint)
         //沿着path绘制
-        canvas.drawPath(cachePath, cachePaint)
+        canvas.drawPath(cachePath!!, cachePaint!!)
     }
 }

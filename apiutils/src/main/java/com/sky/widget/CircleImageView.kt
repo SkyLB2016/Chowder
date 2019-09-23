@@ -6,13 +6,14 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatImageView
 import com.sky.R
 
 /**
  * Created by SKY on 2015/8/17 15:30.
  * 圆形图片
  */
-class CircleImageView @JvmOverloads constructor(context: Context, attrs: AttributeSet, defStyle: Int = 0) : android.support.v7.widget.AppCompatImageView(context, attrs, defStyle) {
+class CircleImageView @JvmOverloads constructor(context: Context, attrs: AttributeSet, defStyle: Int = 0) : AppCompatImageView(context, attrs, defStyle) {
 
     var borderColor = BORDER_COLOR//边颜色
         set(value) {

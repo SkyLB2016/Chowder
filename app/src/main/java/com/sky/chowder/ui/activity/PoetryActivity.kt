@@ -3,7 +3,6 @@ package com.sky.chowder.ui.activity
 import android.content.ClipboardManager
 import android.graphics.RectF
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -11,6 +10,8 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import android.view.animation.LayoutAnimationController
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.sky.adapter.RecyclerAdapter
 import com.sky.adapter.RecyclerHolder
 import com.sky.chowder.R
@@ -50,7 +51,7 @@ class PoetryActivity : BaseNoPActivity() {
                 }
             }
         }
-        recycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        recycler.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         recycler.adapter = adapter
         clipM = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
 
@@ -76,7 +77,7 @@ class PoetryActivity : BaseNoPActivity() {
         while (link.isNotEmpty()) {
             dir = link.removeFirst()
             array = assets.list(dir)
-            for (i in array) {
+            for (i in array!!) {
                 if (i.endsWith(".txt")) {
                     poetry.add("$dir/$i")
                 } else {

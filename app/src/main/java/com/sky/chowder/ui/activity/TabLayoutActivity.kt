@@ -1,10 +1,10 @@
 package com.sky.chowder.ui.activity
 
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentPagerAdapter
 import android.view.View
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentPagerAdapter
+import com.google.android.material.tabs.TabLayout
 import com.sky.chowder.R
 import com.sky.chowder.ui.fragment.*
 import common.base.BaseNoPActivity
@@ -25,10 +25,11 @@ class TabLayoutActivity : BaseNoPActivity() {
 //        mParams.scrollFlags = 0//的时候AppBarLayout下的toolbar就不会随着滚动条折叠
         //        mParams.setScrollFlags(5); //的时候AppBarLayout下的toolbar会随着滚动条折叠
     }
+
     override fun loadData() = Unit
 
     private fun setUpViewPager() {
-      val tabs=  findViewById<TabLayout>(R.id.tabs)
+        val tabs = findViewById<TabLayout>(R.id.tabs)
         tabs.visibility = View.VISIBLE
         val titles = ArrayList<String>()
         titles.add("card")
@@ -45,7 +46,7 @@ class TabLayoutActivity : BaseNoPActivity() {
 //        fragments.add(ShaderFragment())
 //        fragments.add(XferModeFragment())
 //        fragments.add(CursorLoaderListFragment())
-        val adapter = object : FragmentPagerAdapter(supportFragmentManager) {
+        val adapter = object : FragmentPagerAdapter(supportFragmentManager, 1) {
             override fun getCount(): Int = fragments.size
 
             override fun getItem(position: Int): Fragment = fragments[position]

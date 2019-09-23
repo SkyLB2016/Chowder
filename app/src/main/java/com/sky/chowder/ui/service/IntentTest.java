@@ -3,7 +3,7 @@ package com.sky.chowder.ui.service;
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.sky.SkyApp;
 import com.sky.utils.LogUtils;

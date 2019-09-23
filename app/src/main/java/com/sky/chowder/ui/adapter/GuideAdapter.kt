@@ -1,8 +1,8 @@
 package com.sky.chowder.ui.adapter
 
-import android.support.v4.view.PagerAdapter
 import android.view.View
 import android.view.ViewGroup
+import androidx.viewpager.widget.PagerAdapter
 
 /**
  * Created by SKY on 2017/3/6.

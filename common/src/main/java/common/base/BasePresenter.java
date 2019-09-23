@@ -2,8 +2,8 @@ package common.base;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.StringRes;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AppCompatActivity;
 import android.text.TextUtils;
 
 import com.sky.Common;

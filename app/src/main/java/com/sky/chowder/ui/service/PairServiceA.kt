@@ -76,11 +76,11 @@ class PairServiceA : Service() {
             books.add(book)
         }
 
-        override fun linkToDeath(recipient: IBinder.DeathRecipient?, flags: Int) {
+        override fun linkToDeath(recipient: IBinder.DeathRecipient, flags: Int) {
             super.linkToDeath(recipient, flags)
         }
 
-        override fun unlinkToDeath(recipient: IBinder.DeathRecipient?, flags: Int): Boolean {
+        override fun unlinkToDeath(recipient: IBinder.DeathRecipient, flags: Int): Boolean {
 
 //            asBinder().unlinkToDeath(deathRecipient, 0)
             return super.unlinkToDeath(recipient, flags)

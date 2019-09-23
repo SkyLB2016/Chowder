@@ -1,12 +1,12 @@
 package com.sky.chowder.ui.fragment
 
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.NumberPicker
+import androidx.fragment.app.DialogFragment
 import com.sky.chowder.R
 import com.sky.utils.DateUtil
 import com.sky.utils.ScreenUtils
@@ -26,7 +26,7 @@ class TimeFragment : DialogFragment() {
     private val cal = Calendar.getInstance()!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
 //        dialog.setCanceledOnTouchOutside(true)//默认为true，点击外部消失且只有在cancel为true是才有效，变为false是，不消失
 //        isCancelable = true//默认为true，可返回，变为false是，既不可以返回，点击外部也不会消失，只能点击按钮
         return inflater!!.inflate(R.layout.fragment_time, container)
@@ -39,7 +39,7 @@ class TimeFragment : DialogFragment() {
 
     override fun onStart() {
         super.onStart()
-        dialog.window!!.setLayout(ScreenUtils.getWidthPX(activity) / 8 * 7, dialog.window!!.attributes.height)
+        dialog?.window!!.setLayout(ScreenUtils.getWidthPX(activity) / 8 * 7, dialog?.window!!.attributes.height)
     }
 
     private fun initData() {
@@ -81,7 +81,11 @@ class TimeFragment : DialogFragment() {
 //        npHour.setFormatter(getFormatter())
         npHour.setOnValueChangedListener { _, oldVal, newVal ->
             cal.add(Calendar.HOUR_OF_DAY, newVal - oldVal)
-            if ("${DateUtil.timeStampToDate(cal.timeInMillis, "dd")}-$newVal" == DateUtil.timeStampToDate(System.currentTimeMillis(), "dd-HH")) {
+            if ("${DateUtil.timeStampToDate(
+                    cal.timeInMillis,
+                    "dd"
+                )}-$newVal" == DateUtil.timeStampToDate(System.currentTimeMillis(), "dd-HH")
+            ) {
                 cal.set(Calendar.MINUTE, min * minutesInterval)
                 setMinutes(min, 0)
             } else setMinutes(0, cal.get(Calendar.MINUTE) / minutesInterval)
@@ -89,7 +93,12 @@ class TimeFragment : DialogFragment() {
         }
 
         setMinutes(min, 0)
-        npMinute.setOnValueChangedListener { _, oldVal, newVal -> cal.add(Calendar.MINUTE, (newVal - oldVal) * minutesInterval) }
+        npMinute.setOnValueChangedListener { _, oldVal, newVal ->
+            cal.add(
+                Calendar.MINUTE,
+                (newVal - oldVal) * minutesInterval
+            )
+        }
         if (time !== 0L && time > System.currentTimeMillis()) setSelectTime()//如已有设置好的时间，则载入
         tvLeft.setOnClickListener { dismiss() }
         tvRight.setOnClickListener {
@@ -113,7 +122,8 @@ class TimeFragment : DialogFragment() {
 
     private fun setSelectTime() {
         //把当前时间戳转换成日期格式，在转换成00:00时的时间戳
-        val curr = DateUtil.dateToTimeStamp(DateUtil.timeStampToDate(System.currentTimeMillis(), "yyyy-MM-dd"), "yyyy-MM-dd")
+        val curr =
+            DateUtil.dateToTimeStamp(DateUtil.timeStampToDate(System.currentTimeMillis(), "yyyy-MM-dd"), "yyyy-MM-dd")
         val po = (time - curr) / (24 * 3600 * 1000)//选中的时间为第几天
         cal.timeInMillis = time
         if (po.toInt() !== 0) setNpValue(npHour, 23, 0, cal.get(Calendar.HOUR_OF_DAY))

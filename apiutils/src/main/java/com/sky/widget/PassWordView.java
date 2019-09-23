@@ -7,13 +7,14 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 
+import androidx.appcompat.widget.AppCompatEditText;
 import com.sky.R;
 
 /**
  * Created by SKY on 15/3/26 下午3:50.
  * 密码输入框
  */
-public class PassWordView extends android.support.v7.widget.AppCompatEditText {
+public class PassWordView extends AppCompatEditText {
     int with;
     int height;
     private Paint textPaint;//字体的画笔

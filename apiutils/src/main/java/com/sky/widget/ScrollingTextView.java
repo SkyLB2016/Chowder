@@ -9,7 +9,7 @@ import android.util.AttributeSet;
  * Created by SKY on 16/5/10 下午3:50.
  * 滑动的textview
  */
-public class ScrollingTextView extends android.support.v7.widget.AppCompatTextView {
+public class ScrollingTextView extends androidx.appcompat.widget.AppCompatTextView {
 
     public ScrollingTextView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);

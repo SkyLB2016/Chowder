@@ -1,7 +1,7 @@
 package com.sky.chowder.ui.pop
 
-import android.support.v7.widget.RecyclerView
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 
 import com.sky.adapter.RecyclerAdapter
 import com.sky.adapter.RecyclerHolder

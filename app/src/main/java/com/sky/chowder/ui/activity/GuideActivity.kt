@@ -2,10 +2,10 @@ package com.sky.chowder.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.WindowManager
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import com.sky.Common
 import com.sky.chowder.R
 import com.sky.chowder.ui.adapter.GuideContoler

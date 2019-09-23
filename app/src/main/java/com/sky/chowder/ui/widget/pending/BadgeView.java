@@ -13,16 +13,13 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.TabWidget;
-import android.widget.TextView;
 
-import com.sky.chowder.ui.activity.PoetryActivity;
-import com.sky.utils.JumpAct;
 import com.sky.utils.LogUtils;
 
 /**
  * Created by SKY on 2015/12/9 20:52.
  */
-public class BadgeView extends android.support.v7.widget.AppCompatTextView {
+public class BadgeView extends androidx.appcompat.widget.AppCompatTextView {
 
     private boolean mHideOnNull = true;
 

@@ -2,10 +2,10 @@ package com.sky.chowder.ui.activity
 
 import android.graphics.Color
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
 import android.webkit.WebView
+import androidx.appcompat.app.AppCompatActivity
 import com.sky.chowder.R
 import com.sky.utils.FileUtils
 

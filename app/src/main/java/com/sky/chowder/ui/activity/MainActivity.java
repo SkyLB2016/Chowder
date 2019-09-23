@@ -1,19 +1,16 @@
 package com.sky.chowder.ui.activity;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.content.ActivityNotFoundException;
 import android.graphics.Rect;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.text.SpannableStringBuilder;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toolbar;
-
+import androidx.recyclerview.widget.RecyclerView;
 import com.sky.adapter.RecyclerAdapter;
 import com.sky.chowder.R;
 import com.sky.chowder.api.view.IMainView;
@@ -23,18 +20,14 @@ import com.sky.chowder.ui.presenter.MainP;
 import com.sky.utils.AppUtils;
 import com.sky.utils.JumpAct;
 import com.sky.utils.LogUtils;
-
+import common.base.BasePActivity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import common.base.BasePActivity;
 
 /**
  * Created by libin on 2018/11/13 4:26 PM.

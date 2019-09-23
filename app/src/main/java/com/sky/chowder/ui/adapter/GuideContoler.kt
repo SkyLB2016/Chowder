@@ -2,10 +2,10 @@ package com.sky.chowder.ui.adapter
 
 import android.app.Activity
 import android.content.Context
-import android.support.v4.view.ViewPager
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.viewpager.widget.ViewPager
 import com.sky.chowder.R
 import com.sky.chowder.ui.widget.viewpager.DepthPageTransformer
 import java.util.*

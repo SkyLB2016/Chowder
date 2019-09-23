@@ -1,7 +1,7 @@
 package com.sky.api;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 
 /**
  * Created by SKY on 2017/5/29.

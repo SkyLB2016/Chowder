@@ -1,11 +1,11 @@
 package com.sky.chowder.ui.activity
 
 import android.os.Bundle
-import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.Gravity
 import android.view.LayoutInflater
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.sky.chowder.R
 import com.sky.chowder.api.view.ImageUriV
 import com.sky.chowder.model.ImageFloder

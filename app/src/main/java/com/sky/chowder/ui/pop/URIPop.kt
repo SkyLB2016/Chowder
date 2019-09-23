@@ -1,7 +1,7 @@
 package com.sky.chowder.ui.pop
 
-import android.support.v4.view.ViewPager
 import android.view.View
+import androidx.viewpager.widget.ViewPager
 
 import com.sky.chowder.R
 import com.sky.chowder.ui.adapter.PopPagerAdapter

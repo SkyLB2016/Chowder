@@ -7,13 +7,14 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatImageView
 import com.sky.utils.ScreenUtils
 
 /**
  * Created by SKY on 2015/8/14 15:27.
  * drawbitmapmesh应用
  */
-class MeshView @JvmOverloads constructor(context: Context, attrs: AttributeSet, defStyle: Int = 0) : android.support.v7.widget.AppCompatImageView(context, attrs, defStyle) {
+class MeshView @JvmOverloads constructor(context: Context, attrs: AttributeSet, defStyle: Int = 0) : AppCompatImageView(context, attrs, defStyle) {
 
     private val line = 200//行
     private val column = 200//列

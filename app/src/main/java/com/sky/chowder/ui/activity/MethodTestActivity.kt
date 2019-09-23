@@ -17,7 +17,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.speech.tts.TextToSpeech
-import android.support.annotation.LayoutRes
+import androidx.annotation.LayoutRes
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.*
@@ -53,7 +53,6 @@ import java.text.Collator
 import java.text.DecimalFormat
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.coroutines.experimental.buildSequence
 
 /**
  * Created by SKY on 2018/3/6 16:43.
@@ -397,7 +396,7 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener, Observer {
 
     private fun lambda(): String {
         val text = StringBuilder()
-        val seq = buildSequence {
+        val seq = sequence {
             // 产生一个 i 的平方
             for (i in 1..5) yield(i * i)
             // 产生一个区间
@@ -510,7 +509,7 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener, Observer {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 101 && resultCode == BasePActivity.RESULT_OK) {
             val projection = arrayOf(ContactsContract.CommonDataKinds.Phone.NUMBER, ContactsContract.CommonDataKinds.Phone._ID, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
-            val cursor = contentResolver.query(data?.data, projection, null, null, null);
+            val cursor = contentResolver.query(data?.data!!, projection, null, null, null);
             if (cursor != null && cursor.moveToFirst()) {
                 val nameIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
                 val numberIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
@@ -519,7 +518,7 @@ class MethodTestActivity : BaseNoPActivity(), View.OnClickListener, Observer {
                 showToast(number)
                 tvDisplay.text = "姓名:$name;\n电话:$number"
             }
-            cursor.close()
+            cursor?.close()
         }
     }
 

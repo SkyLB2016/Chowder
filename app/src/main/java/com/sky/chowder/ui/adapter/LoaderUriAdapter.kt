@@ -3,10 +3,10 @@ package com.sky.chowder.ui.adapter
 import android.animation.AnimatorInflater
 import android.graphics.Outline
 import android.os.Build
-import android.support.annotation.RequiresApi
-import android.support.v7.widget.RecyclerView
+import androidx.annotation.RequiresApi
 import android.view.View
 import android.view.ViewOutlineProvider
+import androidx.recyclerview.widget.RecyclerView
 import com.sky.adapter.RecyclerAdapter
 import com.sky.adapter.RecyclerHolder
 import com.sky.chowder.R
