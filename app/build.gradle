@@ -32,13 +32,10 @@ dependencies {
 
 //    implementation 'org.codehaus.groovy:groovy-all:2.5.5'
     //butterknife
-    annotationProcessor "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
     implementation "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
+    //kapt对应kotlin，未用kotlin用annotationProcessor
     kapt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
     //butterknife
-
-
-
 }
 def keyPass = rootProject.file("local.properties")
 def key = new Properties()
@@ -114,6 +111,10 @@ android {
 //            dirs 'libs'
 //        }
 //    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 def creatName() {
