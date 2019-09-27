@@ -8,7 +8,6 @@ import android.graphics.RectF;
 import android.graphics.Typeface;
 
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 
 import android.text.TextPaint;
 import android.util.AttributeSet;
@@ -56,7 +55,7 @@ public class Progress extends View {
 
         circleLineIn = getResources().getDimensionPixelSize(R.dimen.wh_4);
         circleLineOut = getResources().getDimensionPixelSize(R.dimen.wh_6);
-        circleInColor = getResources().getColor(R.color.color_d4d4d4);
+        circleInColor = getResources().getColor(R.color.color_D4D4D4);
         circleOutColor = getResources().getColor(R.color.red);
     }
 

@@ -23,7 +23,7 @@ public class WorkerColumnHorizontalView extends View {
     private Paint paint;
     private Paint textP;
     private List<PCommon> data = new ArrayList<>();//员工集合
-    private int color = getResources().getColor(R.color.color_7d91e2);
+    private int color = getResources().getColor(R.color.color_7D91E2);
     private int columnHeight = getResources().getDimensionPixelOffset(R.dimen.wh_12);//柱状图的宽
 
     //坐标系计算，7条线，分六份，每份的大小

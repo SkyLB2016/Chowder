@@ -24,7 +24,7 @@ public class WorkerColumnView extends View {
     private int height;
     private Paint paint;
     private List<PCommon> data = new ArrayList<>();//员工集合
-    private int color = getResources().getColor(R.color.color_5D75DB);
+    private int color = getResources().getColor(R.color.color_7D91E2);
 
     private int LinePad = getResources().getDimensionPixelOffset(R.dimen.wh_14);//横线X的起始位置
     private int columnPad = getResources().getDimensionPixelOffset(R.dimen.wh_19);//柱状图X的起始位置
@@ -53,7 +53,7 @@ public class WorkerColumnView extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         int layoutWidth = MeasureSpec.getSize(widthMeasureSpec);
-        setMeasuredDimension(layoutWidth, layoutWidth / 5 * 4);
+        setMeasuredDimension(layoutWidth, layoutWidth / 5 * 3);
     }
 
     private void init() {

@@ -54,8 +54,8 @@ public class WorkerCircleView extends View {
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         textP = new Paint();
         colors = new ArrayList<>();
-        colors.add(R.color.color_5D75DB);
-        colors.add(R.color.color_49F2d4);
+        colors.add(R.color.color_7D91E2);
+        colors.add(R.color.color_49F2D4);
         colors.add(R.color.color_35BEF8);
         colors.add(R.color.color_C3EBFF);
     }
@@ -129,7 +129,7 @@ public class WorkerCircleView extends View {
         float baseline = rectBounds.top + rectBounds.height() / 2 + textHeight / 2 - metrics.descent;                                          //计算baseline
 
         int leftX = rectBounds.width() / 4;                                                                 //文字X的起始位置，默认设为矩形宽的四分之一
-        textP.setColor(getResources().getColor(R.color.color_c8c8c8));
+        textP.setColor(getResources().getColor(R.color.color_C8C8C8));
         canvas.drawText(data.get(touchIndex).getName(), leftX, baseline, textP);
         //具体人数
         textP.setTextSize(getResources().getDimension(R.dimen.text_12));

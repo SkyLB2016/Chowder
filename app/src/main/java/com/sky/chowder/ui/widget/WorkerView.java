@@ -32,7 +32,7 @@ public class WorkerView extends View {
     private Paint textP;
     private List<String> text = new ArrayList<>();//种类集合
     private List<PCommon> workers = new ArrayList<>();//员工集合
-    private int workerColor = getResources().getColor(R.color.color_7d91e2);//在职的颜色
+    private int workerColor = getResources().getColor(R.color.color_7D91E2);//在职的颜色
     private int joinColor = getResources().getColor(R.color.color_b1bdee);//入职的颜色
     private int leaveColor = getResources().getColor(R.color.color_5D75DB);//离职的颜色
 
@@ -262,7 +262,7 @@ public class WorkerView extends View {
         //在职人数
         paint.setColor(workerColor);
         canvas.drawCircle(centerX, centerY, radius, paint);
-        textP.setColor(getResources().getColor(R.color.color_c8c8c8));
+        textP.setColor(getResources().getColor(R.color.color_C8C8C8));
         canvas.drawText(text.get(0), leftX, baseline, textP);
 
         //入职人数

@@ -10,7 +10,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toolbar;
+
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.sky.adapter.RecyclerAdapter;
 import com.sky.chowder.R;
 import com.sky.chowder.api.view.IMainView;
@@ -20,7 +22,9 @@ import com.sky.chowder.ui.presenter.MainP;
 import com.sky.utils.AppUtils;
 import com.sky.utils.JumpAct;
 import com.sky.utils.LogUtils;
+
 import common.base.BasePActivity;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
