@@ -5,7 +5,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion COMPILE_SDK_VERSION as int
-//    buildToolsVersion BUILD_TOOLS_VERSION
+    buildToolsVersion BUILD_TOOLS_VERSION
 
     defaultConfig {
         if (puzzle.toBoolean()) applicationId "com.sky.g2048"
@@ -37,5 +37,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$KOTLIN_VERSION"
+    implementation project(':apiutils')
     implementation project(':common')
 }

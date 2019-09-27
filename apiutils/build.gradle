@@ -52,7 +52,7 @@ dependencies {
     api "org.jetbrains.kotlin:kotlin-stdlib:$KOTLIN_VERSION"
     api 'androidx.core:core-ktx:1.1.0'
 
-    api 'androidx.appcompat:appcompat:1.1.0'
+    api "androidx.appcompat:appcompat:$APPCOMPAT_VERSION"
     api 'androidx.constraintlayout:constraintlayout:1.1.3'
     api 'com.google.android.material:material:1.0.0'
 
