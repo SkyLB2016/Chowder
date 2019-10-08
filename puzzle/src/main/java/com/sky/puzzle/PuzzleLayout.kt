@@ -14,9 +14,8 @@ import android.view.animation.BounceInterpolator
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.Toast
-import com.sky.utils.LogUtils
-import com.sky.utils.ScreenUtils
-import java.util.*
+import com.sky.sdk.utils.LogUtils
+import com.sky.sdk.utils.ScreenUtils
 
 /**
  * Created by SKY on 2015/12/24 10:58.

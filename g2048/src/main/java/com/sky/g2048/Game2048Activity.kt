@@ -1,16 +1,16 @@
 package com.sky.g2048
 
 import android.os.Bundle
+import android.os.Environment
 import android.os.Handler
 import android.os.Message
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
-import com.sky.SkyApp
-import com.sky.utils.DateUtil
-import com.sky.utils.FileUtils
-import com.sky.utils.LogUtils
-import common.base.BaseNoPActivity
+import com.sky.design.app.BaseNoPActivity
+import com.sky.sdk.utils.DateUtil
+import com.sky.sdk.utils.FileUtils
+import com.sky.sdk.utils.LogUtils
 import kotlinx.android.synthetic.main.activity_g2048.*
 import java.io.File
 import java.io.ObjectInputStream
@@ -18,17 +18,28 @@ import java.util.*
 
 class Game2048Activity : BaseNoPActivity() {
 
-    private val pathName = SkyApp.getInstance().fileCacheDir + "2048orginal.txt"
-    private val automaticPath = SkyApp.getInstance().fileCacheDir + "2048automatic.txt"
+    private val pathName =
+        getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)!!.absolutePath + File.separator + "2048orginal.txt"
+    private val automaticPath =
+        getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)!!.absolutePath + File.separator + "2048automatic.txt"
     var automatic: Boolean = false//自动AI
 
-    val array = intArrayOf(KeyEvent.KEYCODE_W, KeyEvent.KEYCODE_S, KeyEvent.KEYCODE_A, KeyEvent.KEYCODE_D,
-            KeyEvent.KEYCODE_DPAD_UP, KeyEvent.KEYCODE_DPAD_DOWN, KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_DPAD_RIGHT)
+    val array = intArrayOf(
+        KeyEvent.KEYCODE_W,
+        KeyEvent.KEYCODE_S,
+        KeyEvent.KEYCODE_A,
+        KeyEvent.KEYCODE_D,
+        KeyEvent.KEYCODE_DPAD_UP,
+        KeyEvent.KEYCODE_DPAD_DOWN,
+        KeyEvent.KEYCODE_DPAD_LEFT,
+        KeyEvent.KEYCODE_DPAD_RIGHT
+    )
     private val handler = object : Handler() {
         override fun handleMessage(msg: Message?) {
             when (msg!!.what) {
                 1009 -> {
-                    tvTime.text = DateUtil.timeStampToDate(System.currentTimeMillis() - start, "mm:ss")
+                    tvTime.text =
+                        DateUtil.timeStampToDate(System.currentTimeMillis() - start, "mm:ss")
                     sendEmptyMessage(1009)
                 }
                 1110 -> {
@@ -68,7 +79,9 @@ class Game2048Activity : BaseNoPActivity() {
         setTime()
         tvAutomatic.setOnClickListener { setAutomatic() }
 //        handler.sendEmptyMessageDelayed(2001, 100)
-        handler.postDelayed({ game.orginal = FileUtils.deserialize<IntArray>(pathName) ?: IntArray(0) }, 100)
+        handler.postDelayed({
+            game.orginal = FileUtils.deserialize<IntArray>(pathName) ?: IntArray(0)
+        }, 100)
     }
 
     var auto: LinkedList<IntArray>? = null
@@ -77,7 +90,7 @@ class Game2048Activity : BaseNoPActivity() {
 //                ?: LinkedList<IntArray>()
 
         val ois = ObjectInputStream(resources.openRawResource(R.raw.auto2048))
-        auto= ois.readObject() as LinkedList<IntArray>?
+        auto = ois.readObject() as LinkedList<IntArray>?
         if (auto!!.isEmpty()) return
         handler.sendEmptyMessageDelayed(2002, 50)
 

@@ -192,11 +192,6 @@
 -keep class org.xz_sale.entity.**{*;}
 # Gson
 
--keep class com.sky.**{*;}
--keep class common.**{*;}
-
-
-
 -dontwarn com.google.**
 -keep class com.google.** { *;}
 

@@ -5,11 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
-import com.sky.utils.BitmapUtils
-import com.sky.utils.PhotoUtils
-import com.sky.utils.ScreenUtils
-import com.sky.utils.StringUtils
-import common.base.BaseNoPActivity
+import com.sky.design.app.BaseNoPActivity
+import com.sky.design.widget.PhotoUtils
+import com.sky.sdk.utils.BitmapUtils
+import com.sky.sdk.utils.ScreenUtils
+import com.sky.sdk.utils.StringUtils
 import kotlinx.android.synthetic.main.activity_puzzle.*
 
 /**

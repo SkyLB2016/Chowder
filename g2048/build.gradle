@@ -1,31 +1,23 @@
-if (puzzle.toBoolean()) apply plugin: 'com.android.application'
+if (IS_APP.toBoolean()) apply plugin: 'com.android.application'
 else apply plugin: 'com.android.library'
 
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+
+apply from:"${rootDir}/buildgradle/basebuild.gradle"
 android {
-    compileSdkVersion COMPILE_SDK_VERSION as int
-    buildToolsVersion BUILD_TOOLS_VERSION
-
     defaultConfig {
-        if (puzzle.toBoolean()) applicationId "com.sky.g2048"
-        minSdkVersion MIN_SDK_VERSION as int
-        targetSdkVersion TARGET_SDK_VERSION as int
-        versionCode 1
-        versionName "1.0"
-        buildConfigField "boolean", "isModel", puzzle
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
+        if (IS_APP.toBoolean()) applicationId "com.sky.g2048"
+//        minSdkVersion MIN_SDK_VERSION as int
+//        targetSdkVersion TARGET_SDK_VERSION as int
+//        versionCode 1
+//        versionName "1.0"
+        buildConfigField "boolean", "isModel", IS_APP
     }
     //对应jar或应用的manifest
     sourceSets {
         main {
-            if (puzzle.toBoolean()) {
+            if (IS_APP.toBoolean()) {
                 manifest.srcFile 'src/main/manifest/g2048/AndroidManifest.xml'
             } else {
                 manifest.srcFile 'src/main/manifest/app/AndroidManifest.xml'
@@ -35,8 +27,6 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$KOTLIN_VERSION"
-    implementation project(':apiutils')
-    implementation project(':common')
+    implementation project(':libsdk')
+    implementation project(':libdesign')
 }

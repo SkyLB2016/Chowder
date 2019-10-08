@@ -1,0 +1,53 @@
+android {
+    compileSdkVersion COMPILE_SDK_VERSION as int
+    buildToolsVersion BUILD_TOOLS_VERSION
+    defaultConfig {
+        minSdkVersion MIN_SDK_VERSION as int
+        targetSdkVersion TARGET_SDK_VERSION as int
+        versionCode versionCode
+        versionName versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+//        consumerProguardFiles 'consumer-rules.pro'//新的,只用library包有
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            //5.1.1版本之前的
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //5.1.1版本后新的
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+}
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$KOTLIN_VERSION"
+    implementation 'androidx.core:core-ktx:1.1.0'
+
+    implementation "androidx.appcompat:appcompat:$APPCOMPAT_VERSION"
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'com.google.android.material:material:1.0.0'
+
+    //rxjava
+    implementation "io.reactivex.rxjava2:rxjava:$RXJAVA_VERSION"
+    implementation "io.reactivex.rxjava2:rxandroid:$RXANDROID_VERSION"
+    //rxjava
+    //retrofit2
+    implementation "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
+    implementation("com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION") {
+        exclude group: 'com.google.code.gson', module: 'gson'
+    }
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$RETROFIT_VERSION"
+    //retrofit2
+    implementation "com.squareup.okhttp3:okhttp:$OKHTTP_VERSION"
+    implementation "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
+    //工具类
+    //    api 'com.blankj:utilcode:1.6.3'
+}
+
+repositories {
+    mavenCentral()
+}

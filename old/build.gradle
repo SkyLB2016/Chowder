@@ -1,0 +1,196 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'//kotlin view 注入工具
+apply plugin: 'kotlin-kapt'
+
+//apply plugin: 'grovvy'
+description = "程序集合的主项目"
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+//    testImplementation 'junit:junit:4.12'
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$KOTLIN_VERSION"
+    implementation 'androidx.core:core-ktx:1.1.0'
+    implementation "androidx.appcompat:appcompat:$APPCOMPAT_VERSION"
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+//    implementation 'androidx.cardview:cardview:1.0.0'
+
+    //    implementation 'com.facebook.fresco:fresco:1.4.0'
+//    implementation("com.facebook.fresco:imagepipeline-okhttp3:${FRESCO_VERSION}") {
+//        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
+//    }
+    implementation "com.google.code.gson:gson:$GSON_VERSION"
+    implementation project(':libdesign')
+    implementation project(':libsdk')
+    if (!IS_APP.toBoolean()) {
+        implementation project(':puzzle')
+        implementation project(':g2048')
+    }
+//    implementation (name:'apiutils',ext:'aar')
+
+//    implementation 'org.codehaus.groovy:groovy-all:2.5.5'
+    //butterknife
+    implementation "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
+    //kapt对应kotlin，未用kotlin用annotationProcessor
+    kapt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
+    //butterknife
+}
+def keyPass = rootProject.file("local.properties")
+def key = new Properties()
+key.load(new FileInputStream(keyPass))
+android {
+    compileSdkVersion COMPILE_SDK_VERSION as int
+    buildToolsVersion BUILD_TOOLS_VERSION
+    defaultConfig {
+        applicationId "com.sky"
+        minSdkVersion MIN_SDK_VERSION as int
+        targetSdkVersion TARGET_SDK_VERSION as int
+        versionCode 3
+        versionName "3.0"
+        // dex突破65535的限制
+//        multiDexEnabled true
+//        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [CHANNEL_VALUE: "umeng"]//默认是umeng的渠道
+        ndk {
+            //添加对应cpu类型的.so库。
+            abiFilters 'armeabi-v7a', 'armeabi-v8a', 'armeabi', 'x86'
+        }
+    }
+    signingConfigs {
+        debug {
+            keyAlias key['keyAlias']
+            keyPassword key['keyPassword']
+            storeFile file(key['storeFile'])
+            storePassword key['storePassword']
+            println "未签名"
+        }
+        release {
+            keyAlias key['keyAlias']
+            keyPassword key['keyPassword']
+            storeFile file(key['storeFile'])
+            storePassword key['storePassword']
+            println "已签名"
+        }
+    }
+    buildTypes {
+        debug {
+            testCoverageEnabled false
+            minifyEnabled false //是否开启混淆
+            versionNameSuffix "-debug"
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            creatName()
+        }
+        release {
+            versionNameSuffix "-release"
+            minifyEnabled true //是否开启混淆
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release  //签名
+            zipAlignEnabled true //Zipalign优化
+            creatName()
+        }
+    }
+    //执行lint检查，有任何的错误或者警告提示，都会终止构建，我们可以将其关掉。
+    lintOptions {
+        abortOnError false
+    }
+    flavorDimensions "sky"
+    productFlavors {
+        sky {
+            dimension "sky"
+        }
+//        baidu {}
+//        xiaomi {}
+//        umeng {}
+    }
+    productFlavors.all { flavor -> flavor.manifestPlaceholders = [CHANNEL_VALUE: name] }
+//    repositories {
+//        flatDir {
+//            dirs 'libs'
+//        }
+//    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+def creatName() {
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            if (variant.buildType.name == "debug") outputFileName = "${variant.baseName}_${variant.versionName}.apk"
+            else outputFileName = "${variant.baseName}_${variant.versionName}.apk"//_${buildTime()}
+        }
+    }
+}
+
+def buildTime() {
+    def date = new Date()
+    def formattedDate = date.format('yyyy年MM月dd日HH时mm分ss秒')
+    return formattedDate
+}
+//            applicationVariants.all { variant ->
+//                variant.outputs.all { output ->
+//                    output.processManifest.doLast {
+//                        // Stores the path to the maifest.
+//                        String manifestPath = "$manifestOutputDirectory/AndroidManifest.xml"
+//                        // Stores the contents of the manifest.
+//                        def manifestContent = file(manifestPath).getText()
+//                        // Changes the version code in the stored text.
+//                manifestContent = manifestContent.replace('android:versionCode="1"', String.format('android:versionCode="%s"', generatedCode))
+//                        // Overwrites the manifest with the new text.
+//                        file(manifestPath).write(manifestContent)
+//                    }
+//
+//                }
+//            }
+
+task hello {
+    doLast {
+        println "app的 hello World"
+    }
+}
+task projectInfo {
+    doLast {
+        println "name            ==" + project.name            //String 	项目目录的名称。
+        println "path            ==" + project.path            //String 	项目的绝对路径。
+        println "description     ==" + project.description     //String 	项目的描述。
+        println "projectDir      ==" + project.projectDir      //File 	包含生成脚本的目录。
+        println "buildDir        ==" + project.buildDir        //File 	projectDir/build
+        println "group           ==" + project.group           //Object 	未指定
+        println "version         ==" + project.version         //Object 	未指定
+        println "ant             ==" + project.ant             //AntBuilder 	AntBuilder实例
+    }
+}
+
+
+ext {
+    springVersion = "3.3.3"
+    emailNotification = "abcdefghijklmn"
+}
+sourceSets.all {
+    ext.purpose = null
+}
+sourceSets {
+    main {
+        purpose = "production"
+    }
+    test {
+        purpose = "test"
+    }
+    plugin {
+        purpose = "production"
+    }
+}
+
+task printProperties {
+    doLast {
+        println springVersion
+        println emailNotification
+        sourceSets.matching { it.purpose == "production" }.each { println it.getName() }
+    }
+}
+//configurations.runtime.each { f -> println f.path }

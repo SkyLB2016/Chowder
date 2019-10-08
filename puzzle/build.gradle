@@ -1,4 +1,4 @@
-if (puzzle.toBoolean()) apply plugin: 'com.android.application'
+if (IS_APP.toBoolean()) apply plugin: 'com.android.application'
 else apply plugin: 'com.android.library'
 
 apply plugin: 'kotlin-android'
@@ -8,7 +8,7 @@ android {
     buildToolsVersion BUILD_TOOLS_VERSION
 
     defaultConfig {
-        if (puzzle.toBoolean()) applicationId "com.sky.puzzle"
+        if (IS_APP.toBoolean()) applicationId "com.sky.puzzle"
         minSdkVersion MIN_SDK_VERSION as int
         targetSdkVersion TARGET_SDK_VERSION as int
         versionCode 1
@@ -24,7 +24,7 @@ android {
     //对应jar或应用的manifest
     sourceSets {
         main {
-            if (puzzle.toBoolean()) {
+            if (IS_APP.toBoolean()) {
                 manifest.srcFile 'src/main/manifest/puzzle/AndroidManifest.xml'
             } else {
                 manifest.srcFile 'src/main/manifest/app/AndroidManifest.xml'
@@ -34,8 +34,6 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$KOTLIN_VERSION"
-    implementation project(':apiutils')
-    implementation project(':common')
+    implementation project(':libsdk')
+    implementation project(':libdesign')
 }
