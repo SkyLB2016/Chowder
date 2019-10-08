@@ -8,6 +8,7 @@ import android.os.Message
 import com.sky.design.app.BaseNoPActivity
 import com.sky.design.widget.PhotoUtils
 import com.sky.sdk.utils.BitmapUtils
+import com.sky.sdk.utils.SPUtils
 import com.sky.sdk.utils.ScreenUtils
 import com.sky.sdk.utils.StringUtils
 import kotlinx.android.synthetic.main.activity_puzzle.*
@@ -26,6 +27,7 @@ class PuzzleActivity : BaseNoPActivity() {
 
     override fun getLayoutResId(): Int = R.layout.activity_puzzle
     override fun initialize(savedInstanceState: Bundle?) {
+        SPUtils.init(this)
         btUp?.setOnClickListener { puzzle.piece = -1 }
         btChange?.setOnClickListener { getPhoto() }
         btNext?.setOnClickListener { puzzle.piece = 1 }

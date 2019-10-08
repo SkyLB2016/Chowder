@@ -11,6 +11,7 @@ import com.sky.design.app.BaseNoPActivity
 import com.sky.sdk.utils.DateUtil
 import com.sky.sdk.utils.FileUtils
 import com.sky.sdk.utils.LogUtils
+import com.sky.sdk.utils.SPUtils
 import kotlinx.android.synthetic.main.activity_g2048.*
 import java.io.File
 import java.io.ObjectInputStream
@@ -18,10 +19,8 @@ import java.util.*
 
 class Game2048Activity : BaseNoPActivity() {
 
-    private val pathName =
-        getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)!!.absolutePath + File.separator + "2048orginal.txt"
-    private val automaticPath =
-        getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)!!.absolutePath + File.separator + "2048automatic.txt"
+    private var pathName = ""
+    private var automaticPath = ""
     var automatic: Boolean = false//自动AI
 
     val array = intArrayOf(
@@ -61,14 +60,24 @@ class Game2048Activity : BaseNoPActivity() {
     var start = 0L//开始时间
     override fun getLayoutResId(): Int = R.layout.activity_g2048
     override fun initialize(savedInstanceState: Bundle?) {
+
+        val path =
+            getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)!!.absolutePath + File.separator
+        pathName = path + "2048orginal.txt"
+        automaticPath = path + "2048automatic.txt"
+
         LogUtils.isDebug = BuildConfig.DEBUG
+        SPUtils.init(this)
         setToolbarRightTitle("重新开始")
 //        if (BuildConfig.isModel)
 //            baseTitle.setLeftButton(-1)
         when (BuildConfig.isModel) {
             true -> baseTitle.setLeftButton(-1)
         }
-        game.checkIsEnd = { end -> imgEnd.visibility = if (end) View.VISIBLE else View.GONE }
+        game.checkIsEnd = { end ->
+            if (end) showToast("游戏结束")
+            imgEnd.visibility = if (end) View.VISIBLE else View.GONE
+        }
         findViewById<View>(R.id.tvRight).setOnClickListener {
             game.restartGame()
             setTime()
@@ -82,6 +91,7 @@ class Game2048Activity : BaseNoPActivity() {
         handler.postDelayed({
             game.orginal = FileUtils.deserialize<IntArray>(pathName) ?: IntArray(0)
         }, 100)
+
     }
 
     var auto: LinkedList<IntArray>? = null

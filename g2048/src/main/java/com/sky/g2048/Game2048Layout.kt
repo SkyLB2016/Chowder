@@ -9,11 +9,9 @@ import android.view.KeyEvent
 import android.view.MotionEvent
 import android.widget.ImageView
 import android.widget.RelativeLayout
-import com.sky.SkyApp
-import com.sky.utils.ScreenUtils
+import com.sky.sdk.utils.ScreenUtils
 import java.util.*
 import kotlin.collections.ArrayList
-
 
 /**
  * Created by SKY on 2015/12/24 10:58.
@@ -183,7 +181,6 @@ class Game2048Layout @JvmOverloads constructor(context: Context, attrs: Attribut
                     break
                 }
             }
-            if (isEnd) SkyApp.getInstance().showToast("游戏结束")
             checkIsEnd?.invoke(isEnd)
         }
     }

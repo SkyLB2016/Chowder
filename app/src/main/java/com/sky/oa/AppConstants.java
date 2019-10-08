@@ -7,7 +7,6 @@ import android.provider.SyncStateContract;
  * 公共的常量
  */
 public class AppConstants {
-SyncStateContract.Constants
     public final static int NET_NULL = 5005;//数据为空
     public final static String NET_EMPTY = "未获取到数据";//
     public final static int NET_NOT_FOUND = 4004;//
@@ -20,9 +19,4 @@ SyncStateContract.Constants
     public final static String PWD = "pwd";
 
     public final static String EXTRA = "extra";//默认的传输字段
-
-    //事件总线
-    public static RxBus getRxBus() {
-        return RxBus.getInstance();
-    }
 }
