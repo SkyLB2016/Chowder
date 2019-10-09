@@ -2,7 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'//kotlin view 注入工具
 apply plugin: 'kotlin-kapt'//kotlin的annotationProcessor
-apply from:"${rootDir}/buildgradle/basebuild.gradle"
+apply from: "${rootDir}/buildgradle/basebuild.gradle"
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -34,11 +35,140 @@ android {
         // dex突破65535的限制
 //        multiDexEnabled true
 //        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-//        manifestPlaceholders = [CHANNEL_VALUE: "umeng"]//默认是umeng的渠道
+        manifestPlaceholders = [CHANNEL_VALUE: "umeng"]//默认是umeng的渠道
         ndk {
             //添加对应cpu类型的.so库。
             abiFilters 'armeabi-v7a', 'armeabi-v8a', 'armeabi', 'x86'
         }
     }
+    signingConfigs {
+        debug {
+            keyAlias key['keyAlias']
+            keyPassword key['keyPassword']
+            storeFile file(key['storeFile'])
+            storePassword key['storePassword']
+            println "未签名"
+        }
+        release {
+            keyAlias key['keyAlias']
+            keyPassword key['keyPassword']
+            storeFile file(key['storeFile'])
+            storePassword key['storePassword']
+            println "已签名"
+        }
+    }
+    buildTypes {
+        debug {
+            testCoverageEnabled false
+            minifyEnabled false //是否开启混淆
+            versionNameSuffix "-debug"
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            creatName()
+        }
+        release {
+            versionNameSuffix "-release"
+            minifyEnabled true //是否开启混淆
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release  //签名
+            zipAlignEnabled true //Zipalign优化
+            creatName()
+        }
+    }
+    flavorDimensions "sky"
+    productFlavors {
+        sky {
+            dimension "sky"
+        }
+//        baidu {}
+//        xiaomi {}
+//        umeng {}
+    }
+    productFlavors.all { flavor -> flavor.manifestPlaceholders = [CHANNEL_VALUE: name] }
+//    repositories {
+//        flatDir {
+//            dirs 'libs'
+//        }
+//    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
+def creatName() {
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            if (variant.buildType.name == "debug") outputFileName = "${variant.baseName}_${variant.versionName}.apk"
+            else outputFileName = "${variant.baseName}_${variant.versionName}.apk"//_${buildTime()}
+        }
+    }
+}
+
+def buildTime() {
+    def date = new Date()
+    def formattedDate = date.format('yyyy年MM月dd日HH时mm分ss秒')
+    return formattedDate
+}
+//            applicationVariants.all { variant ->
+//                variant.outputs.all { output ->
+//                    output.processManifest.doLast {
+//                        // Stores the path to the maifest.
+//                        String manifestPath = "$manifestOutputDirectory/AndroidManifest.xml"
+//                        // Stores the contents of the manifest.
+//                        def manifestContent = file(manifestPath).getText()
+//                        // Changes the version code in the stored text.
+//                manifestContent = manifestContent.replace('android:versionCode="1"', String.format('android:versionCode="%s"', generatedCode))
+//                        // Overwrites the manifest with the new text.
+//                        file(manifestPath).write(manifestContent)
+//                    }
+//
+//                }
+//            }
+
+task hello {
+    doLast {
+        println "app的 hello World"
+    }
+}
+task projectInfo {
+    doLast {
+        println "name            ==" + project.name            //String 	项目目录的名称。
+        println "path            ==" + project.path            //String 	项目的绝对路径。
+        println "description     ==" + project.description     //String 	项目的描述。
+        println "projectDir      ==" + project.projectDir      //File 	包含生成脚本的目录。
+        println "buildDir        ==" + project.buildDir        //File 	projectDir/build
+        println "group           ==" + project.group           //Object 	未指定
+        println "version         ==" + project.version         //Object 	未指定
+        println "ant             ==" + project.ant             //AntBuilder 	AntBuilder实例
+    }
+}
+
+
+ext {
+    springVersion = "3.3.3"
+    emailNotification = "abcdefghijklmn"
+}
+sourceSets.all {
+    ext.purpose = null
+}
+sourceSets {
+    main {
+        purpose = "production"
+    }
+    test {
+        purpose = "test"
+    }
+    plugin {
+        purpose = "production"
+    }
+}
+
+task printProperties {
+    doLast {
+        println springVersion
+        println emailNotification
+        sourceSets.matching { it.purpose == "production" }.each { println it.getName() }
+    }
+}
+//configurations.runtime.each { f -> println f.path }
 

@@ -8,13 +8,13 @@ import com.sky.design.api.TextWatcherAdapter
 import com.sky.chowder.R
 import com.sky.chowder.utils.EditInputFilter
 import com.sky.utils.StringUtils
-import com.sky.design.app.BaseNoPActivity
+import com.sky.design.app.BaseActivity
 
 /**
  * Created by SKY on 2016/4/13.
  * 股票计算
  */
-class StockActivity : com.sky.design.app.BaseNoPActivity() {
+class StockActivity : BaseActivity() {
     //etUnit:单价; etNum:数量; etTotal:总价;tvStampDuty:印花税,只在卖出的时候有
     //tvRealEstateTransferTax:过户税;tvBrokerageCommission:券商佣金;tvTotalCounterFee:总手续费
     //totalBuyOrSell:买还是卖;totalBS:收入与支出

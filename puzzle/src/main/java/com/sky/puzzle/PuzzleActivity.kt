@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
-import com.sky.design.app.BaseNoPActivity
+import com.sky.design.app.BaseActivity
 import com.sky.design.widget.PhotoUtils
 import com.sky.sdk.utils.BitmapUtils
 import com.sky.sdk.utils.SPUtils
@@ -17,8 +17,8 @@ import kotlinx.android.synthetic.main.activity_puzzle.*
  * Created by SKY on 2015/8/19 15:31.
  * 拼图游戏
  */
-class PuzzleActivity : BaseNoPActivity() {
-    private val handler=object :Handler(){
+class PuzzleActivity : BaseActivity() {
+    private val handler = object : Handler() {
         override fun handleMessage(msg: Message?) {
             super.handleMessage(msg)
             puzzle.piece = 1
@@ -26,6 +26,7 @@ class PuzzleActivity : BaseNoPActivity() {
     }
 
     override fun getLayoutResId(): Int = R.layout.activity_puzzle
+
     override fun initialize(savedInstanceState: Bundle?) {
         SPUtils.init(this)
         btUp?.setOnClickListener { puzzle.piece = -1 }
@@ -39,10 +40,10 @@ class PuzzleActivity : BaseNoPActivity() {
         lp?.height = ScreenUtils.getHeightPX(this) / 5
 //        ImgOriginal.layoutParams = lp
         ImgOriginal?.setImageBitmap(puzzle.bitmap)
-        puzzle.checkSuccess = { success -> if (success)handler.sendEmptyMessageDelayed(101,5000) }
+        puzzle.checkSuccess = { success -> if (success) handler.sendEmptyMessageDelayed(101, 5000) }
     }
 
-    override fun loadData() =Unit
+    override fun loadData() = Unit
 
     private var photoUtils: PhotoUtils? = null
 

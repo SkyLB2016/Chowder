@@ -11,12 +11,12 @@ import com.sky.chowder.ui.service.IBookManager
 import com.sky.chowder.ui.service.IOnNewBookArriveListener
 import com.sky.chowder.ui.service.PairServiceA
 import com.sky.utils.LogUtils
-import com.sky.design.app.BaseNoPActivity
+import com.sky.design.app.BaseActivity
 
 /**
  * Created by SKY on 2018/5/9 19:07.
  */
-class IPCActivity : com.sky.design.app.BaseNoPActivity() {
+class IPCActivity : BaseActivity() {
     override fun getLayoutResId(): Int = R.layout.activity_ipc
     override fun initialize(savedInstanceState: Bundle?) {
         bindService(Intent(this, PairServiceA::class.java), connection, Context.BIND_AUTO_CREATE)

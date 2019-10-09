@@ -16,6 +16,10 @@ public class LogUtils {
     public static boolean isDebug = false;// 是否需要打印bug，debug与release的buildconfig，也可以自定义
     private static final String TAG = "SKY";//默认情况下的前缀
 
+    public static void setIsDebug(boolean debug) {
+        isDebug = debug;
+    }
+
     private static String generateTag() {
 //        StackTraceElement stack = Thread.currentThread().getStackTrace()[4];//此方法取得的栈的前两个分别为vm和Thread
         StackTraceElement stack = new Throwable().getStackTrace()[2];

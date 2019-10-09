@@ -7,7 +7,7 @@ import android.os.Message
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
-import com.sky.design.app.BaseNoPActivity
+import com.sky.design.app.BaseActivity
 import com.sky.sdk.utils.DateUtil
 import com.sky.sdk.utils.FileUtils
 import com.sky.sdk.utils.LogUtils
@@ -17,7 +17,7 @@ import java.io.File
 import java.io.ObjectInputStream
 import java.util.*
 
-class Game2048Activity : BaseNoPActivity() {
+class Game2048Activity : BaseActivity() {
 
     private var pathName = ""
     private var automaticPath = ""
@@ -168,12 +168,12 @@ class Game2048Activity : BaseNoPActivity() {
         return super.onKeyDown(keyCode, event!!)
     }
 
-    private var lastBack: Long = 0
-    override fun onBackPressed() {
-        val now = System.currentTimeMillis()
-        if (BuildConfig.isModel && now - lastBack > 3000) {
-            showToast(getString(R.string.toast_exit))
-            lastBack = now
-        } else super.onBackPressed()
-    }
+//    private var lastBack: Long = 0
+//    override fun onBackPressed() {
+//        val now = System.currentTimeMillis()
+//        if (BuildConfig.isModel && now - lastBack > 3000) {
+//            showToast(getString(R.string.toast_exit))
+//            lastBack = now
+//        } else super.onBackPressed()
+//    }
 }

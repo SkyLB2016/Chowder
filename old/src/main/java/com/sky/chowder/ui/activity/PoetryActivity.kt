@@ -21,14 +21,14 @@ import com.sky.chowder.utils.CatalogThread
 import com.sky.utils.FileUtils
 import com.sky.utils.ScreenUtils
 import com.sky.widget.BaseTitle
-import com.sky.design.app.BaseNoPActivity
+import com.sky.design.app.BaseActivity
 import java.text.Collator
 import java.util.*
 
 /**
  * Created by SKY on 2018/3/16.
  */
-class PoetryActivity : com.sky.design.app.BaseNoPActivity() {
+class PoetryActivity : BaseActivity() {
     private var gravity = Gravity.LEFT
     private lateinit var adapter: RecyclerAdapter<ChapterEntity>
     //    private var poetry = arrayOf<String>()

@@ -8,9 +8,9 @@ apply from:"${rootDir}/buildgradle/basebuild.gradle"
 android {
     defaultConfig {
         if (IS_APP.toBoolean()) applicationId "com.sky.g2048"
-//        buildConfigField "boolean", "isModel", IS_APP
+        buildConfigField "boolean", "isModel", IS_APP
     }
-    //对应jar或应用的manifest
+    //对应jar或app的manifest
     sourceSets {
         main {
             if (IS_APP.toBoolean()) {

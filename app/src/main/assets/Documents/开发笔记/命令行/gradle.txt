@@ -1,0 +1,112 @@
+gradle命令行
+1.特性
+1）基于声明和基于约定的构建
+2）为以依赖为基础的编程方式提供语言环境
+3）构建结构化
+4）深度API
+5）Gradle的扩展
+6）多项目构建
+7）多种方式管理依赖
+8）Gradle是第一个构建集成工具
+9）易于移植
+10）Groovy
+11）The Gradle Wrapper
+12）自由和开源
+2.配置： 可在gradlew中配置jvm；
+3.构建基础
+1）-q：只输出需要的内容；
+-x：排除任务;
+-b：指定构建文件的路径（单个文件）;
+-p：指定构建目录的路径（目录中有多个构建文件时），也可以用来单独添加某个属性;
+-d：添加指定的系统属性。
+--continue：有错误也会继续执行。
+overwrite:true：重写现有的任务
+onlyIf{}：为真时跳过。
+enable：任务的启用与禁用
+任务名可简化，可驼峰缩写执行
+2）<<：是dolast的缩写；
+3）任务依赖，延迟依赖（顺序先后问题而已）
+4）动态任务（代码中动态定义任务），
+任务联动依赖（dolast与dofirst（短标记法），dependsOn）
+5）增加自定义属性
+6）调用Ant任务，方法抽取
+7）默认任务，不同依赖的不同输出
+group:name:version
+
+常用任务有：联合执行直接写两个任务名称就好
+-v：查询版本号
+clean：删除 build 目录以及所有构建完成的文件
+check 编译并测试代码。一些其他插件也可能会增强这个任务的功能。例如，如果采用了 Code-quality 插件，这个任务会额外执行 Checkstyle。
+build 编译并打包jar文件，但不会执行单元测试。一些其他插件可能会增强这个任务的功能。例如，如果采用了War插件，这个任务便会为你的项目打出War包。
+
+projects 显示所有model，以及说明（description）
+tasks|less 显示任务信息，并分页
+tasks --all 显示更多的任务信息，并分页
+model 显示定义的所有任务
+app:properties|less 显示app的所有属性，并分页
+androidDependencies 查看所有的依赖包
+app:dDependencies 查看app的依赖关系
+
+
+assemble：编译并打Debug和Release包
+assembleDebug：编译并把本项目下所有模块所有渠道的Debug版本打包
+assembleRelease 编译并把本项目下所有模块所有渠道的Release版本打包
+assemble渠道名：生成渠道名的Debug和Release版本
+assemble渠道名Release：渠道release版本
+assemble渠道名Release -p app：打包app工程下渠道名的release版本（-p 决定执行哪个）
+installRelease：打包Release版本并安装
+uninstallRelease：卸载Release版本包
+
+project属性：参考chowder
+project 	Project 	Project实例
+name 	String 	项目目录的名称。
+path 	String 	项目的绝对路径。
+description 	String 	项目的描述。
+projectDir 	File 	包含生成脚本的目录。
+buildDir 	File 	projectDir/build
+group 	Object 	未指定
+version 	Object 	未指定
+ant 	AntBuilder 	AntBuilder实例
+
+
+
+gradlew错误
+zsh: permission denied: ./gradlew
+运行 chmod +x gradlew
+
+compileSdkVersion 代表着编译的时候，会采用该api的规范进行代码检查和警告，但是并不会编译进apk中。
+targetSdkVersion 代表着目标版本，在编译的时候会将该版本的api编译进apk中。
+minSdkVersion 代表着最低版本，在编译的时候兼容到该参数指定最低版本api。
+
+minSDKVersion xx --  targetSDKVersion xx：兼容从xx到xx之间所有api的变化；
+三者关系：minsdkVersion<=TargetSdkVersion<=compileSdkVersion;
+理想关系：minsdkVersion<=TargetSdkVersion==compileSdkVersion，目标与依赖相同
+
+
+
+
+
+
+
+
+
+MAC下删除Android开发缓存
+1.AndroidStudio所在目录
+rm -rf /Applications/Android\ Studio.app
+SDK所在目录
+rm -rf ~/Library/Android/sdk
+或者也可以这么写：
+rm -rf ~/Library/Android*
+
+2.AndroidStudio的缓存
+rm -rf ~/Library/Preferences/AndroidStudio*
+rm ~/Library/Preferences/com.google.android.studio.plist
+rm -rf ~/Library/Application\ Support/AndroidStudio*
+rm -rf ~/Library/Logs/AndroidStudio*
+rm -rf ~/Library/Caches/AndroidStudio*
+
+3.删除gradle关联文件 (caches & wrapper)
+rm -rf ~/.gradle
+
+4.删除模拟器
+rm -rf ~/.android

@@ -43,9 +43,7 @@ import com.sky.utils.AppUtils
 import com.sky.utils.DateUtil
 import com.sky.utils.LogUtils
 import com.sky.utils.MD5Utils
-import com.sky.design.app.BaseNoPActivity
-import com.sky.design.app.BasePActivity
-import com.sky.sdk.net.http.ApiResponse
+import com.sky.design.app.BaseActivity
 import java.io.File
 import java.net.URL
 import java.text.Collator
@@ -56,7 +54,7 @@ import kotlin.collections.ArrayList
 /**
  * Created by SKY on 2018/3/6 16:43.
  */
-class MethodTestActivity : com.sky.design.app.BaseNoPActivity(), View.OnClickListener, Observer {
+class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
     override fun getLayoutResId(): Int = R.layout.activity_method
     override fun loadData() = Unit
     override fun initialize(savedInstanceState: Bundle?) {

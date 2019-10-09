@@ -4,13 +4,13 @@
 //import android.support.design.widget.Snackbar
 //import android.view.View
 //import com.sky.chowder.R
-//import common.base.BaseNoPActivity
+//import common.base.BaseActivity
 //import kotlinx.android.synthetic.main.activity_detail.*
 //
 ///**
 // * Created by SKY on 15/11/28 下午2:22.
 // */
-//class CoordinatorActivity : BaseNoPActivity() {
+//class CoordinatorActivity : BaseActivity() {
 //    override fun getLayoutResId(): Int = R.layout.activity_detail
 //    override fun initialize(savedInstanceState: Bundle?) {
 //        toolbarv7.setNavigationIcon(R.mipmap.ic_back)

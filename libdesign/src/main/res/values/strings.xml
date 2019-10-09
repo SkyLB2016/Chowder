@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">libdesign</string>
     <string name="sure">确认</string>
     <string name="cancel">取消</string>
     <string name="complete">完成</string>

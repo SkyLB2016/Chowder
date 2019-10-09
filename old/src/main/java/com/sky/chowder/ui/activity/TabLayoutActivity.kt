@@ -7,14 +7,14 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.sky.chowder.R
 import com.sky.chowder.ui.fragment.*
-import com.sky.design.app.BaseNoPActivity
+import com.sky.design.app.BaseActivity
 import java.util.*
 
 /**
  * Created by SKY on 2015/8/31 14：25.
  * 标签栏
  */
-class TabLayoutActivity : com.sky.design.app.BaseNoPActivity() {
+class TabLayoutActivity : BaseActivity() {
 
     override fun getLayoutResId(): Int = R.layout.activity_tab_vp
 

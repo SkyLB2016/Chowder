@@ -3,12 +3,12 @@ package com.sky.chowder.ui.activity
 import android.os.Bundle
 import android.view.View
 import com.sky.chowder.R
-import com.sky.design.app.BaseNoPActivity
+import com.sky.design.app.BaseActivity
 
 /**
  * Created by SKY on 2018/5/2 10:49.
  */
-class NinthPalaceActivity : com.sky.design.app.BaseNoPActivity() {
+class NinthPalaceActivity : BaseActivity() {
     override fun getLayoutResId(): Int = R.layout.activity_ninthpalace
     override fun initialize(savedInstanceState: Bundle?) {
         setToolbarRightTitle("随机图案")

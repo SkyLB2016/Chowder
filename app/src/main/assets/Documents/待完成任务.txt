@@ -1,0 +1,21 @@
+待完成任务
+一、JAVA编程思想
+	Java的原子性和可见性
+	锁机制
+	多线程交互模型：
+	1.Producer-Consumer模型
+	2.Read-Write Lock模型
+	3.Future模型
+	4.Worker Thread模型
+	并发编程工具：
+	1.concurrent
+	2.线程池ExecutorService
+	3.Callable & Future
+	4.BlockingQueue
+二、错误种类：
+三、加密算法：
+	
+四、注解：@interface
+五、Makefile机制:组合文件，进行自动的可控制的编译（待加强）。
+六、drawable文件，true，false，不同时出现的话，true，必须在前，文件效果才有效。
+七、Scroller（待深入研究）：弹性滑动对象，与view中的computeScroll方法配合。									
