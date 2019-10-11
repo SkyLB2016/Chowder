@@ -54,7 +54,7 @@ public class BaseTitle {
         activity.setSupportActionBar(toolbar);
         //toolbar.setBackground(R.);
 //        toolbar.setLogo(R.drawable.div_line_v);
-        toolbar.setNavigationIcon(R.mipmap.ic_left);//返回的图标
+        toolbar.setNavigationIcon(R.mipmap.ic_back_oriange);//返回的图标
         if (activity instanceof Toolbar.OnMenuItemClickListener)//右侧menu的点击事件
             toolbar.setOnMenuItemClickListener((Toolbar.OnMenuItemClickListener) activity);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {

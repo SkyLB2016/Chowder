@@ -29,7 +29,7 @@ class SplashActivity : AppCompatActivity() {
      */
     private fun initData() {
         val contoler = SplashContoler(this)
-        val imgIds = intArrayOf(R.mipmap.ic_landing, R.mipmap.splash_01, R.mipmap.splash_02)
+        val imgIds = intArrayOf(R.mipmap.splash_00, R.mipmap.splash_01, R.mipmap.splash_02)
         val view = LayoutInflater.from(this).inflate(R.layout.splash_pager_end, null)
         contoler.init(imgIds, view)
         view.findViewById<Button>(R.id.btBegin).setOnClickListener {

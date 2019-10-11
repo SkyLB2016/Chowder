@@ -24,7 +24,7 @@ class LandingActivity : AppCompatActivity() {
         )//去掉信息栏
         super.onCreate(savedInstanceState)
         val view = ImageView(this)
-        view.setBackgroundResource(R.mipmap.ic_landing)
+        view.setBackgroundResource(R.mipmap.splash_00)
         setContentView(view)
         //加载动画
         val set = AnimationSet(true)

@@ -1,1 +1,1 @@
-include ':old', ':puzzle', ':g2048', ':libsdk', ':libdesign', ':rxbus', ':app', ':jnilib'
+include ':app', ':puzzle', ':g2048', ':libsdk', ':libdesign', ':rxbus', ':jnilib'
