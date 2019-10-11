@@ -1,6 +1,0 @@
-常用View的个别属性汇总
-1）TextView
-letterSpacing="0.1"：字间距，按字的宽度的比例来算，默认为0；-1的话就只在第一个位置上显示了。
-lineSpacingMultiplier="1.5"：行间距，按行的高度的比例算，默认为1；0的话就只在第一行显示了。
-lineSpacingExtra="@dimen/wh_20"：行间距，按dp来算
-textIsSelectable="true"：是否可选择文字，默认为false

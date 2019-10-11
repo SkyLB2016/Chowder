@@ -19,4 +19,18 @@ public class AppConstants {
     public final static String PWD = "pwd";
 
     public final static String EXTRA = "extra";//默认的传输字段
+
+//    public final static int SOLAR = 2001;
+//
+//    //    val BASE_URL = "http://uat.b.quancome.com/platform/api"
+//    public final static String TEST_BASE_URL = "http://test.services.banyunbang.com.cn/";//测试请求地址
+//    public final static String TEST_IMAGE_URL = "http://test.mg.banyunbang.com.cn/";//图片请求地址
+//
+//    public static String getUrl() {
+//        return TEST_BASE_URL;
+//    }
+//
+//    public static String getImageUrl() {
+//        return TEST_IMAGE_URL;
+//    }
 }

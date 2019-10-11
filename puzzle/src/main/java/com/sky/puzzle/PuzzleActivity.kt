@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_puzzle.*
  */
 class PuzzleActivity : BaseActivity() {
     private val handler = object : Handler() {
-        override fun handleMessage(msg: Message?) {
+        override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
             puzzle.piece = 1
         }

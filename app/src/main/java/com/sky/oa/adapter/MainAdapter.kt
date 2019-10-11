@@ -31,13 +31,12 @@ class MainAdapter(layoutId: Int) : RecyclerAdapter<ActivityModel>(layoutId) {
         //应写成异步调用
         val scale = ScaleAnimation(0f, 1f, 0f, 1f)
         scale.duration = 100
-        var face =
-            Typeface.createFromAsset(context.assets, "font/icomoon.ttf")//字体，icomoon对应fonticon
+        var face = Typeface.createFromAsset(context.assets, "font/icomoon.ttf")//字体，icomoon对应fonticon
         if (position % 2 == 1) {
             val controller = LayoutAnimationController(scale, 0.5f)
             controller.order = LayoutAnimationController.ORDER_RANDOM
             (holder?.itemView as ViewGroup).layoutAnimation = controller
-            face = Typeface.createFromAsset(context.assets, "font/Lobster-Regular.ttf")//不对应fonticon
+//            face = Typeface.createFromAsset(context.assets, "font/Lobster-Regular.ttf")//不对应fonticon
         } else holder?.itemView.startAnimation(scale)
         with(holder!!.itemView) {
             tvName.text =

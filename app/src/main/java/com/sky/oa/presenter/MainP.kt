@@ -15,7 +15,7 @@ import java.util.*
 /**
  * Created by SKY on 2017/5/29.
  */
-class MainP(context: Context) : com.sky.design.app.BasePresenter<IMainView>(context), IMainPresenter {
+class MainP(context: Context) : com.sky.design.app.BasePresenter<IMainView>(context) {
     override fun loadData() {
         mView.setData(activities)
     }

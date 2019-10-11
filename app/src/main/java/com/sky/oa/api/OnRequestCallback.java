@@ -7,7 +7,7 @@ package com.sky.oa.api;
  * @param <T> 泛型类
  */
 public interface OnRequestCallback<T> {
-    void onFail(String code, String message);
+    void onFail(int code, String message);
 
     void onSuccess(T data);
 }

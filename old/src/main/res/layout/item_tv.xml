@@ -6,7 +6,7 @@
     android:layout_margin="5dp"
     android:background="@drawable/sel_shape_yellow"
     android:gravity="center"
-    android:textColor="@color/white"
+    android:textColor="@color/color_white"
     android:textSize="@dimen/text_15" />
     <!--android:selectAllOnFocus="true"-->
     <!--android:textIsSelectable="true"-->

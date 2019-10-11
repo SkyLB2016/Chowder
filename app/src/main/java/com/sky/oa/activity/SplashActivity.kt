@@ -8,7 +8,7 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.sky.oa.AppConstants
 import com.sky.oa.R
-import com.sky.oa.adapter.GuideContoler
+import com.sky.oa.adapter.SplashContoler
 import com.sky.sdk.utils.SPUtils
 
 /**
@@ -28,9 +28,9 @@ class SplashActivity : AppCompatActivity() {
      * 使用写好的库初始化引导页面
      */
     private fun initData() {
-        val contoler = GuideContoler(this)
-        val imgIds = intArrayOf(R.mipmap.ic_landing, R.mipmap.ic_bg_01, R.mipmap.ic_bg_02)
-        val view = LayoutInflater.from(this).inflate(R.layout.pager_end, null)
+        val contoler = SplashContoler(this)
+        val imgIds = intArrayOf(R.mipmap.ic_landing, R.mipmap.splash_01, R.mipmap.splash_02)
+        val view = LayoutInflater.from(this).inflate(R.layout.splash_pager_end, null)
         contoler.init(imgIds, view)
         view.findViewById<Button>(R.id.btBegin).setOnClickListener {
             SPUtils.getInstance(AppConstants.ISFIRST).put(AppConstants.ISFIRST, false)

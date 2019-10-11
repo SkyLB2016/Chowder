@@ -32,7 +32,7 @@ public class CleanUtils {
     }
 
     /**
-     * 清除/storage/emulated/0/Android/data/com.sky.chowder/files
+     * 清除/storage/emulated/0/Android/data/com.sky.oa/files
      */
     public static void cleanExternalFiles(Context context) {
         FileUtils.deleteFile(context.getExternalFilesDir(""));

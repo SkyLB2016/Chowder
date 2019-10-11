@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/rect_10_white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/wh_8"
+        android:gravity="center"
+        android:padding="@dimen/wh_16"
+        android:text="选择时间"
+        android:textSize="@dimen/text_18" />
+
+    <LinearLayout
+        android:id="@+id/timePickerLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layoutDirection="ltr"
+        android:orientation="horizontal">
+
+        <!-- hour -->
+        <NumberPicker
+            android:id="@+id/npProvince"
+            android:layout_width="@dimen/wh_72"
+            android:layout_height="@dimen/wh_120"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
+
+        <NumberPicker
+            android:id="@+id/npCity"
+            android:layout_width="@dimen/wh_48"
+            android:layout_height="@dimen/wh_120"
+            android:layout_marginLeft="@dimen/wh_2"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
+
+        <NumberPicker
+            android:id="@+id/npCounty"
+            android:layout_width="@dimen/wh_48"
+            android:layout_height="@dimen/wh_120"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/wh_8"
+        android:layout_marginTop="@dimen/wh_8"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/tvLeft"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/wh_8"
+            android:layout_marginRight="@dimen/wh_8"
+            android:layout_weight="1"
+            android:background="@drawable/sel_rect_yellow_ddc29f07"
+            android:text="取消" />
+
+        <Button
+            android:id="@+id/tvRight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/wh_8"
+            android:layout_marginRight="@dimen/wh_8"
+            android:layout_weight="1"
+            android:background="@drawable/sel_rect_green"
+            android:text="确定" />
+    </LinearLayout>
+</LinearLayout>

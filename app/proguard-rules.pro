@@ -112,7 +112,7 @@
 
 #量身定制
 # 保留实体类
--keep class com.sky.chowder.model.** {
+-keep class com.sky.oa.model.** {
     public void set*(***);
     public *** get*();
     public *** is*();
@@ -136,7 +136,7 @@
 -keep class androidx.viewpager.widget.** { *; }
 -keep public class * extends androidx.viewpager.widget.**
 # 自己的包下的fragment
--keep public class com.sky.chowder.ui.fragment.** {*;}
+-keep public class com.sky.oa.fragment.** {*;}
 
 
 #保护指定类的成员，如果此类受到保护他们会保护的更好

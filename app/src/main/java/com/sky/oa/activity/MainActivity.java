@@ -33,19 +33,6 @@ import java.util.List;
  */
 public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenuItemClickListener, IMainView {
 
-    private String cacheDir;//缓存目录 /storage/emulated/0/Android/data/包名/cache
-    private String fileCacheDir;//文件日志缓存文件夹目录 /storage/emulated/0/Android/data/包名/files/Documents
-    private String picCacheDir;//图片文件夹目录 /storage/emulated/0/Android/data/包名/files/Pictures
-    /**
-     * 获取缓存文件夹
-     */
-    private void getDataCacheDir() {
-        cacheDir = getExternalCacheDir().getAbsolutePath() + File.separator;
-        fileCacheDir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath() + File.separator;
-        picCacheDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath() + File.separator;
-    }
-
-    //易筋经、五禽戏、六字诀和八段锦
     private MainAdapter adapter;
 
     @Override
@@ -77,6 +64,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
                 new int[]{0, 0, 0}
         );
 
+        //易筋经、五禽戏、六字诀和八段锦
         //Rw2 B2 U2 Lw U2 Rw' U2 Rw U2 F2 Rw F2 Lw' B2 Rw2
         //LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
@@ -112,7 +100,6 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         return false;
     }
 
-
     private void startOther(String packageName, String componentName) {
         try {
             JumpAct.jumpActivity(this, packageName, componentName);
@@ -121,6 +108,17 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         }
     }
 
+    private String cacheDir;//缓存目录 /storage/emulated/0/Android/data/包名/cache
+    private String fileCacheDir;//文件日志缓存文件夹目录 /storage/emulated/0/Android/data/包名/files/Documents
+    private String picCacheDir;//图片文件夹目录 /storage/emulated/0/Android/data/包名/files/Pictures
+    /**
+     * 获取缓存文件夹
+     */
+    private void getDataCacheDir() {
+        cacheDir = getExternalCacheDir().getAbsolutePath() + File.separator;
+        fileCacheDir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath() + File.separator;
+        picCacheDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath() + File.separator;
+    }
     private long lastBack = 0;
 
     @Override

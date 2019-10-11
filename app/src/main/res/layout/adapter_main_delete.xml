@@ -25,7 +25,7 @@
                 android:id="@+id/tvImage"
                 android:layout_width="@dimen/wh_72"
                 android:layout_height="@dimen/wh_72"
-                android:background="@drawable/main_bg"
+                android:background="@drawable/sel_rect_10_stroke_gradient_yellow"
                 android:gravity="center" />
 
             <TextView

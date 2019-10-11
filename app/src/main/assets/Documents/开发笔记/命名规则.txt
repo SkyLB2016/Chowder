@@ -1,6 +1,6 @@
 命名规范
 1. 包命名，小写：
-com+公司缩写（个人昵称）＋项目名称，如：com.sky.chowder.ui;
+com+公司缩写（个人昵称）＋项目名称，如：com.sky.oa;
 2. 类和接口命名，大驼峰规则，单词首字母大写。常用类的命名：
 activity类，命名以Activity为后缀，如：LoginActivity
 fragment类，命名以Fragment为后缀，如：ShareDialogFragment
@@ -49,3 +49,8 @@ push_down_out，从下方推出
 slide_in_from_top，从头部滑动进入
 zoom_enter，变形进入
 shrink_to_middle，中间缩小
+8.shape命名
+shapeName_corners_[tl,tr,bl,br]_strokeWidth_strokeColor_solidcolor
+8.select命名
+sel_shapeName_corners_[tl,tr,bl,br]_strokeWidth_normarC_pressedC
+
