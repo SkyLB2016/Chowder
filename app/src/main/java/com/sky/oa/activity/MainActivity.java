@@ -1,7 +1,10 @@
 package com.sky.oa.activity;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.Menu;
@@ -21,6 +24,7 @@ import com.sky.oa.model.ActivityModel;
 import com.sky.oa.presenter.MainP;
 import com.sky.sdk.utils.AppUtils;
 import com.sky.sdk.utils.JumpAct;
+import com.sky.sdk.utils.LogUtils;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -75,7 +79,6 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         });
     }
 
-
     @Override
     public void setData(@NotNull List<ActivityModel> data) {
         adapter.setDatas(data);
@@ -111,6 +114,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
     private String cacheDir;//缓存目录 /storage/emulated/0/Android/data/包名/cache
     private String fileCacheDir;//文件日志缓存文件夹目录 /storage/emulated/0/Android/data/包名/files/Documents
     private String picCacheDir;//图片文件夹目录 /storage/emulated/0/Android/data/包名/files/Pictures
+
     /**
      * 获取缓存文件夹
      */
@@ -119,6 +123,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         fileCacheDir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath() + File.separator;
         picCacheDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath() + File.separator;
     }
+
     private long lastBack = 0;
 
     @Override

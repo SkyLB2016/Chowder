@@ -68,7 +68,8 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
             , "MD5加密", "科学计数法"
         )
         for (i in method) {
-            val tvText = LayoutInflater.from(this).inflate(R.layout.item_tv, flow, false) as TextView
+            val tvText =
+                LayoutInflater.from(this).inflate(R.layout.item_tv, flow, false) as TextView
             tvText.text = i
             tvText.tag = i
             flow.addView(tvText)
@@ -385,15 +386,30 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
             text.length,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        span.setSpan(ForegroundColorSpan(Color.RED), 8, 17, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//字体颜色
-        span.setSpan(BackgroundColorSpan(Color.rgb(55, 155, 200)), 17, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        span.setSpan(
+            ForegroundColorSpan(Color.RED),
+            8,
+            17,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )//字体颜色
+        span.setSpan(
+            BackgroundColorSpan(Color.rgb(55, 155, 200)),
+            17,
+            text.length,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
         span.setSpan(UnderlineSpan(), 0, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//下划线
         span.setSpan(StrikethroughSpan(), 4, 8, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//中划线
         span.setSpan(RelativeSizeSpan(1.2f), 8, 10, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//字号按比例翻倍
         span.setSpan(SuperscriptSpan(), 10, 11, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//上标
         span.setSpan(SubscriptSpan(), 12, 13, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//下标
         span.setSpan(StyleSpan(Typeface.BOLD), 13, 15, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//字体风格
-        span.setSpan(URLSpan("http://www.baidu.com"), 17, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//超链接
+        span.setSpan(
+            URLSpan("http://www.baidu.com"),
+            17,
+            text.length,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )//超链接
         span.append("\n天地玄黄，宇宙洪荒。\n")
         span.append("日月盈仄，辰宿列张。\n")
         span.append(getText(R.string.ibu))
@@ -414,14 +430,16 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
             .sortedBy { it }
             .map { it.toUpperCase() }
             .forEach { text.append(it + "\n") }
-        val array = GsonUtils.fromJson(getString(R.string.jsonarray), Array<ActivityModel>::class.java)
+        val array =
+            GsonUtils.fromJson(getString(R.string.jsonarray), Array<ActivityModel>::class.java)
         array.sortedByDescending { it }
             .forEach { text.append(it.className + "\n") }
         return text.toString()
     }
 
     private fun iterator(): String {
-        val list = GsonUtils.fromJson(getString(R.string.jsonarray), Array<ActivityModel>::class.java)
+        val list =
+            GsonUtils.fromJson(getString(R.string.jsonarray), Array<ActivityModel>::class.java)
         val iter = list.iterator()
         val text = StringBuilder()
         for (i in iter) text.append(i.toString())
@@ -477,12 +495,22 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
         private val collator = Collator.getInstance()
         //升序
         private val ascending =
-            Comparator<SortModel> { first, second -> collator.compare(first.className, second.className) }
+            Comparator<SortModel> { first, second ->
+                collator.compare(
+                    first.className,
+                    second.className
+                )
+            }
         private val ascending1 =
             Comparator<SortModel> { first, second -> first.className!!.compareTo(second.className!!) }
         //降序
         private val descending =
-            Comparator<SortModel> { first, second -> collator.compare(second.className, first.className) }
+            Comparator<SortModel> { first, second ->
+                collator.compare(
+                    second.className,
+                    first.className
+                )
+            }
     }
 
     //获取电量百分比
@@ -527,8 +555,10 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
             )
             val cursor = contentResolver.query(data?.data!!, projection, null, null, null);
             if (cursor != null && cursor.moveToFirst()) {
-                val nameIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
-                val numberIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
+                val nameIndex =
+                    cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
+                val numberIndex =
+                    cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
                 val name = cursor.getString(nameIndex);
                 val number = cursor.getString(numberIndex);
                 showToast(number)
@@ -538,9 +568,10 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
         }
     }
 
-    private fun equalHashCode(): String = "Aa的hashCode:${"Aa".hashCode()}==BB的hashCode:${"BB".hashCode()};\n" +
-            "Bb的hashCode:${"Bb".hashCode()}==CC的hashCode:${"CC".hashCode()};\n" +
-            "Cc的hashCode:${"Cc".hashCode()}==DD的hashCode:${"DD".hashCode()};\n"
+    private fun equalHashCode(): String =
+        "Aa的hashCode:${"Aa".hashCode()}==BB的hashCode:${"BB".hashCode()};\n" +
+                "Bb的hashCode:${"Bb".hashCode()}==CC的hashCode:${"CC".hashCode()};\n" +
+                "Cc的hashCode:${"Cc".hashCode()}==DD的hashCode:${"DD".hashCode()};\n"
 
 
     private fun toArray(): String {
@@ -562,31 +593,37 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private fun getSystemMessage(): String {
         val text = StringBuilder()
-        val list = Build.SUPPORTED_ABIS
-        for (i in list)
+        val cpus = Build.SUPPORTED_ABIS
+        for (i in cpus)
             text.append("CPU指令集==$i\n")
-        text.append(
-            "主板型号==${Build.BOARD}\n" +
-                    "系统定制商==${Build.BRAND}\n" +
-                    "设备参数==${Build.DEVICE}\n" +
-                    "显示屏参数==${Build.DISPLAY}\n" +
-                    "唯一编号==${Build.FINGERPRINT}\n" +
-                    "硬件序列号==${Build.SERIAL}\n" +
-                    "修订版本列表==${Build.ID}\n" +
-                    "硬件制造商==${Build.MANUFACTURER}\n" +
-                    "版本==${Build.MODEL}\n" +
-                    "硬件名==${Build.HARDWARE}\n" +
-                    "手机产品名==${Build.PRODUCT}\n" +
-                    "描述Build的标签==${Build.TAGS}\n" +
-                    "Builder的类型==${Build.TYPE}\n" +
-                    "当前开发代号==${Build.VERSION.CODENAME}\n" +
-                    "源码控制版本号==${Build.VERSION.INCREMENTAL}\n" +
-                    "系统版本==${Build.VERSION.RELEASE}\n" +
-                    "系统版本号==${Build.VERSION.SDK_INT}\n" +
-                    "Host值==${Build.HOST}\n" +
-                    "User名==${Build.USER}\n" +
-                    "编译时间==${Build.TIME}\n"
-        )
+        val abis32 = Build.SUPPORTED_32_BIT_ABIS
+        for (i in abis32)
+            text.append("CPU32指令集==$i\n")
+        val abis64 = Build.SUPPORTED_64_BIT_ABIS
+        for (i in abis64)
+            text.append("CPU64指令集==$i\n")
+        text.append("CPU指令集==${Build.CPU_ABI}\n")
+        text.append("CPU指令集==${Build.CPU_ABI2}\n")
+        text.append("主板型号==${Build.BOARD}\n")
+        text.append("系统定制商==${Build.BRAND}\n")
+        text.append("设备参数==${Build.DEVICE}\n")
+        text.append("显示屏参数==${Build.DISPLAY}\n")
+        text.append("唯一编号==${Build.FINGERPRINT}\n")
+        text.append("硬件序列号==${Build.SERIAL}\n")
+        text.append("修订版本列表==${Build.ID}\n")
+        text.append("硬件制造商==${Build.MANUFACTURER}\n")
+        text.append("版本==${Build.MODEL}\n")
+        text.append("硬件名==${Build.HARDWARE}\n")
+        text.append("手机产品名==${Build.PRODUCT}\n")
+        text.append("描述Build的标签==${Build.TAGS}\n")
+        text.append("Builder的类型==${Build.TYPE}\n")
+        text.append("当前开发代号==${Build.VERSION.CODENAME}\n")
+        text.append("源码控制版本号==${Build.VERSION.INCREMENTAL}\n")
+        text.append("系统版本==${Build.VERSION.RELEASE}\n")
+        text.append("系统版本号==${Build.VERSION.SDK_INT}\n")
+        text.append("Host值==${Build.HOST}\n")
+        text.append("User名==${Build.USER}\n")
+        text.append("编译时间==${Build.TIME}\n")
         return text.toString()
     }
 
