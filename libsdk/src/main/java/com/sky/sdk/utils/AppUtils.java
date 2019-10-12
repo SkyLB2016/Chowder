@@ -120,14 +120,14 @@ public class AppUtils {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             String[] abis = Build.SUPPORTED_ABIS;
             for (String cpu : abis) {
-                if (cpu.startsWith("X86")) {
+                if (cpu.startsWith("x86")) {
                     return true;
                 }
             }
         } else {
             String abi = Build.CPU_ABI;
             String abi2 = Build.CPU_ABI2;
-            if (abi.startsWith("X86") || abi2.startsWith("X86")) {
+            if (abi.startsWith("x86") || abi2.startsWith("x86")) {
                 return true;
             }
         }
