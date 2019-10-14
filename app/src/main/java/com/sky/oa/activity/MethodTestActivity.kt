@@ -590,7 +590,6 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
             String.format(getString(R.string.format04), 9982999, 9998.876)
 
     //获取系统信息
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private fun getSystemMessage(): String {
         val text = StringBuilder()
         val cpus = Build.SUPPORTED_ABIS
@@ -602,14 +601,16 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
         val abis64 = Build.SUPPORTED_64_BIT_ABIS
         for (i in abis64)
             text.append("CPU64指令集==$i\n")
-        text.append("CPU指令集==${Build.CPU_ABI}\n")
-        text.append("CPU指令集==${Build.CPU_ABI2}\n")
+//        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+//            text.append("CPU指令集==${Build.CPU_ABI}\n")
+//            text.append("CPU指令集==${Build.CPU_ABI2}\n")
+//            text.append("硬件序列号==${Build.SERIAL}\n")
+//        }
         text.append("主板型号==${Build.BOARD}\n")
         text.append("系统定制商==${Build.BRAND}\n")
         text.append("设备参数==${Build.DEVICE}\n")
         text.append("显示屏参数==${Build.DISPLAY}\n")
         text.append("唯一编号==${Build.FINGERPRINT}\n")
-        text.append("硬件序列号==${Build.SERIAL}\n")
         text.append("修订版本列表==${Build.ID}\n")
         text.append("硬件制造商==${Build.MANUFACTURER}\n")
         text.append("版本==${Build.MODEL}\n")

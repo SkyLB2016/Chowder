@@ -22,6 +22,7 @@ import com.sky.oa.adapter.MainAdapter;
 import com.sky.oa.api.view.IMainView;
 import com.sky.oa.model.ActivityModel;
 import com.sky.oa.presenter.MainP;
+import com.sky.oa.utils.EmulatorDetector;
 import com.sky.sdk.utils.AppUtils;
 import com.sky.sdk.utils.JumpAct;
 import com.sky.sdk.utils.LogUtils;
@@ -74,9 +75,38 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                detectEmulatorSimple();
             }
         });
+
+    }
+
+    private void detectEmulatorSimple() {
+        EmulatorDetector.with(this)
+                .detectSimple(new EmulatorDetector.OnEmulatorDetectorListener() {
+                    @Override
+                    public void onResult(final boolean isEmulator) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (isEmulator) {
+                                    new AlertDialog.Builder(MainActivity.this)
+                                            .setTitle("虚拟机不能执行此功能")
+                                            .setCancelable(false)
+                                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    dialog.dismiss();
+                                                    finish();
+                                                }
+                                            })
+                                            .create()
+                                            .show();
+                                }
+                            }
+                        });
+                    }
+                });
     }
 
     @Override

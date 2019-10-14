@@ -111,27 +111,4 @@ public class AppUtils {
         install.setDataAndType(uri, "application/vnd.android.package-archive");
         context.startActivity(install);
     }
-
-    /**
-     * 是否是真机，真机都是arm架构的
-      * @return
-     */
-    public Boolean isVirtualMachine() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            String[] abis = Build.SUPPORTED_ABIS;
-            for (String cpu : abis) {
-                if (cpu.startsWith("x86")) {
-                    return true;
-                }
-            }
-        } else {
-            String abi = Build.CPU_ABI;
-            String abi2 = Build.CPU_ABI2;
-            if (abi.startsWith("x86") || abi2.startsWith("x86")) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 }
