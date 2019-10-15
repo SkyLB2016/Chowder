@@ -20,10 +20,10 @@ class FlowLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
     // 记录行高
     private val lineHeights = ArrayList<Int>()
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        val layoutWidth = View.MeasureSpec.getSize(widthMeasureSpec)//match_parent时的宽
-        val widthMode = View.MeasureSpec.getMode(widthMeasureSpec)//获取测量模式，match与wrap
-        val layoutHeight = View.MeasureSpec.getSize(heightMeasureSpec)
-        val heightMode = View.MeasureSpec.getMode(heightMeasureSpec)
+        val layoutWidth = MeasureSpec.getSize(widthMeasureSpec)//match_parent时的宽
+        val widthMode = MeasureSpec.getMode(widthMeasureSpec)//获取测量模式，match与wrap
+        val layoutHeight = MeasureSpec.getSize(heightMeasureSpec)
+        val heightMode = MeasureSpec.getMode(heightMeasureSpec)
 
         // 模式为wrap_content时，测量框架的宽高
         // 先清空
@@ -75,8 +75,8 @@ class FlowLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
         lineHeights.add(lineHeight)
         // 为框架父控件写入宽高
         setMeasuredDimension(
-                if (widthMode == View.MeasureSpec.EXACTLY) layoutWidth else width + paddingLeft + paddingRight,
-                if (heightMode == View.MeasureSpec.EXACTLY) layoutHeight else height + paddingTop + paddingBottom
+                if (widthMode == MeasureSpec.EXACTLY) layoutWidth else width + paddingLeft + paddingRight,
+                if (heightMode == MeasureSpec.EXACTLY) layoutHeight else height + paddingTop + paddingBottom
         )
     }
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Chowder.iml" filepath="$PROJECT_DIR$/.idea/Chowder.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/g2048/g2048.iml" filepath="$PROJECT_DIR$/g2048/g2048.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jnilib/jnilib.iml" filepath="$PROJECT_DIR$/jnilib/jnilib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libdesign/libdesign.iml" filepath="$PROJECT_DIR$/libdesign/libdesign.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libsdk/libsdk.iml" filepath="$PROJECT_DIR$/libsdk/libsdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/puzzle/puzzle.iml" filepath="$PROJECT_DIR$/puzzle/puzzle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rxbus/rxbus.iml" filepath="$PROJECT_DIR$/rxbus/rxbus.iml" />
+    </modules>
+  </component>
+</project>
