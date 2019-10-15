@@ -4,6 +4,8 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
 import android.annotation.TargetApi
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Color
@@ -38,6 +40,7 @@ import com.sky.oa.other.factory.abstractfactory.HNFactory
 import com.sky.oa.other.factory.abstractfactory.MCFctory
 import com.sky.oa.other.factory.factory.HairFactory
 import com.sky.oa.other.factory.factory.hair.LeftHair
+import com.sky.oa.utils.EmulatorDetector
 import com.sky.oa.utils.http.HttpUrl
 import com.sky.sdk.utils.AppUtils
 import com.sky.sdk.utils.DateUtil
@@ -65,7 +68,7 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
             , "Intent测试", "时间选择", "地址选择", "工厂模式"
             , "SVG与Value", "渐变的文字", "音频处理", "字符串转id"
             , "排序算法", "LinkedList使用"
-            , "MD5加密", "科学计数法"
+            , "MD5加密", "科学计数法", "虚拟机鉴定"
         )
         for (i in method) {
             val tvText =
@@ -113,8 +116,28 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
             "SVG与Value" -> setSvg()
             "渐变的文字" -> shaderText()
             "音频处理" -> makePlayer()
-            "" -> ""
+            "虚拟机鉴定" -> detectEmulatorSimple()
         }
+    }
+
+    private fun detectEmulatorSimple() {
+        EmulatorDetector.with(this)
+            .detectSimple { isEmulator ->
+                runOnUiThread {
+                    tvDisplay.text = "This is not a emulator !"
+                    if (isEmulator) {
+                        tvDisplay.text = "This is a emulator !"
+                        AlertDialog.Builder(this)
+                            .setTitle("虚拟机不能执行此功能")
+                            .setCancelable(false)
+                            .setPositiveButton("确定") { dialog, which ->
+                                dialog.dismiss()
+                            }
+                            .create()
+                            .show()
+                    }
+                }
+            }
     }
 
     /**
