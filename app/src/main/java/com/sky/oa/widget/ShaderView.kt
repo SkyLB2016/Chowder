@@ -17,7 +17,7 @@ class ShaderView @JvmOverloads constructor(context: Context, attrs: AttributeSet
     private var paint: Paint? = null
 
     init {
-        bitmap = BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher)
+        bitmap = BitmapFactory.decodeResource(resources, R.mipmap.ic_banner)
         val matrix = Matrix()
         matrix.setScale(1f, -1f)
         refBitmap = Bitmap.createBitmap(bitmap!!, 0, 0, bitmap!!.width, bitmap!!.height, matrix, true)
