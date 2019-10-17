@@ -3,92 +3,72 @@ package com.sky.design.app;
 import android.os.Bundle;
 import android.text.TextUtils;
 
+import androidx.annotation.CheckResult;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.sky.R;
 import com.sky.design.api.IBasePresenter;
+import com.sky.design.widget.BaseTitle;
+import com.sky.design.widget.DialogManager;
 import com.sky.rxbus.DefaultBus;
 import com.sky.rxbus.RxBus;
 import com.sky.sdk.utils.NetworkUtils;
 import com.sky.sdk.utils.SPUtils;
-import org.jetbrains.annotations.Nullable;
+import com.sky.sdk.utils.ToastUtils;
+
 import io.reactivex.functions.Consumer;
 
 /**
  * activity 的基类
  * Created by SKY on 2017/5/27.
  */
-public abstract class BaseActivity extends SkyActivity implements IBasePresenter {
+public abstract class BaseActivity extends AppCompatActivity {
+    public BaseTitle baseTitle;
+    public DialogManager dialogManager;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        RxBus.getInstance().add(this,
-                RxBus.getInstance().register(DefaultBus.class)
-                        .subscribe(new Consumer<DefaultBus>() {
-                            @Override
-                            public void accept(DefaultBus o) throws Exception {
-                                onReceiveEvent(o);
-                            }
-                        }));
-        if (!hasInternetConnected()) showToast(getString(R.string.toast_isinternet));
-        initialize(savedInstanceState);
-        loadData();
+        setContentView(getLayoutResId());
+        baseTitle = new BaseTitle(this);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        RxBus.getInstance().unregister(this);
+    /**
+     * 获取布局的resId
+     */
+    @CheckResult
+    protected abstract int getLayoutResId();
+
+    public void setToolbarTitle(String title, String rightText) {
+        baseTitle.setCenterTitle(title);
+        baseTitle.setRightText(rightText);
     }
 
-    protected abstract void initialize(@Nullable Bundle savedInstanceState);
-    public abstract void loadData();
-
-    @Override
-    public Bundle getExtras() {
-        return  getIntent().getExtras();
+    public void setToolbarTitle(String title) {
+        baseTitle.setCenterTitle(title);
     }
 
-    @Override
-    public void sendEvent(int code) {
-        RxBus.getInstance().send(code);
+    public void setToolbarRightTitle(String rightText) {
+        baseTitle.setRightText(rightText);
     }
 
-    @Override
-    public <T> void sendEvent(int code, T event) {
-        RxBus.getInstance().send(code, event);
+    public void showToast(@StringRes int resId) {
+        ToastUtils.showShort(this, resId);
     }
 
-    @Override
-    public void onReceiveEvent(DefaultBus event) {
+    public void showToast(String text) {
+        ToastUtils.showShort(this, text);
     }
 
-    @Override
-    public <T> T getObject(String text, T value) {
-        return (T) SPUtils.getInstance().get(text, value);
+    public void showLoading() {
+        dialogManager = dialogManager == null ? new DialogManager(this) : dialogManager;
+        dialogManager.showDialog(this);
     }
 
-    @Override
-    public <T> void setObject(String text, T value) {
-        SPUtils.getInstance().put(text, value);
+    public void disLoading() {
+        dialogManager.disDialog();
     }
 
-    @Override
-    public boolean getUsertOnline() {
-        return !TextUtils.isEmpty(getToken());
-    }
-
-
-    @Override
-    public String getToken() {
-        return getObject("TOKEN", "");
-    }
-
-    @Override
-    public boolean hasInternetConnected() {
-        return NetworkUtils.isConnected(this);
-    }
-
-    @Override
-    public String getStringArray(int array, int position) {
-        return getResources().getStringArray(array)[position];
-    }
 }

@@ -51,8 +51,6 @@ public class BaseTitle {
      * 在每个需要标题的XML中引用
      */
     public void setToolbar(String title) {
-        appbar =  activity.findViewById(R.id.appbar);
-        appbar.setElevation(0f);
         toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         if (toolbar == null) return;
         toolbar.setTitle("");//默认为居左,所以隐藏

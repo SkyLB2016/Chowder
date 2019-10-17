@@ -11,8 +11,8 @@ import com.sky.design.app.BaseActivity
 class PullDownActivity : BaseActivity() {
 
     override fun getLayoutResId(): Int = R.layout.activity_pulldown
-
-    override fun initialize(savedInstanceState: Bundle?) = showToast(intent.getStringExtra("message") ?: "")
-    override fun loadData() = Unit
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        showToast(intent.getStringExtra("message") ?: "")
+    }
 }

@@ -57,8 +57,9 @@ import kotlin.collections.ArrayList
  */
 class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
     override fun getLayoutResId(): Int = R.layout.activity_method
-    override fun loadData() = Unit
-    override fun initialize(savedInstanceState: Bundle?) {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         val method = arrayListOf(
             "字符替换与数组化", "hash相同", "字体颜色背景变换"
             , "系统信息", "获取app信息", "电池电量"

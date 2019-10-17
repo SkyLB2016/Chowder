@@ -59,8 +59,8 @@ class Game2048Activity : BaseActivity() {
     }
     var start = 0L//开始时间
     override fun getLayoutResId(): Int = R.layout.activity_g2048
-    override fun initialize(savedInstanceState: Bundle?) {
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         val path =
             getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)!!.absolutePath + File.separator
         pathName = path + "2048orginal.txt"
@@ -117,11 +117,9 @@ class Game2048Activity : BaseActivity() {
 
     private fun setTime() {
         start = System.currentTimeMillis()
-        setObject("time", start)
+        SPUtils.getInstance().put("time", start)
         handler.sendEmptyMessage(1009)
     }
-
-    override fun loadData() = Unit
 
     override fun onTouchEvent(event: MotionEvent?): Boolean = game.onTouchEvent(event!!)
 

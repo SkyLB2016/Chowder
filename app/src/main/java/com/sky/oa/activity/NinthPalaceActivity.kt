@@ -11,12 +11,11 @@ import kotlinx.android.synthetic.main.activity_ninthpalace.*
  */
 class NinthPalaceActivity : BaseActivity() {
     override fun getLayoutResId(): Int = R.layout.activity_ninthpalace
-    override fun initialize(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setToolbarRightTitle("随机图案")
         findViewById<View>(R.id.tvRight).setOnClickListener { nine.shuffle() }
         nine.onSuccess = { s -> if (s) showToast("成功") else showToast("失败") }
 //        LogUtils.i("${ProcessUtils().getRunningAppProcessInfo(this)}")
     }
-    override fun loadData() = Unit
-
 }

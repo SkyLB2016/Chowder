@@ -6,13 +6,12 @@ import android.os.Message
 import android.view.View
 import com.sky.design.app.BaseFragment
 import com.sky.oa.R
-import com.sky.oa.presenter.BaseP
 import com.sky.sdk.utils.LogUtils
 
 /**
  * Created by SKY on 2015/12/9 20:52.
  */
-class XferModeFragment : BaseFragment<BaseP>() {
+class XferModePFragment : BaseFragment() {
     internal var handler: Handler = object : Handler() {
         override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
@@ -49,12 +48,6 @@ class XferModeFragment : BaseFragment<BaseP>() {
     }
 
     override fun getLayoutResId(): Int = R.layout.fragment_three
-
-    override fun creatPresenter() = BaseP(activity!!)
-
-    override fun initialize(savedInstanceState: Bundle?) {
-
-    }
 
     internal inner class Animator : Runnable {
 

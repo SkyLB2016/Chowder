@@ -1,20 +1,15 @@
 package com.sky.oa.activity;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
-import android.content.DialogInterface;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sky.design.adapter.RecyclerAdapter;
@@ -24,7 +19,6 @@ import com.sky.oa.adapter.MainAdapter;
 import com.sky.oa.api.view.IMainView;
 import com.sky.oa.model.ActivityModel;
 import com.sky.oa.presenter.MainP;
-import com.sky.oa.utils.EmulatorDetector;
 import com.sky.sdk.utils.AppUtils;
 import com.sky.sdk.utils.JumpAct;
 import com.sky.sdk.utils.LogUtils;
@@ -83,7 +77,8 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         //requestCode是之前传入的请求值
         //permissions是请求的权限集合

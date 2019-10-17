@@ -24,7 +24,8 @@ class StockActivity : BaseActivity() {
     private val type = "1"//1是单价与数量算总价,2是直接填写的总价
 
     override fun getLayoutResId() = R.layout.activity_stock
-    override fun initialize(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         checkTextChange(etUnit)
         checkTextChange(etNum)
         etTotal?.addTextChangedListener(object : TextWatcherAdapter() {
@@ -44,7 +45,6 @@ class StockActivity : BaseActivity() {
             setTotal()
         }
     }
-    override fun loadData() = Unit
 
     private fun checkTextChange(one: EditText?) {
         one?.addTextChangedListener(object : TextWatcherAdapter() {

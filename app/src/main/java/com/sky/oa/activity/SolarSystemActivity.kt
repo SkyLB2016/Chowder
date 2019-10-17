@@ -20,9 +20,6 @@ import kotlinx.android.synthetic.main.activity_solar.*
  * 卫星菜单栏
  */
 class SolarSystemActivity : BaseActivity(), Toolbar.OnMenuItemClickListener {
-    override fun loadData() {
-    }
-
     private var layoutDraw: AnimationDrawable? = null
 
     private var handler: Handler = object : Handler() {
@@ -33,7 +30,8 @@ class SolarSystemActivity : BaseActivity(), Toolbar.OnMenuItemClickListener {
 
     override fun getLayoutResId(): Int = R.layout.activity_solar
 
-    override fun initialize(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         val width = ScreenUtils.getWidthPX(this)
         val lp = relative.layoutParams
         lp.height = width / 3

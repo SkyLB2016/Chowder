@@ -19,7 +19,8 @@ import kotlinx.android.synthetic.main.activity_ipc.*
  */
 class IPCActivity : BaseActivity() {
     override fun getLayoutResId(): Int = R.layout.activity_ipc
-    override fun initialize(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         bindService(Intent(this, PairServiceA::class.java), connection, Context.BIND_AUTO_CREATE)
 //        startService(Intent(this, PairServiceA::class.java))
 //        val badge = BadgeView(this)
@@ -28,7 +29,6 @@ class IPCActivity : BaseActivity() {
         chro.start()
     }
 
-    override fun loadData() = Unit
     private val handler: Handler = object : Handler() {
         override fun handleMessage(msg: Message) = LogUtils.i("${msg.obj}")
     }

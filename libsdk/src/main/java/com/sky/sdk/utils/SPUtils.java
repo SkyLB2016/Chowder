@@ -67,6 +67,13 @@ public class SPUtils {
     }
 
     /**
+     * 通过泛型来强制转换数据
+     */
+    public <T extends Object> T getObject(String text, T a) {
+        return (T) get(text, a);
+    }
+
+    /**
      * 读取数据
      *
      * @param value 读取失败时，返回的数据
@@ -140,13 +147,4 @@ public class SPUtils {
         }
         return map;
     }
-
-    public <T extends Object> T getObject(String text, T a) {
-        return (T) get(text, a);
-    }
-
-    public <T extends Object> void setObject(String text, T a) {
-        put(text, a);
-    }
-
 }

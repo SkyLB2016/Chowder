@@ -19,14 +19,13 @@ class TabLayoutActivity : BaseActivity() {
 
     override fun getLayoutResId(): Int = R.layout.activity_tab_vp
 
-    override fun initialize(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setUpViewPager()
 //        val mParams = findViewById<AppBarLayout>(R.id.appbar).getChildAt(0).layoutParams as AppBarLayout.LayoutParams
 //        mParams.scrollFlags = 0//的时候AppBarLayout下的toolbar就不会随着滚动条折叠
         //        mParams.setScrollFlags(5); //的时候AppBarLayout下的toolbar会随着滚动条折叠
     }
-
-    override fun loadData() = Unit
 
     private fun setUpViewPager() {
         val tabs = findViewById<TabLayout>(R.id.tabs)
@@ -34,18 +33,18 @@ class TabLayoutActivity : BaseActivity() {
         val titles = ArrayList<String>()
         titles.add("card")
         titles.add("MeshView")
-//        titles.add("Shader")
-//        titles.add("XferModeView")
-//        titles.add("通讯录")
+        titles.add("Shader")
+        titles.add("XferModeView")
+        titles.add("通讯录")
         for (i in titles) {
             tabs.addTab(tabs.newTab().setText(i))
         }
         val fragments = ArrayList<Fragment>()
-        fragments.add(RecycleFragment())
-        fragments.add(MeshFragment())
-//        fragments.add(ShaderFragment())
-//        fragments.add(XferModeFragment())
-//        fragments.add(CursorLoaderListFragment())
+        fragments.add(RecyclePFragment())
+        fragments.add(MeshPFragment())
+        fragments.add(ShaderPFragment())
+        fragments.add(XferModePFragment())
+        fragments.add(CursorLoaderListFragment())
         val adapter = object : FragmentPagerAdapter(supportFragmentManager, 1) {
             override fun getCount(): Int = fragments.size
 

@@ -1,17 +1,19 @@
 package com.sky.oa.activity;
 
 import android.os.Bundle;
+
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+
 import android.view.View;
 import android.widget.Toast;
 
 import com.sky.design.app.BaseActivity;
 import com.sky.oa.R;
 import com.sky.sdk.utils.LogUtils;
-
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by libin on 2019/0520 19:25 Monday.
@@ -25,8 +27,8 @@ public class CoordinatorActivity extends BaseActivity {
     }
 
     @Override
-    protected void initialize(@Nullable Bundle savedInstanceState) {
-
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         Toolbar toolbarv7 = findViewById(R.id.toolbarv7);
         toolbarv7.setNavigationIcon(R.mipmap.ic_back);
         setSupportActionBar(toolbarv7);
@@ -68,12 +70,5 @@ public class CoordinatorActivity extends BaseActivity {
             }
         });
     }
-
-    @Override
-    public void loadData() {
-
-    }
-//    override fun loadData() = Unit
-//    fun checkin(view: View) = Snackbar.make(view, "checkin success!", Snackbar.LENGTH_SHORT).show()
 }
 

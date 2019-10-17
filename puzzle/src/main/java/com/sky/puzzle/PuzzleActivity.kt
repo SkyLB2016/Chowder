@@ -26,13 +26,13 @@ class PuzzleActivity : BaseActivity() {
     }
 
     override fun getLayoutResId(): Int = R.layout.activity_puzzle
-
-    override fun initialize(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         SPUtils.init(this)
         btUp?.setOnClickListener { puzzle.piece = -1 }
         btChange?.setOnClickListener { getPhoto() }
         btNext?.setOnClickListener { puzzle.piece = 1 }
-        val path = getObject("puzzle", "")
+        val path = SPUtils.instance.getObject("puzzle", "")
         if (path.isNotEmpty()) puzzle?.bitmap = BitmapUtils.getBitmapFromPath(path, 2048, 2048)
 
         val lp = ImgOriginal?.layoutParams
@@ -43,15 +43,17 @@ class PuzzleActivity : BaseActivity() {
         puzzle.checkSuccess = { success -> if (success) handler.sendEmptyMessageDelayed(101, 5000) }
     }
 
-    override fun loadData() = Unit
-
     private var photoUtils: PhotoUtils? = null
 
     private fun getPhoto() {
         photoUtils = PhotoUtils(this, "", false)
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         photoUtils?.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
@@ -69,7 +71,7 @@ class PuzzleActivity : BaseActivity() {
                 if (StringUtils.notNull(path, error)) return
                 puzzle.bitmap = BitmapUtils.getBitmapFromPath(path, 2048, 2048)//获取bitmap
                 ImgOriginal.setImageBitmap(puzzle.bitmap)
-                setObject("puzzle", path)
+                SPUtils.instance.put("puzzle", path)
             }
         }
     }

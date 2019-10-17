@@ -37,8 +37,8 @@ class PoetryActivity : BaseActivity() {
     private val poetry = ArrayList<String>();//
     private lateinit var clipM: ClipboardManager
     override fun getLayoutResId(): Int = R.layout.activity_poetry
-
-    override fun initialize(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         baseTitle.setNavigationIcon(R.mipmap.ic_menu)
         baseTitle.onLeftImgClick = BaseTitle.OnClickListener { sliding.toggleMenu() }
         baseTitle.setRightText("3.16建")
@@ -62,6 +62,7 @@ class PoetryActivity : BaseActivity() {
 
         initEvent()
         addAni()
+        loadData()
     }
 
     private fun addAni() {
@@ -71,7 +72,7 @@ class PoetryActivity : BaseActivity() {
         recycler.layoutAnimation = controller
     }
 
-    override fun loadData() {
+    fun loadData() {
         var dir = "Documents"//assets初始路径
         var array: Array<String>? = null//assets取出的目录名称
         val link = LinkedList<String>()
