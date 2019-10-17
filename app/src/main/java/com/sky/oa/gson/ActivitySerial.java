@@ -16,7 +16,7 @@ public class ActivitySerial implements JsonSerializer<ActivityModel> {
     @Override
     public JsonElement serialize(ActivityModel model, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject json = new JsonObject();
-        json.addProperty("class", model.getClassName());
+        json.addProperty("class", model.getActivityName());
         json.addProperty("component", model.getComponentName());
         json.addProperty("image", model.getImg());
         json.addProperty("des", model.getDescribe());

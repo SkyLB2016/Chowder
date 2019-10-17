@@ -2,12 +2,17 @@ package com.sky.design.widget;
 
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.sky.R;
 import com.sky.sdk.utils.LogUtils;
 
@@ -17,6 +22,7 @@ import com.sky.sdk.utils.LogUtils;
 public class BaseTitle {
     public AppCompatActivity activity;
     //定义toolbar
+    private AppBarLayout appbar;
     private Toolbar toolbar;
     private TextView tvCenter;
     private TextView tvRight;
@@ -45,6 +51,8 @@ public class BaseTitle {
      * 在每个需要标题的XML中引用
      */
     public void setToolbar(String title) {
+        appbar =  activity.findViewById(R.id.appbar);
+        appbar.setElevation(0f);
         toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         if (toolbar == null) return;
         toolbar.setTitle("");//默认为居左,所以隐藏
@@ -54,15 +62,26 @@ public class BaseTitle {
         activity.setSupportActionBar(toolbar);
         //toolbar.setBackground(R.);
 //        toolbar.setLogo(R.drawable.div_line_v);
-        toolbar.setNavigationIcon(R.mipmap.ic_back_oriange);//返回的图标
+
+        //必须在设置了toolbar之后获取actionbar才有效
+        ActionBar actionBar = activity.getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);//显示默认的icon
+        }
+//        toolbar.setNavigationIcon(R.mipmap.ic_close);//左侧图标
+//        toolbar.setNavigationIcon(null);//左侧图标
+
+        //可以用tool自带的menu，需要注册；也可以用activity默认的menu，不需要注册。
         if (activity instanceof Toolbar.OnMenuItemClickListener)//右侧menu的点击事件
             toolbar.setOnMenuItemClickListener((Toolbar.OnMenuItemClickListener) activity);
+
+        //返回图标的点击事件
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 leftOnClick(v);
             }
-        });//返回图标的点击事件
+        });
     }
 
     public void setVisibility(int vis) {
@@ -82,31 +101,22 @@ public class BaseTitle {
     }
 
     /**
-     * 设置居中标题
-     *
-     * @param title
-     */
-    public void setCenterTitle(String title) {
-        tvCenter.setText(title);
-    }
-
-    /**
-     * 设置居中标题背景
-     *
-     * @param mip
-     */
-    public void setCenterImage(int mip) {
-        tvCenter.setBackgroundResource(mip);
-    }
-
-    /**
-     * 左侧标题
+     * 左侧标题，自带的标题就是左侧的，
      *
      * @param title
      */
     public void setLeftTitle(String title) {
         toolbar.setTitle(title);
         tvCenter.setText("");
+    }
+
+    /**
+     * 设置居中标题
+     *
+     * @param title
+     */
+    public void setCenterTitle(String title) {
+        tvCenter.setText(title);
     }
 
     public void setRightText(String text) {
@@ -118,18 +128,26 @@ public class BaseTitle {
     }
 
     /**
-     * 更换左侧图标
+     * 为空时，隐藏左侧图标
      *
-     * @param left 为－1时，隐藏图标
+     * @param icon
      */
-    public void setLeftButton(int left) {
-        if (left == -1) {
-            toolbar.setNavigationIcon(null);
-        } else {
-            toolbar.setNavigationIcon(left);
-        }
+    public void setNavigationIcon(@Nullable Drawable icon) {
+        toolbar.setNavigationIcon(null);
     }
 
+    /**
+     * 为0时隐藏图标
+     *
+     * @param resId
+     */
+    public void setNavigationIcon(@DrawableRes int resId) {
+        if (resId == 0) {
+            toolbar.setNavigationIcon(null);
+        } else {
+            toolbar.setNavigationIcon(resId);
+        }
+    }
 
     public interface OnClickListener {
         void OnClick(View v);

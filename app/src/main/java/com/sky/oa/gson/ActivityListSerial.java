@@ -21,7 +21,7 @@ public class ActivityListSerial implements JsonSerializer<List<ActivityModel>> {
         for (int i = 0; i < src.size(); i++) {
             ActivityModel model = src.get(i);
             JsonObject json = new JsonObject();
-            json.addProperty("class", model.getClassName());
+            json.addProperty("class", model.getActivityName());
             json.addProperty("component", model.getComponentName());
             json.addProperty("image", model.getImg());
             json.addProperty("des", model.getDescribe());

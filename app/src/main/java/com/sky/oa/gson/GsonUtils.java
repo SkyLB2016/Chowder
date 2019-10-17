@@ -48,7 +48,7 @@ public class GsonUtils {
             public String translateName(Field f) {
                 String name = f.getName();//对应字段的名称，如需要更换名称则自行处理
                 if ("name".equals(name)) {
-                    return "className";
+                    return "activityName";
                 } else if ("component".equals(name)) {
                     return "componentName";
                 } else if ("des".equals(name)) {

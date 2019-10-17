@@ -72,7 +72,7 @@ class Game2048Activity : BaseActivity() {
 //        if (BuildConfig.isModel)
 //            baseTitle.setLeftButton(-1)
         when (BuildConfig.isModel) {
-            true -> baseTitle.setLeftButton(-1)
+            true -> baseTitle.setNavigationIcon(null)
         }
         game.checkIsEnd = { end ->
             if (end) showToast("游戏结束")

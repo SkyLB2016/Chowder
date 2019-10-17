@@ -14,6 +14,8 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by SKY on 2017/8/22.
@@ -73,16 +75,23 @@ public class AppUtils {
     }
 
     /**
-     * 检查权限，未通过的自动向系统请求权限
+     * 检查权限，未通过的单独组成一个数组向系统请求权限
      *
-     * @param permissions 需要请求的权限数组
+     * @param original    需要请求的权限数组，已通过的剔除掉，剩余的组成一个数组去请求权限
      * @param requestCode 权限请求成功后的请求码
      */
-    public static void isPermissions(Activity activity, String[] permissions, int[] requestCode) {
-        for (int i = 0; i < permissions.length; i++) {
-            if (!isPermission(activity, permissions[i]))
-                requestPermission(activity, new String[]{permissions[i]}, requestCode[i]);
+    public static void isPermissions(Activity activity, String[] original, int requestCode) {
+        List<String> temps = new ArrayList<>();
+        for (int i = 0; i < original.length; i++) {
+            if (!isPermission(activity, original[i]))
+                temps.add(original[i]);
         }
+        if (temps.isEmpty()) return;
+        String[] pers = new String[temps.size()];
+        for (int i = 0; i < temps.size(); i++) {
+            pers[i] = temps.get(i);
+        }
+        requestPermissions(activity, pers, requestCode);
     }
 
     /**
@@ -91,7 +100,7 @@ public class AppUtils {
      * @param permissions 需要请求的权限数组
      * @param requestCode 权限请求成功后的请求码
      */
-    public static void requestPermission(Activity activity, String[] permissions, int requestCode) {
+    public static void requestPermissions(Activity activity, String[] permissions, int requestCode) {
         ActivityCompat.requestPermissions(activity, permissions, requestCode);
     }
 

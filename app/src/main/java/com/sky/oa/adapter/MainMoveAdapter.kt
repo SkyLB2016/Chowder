@@ -45,7 +45,7 @@ class MainMoveAdapter(layoutId: Int) : RecyclerAdapter<ActivityModel>(layoutId) 
             face = Typeface.createFromAsset(context.assets, "font/Lobster-Regular.ttf")//不对应fonticon
         } else holder?.itemView.startAnimation(scale)
         with(holder!!.itemView) {
-            tvName.text = "${datas[position].className}" + resources.getString(fontIcon[position % 9])
+            tvName.text = "${datas[position].activityName}" + resources.getString(fontIcon[position % 9])
             tvDescribe.text = resources.getString(fontIcon[8 - position % 9]) + datas[position].describe
             tvImage.text = resources.getString(fontIcon[position % 9])
 

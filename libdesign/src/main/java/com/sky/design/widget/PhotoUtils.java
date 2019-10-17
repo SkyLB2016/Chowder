@@ -64,19 +64,24 @@ public class PhotoUtils {
     //打开相机
     private void checkCamera() {
         //检测是否有相机和读写文件权限
-        if (AppUtils.isPermission(activity, Manifest.permission.CAMERA)) startCamera();
-        else AppUtils.requestPermission(activity,
-                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA},
-                PHOTO_PERMISSIONS);
+        if (AppUtils.isPermission(activity, Manifest.permission.CAMERA)) {
+            startCamera();
+        } else {
+            AppUtils.requestPermissions(activity,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA},
+                    PHOTO_PERMISSIONS);
+        }
     }
 
     //打开本地图库
     private void checkAlbum() {
-        if (AppUtils.isPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE))
+        if (AppUtils.isPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             openAlbum();
-        else AppUtils.requestPermission(activity,
-                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                LOCAL_PHOTO_PERMISSIONS);
+        } else {
+            AppUtils.requestPermissions(activity,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    LOCAL_PHOTO_PERMISSIONS);
+        }
     }
 
     //打开相机

@@ -40,7 +40,7 @@ class MainAdapter(layoutId: Int) : RecyclerAdapter<ActivityModel>(layoutId) {
         } else holder?.itemView.startAnimation(scale)
         with(holder!!.itemView) {
             tvName.text =
-                "${datas[position].className}" + resources.getString(fontIcon[position % 9])
+                "${datas[position].activityName}" + resources.getString(fontIcon[position % 9])
             tvDescribe.text =
                 resources.getString(fontIcon[8 - position % 9]) + datas[position].describe
             tvImage.text = resources.getString(fontIcon[position % 9])

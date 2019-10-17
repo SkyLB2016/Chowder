@@ -24,7 +24,7 @@ public class ActivityListDeserial implements JsonDeserializer<List<ActivityModel
         JsonArray array = json.getAsJsonArray();
         for (int i = 0; i < array.size(); i++) {
             JsonObject object = array.get(i).getAsJsonObject();
-            JsonElement cla = object.get("className");
+            JsonElement cla = object.get("activityName");
             JsonElement img = object.get("img");
             ActivityModel model = new ActivityModel(
                     cla.isJsonNull() ? null : cla.getAsString(),

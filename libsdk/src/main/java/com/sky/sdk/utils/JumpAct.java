@@ -1,9 +1,11 @@
 package com.sky.sdk.utils;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.sky.sdk.R;
@@ -77,10 +79,11 @@ public class JumpAct {
     public static void jumpActivity(Context context, Intent intent) {
         //高德有问题
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-//            context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(((Activity) context)).
-//                    toBundle());
+            context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(((Activity) context)).
+                    toBundle());
 //        else {
-        context.startActivity(intent);
-        ((Activity) context).overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+//            context.startActivity(intent);
+//            ((Activity) context).overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+//        }
     }
 }

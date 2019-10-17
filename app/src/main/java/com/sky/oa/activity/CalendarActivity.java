@@ -38,9 +38,6 @@ public class CalendarActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String[] aa = new String[]{Manifest.permission.WRITE_CONTACTS, Manifest.permission.READ_CONTACTS, Manifest.permission.READ_EXTERNAL_STORAGE};
-        int[] aaaa = new int[]{2, 2, 2};
-        AppUtils.isPermissions(this,aa,aaaa);
         setContentView(R.layout.activity_calendar);
         calendar = findViewById(R.id.calendar);
         mode = CalendarMode.MONTH;

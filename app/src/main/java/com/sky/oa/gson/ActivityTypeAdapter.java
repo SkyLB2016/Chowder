@@ -25,7 +25,7 @@ public class ActivityTypeAdapter extends TypeAdapter<ActivityEntity> {
         in.beginObject();
         while (in.hasNext()) {
             switch (in.nextName()) {
-                case "className":
+                case "activityName":
                     entity.setName(in.nextString());
                     break;
                 case "componentName":
@@ -48,7 +48,7 @@ public class ActivityTypeAdapter extends TypeAdapter<ActivityEntity> {
 //                        in.beginObject();
 //                        while (in.hasNext()) {
 //                            switch (in.nextName()) {
-//                                case "className":
+//                                case "activityName":
 //                                    in.nextString();
 //                                    break;
 //                                case "componentName":

@@ -3,9 +3,7 @@ package com.sky.oa.activity
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
-import android.annotation.TargetApi
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Color
@@ -456,7 +454,7 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
         val array =
             GsonUtils.fromJson(getString(R.string.jsonarray), Array<ActivityModel>::class.java)
         array.sortedByDescending { it }
-            .forEach { text.append(it.className + "\n") }
+            .forEach { text.append(it.activityName + "\n") }
         return text.toString()
     }
 

@@ -18,7 +18,7 @@ public class ActivityDeserial implements JsonDeserializer<ActivityModel> {
     @Override
     public ActivityModel deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         JsonObject object = json.getAsJsonObject();
-        JsonElement cla = object.get("className");
+        JsonElement cla = object.get("activityName");
         JsonElement img = object.get("img");
         ActivityModel model = new ActivityModel(
                 cla.isJsonNull() ? null : cla.getAsString(),

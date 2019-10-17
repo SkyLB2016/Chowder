@@ -13,7 +13,7 @@ public class Methodd {
             StackTraceElement stack = stacks[i];
             String tag = "%s.%s(L:%d)";
             String className = stack.getClassName();
-//            className = className.substring(className.lastIndexOf(".") + 1);
+//            activityName = activityName.substring(activityName.lastIndexOf(".") + 1);
             Log.i("name","name==" + String.format(tag, className, stack.getMethodName(), stack.getLineNumber()));
         }
 //        tag = TextUtils.isEmpty(TAG) ? tag : TAG + ":" + tag;

@@ -8,7 +8,7 @@ import java.io.Serializable
  */
 //@JsonAdapter(ActivityDeserial::class)
 class ActivityModel(
-    var className: String?//activity的名称
+    var activityName: String?//activity的名称
     , var describe: String?//activity的描述
     , var img: Int//代表图片
     , var componentName: String?//跳转所需
@@ -24,16 +24,16 @@ class ActivityModel(
     /**
      *  排序
      */
-    override fun compareTo(model: ActivityModel): Int = className!!.compareTo(model.className!!)
+    override fun compareTo(model: ActivityModel): Int = activityName!!.compareTo(model.activityName!!)
 
 //    override fun toString(): String {
-////        return "{\"className\":\"$className\",\"describe\":\"$describe\",\"img\":$img,\"componentName\":\"$componentName\"}"
+////        return "{\"activityName\":\"$activityName\",\"describe\":\"$describe\",\"img\":$img,\"componentName\":\"$componentName\"}"
 //        return GsonUtils.toJson(this)
 //    }
 
     override fun clone(): Any {
         val activity = super.clone() as ActivityModel
-        activity.className = this.className
+        activity.activityName = this.activityName
         activity.describe = this.describe
         activity.img = this.img
         activity.componentName = this.componentName

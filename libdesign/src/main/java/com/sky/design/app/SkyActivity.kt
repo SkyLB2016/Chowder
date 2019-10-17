@@ -39,8 +39,10 @@ abstract class SkyActivity : AppCompatActivity(), IBaseView {
 
     override fun setToolbarTitle(title: String) = baseTitle.setCenterTitle(title)
     override fun setToolbarRightTitle(rightText: String) = baseTitle.setRightText(rightText)
+
     override fun showToast(@StringRes resId: Int) = ToastUtils.showShort(this, resId)
     override fun showToast(text: String) = ToastUtils.showShort(this, text)
+
     override fun showLoading() {
         dialogManager = dialogManager ?: DialogManager(this)
         dialogManager?.showDialog(this)
@@ -49,10 +51,4 @@ abstract class SkyActivity : AppCompatActivity(), IBaseView {
     override fun disLoading() {
         dialogManager?.disDialog()
     }
-
-    fun registerOnClick(vararg views: View) {
-        for (v in views) registerView(v)
-    }
-
-    open fun registerView(v: View) = Unit
 }

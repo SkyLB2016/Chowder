@@ -23,7 +23,7 @@ import com.sky.oa.R
 import com.sky.sdk.utils.FileUtils
 import com.sky.sdk.utils.ScreenUtils
 import kotlinx.android.synthetic.main.activity_poetry.*
-import kotlinx.android.synthetic.main.item_poetry.*
+import kotlinx.android.synthetic.main.item_poetry.view.*
 import java.text.Collator
 import java.util.*
 
@@ -39,7 +39,7 @@ class PoetryActivity : BaseActivity() {
     override fun getLayoutResId(): Int = R.layout.activity_poetry
 
     override fun initialize(savedInstanceState: Bundle?) {
-        baseTitle.setLeftButton(R.mipmap.ic_menu)
+        baseTitle.setNavigationIcon(R.mipmap.ic_menu)
         baseTitle.onLeftImgClick = BaseTitle.OnClickListener { sliding.toggleMenu() }
         baseTitle.setRightText("3.16建")
         adapter = object : RecyclerAdapter<ChapterEntity>(R.layout.item_poetry) {
@@ -47,7 +47,12 @@ class PoetryActivity : BaseActivity() {
                 with(holder!!.itemView) {
                     tvDisplay.text = getDatas()[position].content
 //                    tvDisplay.gravity = gravity
-                    if (position == 0) tvDisplay.setPadding(resources.getDimensionPixelSize(R.dimen.wh_32), resources.getDimensionPixelSize(R.dimen.wh_16), resources.getDimensionPixelSize(R.dimen.wh_32), resources.getDimensionPixelSize(R.dimen.wh_4))
+                    if (position == 0) tvDisplay.setPadding(
+                        resources.getDimensionPixelSize(R.dimen.wh_32),
+                        resources.getDimensionPixelSize(R.dimen.wh_16),
+                        resources.getDimensionPixelSize(R.dimen.wh_32),
+                        resources.getDimensionPixelSize(R.dimen.wh_4)
+                    )
                 }
             }
         }
@@ -116,7 +121,7 @@ class PoetryActivity : BaseActivity() {
     }
 
     private val selectArticle = View.OnClickListener { v ->
-//        gravity = when (v?.id) {
+        //        gravity = when (v?.id) {
 //            in 2..5 -> Gravity.CENTER
 //            else -> Gravity.LEFT
 //        }
@@ -151,8 +156,10 @@ class PoetryActivity : BaseActivity() {
     }
 
     private fun showCatalogPop(floders: List<ChapterEntity>?) {
-        val floderPop = CatalogPop(LayoutInflater.from(this).inflate(R.layout.include_recycler, null),
-                ScreenUtils.getWidthPX(this), (ScreenUtils.getHeightPX(this) * 0.7).toInt())
+        val floderPop = CatalogPop(
+            LayoutInflater.from(this).inflate(R.layout.include_recycler, null),
+            ScreenUtils.getWidthPX(this), (ScreenUtils.getHeightPX(this) * 0.7).toInt()
+        )
         floderPop?.datas = floders
         floderPop?.setOnItemClickListener { _, position -> moveToChapter(position) }
         floderPop?.showAtLocation(window.decorView, Gravity.CENTER, 0, 0)
@@ -170,8 +177,13 @@ class PoetryActivity : BaseActivity() {
                 val width = ScreenUtils.getWidthPX(this) / 3f
                 val height = ScreenUtils.getHeightPX(this) / 3f
                 val rect = RectF(width, height, width * 2, height * 2)
-                if (Math.abs(ev.x - downX) < 5 && Math.abs(ev.y - downY) < 1 && rect.contains(ev.x, ev.y) && sliding.isClose)
-                    llBottomBar.visibility = if (llBottomBar.visibility == View.GONE) View.VISIBLE else View.GONE
+                if (Math.abs(ev.x - downX) < 5 && Math.abs(ev.y - downY) < 1 && rect.contains(
+                        ev.x,
+                        ev.y
+                    ) && sliding.isClose
+                )
+                    llBottomBar.visibility =
+                        if (llBottomBar.visibility == View.GONE) View.VISIBLE else View.GONE
             }
         }
         return super.dispatchTouchEvent(ev)

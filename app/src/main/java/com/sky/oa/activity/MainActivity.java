@@ -12,7 +12,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sky.design.adapter.RecyclerAdapter;
@@ -52,8 +54,8 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
 
     @Override
     protected void initialize(@Nullable Bundle savedInstanceState) {
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        baseTitle.setLeftButton(-1);
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//屏幕在此页面时保持常亮
+        baseTitle.setNavigationIcon(null);
         RecyclerView recycler = findViewById(R.id.recycler);
         recycler.setHasFixedSize(true);
         adapter = new MainAdapter(R.layout.adapter_main_delete);
@@ -66,8 +68,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         });
         AppUtils.isPermissions(this,
                 new String[]{Manifest.permission.WRITE_CONTACTS, Manifest.permission.READ_CONTACTS, Manifest.permission.READ_EXTERNAL_STORAGE},
-                new int[]{0, 0, 0}
-        );
+                1119);
 
         //易筋经、五禽戏、六字诀和八段锦
         //Rw2 B2 U2 Lw U2 Rw' U2 Rw U2 F2 Rw F2 Lw' B2 Rw2
@@ -75,10 +76,27 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
             }
         });
 
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        //requestCode是之前传入的请求值
+        //permissions是请求的权限集合
+        //grantResults是权限是否同意的集合，与permissions一一对应。
+        LogUtils.i("requestCode==" + requestCode);
+        for (int i = 0; i < permissions.length; i++) {
+            LogUtils.i("permissions==" + permissions[i]);
+        }
+        for (int i = 0; i < grantResults.length; i++) {
+            LogUtils.i("grantResults==" + i + "==" + grantResults[i]);
+        }
+    }
+
     @Override
     public void setData(@NotNull List<ActivityModel> data) {
         adapter.setDatas(data);
@@ -90,6 +108,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         return super.onCreateOptionsMenu(menu);
     }
 
+    //需要在toolbar中注册，
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
@@ -102,6 +121,21 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         }
         return false;
     }
+
+    //原来的
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_01:
+                startOther("com.cx.architecture", "com.cx.architecture.ui.activity.LoginActivity");
+                break;
+            case R.id.action_02:
+                startOther("com.gc.materialdesigndemo", "com.gc.materialdesigndemo.ui.MainActivity");
+                break;
+        }
+        return false;
+    }
+
 
     private void startOther(String packageName, String componentName) {
         try {
