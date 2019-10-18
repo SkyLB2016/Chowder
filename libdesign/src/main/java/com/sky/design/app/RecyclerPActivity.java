@@ -1,9 +1,10 @@
 package com.sky.design.app;
 
 import android.os.Bundle;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.TypedValue;
+
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.sky.design.adapter.RecyclerAdapter;
 import com.sky.design.api.IRefreshV;

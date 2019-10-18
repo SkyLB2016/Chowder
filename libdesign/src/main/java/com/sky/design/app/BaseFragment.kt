@@ -1,14 +1,11 @@
 package com.sky.design.app
 
 import android.os.Bundle
-import androidx.annotation.CheckResult
-import androidx.annotation.StringRes
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.sky.design.api.IBaseView
-import com.sky.design.app.BasePresenter
+import androidx.annotation.CheckResult
+import androidx.fragment.app.Fragment
 
 /**
  * Created by SKY on 2017/6/7.

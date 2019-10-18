@@ -1,24 +1,15 @@
 package com.sky.design.app;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 
 import androidx.annotation.CheckResult;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.sky.R;
-import com.sky.design.api.IBasePresenter;
 import com.sky.design.widget.BaseTitle;
 import com.sky.design.widget.DialogManager;
-import com.sky.rxbus.DefaultBus;
-import com.sky.rxbus.RxBus;
-import com.sky.sdk.utils.NetworkUtils;
-import com.sky.sdk.utils.SPUtils;
 import com.sky.sdk.utils.ToastUtils;
-
-import io.reactivex.functions.Consumer;
 
 /**
  * activity 的基类

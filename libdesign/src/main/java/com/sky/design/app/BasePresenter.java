@@ -2,9 +2,10 @@ package com.sky.design.app;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
+
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
-import android.text.TextUtils;
 
 import com.sky.R;
 import com.sky.design.api.IBasePresenter;
