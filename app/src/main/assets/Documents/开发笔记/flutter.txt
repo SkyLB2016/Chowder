@@ -1,0 +1,3 @@
+flutter
+
+MissingPluginException clean一下，重启app就好
