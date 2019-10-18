@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.snackbar.Snackbar
+import com.sky.design.app.RecyclerPActivity
 import com.sky.oa.model.CourseEntity
 import com.sky.design.widget.MyRecyclerView
 import com.sky.design.widget.PhotoUtils
@@ -26,7 +27,7 @@ import java.util.*
  * Created by SKY on 2015/11/28.
  * 加载网络图片
  */
-class ImageUrlActivity : com.sky.design.app.RecyclerPActivity<CourseEntity, ImageUrlP>() {
+class ImageUrlActivity : RecyclerPActivity<CourseEntity, ImageUrlP>() {
     private var first: Boolean = false
     private var firstVisibleItem: Int = 0
     private var lastVisibleItem: Int = 0

@@ -3,6 +3,7 @@ package com.sky.oa.utils.http
 import com.sky.oa.model.CourseEntity
 import com.sky.oa.model.LoginEntity
 import com.sky.oa.model.params.LoginParams
+import com.sky.sdk.net.http.ApiResponse
 import io.reactivex.Observable
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -31,11 +32,11 @@ class HttpUtils private constructor() : BaseHttp() {
         initRetrofit()
     }
 
-    fun login(params: LoginParams): Observable<com.sky.sdk.net.http.ApiResponse<LoginEntity>> {
+    fun login(params: LoginParams): Observable<ApiResponse<LoginEntity>> {
         return retrofit!!.create(IHttpUrl::class.java).login(params)
     }
 
-    fun getMuke(): Observable<com.sky.sdk.net.http.ApiResponse<CourseEntity>> {
+    fun getMuke(): Observable<ApiResponse<CourseEntity>> {
         return Retrofit.Builder()
                 .baseUrl(HttpUrl.URL_MUKE)
                 .addConverterFactory(GsonConverterFactory.create())

@@ -46,7 +46,7 @@ open class BaseHttp {
         client = OkHttpClient.Builder()
             .connectTimeout(REQUEST_TIME_OUT.toLong(), TimeUnit.SECONDS)
             .readTimeout(RESPONSE_TIME_OUT.toLong(), TimeUnit.SECONDS)
-            //.addInterceptor(mLoggingInterceptor)//与图片上传会有冲突
+            .addInterceptor(mLoggingInterceptor)//与图片上传会有冲突
             .build()
     }
 

@@ -1,1 +1,5 @@
-include ':app', ':puzzle', ':g2048', ':libsdk', ':libdesign', ':rxbus', ':jnilib'
+include ':app', ':puzzle', ':g2048',
+        ':libsdk',
+        ':libdesign',
+        ':rxbus',
+        ':jnilib'

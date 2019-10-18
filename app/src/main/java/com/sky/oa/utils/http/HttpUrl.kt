@@ -10,4 +10,5 @@ object HttpUrl {
     const val URL_LOGIN = "/Driver/Login"
     const val URL_MUKE = "http://www.imooc.com/api/"
     const val URL_MUKE1 = "teacher?type=4&num=30"
+    const val URL_MUKE2= "http://www.imooc.com/api/teacher?type=4&num=30"
 }
