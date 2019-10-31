@@ -239,7 +239,7 @@ public class JavaConsole {
     }
 
     void reimburse() {
-        //9.26；
+        //
         //周六日：；
         //总报销：
         //发票：400
