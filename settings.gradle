@@ -3,3 +3,4 @@ include ':libsdk',
         ':libdesign',
         ':rxbus',
         ':jnilib'
+rootProject.name='Chowder'
