@@ -2,6 +2,9 @@ git命令行
 红色代表add之前，
 绿色代表add之后
 
+  gcf     -> git config --global user.email "邮箱"。
+             git config --global user.name "名字"。
+             git config --list 显示Git的配置信息;
   gcl     -> git clone <repo> <dir> 拉取远程仓库，可以指定位置
   gst     -> git status 显示修改的内容以及在缓存区的状态
   gss     -> git status -s 只显示修改的文件
@@ -9,14 +12,15 @@ git命令行
   gaa     -> git add .或--all 添加全部有改动的文件到缓存区
   gd      -> git diff 查看尚未add的缓存内容
   gdca    -> git diff --cached 查看已缓存的内容
-          -> git diff head 查看head里的所有修改的内容
-          -> git diff --stat 显示尚未缓存的文件
+          -> gd head 查看head里的所有修改的内容
+          -> gd --stat 显示尚未缓存的文件
   grh     -> git reset 撤销已缓存的文件
-          -> git reset <file> 单独撤销文件
+          -> grh <file> 单独撤销文件
   gcmsg   -> git commit -m "" 提交到本地库
   gp      -> git push 推送到git远程仓库
   gl      -> git pull 从远程仓库拉取
   gup     -> git pull -rebase
+
   gstl    -> git stash list 拉取仓库前，缓存代码列表
   gstp    -> git stash pop stash@{0} 载入此缓存，并移除
   gstaa   -> git stash apply 载入此缓存
@@ -34,10 +38,10 @@ git命令行
   grv     -> git remote -v 远程仓库地址
   gcp     -> git cherry-pick name
 git层级：
-第一层：未缓存，也即未add前，命名为：未缓存
-第二层：暂存区，add后，commit前，命名为：已缓存；
-第三层：版本库，commit后，push前，本地版本库，命名为：已提交；
-第四层：远程仓库，push后，github云端刷新，命名为：已推送。
+第一层：未缓存，也即未add前，状态为：未缓存
+第二层：暂存区，add后，commit前，状态为：已缓存；
+第三层：本地仓库，commit后，push前，本地版本库，状态为：已提交；
+第四层：远程仓库，push后，github云端刷新，状态为：已推送。
 总结：只要没有push，本地可以随便玩。
 
 一、Git提交的基本流程

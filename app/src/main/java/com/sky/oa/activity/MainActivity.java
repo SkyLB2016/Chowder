@@ -70,6 +70,9 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String text = getResources().getString(R.string.cezi);
+                LogUtils.i("长度==" + text.replaceAll(" ", "").length());
+                LogUtils.i("长度==" + text.length());
 
             }
         });
