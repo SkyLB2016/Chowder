@@ -70,13 +70,25 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String text = getResources().getString(R.string.cezi);
-                LogUtils.i("长度==" + text.replaceAll(" ", "").length());
-                LogUtils.i("长度==" + text.length());
-
+                equalPoetry();
             }
         });
 
+    }
+
+    private void equalPoetry() {
+        String text = getResources().getString(R.string.new_text).replaceAll(" ", "");
+        String origin = getResources().getString(R.string.origin).trim().replaceAll(" ", "");
+
+        LogUtils.i("长度==" + (text.length()));
+        LogUtils.i("长度==" + (origin.length()));
+        String[] texts =text.split("");
+        String[] origins =origin.split("");
+        for (int i = 0; i < texts.length; i++) {
+            if (!texts[i].equals(origins[i])) {
+                LogUtils.i(i + texts[i] + "==" + origins[i]);
+            }
+        }
     }
 
     @Override
