@@ -82,8 +82,8 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
 
         LogUtils.i("长度==" + (text.length()));
         LogUtils.i("长度==" + (origin.length()));
-        String[] texts =text.split("");
-        String[] origins =origin.split("");
+        String[] texts = text.split("");
+        String[] origins = origin.split("");
         for (int i = 0; i < texts.length; i++) {
             if (!texts[i].equals(origins[i])) {
                 LogUtils.i(i + texts[i] + "==" + origins[i]);
@@ -179,5 +179,4 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         } else
             super.onBackPressed();
     }
-
 }
