@@ -10,13 +10,14 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.Scroller
 import com.sky.oa.R
+import com.sky.sdk.utils.LogUtils
 import java.util.*
 
 /**
  * Created by SKY on 2017/3/9 20:52.
  */
 class CanvasView @JvmOverloads constructor(
-        context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
     private var lastX = -1f
     private var lastY = -1f
@@ -198,14 +199,24 @@ class CanvasView @JvmOverloads constructor(
                     paint.textSize = 30f
                     canvas.drawLine(600f, 410f, 600f, 440f, paint)
                     val w = paint.measureText("$i")
-                    canvas.drawText("$i", 600f - w / 2, 440f + paint.descent() - paint.ascent(), paint)
+                    canvas.drawText(
+                        "$i",
+                        600f - w / 2,
+                        440f + paint.descent() - paint.ascent(),
+                        paint
+                    )
                 }
                 else -> {
                     paint.strokeWidth = 6f
                     paint.textSize = 20f
                     canvas.drawLine(600f, 410f, 600f, 420f, paint)
                     val w = paint.measureText("$i")
-                    canvas.drawText("$i", 600f - w / 2, 420f + paint.descent() - paint.ascent(), paint)
+                    canvas.drawText(
+                        "$i",
+                        600f - w / 2,
+                        420f + paint.descent() - paint.ascent(),
+                        paint
+                    )
                 }
             }
             canvas.rotate(30f, 600f, 600f)
@@ -223,8 +234,15 @@ class CanvasView @JvmOverloads constructor(
     private fun drawOval(canvas: Canvas) {
         val paint = Paint()
         paint.isAntiAlias = true
-        val mShader = LinearGradient(0f, 0f, 100f, 100f,
-                intArrayOf(Color.RED, Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.LTGRAY), null, Shader.TileMode.REPEAT) //一个材质,打造出一个线性梯度沿著一条线。
+        val mShader = LinearGradient(
+            0f,
+            0f,
+            100f,
+            100f,
+            intArrayOf(Color.RED, Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.LTGRAY),
+            null,
+            Shader.TileMode.REPEAT
+        ) //一个材质,打造出一个线性梯度沿著一条线。
         paint.shader = mShader
         val rect = RectF(0f, 0f, 300f, 400f)
         canvas.drawOval(rect, paint)
@@ -280,24 +298,25 @@ class CanvasView @JvmOverloads constructor(
         textP.textSize = 60f
         textP.pathEffect = CornerPathEffect(20f)//圆角
         textP.textAlign = Paint.Align.CENTER
+
         val text = "进度条"
-        val textBound = Rect()
-        textP.getTextBounds(text, 0, text.length, textBound)
+        val metrics = textP.fontMetricsInt//文本的基线数据
+        val textHeight = metrics.bottom - metrics.top//文本框所占的高度
+//        textP.getTextBounds(text, 0, text.length, textBound)//不建议用
 
         val radius = area.height() / 2
         //计算的文字所在的背景框的左侧，顶部，右侧，底部
-        val leftX = radius * Math.cos(Math.PI / 180 * start) + area?.centerX() + 20//(20的偏移量)
-        val topY = radius * Math.sin(Math.PI / 180 * start) + area.centerY() - textBound.height()
+        val leftX = radius * Math.cos(Math.PI / 180 * start) + area?.centerX() + 20//(20的偏移量，是向右移动的，所以加)
+        val topY = radius * Math.sin(Math.PI / 180 * start) + area.centerY() - textHeight
         val rightX = radius * Math.cos(Math.PI / 180 * (start + sweep)) + area?.centerX() - 20//(20的偏移量)
-        val bottomY = topY + textBound.height() * 2
+        val bottomY = topY + textHeight * 1.5
         //文字背景所在矩形
         val textRect = Rect(leftX.toInt(), topY.toInt(), rightX.toInt(), bottomY.toInt())
         val textbg = ContextCompat.getDrawable(context, R.drawable.sel_rect_green)
         textbg?.bounds = textRect//为文字设置背景
         textbg?.draw(canvas)//画入画布中
         //让文字居于背景中间，计算文字的左距离与底部距离
-        val offset = textP.fontMetricsInt.ascent - textP.fontMetricsInt.top
-        val baseline = textRect.exactCenterY() + textBound.height() / 2 - offset / 2
+        val baseline = textRect.exactCenterY() + textHeight / 2 - metrics.bottom
         canvas.drawText(text, textRect.exactCenterX(), baseline, textP)//画入画布中
     }
 
@@ -312,13 +331,25 @@ class CanvasView @JvmOverloads constructor(
                 0 -> {
                     bezierPath.moveTo(list[i].x * 1f, list[i].y * 1f)//移动到Path的起点，画下一个点
                     //第一条为二次贝赛尔曲线
-                    bezierPath.quadTo(control[i].x * 1f, control[i].y * 1f, list[i + 1].x * 1f, list[i + 1].y * 1f)
+                    bezierPath.quadTo(
+                        control[i].x * 1f,
+                        control[i].y * 1f,
+                        list[i + 1].x * 1f,
+                        list[i + 1].y * 1f
+                    )
                 }
-            //最后一条为二次贝赛尔曲线
-                list.size - 2 -> bezierPath.quadTo(control[i * 2 - 1].x * 1f, control[i * 2 - 1].y * 1f, list[i + 1].x * 1f, list[i + 1].y * 1f)
-                else -> bezierPath.cubicTo(control[i * 2 - 1].x * 1f, control[i * 2 - 1].y * 1f,//控制点
-                        control[i * 2].x * 1f, control[i * 2].y * 1f,//控制点
-                        list[i + 1].x * 1f, list[i + 1].y * 1f)//终点
+                //最后一条为二次贝赛尔曲线
+                list.size - 2 -> bezierPath.quadTo(
+                    control[i * 2 - 1].x * 1f,
+                    control[i * 2 - 1].y * 1f,
+                    list[i + 1].x * 1f,
+                    list[i + 1].y * 1f
+                )
+                else -> bezierPath.cubicTo(
+                    control[i * 2 - 1].x * 1f, control[i * 2 - 1].y * 1f,//控制点
+                    control[i * 2].x * 1f, control[i * 2].y * 1f,//控制点
+                    list[i + 1].x * 1f, list[i + 1].y * 1f
+                )//终点
             }
         }
         return bezierPath

@@ -25,7 +25,7 @@
       </configuration>
     </facet>
     <facet type="kotlin-language" name="Kotlin">
-      <configuration version="3" platform="JVM 1.6" allPlatforms="JVM [1.6]" useProjectSettings="false" pureKotlinSourceFolders="$MODULE_DIR$/src/skyReleaseUnitTest/kotlin;/Users/sky/Documents/WorkSpace/Chowder/app/src/skyDebugAndroidTest/kotlin;/Users/sky/Documents/WorkSpace/Chowder/app/src/skyRelease/kotlin;/Users/sky/Documents/WorkSpace/Chowder/app/src/skyRelease/java;/Users/sky/Documents/WorkSpace/Chowder/app/src/skyDebugUnitTest/kotlin;/Users/sky/Documents/WorkSpace/Chowder/app/src/skyDebug/kotlin;/Users/sky/Documents/WorkSpace/Chowder/app/src/skyDebug/java">
+      <configuration version="3" platform="JVM 1.6" allPlatforms="JVM [1.6]" useProjectSettings="false">
         <compilerSettings>
           <option name="additionalArguments" value="-Xallow-no-source-files" />
         </compilerSettings>

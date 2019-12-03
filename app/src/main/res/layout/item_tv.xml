@@ -4,9 +4,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    android:background="@drawable/sel_rect_10_stroke_gradient_yellow"
+    android:background="@drawable/sel_rect_10_stroke_white_ff4081"
     android:gravity="center"
-    android:textColor="@color/color_white"
     android:textSize="@dimen/text_15" />
     <!--android:selectAllOnFocus="true"-->
     <!--android:textIsSelectable="true"-->

@@ -118,13 +118,14 @@ android:excludeFromRecents="true"，目前未起作用)。
 　　2）setStrokeWidth(),宽度是从中间开始计算的
 　　3）setARGB(),setAlpha(),setTextSize(),setStyle(),setColor().
 　　4）基准线是baseline
-　　5）top：ascent的最大值
-　　6）ascent：字体在baseline上方被推荐的距离（一些字体制作商需要参考这个）
-　　7）descent：字体在是baseline下方被推荐的距离（一些字体制作商需要参考这个）
-　　8）bottom：descent的最大值
-　　textHeight=paint.descent()-paint.ascent();//文字高度
-　　bottomY=bgHeight/2+textHeight/2;//文字底部位置
-　　baseY=bottomY-paint.descent();//文字baseline
+　　5）top：ascent的最大值，在基线上方，值为负数；
+　　6）ascent：字体在baseline上方被推荐的距离（一些字体制作商需要参考这个），在基线上方，值为负数；
+　　7）descent：字体在是baseline下方被推荐的距离（一些字体制作商需要参考这个），在基线下方，值为正数；
+　　8）bottom：descent的最大值，在基线下方，值为正数；
+获取基线baseline：
+　　val metrics = textP.fontMetricsInt//文本的基线数据
+　　val textHeight = metrics.bottom - metrics.top//文本框所占的高度
+　　val baseline=背景框的中心点Y+textHeight/2-metrics.bottom;//文字baseline
 　　9）getTextBounds(String text, int start, int end, Rect bounds):获取文字宽高
 　　10）measureText(text)：获取文字宽度
 　　11）ColorMatrix

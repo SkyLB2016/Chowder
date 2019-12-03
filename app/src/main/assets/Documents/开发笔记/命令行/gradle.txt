@@ -1,17 +1,9 @@
 gradle命令行
-1.特性
-1）基于声明和基于约定的构建
-2）为以依赖为基础的编程方式提供语言环境
-3）构建结构化
-4）深度API
-5）Gradle的扩展
-6）多项目构建
-7）多种方式管理依赖
-8）Gradle是第一个构建集成工具
-9）易于移植
-10）Groovy
-11）The Gradle Wrapper
-12）自由和开源
+1、gradle的特性：
+基于声明和基于约定的构建；为以依赖为基础的编程方式提供语言环境；
+构建结构化；深度API；gradle的扩展；多项目构建；
+多种方式管理依赖；gradle是第一个构建集成工具；
+易于移植；groovy；The Gradle Wrapper；自由和开源;
 2.配置： 可在gradlew中配置jvm；
 3.构建基础
 1）-q：只输出需要的内容；
@@ -57,23 +49,6 @@ assemble渠道名Release -p app：打包app工程下渠道名的release版本（
 installRelease：打包Release版本并安装
 uninstallRelease：卸载Release版本包
 
-project属性：参考chowder
-project 	Project 	Project实例
-name 	String 	项目目录的名称。
-path 	String 	项目的绝对路径。
-description 	String 	项目的描述。
-projectDir 	File 	包含生成脚本的目录。
-buildDir 	File 	projectDir/build
-group 	Object 	未指定
-version 	Object 	未指定
-ant 	AntBuilder 	AntBuilder实例
-
-
-
-gradlew错误
-zsh: permission denied: ./gradlew
-运行 chmod +x gradlew
-
 compileSdkVersion 代表着编译的时候，会采用该api的规范进行代码检查和警告，但是并不会编译进apk中。
 targetSdkVersion 代表着目标版本，在编译的时候会将该版本的api编译进apk中。
 minSdkVersion 代表着最低版本，在编译的时候兼容到该参数指定最低版本api。
@@ -85,9 +60,9 @@ minSDKVersion xx --  targetSDKVersion xx：兼容从xx到xx之间所有api的变
 
 
 
-
-
-
+gradlew错误
+zsh: permission denied: ./gradlew
+运行 chmod +x gradlew
 
 
 MAC下删除Android开发缓存

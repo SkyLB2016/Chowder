@@ -109,28 +109,28 @@ class FlowLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
 
     var lastY = 0f
     //滑动控件内容
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        when (event?.action) {
-            MotionEvent.ACTION_DOWN -> lastY = event.rawY
-            MotionEvent.ACTION_MOVE -> {
-                var dy = lastY - event.rawY
-                if (scrollY < 0 && dy < 0)
-                    dy = 0f
-                if (scrollY > height - ScreenUtils.getHeightPX(context) + ScreenUtils.getStatusHeight(context) + 10 && dy > 0)
-                    dy = 0f
-                scrollBy(0, dy.toInt())
-
-//                var dy = event.rawY - lastY
-//                if (scrollY < 0 && dy > 0)
+//    override fun onTouchEvent(event: MotionEvent?): Boolean {
+//        when (event?.action) {
+//            MotionEvent.ACTION_DOWN -> lastY = event.rawY
+//            MotionEvent.ACTION_MOVE -> {
+//                var dy = lastY - event.rawY
+//                if (scrollY < 0 && dy < 0)
 //                    dy = 0f
-//                if (scrollY > height - ScreenUtils.getHeightPX(context) + ScreenUtils.getStatusHeight(context) + 10 && dy < 0)
+//                if (scrollY > height - ScreenUtils.getHeightPX(context) + ScreenUtils.getStatusHeight(context) + 10 && dy > 0)
 //                    dy = 0f
-//                scrollBy(0, -dy.toInt())
-
-                lastY = event.rawY
-            }
-        }
-        postInvalidate()
-        return true
-    }
+//                scrollBy(0, dy.toInt())
+//
+////                var dy = event.rawY - lastY
+////                if (scrollY < 0 && dy > 0)
+////                    dy = 0f
+////                if (scrollY > height - ScreenUtils.getHeightPX(context) + ScreenUtils.getStatusHeight(context) + 10 && dy < 0)
+////                    dy = 0f
+////                scrollBy(0, -dy.toInt())
+//
+//                lastY = event.rawY
+//            }
+//        }
+//        postInvalidate()
+//        return true
+//    }
 }
