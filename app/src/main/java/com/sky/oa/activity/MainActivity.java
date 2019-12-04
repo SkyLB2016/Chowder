@@ -84,9 +84,9 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         LogUtils.i("长度==" + (origin.length()));
         String[] texts = text.split("");
         String[] origins = origin.split("");
-        for (int i = 0; i < texts.length; i++) {
+        for (int i = 1; i < texts.length - 1; i++) {
             if (!texts[i].equals(origins[i])) {
-                LogUtils.i(i + texts[i] + "==" + origins[i]);
+                LogUtils.i(i + texts[i - 1] + texts[i] + texts[i + 1] + "==" + origins[i - 1] + origins[i] + origins[i + 1]);
             }
         }
     }
