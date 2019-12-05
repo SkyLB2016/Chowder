@@ -9,19 +9,25 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import com.sky.oa.R
-import com.sky.oa.model.NinthPalaceEntity
+import com.sky.oa.model.PointEntity
+import com.sky.sdk.utils.LogUtils
 import com.sky.sdk.utils.ScreenUtils
 
 /**
  * Created by SKY on 2015/12/24 10:58.
  * 拼图游戏
  */
-class NinthPalaceLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
-    : View(context, attrs, defStyleAttr) {
+class NinthPalaceLayout @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : View(context, attrs, defStyleAttr) {
 
-    private val orginal = ArrayList<NinthPalaceEntity>()//原数据
-    private val select = ArrayList<NinthPalaceEntity>()//选中的
-    private var passWord = ArrayList<NinthPalaceEntity>()//密码
+    private val orginal = ArrayList<PointEntity>()//原数据
+    private val select = ArrayList<PointEntity>()//选中的
+    private var passWord = ArrayList<PointEntity>()//密码
+
+    var isSure = true//默认是正确的
 
     var onSuccess: ((Boolean) -> Unit)? = null//
 
@@ -45,11 +51,12 @@ class NinthPalaceLayout @JvmOverloads constructor(context: Context, attrs: Attri
         val width = ScreenUtils.getWidthPX(context)
         val pieceWidth = width / piece
         val top = (ScreenUtils.getHeightPX(context) - width) / 2
+        val radius = pieceWidth / 4;
         for (i in 0..8) {
             val left = i % piece * pieceWidth
             val top = i / piece * pieceWidth + top
-            val rect = Rect(left + pieceWidth / 4, top + pieceWidth / 4, left + pieceWidth * 3 / 4, top + pieceWidth * 3 / 4)
-            orginal.add(NinthPalaceEntity(i, rect))
+            val rect = Rect(left + radius, top + radius, left + pieceWidth - radius, top + pieceWidth - radius)
+            orginal.add(PointEntity(i, rect, radius * 1f))
         }
         butterfly()
     }
@@ -87,7 +94,7 @@ class NinthPalaceLayout @JvmOverloads constructor(context: Context, attrs: Attri
         select.add(orginal[3])
         select.add(orginal[5])
 
-        passWord = select.clone() as ArrayList<NinthPalaceEntity>
+        passWord = select.clone() as ArrayList<PointEntity>
         invalidate()
     }
 
@@ -98,68 +105,112 @@ class NinthPalaceLayout @JvmOverloads constructor(context: Context, attrs: Attri
         //原点
         for (i in orginal) canvas?.drawCircle(i.rect.centerX() * 1f, i.rect.centerY() * 1f, i.radius, paint)
 
-        paint.color = Color.CYAN
+        paint.color = if (isSure) Color.CYAN else Color.RED
         paint.strokeWidth = 5f
         //选中的点与线
         for (i in select.indices) {
             canvas?.drawCircle(select[i].rect.centerX() * 1f, select[i].rect.centerY() * 1f, select[i].radius, paint)
-            if (i + 1 < select.size) canvas?.drawLine(select[i].rect.centerX() * 1f, select[i].rect.centerY() * 1f, select[i + 1].rect.centerX() * 1f, select[i + 1].rect.centerY() * 1f, paint)
-            else if (endX !== 0f && endY !== 0f) canvas?.drawLine(select[i].rect.centerX() * 1f, select[i].rect.centerY() * 1f, endX, endY, paint)
+            if (i + 1 < select.size) {
+                canvas?.drawLine(
+                    select[i].rect.centerX() * 1f,
+                    select[i].rect.centerY() * 1f,
+                    select[i + 1].rect.centerX() * 1f,
+                    select[i + 1].rect.centerY() * 1f,
+                    paint
+                )
+            } else if (endX !== 0f && endY !== 0f) {
+                canvas?.drawLine(select[i].rect.centerX() * 1f, select[i].rect.centerY() * 1f, endX, endY, paint)
+            }
         }
+        isSure = true
     }
 
-    private var downX = 0f
-    private var downY = 0f
     private var endX = 0f
     private var endY = 0f
+    private var orginalCopy = ArrayList<PointEntity>()//原数据拷贝，
 
+    var num = 0;
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event?.action) {
             MotionEvent.ACTION_DOWN -> {
-                downX = event.x
-                downY = event.y
+                endX = event.x
+                endY = event.y
                 select.clear()
-                for (i in orginal) if (i.rect.contains(downX.toInt(), downY.toInt())) {
-                    select.add(i)
+                //原数据拷贝，select每添加一个，移除一个
+                orginalCopy = orginal.clone() as ArrayList<PointEntity>
+                for (point in orginal) if (point.rect.contains(endX.toInt(), endY.toInt())) {
+                    select.add(point)
+                    orginalCopy.remove(point)
                     invalidate()
                 }
             }
             MotionEvent.ACTION_MOVE -> {
                 endX = event.x
                 endY = event.y
-                if (select.isEmpty()) return false
-                for (i in orginal)
-                    if (i.rect.contains(endX.toInt(), endY.toInt()) && !select.contains(i)) {
-                        val sId = select.last().id//上一个点的id
-                        val eId = i.id//后一个点的id
-                        val eq = EqualEntity(sId, eId)
-                        //获取中间点0-8,1-7,2-6,3-5中间点为4；0-2为1；0-6为3；8-2为5；8-6为7；
-                        val contains = if (eq.equalsTwo(0, 8) || eq.equalsTwo(1, 7) || eq.equalsTwo(2, 6) || eq.equalsTwo(3, 5)) orginal[4]
-                        else if (eq.equalsTwo(0, 2)) orginal[1]
-                        else if (eq.equalsTwo(0, 6)) orginal[3]
-                        else if (eq.equalsTwo(8, 2)) orginal[5]
-                        else if (eq.equalsTwo(8, 6)) orginal[7]
-                        else null
-                        //判断是否已包含此点，为包含则包含
-                        if (contains != null && !select.contains(contains)) select.add(contains)
-                        select.add(i)
+                for (point in orginalCopy) {
+                    LogUtils.i("第${num++}个")
+                    if (point.rect.contains(endX.toInt(), endY.toInt()) && !select.contains(point)) {
+                        if (select.isEmpty()) {
+                            select.add(point)
+                            orginalCopy.remove(point)
+                            break
+                        }
+                        //检查上一个点与现在的点之间是否有中间点
+                        val middle = checkMiddlePoint(select.last().id, point.id)
+                        //判断是否已包含中间过点
+                        if (middle != null && !select.contains(middle)) {
+                            select.add(middle)
+                            orginalCopy.remove(middle)
+                        }
+                        select.add(point)
+                        orginalCopy.remove(point)
+                        break
                     }
+                }
                 invalidate()
             }
             MotionEvent.ACTION_UP -> {
                 endX = 0f
                 endY = 0f
+                if (passWord.isEmpty()) {
+                    passWord = select.clone() as ArrayList<PointEntity>
+                } else {
+                    isSure = select == passWord
+                    onSuccess?.invoke(isSure)
+                }
                 invalidate()
-                if (passWord.isEmpty())
-                    passWord = select.clone() as ArrayList<NinthPalaceEntity>
-                else
-                    onSuccess?.invoke(select == passWord)
             }
         }
         return true
     }
 
+    /**
+     * upId: 上一个点的id
+     * currentId: 上一个点的id
+     * 直接连第0个与第8个点，会绕过他们之间的中点4，所以应该判断一下中间点是否已加入
+     *获取中间点；
+     */
+    private fun checkMiddlePoint(upId: Int, currentId: Int): PointEntity? {
+        val eq = EqualEntity(upId, currentId)
+        //0-8,1-7,2-6,3-5中间点为4
+        return if (eq.equalsTwo(0, 8) || eq.equalsTwo(1, 7)
+            || eq.equalsTwo(2, 6) || eq.equalsTwo(3, 5)
+        ) {
+            orginal[4]
+        } else if (eq.equalsTwo(0, 2)) {//0-2为1；
+            orginal[1]
+        } else if (eq.equalsTwo(0, 6)) {//0-6为3；
+            orginal[3]
+        } else if (eq.equalsTwo(8, 2)) {//8-2为5；
+            orginal[5]
+        } else if (eq.equalsTwo(8, 6)) {//8-6为7；
+            orginal[7]
+        } else {
+            null
+        }
+    }
+
     class EqualEntity(var a: Int, var b: Int) {
-        fun equalsTwo(c: Int, d: Int): Boolean = a == c && b == d || a == d && b == c
+        fun equalsTwo(c: Int, d: Int) = (a == c && b == d) || (a == d && b == c)
     }
 }
