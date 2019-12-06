@@ -49,12 +49,21 @@ class NinthPalaceLayout @JvmOverloads constructor(
 
     private fun setView() {
         val width = ScreenUtils.getWidthPX(context)
-        val pieceWidth = width / piece
-        val top = (ScreenUtils.getHeightPX(context) - width) / 2
+        val height = ScreenUtils.getHeightPX(context)
+        var offsetsX = 0
+        var offsetsY = 0
+        var pieceWidth = 0
+        if (width > height) {
+            offsetsX = (width - height) / 2
+            pieceWidth = height / piece
+        } else {
+            offsetsY = (height - width) / 2
+            pieceWidth = width / piece
+        }
         val radius = pieceWidth / 4;
         for (i in 0..8) {
-            val left = i % piece * pieceWidth
-            val top = i / piece * pieceWidth + top
+            val left = i % piece * pieceWidth + offsetsX
+            val top = i / piece * pieceWidth + offsetsY
             val rect = Rect(left + radius, top + radius, left + pieceWidth - radius, top + pieceWidth - radius)
             orginal.add(PointEntity(i, rect, radius * 1f))
         }
@@ -103,7 +112,9 @@ class NinthPalaceLayout @JvmOverloads constructor(
         val paint = Paint()
         paint.color = Color.BLUE
         //原点
-        for (i in orginal) canvas?.drawCircle(i.rect.centerX() * 1f, i.rect.centerY() * 1f, i.radius, paint)
+        for (i in orginal) {
+            canvas?.drawCircle(i.rect.centerX() * 1f, i.rect.centerY() * 1f, i.radius, paint)
+        }
 
         paint.color = if (isSure) Color.CYAN else Color.RED
         paint.strokeWidth = 5f
@@ -128,8 +139,6 @@ class NinthPalaceLayout @JvmOverloads constructor(
     private var endX = 0f
     private var endY = 0f
     private var orginalCopy = ArrayList<PointEntity>()//原数据拷贝，
-
-    var num = 0;
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event?.action) {
             MotionEvent.ACTION_DOWN -> {
@@ -148,7 +157,6 @@ class NinthPalaceLayout @JvmOverloads constructor(
                 endX = event.x
                 endY = event.y
                 for (point in orginalCopy) {
-                    LogUtils.i("第${num++}个")
                     if (point.rect.contains(endX.toInt(), endY.toInt()) && !select.contains(point)) {
                         if (select.isEmpty()) {
                             select.add(point)
@@ -193,8 +201,10 @@ class NinthPalaceLayout @JvmOverloads constructor(
     private fun checkMiddlePoint(upId: Int, currentId: Int): PointEntity? {
         val eq = EqualEntity(upId, currentId)
         //0-8,1-7,2-6,3-5中间点为4
-        return if (eq.equalsTwo(0, 8) || eq.equalsTwo(1, 7)
-            || eq.equalsTwo(2, 6) || eq.equalsTwo(3, 5)
+        return if (eq.equalsTwo(0, 8)
+            || eq.equalsTwo(1, 7)
+            || eq.equalsTwo(2, 6)
+            || eq.equalsTwo(3, 5)
         ) {
             orginal[4]
         } else if (eq.equalsTwo(0, 2)) {//0-2为1；

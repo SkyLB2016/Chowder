@@ -106,7 +106,7 @@ class PoetryActivity : BaseActivity() {
             flow.addView(tv)
             tv.setOnClickListener(selectArticle)
         }
-        val text = getDocument(poetry[0])
+        val text = getDocument("Documents/开发笔记/Android笔记.txt")
         setToolbarTitle(text.lines()[0])
         getCatalog(text)
     }

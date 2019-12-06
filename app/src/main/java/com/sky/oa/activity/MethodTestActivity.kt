@@ -72,6 +72,7 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
         for (i in method) {
             val tvText =
                 LayoutInflater.from(this).inflate(R.layout.item_tv, flow, false) as TextView
+            tvText.setPadding(10, 0, 10, 0)
             tvText.text = i
             tvText.tag = i
             flow.addView(tvText)

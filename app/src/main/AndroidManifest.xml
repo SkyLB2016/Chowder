@@ -159,8 +159,7 @@
             android:name=".activity.NinthPalaceActivity"
             android:description="@string/act_ninth"
             android:icon="@mipmap/ic_launcher"
-            android:label="@string/act_ninth"
-            android:screenOrientation="portrait">
+            android:label="@string/act_ninth">
             <intent-filter>
                 <action android:name="com.sky.coustom" />
                 <category android:name="android.intent.category.CAR_MODE" />
