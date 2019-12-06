@@ -27,6 +27,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -71,6 +72,10 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
             @Override
             public void onClick(View v) {
                 equalPoetry();
+                List ll=new ArrayList();
+                ll.add(1);
+                ll.add('d');
+                ll.add(true);
             }
         });
 
@@ -86,7 +91,8 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         String[] origins = origin.split("");
         for (int i = 1; i < texts.length - 1; i++) {
             if (!texts[i].equals(origins[i])) {
-                LogUtils.i(i + texts[i - 1] + texts[i] + texts[i + 1] + "==" + origins[i - 1] + origins[i] + origins[i + 1]);
+//                LogUtils.i(i + texts[i - 1] + texts[i] + texts[i + 1] + "==" + origins[i - 1] + origins[i] + origins[i + 1]);
+                LogUtils.i(i + texts[i] + "==" + origins[i]);
             }
         }
     }
