@@ -72,10 +72,6 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
             @Override
             public void onClick(View v) {
                 equalPoetry();
-                List ll=new ArrayList();
-                ll.add(1);
-                ll.add('d');
-                ll.add(true);
             }
         });
 
@@ -83,15 +79,16 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
 
     private void equalPoetry() {
         String text = getResources().getString(R.string.new_text).replaceAll(" ", "");
-        String origin = getResources().getString(R.string.origin).trim().replaceAll(" ", "");
+        String origin = getResources().getString(R.string.origin).replaceAll(" ", "");
 
         LogUtils.i("长度==" + (text.length()));
         LogUtils.i("长度==" + (origin.length()));
         String[] texts = text.split("");
         String[] origins = origin.split("");
-        for (int i = 1; i < texts.length - 1; i++) {
+        for (int i = 2; i < texts.length - 2; i++) {
             if (!texts[i].equals(origins[i])) {
-//                LogUtils.i(i + texts[i - 1] + texts[i] + texts[i + 1] + "==" + origins[i - 1] + origins[i] + origins[i + 1]);
+//                LogUtils.i(texts[i - 2] + texts[i - 1] + texts[i] + texts[i + 1] + texts[i + 2] + "==" + origins[i - 2] + origins[i - 1] + origins[i] + origins[i + 1]+origins[i + 2]);
+//                i += 2;
                 LogUtils.i(i + texts[i] + "==" + origins[i]);
             }
         }
