@@ -1,0 +1,7 @@
+Android系统架构
+linux内核
+硬件抽象接口层
+native c、C++ libraries和Android运行时环境
+application framework
+application
+

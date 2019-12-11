@@ -4,6 +4,8 @@ import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +31,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
 
 /**
  * Created by libin on 2018/11/13 4:26 PM.
@@ -36,6 +39,18 @@ import java.util.List;
 public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenuItemClickListener, IMainView {
 
     private MainAdapter adapter;
+    Handler handler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(@NonNull Message msg) {
+            LogUtils.i("callback的handleMessage");
+            return true;
+        }
+    }) {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            LogUtils.i("自带的handleMessage");
+        }
+    };
 
     @Override
     protected int getLayoutResId() {
@@ -71,9 +86,21 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                equalPoetry();
+
+                testMethod();
+//                equalPoetry();
             }
         });
+
+    }
+
+
+    private void testMethod() {
+//        handler.sendEmptyMessage(1);
+        Executors.newFixedThreadPool(1);//，都为核心线程，且数量固定的线程池，无超时机制。
+        Executors.newCachedThreadPool();//，无核心，非核心线程数不限数量，有超时机制60s，适合多图加载这种文件小而多的任务。
+        Executors.newScheduledThreadPool(1);//，核心固定，非核心不限，闲置时超时回收，主要用于执行定时任务和具有固定周期的重复任务。
+        Executors.newSingleThreadExecutor();//，仅创建一个单核心线程，任务串行。
 
     }
 
