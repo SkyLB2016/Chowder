@@ -289,7 +289,7 @@ int getPriority() 返回线程的优先级。
 void interrupt() 中断线程。
 boolean isAlive()测试线程是否处于活动状态。
 
-会优先执行调用join的线程，可中途加入，直到该线程执行完毕或等待时间结束。
+会优先执行调用join的线程，可中途加入，直到该线程执行完毕或等待时间结束。其实就是插队。
 void join()等待该线程终止。
 void join(long millis)等待该线程终止的时间最长为 millis 毫秒。
 void join(long millis, int nanos)等待该线程终止的时间最长为 millis 毫秒 + nanos 纳秒。

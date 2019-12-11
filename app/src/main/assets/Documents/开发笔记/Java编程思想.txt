@@ -38,3 +38,8 @@ Java编程思想
 UML：Unified Modelling Language 统一建模语言
 
 JAVA锁机制，原子性
+1
+2
+4
+8
+16

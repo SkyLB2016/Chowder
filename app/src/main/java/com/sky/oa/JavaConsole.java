@@ -30,111 +30,22 @@ public class JavaConsole {
 //        IOTest();
 //        readSdFile(new File("C:\\WorkSpace\\Chowder\\app\\total"));
 //        readS();语数外理化生史地政
-        System.out.println(
-                53
-                        + 48
-                        + 29
-                        + 59
-                        + 41
-                        + 51
-                        + 53
-                        + 11
-                        + 8
-                        + 17
-                        + 15
-                        + 46
-                        + 40
-                        + 9
-                        + 15
-                        + 38
-                        + 41
-                        + 45
-                        + 8
-                        + 22
-                        + 31
-                        + 25
-                        + 57
-                        + 01
-                        + 26
-                        + 04
-                        + 1
-                        + 9
-                        + 59
-                        + 34
-                        + 15
-                        + 31
-                        + 4
-                        + 43
-                        + 33
-                        + 07
-                        + 12
-                        + 8
-                        + 23
-                        + 48
-                        + 24
-                        + 4
-                        + 9
-                        + 29
-                        + 49
-                        + 45
-                        + 43
-        );
-        System.out.println(
-                2
-                        + 0
-                        + 8
-                        + 3
+        System.out.println();
 
-                        + 5
-                        + 8
-                        + 10
-                        + 1
-                        + 11
-                        + 10
-                        + 3
+    }
 
-                        + 3
-                        + 3
-                        + 3
-                        + 4
-                        + 3
-
-                        + 3
-                        + 2
-                        + 3
-                        + 5
-                        + 5
-
-                        + 9
-                        + 5
-                        + 3
-                        + 7
-                        + 6
-                        + 4
-
-                        + 1
-                        + 6
-                        + 4
-                        + 7
-                        + 2
-                        + 3
-                        + 2
-                        + 3
-                        + 6
-                        + 3
-                        + 1
-
-                        + 1
-                        + 9
-                        + 5
-                        + 3
-                        + 4
-                        + 8
-                        + 5
-
-                        + 4
-                        + 6
-        );
+    private static void testJoin() {
+        Thread thread = new JoinThread();
+        thread.start();
+        try {
+            //主线程等待thread的业务处理完了之后再向下运行
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        for (int i = 0; i < 5; i++) {
+            System.out.println(Thread.currentThread().getName() + " -- " + i);
+        }
     }
 
     private static void IO() throws IOException {
@@ -351,4 +262,17 @@ public class JavaConsole {
     }
 
 }
-//          7,011.02
+
+class JoinThread extends Thread {
+    @Override
+    public void run() {
+        for (int i = 0; i < 5; i++) {
+            System.out.println(Thread.currentThread().getName() + " -- " + i);
+            try {
+                sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}

@@ -5,6 +5,7 @@ import android.content.ActivityNotFoundException;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -86,22 +87,15 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 testMethod();
 //                equalPoetry();
             }
         });
-
     }
-
 
     private void testMethod() {
 //        handler.sendEmptyMessage(1);
-        Executors.newFixedThreadPool(1);//，都为核心线程，且数量固定的线程池，无超时机制。
-        Executors.newCachedThreadPool();//，无核心，非核心线程数不限数量，有超时机制60s，适合多图加载这种文件小而多的任务。
-        Executors.newScheduledThreadPool(1);//，核心固定，非核心不限，闲置时超时回收，主要用于执行定时任务和具有固定周期的重复任务。
-        Executors.newSingleThreadExecutor();//，仅创建一个单核心线程，任务串行。
-
+//        HandlerThread
     }
 
     private void equalPoetry() {
@@ -208,5 +202,85 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
             lastBack = now;
         } else
             super.onBackPressed();
+    }
+
+    private void testTree() {
+//        handler.sendEmptyMessage(1);
+        TreeNode tree = new TreeNode(4);
+        tree.left = getTreeNode(2, 1, 3);
+        tree.right = getTreeNode(7, 6, 9);
+
+        LogUtils.i(tree.val + getTreeString(tree));
+        new Solution().invertTree(tree);
+        LogUtils.i(tree.val + getTreeString(tree));
+    }
+
+    private String getTreeString(TreeNode tree) {
+        StringBuilder builder = new StringBuilder();
+//        builder.append(tree.val);
+        //单侧获取
+//        if (tree.left != null)
+//            builder.append(getTreeString(tree.left));
+//        if (tree.right != null)
+//            builder.append(getTreeString(tree.right));
+        if (tree.right != null && tree.right != null) {
+            builder.append(tree.left.val);
+            builder.append(tree.right.val);
+            builder.append(getTreeString(tree.left));
+            builder.append(getTreeString(tree.right));
+//        } else if (tree.left != null) {
+//            builder.append(tree.left.val);
+//            builder.append(getTreeString(tree.left));
+//        } else if (tree.right != null) {
+//            builder.append(tree.right.val);
+//            builder.append(getTreeString(tree.right));
+        }
+        return builder.toString();
+    }
+
+
+    private TreeNode getTreeNode(int root, int left, int right) {
+        TreeNode treeNode = new TreeNode(root);
+        if (left == -1) {
+//            treeNode.left = null;
+        } else {
+            treeNode.left = getTreeNode(left, -1, -1);
+        }
+        if (right == -1) {
+//            treeNode.right = null;
+        } else {
+            treeNode.right = getTreeNode(right, -1, -1);
+        }
+        return treeNode;
+    }
+
+}
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ * int val;
+ * TreeNode left;
+ * TreeNode right;
+ * TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public TreeNode invertTree(TreeNode root) {
+        if (root == null) return null;
+        TreeNode temp = root.left;
+        root.left = invertTree(root.right);
+        root.right = invertTree(temp);
+        return root;
+    }
+}
+
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+
+    TreeNode(int x) {
+        val = x;
     }
 }
