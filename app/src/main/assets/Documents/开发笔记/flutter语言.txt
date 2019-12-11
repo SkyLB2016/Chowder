@@ -1,9 +1,9 @@
 flutter
 
 ●01.flutter优势
-　　1）跨平台linux，Android，iOS，Fuchsia
-　　2）每秒传输帧数高120，RN最高是60.
-　　3）
-　　4）
-　　5）
-　　6）
+1）跨平台linux，Android，iOS，Fuchsia
+2）每秒传输帧数高120，RN最高是60.
+3）
+4）
+5）
+6）
