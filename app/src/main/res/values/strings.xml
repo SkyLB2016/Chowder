@@ -2,7 +2,7 @@
     <string name="app_name">chowder</string>
     <string name="dialog_exit">确定退出应用程序吗?</string>
 
-    <string name="act_test">00.功能演示类</string>
+    <string name="act_test">19.功能演示类</string>
     <string name="act_test_des">功能演示类</string>
 
     <string name="act_method">01.方法组合类</string>
@@ -28,7 +28,7 @@
     <string name="act_tab">10.滑动窗口</string>
     <string name="act_tab_b">tab结合viewpager，包含：CardView,MeshView,Shader，XferModeF，电话簿</string>
 
-    <string name="act_svg">11.SVG</string>
+    <string name="act_svg">18.SVG</string>
     <string name="act_svg_d">SVG演示，加载html下的svg</string>
 
     <string name="act_coordinator">12.CoordinatorLayout与ToolBar的组合应用</string>
@@ -45,9 +45,9 @@
 
     <string name="act_progress">16.进度条</string>
     <string name="act_progress_d">进度条</string>
-    <string name="act_calendar">17.日历</string>
+    <string name="act_calendar">00.日历</string>
     <string name="act_calendar_d">日历</string>
-    <string name="act_hrm">18.页面UI图</string>
+    <string name="act_hrm">11.页面UI图</string>
     <string name="act_hrm_d">页面UI图</string>
 
     <string name="ibu"><i><b><u>下划线加粗斜体</u></b></i></string>

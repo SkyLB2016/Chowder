@@ -9,7 +9,9 @@ import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
+
 import androidx.annotation.Nullable;
+
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -132,6 +134,7 @@ public class WorkerView extends View {
 
         textP.setTextSize(getResources().getDimension(R.dimen.text_10));
         textP.setColor(getResources().getColor(R.color.color_333333));
+        textP.setTextAlign(Paint.Align.LEFT);//左对齐
 
         if (workers.size() == 0) return;
         //设置月份与底部文字

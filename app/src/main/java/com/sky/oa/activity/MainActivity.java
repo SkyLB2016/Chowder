@@ -78,7 +78,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
             }
         });
         AppUtils.isPermissions(this,
-                new String[]{Manifest.permission.WRITE_CONTACTS, Manifest.permission.READ_CONTACTS, Manifest.permission.READ_EXTERNAL_STORAGE},
+                new String[]{Manifest.permission.WRITE_CONTACTS, Manifest.permission.READ_CONTACTS, Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE},
                 1119);
 
         //易筋经、五禽戏、六字诀和八段锦

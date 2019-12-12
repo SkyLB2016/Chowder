@@ -117,6 +117,7 @@ public class WorkerCircleView extends View {
         textP.setFlags(Paint.ANTI_ALIAS_FLAG);
         textP.setTextSize(getResources().getDimension(R.dimen.text_10));
         textP.setColor(getResources().getColor(R.color.color_333333));
+        textP.setTextAlign(Paint.Align.LEFT);//左对齐
 
         //矩形背景
         Rect rectBounds = new Rect(10, 10, 10 + getWidth() / 2, 10 + getWidth() / 6);

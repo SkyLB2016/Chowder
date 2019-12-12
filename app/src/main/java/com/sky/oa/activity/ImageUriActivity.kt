@@ -52,7 +52,14 @@ class ImageUriActivity : RecyclerPActivity<String, ImageUriP>(), ImageUriV<Strin
         setRecyclerLayout(layoutManager)
         //        recycler.setLayoutManager(new StaggeredGridLayoutManager(this,null,0,0));
         //        recycler.setLayoutManager(new GridLayoutManager(this,3));
-        relative.setOnClickListener { if (!floderPop!!.isShowing) floderPop!!.showAtLocation(window.decorView, Gravity.BOTTOM, 0, 0) }
+        relative.setOnClickListener {
+            if (!floderPop!!.isShowing) floderPop!!.showAtLocation(
+                window.decorView,
+                Gravity.BOTTOM,
+                0,
+                0
+            )
+        }
     }
 
     private fun showImagePop(position: Int) {
@@ -76,9 +83,11 @@ class ImageUriActivity : RecyclerPActivity<String, ImageUriP>(), ImageUriV<Strin
 
     override fun onRecyclerScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
         //获取可见的第一个与最后一个item
-        val firstPositions = layoutManager!!.findFirstVisibleItemPositions(IntArray(layoutManager!!.spanCount))
+        val firstPositions =
+            layoutManager!!.findFirstVisibleItemPositions(IntArray(layoutManager!!.spanCount))
         firstVisibleItem = getMinPositions(firstPositions)
-        val lastPositions = layoutManager!!.findLastVisibleItemPositions(IntArray(layoutManager!!.spanCount))
+        val lastPositions =
+            layoutManager!!.findLastVisibleItemPositions(IntArray(layoutManager!!.spanCount))
         lastVisibleItem = getMaxPositions(lastPositions)
         if (firstVisibleItem == -1) firstVisibleItem = 0
         //首次加载执行
@@ -90,21 +99,23 @@ class ImageUriActivity : RecyclerPActivity<String, ImageUriP>(), ImageUriV<Strin
 
     private fun getMinPositions(firstPositions: IntArray): Int {
         return (0 until firstPositions.size)
-                .map { firstPositions[it] }
-                .min()
-                ?: firstPositions[0]
+            .map { firstPositions[it] }
+            .min()
+            ?: firstPositions[0]
     }
 
     private fun getMaxPositions(lastPositions: IntArray): Int {
         return (0 until lastPositions.size)
-                .map { lastPositions[it] }
-                .max()
-                ?: lastPositions[0]
+            .map { lastPositions[it] }
+            .max()
+            ?: lastPositions[0]
     }
 
     override fun showFloderPop(floders: List<ImageFloder>) {
-        floderPop = FloderPop(LayoutInflater.from(this).inflate(R.layout.include_recycler, null),
-                ScreenUtils.getWidthPX(this), (ScreenUtils.getHeightPX(this) * 0.7).toInt())
+        floderPop = FloderPop(
+            LayoutInflater.from(this).inflate(R.layout.include_recycler, null),
+            ScreenUtils.getWidthPX(this), (ScreenUtils.getHeightPX(this) * 0.7).toInt()
+        )
         floderPop?.datas = floders
         floderPop?.setOnItemClickListener { _, position ->
             setAdapterData(File(floders[position].dirPath!!))
@@ -113,6 +124,7 @@ class ImageUriActivity : RecyclerPActivity<String, ImageUriP>(), ImageUriV<Strin
     }
 
     override fun setAdapterData(parent: File?) {
+        if (parent == null) return
         first = true
         val imageNames = Arrays.asList(*parent!!.list(filter))
         loaderAdapter?.parentPath = parent.absolutePath
