@@ -5,7 +5,6 @@ import android.content.ActivityNotFoundException;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.os.HandlerThread;
 import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.sky.design.adapter.RecyclerAdapter;
 import com.sky.design.app.BasePActivity;
 import com.sky.oa.R;
+import com.sky.oa.Solution;
+import com.sky.oa.TreeNode;
 import com.sky.oa.adapter.MainAdapter;
 import com.sky.oa.api.view.IMainView;
 import com.sky.oa.model.ActivityModel;
@@ -30,9 +31,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executors;
 
 /**
  * Created by libin on 2018/11/13 4:26 PM.
@@ -254,33 +253,4 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         return treeNode;
     }
 
-}
-
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- * int val;
- * TreeNode left;
- * TreeNode right;
- * TreeNode(int x) { val = x; }
- * }
- */
-class Solution {
-    public TreeNode invertTree(TreeNode root) {
-        if (root == null) return null;
-        TreeNode temp = root.left;
-        root.left = invertTree(root.right);
-        root.right = invertTree(temp);
-        return root;
-    }
-}
-
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-
-    TreeNode(int x) {
-        val = x;
-    }
 }
