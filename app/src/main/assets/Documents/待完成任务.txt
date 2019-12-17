@@ -14,11 +14,6 @@
 三、加密算法：
 	
 四、注解：@interface
-五、
-六、
-七、Scroller（待深入研究）：弹性滑动对象，与view中的computeScroll方法配合。
+五、Scroller（待深入研究）：弹性滑动对象，与view中的computeScroll方法配合。
 
-
-算法是怎么翻转一个二叉树
-okhttp的任务链
-glide的缓存内存缓存 存的是什么 disk缓存存的是什么
+红黑树

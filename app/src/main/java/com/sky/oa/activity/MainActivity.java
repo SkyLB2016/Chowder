@@ -20,9 +20,12 @@ import com.sky.oa.R;
 import com.sky.oa.Solution;
 import com.sky.oa.TreeNode;
 import com.sky.oa.adapter.MainAdapter;
+import com.sky.oa.api.IMyBinder;
+import com.sky.oa.api.OnRequestCallback;
 import com.sky.oa.api.view.IMainView;
 import com.sky.oa.model.ActivityModel;
 import com.sky.oa.presenter.MainP;
+import com.sky.oa.widget.CustomView;
 import com.sky.sdk.utils.AppUtils;
 import com.sky.sdk.utils.JumpAct;
 import com.sky.sdk.utils.LogUtils;
@@ -77,7 +80,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
             }
         });
         AppUtils.isPermissions(this,
-                new String[]{Manifest.permission.WRITE_CONTACTS, Manifest.permission.READ_CONTACTS, Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                new String[]{Manifest.permission.WRITE_CONTACTS, Manifest.permission.READ_CONTACTS, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
                 1119);
 
         //易筋经、五禽戏、六字诀和八段锦
@@ -93,8 +96,9 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
     }
 
     private void testMethod() {
-//        handler.sendEmptyMessage(1);
+        handler.sendEmptyMessage(1);
 //        HandlerThread
+//        IMyBinder
     }
 
     private void equalPoetry() {

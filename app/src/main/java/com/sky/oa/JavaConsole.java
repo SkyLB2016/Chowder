@@ -9,8 +9,10 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
 
 public class JavaConsole {
 
@@ -30,8 +32,37 @@ public class JavaConsole {
 //        IOTest();
 //        readSdFile(new File("C:\\WorkSpace\\Chowder\\app\\total"));
 //        readS();语数外理化生史地政
-        System.out.println();
 
+//        runableAndThread();
+
+//        String str=new String("abc");                                     // 强引用
+//        SoftReference<String> softRef=new SoftReference<String>(str);
+
+        String a = "android";
+        String b = "android";
+        String c = new String("android");
+        String d = new String("android");
+        String e = d.intern();
+
+        System.out.println(a == b);
+        System.out.println(a == c);
+        System.out.println(d == c);
+        System.out.println(a == e);
+//        Executors
+
+    }
+
+    private static void runableAndThread() {
+        //测试Runnable
+        MyThread1 t1 = new MyThread1();
+        new Thread(t1).start();//同一个t1，如果在Thread中就不行，会报错
+        new Thread(t1).start();
+        new Thread(t1).start();
+
+        MyThread T1 = new MyThread("A");
+        MyThread T2 = new MyThread("B");
+        T1.start();
+        T2.start();
     }
 
     private static void testJoin() {
@@ -274,5 +305,42 @@ class JoinThread extends Thread {
                 e.printStackTrace();
             }
         }
+    }
+}
+
+class MyThread1 implements Runnable {
+    private int ticket = 10;
+
+    @Override
+    //记得要资源公共，要在run方法之前加上synchronized关键字，要不然会出现抢资源的情况
+    public synchronized void run() {
+        for (int i = 0; i < 10; i++) {
+            if (this.ticket > 0) {
+                System.out.println("卖票：ticket" + this.ticket--);
+            }
+        }
+
+    }
+
+}
+
+class MyThread extends Thread {
+    private String name;
+
+    public MyThread(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public synchronized void run() {
+        for (int i = 0; i < 5; i++) {
+            System.out.println(name + ":" + i);
+            try {
+                sleep(1000); //休眠1秒，避免太快导致看不到同时执行
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 }
