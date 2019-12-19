@@ -201,19 +201,22 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
 
     private fun sort(): CharSequence? {
         val arr = intArrayOf(99, 12, 35, 5, 9, 54, 44)
-        var text = "${arr[0]}"
-        for (a in 1 until arr.size) text = "$text，${arr[a]}"
-        return "原始数据：$text；\n" +
-                "冒泡排序：${bubbleSort(arr)}；\n" +
-                "冒泡排序：${bubbleSort1(arr)}；\n" +
-                "选择排序：${selectSort(arr)}；\n" +
-                "插入排序：${insertSort(arr)}。"
+        return "原始数据：${getArrayString(arr)}；\n" +
+                "冒泡排序：${bubbleSort(arr.clone())}；\n" +
+                "冒泡排序：${bubbleSort1(arr.clone())}；\n" +
+                "选择排序：${selectSort(arr.clone())}；\n" +
+                "插入排序：${insertSort(arr.clone())}。"
     }
 
+    /**
+     * 插入排序
+     */
     private fun insertSort(arr: IntArray): String {
+        LogUtils.i("数据==${getArrayString(arr)}")
         var temp: Int
         for (i in 0 until arr.size - 1) {
             for (j in i + 1 downTo 1) {
+//                LogUtils.i("j==$j")
                 if (arr[j] < arr[j - 1]) {
                     temp = arr[j - 1]
                     arr[j - 1] = arr[j]
@@ -223,15 +226,25 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
                 }
             }
         }
-        var text = "${arr[0]}"
-        for (a in 1 until arr.size) text = "$text，${arr[a]}"
-        return text
+        return getArrayString(arr);
     }
 
+    private fun getArrayString(arr: IntArray): String {
+        var builder = StringBuilder()
+        for (element in arr) builder.append("，$element")
+//        LogUtils.i("text==$builder")
+        builder.replace(0, 1, "")
+//        LogUtils.i("text==$builder")
+        return builder.toString()
+    }
+
+    /**
+     * 选择排序
+     */
     private fun selectSort(arr: IntArray): String {
+        LogUtils.i("数据==${getArrayString(arr)}")
         var index: Int//临时变量
         var temp: Int//临时变量
-        var text = ""
         for (i in 0..arr.size - 2) {
             index = i
             for (j in i + 1 until arr.size) {
@@ -241,16 +254,16 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
             temp = arr[i]
             arr[i] = arr[index]
             arr[index] = temp
-            text = "${arr[0]}"
-            for (a in 1 until arr.size) text = "$text，${arr[a]}"
         }
-        return text
+        return getArrayString(arr);
     }
 
     private fun bubbleSort1(arr: IntArray): String {
+        LogUtils.i("数据==${getArrayString(arr)}")
+        if (arr == null) throw IllegalArgumentException("arr 不能为空")
+        if (arr.size < 2) return "";
         var temp: Int//临时变量
         var flag: Boolean
-        var text = ""
         for (i in arr.size - 1 downTo 1) { //表示趟数，一共arr.length-1次。
             flag = false
             for (j in 0 until i) {
@@ -261,20 +274,21 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
                     flag = true
                 }
             }
-            text = "${arr[0]}"
-            for (a in 1 until arr.size) text = "$text，${arr[a]}"
             if (!flag) break
         }
-        return text
+        return getArrayString(arr);
     }
 
+    /**
+     * 冒泡排序
+     */
     private fun bubbleSort(arr: IntArray): String {
+        LogUtils.i("数据==${getArrayString(arr)}")
         var temp: Int//临时变量
         var flag: Boolean
-        var text = ""
         for (i in 0 until arr.size - 1) { //表示趟数，一共arr.length-1次。
             flag = false
-            for (j in arr.size - 1 downTo i + 1) {
+            for (j in arr.size - 1 downTo i + 1) {//从后往前跑
                 if (arr[j] < arr[j - 1]) {
                     temp = arr[j]
                     arr[j] = arr[j - 1]
@@ -282,11 +296,9 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
                     flag = true
                 }
             }
-            text = "${arr[0]}"
-            for (a in 1 until arr.size) text = "$text，${arr[a]}"
             if (!flag) break
         }
-        return text
+        return getArrayString(arr);
     }
 
     private fun changeStrToId(): CharSequence? {

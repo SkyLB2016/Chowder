@@ -13,7 +13,7 @@ public class LogUtils {
         throw new UnsupportedOperationException("cannot be instantiated");
     }
 
-    public static boolean isDebug = false;// 是否需要打印bug，debug与release的buildconfig，也可以自定义
+    public static boolean isDebug = true;// 是否需要打印bug，debug与release的buildconfig，也可以自定义
     private static final String TAG = "SKY";//默认情况下的前缀
 
     public static void setIsDebug(boolean debug) {

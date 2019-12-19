@@ -99,6 +99,10 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         handler.sendEmptyMessage(1);
 //        HandlerThread
 //        IMyBinder
+        StringBuffer buffer = new StringBuffer();
+        buffer.append("");
+        StringBuilder builder = new StringBuilder();
+        builder.append("");
     }
 
     private void equalPoetry() {

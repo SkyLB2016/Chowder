@@ -28,8 +28,7 @@ public class TouchA extends LinearLayout {
     }
 
     @Override
-    protected boolean dispatchHoverEvent(MotionEvent event) {
-        LogUtils.i("A的dispatch");
+    public boolean dispatchTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 LogUtils.i("A的dispatch的ACTION_DOWN");
@@ -41,7 +40,7 @@ public class TouchA extends LinearLayout {
                 LogUtils.i("A的dispatch的ACTION_UP");
                 break;
         }
-        return super.dispatchHoverEvent(event);
+        return super.dispatchTouchEvent(event);
     }
 
     @Override

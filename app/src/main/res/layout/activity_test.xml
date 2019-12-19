@@ -3,9 +3,6 @@
     android:id="@+id/scroller"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:animateLayoutChanges="true"
-    android:background="@color/color_F0F0F0"
-    android:focusableInTouchMode="true"
     android:orientation="vertical">
 
     <include layout="@layout/include_toolbar" />
@@ -20,7 +17,7 @@
             android:layout_height="@dimen/wh_120"
             android:orientation="vertical">
 
-            <com.sky.oa.widget.TouchCView
+            <com.sky.oa.widget.TouchC
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

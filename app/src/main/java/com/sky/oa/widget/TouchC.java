@@ -13,21 +13,21 @@ import com.sky.sdk.utils.LogUtils;
 /**
  * Created by libin on 2019/12/17 17:56 Tuesday.
  */
-public class TouchCView extends TextView {
-    public TouchCView(Context context) {
+public class TouchC extends TextView {
+    public TouchC(Context context) {
         super(context);
     }
 
-    public TouchCView(Context context, @Nullable AttributeSet attrs) {
+    public TouchC(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public TouchCView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public TouchC(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
     @Override
-    protected boolean dispatchHoverEvent(MotionEvent event) {
+    public boolean dispatchTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 LogUtils.i("C的dispatch的ACTION_DOWN");
@@ -39,7 +39,7 @@ public class TouchCView extends TextView {
                 LogUtils.i("C的dispatch的ACTION_UP");
                 break;
         }
-        return super.dispatchHoverEvent(event);
+        return super.dispatchTouchEvent(event);
     }
 
     @Override
@@ -47,7 +47,8 @@ public class TouchCView extends TextView {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 LogUtils.i("C的touch的ACTION_DOWN");
-                break;
+                return true;
+//                break;
             case MotionEvent.ACTION_MOVE:
                 LogUtils.i("C的touch的ACTION_MOVE");
                 break;

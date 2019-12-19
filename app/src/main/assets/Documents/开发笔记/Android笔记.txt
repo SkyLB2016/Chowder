@@ -117,6 +117,9 @@ scrollTo/scrollBy：操作简单，适合对View内容的滑动；
     GetRawX()与getRawY()是绝对坐标，即是触摸点到屏幕左边与顶边的距离
     5）触摸按钮时的回调机制：A包B包C
     A.disPatch -> A.intercept ->B.disPatch -> B.intercept ->C.disPatch -> C.touch -> B.touch -> A.touch
+    6）viewgroup推荐使用onInterceptTouchEvent,view使用onTouchEvent。
+    viewgroup消费down后，再次消费move与up时，会直接跳过此view的intercept。
+
 
 ●10.Canvas方法：
 1）translate(x,y)：将原点(0,0)移动(x,y)
@@ -159,7 +162,7 @@ ComPosePathEffect与SunPathEffect：组合前几者
 
 ●12.动画类型分为三种：逐帧动画，补间动画，属性动画：
 1）逐帧动画（Frame Animation）：AnimationDrawable相对于animation-list
-2）补间动画 Animation：位移，缩放，旋转，透明度；
+2）补间动画 Animation：位移，缩放，旋转，透明度；可以采用xml的形式也就是逐帧动画，也可以代码实现。
     TranslateAnimation -> translate
     ScaleAnimation -> scale
     RotateAnimation -> ratate
