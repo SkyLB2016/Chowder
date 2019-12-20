@@ -85,12 +85,15 @@ LRU（Least Recently Used）最近最少使用，LRU使用的是LinkedHashMap，
 5）
 6）
 
-●.
-1）
-2）
-3）
-4）
-5）
+●16.RecyclerView 和 ListView的区别
+1）RecyclerView的Viewholder规范化
+2）RecyclerView可以实现线性布局，网格布局，瀑布流布局效果
+3）ListView具有setEmptyView，addHeaderView，addFooterView
+4）RecyclerView支持局部刷新
+5）RecyclerView轻松实现item动画效果
+6）RecyclerView没有setOnItemClickListener，setOnItemLongClickListener而是
+6）
+6）
 6）
 
 ●.

@@ -20,13 +20,11 @@ import com.sky.oa.R;
 import com.sky.oa.Solution;
 import com.sky.oa.TreeNode;
 import com.sky.oa.adapter.MainAdapter;
-import com.sky.oa.api.IMyBinder;
-import com.sky.oa.api.OnRequestCallback;
 import com.sky.oa.api.view.IMainView;
 import com.sky.oa.model.ActivityModel;
 import com.sky.oa.presenter.MainP;
-import com.sky.oa.widget.CustomView;
 import com.sky.sdk.utils.AppUtils;
+import com.sky.sdk.utils.FileUtils;
 import com.sky.sdk.utils.JumpAct;
 import com.sky.sdk.utils.LogUtils;
 
@@ -79,6 +77,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
                 JumpAct.jumpActivity(MainActivity.this, adapter.getDatas().get(position).getComponentName());
             }
         });
+//recycler.addOnItemTouchListener();
         AppUtils.isPermissions(this,
                 new String[]{Manifest.permission.WRITE_CONTACTS, Manifest.permission.READ_CONTACTS, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
                 1119);
@@ -89,37 +88,40 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                testMethod();
+//                testMethod();
 //                equalPoetry();
             }
         });
     }
 
     private void testMethod() {
-        handler.sendEmptyMessage(1);
+//        handler.sendEmptyMessage(1);
 //        HandlerThread
 //        IMyBinder
-        StringBuffer buffer = new StringBuffer();
-        buffer.append("");
-        StringBuilder builder = new StringBuilder();
-        builder.append("");
     }
 
     private void equalPoetry() {
-        String text = getResources().getString(R.string.new_text).replaceAll(" ", "");
-        String origin = getResources().getString(R.string.origin).replaceAll(" ", "");
+//        presenter.calculationTextLength();
 
-        LogUtils.i("长度==" + (text.length()));
-        LogUtils.i("长度==" + (origin.length()));
-        String[] texts = text.split("");
-        String[] origins = origin.split("");
-        for (int i = 2; i < texts.length - 2; i++) {
-            if (!texts[i].equals(origins[i])) {
-//                LogUtils.i(texts[i - 2] + texts[i - 1] + texts[i] + texts[i + 1] + texts[i + 2] + "==" + origins[i - 2] + origins[i - 1] + origins[i] + origins[i + 1]+origins[i + 2]);
-//                i += 2;
-                LogUtils.i(i + texts[i] + "==" + origins[i]);
-            }
-        }
+        String poetry = FileUtils.readAssestToChar(this, "Documents/文学/道家/道德经.txt")
+//        String poetry = FileUtils.readAssestToChar(this, "Documents/复写.txt")
+                .replaceAll("　", "")
+                .replaceAll("\n", "");
+        LogUtils.i("长度==" + (poetry.length()));
+
+//        String text = getResources().getString(R.string.new_text).replaceAll(" ", "");
+//        LogUtils.i("长度==" + (text.length()));
+//        String origin = getResources().getString(R.string.origin).replaceAll(" ", "");
+//        LogUtils.i("长度==" + (origin.length()));
+//        String[] texts = text.split("");
+//        String[] origins = origin.split("");
+//        for (int i = 2; i < texts.length - 2; i++) {
+//            if (!texts[i].equals(origins[i])) {
+////                LogUtils.i(texts[i - 2] + texts[i - 1] + texts[i] + texts[i + 1] + texts[i + 2] + "==" + origins[i - 2] + origins[i - 1] + origins[i] + origins[i + 1]+origins[i + 2]);
+////                i += 2;
+//                LogUtils.i(i + texts[i] + "==" + origins[i]);
+//            }
+//        }
     }
 
     @Override

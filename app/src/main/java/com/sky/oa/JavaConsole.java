@@ -1,5 +1,9 @@
 package com.sky.oa;
 
+import com.sky.oa.model.PoetryEntity;
+import com.sky.oa.thread.JoinThread;
+import com.sky.oa.thread.MyThread;
+import com.sky.oa.thread.MyThread1;
 import com.sky.sdk.utils.RegexUtils;
 
 import java.io.BufferedInputStream;
@@ -38,6 +42,18 @@ public class JavaConsole {
 //        String str=new String("abc");                                     // 强引用
 //        SoftReference<String> softRef=new SoftReference<String>(str);
 
+//        stringEqualStr();
+//        Executors
+        PoetryEntity item = new PoetryEntity();
+        try {
+            item.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private static void stringEqualStr() {
         String a = "android";
         String b = "android";
         String c = new String("android");
@@ -48,8 +64,6 @@ public class JavaConsole {
         System.out.println(a == c);
         System.out.println(d == c);
         System.out.println(a == e);
-//        Executors
-
     }
 
     private static void runableAndThread() {
@@ -292,55 +306,4 @@ public class JavaConsole {
         //发票：400
     }
 
-}
-
-class JoinThread extends Thread {
-    @Override
-    public void run() {
-        for (int i = 0; i < 5; i++) {
-            System.out.println(Thread.currentThread().getName() + " -- " + i);
-            try {
-                sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-}
-
-class MyThread1 implements Runnable {
-    private int ticket = 10;
-
-    @Override
-    //记得要资源公共，要在run方法之前加上synchronized关键字，要不然会出现抢资源的情况
-    public synchronized void run() {
-        for (int i = 0; i < 10; i++) {
-            if (this.ticket > 0) {
-                System.out.println("卖票：ticket" + this.ticket--);
-            }
-        }
-
-    }
-
-}
-
-class MyThread extends Thread {
-    private String name;
-
-    public MyThread(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public synchronized void run() {
-        for (int i = 0; i < 5; i++) {
-            System.out.println(name + ":" + i);
-            try {
-                sleep(1000); //休眠1秒，避免太快导致看不到同时执行
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
 }

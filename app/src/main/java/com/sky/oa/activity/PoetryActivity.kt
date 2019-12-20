@@ -20,7 +20,9 @@ import com.sky.oa.utils.CatalogThread
 import com.sky.design.app.BaseActivity
 import com.sky.design.widget.BaseTitle
 import com.sky.oa.R
+import com.sky.oa.model.PoetryEntity
 import com.sky.sdk.utils.FileUtils
+import com.sky.sdk.utils.LogUtils
 import com.sky.sdk.utils.ScreenUtils
 import kotlinx.android.synthetic.main.activity_poetry.*
 import kotlinx.android.synthetic.main.item_poetry.view.*
@@ -34,7 +36,7 @@ class PoetryActivity : BaseActivity() {
     private var gravity = Gravity.LEFT
     private lateinit var adapter: RecyclerAdapter<ChapterEntity>
     //    private var poetry = arrayOf<String>()
-    private val poetry = ArrayList<String>();//
+    private val poetries = ArrayList<PoetryEntity>();//
     private lateinit var clipM: ClipboardManager
     override fun getLayoutResId(): Int = R.layout.activity_poetry
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,28 +81,34 @@ class PoetryActivity : BaseActivity() {
         link.add(dir)
 //            val stack = Stack<String>();
 //            stack.add(dir)
+        var item = PoetryEntity()
         //取出Documents下的所有文本文件
         while (link.isNotEmpty()) {
             dir = link.removeFirst()
             array = assets.list(dir)
             for (i in array!!) {
                 if (i.endsWith(".txt")) {
-                    poetry.add("$dir/$i")
+                    item = item.clone() as PoetryEntity
+//                    item = PoetryEntity()
+                    item.name = i.substring(0, i.length - 4)
+                    item.path = "$dir/$i"
+                    poetries.add(item)
                 } else {
                     link.add("$dir/$i")
                 }
             }
         }
         val collator = Collator.getInstance(Locale.CHINA)
-        poetry.sortWith(Comparator { o1, o2 -> collator.compare(o1, o2) })
+        poetries.sortWith(Comparator { o1, o2 -> collator.compare(o1.path, o2.path) })
 
         var tv: TextView
-        for ((index, text) in poetry.withIndex()) {
+        for ((index, poetry) in poetries.withIndex()) {
             tv = LayoutInflater.from(this).inflate(R.layout.item_tv, flow, false) as TextView
             tv.width = resources.getDimensionPixelSize(R.dimen.wh_96)
             tv.textSize = 18f
             tv.maxLines = 1
-            tv.text = text.substringAfterLast("/", ".").substringBefore(".", "")
+//            tv.text = text.substringAfterLast("/", ".").substringBefore(".", "")
+            tv.text = poetry.name
             tv.setPadding(10, 0, 10, 0)
             tv.id = index
             flow.addView(tv)
@@ -112,7 +120,7 @@ class PoetryActivity : BaseActivity() {
     }
 
     private fun getDocument(sign: String): String {
-        return FileUtils.readAssestToStr(this, sign)
+        return FileUtils.readAssestToChar(this, sign)
     }
 
     private fun initEvent() {
@@ -126,7 +134,7 @@ class PoetryActivity : BaseActivity() {
 //            in 2..5 -> Gravity.CENTER
 //            else -> Gravity.LEFT
 //        }
-        val text = getDocument(poetry[v!!.id])
+        val text = getDocument(poetries[v!!.id].path)
 //        clipM.primaryClip = ClipData.newPlainText("",text.lines()[0])
         setToolbarTitle(text.lines()[0])
         getCatalog(text)

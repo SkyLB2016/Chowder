@@ -355,13 +355,13 @@ public class FileUtils {
     }
 
     /**
-     * 读取assest文本文件，并返回字符串
+     * 读取assest文本文件，并返回中文文本
      *
      * @param context
      * @param pathname 路径
-     * @return
+     * @return 字符流
      */
-    public static String readAssestToStr(Context context, String pathname) {
+    public static String readAssestToChar(Context context, String pathname) {
         try {
             return readCharFile(context.getAssets().open(pathname));
         } catch (IOException e) {
@@ -370,7 +370,14 @@ public class FileUtils {
         return "";
     }
 
-    public static String readByteAssest(Context context, String fileName) {
+    /**
+     * 字节流，返回文本，一般是英文使用的
+     *
+     * @param context
+     * @param fileName
+     * @return 字节流
+     */
+    public static String readAssestToByte(Context context, String fileName) {
         //先初始化输入输出流。防止处理失败，不能关闭
         InputStream is = null;
         ByteArrayOutputStream baos = null;

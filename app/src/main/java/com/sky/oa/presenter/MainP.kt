@@ -6,6 +6,8 @@ import android.content.pm.PackageManager
 import com.sky.oa.R
 import com.sky.oa.api.view.IMainView
 import com.sky.oa.model.ActivityModel
+import com.sky.oa.model.PoetryEntity
+import com.sky.sdk.utils.FileUtils
 import com.sky.sdk.utils.LogUtils
 import java.text.Collator
 import java.util.*
@@ -73,4 +75,47 @@ class MainP(context: Context) : com.sky.design.app.BasePresenter<IMainView>(cont
     }
     private val sort =
         Comparator<Double> { first, second -> if (first > second) 1 else if (first < second) -1 else 0 }
+
+    /**
+     * 计算文本数据的数量
+     */
+    fun calculationTextLength() {
+        val poetries = ArrayList<PoetryEntity>()
+        var dir = "Documents"//assets初始路径
+        var array: Array<String>? = null//assets取出的目录名称
+        val link = LinkedList<String>()
+        link.add(dir)
+//            val stack = Stack<String>();
+//            stack.add(dir)
+        var item = PoetryEntity()
+        //取出Documents下的所有文本文件
+        while (link.isNotEmpty()) {
+            dir = link.removeFirst()
+            array = context.assets.list(dir)
+            for (i in array!!) {
+                if (i.endsWith(".txt")) {
+                    item = item.clone() as PoetryEntity
+//                    item = PoetryEntity()
+                    item.name = i.substring(0, i.length - 4)
+                    item.path = "$dir/$i"
+                    poetries.add(item)
+                } else {
+                    link.add("$dir/$i")
+                }
+            }
+        }
+        val collator = Collator.getInstance(Locale.CHINA)
+        poetries.sortWith(Comparator { o1, o2 -> collator.compare(o1.path, o2.path) })
+
+        var text = ""
+        for (poetry in poetries) {
+//            text = FileUtils.readAssestToByte(context, poetry.path)//字节流也可以但是不建议。
+            text = FileUtils.readAssestToChar(context, poetry.path)
+                .replace("　".toRegex(), "")
+                .replace("\n".toRegex(), "")
+            LogUtils.i("${poetry.name}==${text.length}")
+        }
+        //        String poetry = FileUtils.readAssestToChar(this, "Documents/文学/道家/道德经.txt")
+    }
+
 }
