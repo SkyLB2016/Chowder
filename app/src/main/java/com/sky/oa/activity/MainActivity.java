@@ -90,6 +90,10 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
             public void onClick(View v) {
 //                testMethod();
 //                equalPoetry();
+
+                File file = new File(getAssets().toString()+"Documents/文学/道家/道德经.txt");
+                LogUtils.i("是否存在==" + file.exists());
+                LogUtils.i("是否存在==" + getAssets().toString());
             }
         });
     }

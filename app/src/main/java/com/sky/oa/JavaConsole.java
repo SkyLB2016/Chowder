@@ -1,6 +1,5 @@
 package com.sky.oa;
 
-import com.sky.oa.model.PoetryEntity;
 import com.sky.oa.thread.JoinThread;
 import com.sky.oa.thread.MyThread;
 import com.sky.oa.thread.MyThread1;
@@ -44,12 +43,6 @@ public class JavaConsole {
 
 //        stringEqualStr();
 //        Executors
-        PoetryEntity item = new PoetryEntity();
-        try {
-            item.clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
 
     }
 

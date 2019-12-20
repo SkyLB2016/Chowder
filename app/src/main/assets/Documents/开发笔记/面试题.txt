@@ -91,9 +91,44 @@ LRU（Least Recently Used）最近最少使用，LRU使用的是LinkedHashMap，
 3）ListView具有setEmptyView，addHeaderView，addFooterView
 4）RecyclerView支持局部刷新
 5）RecyclerView轻松实现item动画效果
-6）RecyclerView没有setOnItemClickListener，setOnItemLongClickListener而是
+6）RecyclerView没有setOnItemClickListener，setOnItemLongClickListener，而是添加了addOnItemTouchListener，可以多次添加事件
+7）RecyclerView可以自定义分割线
+
+●17.View的绘制流程
+从ViewRoot的performTraversals方法开始依次调用performMeasure、performLayout和performDraw这三个方法。
+这三个方法分别完成顶级View的measure、layout和draw三大流程，其中performMeasure会调用measure，measure又会调用onMeasure，在onMeasure中则会对所有子元素进行measure（测量），这个时候measure流程就从父容器传递到子元素中了，这样就完成了一次measure过程，接着子元素会重复父容器的measure，如此反复就完成了整个View树的遍历。
+同理，performLayout和perforDraw也分别完成performMeasure类似的流程。通过这三大流程，分别遍历正科View树，就实现了Measure，Layout，Draw这一过程，view就绘制出来了。
+
+●18.ArrayList、LinkedList、Vector的区别
+1）ArrayList类似于C中的数组，查找方便，插入复杂；
+2）LinkedList类似于C中的链表，插入简单（只是把两个item的上下节点换了一下），查找复杂度高；
+3）Vector类似于ArrayList，在Java1.5之后就不推荐使用了
+
+●19.Map、Set、List、Queue、Stack的特点与用法。
+1）map根据key 找 value。
+2）set元素不能重复。
+3）list类似数组。
+4）Queue队列，先进先出。
+5）Stack 栈，后进后出。
+
+●20.HashMap和HashTable的区别（没用过）
+1）当需要同步时，用HashTable，反之用HashMap。但是因为在需要时，HashMap可以被同步，HashMap的功能比HashTable的功能更多，而且他不是基于一个陈旧的类，所以有人认为在各种情况下，HashMap都优先于HashTable。
+2）只有HashMap可以让你将控制作为key或value。key只能有一个空，不重复，value可以重复。
+
+●21.HashMap和ConCurrentHas和Map的区别，
+1）有并发访问的时候用ConcurrentHashMap，效率比用锁的HashMap好。
+2）HashMap的底层源码是用（Entry）数组+链表的形式实现，详情看：http://liaokang-java.iteye.com/blog/1098404
+3）
+4）
+5）
 6）
-6）
+
+●.
+1）
+2）
+3）
+4）
+5）
 6）
 
 ●.

@@ -37,6 +37,7 @@ git命令行
   gr      -> git remote 远程仓库
   grv     -> git remote -v 远程仓库地址
   gcp     -> git cherry-pick name
+
 git层级：
 第一层：未缓存，也即未add前，状态为：未缓存
 第二层：暂存区，add后，commit前，状态为：已缓存；
