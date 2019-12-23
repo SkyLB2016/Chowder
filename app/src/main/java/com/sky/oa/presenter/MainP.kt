@@ -3,6 +3,7 @@ package com.sky.oa.presenter
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import com.sky.design.app.BasePresenter
 import com.sky.oa.R
 import com.sky.oa.api.view.IMainView
 import com.sky.oa.model.ActivityModel
@@ -15,7 +16,7 @@ import java.util.*
 /**
  * Created by SKY on 2017/5/29.
  */
-class MainP(context: Context) : com.sky.design.app.BasePresenter<IMainView>(context) {
+class MainP(context: Context) : BasePresenter<IMainView>(context) {
     override fun loadData() {
         mView.setData(activities)
     }

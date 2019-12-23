@@ -2,6 +2,7 @@ package com.sky.oa.presenter
 
 import android.content.Context
 import android.provider.MediaStore
+import com.sky.design.app.RefreshP
 import com.sky.oa.model.ImageFloder
 import com.sky.oa.api.view.ImageUriV
 import com.sky.sdk.utils.SDCardUtils
@@ -9,7 +10,7 @@ import java.io.File
 import java.io.FilenameFilter
 import java.util.*
 
-class ImageUriP(context: Context) : com.sky.design.app.RefreshP<ImageUriV<String>>(context) {
+class ImageUriP(context: Context) : RefreshP<ImageUriV<String>>(context) {
 
     private val floders = ArrayList<ImageFloder>()//照片所在的文件夹列表
 

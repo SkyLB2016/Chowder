@@ -40,7 +40,7 @@ int(包装类为：Integer)：32bit，4字节，-2^31~2^31-1，有0的，最常�
 long(包装类为：Long)：64bit，8字节，-2^63~2^63-1，有0的，次常用，后缀L，l；
 float(包装类为：Float)：32bit,4字节，不过我没闹明白它的位数问题，有效数位7位；
 double(包装类为：Double)：64bit，8字节，我也没闹明白他的位数问题，浮点数是不精确的，不能对浮点数进行精确比较亲测精度只到16位，位数再多的话将无法比较大小；
-boolean(包装类为：Boolean)：布尔数据类型，只有true与false；
+boolean(包装类为：Boolean)：布尔数据类型，只有true与false；在JVM规范中，boolean变量作为int处理，也就是4字节；boolean数组当做byte数组处理。
 char(包装类为：Character)：16bit，2字节，字符型，用单引号''表示，本质就是个数字，Unicode字符；最小值’\u0000’（0），最大值’\uffff’（即为65,535）
 外加一个字符串包装类型：
 String：不是关键字，是类，值无法改变，每次都是创建新的对象，如频繁操作，应使用stringBuilder

@@ -71,7 +71,7 @@ Java教程笔记
 3）Java常量：指不能改变的量，final符修饰的变量。
 
 ●12.String<StringBuffer<StringBuilder
-1）String是字符串常量，每次修改都相当于生成一个新的对象，所以不适合经常变更值的场景
+1）String是字符串常量，不可变，每次修改都相当于生成一个新的对象，所以不适合经常变更值的场景
 2）StringBuffer是线程安全的，使用了synchronized修饰，适用于多线程
 3）StringBuilder不是线程安全的，适用于单线程，所以效率略快于StringBuffer。
 4）速度上面String不断地复制和变更是创建不同的对象进行操作，如String a="a"+"b"+"c"，其内部会自动转成StringBuilder的拼接，数据多的时候会创建循环来拼接，builder的创建有可能会放在循环里边，会影响GC的回收，要避免。

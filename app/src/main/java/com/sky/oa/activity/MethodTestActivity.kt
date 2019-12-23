@@ -29,6 +29,7 @@ import androidx.annotation.LayoutRes
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.sky.design.app.BaseActivity
+import com.sky.design.app.BasePActivity
 import com.sky.oa.R
 import com.sky.oa.fragment.AddressFragment
 import com.sky.oa.fragment.TimeFragment
@@ -582,7 +583,7 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 101 && resultCode == com.sky.design.app.BasePActivity.RESULT_OK) {
+        if (requestCode == 101 && resultCode == BasePActivity.RESULT_OK) {
             val projection = arrayOf(
                 ContactsContract.CommonDataKinds.Phone.NUMBER,
                 ContactsContract.CommonDataKinds.Phone._ID,

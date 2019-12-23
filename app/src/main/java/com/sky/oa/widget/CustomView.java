@@ -25,6 +25,8 @@ public class CustomView extends TextView {
         for (int i = 0; i < attrs.getAttributeCount(); i++) {
             Log.d(tag, attrs.getAttributeName(i) + "   :   " + attrs.getAttributeValue(i));
         }
+//        getDefaultSize();
+//        getSuggestedMinimumHeight();
 
     }
 

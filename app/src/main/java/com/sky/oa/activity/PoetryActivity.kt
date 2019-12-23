@@ -94,7 +94,9 @@ class PoetryActivity : BaseActivity() {
                     item.path = "$dir/$i"
                     poetries.add(item)
                 } else {
-                    link.add("$dir/$i")
+                    if (i != "other") {
+                        link.add("$dir/$i")
+                    }
                 }
             }
         }
