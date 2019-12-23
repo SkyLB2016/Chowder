@@ -36,7 +36,7 @@ public class JavaConsole {
 //        readSdFile(new File("C:\\WorkSpace\\Chowder\\app\\total"));
 //        readS();语数外理化生史地政
 
-//        runableAndThread();
+        runableAndThread();
 
 //        String str=new String("abc");                                     // 强引用
 //        SoftReference<String> softRef=new SoftReference<String>(str);
@@ -61,11 +61,12 @@ public class JavaConsole {
 
     private static void runableAndThread() {
         //测试Runnable
-        MyThread1 t1 = new MyThread1();
-        new Thread(t1).start();//同一个t1，如果在Thread中就不行，会报错
-        new Thread(t1).start();
-        new Thread(t1).start();
+//        MyThread1 runnable = new MyThread1();
+//        new Thread(runnable).start();//同一个runnable，如果在Thread中生成的就是两个实体对象，会重复
+//        new Thread(runnable).start();
+//        new Thread(runnable).start();
 
+        //就算Thread的run方法加上synchronized，但是创建的是两个对象，也就是两个锁，两个锁会交替争抢CPU资源，谁抢到谁执行；没有锁也是一样，所以可以不加锁。
         MyThread T1 = new MyThread("A");
         MyThread T2 = new MyThread("B");
         T1.start();

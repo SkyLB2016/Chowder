@@ -22,6 +22,7 @@ import com.sky.oa.TreeNode;
 import com.sky.oa.adapter.MainAdapter;
 import com.sky.oa.api.view.IMainView;
 import com.sky.oa.model.ActivityModel;
+import com.sky.oa.model.PoetryEntity;
 import com.sky.oa.presenter.MainP;
 import com.sky.sdk.utils.AppUtils;
 import com.sky.sdk.utils.FileUtils;
@@ -91,8 +92,29 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
 //                testMethod();
 //                equalPoetry();
 
+
+                getIdentity();
+
+
             }
         });
+    }
+
+    private void getIdentity() {
+        Integer entity = new Integer(3);
+        LogUtils.i("地址==" + entity.hashCode());//hashcode
+        LogUtils.i("地址==" + System.identityHashCode(entity));//内存地址
+        entity = 5;
+        LogUtils.i("地址==" + entity.hashCode());
+        LogUtils.i("地址==" + System.identityHashCode(entity));
+
+        String text = "道德经";
+        LogUtils.i("地址==" + text.hashCode());
+        LogUtils.i("地址==" + System.identityHashCode(text));
+
+        text = "王弼本";
+        LogUtils.i("地址==" + text.hashCode());
+        LogUtils.i("地址==" + System.identityHashCode(text));
     }
 
     private void testMethod() {
