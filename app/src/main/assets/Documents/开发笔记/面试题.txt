@@ -6,13 +6,13 @@
 
 ●02.handler机制与RaJava有什么区别：相同都是为了线程间通信
 1）Rxjava线程切换更方便，可以直接切换子线程和UI线程，handler需要在子线程中发送消息，在主线程中去接收消息，才能改变UI。
-2）RxJava是观察者模式，Handler消息队列用的是双向链表，也就是责任链模式。
+2）RxJava是观察者模式，Handler消息队列用的是双向链表，类似于linkedList，是责任链模式。
 
 ●03.广播有几种创建方式，有什么区别？
 两种，动态注册和静态注册（8.0以后不能静态注册广播，官方说法是为了省电）；区别：
 1）动态注册的广播永远要快于静态注册的广播，不管静态注册的优先级设置的多高，不管动态注册的优先级有多低。也就是和设置优先级无关，动态就是比静态快。
 2）动态注册广播不是常住性广播，也就是说广播跟随activity的生命周期。注意：activity调用ondestory，移除广播接收器。静态注册是常驻型，不能自动销毁，应用程序关闭后，如有信息广播来，程序也会被系统调用自动运行。
-3）在同一个优先级下，谁嫌弃都弄得快，谁将先接收到广播。
+3）在同一个优先级下，谁先启动，谁将先接收到广播。
 
 ●04.Android的数据存储方式有哪些
 1）Shardpreferences（适合轻量级数据存储，采用xml键值对的形式存储到本地，只能用于一个app内）
@@ -23,7 +23,7 @@
 
 ●05.服务的启动方式和对应的生命周期以及区别
 1）startService（onCreate-（onStart已舍弃）-onStartCommand-onDestory）
-服务于启动者没有必然的联系，启动者销毁，服务也可以存在；只有主动调用StopService方法才能停止。
+服务与启动者没有必然的联系，启动者销毁，服务也可以存在；只有主动调用StopService方法才能停止。
 2）bindService（onCreate-onBind-onUnbind-onDestory）
 服务与启动者相互关联，启动者销毁，服务也跟着销毁；
 3）startService之后再bindService这样避免宿主死亡之后service跟着被销毁。
@@ -60,7 +60,7 @@ onSaveInstanceState-onpause-onstop-ondestory-onCreate-onStart-onRestoreInstanceS
 2）功能复杂的话，MVP会产生很多接口，activity需要很多接口方法来更新UI，model与view不直接进行交互，达到解耦的效果
 
 ●11.LRU算法的原理？
-LRU（Least Recently Used）最近最少使用，LRU使用的是LinkedHashMap，如果链表中存在一个数则建起置顶，如果没有则直接在顶部加入这个数并将其底部的数移除。
+LRU（Least Recently Used）最近最少使用，LRU使用的是LinkedHashMap，如果链表中存在一个数则拉起置顶，如果没有则直接在顶部加入这个数并将其底部的数移除。
 
 ●12.IntentService和Service有什么区别？
 1）Service不是独立的进程，也不是独立的线程，他也是依赖于应用程序的主线程，可以说是没有界面的activity，后台执行，不建议在service中编写好事的逻辑和操作，否则会ANR。
@@ -205,15 +205,12 @@ LRU（Least Recently Used）最近最少使用，LRU使用的是LinkedHashMap，
 4）增加程序的健壮性，代码可以被多个线程共享，代码和数据独立。
 
 5）就算Thread的run方法加上synchronized，但是创建的是两个对象，也就是两个锁，两个锁会交替争抢CPU资源，谁抢到谁执行；没有锁也是一样，所以可以不加锁。
-6）
 
-●.
-1）
-2）
-3）
-4）
-5）
-6）
+●37.AsyncTask
+1）onPreExecute() 执行后台耗时操作前被调用，完成一些初始化操作
+2）doInBackground(vararg params: String):异步任务，并且asyncTask中只有他是异步任务，其他都不是；必须重写
+3）onProgressUpdate(vararg values: Void):可在此设置进度条更新，在doInBackground()中调用publishProgress()
+4）onPostExecute(bitmap: Bitmap)：完成后，系统自动调用，在此更新UI
 
 ●.
 1）
