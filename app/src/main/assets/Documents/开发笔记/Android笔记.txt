@@ -109,17 +109,16 @@ scrollTo/scrollBy：操作简单，适合对View内容的滑动；
 11）OnDrawListener：视图树绘制时调用
 
 ●09.触摸事件机制，传递顺序:activity->window->view,方法回调有：（默认返回false）
-    1）disPatchTouchEvent(MotionEvent e)（分发事件，一般不用管）
-    2）onInterceptTouchEvent(MotionEvent e)， ViewGroup独有
-    3）onTouchEvent(MotionEvent e)
-    4）MotionEvent中的方法：
-    GetX()与getY()是视图坐标，相对坐标，即是触摸点到它到父布局左边与顶边的距离
-    GetRawX()与getRawY()是绝对坐标，即是触摸点到屏幕左边与顶边的距离
-    5）触摸按钮时的回调机制：A包B包C
-    A.disPatch -> A.intercept ->B.disPatch -> B.intercept ->C.disPatch -> C.touch -> B.touch -> A.touch
-    6）viewgroup推荐使用onInterceptTouchEvent,view使用onTouchEvent。
-    viewgroup消费down后，再次消费move与up时，会直接跳过此view的intercept。
-
+1）disPatchTouchEvent(MotionEvent e)（分发事件，一般不用管）
+2）onInterceptTouchEvent(MotionEvent e)， ViewGroup独有
+3）onTouchEvent(MotionEvent e)
+4）MotionEvent中的方法：
+GetX()与getY()是视图坐标，相对坐标，即是触摸点到它到父布局左边与顶边的距离
+GetRawX()与getRawY()是绝对坐标，即是触摸点到屏幕左边与顶边的距离
+5）触摸按钮时的回调机制：A包B包C
+A.disPatch -> A.intercept ->B.disPatch -> B.intercept ->C.disPatch -> C.touch -> B.touch -> A.touch
+6）viewgroup推荐使用onInterceptTouchEvent,view使用onTouchEvent。
+viewgroup消费down后，再次消费move与up时，会直接跳过此view的intercept。
 
 ●10.Canvas方法：
 1）translate(x,y)：将原点(0,0)移动(x,y)
