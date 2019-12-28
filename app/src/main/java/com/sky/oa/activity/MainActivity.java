@@ -83,6 +83,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
                 new String[]{Manifest.permission.WRITE_CONTACTS, Manifest.permission.READ_CONTACTS, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
                 1119);
 
+        //昔日古朝讲究德行，以德治天下，不动刀兵，但并非是不修武，而是以武威慑，以德服人。不动干戈，便只是能不动刀兵解决，能有别的方法解决的事情，便不动刀兵，而非是真的不动干戈。
         //易筋经、五禽戏、六字诀和八段锦
         //Rw2 B2 U2 Lw U2 Rw' U2 Rw U2 F2 Rw F2 Lw' B2 Rw2
         //LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
@@ -91,11 +92,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
             public void onClick(View v) {
 //                testMethod();
 //                equalPoetry();
-
-
                 getIdentity();
-
-
             }
         });
     }
@@ -285,5 +282,4 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         }
         return treeNode;
     }
-
 }
