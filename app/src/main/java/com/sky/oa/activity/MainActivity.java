@@ -1,6 +1,7 @@
 package com.sky.oa.activity;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.os.Bundle;
 import android.os.Environment;
@@ -92,9 +93,24 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
             public void onClick(View v) {
 //                testMethod();
 //                equalPoetry();
-                getIdentity();
+//                getIdentity();
+                new AlertDialog.Builder(MainActivity.this).setTitle("测试")
+                        .create()
+                        .show();
             }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LogUtils.i("地址==onpause");//hashcode
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        LogUtils.i("地址==onStop");//hashcode
     }
 
     private void getIdentity() {
@@ -105,11 +121,11 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         LogUtils.i("地址==" + entity.hashCode());
         LogUtils.i("地址==" + System.identityHashCode(entity));
 
-        String text = "道德经";
+        String text = "Java";
         LogUtils.i("地址==" + text.hashCode());
         LogUtils.i("地址==" + System.identityHashCode(text));
 
-        text = "王弼本";
+        text = "Android";
         LogUtils.i("地址==" + text.hashCode());
         LogUtils.i("地址==" + System.identityHashCode(text));
     }

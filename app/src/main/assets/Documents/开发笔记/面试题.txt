@@ -223,6 +223,7 @@ LRU（Least Recently Used）最近最少使用，LRU使用的是LinkedHashMap，
 3）Socket是一种不同计算机实时连接，比如说传送文件，即时通讯。
 
 ●39.view，activity，window三者之间的关系
+一个Activity对弈一个Window，也就是一个PhoneWindow，一个PhoneWindow持有一个DecorView的实例，DecorView本身是一个FrameLayout。
 1）
 2）
 3）
@@ -246,7 +247,7 @@ LRU（Least Recently Used）最近最少使用，LRU使用的是LinkedHashMap，
 5）
 6）
 
-●.RecyclerView的缓存机制？
+●42.RecyclerView的缓存机制？
 1）
 2）
 3）
