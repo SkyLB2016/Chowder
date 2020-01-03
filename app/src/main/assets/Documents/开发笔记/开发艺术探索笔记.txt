@@ -5,7 +5,7 @@ onCreate：表示activity正在被创建，在此可以做一些初始化工作�
 onRestart：表示activity正在重新启动，在执行了onStop，未执行onDestory前，又回到这个activity，就会执行。
 onStart：表示activity正在被启动，此时activity可见，但还没有出现在前台，无法与用户交互。这时候可以理解为activity已经显示出来了，但是我们还看不到。
 onResume：表示activity已经可见了，出现在前台开始活动。onStart和onResume都表示activity可见，但是onStart的时候页面还在后台，onResume的时候显示到前台。view的onMeasure，onLayout，onDraw在此时执行。
-onPause：表示activity正在停止，正常情况下onStop会紧接着被调用。如在跳转页面时，页面启动崩溃，又返回到此页面，onStop来不及执行，会直接调用onResume。onPause可以做一些存储数据，停止动画等工作，不能太耗时，因为只有onPause先执行完，新页面的onResume才会执行。
+onPause：表示activity正在停止，正常情况下onStop会紧接着被调用。如在跳转页面时，页面启动崩溃，又返回到此页面，onStop来不及执行，会直接调用onResume。onPause可以做一些存储数据，停止动画等工作，不能太耗时，因为只有onPause先执行完，新页面的onResume才会执行。页面上的弹窗不会执行onPause
 onStop：表示activity即将停止，可以做一些稍微重量级的回收工作，同样不能太耗时
 onDestory：表示activity即将被销毁，可以做一些回收工作和最重的资源释放。
 

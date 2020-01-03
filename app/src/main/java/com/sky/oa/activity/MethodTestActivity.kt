@@ -41,6 +41,7 @@ import com.sky.oa.other.factory.factory.HairFactory
 import com.sky.oa.other.factory.factory.hair.LeftHair
 import com.sky.oa.utils.EmulatorDetector
 import com.sky.oa.utils.http.HttpUrl
+import com.sky.sdk.net.http.ApiResponse
 import com.sky.sdk.utils.AppUtils
 import com.sky.sdk.utils.DateUtil
 import com.sky.sdk.utils.LogUtils
@@ -68,7 +69,7 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
             , "Intent测试", "时间选择", "地址选择", "工厂模式"
             , "SVG与Value", "渐变的文字", "音频处理", "字符串转id"
             , "排序算法", "LinkedList使用"
-            , "MD5加密", "科学计数法", "虚拟机鉴定"
+            , "MD5加密", "科学计数法", "虚拟机鉴定", "获取当前方法的名称"
         )
         for (i in method) {
             val tvText =
@@ -118,8 +119,57 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
             "渐变的文字" -> shaderText()
             "音频处理" -> makePlayer()
             "虚拟机鉴定" -> detectEmulatorSimple()
+            "获取当前方法的名称" -> getMethodName()
         }
     }
+
+    private fun getMethodName() {
+        //获取当前方法的名称的两种方法。
+        //1）StackTraceElement[] traceElement = Thread.currentThread().getStackTrace();
+        //此方法取得的StackTraceElement栈：
+        //第零条数据是VmStack的getThreadStackTrace；
+        //第一条数据是Thread的getStackTrace
+        //第二条数据是当前方法的所在位置。
+
+        var traceElement = Thread.currentThread().stackTrace
+        val builder = StringBuilder()
+        builder.append("第一种")
+        builder.append("\n")
+        for (i in traceElement.indices) {
+            val stack = traceElement[i]
+            var className = stack.className
+            className = className.substring(className.lastIndexOf(".") + 1)
+//            builder.setLength(0)//清空字符串
+            builder.append("位置：")
+            builder.append(i)
+            builder.append("；")
+            builder.append(className)
+            builder.append(".")
+            builder.append(stack.methodName)
+            builder.append("\n")
+//            Log.i("logutils", "第" + i + "个" + builder)
+        }
+        traceElement = Throwable().stackTrace
+        builder.append("\n")
+        builder.append("第二种")
+        builder.append("\n")
+        for (i in traceElement.indices) {
+            val stack = traceElement[i]
+            var className = stack.className
+            className = className.substring(className.lastIndexOf(".") + 1)
+//            builder.setLength(0)
+            builder.append("位置：")
+            builder.append(i)
+            builder.append("；")
+            builder.append(className)
+            builder.append(".")
+            builder.append(stack.methodName)
+            builder.append("\n")
+//            Log.i("logutils", "第" + i + "个" + builder)
+        }
+        tvDisplay.text = builder.toString()
+    }
+
 
     private fun detectEmulatorSimple() {
         EmulatorDetector.with(this)
@@ -488,18 +538,44 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
 
     private fun changeJson(): String {
         val model = GsonUtils.fromJson(getString(R.string.jsonobj), ActivityModel::class.java)
-        val entity = GsonUtils.fromJson<com.sky.sdk.net.http.ApiResponse<List<ActivityModel>>>(
+        val entity = GsonUtils.fromJson<ApiResponse<List<ActivityModel>>>(
             getString(R.string.jsonlist),
-            object : TypeToken<com.sky.sdk.net.http.ApiResponse<List<ActivityModel>>>() {}.type
+            object : TypeToken<ApiResponse<List<ActivityModel>>>() {}.type
         )
-        val list = Gson().fromJson(getString(R.string.jsonarray), Array<ActivityModel>::class.java)
+        val list = GsonUtils.fromJson<List<ActivityModel>>(
+            getString(R.string.jsonarray),
+            object : TypeToken<ArrayList<ActivityModel>>() {}.type
+        )
+
         val array = Gson().fromJson(getString(R.string.jsonarray), Array<ActivityModel>::class.java)
-        val text = StringBuilder()
-        text.append(model.toString() + "\n")
-        text.append(entity.objList.toString() + "\n")
-        text.append(list.toString() + "\n")
-        for (i in array) text.append(i.toString() + "\n")
-        return text.toString()
+
+        val builder = StringBuilder()
+
+        builder.append("单个类：")
+        builder.append("\n")
+        builder.append(model.toString())
+        builder.append("\n")
+        builder.append("\n")
+
+        builder.append("类中套列表：")
+        builder.append("\n")
+        builder.append(entity.objList.toString())
+        builder.append("\n")
+        builder.append("\n")
+
+        builder.append("列表：")
+        builder.append("\n")
+        builder.append(list.toString())
+        builder.append("\n")
+        builder.append("\n")
+
+        builder.append("数组：")
+        builder.append("\n")
+        builder.append("[")
+        for (i in array) builder.append(i.toString())
+        builder.append("]")
+        builder.append("\n")
+        return builder.toString()
     }
 
     private fun sortList(): String {
@@ -507,19 +583,19 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
         ('g' downTo 'a').mapTo(list) { SortModel("$it") }
         (22222 downTo 22217).mapTo(list) { SortModel("${it.toChar()}") }
         ('G' downTo 'A').mapTo(list) { SortModel("$it") }
-        val text = StringBuilder()
-        text.append("原数据：$list\n")
+        val builder = StringBuilder()
+        builder.append("原数据：$list\n")
         list.reverse()//逆序
-        text.append("逆序：$list\n")
+        builder.append("逆序：$list\n")
         list.shuffle()//随机
-        text.append("随机：$list\n")
+        builder.append("随机：$list\n")
         list.sort()//排序
-        text.append("sort排序（大写小写文字）：$list\n")
+        builder.append("sort排序（大写小写文字）：$list\n")
         Collections.sort(list, ascending)
-        text.append("Comparable升序(文字小大写)：$list\n")
+        builder.append("Comparable升序(文字小大写)：$list\n")
         Collections.sort(list, descending)
-        text.append("Comparable降序(大小写文字)：$list")
-        return text.toString()
+        builder.append("Comparable降序(大小写文字)：$list")
+        return builder.toString()
     }
 
     class SortModel(var className: String?) : Comparable<SortModel> {

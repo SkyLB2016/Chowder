@@ -21,7 +21,7 @@ public class LogUtils {
     }
 
     private static String generateTag() {
-//        StackTraceElement stack = Thread.currentThread().getStackTrace()[4];//此方法取得的栈的前两个分别为vm和Thread
+        //此方法获取的栈的第零条数据是当前方法所在位置，以此类推，idev四个方法就是第一条，在之上的入口位置就是第二条
         StackTraceElement stack = new Throwable().getStackTrace()[2];
         String tag = "%s.%s(L:%d)";
         String className = stack.getClassName();

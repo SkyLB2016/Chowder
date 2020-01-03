@@ -127,6 +127,15 @@ Java教程笔记
 6）Java接口中的成员函数默认是public的。抽象类的成员函数可以是private，protected，public，default。
 7）接口是绝对抽象的，不可以被实例化。抽象类也不可以被实例化，但是如果它包含main方法的话是可以被调用的。
 
+●17.获取当前方法的名称的两种方法。推荐第一种
+1）StackTraceElement[] traceElement = Thread.currentThread().getStackTrace();
+此方法取得的StackTraceElement栈：
+第零条数据是VmStack的getThreadStackTrace；
+第一条数据是Thread的getStackTrace
+第二条数据是当前方法的所在位置。
+2）StackTraceElement stack = new Throwable().getStackTrace();
+此方法取得的StackTraceElement栈，它的第零条数据就是当前方法所在的位置。
+
 ●17.
 1）
 2）

@@ -1,7 +1,6 @@
 package com.sky.oa.activity;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.os.Bundle;
 import android.os.Environment;
@@ -23,7 +22,6 @@ import com.sky.oa.TreeNode;
 import com.sky.oa.adapter.MainAdapter;
 import com.sky.oa.api.view.IMainView;
 import com.sky.oa.model.ActivityModel;
-import com.sky.oa.model.PoetryEntity;
 import com.sky.oa.presenter.MainP;
 import com.sky.sdk.utils.AppUtils;
 import com.sky.sdk.utils.FileUtils;
@@ -91,49 +89,69 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                testMethod();
-//                equalPoetry();
-//                getIdentity();
-                new AlertDialog.Builder(MainActivity.this).setTitle("测试")
-                        .create()
-                        .show();
+                testMethod();
             }
         });
+    }
+
+    private void testMethod() {
+//        handler.sendEmptyMessage(1);
+//                equalPoetry();
+        LogUtils.i(getClass().getSimpleName()+"=="+Thread.currentThread().getStackTrace()[2].getMethodName());
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        LogUtils.i(getClass().getSimpleName()+"=="+Thread.currentThread().getStackTrace()[2].getMethodName());
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LogUtils.i(getClass().getSimpleName()+"=="+Thread.currentThread().getStackTrace()[2].getMethodName());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LogUtils.i(getClass().getSimpleName()+"=="+Thread.currentThread().getStackTrace()[2].getMethodName());
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        LogUtils.i("地址==onpause");//hashcode
+        LogUtils.i(getClass().getSimpleName()+"=="+Thread.currentThread().getStackTrace()[2].getMethodName());
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        LogUtils.i("地址==onStop");//hashcode
+        LogUtils.i(getClass().getSimpleName()+"=="+Thread.currentThread().getStackTrace()[2].getMethodName());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        LogUtils.i(getClass().getSimpleName()+"=="+Thread.currentThread().getStackTrace()[2].getMethodName());
     }
 
     private void getIdentity() {
         Integer entity = new Integer(3);
-        LogUtils.i("地址==" + entity.hashCode());//hashcode
-        LogUtils.i("地址==" + System.identityHashCode(entity));//内存地址
+        LogUtils.i("HashCode地址==" + entity.hashCode());//hashcode
+        LogUtils.i("内存地址==" + System.identityHashCode(entity));//内存地址
         entity = 5;
-        LogUtils.i("地址==" + entity.hashCode());
-        LogUtils.i("地址==" + System.identityHashCode(entity));
+        LogUtils.i("HashCode地址==" + entity.hashCode());
+        LogUtils.i("内存地址==" + System.identityHashCode(entity));
 
         String text = "Java";
-        LogUtils.i("地址==" + text.hashCode());
-        LogUtils.i("地址==" + System.identityHashCode(text));
+        LogUtils.i("HashCode地址==" + text.hashCode());
+        LogUtils.i("内存地址==" + System.identityHashCode(text));
 
         text = "Android";
-        LogUtils.i("地址==" + text.hashCode());
-        LogUtils.i("地址==" + System.identityHashCode(text));
-    }
-
-    private void testMethod() {
-//        handler.sendEmptyMessage(1);
-//        HandlerThread
-//        IMyBinder
+        LogUtils.i("HashCode地址==" + text.hashCode());
+        LogUtils.i("内存地址==" + System.identityHashCode(text));
     }
 
     private void equalPoetry() {

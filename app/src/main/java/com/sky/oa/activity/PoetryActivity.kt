@@ -82,7 +82,7 @@ class PoetryActivity : BaseActivity() {
         recycler.layoutAnimation = controller
     }
 
-    fun loadData() {
+    private fun loadData() {
         var dir = "Documents"//assets初始路径
         var array: Array<String>? = null//assets取出的目录名称
         val link = LinkedList<String>()
