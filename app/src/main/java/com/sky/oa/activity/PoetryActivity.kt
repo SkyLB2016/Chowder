@@ -1,6 +1,7 @@
 package com.sky.oa.activity
 
 import android.content.ClipboardManager
+import android.graphics.Color
 import android.graphics.RectF
 import android.os.Bundle
 import android.view.Gravity
@@ -49,11 +50,18 @@ class PoetryActivity : BaseActivity() {
                 with(holder!!.itemView) {
                     tvDisplay.text = getDatas()[position].content
 //                    tvDisplay.gravity = gravity
+//                    if (position % 2 == 0)
+//                        tvDisplay.setBackgroundColor(Color.WHITE)
+//                    else
+////                        tvDisplay.setBackgroundColor(resources.getColor(R.color.color_DDC29F07))
+//                        tvDisplay.background =
+//                            resources.getDrawable(R.drawable.sel_rect_10_stroke_white_ff4081)
+
                     if (position == 0) tvDisplay.setPadding(
-                        resources.getDimensionPixelSize(R.dimen.wh_32),
                         resources.getDimensionPixelSize(R.dimen.wh_16),
-                        resources.getDimensionPixelSize(R.dimen.wh_32),
-                        resources.getDimensionPixelSize(R.dimen.wh_4)
+                        resources.getDimensionPixelSize(R.dimen.wh_16),
+                        resources.getDimensionPixelSize(R.dimen.wh_16),
+                        0
                     )
                 }
             }
