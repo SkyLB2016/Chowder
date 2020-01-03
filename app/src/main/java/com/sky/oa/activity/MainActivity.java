@@ -1,6 +1,7 @@
 package com.sky.oa.activity;
 
 import android.Manifest;
+import android.app.ActivityManager;
 import android.content.ActivityNotFoundException;
 import android.os.Bundle;
 import android.os.Environment;
@@ -97,45 +98,46 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
     private void testMethod() {
 //        handler.sendEmptyMessage(1);
 //                equalPoetry();
-        LogUtils.i(getClass().getSimpleName()+"=="+Thread.currentThread().getStackTrace()[2].getMethodName());
+//        ActivityManager
+//                ActivityThread
 
     }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        LogUtils.i(getClass().getSimpleName()+"=="+Thread.currentThread().getStackTrace()[2].getMethodName());
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        LogUtils.i(getClass().getSimpleName()+"=="+Thread.currentThread().getStackTrace()[2].getMethodName());
-    }
-
+//    @Override
+//    protected void onRestart() {
+//        super.onRestart();
+//        LogUtils.i(getClass().getSimpleName()+"=="+Thread.currentThread().getStackTrace()[2].getMethodName());
+//    }
+//
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        LogUtils.i(getClass().getSimpleName()+"=="+Thread.currentThread().getStackTrace()[2].getMethodName());
+//    }
+//
     @Override
     protected void onResume() {
         super.onResume();
         LogUtils.i(getClass().getSimpleName()+"=="+Thread.currentThread().getStackTrace()[2].getMethodName());
     }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        LogUtils.i(getClass().getSimpleName()+"=="+Thread.currentThread().getStackTrace()[2].getMethodName());
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        LogUtils.i(getClass().getSimpleName()+"=="+Thread.currentThread().getStackTrace()[2].getMethodName());
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        LogUtils.i(getClass().getSimpleName()+"=="+Thread.currentThread().getStackTrace()[2].getMethodName());
-    }
+//
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        LogUtils.i(getClass().getSimpleName()+"=="+Thread.currentThread().getStackTrace()[2].getMethodName());
+//    }
+//
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        LogUtils.i(getClass().getSimpleName()+"=="+Thread.currentThread().getStackTrace()[2].getMethodName());
+//    }
+//
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        LogUtils.i(getClass().getSimpleName()+"=="+Thread.currentThread().getStackTrace()[2].getMethodName());
+//    }
 
     private void getIdentity() {
         Integer entity = new Integer(3);
