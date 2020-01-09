@@ -1,5 +1,8 @@
 package com.sky.oa;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import com.sky.oa.thread.JoinThread;
 import com.sky.oa.thread.MyThread;
 import com.sky.oa.thread.MyThread1;
@@ -14,8 +17,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.ref.SoftReference;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class JavaConsole {
 
@@ -36,7 +43,7 @@ public class JavaConsole {
 //        readSdFile(new File("C:\\WorkSpace\\Chowder\\app\\total"));
 //        readS();语数外理化生史地政
 
-        runableAndThread();
+//        runableAndThread();
 
 //        String str=new String("abc");                                     // 强引用
 //        SoftReference<String> softRef=new SoftReference<String>(str);
@@ -44,6 +51,9 @@ public class JavaConsole {
 //        stringEqualStr();
 //        Executors
 
+        HashMap<String,String> map = new HashMap<>();
+        String add = map.put("add", "add");
+        System.out.println(add);
     }
 
     private static void stringEqualStr() {

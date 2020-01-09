@@ -289,7 +289,8 @@ Parcelable，Android独有的数据序列化，在CourseEntity中有应用。
 实现IBinder接口（aidl快速实现Binder的工具），主要用在Service开发中，AIDL在PairServiceA中有应用。
 
 ●23.线程Thread：AsyncTask，HandlerThread，IntentService，ThreadPoolExecutor。
-1）Executors.newFixedThreadPool(5)，都为核心线程，且数量固定的线程池，无超时机制。
+Executors创建的ExecutorService，allowCoreThreadTimeOut在ThreadPoolExecutor中；
+1）Executors.newFixedThreadPool(5)，都为核心线程，且数量固定的线程池，可以用allowCoreThreadTimeOut设置超时机制，这样和非核心线程也就没啥区别了。
 2）Executors.newCachedThreadPool()，无核心，非核心线程数不限数量，有超时机制60s，适合多图加载这种文件小而多的任务。
 3）Executors.newScheduledThreadPool(5)，核心固定，非核心不限，闲置时超时回收，主要用于执行定时任务和具有固定周期的重复任务。
 4）Executors.newSingleThreadExecutor()，仅创建一个单核心线程，任务串行。

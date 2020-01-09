@@ -1,4 +1,4 @@
-include ':app', ':puzzle', ':g2048'
+include ':app', ':puzzle', ':g2048', ':source'
 include ':libsdk',
         ':libdesign',
         ':rxbus',

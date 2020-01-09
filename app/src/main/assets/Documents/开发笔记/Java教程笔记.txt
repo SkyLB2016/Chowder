@@ -1,16 +1,16 @@
 Java教程笔记
 
 ●01.Java特性
-1）简单的：类似C
-2）面向对象的：
-3）分布式的：
-4）健壮的：
-5）安全的：
-6）体系结构中立的：
-7）可移植的：
-8）解释型的：
-9）高性能的：
-10）多线程的：
+1）简单的，类似C；
+2）面向对象的；
+3）分布式的；
+4）健壮的；
+5）安全的；
+6）体系结构中立的；
+7）可移植的；
+8）解释型的；
+9）高性能的；
+10）多线程的；
 11）动态的：云端更新类。
 
 ●02.一些概念一系列对象的集合，通过调用彼此的方法来协同工作。彼此间的概念：对象，类，方法，变量.
@@ -100,9 +100,9 @@ Java教程笔记
 
 ●14.强引用，软引用，弱引用，虚引用
 1）强引用：直接赋值的引用
-2）软引用：直接赋值后，使用SoftReference包装，一般会结合ReferenceQueue（引用队列来使用），内存不足时回收，软引用被回收后，才会被加载（关联）到引用队列中。
+2）软引用：直接赋值后，使用SoftReference包装，一般会结合ReferenceQueue（引用队列）来使用，内存不足时回收，软引用被回收后，才会被加载（关联）到引用队列中。
 软引用可用来实现内存敏感的高速缓存，如内存中缓存图片
-3）弱引用：直接赋值后，使用WeakReference包装，一般会结合ReferenceQueue（引用队列来使用），发现即回收，弱引用被回收后，才会被加载（关联）到引用队列中。
+3）弱引用：直接赋值后，使用WeakReference包装，一般会结合ReferenceQueue（引用队列）来使用，发现即回收，弱引用被回收后，才会被加载（关联）到引用队列中。
 通常用于debug，内存监视工具等程序中。因为这类程序一般要求即要观察到对象，又不能影响该对象正常的CG过程。
 4）虚引用：直接赋值后，用PhantomReference包装，必须与ReferenceQueue联合使用。随时回收，回收之前就已经被放到了与之关联的引用队列之中。
 5）String  abc = abcWeakRef.get();相当于强引用
@@ -135,6 +135,11 @@ Java教程笔记
 第二条数据是当前方法的所在位置。
 2）StackTraceElement stack = new Throwable().getStackTrace();
 此方法取得的StackTraceElement栈，它的第零条数据就是当前方法所在的位置。
+StackTraceElement的属性
+String declaringClass; 类的全名；getMethodName
+String methodName; 对应的方法名；getClassName
+String fileName; 类名；getFileName
+int    lineNumber; 对应代码的行数；getLineNumber
 
 ●17.
 1）

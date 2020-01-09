@@ -22,7 +22,10 @@ public class LogUtils {
 
     private static String generateTag() {
         //此方法获取的栈的第零条数据是当前方法所在位置，以此类推，idev四个方法就是第一条，在之上的入口位置就是第二条
-        StackTraceElement stack = new Throwable().getStackTrace()[2];
+//        StackTraceElement stack = new Throwable().getStackTrace()[2];
+
+        //第二条数据是当前方法的所在位置。第四条数据就是所调用的方法的位置
+        StackTraceElement stack = Thread.currentThread().getStackTrace()[4];
         String tag = "%s.%s(L:%d)";
         String className = stack.getClassName();
         className = className.substring(className.lastIndexOf(".") + 1);

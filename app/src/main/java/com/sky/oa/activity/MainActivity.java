@@ -10,6 +10,7 @@ import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
@@ -33,7 +34,10 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by libin on 2018/11/13 4:26 PM.
@@ -100,15 +104,37 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
 //                equalPoetry();
 //        ActivityManager
 //                ActivityThread
+//        TextView
+        LinkedHashMap<String, String> map = new LinkedHashMap<>();
+        String add = map.put("add", "add");
+        map.put("add1", "add");
+        map.put("add2", "add");
+        map.put("add3", "add");
+        map.put("add4", "add");
+        map.put("add5", "add");
+        map.put("add6", "add999");
+
+        LogUtils.i(map.get("add1"));
+        String add1 = map.put("add3", "不同的");
+        LogUtils.i("add1==" + add1);
+        String add4 = map.put("add4", "add");
+        LogUtils.i("add4==" + add4);
+        Map.Entry<String,String> toEvict = null;
+        for (Map.Entry<String,String>  entry : map.entrySet()) {
+            toEvict = entry;
+        }
+
+        LogUtils.i("add4==" + toEvict.getKey()+"=="+toEvict.getValue());
 
     }
 
-//    @Override
-//    protected void onRestart() {
-//        super.onRestart();
-//        LogUtils.i(getClass().getSimpleName()+"=="+Thread.currentThread().getStackTrace()[2].getMethodName());
-//    }
-//
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        LogUtils.i(getClass().getSimpleName() + "==" + Thread.currentThread().getStackTrace()[2].getMethodName());
+    }
+
+    //
 //    @Override
 //    protected void onStart() {
 //        super.onStart();
@@ -118,7 +144,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
     @Override
     protected void onResume() {
         super.onResume();
-        LogUtils.i(getClass().getSimpleName()+"=="+Thread.currentThread().getStackTrace()[2].getMethodName());
+        LogUtils.i(getClass().getSimpleName() + "==" + Thread.currentThread().getStackTrace()[2].getMethodName());
     }
 //
 //    @Override
