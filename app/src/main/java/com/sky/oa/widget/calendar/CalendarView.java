@@ -31,7 +31,7 @@ import java.util.Calendar;
 public class CalendarView extends View {
 
     public static final int MONTH_OF_DAY_ROW = 6;   //行数
-    public static final int MONTH_OF_DAY_COL = 7;   //列数
+    public static final int MONTH_OF_DAY_COLUMN = 7;   //列数
 
     public static int FIRST_DAY = Calendar.MONDAY;  //每周的第一天是周几
 
@@ -97,7 +97,7 @@ public class CalendarView extends View {
         getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
-                LogUtils.i("执行的第" + num++ + "次");
+                LogUtils.i("执行的==第" + num++ + "次");
                 if (getViewTreeObserver().isAlive()) {
                     getViewTreeObserver().removeOnPreDrawListener(this);
                     initLayer();
@@ -105,6 +105,12 @@ public class CalendarView extends View {
                 return true;
             }
         });
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        LogUtils.i("onMeasure==");
     }
 
     protected void initLayer() {
@@ -120,7 +126,9 @@ public class CalendarView extends View {
         //导航条高度，其他几种模式，基于此为顶部
         int yearBarHeight = getResources().getDimensionPixelOffset(R.dimen.wh_40);
         //行高使用一样的
-        int rowHeight = getWidth() / MONTH_OF_DAY_COL;
+        int rowHeight = getWidth() / MONTH_OF_DAY_COLUMN;
+        LogUtils.i("width=="+getWidth());
+        LogUtils.i("height=="+getHeight());
 
         //年份导航条
         initYearBar(year, month, yearBarHeight);
@@ -277,6 +285,7 @@ public class CalendarView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        LogUtils.i("ondraw==");
         super.onDraw(canvas);
         if (yearBarLayer != null) {
             yearBarLayer.onDraw(canvas);

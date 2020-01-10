@@ -101,39 +101,16 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
 
     }
 
-//    LruCache<String, String> lru = new LruCache<>(5);
-    LinkedHashMap<String, String> linked = new LinkedHashMap<String, String>(0, 0.75f, true);
-
-    private void addLinked() {
-        linked.put("add0", "add0");
-        linked.put("add1", "add1");
-        linked.put("add2", "add2");
-        linked.put("add3", "add3");
-        linked.put("add4", "add4");
-        linked.put("add5", "add5");
-    }
     private void testMethod() {
-        addLinked();
 //        handler.sendEmptyMessage(1);
 //                equalPoetry();
-        for (int i = 0; i < 100; i++) {
-            linked.put("add"+i, "add"+i);
-        }
-        linked.put("add6", "add6");
-        linked.put("add7", "add7");
-        linked.put("add8", "add8");
-        linked.put("add6", "add6");
-        linked.put("add8", "add8");
-        linked.put("add7", "add7");
-        linked.put("add4", "add4");
-
     }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        LogUtils.i(getClass().getSimpleName() + "==" + Thread.currentThread().getStackTrace()[2].getMethodName());
-    }
+//    @Override
+//    protected void onRestart() {
+//        super.onRestart();
+//        LogUtils.i(getClass().getSimpleName() + "==" + Thread.currentThread().getStackTrace()[2].getMethodName());
+//    }
 
     //
 //    @Override
