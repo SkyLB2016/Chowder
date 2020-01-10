@@ -283,7 +283,7 @@ Serializable应用：
 3）用transient关键字标记的成员变量不参与序列化。
 Parcelable，Android独有的数据序列化，在CourseEntity中有应用。
 两者的应用比较：
-在本地保存数据时以及简单的数据通讯可以使用serializable，Parcelable主要用在内存序列化上，建议比较大的数据对象传输是使用。
+在本地保存数据时以及简单的数据通讯可以使用serializable，Parcelable主要用在内存序列化上，建议比较大的数据对象传输时使用。
 
 ●22.Binder（待深入研究）
 实现IBinder接口（aidl快速实现Binder的工具），主要用在Service开发中，AIDL在PairServiceA中有应用。

@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
+import androidx.collection.LruCache;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sky.design.adapter.RecyclerAdapter;
@@ -97,34 +98,34 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
                 testMethod();
             }
         });
+
     }
 
+//    LruCache<String, String> lru = new LruCache<>(5);
+    LinkedHashMap<String, String> linked = new LinkedHashMap<String, String>(0, 0.75f, true);
+
+    private void addLinked() {
+        linked.put("add0", "add0");
+        linked.put("add1", "add1");
+        linked.put("add2", "add2");
+        linked.put("add3", "add3");
+        linked.put("add4", "add4");
+        linked.put("add5", "add5");
+    }
     private void testMethod() {
+        addLinked();
 //        handler.sendEmptyMessage(1);
 //                equalPoetry();
-//        ActivityManager
-//                ActivityThread
-//        TextView
-        LinkedHashMap<String, String> map = new LinkedHashMap<>();
-        String add = map.put("add", "add");
-        map.put("add1", "add");
-        map.put("add2", "add");
-        map.put("add3", "add");
-        map.put("add4", "add");
-        map.put("add5", "add");
-        map.put("add6", "add999");
-
-        LogUtils.i(map.get("add1"));
-        String add1 = map.put("add3", "不同的");
-        LogUtils.i("add1==" + add1);
-        String add4 = map.put("add4", "add");
-        LogUtils.i("add4==" + add4);
-        Map.Entry<String,String> toEvict = null;
-        for (Map.Entry<String,String>  entry : map.entrySet()) {
-            toEvict = entry;
+        for (int i = 0; i < 100; i++) {
+            linked.put("add"+i, "add"+i);
         }
-
-        LogUtils.i("add4==" + toEvict.getKey()+"=="+toEvict.getValue());
+        linked.put("add6", "add6");
+        linked.put("add7", "add7");
+        linked.put("add8", "add8");
+        linked.put("add6", "add6");
+        linked.put("add8", "add8");
+        linked.put("add7", "add7");
+        linked.put("add4", "add4");
 
     }
 
