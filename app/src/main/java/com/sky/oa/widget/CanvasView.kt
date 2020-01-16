@@ -38,18 +38,25 @@ class CanvasView @JvmOverloads constructor(
                 cY = event.y
             }
             MotionEvent.ACTION_MOVE -> {
-                val dX = (event.rawX - lastX).toInt()
-                val dY = (event.rawY - lastY).toInt()
+                val dX = (lastX - event.rawX).toInt()
+                val dY = (lastY - event.rawY).toInt()
                 //移动view所在位置
-                layout(left + dX, top + dY, right + dX, bottom + dY)
+//                layout(left + dX, top + dY, right + dX, bottom + dY)
 //                offsetLeftAndRight(dX)
 //                offsetTopAndBottom(dY)
-//                (parent as View).scrollBy(-dX, -dY)
-                cX = event.x
-                cY = event.y
+
+//                smoothScrollTo(dX, dY)
+//                scrollTo(dX, dY)//lastXY不能重置
+//                (parent as View).scrollBy(dX, dY)
+                scrollBy(dX, dY)
+
+                //scrollTo中的xy是最终距离，所以使用scrollTo是，lastXY只能是按下时的点。
                 lastX = event.rawX
                 lastY = event.rawY
-//                smoothScrollTo(dX, dY)
+
+                //触摸点的圆心
+                cX = event.x
+                cY = event.y
             }
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                 lastX = -1f
@@ -63,20 +70,21 @@ class CanvasView @JvmOverloads constructor(
     }
 
     val scroller = Scroller(context)
+
     override fun computeScroll() {
-        super.computeScroll()
         if (scroller.computeScrollOffset()) {
             scrollTo(scroller.currX, scroller.currY)
             postInvalidate()
         }
     }
 
-    fun smoothScrollTo(destX: Int, destY: Int) {
-        val scrollX = scrollX
-        val delta = destX - scrollX
-        scroller.startScroll(scrollX, 0, delta, 0, 1000)
+    private fun smoothScrollTo(dX: Int, dY: Int) {
+//        val scrollX = scrollX
+//        val delta = dX - scrollX
+//        //在1000ms内画像dX，慢慢的滑动
+        scroller.startScroll(scrollX, scrollY, dX, dY, 1000)
+        invalidate()
     }
-
     var bitmap: Bitmap = BitmapFactory.decodeResource(resources, R.mipmap.ic_puzzle)
     var sx = 0f
     var bw = 0
@@ -306,9 +314,11 @@ class CanvasView @JvmOverloads constructor(
 
         val radius = area.height() / 2
         //计算的文字所在的背景框的左侧，顶部，右侧，底部
-        val leftX = radius * Math.cos(Math.PI / 180 * start) + area?.centerX() + 20//(20的偏移量，是向右移动的，所以加)
+        val leftX =
+            radius * Math.cos(Math.PI / 180 * start) + area?.centerX() + 20//(20的偏移量，是向右移动的，所以加)
         val topY = radius * Math.sin(Math.PI / 180 * start) + area.centerY() - textHeight
-        val rightX = radius * Math.cos(Math.PI / 180 * (start + sweep)) + area?.centerX() - 20//(20的偏移量)
+        val rightX =
+            radius * Math.cos(Math.PI / 180 * (start + sweep)) + area?.centerX() - 20//(20的偏移量)
         val bottomY = topY + textHeight * 1.5
         //文字背景所在矩形
         val textRect = Rect(leftX.toInt(), topY.toInt(), rightX.toInt(), bottomY.toInt())

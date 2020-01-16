@@ -50,10 +50,13 @@ Activity内事件在5s后依然无响应，broadcastreceiver 10s内无法回应�
 2）不要再广播内做耗时操作，如果非要，那么请通过service新启线程来进行耗时操作。
 
 ●09.横竖屏切换activity的生命周期
-1）不设置manifest里设置Android:configChanges
-设置manifest里设置Android:configChanges="orientation"，执行顺序
-onSaveInstanceState与onpause（可先可后）-onstop-ondestory-onCreate-onStart-onRestoreInstanceState-onresume
-2）设置manifest里设置Android:configChanges="orientation|keyboardHidden"，不会调用生命周期，只会执行onConfigurationChanged方法。
+1）不设置manifest里设置Android:configChanges，会调用onSaveInstanceState（一般会在stop之后）和onRestoreInstanceState；执行顺序
+onpause-onstop-（onSaveInstanceState）-ondestory-onCreate-onStart-onRestoreInstanceState-onresume
+2）设置manifest里设置android:configChanges="orientation"，不会调用生命周期，只会执行onConfigurationChanged方法。
+configchanges一般常用三个选项：
+locale：系统语言变化
+keyboardHidden：键盘的可访问性发生了变化
+orientation：屏幕方向变化
 
 ●10.MVC与MVP的区别
 1）功能复杂的话，MVC的activity或fragment会很庞大，view与model耦合严重
@@ -67,7 +70,7 @@ accessOrder为true时，get方法中会调用afterNodeAccess(e)，put方法中�
 各版本代码稍有不同，但基本思想就是这样的。
 
 ●12.IntentService和Service有什么区别？
-1）Service不是独立的进程，也不是独立的线程，他也是依赖于应用程序的主线程，可以说是没有界面的activity，后台执行，不建议在service中编写好事的逻辑和操作，否则会ANR。
+1）Service不是独立的进程，也不是独立的线程，他也是依赖于应用程序的主线程，可以说是没有界面的activity，后台执行，不建议在service中编写耗时的逻辑和操作，否则会ANR。
 2）IntentService是Service的子类，IntentService在执行onCreate操作的时候，内部开了一个线程，去执行耗时操作。通过Handler Looper Message的方式实现了一个多线程的操作，同时耗时操作也可以被这个线程管理和执行，不会产生ANR。
 3）其实就是IntentService内部单开了一个线程
 
@@ -189,10 +192,14 @@ accessOrder为true时，get方法中会调用afterNodeAccess(e)，put方法中�
 5）生成动态代理。
 
 ●32.进程与线程的区别。
+线程就是共享父进程的空间的便是线程，所以子线程的VSIZE必然相同，否则要么是子进程，要么是平级的进程，再不然就是父进程。
+kthread进程是所有内核进程的父进程。
+init进程：是所有用户（App）进程的父进程（或者父父进程）
+
 进程包括多个线程，一个程序一个进程，可以有多个线程；多线程的优点可以提高执行效率，提高资源利用率。
 线程作为调度和分配的基本单位，进程作为拥有资源的基本单位。
 
-●33.思索的必要条件，怎么处理死锁。
+●33.死锁的必要条件，怎么处理死锁。
 1）循环等待
 2）非抢占
 3）互斥使用
@@ -228,7 +235,7 @@ accessOrder为true时，get方法中会调用afterNodeAccess(e)，put方法中�
 3）Socket是一种不同计算机实时连接，比如说传送文件，即时通讯。
 
 ●39.view，activity，window三者之间的关系
-一个Activity一个Window，也就是一个PhoneWindow，一个PhoneWindow持有一个DecorView的实例，DecorView本身是一个FrameLayout。
+一个Activity包含一个Window，也就是一个PhoneWindow，一个PhoneWindow持有一个DecorView的实例，DecorView本身继承FrameLayout。
 1）
 2）
 3）

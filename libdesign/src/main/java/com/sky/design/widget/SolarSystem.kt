@@ -7,28 +7,35 @@ import android.animation.ObjectAnimator
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
+import android.view.ViewConfiguration
 import android.view.animation.BounceInterpolator
 import android.widget.FrameLayout
 import com.sky.R
+import com.sky.sdk.utils.LogUtils
 
 /**
  * Created by SKY on 2015/4/9 21:10:39.
  * 卫星式菜单
  * Math的三角函数算法：
-    var angle = 30.0//角度
-    val radians = Math.PI * angle / 180//转换成弧度
-    val ix = 200 * Math.cos(radians)
-    val iy = 200 * Math.sin(radians)
-    0-360 度，Cos取值范围1..0..-1..0..1，即+- -+，Sin 取值范围0..1..0..-1..0,即++- -
-    以x=Cos,y=Sin算为++，-+，- -，+-，即一二三四象限，以X正轴1为起点，逆时针方向画圆，画布上Y轴正负颠倒，所以是顺时针方向画圆
-    以x=Sin,y=Cos算为++，+-，- -，-+，即一四三二象限，以Y正轴1为起点，顺时针方向画圆，画布上Y轴正负颠倒，所以是逆时针方向画圆
-    val ix = 200 * Math.sin(radians)
-    val iy = 200 * Math.cos(radians)
+var angle = 30.0//角度
+val radians = Math.PI * angle / 180//转换成弧度
+val ix = 200 * Math.cos(radians)
+val iy = 200 * Math.sin(radians)
+0-360 度，Cos取值范围1..0..-1..0..1，即+- -+，Sin 取值范围0..1..0..-1..0,即++- -
+以x=Cos,y=Sin算为++，-+，- -，+-，即一二三四象限，以X正轴1为起点，逆时针方向画圆，画布上Y轴正负颠倒，所以是顺时针方向画圆
+以x=Sin,y=Cos算为++，+-，- -，-+，即一四三二象限，以Y正轴1为起点，顺时针方向画圆，画布上Y轴正负颠倒，所以是逆时针方向画圆
+val ix = 200 * Math.sin(radians)
+val iy = 200 * Math.cos(radians)
  */
-class SolarSystem @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : FrameLayout(context, attrs, defStyleAttr) {
+class SolarSystem @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : FrameLayout(context, attrs, defStyleAttr) {
 
     var radius: Int = RADIUS
-    var position = CENTER// 默认位置
+    var position = CENTER
+        // 默认位置
         set(value) {
             if (value === field) return
             if (isOpen) toggleMenu(TIME)
@@ -58,7 +65,8 @@ class SolarSystem @JvmOverloads constructor(context: Context, attrs: AttributeSe
     private var isRotating = false
 
     init {
-        val style = context.theme.obtainStyledAttributes(attrs, R.styleable.SolarSystem, defStyleAttr, 0)
+        val style =
+            context.theme.obtainStyledAttributes(attrs, R.styleable.SolarSystem, defStyleAttr, 0)
         position = style.getInt(R.styleable.SolarSystem_position, CENTER)//控件所处位置
         radius = style.getDimensionPixelSize(R.styleable.SolarSystem_radius, radius)//获取半径值
         style.recycle()// 释放
@@ -105,12 +113,14 @@ class SolarSystem @JvmOverloads constructor(context: Context, attrs: AttributeSe
             CENTER_LEFT, CENTER_RIGHT -> height += height   //居中且在左或右边时高翻倍
         }
         // 判断宽高是否超越EXACTLY即match模式下的宽高
-        if (layoutWidth - paddingLeft - paddingRight < width) width = layoutWidth - paddingLeft - paddingRight
-        if (layoutHeight - paddingTop - paddingBottom < height) height = layoutHeight - paddingTop - paddingBottom
+        if (layoutWidth - paddingLeft - paddingRight < width) width =
+            layoutWidth - paddingLeft - paddingRight
+        if (layoutHeight - paddingTop - paddingBottom < height) height =
+            layoutHeight - paddingTop - paddingBottom
         // 为框架父控件写入宽高
         setMeasuredDimension(
-                if (widthMode == MeasureSpec.EXACTLY) layoutWidth else width + paddingLeft + paddingRight,
-                if (heightMode == MeasureSpec.EXACTLY) layoutHeight else height + paddingTop + paddingBottom
+            if (widthMode == MeasureSpec.EXACTLY) layoutWidth else width + paddingLeft + paddingRight,
+            if (heightMode == MeasureSpec.EXACTLY) layoutHeight else height + paddingTop + paddingBottom
         )
     }
 
@@ -133,7 +143,12 @@ class SolarSystem @JvmOverloads constructor(context: Context, attrs: AttributeSe
             lp = childAt.layoutParams as MarginLayoutParams
             childPadLeft = getChildPadLeft(menuWidth, lp, childWidth)
             childPadTop = getChildPadTop(menuHeight, lp, childHeight)
-            childAt.layout(childPadLeft, childPadTop, childPadLeft + childWidth, childPadTop + childHeight)
+            childAt.layout(
+                childPadLeft,
+                childPadTop,
+                childPadLeft + childWidth,
+                childPadTop + childHeight
+            )
         }
     }
 
@@ -159,12 +174,13 @@ class SolarSystem @JvmOverloads constructor(context: Context, attrs: AttributeSe
     }
 
     //九个位置三行
-    private fun getChildPadTop(menuHeight: Int, lp: MarginLayoutParams, childHeight: Int): Int = when (position) {
-        CENTER, CENTER_LEFT, CENTER_RIGHT -> (height - childHeight) / 2 + lp.topMargin + paddingTop - paddingBottom
-        LEFT_TOP, RIGHT_TOP, CENTER_TOP -> paddingTop + lp.topMargin + (menuHeight - childHeight) / 2
-        LEFT_BOTTOM, CENTER_BOTTOM, RIGHT_BOTTOM -> height - childHeight - lp.bottomMargin - paddingBottom - (menuHeight - childHeight) / 2
-        else -> 0
-    }
+    private fun getChildPadTop(menuHeight: Int, lp: MarginLayoutParams, childHeight: Int): Int =
+        when (position) {
+            CENTER, CENTER_LEFT, CENTER_RIGHT -> (height - childHeight) / 2 + lp.topMargin + paddingTop - paddingBottom
+            LEFT_TOP, RIGHT_TOP, CENTER_TOP -> paddingTop + lp.topMargin + (menuHeight - childHeight) / 2
+            LEFT_BOTTOM, CENTER_BOTTOM, RIGHT_BOTTOM -> height - childHeight - lp.bottomMargin - paddingBottom - (menuHeight - childHeight) / 2
+            else -> 0
+        }
 
     override fun generateLayoutParams(attrs: AttributeSet) = LayoutParams(context, attrs)
 
@@ -195,6 +211,7 @@ class SolarSystem @JvmOverloads constructor(context: Context, attrs: AttributeSe
         for (i in 0 until childCount - 1) {
             childAt = getChildAt(i)
             childAt.setOnClickListener { v ->
+                outPutViewParameter(v)
                 menuItemOnClick?.invoke(v, i)
                 childAnimator(i)//子view点击之后的效果
                 if (isRecoverChild) toggleMenu(TIME)
@@ -225,6 +242,27 @@ class SolarSystem @JvmOverloads constructor(context: Context, attrs: AttributeSe
                 })
         }
         mState = changeState()// 执行完成后切换菜单状态
+
+
+//        for (i in 0 until childCount - 1) {
+        outPutViewParameter(getChildAt(0))
+//        }
+
+    }
+
+    /**
+     * 输出view的left、top、right、bottom、x、y、translationX、translationY。
+     */
+    private fun outPutViewParameter(v: View) {
+        LogUtils.i("left==" + v.left)
+        LogUtils.i("top==" + v.top)
+        LogUtils.i("right==" + v.right)
+        LogUtils.i("bottom==" + v.bottom)
+        LogUtils.i("x==" + v.x)
+        LogUtils.i("y==" + v.y)
+        LogUtils.i("translationX==" + v.translationX)
+        LogUtils.i("translationY==" + v.translationY)
+        LogUtils.i("touchSlop=="+ViewConfiguration.get(context).scaledTouchSlop)
     }
 
     /**

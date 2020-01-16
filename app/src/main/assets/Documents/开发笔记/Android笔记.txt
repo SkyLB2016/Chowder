@@ -1,5 +1,8 @@
 编程笔记·李彬
 
+无论以前还是现在享过的福，偷过的懒，早晚都会让你连本带利的还回来。
+你还在偷懒吗？
+
 ●01.Android的系统架构
 1）操作系统层OS：linux内核。
 2）硬件抽象层：HAL（Hardware Abstraction Layer），内核与硬件电路之间的抽象接口层。
@@ -113,8 +116,8 @@ scrollTo/scrollBy：操作简单，适合对View内容的滑动；
 2）onInterceptTouchEvent(MotionEvent e)， ViewGroup独有
 3）onTouchEvent(MotionEvent e)
 4）MotionEvent中的方法：
-GetX()与getY()是视图坐标，相对坐标，即是触摸点到它到父布局左边与顶边的距离
-GetRawX()与getRawY()是绝对坐标，即是触摸点到屏幕左边与顶边的距离
+GetX()与getY()是视图坐标，相对坐标，返回的是相对于当前view左上角的xy的坐标。
+GetRawX()与getRawY()是绝对坐标，返回的是相对于手机屏幕左上角的xy的坐标。
 5）触摸按钮时的回调机制：A包B包C
 A.disPatch -> A.intercept ->B.disPatch -> B.intercept ->C.disPatch -> C.touch -> B.touch -> A.touch
 6）viewgroup推荐使用onInterceptTouchEvent,view使用onTouchEvent。
@@ -406,7 +409,7 @@ http://www.baidu.com/...
 6）
 
 ●32.JAVA锁机制，原子性
-1）synchronizen：同一性，可见性。同一个方法块同时只能有一条线程运行。
+1）synchronized：同一性，可见性。同一个方法块同时只能有一条线程运行。
 偏向锁：保存线程id，大量同一线程访问，方法块不加锁。
 轻量级锁：非同时多线程访问，id不同，锁启动。
 重量级锁：多线程同时访问。

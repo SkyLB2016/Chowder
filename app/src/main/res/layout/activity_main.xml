@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:animateLayoutChanges="true"
->
+    android:animateLayoutChanges="true">
+
     <include layout="@layout/include_toolbar" />
 
     <include layout="@layout/content_main" />
@@ -19,8 +19,17 @@
         android:layout_margin="@dimen/wh_16"
         app:rippleColor="@color/colorPrimaryDark"
         app:srcCompat="@drawable/ic_menu_send" />
-    <!--app:backgroundTint="@color/colorAccent"-->
-    <!--app:backgroundTintMode="screen"-->
-    <!--app:layout_anchor="@id/appbar"/>-->
-    <!--app:layout_anchorGravity="end|center|bottom"/>-->
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|bottom"
+        android:layout_margin="@dimen/wh_16"
+        app:backgroundTint="@color/colorAccent"
+        app:backgroundTintMode="screen"
+        app:rippleColor="@color/colorPrimaryDark"
+        app:srcCompat="@drawable/ic_menu_send" />
+    <!--    app:layout_anchor="@id/appbar"/>-->
+    <!--    app:layout_anchorGravity="end|center|bottom"/>-->
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -269,8 +269,9 @@ public class ZoomImageView extends androidx.appcompat.widget.AppCompatImageView 
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        if (gestureDetector.onTouchEvent(event))
+        if (gestureDetector.onTouchEvent(event)) {
             return true;
+        }
         scaleGestureDetector.onTouchEvent(event);
         float x = 0;
         float y = 0;

@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.collection.LruCache;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.sky.design.adapter.RecyclerAdapter;
 import com.sky.design.app.BasePActivity;
 import com.sky.oa.R;
@@ -40,10 +42,18 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by libin on 2018/11/13 4:26 PM.
  */
 public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenuItemClickListener, IMainView {
+
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
+    @BindView(R.id.fabLeft)
+    FloatingActionButton fabLeft;
 
     private MainAdapter adapter;
     Handler handler = new Handler(new Handler.Callback() {
@@ -72,6 +82,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
     @Override
     protected void initialize(@Nullable Bundle savedInstanceState) {
 //        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//屏幕在此页面时保持常亮
+        ButterKnife.bind(this);
         baseTitle.setNavigationIcon(null);
         RecyclerView recycler = findViewById(R.id.recycler);
         recycler.setHasFixedSize(true);
@@ -92,18 +103,58 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         //易筋经、五禽戏、六字诀和八段锦
         //Rw2 B2 U2 Lw U2 Rw' U2 Rw U2 F2 Rw F2 Lw' B2 Rw2
         //LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
-        findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 testMethod();
             }
         });
+        fab.setEnabled(false);
+        fab.setClickable(false);
 
+        fab.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                testMethod();
+                return true;
+            }
+        });
+        fabLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                testMethod();
+            }
+        });
+        fabLeft.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return false;
+            }
+        });
+
+    }
+
+    @Override
+    protected void onUserLeaveHint() {
+        super.onUserLeaveHint();
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+
+        return super.dispatchTouchEvent(ev);
     }
 
     private void testMethod() {
 //        handler.sendEmptyMessage(1);
 //                equalPoetry();
+        LogUtils.i("fab的Enable状态==" + fab.isEnabled());
+        LogUtils.i("fab的Clickable状态==" + fab.isClickable());
+        LogUtils.i("fab的LongClickable状态==" + fab.isLongClickable());
+
+        LogUtils.i("fabLeft的Enable状态==" + fabLeft.isEnabled());
+        LogUtils.i("fabLeft的Clickable状态==" + fabLeft.isClickable());
+        LogUtils.i("fabLeft的LongClickable状态==" + fabLeft.isLongClickable());
     }
 
 //    @Override

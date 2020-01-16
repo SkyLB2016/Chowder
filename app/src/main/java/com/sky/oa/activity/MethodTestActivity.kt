@@ -22,6 +22,8 @@ import android.text.SpannableStringBuilder
 import android.text.style.*
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewConfiguration
+import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.animation.LayoutAnimationController
 import android.widget.TextView
@@ -70,6 +72,7 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
             , "SVG与Value", "渐变的文字", "音频处理", "字符串转id"
             , "排序算法", "LinkedList使用"
             , "MD5加密", "科学计数法", "虚拟机鉴定", "获取当前方法的名称"
+            , "输出View的位置信息", "URL的结构"
         )
         for (i in method) {
             val tvText =
@@ -106,6 +109,8 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
             "LinkedList使用" -> getNum()
             "MD5加密" -> MD5Utils.encryption("http://img.mukewang.com/55237dcc0001128c06000338.jpg")
             "科学计数法" -> format("0")
+            "输出View的位置信息" -> outPutViewParameter(v)
+            "URL的结构" -> getURL()
             else -> ""
         }
         image.visibility = View.GONE
@@ -121,6 +126,42 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
             "虚拟机鉴定" -> detectEmulatorSimple()
             "获取当前方法的名称" -> getMethodName()
         }
+    }
+
+    /**
+     * 输出view的left、top、right、bottom、x、y、translationX、translationY。
+     */
+    private fun outPutViewParameter(v: View): String {
+
+        val builder = StringBuilder()
+        builder.append("left == ${v.left}\n")
+        builder.append("top == ${v.top}\n")
+        builder.append("right == ${v.right}\n")
+        builder.append("bottom == ${v.bottom}\n")
+        builder.append("x == ${v.x}\n")
+        builder.append("y == ${v.y}\n")
+        builder.append("translationX == ${v.translationX}\n")
+        builder.append("translationY == ${v.translationY}\n")
+        builder.append("touchSlop == ${ViewConfiguration.get(this).scaledTouchSlop}\n")
+        val layoutParams: ViewGroup.LayoutParams = v.layoutParams
+        builder.append("width == ${layoutParams.width}\n")
+        builder.append("height == ${layoutParams.height}\n")
+
+        builder.append("width == ${v.width}\n")
+        builder.append("height == ${v.height}\n")
+
+
+        val params: ViewGroup.MarginLayoutParams = v.layoutParams as ViewGroup.MarginLayoutParams
+        builder.append("width == ${params.width}\n")
+        builder.append("height == ${params.height}\n")
+        builder.append("layoutDirection == ${params.layoutDirection}\n")
+        builder.append("leftMargin == ${params.leftMargin}\n")
+        builder.append("topMargin == ${params.topMargin}\n")
+        builder.append("rightMargin == ${params.rightMargin}\n")
+        builder.append("bottomMargin == ${params.bottomMargin}\n")
+        builder.append("marginEnd == ${params.marginEnd}\n")
+        builder.append("marginStart == ${params.marginStart}\n")
+        return builder.toString()
     }
 
     private fun getMethodName() {
@@ -284,7 +325,7 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
         var builder = StringBuilder()
         for (element in arr) builder.append("，$element")
 //        LogUtils.i("text==$builder")
-        builder.replace(0, 1, "")
+        builder.replace(0, 1, "")//移除开始的逗号
 //        LogUtils.i("text==$builder")
         return builder.toString()
     }
@@ -760,14 +801,19 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
                 "Java Home 属性==${System.getProperty("java.home")}\n"
     }
 
-    private fun getURL() {
+    /**
+     * URL的结构
+     */
+    private fun getURL(): String {
+        val builder = StringBuilder()
         val url = URL(HttpUrl.URL_MUKE + HttpUrl.URL_MUKE1)
-        LogUtils.i("资源名==${url.file}")
-        LogUtils.i("主机名==${url.host}")
-        LogUtils.i("路径==${url.path}")
-        LogUtils.i("端口==${url.port}")
-        LogUtils.i("协议名称==${url.protocol}")
-        LogUtils.i("查询字符串==${url.query}")
+        builder.append("资源名 == ${url.file}\n")
+        builder.append("主机名 == ${url.host}\n")
+        builder.append("路径 == ${url.path}\n")
+        builder.append("端口 == ${url.port}\n")
+        builder.append("协议名称 == ${url.protocol}\n")
+        builder.append("查询字符串 == ${url.query}\n")
+        return builder.toString()
     }
 
     private fun ttsTest() {

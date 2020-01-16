@@ -29,7 +29,7 @@ class PopPagerAdapter : PagerAdapter() {
 
         val imageView = ZoomImageView(container.context)
         imageView.setBackgroundResource(R.color.color_white)
-        imageView.setColorFilter(Color.parseColor("#77000000"))
+//        imageView.setColorFilter(Color.parseColor("#77000000"))
         loader.loadImage(imageView, parentPath + "/" + this.strings!![position])
 
         container.addView(imageView)

@@ -87,7 +87,7 @@
             android:hardwareAccelerated="false"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_test"
-            android:screenOrientation="portrait">
+            android:configChanges="keyboardHidden">
             <intent-filter>
                 <action android:name="com.sky.coustom" />
                 <category android:name="android.intent.category.CAR_MODE" />

@@ -16,7 +16,8 @@
  * limitations under the License.
  */
 
-package source;
+package com.sky.source;
+//package com.android.server.am;
 
 import static android.Manifest.permission.CHANGE_CONFIGURATION;
 import static android.Manifest.permission.CHANGE_DEVICE_IDLE_TEMP_WHITELIST;

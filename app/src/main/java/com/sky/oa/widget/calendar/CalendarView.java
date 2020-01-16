@@ -4,7 +4,9 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewTreeObserver;
 
@@ -107,11 +109,11 @@ public class CalendarView extends View {
         });
     }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        LogUtils.i("onMeasure==");
-    }
+//    @Override
+//    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+//        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+//        LogUtils.i("onMeasure==");
+//    }
 
     protected void initLayer() {
         if (initListener != null) {
@@ -127,8 +129,8 @@ public class CalendarView extends View {
         int yearBarHeight = getResources().getDimensionPixelOffset(R.dimen.wh_40);
         //行高使用一样的
         int rowHeight = getWidth() / MONTH_OF_DAY_COLUMN;
-        LogUtils.i("width=="+getWidth());
-        LogUtils.i("height=="+getHeight());
+//        LogUtils.i("width==" + getWidth());
+//        LogUtils.i("height==" + getHeight());
 
         //年份导航条
         initYearBar(year, month, yearBarHeight);
@@ -285,7 +287,7 @@ public class CalendarView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        LogUtils.i("ondraw==");
+//        LogUtils.i("ondraw==");
         super.onDraw(canvas);
         if (yearBarLayer != null) {
             yearBarLayer.onDraw(canvas);
@@ -304,8 +306,48 @@ public class CalendarView extends View {
         }
     }
 
+    VelocityTracker tracker = null;
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if (tracker == null) tracker = VelocityTracker.obtain();
+        tracker.addMovement(event);
+        tracker.computeCurrentVelocity(10);
+        LogUtils.i("X速度==" + tracker.getXVelocity());
+        LogUtils.i("Y速度==" + tracker.getYVelocity());
+
+        GestureDetector detector=  new GestureDetector(getContext(), new GestureDetector.OnGestureListener() {
+            @Override
+            public boolean onDown(MotionEvent e) {
+                return false;
+            }
+
+            @Override
+            public void onShowPress(MotionEvent e) {
+
+            }
+
+            @Override
+            public boolean onSingleTapUp(MotionEvent e) {
+                return false;
+            }
+
+            @Override
+            public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+                return false;
+            }
+
+            @Override
+            public void onLongPress(MotionEvent e) {
+
+            }
+
+            @Override
+            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+                return false;
+            }
+        });
+
         yearBarLayer.onTouchEvent(event);
         if (yearLayerManager != null) {
             yearLayerManager.onTouchEvent(event);

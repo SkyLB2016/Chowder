@@ -105,7 +105,7 @@ class ImageUriActivity : RecyclerPActivity<String, ImageUriP>(), ImageUriV<Strin
     }
 
     private fun getMaxPositions(lastPositions: IntArray): Int {
-        return (0 until lastPositions.size)
+        return (lastPositions.indices)
             .map { lastPositions[it] }
             .max()
             ?: lastPositions[0]

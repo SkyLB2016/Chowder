@@ -10,16 +10,20 @@ onStop：表示activity即将停止，可以做一些稍微重量级的回收工
 onDestory：表示activity即将被销毁，可以做一些回收工作和最重的资源释放。
 
 onStrat和onStop、onResume和onPause有什么不同？
-onStrat和onStop是从activity是否可见这个角度来回调的；onResume和onPause是从activity是否位于前台这个角度来回调的，除此之外，无其他明显区别。
+onStrat和onStop是从activity是否可见这个角度来回调的；onResume和onPause是从activity是否位于前台这个角度来回调的，除此之外，无其它明显区别。
+页面跳转
+1）A启动 A.onCreate -> A.onStart -> A.onResume
+2）A跳B A.onPause -> B.onCreate -> B.onStart -> B.onResume -> A.onStop
+3）关闭B B.onPause -> A.onRestart -> A.onStart -> A.onResume -> B.onStop ->B.onDestory
 
-
-
-
-
-
-
-
-
+横竖屏切换activity的生命周期
+1）不设置manifest里设置Android:configChanges，会调用onSaveInstanceState（一般会在stop之后）和onRestoreInstanceState；执行顺序
+onpause-onstop-（onSaveInstanceState）-ondestory-onCreate-onStart-onRestoreInstanceState-onresume
+2）设置manifest里设置android:configChanges="orientation"，不会调用生命周期，只会执行onConfigurationChanged方法。
+configchanges一般常用三个选项：
+locale：系统语言变化
+keyboardHidden：键盘的可访问性发生了变化
+orientation：屏幕方向变化
 
 ●04.Intent：意图，分显式与隐式两种，显式为指定了component属性，明确启动哪个组件；隐式是搜索符合条件的组件，供用户选择。
 1）构造函数：可以是类名、action、Component（setClass）。
@@ -34,3 +38,213 @@ FLAG_ACTIVITY_SINGLE_TOP,FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS(跳转页面后自�
 android:excludeFromRecents="true"，目前未起作用)。
 8）数据传递bundle：Intent内部已经封装好，不用自己封了，serializable，parcelable，也可以转成json字符串传过去。
 9）也可以定义一个静态类，每次跳转页面前添加数据到静态类，跳转完成后从静态类中取出，同时移除。
+
+第三章 View的事件体系
+3.1 View的基础知识
+view的位置参数、MotionEvent、TouchSlop、VelocityTracker、GestureDetector、Scroller
+
+3.1.1 什么是View
+View是Android中所有控件的基类，View是一种界面层控件的一种抽象。
+
+3.1.2 View的位置参数
+View的位置主要有它的四个顶点来决定，分别对应top、left、bottom、right。left、top对应左上角的xy轴坐标，right、bottom对应右下角的xy轴坐标。
+需要注意的是这四个坐标都是相对于父容器来说的。
+所以
+width=right - left
+height=bottom - top
+View代码中的成员变量分别为
+mLeft = getLeft()
+mTop = getTop()
+mRight = getRight()
+mBottom = getBottom()
+
+从3.0开始View增加了几个额外的参数：x、y、translationX、translationY；
+其中
+x = left + translationX
+y = top + translationY
+四个坐标是原始坐标，平移时也是不变的，变得是translationX和translationY，x、y随之变化。
+x，y相当于平移后的left，top。
+
+3.1.3 MotionEvent 和 TouchSlop
+1.MotionEvent
+ACTION_DOWN 手指当接触到屏幕
+ACTION_MOVE 手指在屏幕上移动
+ACTION_UP 手指抬起的一瞬间
+
+getX与getY返回的是相对于当前view左上角的xy的坐标。
+getRawX与getRawY返回的是相对于手机屏幕左上角的xy的坐标。
+
+2.TouchSlop
+TouchSlop是系统所能识别出的被认为是滑动的最小距离；这是一个常量，和设备有关。获取方法
+ViewConfiguration.get(context).getScaledTouchSlop()。
+这个常量的意义是：当我们在处理滑动时，可以利用这个常量来做一些过滤。比如当两次滑动事件的滑动距离小于这个值，我们就可以认为未达到滑动距离的临界值，因此就可以认为它们不是滑动，这样做可以有更好地用户体验。
+也可以自定义。
+
+3.1.4 VelocityTracker、GestureDetector、Scroller
+1.VelocityTracker
+速度追踪，用于追踪手指在滑动过程中的速度，包括水平和竖直方向的速度。使用方法：
+首先在View的onTouchEvent方法中追踪当前单击事件的速度。
+VelocityTracker tracker = VelocityTracker.obtain();
+tracker.addMovement(event);
+
+通常可以在ACTION_MOVE，ACTION_UP中使用
+tracker.computerCurrentVelocity(1000)//移动速度的单位，毫秒值，所以是1000起步。
+tracker.getXVelocity()
+tracker.getYVelocity()
+
+当不需要的时候回收，在ACTION_UP中回收。
+tracker.clear();
+tracker.recycle();
+tracker = null;//强引用消除
+
+2.GestureDetector
+手势检测，用于辅助检测用户的单击，长按，双击，滑动
+使用方法：单个参数的构造方法已经舍弃。
+GestureDetector detector = new GestureDetector(context，OnGestureListener)；
+里面的监听一般使用SimpleOnGestureListener，方便类，用哪个方法，就重写那个方法。
+
+解决长按屏幕后无法拖动的现象
+detector.setIsLongpressEnabled(false);
+
+还要接管目标View的onTouchEvent方法。
+if(detector.onTouchEvent(event)){//有可能 还需要向下传递。
+return true;
+}
+
+OnGestureListener中的方法
+onDown  按下，由一个ACTION_DOWN触发
+onShowPress  手指轻按，尚未松开或拖动，由一个ACTION_DOWN触发。与onDown的区别是，此方法是在没有松开或者拖动的状态下。
+onSingleTapUp  手指轻轻触摸屏幕后松开，伴随着一个ACTION_UP触发，这是单击行为。
+onScroll  手指按下屏幕并拖动，由一个ACTION_DOWN，多个ACTION_MOVE触发，也就是拖动行为。
+onLongPress  用户长久的按着屏幕不放，即长按。
+onFling  用户按下触摸屏、快速滑动后松开，由一个ACTION_DOWN,多个ACTION_MOVE和一个ACTION_UP触发，这是快速滑动行为。
+
+OnDoubleTapListener中的方法
+onDoubleTap 双击，由两次连续的单击组成，它不可能和onSingleTapConfirmed共存
+onSingleTapConfirmed 严格的单击行为；与onDoubleTap互斥，触发了此方法，就算后边紧跟着一次单击，也不会执行双击。
+onDoubleTapEvent 表示发生了双击行为，在双击期间，ACTION_DOWN、ACTION_MOVE、ACTION_UP都会触发此回调。
+
+在日常开发中比较常用的的有：onSingleTapUp（单击）、onFling（快速滑动）、onLongPress（长按）和onDoubleTap（双击）。
+如果要实现双击这种行为的话，使用GestureDetector比较好。
+
+3.Scroller
+弹性滑动对象，用于实现View的弹性滑动。使用方法：
+val scroller = Scroller(context)
+    override fun computeScroll() {
+        super.computeScroll()
+        if (scroller.computeScrollOffset()) {
+            LogUtils.i("currX" + scroller.currX)
+            LogUtils.i("currY" + scroller.currY)
+            scrollTo(scroller.currX, scroller.currY)
+            postInvalidate()
+        }
+    }
+    //需要在ACTION_MOVE中调用
+    fun smoothScrollTo(dX: Int, dY: Int) {
+        //在1000ms内画像destX，慢慢的滑动
+        scroller.startScroll(scrollX, scrollY, dX, dY, 1000)
+        invalidate()
+    }
+
+3.2 View的滑动
+3.2.1使用scrollTo/scrollBy，属于内部内容的滑动。
+scrollTo(x,y)是基于xy的绝对滑动。
+scorllBy(x,y)是相对于原来的mScrollX与mScrollY的相对滑动，内部也是调用的scrollTo；
+mScrollX与mScrollY可以理解为，View的边缘（四坐标）减去view内容的边缘
+
+3.2.2 使用动画
+补间动画，和属性动画
+
+3.2.3 改变布局参数
+也就是改变layoutparams中的配置
+单纯的LayoutParams中只有width与height，要想设置边距得用，MarginLayoutParams。
+
+3.2.4 各种滑动方式的对比
+scrollTo/scrollBy：操作简单，适合对View内容的滑动；
+动画：操作简单，主要适用于没有交互的View（主要是3.0以下不支持属性动画）和实现复杂的动画效果
+改变布局参数：操作稍微复杂，适用于有交互的View。
+
+3.3 弹性滑动
+可以通过 Scroller、Handler#postDelayed、Thread#sleep
+
+3.3.1 使用Scroller
+需要手动调用smoothScrollTo方法，传入的参数是移动的距离，负值是向右向下，正值是向左向上。
+
+3.3.2 通过动画
+ObjectAnimator继承自ValueAnimator
+
+3.3.3 使用延时策略：通过发送一系列的延时信息，从而达到渐进式的效果。
+handler或View的postDelayed来延时发送消息刷新。还可以用Thread的sleep来操作。
+
+3.4 View的事件分发机制
+
+3.4.1点击事件的传递规则
+点击事件的分发其实就是对MotionEvent的分发过程。主要由三个很重要的方法完成。
+第一个
+public boolean dispatchTouchEvent(MotionEvent event)
+用来进行事件的分发，如果事件能够传递给当前View，此方法一定会被调用。返回结果受当前View的onTouchEvent和下级View的dispatchTouchEvent方法的影响，表示是否消耗当前事件。
+
+第二个：ViewGroup独有
+public boolean onInterceptTouchEvent(MotionEvent event)
+在上述方法内部调用，用来判断是否拦截某个事件，如果当前View拦截了某个事件，那么在同一个事件序列当中，此方法不会被再次调用，返回结果表示是否拦截当前事件。
+
+第三个
+public boolean onTouchEvent(MotionEvent event)
+在dispatchTouchEvent中调用，用来处理点击事件，返回结果表示是否消耗当前事件，如果不消耗，则在同一个事件序列中，当前View无法再次接收到事件。
+
+三者关系大概如下
+public boolean onInterceptTouchEvent(MotionEvent event){
+     boolean consume = false;
+     if(onInterceptTouchEvent(event)){
+        consume = onTouchEvent(event);
+     }else{
+        consume = child.dispatchTouchEvent(event)
+     }
+
+     return consume;
+}
+
+View的setOnTouchListener里的OnTouchListener优先级高于View自身的onTouchEvent。实际代码如下
+            ListenerInfo li = mListenerInfo;
+            if (li != null && li.mOnTouchListener != null
+                    && (mViewFlags & ENABLED_MASK) == ENABLED
+                    && li.mOnTouchListener.onTouch(this, event)) {
+                result = true;
+            }
+
+            if (!result && onTouchEvent(event)) {
+                result = true;
+            }
+
+
+当一个点击事件产生后，它的传递顺序是：Activity -> Window -> View。
+用一句话解释就是Activity嵌套Window，Window中嵌套DecorView，DecorView继承自FrameLayout。
+
+关于时间传递机制的一些结论
+（1）同一个事件序列是指从手指接触屏幕到手指离开屏幕的结束，这个事件以down事件开始，中间含有数量不定的move事件，最终以up事件结束。
+
+（2）正常情况下，一个事件序列只能被一个View拦截且消耗。但也可以通过自己的onTouchEvent强行传递个其它View处理。
+
+（3）某个View一旦决定拦截，那么这个事件序列都只能由它来处理，并且它的onInterceptTouchEvent不会再被调用。
+
+（4）某个View一旦开始处理事件，如果它不消耗ACTION_DOWN事件（onTouchEvent返回了false），那么同一事件序列中的其它事件也不会交给它处理，会交由上级父元素的onTouchEvent处理
+
+（5）如果View不消耗ACTION_DOWN以外的其他事件，那么这个点击事件会消失，此时父元素的onTouchEvent不会被调用，最终这些消失的事件会传递给activity处理；
+
+（6）ViewGroup的onInterceptTouchEvent默认返回false；
+
+（7）onInterceptTouchEvent方法是ViewGroup独有的，其他View,Activity,Window都没有此方法。没有OnTouchListener拦截的话，onTouchEvent一定会执行。
+
+（8）View的onTouchEvent默认都会消耗事件（返回true），除非他是不可点击的(clickable和longClickable同时为false)。
+View的longClickable属性默认为false，clickable属性分情况，Button中为true，TextView中为false。可以简单地理解为：可点击的为true；
+
+（9）View的enable属性不影响onTouchEvent的默认返回值。其实是enable设置不影响clickable和longClickable的值，所以也就影响不了onTouchEvent的返回值。
+
+（10）onClick会发生的前提是当前View是可点击的，并且他收到了down和up事件。点击事件是在up中调用的。
+
+（11）事件传递过程是由外向内的，即父元素分发给子View，通过requestDisallowInterceptTouchEvent方法可以在子元素中干预父元素的事件分发过程，但是ACTION_DOWN事件除外。
+
+3.4.2 事件分发的源码解析
+
+
+
