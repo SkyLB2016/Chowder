@@ -227,7 +227,8 @@ View的setOnTouchListener里的OnTouchListener优先级高于View自身的onTouc
 
 （3）某个View一旦决定拦截，那么这个事件序列都只能由它来处理，并且它的onInterceptTouchEvent不会再被调用。
 
-（4）某个View一旦开始处理事件，如果它不消耗ACTION_DOWN事件（onTouchEvent返回了false），那么同一事件序列中的其它事件也不会交给它处理，会交由上级父元素的onTouchEvent处理
+（4）某个View一旦开始处理事件，如果它不消耗ACTION_DOWN事件（onTouchEvent返回了false），那么同一事件序列中的其它事件也不会交给它处理，会交由上级父元素的onTouchEvent处理;
+没有处理ACTION_DOWN，则mFirstTouchTarget为空，会默认调用ViewGroup父元素view的super.dispatchTouchEvent，继而调用onTouchEvent。
 
 （5）如果View不消耗ACTION_DOWN以外的其他事件，那么这个点击事件会消失，此时父元素的onTouchEvent不会被调用，最终这些消失的事件会传递给activity处理；
 
@@ -236,7 +237,7 @@ View的setOnTouchListener里的OnTouchListener优先级高于View自身的onTouc
 （7）onInterceptTouchEvent方法是ViewGroup独有的，其他View,Activity,Window都没有此方法。没有OnTouchListener拦截的话，onTouchEvent一定会执行。
 
 （8）View的onTouchEvent默认都会消耗事件（返回true），除非他是不可点击的(clickable和longClickable同时为false)。
-View的longClickable属性默认为false，clickable属性分情况，Button中为true，TextView中为false。可以简单地理解为：可点击的为true；
+View的longClickable属性默认为false，clickable属性分情况，Button中为true，TextView中为false。可以简单地理解为：可点击的为true，不可点击的为false；不过只要设置了统一为true
 
 （9）View的enable属性不影响onTouchEvent的默认返回值。其实是enable设置不影响clickable和longClickable的值，所以也就影响不了onTouchEvent的返回值。
 
@@ -245,6 +246,41 @@ View的longClickable属性默认为false，clickable属性分情况，Button中�
 （11）事件传递过程是由外向内的，即父元素分发给子View，通过requestDisallowInterceptTouchEvent方法可以在子元素中干预父元素的事件分发过程，但是ACTION_DOWN事件除外。
 
 3.4.2 事件分发的源码解析
+activity -> window -> DecroView(顶级view) -> View
 
+onInterceptTouchEvent在ACTION_DOWN时一定会调用，在MOVE或者UP时不是每次都调用，如果想要提前处理所有的点击事件，要在dispatchTouchEvent中处理。
+
+在dispatchTouchEvent中，在ACTION_DOWN或者myFirstTouchTarget不为空（即有可以向下传递的View）时，才会向下传递。代码如下：
+// Check for interception.
+            final boolean intercepted;
+            if (actionMasked == MotionEvent.ACTION_DOWN //按下
+                    || mFirstTouchTarget != null
+                    ) {
+                final boolean disallowIntercept = (mGroupFlags & FLAG_DISALLOW_INTERCEPT) != 0;
+                if (!disallowIntercept) {
+                    intercepted = onInterceptTouchEvent(ev);
+                    ev.setAction(action); // restore action in case it was changed
+                } else {
+                    intercepted = false;
+                }
+            } else {
+                // There are no touch targets and this action is not an initial down
+                // so this view group continues to intercept touches.
+                intercepted = true;
+            }
+
+mFirstTouchTarget会在之后的代码中赋值，在MOVE和UP时，判断是否为空，为空则证明已拦截，之后的MOVE或UP不会执行。
+
+requestDisallowInterceptTouchEvent方法会设置mGroupFlags，但是在dispatchTouchEvent最开始是会重置mGroupFlags的，所以此方法的设置不影响下次onInterceptTouchEvent对ACTION_DOWN的拦截，会影响对MOVE和UP的拦截。
+
+FLAG_DISALLOW_INTERCEPT标记为的作用可以考虑用这种方法去解决事件冲突。
+
+mGroupFlags &= ~FLAG_DISALLOW_INTERCEPT; 是尼玛啥个意思？
+
+
+3.5 View的滑动冲突
+冲突产生的原因是界面中有内外两层同时可以滑动，事件分发向两个view。
+
+3.5.1 常见的滑动冲突场景
 
 

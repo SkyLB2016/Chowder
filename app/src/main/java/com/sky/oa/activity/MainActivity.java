@@ -109,8 +109,8 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
                 testMethod();
             }
         });
-        fab.setEnabled(false);
-        fab.setClickable(false);
+//        fab.setEnabled(false);
+//        fab.setClickable(false);
 
         fab.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -131,7 +131,6 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
                 return false;
             }
         });
-
     }
 
     @Override
@@ -141,13 +140,18 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-
         return super.dispatchTouchEvent(ev);
     }
 
     private void testMethod() {
 //        handler.sendEmptyMessage(1);
 //                equalPoetry();
+
+        final boolean intercepted;
+
+    }
+
+    private void fabState() {
         LogUtils.i("fab的Enable状态==" + fab.isEnabled());
         LogUtils.i("fab的Clickable状态==" + fab.isClickable());
         LogUtils.i("fab的LongClickable状态==" + fab.isLongClickable());
