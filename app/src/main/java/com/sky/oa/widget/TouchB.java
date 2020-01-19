@@ -9,6 +9,9 @@ import androidx.annotation.Nullable;
 
 import com.sky.sdk.utils.LogUtils;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
 /**
  * Created by libin on 2019/12/17 17:56 Tuesday.
  */
@@ -48,22 +51,28 @@ public class TouchB extends LinearLayout {
                 LogUtils.i("B的intercept的ACTION_DOWN");
                 break;
             case MotionEvent.ACTION_MOVE:
+                move++;
                 LogUtils.i("B的intercept的ACTION_MOVE");
+                if (move > 5)
+                    return true;
                 break;
             case MotionEvent.ACTION_UP:
                 LogUtils.i("B的intercept的ACTION_UP");
+                if (move > 5)
+                    return false;
                 break;
         }
         return super.onInterceptTouchEvent(ev);
     }
+
+    int move = 0;
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 LogUtils.i("B的touch的ACTION_DOWN");
-                return true;
-//                break;
+                break;
             case MotionEvent.ACTION_MOVE:
                 LogUtils.i("B的touch的ACTION_MOVE");
                 break;

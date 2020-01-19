@@ -47,11 +47,11 @@ public class TouchC extends TextView {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 LogUtils.i("C的touch的ACTION_DOWN");
-                return true;
-//                break;
+                break;
             case MotionEvent.ACTION_MOVE:
                 LogUtils.i("C的touch的ACTION_MOVE");
-                break;
+                return true;
+//            break;
             case MotionEvent.ACTION_UP:
                 LogUtils.i("C的touch的ACTION_UP");
                 break;

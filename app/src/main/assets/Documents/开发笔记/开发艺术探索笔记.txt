@@ -269,7 +269,14 @@ onInterceptTouchEvent在ACTION_DOWN时一定会调用，在MOVE或者UP时不是
                 intercepted = true;
             }
 
-mFirstTouchTarget会在之后的代码中赋值，在MOVE和UP时，判断是否为空，为空则证明已拦截，之后的MOVE或UP不会执行。
+actionMasked == MotionEvent.ACTION_DOWN //按下
+按下状态时一定会执行onInterceptTouchEvent，此时有两种情况
+情况一：拦截，intercepted为true，mFirstTouchTarget不会进入赋值代码块（cancel与intercepted同时为false才会进入），mFirstTouchTarget默认为空，每次按下时也会重置为空。
+所以在MOVE与UP时，mFirstTouchTarget != null为false，onInterceptTouchEvent跳过不在执行，所以之后的MOVE与UP都不在向下传递，执行自己的onTouchEvent方法
+
+情况二：不拦截，intercepted为false，mFirstTouchTarget进入赋值代码块，如已经是最底层，依然会为空。
+mFirstTouchTarget != null
+判断是否为空，不为空，之后的MOVE或UP向下传递。
 
 requestDisallowInterceptTouchEvent方法会设置mGroupFlags，但是在dispatchTouchEvent最开始是会重置mGroupFlags的，所以此方法的设置不影响下次onInterceptTouchEvent对ACTION_DOWN的拦截，会影响对MOVE和UP的拦截。
 
@@ -277,10 +284,74 @@ FLAG_DISALLOW_INTERCEPT标记为的作用可以考虑用这种方法去解决事
 
 mGroupFlags &= ~FLAG_DISALLOW_INTERCEPT; 是尼玛啥个意思？
 
-
 3.5 View的滑动冲突
 冲突产生的原因是界面中有内外两层同时可以滑动，事件分发向两个view。
 
 3.5.1 常见的滑动冲突场景
+第一种：滑动方向不一致：上下嵌套左右，或者左右嵌套下上
 
+第二种：滑动方向一致：上下嵌套上下，或者左右嵌套左右
 
+第三种：皆有
+
+3.5.2 滑动冲突的处理规则
+依据水平方向和数值方向上的距离来判断，
+
+依据水平方向和数值方向上的速度来判断，
+
+可以依据滑动路径和水平方向所形成的夹角，绝对值小于45度就是水平方向的滑动。
+
+三种都只适用于方向不一致的滑动，也就是第一种情况；二三种需要根据业务编写需要的逻辑。
+
+3.5.3 滑动冲突的解决方式
+
+1.外部拦截
+直接在父容器的onInterceptTouchEvent中进行拦截，父容器需要此事件就拦截，不需要就放行。需要知道的是
+ACTION_DOWN：必须返回false，否则子view将接收不到事件；
+ACTION_MOVE：根据自身需要拦截事件
+ACTION_UP：必须返回false，否则子view的onclick将不会执行。如果在MOVE已拦截，则不会执行onInterceptTouchEvent的ACTION_UP事件。
+
+2.内部拦截
+父容器不拦截任何事件，所有的都传递个子元素处理，如果子元素也不消耗，就回传到上级父元素处理，（这种方法和Android中的事件分发机制不一致，？？？？哪里不一致，问号？？）。
+需要配合requestDisallowInterceptTouchEvent方法才能正常工作，使用起来稍显复杂。
+
+不一致请看：
+自身的事件处理：
+ACTION_DOWN：设置requestDisallowInterceptTouchEvent(true);变为true；
+ACTION_MOVE：根据父容器需要事件的要求，设置requestDisallowInterceptTouchEvent(false)；变为false
+ACTION_UP：不用管；
+
+父容器中在onInterceptTouchEvent需要默认拦截除ACTION_DOWN以外的其他事件，这样子view调用requestDisallowInterceptTouchEvent(false)才有作用。
+代码如下
+public boolean onInterceptTouchEvent (MotionEvent event) {
+    int action = event.getAction();
+    if(action == MotionEvent.ACTION_DOWN) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+优化滑动体验：
+mScroller.abortAnimation();
+
+第四章 View的工作原理
+
+View的工作原理
+
+自定义View的实现方式
+
+自定义View的底层工作原理，比如View的测量流程、布局流程、绘制流程。
+
+View常见的回调方法，比如构造方法,onAttach、onVisibilityChanged、onDetach等
+
+4.1 初始ViewRoot 和 DecorView
+ViewRoot的实现类是ViewRootImpl，他是链接WindowManager 和 DecorView的纽带。view的三大流程军事通过ViewRoot来完成的。
+
+View的绘制流程从ViewRoot的performTraversals方法开始的。
+measure用来测量View的宽和高
+layout用来确定View在父容器中的放置位置
+draw负责将View绘制在屏幕上
+
+performTraversals 会依次调用 performMeasure、performLayout、performDraw三个方法，分别完成顶级View的measure、layout和draw这三大流程。
+performMeasure会调用measure，在measure中调用onMeasure，在onMeasure中会对所有子元素进行measure过程，此时measure流程会从父容器传递到子元素中，这样就完成了一次measure过程。

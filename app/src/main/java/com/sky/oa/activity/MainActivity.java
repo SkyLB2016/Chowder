@@ -1,6 +1,7 @@
 package com.sky.oa.activity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.ActivityNotFoundException;
 import android.os.Bundle;
@@ -11,11 +12,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.collection.LruCache;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -49,6 +52,9 @@ import butterknife.ButterKnife;
  * Created by libin on 2018/11/13 4:26 PM.
  */
 public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenuItemClickListener, IMainView {
+
+    @BindView(R.id.recycler)
+    RecyclerView recycler;
 
     @BindView(R.id.fab)
     FloatingActionButton fab;
@@ -84,7 +90,6 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
 //        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//屏幕在此页面时保持常亮
         ButterKnife.bind(this);
         baseTitle.setNavigationIcon(null);
-        RecyclerView recycler = findViewById(R.id.recycler);
         recycler.setHasFixedSize(true);
         adapter = new MainAdapter(R.layout.adapter_main_delete);
         recycler.setAdapter(adapter);
@@ -104,33 +109,25 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         //Rw2 B2 U2 Lw U2 Rw' U2 Rw U2 F2 Rw F2 Lw' B2 Rw2
         //LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
         fab.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("RestrictedApi")
             @Override
             public void onClick(View v) {
+                fab.setVisibility(View.GONE);
+                fabLeft.setVisibility(View.VISIBLE);
                 testMethod();
-            }
-        });
-//        fab.setEnabled(false);
-//        fab.setClickable(false);
-
-        fab.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                testMethod();
-                return true;
             }
         });
         fabLeft.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("RestrictedApi")
             @Override
             public void onClick(View v) {
+                fabLeft.setVisibility(View.GONE);
+                fab.setVisibility(View.VISIBLE);
+
                 testMethod();
             }
         });
-        fabLeft.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                return false;
-            }
-        });
+
     }
 
     @Override
@@ -147,8 +144,19 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
 //        handler.sendEmptyMessage(1);
 //                equalPoetry();
 
-        final boolean intercepted;
+        ViewGroup group = findViewById(android.R.id.content);
+        ViewGroup view = (ViewGroup) group.getChildAt(0);
+        LogUtils.i("top==" + group.getTop());
+        LogUtils.i("top==" + view.getTop());
 
+
+    }
+
+    private void getRecycler() {
+        View view = recycler.getChildAt(0);
+        LogUtils.i("top==" + view.getTop());
+        LinearLayoutManager manager = (LinearLayoutManager) recycler.getLayoutManager();
+        LogUtils.i("first==" + manager.findFirstVisibleItemPosition());
     }
 
     private void fabState() {

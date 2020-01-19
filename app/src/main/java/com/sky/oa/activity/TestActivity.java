@@ -31,6 +31,12 @@ public class TestActivity extends AppCompatActivity {
         LogUtils.i(getClass().getSimpleName() + "==" + Thread.currentThread().getStackTrace()[2].getMethodName());
         setContentView(R.layout.activity_test);
         ButterKnife.bind(this);
+        findViewById(R.id.touchC).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LogUtils.i("==执行了点击事件");
+            }
+        });
     }
 
     @Override
@@ -50,7 +56,8 @@ public class TestActivity extends AppCompatActivity {
         super.onRestoreInstanceState(savedInstanceState);
         LogUtils.i(getClass().getSimpleName() + "==" + Thread.currentThread().getStackTrace()[2].getMethodName());
     }
-        @Override
+
+    @Override
     protected void onRestart() {
         super.onRestart();
         LogUtils.i(getClass().getSimpleName() + "==" + Thread.currentThread().getStackTrace()[2].getMethodName());
@@ -60,7 +67,7 @@ public class TestActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        LogUtils.i(getClass().getSimpleName()+"=="+Thread.currentThread().getStackTrace()[2].getMethodName());
+        LogUtils.i(getClass().getSimpleName() + "==" + Thread.currentThread().getStackTrace()[2].getMethodName());
     }
 
     @Override
@@ -72,19 +79,19 @@ public class TestActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        LogUtils.i(getClass().getSimpleName()+"=="+Thread.currentThread().getStackTrace()[2].getMethodName());
+        LogUtils.i(getClass().getSimpleName() + "==" + Thread.currentThread().getStackTrace()[2].getMethodName());
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        LogUtils.i(getClass().getSimpleName()+"=="+Thread.currentThread().getStackTrace()[2].getMethodName());
+        LogUtils.i(getClass().getSimpleName() + "==" + Thread.currentThread().getStackTrace()[2].getMethodName());
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        LogUtils.i(getClass().getSimpleName()+"=="+Thread.currentThread().getStackTrace()[2].getMethodName());
+        LogUtils.i(getClass().getSimpleName() + "==" + Thread.currentThread().getStackTrace()[2].getMethodName());
     }
 
 }
