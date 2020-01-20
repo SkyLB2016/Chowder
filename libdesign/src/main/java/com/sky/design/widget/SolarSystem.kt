@@ -94,8 +94,8 @@ class SolarSystem @JvmOverloads constructor(
             childWidth = child.measuredWidth + lp.leftMargin + lp.rightMargin
             childHeight = child.measuredHeight + lp.bottomMargin + lp.topMargin
             // 取出子view中最大的宽高
-            width = Math.max(childWidth, width)
-            height = Math.max(childHeight, height)
+            width = childWidth.coerceAtLeast(width)
+            height = childHeight.coerceAtLeast(height)
         }
 
         if (widthMode == MeasureSpec.EXACTLY && heightMode == MeasureSpec.EXACTLY)

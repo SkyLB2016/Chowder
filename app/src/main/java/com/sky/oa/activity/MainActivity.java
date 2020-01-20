@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -40,6 +41,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -130,26 +133,58 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
 
     }
 
-    @Override
-    protected void onUserLeaveHint() {
-        super.onUserLeaveHint();
-    }
-
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        return super.dispatchTouchEvent(ev);
-    }
 
     private void testMethod() {
 //        handler.sendEmptyMessage(1);
 //                equalPoetry();
+    }
+    private static final int MODE_SHIFT = 30;
+    private static final int MODE_MASK = 0x3 << MODE_SHIFT;
 
-        ViewGroup group = findViewById(android.R.id.content);
-        ViewGroup view = (ViewGroup) group.getChildAt(0);
-        LogUtils.i("top==" + group.getTop());
-        LogUtils.i("top==" + view.getTop());
+    public static final int UNSPECIFIED = 0 << MODE_SHIFT;
+    public static final int EXACTLY = 1 << MODE_SHIFT;
+    public static final int AT_MOST = 2 << MODE_SHIFT;
+    /**
+     * MeasureSpec的运算
+      */
+    private void computerMeasureSpec() {
+        //        LogUtils.i("MODE_SHIFT ==" + MODE_SHIFT);
+//        LogUtils.i("MODE_MASK  ==" + MODE_MASK);
+//        LogUtils.i("UNSPECIFIED ==" + UNSPECIFIED);
+//        LogUtils.i("EXACTLY     ==" + EXACTLY);
+//        LogUtils.i("AT_MOST     ==" + AT_MOST);
 
+//        int spec = View.MeasureSpec.makeMeasureSpec(30, View.MeasureSpec.AT_MOST);
+//        LogUtils.i("MODE     ==" + View.MeasureSpec.getMode(spec));
+//        LogUtils.i("MODE     ==" + View.MeasureSpec.getSize(spec));
+//
+//        LogUtils.i("MODE_MASK ==" + (Integer.toBinaryString(MODE_MASK)));
+//        LogUtils.i("MODE_MASK ==" + (Integer.toBinaryString(~MODE_MASK)));
+//        LogUtils.i("UNSPECIFIED ==" + (Integer.toBinaryString(UNSPECIFIED)));
+//        LogUtils.i("EXACTLY ==" + (Integer.toBinaryString(EXACTLY)));
+//        LogUtils.i("AT_MOST ==" + (Integer.toBinaryString(AT_MOST)));
 
+        LogUtils.i("size & ~MODE_MASK ==" + (Integer.toBinaryString(60 & ~MODE_MASK)));
+        LogUtils.i("mode & MODE_MASK ==" + (Integer.toBinaryString(View.MeasureSpec.AT_MOST & MODE_MASK)));
+        LogUtils.i("MeasureSpec ==" + (Integer.toBinaryString((60 & ~MODE_MASK) | (View.MeasureSpec.AT_MOST & MODE_MASK))));
+    }
+
+    /**
+     * 二进制运算
+     */
+    private void binaryString() {
+        LogUtils.i("60 ==" + (Integer.toBinaryString(60)));
+        LogUtils.i("13 ==" + (Integer.toBinaryString(13)));
+        LogUtils.i("60 & 13 ==" + (60 & 13));
+        LogUtils.i("60 & 13 ==" + (Integer.toBinaryString(60 & 13)));
+        LogUtils.i("60 | 13 ==" + (60 | 13));
+        LogUtils.i("60 | 13 ==" + (Integer.toBinaryString(60 | 13)));
+        LogUtils.i("60 ^ 13 ==" + (60 ^ 13));
+        LogUtils.i("60 ^ 13 ==" + (Integer.toBinaryString(60 ^ 13)));
+
+        int a = ~60;
+        LogUtils.i("a ==" + (a));
+        LogUtils.i("a的二进制 ==" + (Integer.toBinaryString(a)));
     }
 
     private void getRecycler() {
@@ -170,6 +205,16 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
     }
 
 //    @Override
+//    protected void onUserLeaveHint() {
+//        super.onUserLeaveHint();
+//    }
+//
+//    @Override
+//    public boolean dispatchTouchEvent(MotionEvent ev) {
+//        return super.dispatchTouchEvent(ev);
+//    }
+
+//    @Override
 //    protected void onRestart() {
 //        super.onRestart();
 //        LogUtils.i(getClass().getSimpleName() + "==" + Thread.currentThread().getStackTrace()[2].getMethodName());
@@ -182,11 +227,11 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
 //        LogUtils.i(getClass().getSimpleName()+"=="+Thread.currentThread().getStackTrace()[2].getMethodName());
 //    }
 //
-    @Override
-    protected void onResume() {
-        super.onResume();
-        LogUtils.i(getClass().getSimpleName() + "==" + Thread.currentThread().getStackTrace()[2].getMethodName());
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        LogUtils.i(getClass().getSimpleName() + "==" + Thread.currentThread().getStackTrace()[2].getMethodName());
+//    }
 //
 //    @Override
 //    protected void onPause() {

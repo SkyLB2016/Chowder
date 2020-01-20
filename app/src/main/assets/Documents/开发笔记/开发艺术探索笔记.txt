@@ -7,7 +7,7 @@ onStart：表示activity正在被启动，此时activity可见，但还没有出
 onResume：表示activity已经可见了，出现在前台开始活动。onStart和onResume都表示activity可见，但是onStart的时候页面还在后台，onResume的时候显示到前台。view的onMeasure，onLayout，onDraw在此时执行。
 onPause：表示activity正在停止，正常情况下onStop会紧接着被调用。如在跳转页面时，页面启动崩溃，又返回到此页面，onStop来不及执行，会直接调用onResume。onPause可以做一些存储数据，停止动画等工作，不能太耗时，因为只有onPause先执行完，新页面的onResume才会执行。页面上的弹窗不会执行onPause。
 onStop：表示activity即将停止，可以做一些稍微重量级的回收工作，同样不能太耗时
-onDestory：表示activity即将被销毁，可以做一些回收工作和最重的资源释放。
+onDestory：表示activity即将被销毁，可以做一些回收工作和最终的资源释放。
 
 onStrat和onStop、onResume和onPause有什么不同？
 onStrat和onStop是从activity是否可见这个角度来回调的；onResume和onPause是从activity是否位于前台这个角度来回调的，除此之外，无其它明显区别。
@@ -44,7 +44,7 @@ android:excludeFromRecents="true"，目前未起作用)。
 view的位置参数、MotionEvent、TouchSlop、VelocityTracker、GestureDetector、Scroller
 
 3.1.1 什么是View
-View是Android中所有控件的基类，View是一种界面层控件的一种抽象。
+View是Android中所有控件的基类，View是界面层控件的一种抽象。
 
 3.1.2 View的位置参数
 View的位置主要有它的四个顶点来决定，分别对应top、left、bottom、right。left、top对应左上角的xy轴坐标，right、bottom对应右下角的xy轴坐标。
@@ -354,4 +354,60 @@ layout用来确定View在父容器中的放置位置
 draw负责将View绘制在屏幕上
 
 performTraversals 会依次调用 performMeasure、performLayout、performDraw三个方法，分别完成顶级View的measure、layout和draw这三大流程。
-performMeasure会调用measure，在measure中调用onMeasure，在onMeasure中会对所有子元素进行measure过程，此时measure流程会从父容器传递到子元素中，这样就完成了一次measure过程。
+performMeasure会调用measure，在measure中调用onMeasure，在onMeasure中会对所有子元素进行measure过程，此时measure流程会从父容器传递到子元素中，这样就完成了一次measure过程。接着子元素会重复父容器的measure过程，如此反复就完成了整个View树的遍历。
+同理，performLayout和performDraw的传递流程和performMeasure是类似的，唯一不同的是，performDraw的传递过程是在draw方法中通过dispatchDraw来实现的。不过也只是名称不同而已。
+
+measure过程决定了View的宽高，完成以后可以通过getMeasureWidth和getMeasureHeight来获取到View测量后的宽高。极个别的情况除外。
+layout过程决定了View的四个顶点的坐标和实际View的宽高，完成后可以通过getTop、getBottom、getLeft、getRight来获取顶点的坐标；并且可以通过getWidth和getHeight来拿到View的最终宽高。
+draw过程决定了view的显示，只有draw方法完成以后View的内容才能呈现在屏幕上。
+
+DecorView作为顶级View，一般情况下内含一个竖直方向的LinearLayout，分为上下两部分（具体看版本和主题），上面标题栏，下面内容栏（content），所以是setContentView();
+获取content的方法：
+ViewGroup content = findViewById(android.R.id.content);
+content.getChildAt(0);
+
+4.2 理解MeasureSpec
+MeasureSpec决定了一个View的尺寸规格，父容器会影响View的MeasureSpec的创建过程，系统会将View的 LayoutParams 根据父容器所施加的规则转换成对应的MeasureSpec，然后再根据这个MeasureSpec来测量出View的宽高。
+
+4.2.1
+MeasureSpec代表一个32位的int值，高2位代表SpecMode，低30位代表SpecSize。
+SpecMode指测量模式，SpecSize指在某种测量模式下的规格大小。
+二进制运算请看《java运算符》
+
+SpecMode有三类
+
+UNSPECIFIED：父容器不对View有任何限制，要多大给多大，一般用于系统内部，表示一种测量状态；
+EXACTLY：父容器已经检测出View所需要的精确大小，这个时候View的最终大小就是SpecSize所指定的值。对应LayoutParams中的match_parent和具体的数值，这个两种方式。
+AT_MOST：父容器制定了一个可用大小即SpecSize，View的大小不能大于这个值，具体是什么值要看不同View的具体实现。对应于LayoutParams中的wrap_content。
+
+4.2.2 MeasureSpec 和 LayoutParams 的对应关系
+对于顶级View（DecorView）MeasureSpec有窗口尺寸和其自身的LayoutParams来共同确定；对于其他普通View，MeasureSpec由父容器的MeasureSpec和自身的LayoutParams来共同决定，MeasureSpec一旦确定后，onMeasure中就可以确定View的测量宽高。
+
+DecorView的MeasureSpec具体遵守如下规则，根据他的LayoutParams中狂傲的参数来区分：
+LayoutParams.MATCH_PARENT：精确模式，大小就是窗口的大小；
+LayoutParams.WRAP_CONTENT：最大模式，大小补丁，但不能超过窗口的大小；
+固定大小：精确模式，大小为LayoutParams中指定的大小。
+
+子元素与父容器对应的SpecMode：
+
+子元素的宽高是确定的数值，无论父容器是什么模式，子元素都是EXACTLY;
+
+子元素是match_parent，父容器是精确模式，那View就是精确模式，大小是父容器的剩余空间。父容器是最大模式，那View就是最大模式，大小不会超过父容器的剩余空间；
+
+子元素是wrap_content，无论父容器是精确模式还是最大模式，View都是最大模式，大小不会超过父容器的剩余空间；
+
+4.3 View 的工作流程
+measure、layout、draw，即测量、布局、绘制；
+measure确定View的测量宽/高。
+layout确定View的最终宽高和四个顶点的位置，
+draw则将View绘制到屏幕上。
+
+4.3.1 measure 过程
+View执行完measure方法就完成了自身测量过程。
+ViewGroup还需要去遍历调用子元素的measure方法。依次递归调用。
+
+View的measure过程
+measure是一个final方法，子类不能重写此方法。
+直接继承View的自定义控件需要重写onMeasure方法，并设置wrap_content时的自身大小，因为最大模式默认就是父容器的剩余空间大小，所以需要重新计算。
+
+ViewGroup的measure过程
