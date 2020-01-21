@@ -408,6 +408,65 @@ ViewGroup还需要去遍历调用子元素的measure方法。依次递归调用�
 
 View的measure过程
 measure是一个final方法，子类不能重写此方法。
-直接继承View的自定义控件需要重写onMeasure方法，并设置wrap_content时的自身大小，因为最大模式默认就是父容器的剩余空间大小，所以需要重新计算。
+直接继承View的自定义控件需要重写onMeasure方法，并且在AT_MOST(wrap_content)模式时的需要自己测量View大小，因为最大模式默认就是父容器的剩余空间大小，不自己计算的话和 EXACTLY 模式没有差别，所以需要重新计算。
+View自带的onMeasure代码如下
+
+protected void onMeasure（int widthMeasureSpec， int heightMeasureSpec）{
+    setMeasureDimension(getDefaultSize(getSuggestedMinimumWidth(),widthMeasureSpec),
+        getDetaultSize(getSuggestedMinimumHeight(),heightMeasureSpec))；
+}
+在getDefaultSize方法中：
+在EXACTLY与AT_MOST模式下用的肯定是MeasureSpec；
+在UNSPECIFIED（系统内部测量时使用），会使用getSuggestedMinimumxxx方法
 
 ViewGroup的measure过程
+ViewGroup是一个抽象类，没有重写onMeasure方法，需要他的子类重写，去实现是竖直布局还是水平布局，亦或是相对布局。
+他提供了三个主要方法
+（1）测量所有的child，其中MeasureSpec是父容器自身的MeasureSpec传递给child
+measureChildren(int widthMeasureSpec, int heightMeasureSpec)//自身的MeasureSpec
+（2）测量单个View，其中MeasureSpec是父容器自身的MeasureSpec传递给child，会调用child的measure方法，
+measureChild(View child, int parentWidthMeasureSpec, int parentHeightMeasureSpec)
+（3）测量单个View，其中MeasureSpec是父容器自身的MeasureSpec传递给child，会调用child的measure方法，widthUsed和heightUsed是已经使用的宽高。
+measureChildWithMargins(View child, int parentWidthMeasureSpec,int widthUsed, int parentHeightMeasureSpec, int heightUsed)
+
+measureChild的测量流程：
+（1）取出child自身的LayoutParams
+（2）通过getChildMeasureSpec()方法来创建子元素的MeasureSpec
+（3）将MeasureSpec传递给child的measure方法，开始测量。
+
+LinearLayout的onMeasure区分竖直方向和水平方向
+（1）使用match_parent，则就是父容器的剩余size；
+（2）使用wrap_content，就是所有控件的宽/高总和，但不超过父容器的剩余size。
+（3）还需要考虑padding，div的数值。
+
+View的measure过程是三大流程中最复杂的一个，measure完成以后就可以获取测量宽/高，在某些情况下，系统可能多次measure才能确定作中的测量宽/高，这种情况下很可能不准，一个比较好的习惯是在onLayout中获取测量宽/高，或者最终宽/高。
+
+怎样在Activity启动时获取一个View的宽高？
+View的measure、layout，draw是在onResume中执行的，而且是不同步的，
+（1）onWindowFocusChanged()
+代表这个窗口的焦点，同时表示View已经初始化完毕，可以获取宽高了。
+在activity得到与失去焦点时，也就是onResume或onPause时，都会被调用。
+代码如下
+public void onWindowFocusChanged(boolean hasFocus){
+    super.onWindowFocusChanged(hasFocus);
+    if(hasFocus){
+    int width = view.getMeasureWdith();
+    int height = view.getMeasureHeight();
+    }
+}
+（2）view.post(runnable)
+通过post可以将一个Runnable投递到消息队列的尾部，然后等待Looper调用此Runnable的时候，View也已经初始化好了。
+代码如下
+protected void onStart(){
+    super.onStart();
+    view.post(new Runnable(){
+        @override
+        public void run(){
+            int width = view.getMeasureWdith();
+            int height = view.getMeasureHeight();
+        }
+    });
+}
+(3)viewTreeObserver.addOnGlobalLayoutListener()
+(4)view.measure(int widthMeasureSpec, int heightMeasureSpec)
+

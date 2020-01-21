@@ -247,7 +247,9 @@ init进程：是所有用户（App）进程的父进程（或者父父进程）
 1）强引用？
 
 ●41.onMeasure，onLayout，onDraw，在什么时候执行。
-1）在onResume里执行。
+1）在onCreate方法中初始化View的时候，调用了View的onFinishInflate
+2）在执行完onResume之后才开始了View的绘制工作，onMeasure -> onSizeChanged -> onLayout -> onDraw
+3）onMeasure,onSizeChanged,onLayout,onDraw可能由于setVisible或onResume调用多次，而onAttachedToWindow与onDetachedFromWindow在创建与销毁View的过程中只会调用一次。
 
 ●42.RecyclerView的缓存机制？
 1）

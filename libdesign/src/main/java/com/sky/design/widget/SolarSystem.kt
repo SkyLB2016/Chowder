@@ -78,6 +78,9 @@ class SolarSystem @JvmOverloads constructor(
         val widthMode = MeasureSpec.getMode(widthMeasureSpec)
         val layoutHeight = MeasureSpec.getSize(heightMeasureSpec)
         val heightMode = MeasureSpec.getMode(heightMeasureSpec)
+
+        LogUtils.i("layoutWidth==${layoutWidth}")
+        LogUtils.i("layoutHeight==${layoutHeight}")
         // AT_MOST模式即wrap_content时测量父控件的宽高
         var width = 0
         var height = 0
@@ -211,7 +214,6 @@ class SolarSystem @JvmOverloads constructor(
         for (i in 0 until childCount - 1) {
             childAt = getChildAt(i)
             childAt.setOnClickListener { v ->
-                outPutViewParameter(v)
                 menuItemOnClick?.invoke(v, i)
                 childAnimator(i)//子view点击之后的效果
                 if (isRecoverChild) toggleMenu(TIME)
@@ -242,27 +244,6 @@ class SolarSystem @JvmOverloads constructor(
                 })
         }
         mState = changeState()// 执行完成后切换菜单状态
-
-
-//        for (i in 0 until childCount - 1) {
-        outPutViewParameter(getChildAt(0))
-//        }
-
-    }
-
-    /**
-     * 输出view的left、top、right、bottom、x、y、translationX、translationY。
-     */
-    private fun outPutViewParameter(v: View) {
-        LogUtils.i("left==" + v.left)
-        LogUtils.i("top==" + v.top)
-        LogUtils.i("right==" + v.right)
-        LogUtils.i("bottom==" + v.bottom)
-        LogUtils.i("x==" + v.x)
-        LogUtils.i("y==" + v.y)
-        LogUtils.i("translationX==" + v.translationX)
-        LogUtils.i("translationY==" + v.translationY)
-        LogUtils.i("touchSlop=="+ViewConfiguration.get(context).scaledTouchSlop)
     }
 
     /**

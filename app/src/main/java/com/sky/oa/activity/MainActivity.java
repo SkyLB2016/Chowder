@@ -14,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -133,20 +134,24 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
 
     }
 
-
     private void testMethod() {
 //        handler.sendEmptyMessage(1);
 //                equalPoetry();
+        ViewGroup.LayoutParams lp = fab.getLayoutParams();
+        LogUtils.i("width==" + lp.width);
+        LogUtils.i("height==" + lp.height);
     }
+
     private static final int MODE_SHIFT = 30;
     private static final int MODE_MASK = 0x3 << MODE_SHIFT;
 
     public static final int UNSPECIFIED = 0 << MODE_SHIFT;
     public static final int EXACTLY = 1 << MODE_SHIFT;
     public static final int AT_MOST = 2 << MODE_SHIFT;
+
     /**
      * MeasureSpec的运算
-      */
+     */
     private void computerMeasureSpec() {
         //        LogUtils.i("MODE_SHIFT ==" + MODE_SHIFT);
 //        LogUtils.i("MODE_MASK  ==" + MODE_MASK);
