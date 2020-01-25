@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import com.sky.oa.thread.JoinThread;
 import com.sky.oa.thread.MyThread;
 import com.sky.oa.thread.MyThread1;
+import com.sky.sdk.utils.LogUtils;
 import com.sky.sdk.utils.RegexUtils;
 
 import java.io.BufferedInputStream;
@@ -51,9 +52,17 @@ public class JavaConsole {
 //        stringEqualStr();
 //        Executors
 
-        HashMap<String,String> map = new HashMap<>();
-        String add = map.put("add", "add");
-        System.out.println(add);
+        System.out.println(1 << 30);
+        System.out.println((1 << 30) - 1);
+        System.out.println(Math.pow(2, 30));
+        System.out.println(Math.pow(2, 30) - 1);
+        //银黄含化滴丸
+        //玉屏风颗粒
+        //糠酸莫米松鼻喷雾剂
+        //安宁藻肠溶软胶囊
+        //氯雷他定片
+        //孟鲁司特钠片
+
     }
 
     private static void stringEqualStr() {
@@ -302,12 +311,4 @@ public class JavaConsole {
         }
         return result.toString();
     }
-
-    void reimburse() {
-        //10.29；
-        //周六日：；
-        //总报销：
-        //发票：400
-    }
-
 }

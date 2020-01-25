@@ -52,6 +52,7 @@ View的位置主要有它的四个顶点来决定，分别对应top、left、bot
 所以
 width=right - left
 height=bottom - top
+
 View代码中的成员变量分别为
 mLeft = getLeft()
 mTop = getTop()
@@ -357,7 +358,7 @@ performTraversals 会依次调用 performMeasure、performLayout、performDraw�
 performMeasure会调用measure，在measure中调用onMeasure，在onMeasure中会对所有子元素进行measure过程，此时measure流程会从父容器传递到子元素中，这样就完成了一次measure过程。接着子元素会重复父容器的measure过程，如此反复就完成了整个View树的遍历。
 同理，performLayout和performDraw的传递流程和performMeasure是类似的，唯一不同的是，performDraw的传递过程是在draw方法中通过dispatchDraw来实现的。不过也只是名称不同而已。
 
-measure过程决定了View的宽高，完成以后可以通过getMeasureWidth和getMeasureHeight来获取到View测量后的宽高。极个别的情况除外。
+measure过程决定了View的宽高，完成以后可以通过getMeasureWidth和getMeasuredHeight来获取到View测量后的宽高。极个别的情况除外。
 layout过程决定了View的四个顶点的坐标和实际View的宽高，完成后可以通过getTop、getBottom、getLeft、getRight来获取顶点的坐标；并且可以通过getWidth和getHeight来拿到View的最终宽高。
 draw过程决定了view的显示，只有draw方法完成以后View的内容才能呈现在屏幕上。
 
@@ -377,8 +378,12 @@ SpecMode指测量模式，SpecSize指在某种测量模式下的规格大小。
 SpecMode有三类
 
 UNSPECIFIED：父容器不对View有任何限制，要多大给多大，一般用于系统内部，表示一种测量状态；
-EXACTLY：父容器已经检测出View所需要的精确大小，这个时候View的最终大小就是SpecSize所指定的值。对应LayoutParams中的match_parent和具体的数值，这个两种方式。
-AT_MOST：父容器制定了一个可用大小即SpecSize，View的大小不能大于这个值，具体是什么值要看不同View的具体实现。对应于LayoutParams中的wrap_content。
+
+EXACTLY：父容器已经检测出View所需要的精确大小，这个时候View的最终大小就是SpecSize所指定的值。
+对应LayoutParams中的match_parent和具体的数值，这个两种方式。
+
+AT_MOST：父容器制定了一个可用大小即SpecSize，View的大小不能大于这个值，实际大小要看View的具体实现，不重写onMeasure的话，默认使用的就是SpecSize，即父容器提供的大小，其实就相当于match_parent。
+对应于LayoutParams中的wrap_content。
 
 4.2.2 MeasureSpec 和 LayoutParams 的对应关系
 对于顶级View（DecorView）MeasureSpec有窗口尺寸和其自身的LayoutParams来共同确定；对于其他普通View，MeasureSpec由父容器的MeasureSpec和自身的LayoutParams来共同决定，MeasureSpec一旦确定后，onMeasure中就可以确定View的测量宽高。
@@ -391,9 +396,7 @@ LayoutParams.WRAP_CONTENT：最大模式，大小补丁，但不能超过窗口�
 子元素与父容器对应的SpecMode：
 
 子元素的宽高是确定的数值，无论父容器是什么模式，子元素都是EXACTLY;
-
 子元素是match_parent，父容器是精确模式，那View就是精确模式，大小是父容器的剩余空间。父容器是最大模式，那View就是最大模式，大小不会超过父容器的剩余空间；
-
 子元素是wrap_content，无论父容器是精确模式还是最大模式，View都是最大模式，大小不会超过父容器的剩余空间；
 
 4.3 View 的工作流程
@@ -405,6 +408,7 @@ draw则将View绘制到屏幕上。
 4.3.1 measure 过程
 View执行完measure方法就完成了自身测量过程。
 ViewGroup还需要去遍历调用子元素的measure方法。依次递归调用。
+wrap_content模式下，如果View没有重写onMeasure，那默认的宽高就是parentSize；相当于match_parent。
 
 View的measure过程
 measure是一个final方法，子类不能重写此方法。
@@ -420,7 +424,7 @@ protected void onMeasure（int widthMeasureSpec， int heightMeasureSpec）{
 在UNSPECIFIED（系统内部测量时使用），会使用getSuggestedMinimumxxx方法
 
 ViewGroup的measure过程
-ViewGroup是一个抽象类，没有重写onMeasure方法，需要他的子类重写，去实现是竖直布局还是水平布局，亦或是相对布局。
+ViewGroup是一个抽象类，没有重写onMeasure方法，需要他的子类布局控件重写，去实现是竖直布局还是水平布局，亦或是相对布局。
 他提供了三个主要方法
 （1）测量所有的child，其中MeasureSpec是父容器自身的MeasureSpec传递给child
 measureChildren(int widthMeasureSpec, int heightMeasureSpec)//自身的MeasureSpec
@@ -450,8 +454,8 @@ View的measure、layout，draw是在onResume中执行的，而且是不同步的
 public void onWindowFocusChanged(boolean hasFocus){
     super.onWindowFocusChanged(hasFocus);
     if(hasFocus){
-    int width = view.getMeasureWdith();
-    int height = view.getMeasureHeight();
+    int width = view.getMeasuredWidth();
+    int height = view.getMeasuredHeight();
     }
 }
 （2）view.post(runnable)
@@ -462,11 +466,106 @@ protected void onStart(){
     view.post(new Runnable(){
         @override
         public void run(){
-            int width = view.getMeasureWdith();
-            int height = view.getMeasureHeight();
+            int width = view.getMeasuredWidth();
+            int height = view.getMeasuredHeight();
         }
     });
 }
 (3)viewTreeObserver.addOnGlobalLayoutListener()
-(4)view.measure(int widthMeasureSpec, int heightMeasureSpec)
+当View树的状态发生改变或者View树内部View的可见性发生改变是，onGlobalLayout方法将被回调，因此这是获取View宽高的一个很好的时机。需要注意的事，伴随着View树的状态改变等，onGlobalLayout会被调用多次。
+代码如下：
+protected void onStart（）{
+    super.onStart();
+    ViewTreeObserver observer = view.getViewTreeObserver;
+    observer.addOnGlobalLayoutListener(new onGlobalLayoutListener(){
+        @override
+        public void onGlobalLayout(){
+            view.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+            int width = view.getMeasuredWidth();
+            int height = view.getMeasuredHeight();
+        }
+    });
+}
+
+(4)view.measure(int widthMeasureSpec, int heightMeasureSpec)，不建议使用
+手动对View进行measure来得到宽高。根据View自身的LayoutParams来区分：
+match_parent：无法测量，因为它占据的是父容器的剩余空间parentSize，此时无法知道parentSize的大小。
+
+具体数值，可以直接通过LayoutParams获取到，也可以
+int widthSpec=View.MeasureSpec.makeMeasureSpec(100, View.MeasureSpec.EXACTLY);
+int heightSpec=View.MeasureSpec.makeMeasureSpec(100, View.MeasureSpec.EXACTLY);
+view.measure(widthSpec,heightSpec);
+
+wrap_content：
+int widthSpec=View.MeasureSpec.makeMeasureSpec((1 << 30)-1, View.MeasureSpec.EXACTLY);
+int heightSpec=View.MeasureSpec.makeMeasureSpec((1 << 30)-1, View.MeasureSpec.EXACTLY);
+view.measure(widthSpec,heightSpec);
+
+(1 << 30)-1 = 2的30次方减1，是宽高所能达到的最大值，后两位是宽高的模式
+
+正确的MeasureSpec才能算出正确的宽高。
+
+4.3.2 layout 的过程
+layout方法确定View自身的位置；
+onLayout方法确定子元素的位置。
+
+layout方法中先保存一下原有的上下左右（mLeft，mTop，mRight，mBottom）的位置，通过setFrame方法来View的四个顶点的值，确定后，View在父容器中的位置也就确定了。之后会调用onLayout方法，然后调用各个子元素的layout方法。onLayout方法要看各个布局控件的具体实现。
+
+在setFrame中会先判断是新旧上下左右位置是否有变化，有变化则重新计算。宽高有变化，则刷新自身，设置新的上下左右的位置，同时执行onSizeChanged。
+
+View测量宽高和最终款高有什么区别？getMeasuredWidth与getWidth、getMeasuredHeight与getHeight有什么区别？
+在View的默认实现中，测量宽高与最终宽高是相等的，但是测量宽高在measure过程中形成，最终宽高在layout中形成，所以测量宽高比最终宽高早一些。
+默认是相等的，但在layout可以手动修改上下左右的大小，所以修改了，就有可能会不等。
+
+4.3.3 draw过程
+将View绘制到屏幕上，步骤如下：
+（1）绘制背景：background.draw(canvas)
+（2）绘制自己：onDraw
+（3）绘制children：dispatchDraw
+（4）绘制装饰：onDrawScrollBars
+
+View有一个特殊的方法：setWillNotDraw(boolean willNotDraw)
+如果一个View不需要绘制任何内容，那么就把这个标记设为true。默认情况下，View没有开启，ViewGroup启用了这个标记。所以默认情况下，ViewGroup的子类是不具备绘制功能的，如果绘制，需要手动关闭这个标记。
+
+4.4 自定义View
+
+4.4.1 自定义View的分类
+一种效果可以多种方法实现，我们需要做的就是找到一种代价最小，最高效的方法来实现。
+
+（1）继承View，重写onDraw方法
+这种方法主要用于实现一些不规则的效果。不方便通过布局组合，往往需要静态或动态地显示一些不规则的图形，需要自己处理wrap_content和padding。
+
+（2）继承ViewGroup，派生特殊的ViewGroup
+自定义的布局，需要合适的处理ViewGroup的测量和布局这两个过程，并同时处理子元素测量和布局过程。
+
+（3）继承特定的View（如TextView）
+一般用于扩展已有View的功能，如TextView，不需要自己支持wrap_content和padding.
+
+（4）继承特定的ViewGroup
+实现几种View组合在一起的效果。与方法二的差别在于方法二更接近于View底层
+
+4.4.2 自定义View需须知
+这些问题处理不好，会影响view的使用，甚至是内存泄漏。
+（1）让View支持wrap_content
+因为wrap_content模式下，自己不计算，使用的是父容器提供的剩余大小，会充满父容器，相当于match_parent。
+
+（2）让View支持padding
+直接继承View控件，如不在draw中处理padding，那么padding属性无法起作用。
+直接继承ViewGroup，需要在onMeasure和onLayout中处理padding和子元素的margin，不然将导致padding和子元素的margin失效。
+
+（3）尽量不在View中使用handler，没必要。
+View自带有post系列方法，如非必要，不要使用handler
+
+（4）View中如果有线程或动画，需要及时停止，参考View#onDetachedFromWindow
+View如果包含线程和动画，那在View加载到Activity时需要处理；
+onAttachedToWindow：组件加载到Activity上，一般不用管。
+onDetachedFromWindow：组件从Activity上移除，这时候线程或动画在执行的话，需要停止。
+同时当View变得不可见也需要停止线程和动画如果不及时处理，有可能会造成内存泄漏。
+
+（5）View带有滑动嵌套时，需要处理好滑动冲突
+参考之前的滑动冲突处理方案。
+
+4.4.3 自定义View示例
+
+（1）继承View重写onDraw方法
 

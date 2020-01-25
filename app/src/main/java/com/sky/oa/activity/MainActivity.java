@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -131,7 +132,6 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
                 testMethod();
             }
         });
-
     }
 
     private void testMethod() {
@@ -140,6 +140,17 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         ViewGroup.LayoutParams lp = fab.getLayoutParams();
         LogUtils.i("width==" + lp.width);
         LogUtils.i("height==" + lp.height);
+        LogUtils.i("width==" + fab.getWidth());
+        LogUtils.i("height==" + fab.getHeight());
+        int widthSpec = View.MeasureSpec.makeMeasureSpec(100, View.MeasureSpec.EXACTLY);
+        int heightSpec = View.MeasureSpec.makeMeasureSpec(100, View.MeasureSpec.EXACTLY);
+        fab.measure(widthSpec, heightSpec);
+        LogUtils.i("width==" + fab.getMeasuredHeight());
+        LogUtils.i("height==" + fab.getHeight());
+        int width = fab.getMeasuredWidth();
+        int height = fab.getMeasuredHeight();
+
+
     }
 
     private static final int MODE_SHIFT = 30;
@@ -172,6 +183,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         LogUtils.i("size & ~MODE_MASK ==" + (Integer.toBinaryString(60 & ~MODE_MASK)));
         LogUtils.i("mode & MODE_MASK ==" + (Integer.toBinaryString(View.MeasureSpec.AT_MOST & MODE_MASK)));
         LogUtils.i("MeasureSpec ==" + (Integer.toBinaryString((60 & ~MODE_MASK) | (View.MeasureSpec.AT_MOST & MODE_MASK))));
+
     }
 
     /**
@@ -209,15 +221,19 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         LogUtils.i("fabLeft的LongClickable状态==" + fabLeft.isLongClickable());
     }
 
-//    @Override
+    //    @Override
 //    protected void onUserLeaveHint() {
 //        super.onUserLeaveHint();
 //    }
 //
-//    @Override
-//    public boolean dispatchTouchEvent(MotionEvent ev) {
-//        return super.dispatchTouchEvent(ev);
-//    }
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        boolean flag = super.dispatchTouchEvent(ev);
+        if (!flag) {
+            LogUtils.i("flag==" + flag);
+        }
+        return flag;
+    }
 
 //    @Override
 //    protected void onRestart() {
