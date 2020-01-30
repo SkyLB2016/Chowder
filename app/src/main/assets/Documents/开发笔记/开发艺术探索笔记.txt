@@ -310,7 +310,6 @@ ACTION_DOWN：设置requestDisallowInterceptTouchEvent(true);变为true；
 ACTION_MOVE：根据父容器需要事件的要求，设置requestDisallowInterceptTouchEvent(false)；变为false
 ACTION_UP：不用管；
 
-父容器中在onInterceptTouchEvent需要默认拦截除ACTION_DOWN以外的其他事件，这样子view调用requestDisallowInterceptTouchEvent(false)才有作用。
 代码如下
 public boolean onInterceptTouchEvent (MotionEvent event) {
     int action = event.getAction();
@@ -320,6 +319,7 @@ public boolean onInterceptTouchEvent (MotionEvent event) {
         return true;
     }
 }
+父容器中在onInterceptTouchEvent需要默认拦截除ACTION_DOWN以外的其他事件，这样子view调用requestDisallowInterceptTouchEvent(false)才有作用。
 
 优化滑动体验：
 mScroller.abortAnimation();

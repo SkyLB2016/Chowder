@@ -219,15 +219,14 @@ public class FlowLay extends ViewGroup {
                     scroller.abortAnimation();
                     intercepted = true;
                 }
-                requestDisallowInterceptTouchEvent(true);
                 break;
             case MotionEvent.ACTION_MOVE:
                 float deltaX = interceptX - event.getX();
                 float deltaY = interceptY - event.getY();
                 if (Math.abs(deltaY) >= Math.abs(deltaX) && Math.abs(deltaY) > touchSlop) {
+                    requestDisallowInterceptTouchEvent(true);
                     intercepted = true;
                 } else {
-                    requestDisallowInterceptTouchEvent(false);
                     intercepted = false;
                 }
 
