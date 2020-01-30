@@ -25,20 +25,6 @@ locale：系统语言变化
 keyboardHidden：键盘的可访问性发生了变化
 orientation：屏幕方向变化
 
-●04.Intent：意图，分显式与隐式两种，显式为指定了component属性，明确启动哪个组件；隐式是搜索符合条件的组件，供用户选择。
-1）构造函数：可以是类名、action、Component（setClass）。
-2）明确启动组件component（setComponent()）：明确需要启动组件，与xml中对应。
-3）操作类型action（setAction()）：Java代码中只能存在一个，存在则必须有一个相同；xml中可存在多个。
-4）类别筛选category（addCategory()）：Java代码中存在几个匹配几个，xml中可存在多个。
-5）数据类型data与type：setDataAndType()，地址有特定规则，要么同时设置，要么单独只设置一个。
-6）启动模式LaunchMode四种（manifest中用）：standard（标准），singleTop（栈顶复用），singleTask（类似于单例，独一份，再次进入后清空在其之上的实例），singleInstance（每次启动都是独立栈中的独一份）
-7）标志也即启动模式（Intent中用）：
-FLAG_ACTIVITY_NEW_TASK(需要搭配FLAG_ACTIVITY_CLEAR_TASK使用)；
-FLAG_ACTIVITY_SINGLE_TOP,FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS(跳转页面后自动finish）；
-android:excludeFromRecents="true"，目前未起作用)。
-8）数据传递bundle：Intent内部已经封装好，不用自己封了，serializable，parcelable，也可以转成json字符串传过去。
-9）也可以定义一个静态类，每次跳转页面前添加数据到静态类，跳转完成后从静态类中取出，同时移除。
-
 第三章 View的事件体系
 3.1 View的基础知识
 view的位置参数、MotionEvent、TouchSlop、VelocityTracker、GestureDetector、Scroller
@@ -47,24 +33,24 @@ view的位置参数、MotionEvent、TouchSlop、VelocityTracker、GestureDetecto
 View是Android中所有控件的基类，View是界面层控件的一种抽象。
 
 3.1.2 View的位置参数
-View的位置主要有它的四个顶点来决定，分别对应top、left、bottom、right。left、top对应左上角的xy轴坐标，right、bottom对应右下角的xy轴坐标。
-需要注意的是这四个坐标都是相对于父容器来说的。
-所以
-width=right - left
-height=bottom - top
+View的位置主要由四个顶点来决定，同时对应四个成员变量，分别是：
+mLeft：左上角X坐标，对应的获取方法为 getLeft()；
+mTop：左上角Y坐标，对应的获取方法为 getTop()；
+mRight：右下角X坐标，对应的获取方法为 getRight()；
+mBottom：右下角Y坐标，对应的获取方法为 getBottom()；
 
-View代码中的成员变量分别为
-mLeft = getLeft()
-mTop = getTop()
-mRight = getRight()
-mBottom = getBottom()
+需要注意的是这四个坐标都是相对于父容器来说的。
+同时
+width = mRight - mLeft
+height = mBottom - mTop
+这也是View的最终宽高。
 
 从3.0开始View增加了几个额外的参数：x、y、translationX、translationY；
 其中
-x = left + translationX
-y = top + translationY
-四个坐标是原始坐标，平移时也是不变的，变得是translationX和translationY，x、y随之变化。
-x，y相当于平移后的left，top。
+x = mLeft + translationX
+y = mTop + translationY
+四个顶点坐标是原始坐标，平移时也是不变的，变得是translationX和translationY，x、y随之变化。
+x，y相当于平移后的mLeft，mTop。
 
 3.1.3 MotionEvent 和 TouchSlop
 1.MotionEvent
@@ -92,10 +78,10 @@ tracker.addMovement(event);
 tracker.computerCurrentVelocity(1000)//移动速度的单位，毫秒值，所以是1000起步。
 tracker.getXVelocity()
 tracker.getYVelocity()
+往右下(也就是右滑下滑)是正数速度，左上（左滑上滑）负数的速度，也就是遵循XY轴正方向。
 
 当不需要的时候回收，在ACTION_UP中回收。
 tracker.clear();
-tracker.recycle();
 tracker = null;//强引用消除
 
 2.GestureDetector
@@ -152,6 +138,8 @@ val scroller = Scroller(context)
 scrollTo(x,y)是基于xy的绝对滑动。
 scorllBy(x,y)是相对于原来的mScrollX与mScrollY的相对滑动，内部也是调用的scrollTo；
 mScrollX与mScrollY可以理解为，View的边缘（四坐标）减去view内容的边缘
+scrollY为0时表示已到顶，不能再向下滑，可以向上滑。
+大于0时，可以向下滑。
 
 3.2.2 使用动画
 补间动画，和属性动画
@@ -432,6 +420,11 @@ measureChildren(int widthMeasureSpec, int heightMeasureSpec)//自身的MeasureSp
 measureChild(View child, int parentWidthMeasureSpec, int parentHeightMeasureSpec)
 （3）测量单个View，其中MeasureSpec是父容器自身的MeasureSpec传递给child，会调用child的measure方法，widthUsed和heightUsed是已经使用的宽高。
 measureChildWithMargins(View child, int parentWidthMeasureSpec,int widthUsed, int parentHeightMeasureSpec, int heightUsed)
+View child：子View
+parentWidthMeasureSpec：父容器的模式
+widthUsed：已使用的宽度
+parentHeightMeasureSpec：父容器的模式
+heightUsed：已使用的高度
 
 measureChild的测量流程：
 （1）取出child自身的LayoutParams
@@ -536,7 +529,7 @@ View有一个特殊的方法：setWillNotDraw(boolean willNotDraw)
 这种方法主要用于实现一些不规则的效果。不方便通过布局组合，往往需要静态或动态地显示一些不规则的图形，需要自己处理wrap_content和padding。
 
 （2）继承ViewGroup，派生特殊的ViewGroup
-自定义的布局，需要合适的处理ViewGroup的测量和布局这两个过程，并同时处理子元素测量和布局过程。
+自定义的布局，需要处理ViewGroup的测量和布局这两个过程，并同时处理子元素测量和布局过程。
 
 （3）继承特定的View（如TextView）
 一般用于扩展已有View的功能，如TextView，不需要自己支持wrap_content和padding.
@@ -546,9 +539,9 @@ View有一个特殊的方法：setWillNotDraw(boolean willNotDraw)
 
 4.4.2 自定义View需须知
 这些问题处理不好，会影响view的使用，甚至是内存泄漏。
-（1）让View支持wrap_content
+（1）让View支持wrap_content，以判断EXACTLY为主。
 因为wrap_content模式下，自己不计算，使用的是父容器提供的剩余大小，会充满父容器，相当于match_parent。
-
+ScrollView嵌套下，heightMode的模式可能为UNSPECIFIED，所以以判断EXACTLY为主。推荐使用getDefaultSize这个View自带的方法。
 （2）让View支持padding
 直接继承View控件，如不在draw中处理padding，那么padding属性无法起作用。
 直接继承ViewGroup，需要在onMeasure和onLayout中处理padding和子元素的margin，不然将导致padding和子元素的margin失效。
@@ -568,4 +561,33 @@ onDetachedFromWindow：组件从Activity上移除，这时候线程或动画在�
 4.4.3 自定义View示例
 
 （1）继承View重写onDraw方法
+需要在onMeasure时自己测量wrap_content模式下的宽高，在onDraw时手动加入padding。
+获取自定义属性的方法
+TypedArray style = context.getTheme().obtainStyledAttributes(attrs, R.styleable.SolarSystem, defStyle, 0);
+TypedArray style2 = context.obtainStyledAttributes(attrs, R.styleable.SolarSystem, defStyle, 0);
+TypedArray style3 = context.obtainStyledAttributes(attrs, R.styleable.SolarSystem);
+style.recycle();
+参考SolarSystem；
+
+（2）继承ViewGroup派生特殊的layout
+需要在onMeasure中判断是否有子View，根据模式设定相应的宽高。
+在onLayout中要根据自身的padding以及子View的margin来计算正确的位置。
+要处理margin需要重写generateLayoutParams方法，默认的是ViewGroup的LayoutParams类，要变成MarginLayoutParams才行。
+代码如下：
+这个方法应该是在代码中创建view时才会使用
+@Override
+protected LayoutParams generateLayoutParams(LayoutParams p) {
+    return new ViewGroup.MarginLayoutParams(p);
+}
+
+这个方法应该是在xml中创建view时才会使用
+@Override
+public LayoutParams generateLayoutParams(AttributeSet attrs) {
+    return new MarginLayoutParams(getContext(), attrs);
+}
+
+4.4.4 自定义View的思想
+背过这两章的基础知识就行了，背。
+
+第五章 理解 RemoteViews
 

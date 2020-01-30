@@ -1,33 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scroller"
+<com.sky.oa.widget.ScrollerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+    >
+
+<Button
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="100dp"
+    android:text="This is first child view"/>
 
-    <include layout="@layout/include_toolbar" />
+<Button
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:text="This is second child view"/>
 
-    <com.sky.oa.widget.TouchA
-        android:id="@+id/touchA"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+<Button
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:text="This is third child view"/>
 
-        <com.sky.oa.widget.TouchB
-            android:id="@+id/touchB"
-            android:layout_width="@dimen/wh_120"
-            android:layout_height="@dimen/wh_120"
-            android:orientation="vertical">
-
-            <com.sky.oa.widget.TouchC
-                android:id="@+id/touchC"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/wh_48"
-                android:text="核心"
-                android:textSize="@dimen/text_16"
-                android:textStyle="bold" />
-        </com.sky.oa.widget.TouchB>
-    </com.sky.oa.widget.TouchA>
-</LinearLayout>
+</com.sky.oa.widget.ScrollerLayout>

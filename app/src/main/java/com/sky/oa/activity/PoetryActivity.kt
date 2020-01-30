@@ -73,6 +73,9 @@ class PoetryActivity : BaseActivity() {
         initEvent()
         addAni()
         loadData()
+        sliding.menuState = { state ->
+            LogUtils.i("state==$state")
+        }
     }
 
     private fun addAni() {
@@ -114,12 +117,13 @@ class PoetryActivity : BaseActivity() {
         var tv: TextView
         for ((index, poetry) in poetries.withIndex()) {
             tv = LayoutInflater.from(this).inflate(R.layout.item_tv, flow, false) as TextView
-            tv.width = resources.getDimensionPixelSize(R.dimen.wh_96)
+//            tv.width = resources.getDimensionPixelSize(R.dimen.wh_96)
+            tv.minWidth = resources.getDimensionPixelSize(R.dimen.wh_48)
             tv.textSize = 18f
             tv.maxLines = 1
 //            tv.text = text.substringAfterLast("/", ".").substringBefore(".", "")
             tv.text = poetry.name
-            tv.setPadding(10, 0, 10, 0)
+            tv.setPadding(20, 6, 20, 6)
             tv.id = index
             flow.addView(tv)
             tv.setOnClickListener(selectArticle)

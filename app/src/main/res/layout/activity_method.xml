@@ -6,11 +6,12 @@
 
     <include layout="@layout/include_toolbar" />
 
-    <com.sky.design.widget.FlowLayout
+    <com.sky.design.widget.FlowLay
         android:id="@+id/flow"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:layout_margin="@dimen/wh_1"
         android:background="@drawable/sel_rect_10_stroke_white_ff4081"
         android:elevation="@dimen/wh_8" />
 

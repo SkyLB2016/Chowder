@@ -50,8 +50,8 @@ public class TouchC extends TextView {
                 break;
             case MotionEvent.ACTION_MOVE:
                 LogUtils.i("C的touch的ACTION_MOVE");
-                return true;
-//            break;
+//                return true;
+            break;
             case MotionEvent.ACTION_UP:
                 LogUtils.i("C的touch的ACTION_UP");
                 break;

@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.VelocityTracker
+import android.view.ViewConfiguration
 import android.view.ViewGroup
 import android.widget.HorizontalScrollView
 import com.sky.design.widget.State
@@ -15,7 +16,11 @@ import kotlin.math.abs
  * Created by SKY on 2015/8/17 15:56.
  * 横向的侧滑栏
  */
-class SlidingMenu @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : HorizontalScrollView(context, attrs, defStyleAttr) {
+class SlidingMenu @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : HorizontalScrollView(context, attrs, defStyleAttr) {
 
     private val screenWidth = ScreenUtils.getWidthPX(context)
     private val screenHeight: Int = ScreenUtils.getHeightPX(context)
@@ -26,12 +31,13 @@ class SlidingMenu @JvmOverloads constructor(context: Context, attrs: AttributeSe
 
     private val contentScale = DEFAULTSCALE//控制主布局缩放的大小
     private val mMenuScale = DEFAULTSCALE//控制菜单缩放的大小
+
     private var menuWidth: Int = 0
     private var downX: Float = 0f
     private var downY: Float = 0f
     private var downTime: Long = 0//按下时的时间，计算速度，展开或者关闭menu
     private var state = State.CLOSE//默认状态
-
+    private val touchSlop = ViewConfiguration.get(context).scaledTouchSlop
 
     val isClose: Boolean
         get() = state === State.CLOSE
@@ -50,8 +56,10 @@ class SlidingMenu @JvmOverloads constructor(context: Context, attrs: AttributeSe
             wallPaper = getChildAt(0) as ViewGroup
             menu = wallPaper?.getChildAt(0) as ViewGroup
             content = wallPaper?.getChildAt(1) as ViewGroup
+
             menu?.layoutParams?.width = screenWidth / 4 * 3
             menuWidth = menu?.layoutParams?.width!!
+
             content?.layoutParams?.width = screenWidth
             once = false
         }
@@ -65,28 +73,41 @@ class SlidingMenu @JvmOverloads constructor(context: Context, attrs: AttributeSe
     }
 
     override fun onInterceptTouchEvent(event: MotionEvent): Boolean {
+        var intercepted = false;
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {//获取按下时的信息
-                downX = event.rawX
-                downY = event.rawY
+                downX = event.x
+                downY = event.y
                 downTime = System.currentTimeMillis()
-                if (isOpen && downX > menuWidth) return true//打开时，某些部分的touch事件不向下传递
+                //打开时，点击位置在菜单之外，拦截事件
+                if (isOpen && downX > menuWidth) {
+                    intercepted = true
+                }
             }
-        /*在范围内时滑动的x距离大于100的时候才开始滑动状态*/
-            MotionEvent.ACTION_MOVE -> if (downY > screenHeight * 2 / 5 && event.rawX - downX > TOUCHSLOP) return true
-        }
-        return false
-    }
-    var tracker: VelocityTracker? = null
+            MotionEvent.ACTION_MOVE -> {
+                LogUtils.i("touchSlop==$touchSlop")
+                //横向的滑动范围大于TouchSlop，开始滑动
+//                if (abs(event.x - downX) > touchSlop) {
+                val dX = downX - event.x
+                val dY = downY - event.y
+                if (abs(dX) >= abs(dY) && abs(dX) > touchSlop) {
+                    intercepted = true
+                }
 
+            }
+        }
+        return intercepted
+    }
+
+    var tracker: VelocityTracker? = null
     override fun onTouchEvent(event: MotionEvent): Boolean {
 //        if (tracker == null) tracker = VelocityTracker.obtain()
 //        tracker?.addMovement(event)
         when (event.action) {
             MotionEvent.ACTION_UP -> {
                 //抬起时的XY以及时间
-                val upX = event.rawX
-                val upY = event.rawY
+                val upX = event.x
+                val upY = event.y
                 val distance = upX - downX//抬起时x方向走过的总路程
                 //在open状态下判断点击后抬起时，xy在content范围内，需要关闭menu
                 if (isOpen) {
@@ -94,9 +115,9 @@ class SlidingMenu @JvmOverloads constructor(context: Context, attrs: AttributeSe
                     val top = content!!.height * (SCALE - contentScale) / 2
                     val bottom = content!!.height - top
                     //保证X点在主布局的范围内,同时移动的绝对距离不大于10
-                    if (downX > menuWidth /*&& upX>menuWidth*/ && abs(distance) < TOUCHSLOP
-                            //保证Y点落下与抬起时均在主布局的范围内（/*同时移动的绝对距离不大于10*/）
-                            && downY > top && downY < bottom && upY > top && upY < bottom /*&& Math.abs(upY - downY) < 10*/)
+                    if (downX > menuWidth /*&& upX>menuWidth*/ && abs(distance) < touchSlop
+                        //保证Y点落下与抬起时均在主布局的范围内（/*同时移动的绝对距离不大于10*/）
+                        && downY > top && downY < bottom && upY > top && upY < bottom /*&& Math.abs(upY - downY) < 10*/)
                         return close()//不在向下传递
                 }
                 //计算速度,以及左右滑动时的操作
@@ -160,6 +181,5 @@ class SlidingMenu @JvmOverloads constructor(context: Context, attrs: AttributeSe
         private const val SPEED = 2//这是毫秒的速度
         private const val SCALE = 1f
         private const val DEFAULTSCALE = 0.7f
-        private const val TOUCHSLOP = 100//自定义的TouchSlop
     }
 }

@@ -13,20 +13,19 @@ import java.util.*
  * Created by SKY on 2015/4/2 20:43:43.
  * 流式布局
  */
-class FlowLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : FrameLayout(context, attrs, defStyleAttr) {
+class FlowLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : ViewGroup(context, attrs, defStyleAttr) {
 
     // 所有控件，分行排列
     private val allViews = ArrayList<List<View>>()
     // 记录行高
     private val lineHeights = ArrayList<Int>()
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        val layoutWidth = MeasureSpec.getSize(widthMeasureSpec)//match_parent时的宽
+        val layoutWidth = MeasureSpec.getSize(widthMeasureSpec)//父容器提供的宽
         val widthMode = MeasureSpec.getMode(widthMeasureSpec)//获取测量模式，match与wrap
-        val layoutHeight = MeasureSpec.getSize(heightMeasureSpec)
+        val layoutHeight = MeasureSpec.getSize(heightMeasureSpec)//父容器提供的宽
         val heightMode = MeasureSpec.getMode(heightMeasureSpec)
 
-        // 模式为wrap_content时，测量框架的宽高
-        // 先清空
+        //因为onMeasure要多次执行，所以要清空该清空的数据
         allViews.clear()
         lineHeights.clear()
         var lineViews: MutableList<View> = ArrayList()
@@ -45,7 +44,7 @@ class FlowLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
         for (i in 0 until childCount) {
             child = getChildAt(i)
             measureChild(child, widthMeasureSpec, widthMeasureSpec)// 测量子view
-            lp = child.layoutParams as ViewGroup.MarginLayoutParams
+            lp = child.layoutParams as MarginLayoutParams
             childWidth = child.measuredWidth + lp.leftMargin + lp.rightMargin
             childHeight = child.measuredHeight + lp.topMargin + lp.bottomMargin
             //当行宽加上一个childWidth大于父布局的实际宽时，切换下一行
@@ -66,7 +65,7 @@ class FlowLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
             }
             //判断最后一个，加载最后一行的宽高，获取最终宽高
             if (i === childCount - 1) {
-                width = Math.max(width, lineWidth)
+                width = width.coerceAtLeast(lineWidth)
                 height += lineHeight
             }
             lineViews.add(child)
@@ -105,32 +104,36 @@ class FlowLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
         }
     }
 
-    override fun generateLayoutParams(attrs: AttributeSet) = FrameLayout.LayoutParams(context, attrs)
+    override fun generateLayoutParams(attrs: AttributeSet) = MarginLayoutParams(context, attrs)
+
+    override fun generateLayoutParams(p: LayoutParams?): LayoutParams {
+        return MarginLayoutParams(p)
+    }
 
     var lastY = 0f
     //滑动控件内容
-//    override fun onTouchEvent(event: MotionEvent?): Boolean {
-//        when (event?.action) {
-//            MotionEvent.ACTION_DOWN -> lastY = event.rawY
-//            MotionEvent.ACTION_MOVE -> {
-//                var dy = lastY - event.rawY
-//                if (scrollY < 0 && dy < 0)
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        when (event?.action) {
+            MotionEvent.ACTION_DOWN -> lastY = event.rawY
+            MotionEvent.ACTION_MOVE -> {
+                var dy = lastY - event.rawY
+                if (scrollY < 0 && dy < 0)
+                    dy = 0f
+                if (scrollY > height - ScreenUtils.getHeightPX(context) + ScreenUtils.getStatusHeight(context) + 10 && dy > 0)
+                    dy = 0f
+                scrollBy(0, dy.toInt())
+
+//                var dy = event.rawY - lastY
+//                if (scrollY < 0 && dy > 0)
 //                    dy = 0f
-//                if (scrollY > height - ScreenUtils.getHeightPX(context) + ScreenUtils.getStatusHeight(context) + 10 && dy > 0)
+//                if (scrollY > height - ScreenUtils.getHeightPX(context) + ScreenUtils.getStatusHeight(context) + 10 && dy < 0)
 //                    dy = 0f
-//                scrollBy(0, dy.toInt())
-//
-////                var dy = event.rawY - lastY
-////                if (scrollY < 0 && dy > 0)
-////                    dy = 0f
-////                if (scrollY > height - ScreenUtils.getHeightPX(context) + ScreenUtils.getStatusHeight(context) + 10 && dy < 0)
-////                    dy = 0f
-////                scrollBy(0, -dy.toInt())
-//
-//                lastY = event.rawY
-//            }
-//        }
-//        postInvalidate()
-//        return true
-//    }
+//                scrollBy(0, -dy.toInt())
+
+                lastY = event.rawY
+            }
+        }
+        postInvalidate()
+        return true
+    }
 }

@@ -7,6 +7,7 @@ import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.KeyEvent
 import android.view.MotionEvent
+import android.view.VelocityTracker
 import android.view.View
 import android.widget.Scroller
 import com.sky.oa.R
@@ -24,10 +25,7 @@ class CanvasView @JvmOverloads constructor(
     private var cX = -1f
     private var cY = -1f
     override fun onTouchEvent(event: MotionEvent): Boolean {
-//        val velocity = VelocityTracker.obtain()
-//        velocity.addMovement(event)
-//        velocity.computeCurrentVelocity(1000)
-//        LogUtils.i("速度X==${velocity.xVelocity},速度Y=" + "${velocity.yVelocity}")
+        velocity.addMovement(event)
 //        velocity.clear()
 //        velocity.recycle()
         when (event.action) {
@@ -59,17 +57,22 @@ class CanvasView @JvmOverloads constructor(
                 cY = event.y
             }
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                velocity.computeCurrentVelocity(1000)
+                LogUtils.i("速度X==${velocity.xVelocity}")
+                LogUtils.i("速度Y==${velocity.yVelocity}")
+
                 lastX = -1f
                 lastY = -1f
                 cY = -1f
                 cX = cY
             }
         }
-        invalidate()
+//        invalidate()
         return true
     }
 
     val scroller = Scroller(context)
+    val velocity = VelocityTracker.obtain()
 
     override fun computeScroll() {
         if (scroller.computeScrollOffset()) {
@@ -85,6 +88,7 @@ class CanvasView @JvmOverloads constructor(
         scroller.startScroll(scrollX, scrollY, dX, dY, 1000)
         invalidate()
     }
+
     var bitmap: Bitmap = BitmapFactory.decodeResource(resources, R.mipmap.ic_puzzle)
     var sx = 0f
     var bw = 0
@@ -96,6 +100,7 @@ class CanvasView @JvmOverloads constructor(
         bw = bitmap.width
         bh = bitmap.height
         isFocusable = true
+
     }
 
     override fun onDraw(canvas: Canvas) {

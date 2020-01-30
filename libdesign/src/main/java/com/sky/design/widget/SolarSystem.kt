@@ -67,6 +67,7 @@ class SolarSystem @JvmOverloads constructor(
     init {
         val style =
             context.theme.obtainStyledAttributes(attrs, R.styleable.SolarSystem, defStyleAttr, 0)
+//            context.obtainStyledAttributes(attrs, R.styleable.SolarSystem)
         position = style.getInt(R.styleable.SolarSystem_position, CENTER)//控件所处位置
         radius = style.getDimensionPixelSize(R.styleable.SolarSystem_radius, radius)//获取半径值
         style.recycle()// 释放

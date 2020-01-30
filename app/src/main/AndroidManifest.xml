@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.sky.oa">
 
-<!--    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />-->
+    <!--    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />-->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <!-- 自定义权限 -->
@@ -37,7 +37,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:replace="android:name,android:theme">
-<!--        android:roundIcon="@mipmap/ic_launcher_round"-->
+        <!--        android:roundIcon="@mipmap/ic_launcher_round"-->
         <!--android:roundIcon="@mipmap/ic_launcher_round"-->
         <!-- 申请大内存 -->
         <!-- android:largeHeap="true" -->
@@ -48,9 +48,9 @@
             android:value="${CHANNEL_VALUE}" />
         <!-- 与build.gradle相呼应完-->
         <!--BugHD-->
-<!--        <meta-data-->
-<!--            android:name="BUG_HD_SDK_GENERAL_KEY"-->
-<!--            android:value="279dc3c61d77f5b08b4970a31db93c62" />-->
+        <!--        <meta-data-->
+        <!--            android:name="BUG_HD_SDK_GENERAL_KEY"-->
+        <!--            android:value="279dc3c61d77f5b08b4970a31db93c62" />-->
         <!--BugHD-->
 
         <!--拍照时使用-->
@@ -83,11 +83,23 @@
 
         <activity
             android:name=".activity.TestActivity"
+            android:configChanges="keyboardHidden"
             android:description="@string/act_test"
             android:hardwareAccelerated="false"
             android:icon="@mipmap/ic_launcher"
-            android:label="@string/act_test"
-            android:configChanges="keyboardHidden">
+            android:label="@string/act_test">
+            <intent-filter>
+                <action android:name="com.sky.coustom" />
+                <category android:name="android.intent.category.CAR_MODE" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.TouchActivity"
+            android:configChanges="keyboardHidden"
+            android:description="@string/act_touch"
+            android:hardwareAccelerated="false"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/act_touch_des">
             <intent-filter>
                 <action android:name="com.sky.coustom" />
                 <category android:name="android.intent.category.CAR_MODE" />

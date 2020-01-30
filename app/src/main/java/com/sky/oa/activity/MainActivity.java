@@ -137,6 +137,13 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
     private void testMethod() {
 //        handler.sendEmptyMessage(1);
 //                equalPoetry();
+        int a = 1;
+        a += 1 + 2 + 3;
+        LogUtils.i("a==" + a);
+
+    }
+
+    private void testMeasure() {
         ViewGroup.LayoutParams lp = fab.getLayoutParams();
         LogUtils.i("width==" + lp.width);
         LogUtils.i("height==" + lp.height);
@@ -149,8 +156,6 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         LogUtils.i("height==" + fab.getHeight());
         int width = fab.getMeasuredWidth();
         int height = fab.getMeasuredHeight();
-
-
     }
 
     private static final int MODE_SHIFT = 30;

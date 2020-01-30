@@ -44,22 +44,30 @@ public class TouchB extends LinearLayout {
         return super.dispatchTouchEvent(event);
     }
 
+    float x = 0;
+    float y = 0;
+
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
+
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                x = ev.getRawX();
+                y = ev.getRawY();
+                LogUtils.i("x=="+x);
+                LogUtils.i("y=="+y);
                 LogUtils.i("B的intercept的ACTION_DOWN");
                 break;
             case MotionEvent.ACTION_MOVE:
                 move++;
                 LogUtils.i("B的intercept的ACTION_MOVE");
-                if (move > 5)
-                    return true;
+//                if (move > 5)
+//                    return true;
                 break;
             case MotionEvent.ACTION_UP:
                 LogUtils.i("B的intercept的ACTION_UP");
-                if (move > 5)
-                    return false;
+//                if (move > 5)
+//                    return false;
                 break;
         }
         return super.onInterceptTouchEvent(ev);
@@ -71,6 +79,10 @@ public class TouchB extends LinearLayout {
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                x = event.getRawX();
+                y = event.getRawY();
+                LogUtils.i("x=="+x);
+                LogUtils.i("y=="+y);
                 LogUtils.i("B的touch的ACTION_DOWN");
                 break;
             case MotionEvent.ACTION_MOVE:

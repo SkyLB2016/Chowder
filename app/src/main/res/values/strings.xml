@@ -50,6 +50,10 @@
     <string name="act_hrm">11.页面UI图</string>
     <string name="act_hrm_d">页面UI图</string>
 
+    <string name="act_touch">20.触摸测试类</string>
+    <string name="act_touch_des">触摸测试类</string>
+
+
     <string name="ibu"><i><b><u>下划线加粗斜体</u></b></i></string>
 
     <!--卫星菜单选择-->

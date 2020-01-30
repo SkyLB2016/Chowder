@@ -1,9 +1,12 @@
 package com.sky.design.widget;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+
+import com.sky.R;
 
 /**
  * Created by SKY on 16/5/10 下午3:50.
@@ -19,6 +22,8 @@ public class ScrollingTextView extends androidx.appcompat.widget.AppCompatTextVi
         setSingleLine();
         // setFocusable(true);//==isfocused()
         // setFocusableInTouchMode(true);
+//            context.obtainStyledAttributes(attrs, R.styleable.SolarSystem)
+
     }
 
     public ScrollingTextView(Context context, AttributeSet attrs) {
