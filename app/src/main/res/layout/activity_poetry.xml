@@ -11,13 +11,18 @@
         android:background="@color/color_DDC29F07"
         android:orientation="horizontal">
 
-        <com.sky.design.widget.FlowLay
-            android:id="@+id/flow"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:elevation="@dimen/wh_8"
-            android:padding="@dimen/wh_8"
-            app:lineSpace="@dimen/wh_16" />
+            android:layout_height="match_parent">
+
+            <com.sky.design.widget.FlowLay
+                android:id="@+id/flow"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:elevation="@dimen/wh_8"
+                android:padding="@dimen/wh_8"
+                app:lineSpace="@dimen/wh_16" />
+        </ScrollView>
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -201,90 +201,90 @@ public class FlowLay extends ViewGroup {
         return new MarginLayoutParams(getContext(), attrs);
     }
 
-    @Override
-    public boolean onInterceptTouchEvent(MotionEvent event) {
-        boolean intercepted = super.onInterceptTouchEvent(event);
-        if (getHeight() > bottomBorder) return false;
-        if (tracker == null) {
-            tracker = VelocityTracker.obtain();
-        }
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                interceptX = event.getX();
-                interceptY = event.getY();
-                lastX = event.getX();
-                lastY = event.getY();
-                intercepted = false;
-                if (!scroller.isFinished()) {
-                    scroller.abortAnimation();
-                    intercepted = true;
-                }
-                break;
-            case MotionEvent.ACTION_MOVE:
-                float deltaX = interceptX - event.getX();
-                float deltaY = interceptY - event.getY();
-                if (Math.abs(deltaY) >= Math.abs(deltaX) && Math.abs(deltaY) > touchSlop) {
-                    requestDisallowInterceptTouchEvent(true);
-                    intercepted = true;
-                } else {
-                    intercepted = false;
-                }
-
-                break;
-            case MotionEvent.ACTION_UP:
-                requestDisallowInterceptTouchEvent(false);
-                intercepted = false;
-                break;
-        }
-        return intercepted;
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        if (getHeight() > bottomBorder) return false;
-        tracker.addMovement(event);
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                if (!scroller.isFinished()) {
-                    scroller.abortAnimation();
-                }
-                break;
-            case MotionEvent.ACTION_MOVE:
-//                float deltaX = lastX -event.getX();
-                int deltaY = (int) (lastY - event.getY());
-                if (getScrollY() + deltaY <= 0) {
-                    scrollTo(0, 0);
-                    return true;
-                } else if (getScrollY() + getHeight() + deltaY > bottomBorder) {
-                    scrollTo(0, bottomBorder - getHeight());
-                    return true;
-                }
-                scrollBy(0, deltaY);
-                lastX = event.getX();
-                lastY = event.getY();
-
-                break;
-            case MotionEvent.ACTION_UP:
-                requestDisallowInterceptTouchEvent(false);
-                int scrollY = getScrollY();
-                tracker.computeCurrentVelocity(1000);
-                float speed = tracker.getYVelocity();
-                int dY = (int) (lastY - event.getY());
-
-                if (speed > 500) {//速度为正数，是下滑，scrollX逐渐变小，最小为0
-                    smoothScrollTo(getScrollY(), -getScrollY());
-                } else if (speed < -500) {
-                    smoothScrollTo(getScrollY(), bottomBorder - getHeight() - getScrollY());
-                }
-//                scrollBy(0, dY);
-                restTouch();
-                break;
-            case MotionEvent.ACTION_CANCEL:
-                restTouch();
-                break;
-        }
-        return true;
-    }
+//    @Override
+//    public boolean onInterceptTouchEvent(MotionEvent event) {
+//        boolean intercepted = super.onInterceptTouchEvent(event);
+//        if (getHeight() > bottomBorder) return false;
+//        if (tracker == null) {
+//            tracker = VelocityTracker.obtain();
+//        }
+//        switch (event.getAction()) {
+//            case MotionEvent.ACTION_DOWN:
+//                interceptX = event.getX();
+//                interceptY = event.getY();
+//                lastX = event.getX();
+//                lastY = event.getY();
+//                intercepted = false;
+//                if (!scroller.isFinished()) {
+//                    scroller.abortAnimation();
+//                    intercepted = true;
+//                }
+//                break;
+//            case MotionEvent.ACTION_MOVE:
+//                float deltaX = interceptX - event.getX();
+//                float deltaY = interceptY - event.getY();
+//                if (Math.abs(deltaY) >= Math.abs(deltaX) && Math.abs(deltaY) > touchSlop) {
+//                    requestDisallowInterceptTouchEvent(true);
+//                    intercepted = true;
+//                } else {
+//                    intercepted = false;
+//                }
+//
+//                break;
+//            case MotionEvent.ACTION_UP:
+//                requestDisallowInterceptTouchEvent(false);
+//                intercepted = false;
+//                break;
+//        }
+//        return intercepted;
+//    }
+//
+//    @Override
+//    public boolean onTouchEvent(MotionEvent event) {
+//        if (getHeight() > bottomBorder) return false;
+//        tracker.addMovement(event);
+//        switch (event.getAction()) {
+//            case MotionEvent.ACTION_DOWN:
+//                if (!scroller.isFinished()) {
+//                    scroller.abortAnimation();
+//                }
+//                break;
+//            case MotionEvent.ACTION_MOVE:
+////                float deltaX = lastX -event.getX();
+//                int deltaY = (int) (lastY - event.getY());
+//                if (getScrollY() + deltaY <= 0) {
+//                    scrollTo(0, 0);
+//                    return true;
+//                } else if (getScrollY() + getHeight() + deltaY > bottomBorder) {
+//                    scrollTo(0, bottomBorder - getHeight());
+//                    return true;
+//                }
+//                scrollBy(0, deltaY);
+//                lastX = event.getX();
+//                lastY = event.getY();
+//
+//                break;
+//            case MotionEvent.ACTION_UP:
+//                requestDisallowInterceptTouchEvent(false);
+//                int scrollY = getScrollY();
+//                tracker.computeCurrentVelocity(1000);
+//                float speed = tracker.getYVelocity();
+//                int dY = (int) (lastY - event.getY());
+//
+//                if (speed > 500) {//速度为正数，是下滑，scrollX逐渐变小，最小为0
+//                    smoothScrollTo(getScrollY(), -getScrollY());
+//                } else if (speed < -500) {
+//                    smoothScrollTo(getScrollY(), bottomBorder - getHeight() - getScrollY());
+//                }
+////                scrollBy(0, dY);
+//                restTouch();
+//                break;
+//            case MotionEvent.ACTION_CANCEL:
+//                restTouch();
+//                break;
+//        }
+//        return true;
+//    }
 
     @Override
     public void computeScroll() {
