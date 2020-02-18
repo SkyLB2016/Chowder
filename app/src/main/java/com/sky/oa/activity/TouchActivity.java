@@ -2,6 +2,7 @@ package com.sky.oa.activity;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -22,13 +23,19 @@ public class TouchActivity extends AppCompatActivity {
         LogUtils.i(getClass().getSimpleName() + "==" + Thread.currentThread().getStackTrace()[2].getMethodName());
         setContentView(R.layout.activity_touchtest);
         ButterKnife.bind(this);
-        findViewById(R.id.touchC).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LogUtils.i("==执行了点击事件");
-            }
-        });
+//        findViewById(R.id.touchC).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                LogUtils.i("==执行了点击事件");
+//            }
+//        });
     }
+
+//    @Override
+//    public boolean onTouchEvent(MotionEvent event) {
+//        LogUtils.i("==没有处理点击事件");
+//        return super.onTouchEvent(event);
+//    }
 
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
