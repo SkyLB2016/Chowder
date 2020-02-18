@@ -99,7 +99,8 @@
             android:description="@string/act_touch"
             android:hardwareAccelerated="false"
             android:icon="@mipmap/ic_launcher"
-            android:label="@string/act_touch_des">
+            android:label="@string/act_touch_des"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.sky.coustom" />
                 <category android:name="android.intent.category.CAR_MODE" />
