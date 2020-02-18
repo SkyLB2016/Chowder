@@ -2,9 +2,9 @@
 
 第一章 Activity的生命周期和启动模式
 onCreate：表示activity正在被创建，在此可以做一些初始化工作，加载布局资源，初始化activity所需要的数据
-onRestart：表示activity正在重新启动，在执行了onStop，未执行onDestory前，又回到这个activity，就会执行。
+onRestart：表示activity正在重新启动，在执行了onStop，未执行onDestory前，又回到这个activity，这个方法就会执行。
 onStart：表示activity正在被启动，此时activity可见，但还没有出现在前台，无法与用户交互。这时候可以理解为activity已经显示出来了，但是我们还看不到。
-onResume：表示activity已经可见了，出现在前台开始活动。onStart和onResume都表示activity可见，但是onStart的时候页面还在后台，onResume的时候显示到前台。view的onMeasure，onLayout，onDraw在此时执行。
+onResume：表示activity已经可见了，出现在前台开始活动。onStart和onResume都表示activity可见，但是onStart的时候页面还在后台，onResume的时候显示到前台。view的onMeasure，onLayout，onDraw在这之后执行。
 onPause：表示activity正在停止，正常情况下onStop会紧接着被调用。如在跳转页面时，页面启动崩溃，又返回到此页面，onStop来不及执行，会直接调用onResume。onPause可以做一些存储数据，停止动画等工作，不能太耗时，因为只有onPause先执行完，新页面的onResume才会执行。页面上的弹窗不会执行onPause。
 onStop：表示activity即将停止，可以做一些稍微重量级的回收工作，同样不能太耗时
 onDestory：表示activity即将被销毁，可以做一些回收工作和最终的资源释放。
@@ -92,8 +92,7 @@ GestureDetector detector = new GestureDetector(context，OnGestureListener)；
 
 解决长按屏幕后无法拖动的现象
 detector.setIsLongpressEnabled(false);
-
-还要接管目标View的onTouchEvent方法。
+              b
 if(detector.onTouchEvent(event)){//有可能 还需要向下传递。
 return true;
 }
@@ -134,12 +133,15 @@ val scroller = Scroller(context)
     }
 
 3.2 View的滑动
+
 3.2.1使用scrollTo/scrollBy，属于内部内容的滑动。
-scrollTo(x,y)是基于xy的绝对滑动。
-scorllBy(x,y)是相对于原来的mScrollX与mScrollY的相对滑动，内部也是调用的scrollTo；
-mScrollX与mScrollY可以理解为，View的边缘（四坐标）减去view内容的边缘
-scrollY为0时表示已到顶，不能再向下滑，可以向上滑。
-大于0时，可以向下滑。
+scrollTo(x,y)：滑动到xy指定的位置，是基于xy的绝对滑动。
+scorllBy(x,y)：内部也调用了scrollTo，加上了原来的ScrollX/Y，是基于原来的mScrollX与mScrollY的滑动X/Y距离的相对滑动；
+
+mScrollX与mScrollY可以理解为：View的边缘（四坐标）减去view内容的边缘，默认为0；
+可以理解为view顶部边缘覆盖View的内容，下滑时，向下覆盖，scrollY为正数，上滑时超出view内容后，为负数。
+所以上滑的时候view的上边缘在view内容的下边，scrollY是正数，下滑的时候，view的上边缘在view内容之上，scrollY就是负数，
+左滑的时候，view的左边缘在view内容的右边，scrollX是正数；右滑的时候，view的左边缘在view内容的左边，scrollX就是负数。
 
 3.2.2 使用动画
 补间动画，和属性动画
@@ -157,13 +159,18 @@ scrollTo/scrollBy：操作简单，适合对View内容的滑动；
 可以通过 Scroller、Handler#postDelayed、Thread#sleep
 
 3.3.1 使用Scroller
-需要手动调用smoothScrollTo方法，传入的参数是移动的距离，负值是向右向下，正值是向左向上。
+需要手动调用一下方法，传以下参数是移动的距离，负值是向右向下，正值是向左向上。
+scroller.startScroll(scrollX, scrollY, dX, dY, 1000)
+invalidate()
 
 3.3.2 通过动画
 ObjectAnimator继承自ValueAnimator
 
 3.3.3 使用延时策略：通过发送一系列的延时信息，从而达到渐进式的效果。
+
 handler或View的postDelayed来延时发送消息刷新。还可以用Thread的sleep来操作。
+
+因为View的postDelayed就可以实现延时消息发送，所以如无必要，无需使用handler
 
 3.4 View的事件分发机制
 
@@ -176,20 +183,20 @@ public boolean dispatchTouchEvent(MotionEvent event)
 第二个：ViewGroup独有
 public boolean onInterceptTouchEvent(MotionEvent event)
 在上述方法内部调用，用来判断是否拦截某个事件，如果当前View拦截了某个事件，那么在同一个事件序列当中，此方法不会被再次调用，返回结果表示是否拦截当前事件。
+ACTION_DOWN正常传递，在ACTION_MOVE拦截，拦截之后，此方法就会自动跳过，不在调用，所以之后的ACTION_MOVE与ACTION_UP都不会执行。
 
 第三个
 public boolean onTouchEvent(MotionEvent event)
 在dispatchTouchEvent中调用，用来处理点击事件，返回结果表示是否消耗当前事件，如果不消耗，则在同一个事件序列中，当前View无法再次接收到事件。
 
 三者关系大概如下
-public boolean onInterceptTouchEvent(MotionEvent event){
+public boolean dispatchTouchEvent(MotionEvent event){
      boolean consume = false;
      if(onInterceptTouchEvent(event)){
         consume = onTouchEvent(event);
      }else{
         consume = child.dispatchTouchEvent(event)
      }
-
      return consume;
 }
 
