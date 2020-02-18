@@ -31,13 +31,13 @@ public class TouchA extends LinearLayout {
     public boolean dispatchTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                LogUtils.i("A的dispatch的ACTION_DOWN");
+                LogUtils.i("A的dis==ACTION_DOWN");
                 break;
             case MotionEvent.ACTION_MOVE:
-                LogUtils.i("A的dispatch的ACTION_MOVE");
+                LogUtils.i("A的dis==ACTION_MOVE");
                 break;
             case MotionEvent.ACTION_UP:
-                LogUtils.i("A的dispatch的ACTION_UP");
+                LogUtils.i("A的dis==ACTION_UP");
                 break;
         }
         return super.dispatchTouchEvent(event);
@@ -47,13 +47,13 @@ public class TouchA extends LinearLayout {
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                LogUtils.i("A的intercept的ACTION_DOWN");
+                LogUtils.i("A的拦截==ACTION_DOWN");
                 break;
             case MotionEvent.ACTION_MOVE:
-                LogUtils.i("A的intercept的ACTION_MOVE");
+                LogUtils.i("A的拦截==ACTION_MOVE");
                 break;
             case MotionEvent.ACTION_UP:
-                LogUtils.i("A的intercept的ACTION_UP");
+                LogUtils.i("A的拦截==ACTION_UP");
                 break;
         }
         return super.onInterceptTouchEvent(ev);
@@ -63,13 +63,13 @@ public class TouchA extends LinearLayout {
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                LogUtils.i("A的touch的ACTION_DOWN");
+                LogUtils.i("A的touch==ACTION_DOWN");
                 break;
             case MotionEvent.ACTION_MOVE:
-                LogUtils.i("A的touch的ACTION_MOVE");
+                LogUtils.i("A的touch==ACTION_MOVE");
                 break;
             case MotionEvent.ACTION_UP:
-                LogUtils.i("A的touch的ACTION_UP");
+                LogUtils.i("A的touch==ACTION_UP");
                 break;
         }
         return super.onTouchEvent(event);
