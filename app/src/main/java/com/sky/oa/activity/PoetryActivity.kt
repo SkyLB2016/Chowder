@@ -1,7 +1,6 @@
 package com.sky.oa.activity
 
 import android.content.ClipboardManager
-import android.graphics.Color
 import android.graphics.RectF
 import android.os.Bundle
 import android.view.Gravity
@@ -13,15 +12,15 @@ import android.view.animation.LayoutAnimationController
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.sky.oa.model.ChapterEntity
 import com.sky.design.adapter.RecyclerAdapter
 import com.sky.design.adapter.RecyclerHolder
-import com.sky.oa.pop.CatalogPop
-import com.sky.oa.utils.CatalogThread
 import com.sky.design.app.BaseActivity
 import com.sky.design.widget.BaseTitle
 import com.sky.oa.R
+import com.sky.oa.model.ChapterEntity
 import com.sky.oa.model.PoetryEntity
+import com.sky.oa.pop.CatalogPop
+import com.sky.oa.utils.CatalogThread
 import com.sky.sdk.utils.FileUtils
 import com.sky.sdk.utils.LogUtils
 import com.sky.sdk.utils.ScreenUtils
@@ -76,6 +75,13 @@ class PoetryActivity : BaseActivity() {
         sliding.menuState = { state ->
             LogUtils.i("state==$state")
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        LogUtils.i(
+            javaClass.simpleName + "==" + Thread.currentThread().stackTrace[2].methodName
+        )
     }
 
     private fun addAni() {
