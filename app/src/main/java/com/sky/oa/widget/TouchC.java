@@ -30,13 +30,13 @@ public class TouchC extends TextView {
     public boolean dispatchTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                LogUtils.i("C的dispatch的ACTION_DOWN");
+                LogUtils.i("C的dis==ACTION_DOWN");
                 break;
             case MotionEvent.ACTION_MOVE:
-                LogUtils.i("C的dispatch的ACTION_MOVE");
+                LogUtils.i("C的dis==ACTION_MOVE");
                 break;
             case MotionEvent.ACTION_UP:
-                LogUtils.i("C的dispatch的ACTION_UP");
+                LogUtils.i("C的dis==ACTION_UP");
                 break;
         }
         return super.dispatchTouchEvent(event);
@@ -46,14 +46,14 @@ public class TouchC extends TextView {
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                LogUtils.i("C的touch的ACTION_DOWN");
+                LogUtils.i("C的touch==ACTION_DOWN");
                 break;
             case MotionEvent.ACTION_MOVE:
-                LogUtils.i("C的touch的ACTION_MOVE");
+                LogUtils.i("C的touch==ACTION_MOVE");
 //                return true;
-            break;
+                break;
             case MotionEvent.ACTION_UP:
-                LogUtils.i("C的touch的ACTION_UP");
+                LogUtils.i("C的touch==ACTION_UP");
                 break;
         }
         return super.onTouchEvent(event);
