@@ -15,6 +15,7 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$APPCOMPAT_VERSION"
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'com.google.android.material:material:1.1.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
 
     //rxjava
     implementation "io.reactivex.rxjava2:rxjava:$RXJAVA_VERSION"
@@ -46,10 +47,11 @@ dependencies {
 //    implementation (name:'apiutils',ext:'aar')
 //    implementation 'org.codehaus.groovy:groovy-all:2.5.5'
     //butterknife
-    implementation "com.jakewharton:butterknife:$KNIFE_VERSION"
+    implementation "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
     //kapt对应kotlin，未用kotlin用annotationProcessor
-    kapt "com.jakewharton:butterknife-compiler:$KNIFE_VERSION"
+    kapt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
     //butterknife
+    implementation 'androidx.annotation:annotation:1.1.0'
 }
 def keyPass = rootProject.file("local.properties")
 def key = new Properties()
