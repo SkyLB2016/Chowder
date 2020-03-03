@@ -25,7 +25,7 @@ android {
 }
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
@@ -49,7 +49,7 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:$RETROFIT_VERSION"
     //retrofit2
     implementation "com.squareup.okhttp3:okhttp:$OKHTTP_VERSION"
-    implementation "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
+    implementation "com.jakewharton:butterknife:$KNIFE_VERSION"
     //工具类
     //    api 'com.blankj:utilcode:1.6.3'
 }
