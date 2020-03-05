@@ -14,3 +14,5 @@ android {
         }
     }
 }
+
+description = "类似于eventbus"

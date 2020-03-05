@@ -52,7 +52,8 @@ git层级：
     简拼：gcf
 (2)git clone <repo> <directory> 拉取远程仓库；
     简拼：gcl
-(3)git status 显示内容在缓存区里的状态；
+(3)git
+ 显示内容在缓存区里的状态；
     简拼：gst
     git status -s 只显示有改动的文件；
     简拼：gss
@@ -110,10 +111,12 @@ git层级：
     4.用rebase或者merge来合并自己的本地节点与远程节点
     5.提交push
 我用的：
-(1)直接gl，修改过于多，先提交
-(2)gaa
-(3)gcmsg
-(4)gp
+(1)git  stash
+(2)gl
+(3)git stash pop stash@{0}
+(4)gaa
+(5)gcmsg
+(6)gp
 
 
 三、分支管理

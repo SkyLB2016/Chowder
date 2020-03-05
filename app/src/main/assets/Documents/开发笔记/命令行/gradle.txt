@@ -1,9 +1,9 @@
 gradle命令行
-1、gradle的特性：
+1、gradle的特性：依赖于groovy
 基于声明和基于约定的构建；为以依赖为基础的编程方式提供语言环境；
-构建结构化；深度API；gradle的扩展；多项目构建；
-多种方式管理依赖；gradle是第一个构建集成工具；
-易于移植；groovy；The Gradle Wrapper；自由和开源;
+可多项目构建、结构化、易于扩展性、易于移植；
+gradle是第一个构建集成工具；
+
 2.配置： 可在gradlew中配置jvm；
 3.构建基础
 1）-q：只输出需要的内容；
@@ -26,6 +26,11 @@ enable：任务的启用与禁用
 group:name:version
 
 常用任务有：联合执行直接写两个任务名称就好
+
+gradle 是系统环境变量里配置的gradle
+./gradlew 是项目自身配置的gradle
+如果版本一样就没有区别。
+
 -v：查询版本号
 clean：删除 build 目录以及所有构建完成的文件
 check 编译并测试代码。一些其他插件也可能会增强这个任务的功能。例如，如果采用了 Code-quality 插件，这个任务会额外执行 Checkstyle。
@@ -37,7 +42,7 @@ tasks --all 显示更多的任务信息，并分页
 model 显示定义的所有任务
 app:properties|less 显示app的所有属性，并分页
 androidDependencies 查看所有的依赖包
-app:dDependencies 查看app的依赖关系
+app:Dependencies 查看app的依赖关系
 
 
 assemble：编译并打Debug和Release包

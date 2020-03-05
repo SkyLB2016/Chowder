@@ -1,2 +1,4 @@
 apply plugin: 'com.android.library'
 apply from:"${rootDir}/buildgradle/basebuild.gradle"
+
+description = "JNI项目测试"

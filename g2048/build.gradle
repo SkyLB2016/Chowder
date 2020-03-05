@@ -26,3 +26,5 @@ dependencies {
     implementation project(':libsdk')
     implementation project(':libdesign')
 }
+
+description = "2048游戏，可以单独运行"

@@ -41,6 +41,7 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:$RXJAVA_VERSION"
     implementation "io.reactivex.rxjava2:rxandroid:$RXANDROID_VERSION"
     //rxjava
+
     //retrofit2
     implementation "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
     implementation("com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION") {

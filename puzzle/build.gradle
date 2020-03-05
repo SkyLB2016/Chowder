@@ -25,3 +25,5 @@ dependencies {
     implementation project(':libsdk')
     implementation project(':libdesign')
 }
+
+description = "拼图App，可单独运行"

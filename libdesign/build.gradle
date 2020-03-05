@@ -18,3 +18,5 @@ dependencies {
     implementation project(':libsdk')
     implementation project(':rxbus')
 }
+
+description = "自定义的控件，主题"

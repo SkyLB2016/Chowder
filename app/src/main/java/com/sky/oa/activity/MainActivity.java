@@ -2,7 +2,6 @@ package com.sky.oa.activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.ActivityManager;
 import android.content.ActivityNotFoundException;
 import android.os.Bundle;
 import android.os.Environment;
@@ -13,14 +12,10 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.widget.GridLayout;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
-import androidx.collection.LruCache;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,15 +35,9 @@ import com.sky.sdk.utils.JumpAct;
 import com.sky.sdk.utils.LogUtils;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -128,7 +117,6 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
             public void onClick(View v) {
                 fabLeft.setVisibility(View.GONE);
                 fab.setVisibility(View.VISIBLE);
-
                 testMethod();
             }
         });

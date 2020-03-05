@@ -1,0 +1,10 @@
+adb devices 查看当前连接的设备
+-l 显示列表的详情
+adb install apk路径 ：安装apk
+-r 重装
+adb uninstall package 卸载
+adb push 电脑文件绝对路径 手机路径
+adb pull 手机文件路径 电脑路径
+adb shell df 当前盘符
+
+

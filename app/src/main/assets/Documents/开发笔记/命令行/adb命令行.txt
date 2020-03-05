@@ -1,5 +1,6 @@
 ADB（Android Debug Bridge）命令行：
-1.adb device 查看当前运行设备
+1.adb devices 查看当前运行设备
+　　-l:详细内容
 2.安装apk：adb install apk路径
 　　-r：重新安装apk
 　　-s：安装到sd卡（基本没用了）
