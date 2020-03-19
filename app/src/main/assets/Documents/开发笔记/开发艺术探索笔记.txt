@@ -598,3 +598,5 @@ public LayoutParams generateLayoutParams(AttributeSet attrs) {
 
 第五章 理解 RemoteViews
 
+
+

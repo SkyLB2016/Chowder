@@ -1,0 +1,125 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+            <script type="text/javascript">
+                
+                function actionFromNative(str){
+                    alert(str)
+                }
+            
+            function actionFromNativeWithParam(arg){
+                alert(arg)
+            }
+            
+            
+            function setShareData(){
+                alert(0);
+                var data = '{"methodName": "setShareData","msg": {    "title": "我是标题",    "content": "内容 ",    "url": "http://www.baidu.com",    "isShare": "1",    "shareImageUrl": "http://mobile.umeng.com/images/pic/home/4.0/characters/3-2.png"}}';
+                window.jsApi.shareButClick(data);
+            }
+            
+            function getAppInfo() {
+                //pageLoading.showDIV();
+                
+                //timeTimeOut = setTimeout(function () {
+                //    pageLoading.hideDIV();
+                //    showToast('网络异常，请下拉刷新');
+                //}, 10000)
+                //var data = '{"methodName": "js回调方法名称","msg": {"title": "标题  非必须","content": "内容 ","userId": "用户id  非必须","url": "http://www.baidu.com","type": "消息类型  ","time": "时间  非必须","isShare": "1","shareImageUrl": "http://mobile.umeng.com/images/pic/home/4.0/characters/3-2.png"}}';
+                
+                var data ='{"methodName": "setShareData","msg": {    "title": "我是标题",    "content": "内容 ",    "url": "http://www.baidu.com",    "isShare": "1",    "shareImageUrl": "http://mobile.umeng.com/images/pic/home/4.0/characters/3-2.png"}}';
+                
+                window.jsApi.shareButClick(data);
+            }
+            
+            
+            function setTitle(){
+                var data = '{"jsTitleMsgBean":{"titleText":"帮助说明","titleTextColor":"#000000","titleBackgroundColor":"#FF2777CE","titleBackIcon":"WHITE"}}';
+                window.jsApi.setTitleSytle(data);
+            }
+            //setTitle();
+            
+            
+            function isAllowRefresh(){
+                var data = '{"msg":{"isAllowRefresh":"0"}}';
+                window.jsApi.isAllowRefresh(data);
+            }
+            
+            
+            function versionNameCode(){
+                var data = '{"methodName": "versionName"}';
+                window.jsApi.getVersionName(data);
+            }
+            
+            function versionName(arg){
+                alert(arg)
+            }
+            
+            
+            function bingCompany(){
+                var data = '{"msg": {"type": "74"}}';
+                window.jsApi.setPageJump(data);
+            }
+            
+            function closeWebView(){
+                var data = '{"msg": {"closeWebView": "0"}}';
+                
+                window.jsApi.closeWebView(data);
+            }
+            </script>
+    </head>
+    
+    
+    
+    
+    
+    
+    <body>
+        <p>
+<!--        <button onclick="javascript:closeWebView();"> 关闭浏览器</button>-->
+            <button onclick="window.android.closeWebView()"> 关闭浏览器</button>
+
+        </p>
+        
+        <button onclick="javascript:setShareData();">设置分享</button>
+        <p>WebView与Javascript交互</p>
+        <div>
+            <button onClick="javascript:getAppInfo();">点击调用Native代码</button>
+        </div>
+        <br/>
+        <div>
+            <button onClick="javascript:actionFromNativeWithParam('测试');">点击调用Native代码并传递参数</button>
+        </div>
+        <br/>
+        <div id="log_msg">调用打印信息</div>
+        
+        <a  href= "http://www.baidu.com">   跳转到新的网页 </a>
+        
+        <p>启动原声应用</p>
+        
+        <a href="http://www.baidu.com">测试http的问题</a>
+        <p></p>
+        
+        <a href="">跳转到我们的页面</a>
+        <p></p>
+        <a href="javascript:;" onclick="setTitle()">设置分享按钮</a>
+        <p></p>
+        <input type='file' accept="image/*" capture="camera">我要选择问价</input>
+        <p></p>
+        </p>
+        <button onclick="javascript:isAllowRefresh();">是否允许刷新</button>
+        </p>
+        <button onclick="javascript:versionNameCode();">获取版本号</button>
+        </p>
+        您有<font color="#FF7900">%s笔</font>已经逾期"
+        </p>
+        
+        <p>
+        <button onclick="javascript:bingCompany();"> 跳转绑定到企业页面</button>
+        </p>
+        
+        
+        
+    </body>
+</html>
