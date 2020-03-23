@@ -172,8 +172,10 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
         //第一条数据是Thread的getStackTrace
         //第二条数据是当前方法的所在位置。
 
-        var traceElement = Thread.currentThread().stackTrace
         val builder = StringBuilder()
+        builder.append(Thread.currentThread().name)
+
+        var traceElement = Thread.currentThread().stackTrace
         builder.append("第一种")
         builder.append("\n")
         for (i in traceElement.indices) {
