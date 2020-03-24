@@ -1,12 +1,15 @@
 package com.sky.oa.activity;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -103,7 +106,6 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         //Rw2 B2 U2 Lw U2 Rw' U2 Rw U2 F2 Rw F2 Lw' B2 Rw2
         //LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
         fab.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("RestrictedApi")
             @Override
             public void onClick(View v) {
                 fab.setVisibility(View.GONE);
@@ -112,7 +114,6 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
             }
         });
         fabLeft.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("RestrictedApi")
             @Override
             public void onClick(View v) {
                 fabLeft.setVisibility(View.GONE);
@@ -125,10 +126,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
     private void testMethod() {
 //        handler.sendEmptyMessage(1);
 //                equalPoetry();
-        int a = 1;
-        a += 1 + 2 + 3;
-        LogUtils.i("a==" + a);
-
+        requestWriteSettings();
     }
 
     private void testMeasure() {
@@ -144,6 +142,38 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         LogUtils.i("height==" + fab.getHeight());
         int width = fab.getMeasuredWidth();
         int height = fab.getMeasuredHeight();
+    }
+
+    /**
+     * 申请权限
+     */
+    private void requestWriteSettings() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            //大于等于23 请求权限
+            if (!Settings.System.canWrite(getApplicationContext())) {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
+                intent.setData(Uri.parse("package:" + getPackageName()));
+                startActivityForResult(intent, 1);
+            }
+        } else {
+            //小于23直接设置
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                //Settings.System.canWrite方法检测授权结果
+                if (Settings.System.canWrite(getApplicationContext())) {
+                    showToast("获取了权限");
+                } else {
+                    showToast("您拒绝了权限");
+                }
+            }
+        }
+
     }
 
     private static final int MODE_SHIFT = 30;
