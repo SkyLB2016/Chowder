@@ -53,6 +53,9 @@ dependencies {
     kapt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
     //butterknife
     implementation 'androidx.annotation:annotation:1.1.0'
+
+    implementation 'net.sourceforge.jexcelapi:jxl:2.6.12'
+
 }
 def keyPass = rootProject.file("local.properties")
 def key = new Properties()

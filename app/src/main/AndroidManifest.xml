@@ -96,10 +96,10 @@
         <activity
             android:name=".activity.TouchActivity"
             android:configChanges="keyboardHidden"
-            android:description="@string/act_touch"
+            android:description="@string/act_touch_des"
             android:hardwareAccelerated="false"
             android:icon="@mipmap/ic_launcher"
-            android:label="@string/act_touch_des"
+            android:label="@string/act_touch"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.sky.coustom" />
@@ -282,6 +282,18 @@
             android:name=".activity.WorkerChartActivity"
             android:hardwareAccelerated="false"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.WebActivity"
+            android:description="@string/act_web_des"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/act_web"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.sky.coustom" />
+                <category android:name="android.intent.category.CAR_MODE" />
+            </intent-filter>
+        </activity>
 
         <service android:name=".service.IntentTest" />
         <service

@@ -53,6 +53,9 @@
     <string name="act_touch">20.触摸测试类</string>
     <string name="act_touch_des">触摸测试类</string>
 
+    <string name="act_web">21.js交互</string>
+    <string name="act_web_des">js交互</string>
+
 
     <string name="ibu"><i><b><u>下划线加粗斜体</u></b></i></string>
 
