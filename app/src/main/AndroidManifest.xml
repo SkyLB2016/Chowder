@@ -294,6 +294,17 @@
                 <category android:name="android.intent.category.CAR_MODE" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.ExcelActivity"
+            android:description="@string/act_excel_des"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/act_excel"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.sky.coustom" />
+                <category android:name="android.intent.category.CAR_MODE" />
+            </intent-filter>
+        </activity>
 
         <service android:name=".service.IntentTest" />
         <service

@@ -40,6 +40,7 @@ import com.sky.sdk.utils.LogUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import butterknife.BindView;
@@ -126,7 +127,40 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
     private void testMethod() {
 //        handler.sendEmptyMessage(1);
 //                equalPoetry();
-        requestWriteSettings();
+//        requestWriteSettings();
+//        Environment.getExternalStorageDirectory().getPath()+ "/AExcelDemo"
+//        Environment.getExternalStorageDirectory().getPath()+ "/AExcelDemo"
+        LogUtils.i("lujin==" + Environment.getExternalStorageDirectory().getPath());
+        LogUtils.i("lujin==" + Environment.getExternalStorageDirectory().getAbsolutePath());
+        String path = Environment.getExternalStorageDirectory().getPath() + "/AExcelDemo/aa.txt";
+        File file = new File(path);
+        file.getParentFile().mkdir();
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (!file.exists()){
+            LogUtils.i("lujin==失败");
+        }
+
+
+//        LogUtils.i("lujin==" + Environment.getDataDirectory());
+//        LogUtils.i("lujin==" + Environment.getDownloadCacheDirectory());
+//        LogUtils.i("lujin==" + Environment.getRootDirectory());
+//        LogUtils.i("lujin==" + Environment.getExternalStorageState());
+//        LogUtils.i("lujin==" + Environment.getExternalStorageDirectory());
+
+//        LogUtils.i("storage==" + Environment.getExternalStorageDirectory());
+//        LogUtils.i("DIRECTORY_MUSIC==" + getExternalFilesDir(Environment.DIRECTORY_MUSIC));
+//        LogUtils.i("DIRECTORY_PODCASTS==" + getExternalFilesDir(Environment.DIRECTORY_PODCASTS));
+//        LogUtils.i("DIRECTORY_RINGTONES==" + getExternalFilesDir(Environment.DIRECTORY_RINGTONES));
+//        LogUtils.i("DIRECTORY_ALARMS==" + getExternalFilesDir(Environment.DIRECTORY_ALARMS));
+//        LogUtils.i("DIRECTORY_NOTIFICATIONS==" + getExternalFilesDir(Environment.DIRECTORY_NOTIFICATIONS));
+//        LogUtils.i("DIRECTORY_PICTURES==" + getExternalFilesDir(Environment.DIRECTORY_PICTURES));
+//        LogUtils.i("DIRECTORY_MOVIES==" + getExternalFilesDir(Environment.DIRECTORY_MOVIES));
+
+
     }
 
     private void testMeasure() {

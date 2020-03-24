@@ -1,13 +1,17 @@
-package com.sky.oa.excel
+package com.sky.oa.activity
 
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.sky.oa.R
+import com.sky.oa.model.PeopleEntity
+import com.sky.oa.utils.ExcelUtil
+import com.sky.sdk.utils.LogUtils
 import jxl.Workbook
 import kotlinx.android.synthetic.main.activity_excel.*
 import java.io.File
+import java.io.FileInputStream
 import java.io.InputStream
 
 
@@ -18,15 +22,16 @@ class ExcelActivity : AppCompatActivity() {
         setContentView(R.layout.activity_excel)
         bt.setOnClickListener {
             test()
-//           val list: List<PeopleEntity> =readExcel()
-//            Log.i("activity", list?.get(0)?.name)
+           val list: List<PeopleEntity> =readExcel()
+            LogUtils.i("activity=="+list?.get(0)?.name)
         }
 
     }
 
     private fun test() {
         //创建文件夹
-        var filePath = Environment.getExternalStorageDirectory().path+ "/AndroidExcelDemo"
+//        var filePath = Environment.getExternalStorageDirectory().path+ "/AndroidExcelDemo"
+        var filePath = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)!!.absolutePath + File.separator + "AExcelDemo"
         try {
             val file = File(filePath)
             if (!file.exists()) {
@@ -37,7 +42,7 @@ class ExcelActivity : AppCompatActivity() {
         }
 
         //Excel文件名
-        val excelFileName = "/motian.xlsx"
+        val excelFileName = "/测试.xls"
 
         //Excel的列字段
         val columnTitles : Array<String> = arrayOf("姓名","项目","年")
@@ -46,10 +51,10 @@ class ExcelActivity : AppCompatActivity() {
         filePath += excelFileName
 
         //初始化 Excel的文件、表单名称、列字段
-        ExcelUtil.initExcel(filePath,"project", columnTitles)
+        ExcelUtil.initExcel(filePath, "project", columnTitles)
 
         //内容
-        val projectBean = PeopleEntity("漠天","354","用excel")
+        val projectBean = PeopleEntity("漠天", "354", "用excel")
 
         val list:List<PeopleEntity>  = arrayListOf(projectBean)
         //写入到excel文件里内容
@@ -57,7 +62,7 @@ class ExcelActivity : AppCompatActivity() {
 
         //读取Excel的内容
         val resultFromXLS  = ExcelUtil.getXlsData(filePath)
-//        Log.e("bai",resultFromXLS[0].toString())
+        LogUtils.i(resultFromXLS[0].toString())
     }
 
     /**
@@ -68,9 +73,13 @@ class ExcelActivity : AppCompatActivity() {
     private fun readExcel(): List<PeopleEntity> {
         val countryList: MutableList<PeopleEntity> = ArrayList()
         try {
-            val input: InputStream = assets.open("测试.xls")
-            val book: Workbook = Workbook.getWorkbook(input)
-            book.numberOfSheets
+            var filePath = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)!!.absolutePath + File.separator + "AExcelDemo"+"/motian.xlsx"
+
+            // 创建输入流
+            val stream: InputStream = FileInputStream(filePath)
+
+            val book: Workbook = Workbook.getWorkbook(stream)
+//            book.sheets
             // 获得第一个工作表对象
             val sheet = book.getSheet(0)
             val Rows = sheet.rows
@@ -78,13 +87,11 @@ class ExcelActivity : AppCompatActivity() {
                 val id = sheet.getCell(0, i).contents
                 val areaCode = sheet.getCell(1, i).contents
                 val subName = sheet.getCell(2, i).contents
-                val nameCn = sheet.getCell(3, i).contents
                 countryList.add(
                     PeopleEntity(
                         id,
                         areaCode,
-                        subName,
-                        nameCn
+                        subName
                     )
                 )
             }

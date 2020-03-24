@@ -1,4 +1,4 @@
-面试题总结
+Android题录
 
 ●01.java中equal与==的区别
 1）基本数据类型==比较的是值，非基本类型比较的是内存地址
@@ -7,6 +7,9 @@
 ●02.handler机制与RaJava有什么区别：相同都是为了线程间通信
 1）Rxjava线程切换更方便，可以直接切换子线程和UI线程，handler需要在子线程中发送消息，在主线程中去接收消息，才能改变UI。
 2）RxJava是观察者模式，Handler消息队列用的是双向链表，类似于linkedList，是责任链模式。
+
+双向链表是什么？有哪些应用？
+
 
 ●03.广播有几种创建方式，有什么区别？
 两种，动态注册和静态注册（8.0以后不能静态注册广播，官方说法是为了省电）；区别：
@@ -46,7 +49,7 @@
 ●08.描述一下ANR错误，哪些情况会发生，如何避免？
 Activity内事件在5s后依然无响应，broadcastreceiver 10s内无法回应，service 20s内无法处理完成都会导致应用无响应。（在主线程做好事操作都会导致ANR）
 避免：
-1）不要在主线程做好事操作（数据库查询，网络操作，大量数据存储，图片的切割等）。
+1）不要在主线程做耗时操作（数据库查询，网络操作，大量数据存储，图片的切割等）。
 2）不要再广播内做耗时操作，如果非要，那么请通过service新启线程来进行耗时操作。
 
 ●09.横竖屏切换activity的生命周期
@@ -66,7 +69,9 @@ orientation：屏幕方向变化
 LRU（Least Recently Used）最近最少使用，LRU使用的是LinkedHashMap，get、put、remove，队尾添加，队首移除；
 lru链表的顺序是LinkedHashMap中的accessOrder来控制的；LinkedHashMap中重写了get和afterNodeAccess方法；afterNodeAccess(e)是用来进行重排序的。
 每次调用get、put时，都会在队尾添加，如果put时内存缓存达到设定的最大值，将链表头部的对象移除。
-accessOrder为true时，get方法中会调用afterNodeAccess(e)，put方法中是在HashMap中调用的afterNodeAccess(e)；
+accessOrder默认为false，LruCache中创建LinkedHashMap时会设为true，此时get方法中会调用afterNodeAccess(e)；
+put方法中是在HashMap中调用的afterNodeAccess(e)；
+
 各版本代码稍有不同，但基本思想就是这样的。
 
 ●12.IntentService和Service有什么区别？
@@ -111,7 +116,7 @@ accessOrder为true时，get方法中会调用afterNodeAccess(e)，put方法中�
 同理，performLayout和perforDraw也分别完成performMeasure类似的流程。通过这三大流程，分别遍历整颗View树，就实现了Measure，Layout，Draw这一过程，view就绘制出来了。
 
 ●18.invalidate与requestLayout的区别，以及postInvalidate
-1）View不停向上找parent，可以一直找到DecorView，按理说DecorView是顶点了，但是DecorView还有个虚拟父View，ViewRootImpl。ViewRootImpl不是一个View或者ViewGroup，他有个成员没View是DecorView，所有的操作从ViewRootImpl开始自伤而下分发。
+1）View不停向上找parent，可以一直找到DecorView，按理说DecorView是顶点了，但是DecorView还有个虚拟父View，ViewRootImpl。ViewRootImpl不是一个View或者ViewGroup，他有个成员View是DecorView，所有的操作从ViewRootImpl开始自上而下分发。
 2）View的invalidate不会导致ViewRootImplement的invalidate被调用，而是递归调用父View的invalidateChildInparent，直到ViewRootImpl的invalidateChildInParent，然后触发performTraversals，会导致当前View被重绘，由于mLayoutRequested为false，不会导致onMeasure和onLayout被调用，而onDraw会被调用。
 3）一个View的invalidate会导致本身PFLAG_INVALIDATED的值变为1，导致本身以及父族ViewGroup的PFLAG_DRAWING_CACHE_VALID变成0.
 4）requestLayout会直接递归调用父窗口的requestLayout，直到ViewRootImpl，然后触发perforTraversals，由于mLayoutRequested为true，会导致onMeasure和onLayout被调用，不一定会触发onDraw。
