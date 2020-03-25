@@ -54,7 +54,9 @@ dependencies {
     //butterknife
     implementation 'androidx.annotation:annotation:1.1.0'
 
-    implementation 'net.sourceforge.jexcelapi:jxl:2.6.12'
+//    implementation 'net.sourceforge.jexcelapi:jxl:2.6.12'
+    implementation 'org.apache.poi:poi:4.1.2'
+    implementation 'org.apache.poi:poi-ooxml:4.1.2'
 }
 def keyPass = rootProject.file("local.properties")
 def key = new Properties()

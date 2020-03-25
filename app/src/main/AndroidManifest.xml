@@ -296,7 +296,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.ExcelActivity"
+            android:name=".activity.ExcelPOIActivity"
             android:description="@string/act_excel_des"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_excel"
