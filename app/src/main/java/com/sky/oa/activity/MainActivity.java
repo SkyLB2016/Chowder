@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,6 +42,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -140,7 +142,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (!file.exists()){
+        if (!file.exists()) {
             LogUtils.i("创建文件==失败");
         }
 
@@ -158,6 +160,12 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
 //        LogUtils.i("DIRECTORY_NOTIFICATIONS==" + getExternalFilesDir(Environment.DIRECTORY_NOTIFICATIONS));
 //        LogUtils.i("DIRECTORY_PICTURES==" + getExternalFilesDir(Environment.DIRECTORY_PICTURES));
 //        LogUtils.i("DIRECTORY_MOVIES==" + getExternalFilesDir(Environment.DIRECTORY_MOVIES));
+        ArrayList<String> volumenames = new ArrayList<>(MediaStore.getExternalVolumeNames(this));
+        String path1 = volumenames.get(0);
+        LogUtils.i("path==" + path1);
+        List<String> lists= new ArrayList<>();
+        lists.add("");
+
     }
 
     private void testMeasure() {
