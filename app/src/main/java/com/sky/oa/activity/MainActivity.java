@@ -128,10 +128,10 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
 //        handler.sendEmptyMessage(1);
 //                equalPoetry();
 //        requestWriteSettings();
-//        Environment.getExternalStorageDirectory().getPath()+ "/AExcelDemo"
-//        Environment.getExternalStorageDirectory().getPath()+ "/AExcelDemo"
-        LogUtils.i("lujin==" + Environment.getExternalStorageDirectory().getPath());
-        LogUtils.i("lujin==" + Environment.getExternalStorageDirectory().getAbsolutePath());
+        getEnvironment();
+    }
+
+    private void getEnvironment() {
         String path = Environment.getExternalStorageDirectory().getPath() + "/AExcelDemo/aa.txt";
         File file = new File(path);
         file.getParentFile().mkdir();
@@ -141,9 +141,8 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
             e.printStackTrace();
         }
         if (!file.exists()){
-            LogUtils.i("lujin==失败");
+            LogUtils.i("创建文件==失败");
         }
-
 
 //        LogUtils.i("lujin==" + Environment.getDataDirectory());
 //        LogUtils.i("lujin==" + Environment.getDownloadCacheDirectory());
@@ -159,8 +158,6 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
 //        LogUtils.i("DIRECTORY_NOTIFICATIONS==" + getExternalFilesDir(Environment.DIRECTORY_NOTIFICATIONS));
 //        LogUtils.i("DIRECTORY_PICTURES==" + getExternalFilesDir(Environment.DIRECTORY_PICTURES));
 //        LogUtils.i("DIRECTORY_MOVIES==" + getExternalFilesDir(Environment.DIRECTORY_MOVIES));
-
-
     }
 
     private void testMeasure() {

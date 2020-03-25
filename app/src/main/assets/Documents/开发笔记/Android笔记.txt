@@ -21,6 +21,10 @@ Folder不存在，则需调用mkdir()；
 5）dalvik是运行时编译，ART是安装时就进行编译。目前采用的是ART模式。
 6）multidex参见错误统计表.xlsx。
 7）空白行，或者有注释的的行，Java编译器都会忽略掉
+8）Android Q（系统10）中对于文件读写做了新的心智，无法直接获取除自身缓存外的其他文件，如需要之前的逻辑权限，需要在manifest中设置
+android:requestLegacyExternalStorage="true"
+
+另外，还可以通过storageManager来操作。
 
 ●03.事件监听的几种形式
 1）匿名内部类，推荐的主要用法。
