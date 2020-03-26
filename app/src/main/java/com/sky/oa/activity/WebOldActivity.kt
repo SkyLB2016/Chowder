@@ -13,12 +13,12 @@ import kotlinx.android.synthetic.main.activity_web.*
 /**
  * Created by libin on 2020/3/18 21:10.
  */
-class WebActivity : BaseActivity() {
+class WebOldActivity : BaseActivity() {
     override fun getLayoutResId(): Int = R.layout.activity_web
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val setting: WebSettings = webView.getSettings()
+        val setting: WebSettings = webView.settings
         // 格式规定为:file:///android_asset/文件名.html
         // 格式规定为:file:///android_asset/文件名.html
 //        webView.loadUrl("file:///android_asset/javascript.html")

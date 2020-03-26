@@ -5,6 +5,7 @@ import android.os.Environment
 import androidx.appcompat.app.AppCompatActivity
 import com.sky.oa.R
 import com.sky.oa.model.PeopleEntity
+import com.sky.oa.utils.ExcelPOiUtils
 import kotlinx.android.synthetic.main.activity_excel.*
 import java.io.File
 
@@ -28,24 +29,24 @@ class ExcelPOIActivity : AppCompatActivity() {
         }
         bt04.setOnClickListener {
         }
-woxian
     }
 
     private fun creatExcel() {
         //创建文件夹
-        var filePath = Environment.getExternalStorageDirectory().path + "/老旧线路评估"
+        var filePath = Environment.getExternalStorageDirectory().path + "/excel"
         val file = File(filePath)
         if (!file.exists()) {
             file.mkdirs()
         }
 
-        val excelFileName = "/测试.xlsx"//Excel文件名
+        val excelFileName = "/aaaa.xlsx"//Excel文件名
         filePath += excelFileName//文件的全路径
         val sheetName = "页签1"
         val columnTitles: Array<String> = arrayOf("姓名", "性别", "年龄", "地址")//Excel的列字段
 
         //初始化 Excel的文件、表单名称、列字段
-//        ExcelJXLUtils.initExcel(filePath, sheetName, columnTitles)
+//        ExcelPOiUtils.initExcelAndXLSX(filePath, sheetName, columnTitles)
+        ExcelPOiUtils.excelColor(filePath)
 
         val list: MutableList<PeopleEntity> = ArrayList()
         list.add(PeopleEntity("张三", "男", "22", "北京"))
@@ -64,6 +65,6 @@ woxian
         }
 
         //写入到excel文件里内容
-//        ExcelJXLUtils.writeContentToExcel(datas, filePath, "页签1", this)
+//        ExcelPOiUtils.writeToExcelXLSX(datas, filePath, sheetName)
     }
 }

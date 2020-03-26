@@ -6,15 +6,10 @@ import android.os.Environment
 import androidx.appcompat.app.AppCompatActivity
 import com.sky.oa.R
 import com.sky.oa.model.PeopleEntity
-import com.sky.oa.utils.ExcelJXLUtils
 import com.sky.sdk.utils.FileUtils
 import com.sky.sdk.utils.LogUtils
-import jxl.Workbook
-import jxl.biff.drawing.Drawing
 import kotlinx.android.synthetic.main.activity_excel.*
 import java.io.File
-import java.io.FileInputStream
-import java.io.InputStream
 
 
 class ExcelJXLActivity : AppCompatActivity() {
@@ -29,8 +24,8 @@ class ExcelJXLActivity : AppCompatActivity() {
             var filePath =
                 Environment.getExternalStorageDirectory().path + "/老旧线路评估/测试.xlsx"//文件的全路径
             //读取Excel的内容
-            val resultFromXLS = ExcelJXLUtils.getExcelContent(filePath)
-            LogUtils.i(resultFromXLS.toString())
+//            val resultFromXLS = ExcelJXLUtils.getExcelContent(filePath)
+//            LogUtils.i(resultFromXLS.toString())
         }
         bt03.setOnClickListener {
             val list: List<PeopleEntity> = readExcelImage()
@@ -61,7 +56,7 @@ class ExcelJXLActivity : AppCompatActivity() {
         val columnTitles: Array<String> = arrayOf("姓名", "性别", "年龄", "地址")//Excel的列字段
 
         //初始化 Excel的文件、表单名称、列字段
-        ExcelJXLUtils.initExcel(filePath, sheetName, columnTitles)
+//        ExcelJXLUtils.initExcel(filePath, sheetName, columnTitles)
 
         val list: MutableList<PeopleEntity> = ArrayList()
         list.add(PeopleEntity("张三", "男", "22", "北京"))
@@ -80,7 +75,7 @@ class ExcelJXLActivity : AppCompatActivity() {
         }
 
         //写入到excel文件里内容
-        ExcelJXLUtils.writeContentToExcel(datas, filePath, "页签1", this)
+//        ExcelJXLUtils.writeContentToExcel(datas, filePath, "页签1", this)
     }
 
     /**
@@ -90,46 +85,46 @@ class ExcelJXLActivity : AppCompatActivity() {
     </Country> */
     private fun readExcelImage(): List<PeopleEntity> {
         val countryList: MutableList<PeopleEntity> = ArrayList()
-        var filePath =
-//            Environment.getExternalStorageDirectory().path + "/Download/image2.xlsx"//文件的全路径
-            Environment.getExternalStorageDirectory().path + "/Download/image.xls"//文件的全路径
-        //读取Excel的内容
-
-        try {
-            // 创建输入流
-            val stream: InputStream = FileInputStream(filePath)
-            val book: Workbook = Workbook.getWorkbook(stream)
-
-
-            // 获得第一个工作表对象
-            val sheet = book.getSheet(0)
-            val Rows = sheet.rows
-            for (i in 2 until Rows) { //将每一列的数据读取
-                val id = sheet.getCell(0, i).contents
-                val areaCode = sheet.getCell(1, i).contents
-                val subName = sheet.getCell(2, i).contents
-                val image = sheet.getDrawing(2) as Drawing
-//                image.imageFile
-//                val wi = WritableImage(
-//                    image,
-//                    toSheet.getWorkbook().getDrawingGroup()
+//        var filePath =
+////            Environment.getExternalStorageDirectory().path + "/Download/image2.xlsx"//文件的全路径
+//            Environment.getExternalStorageDirectory().path + "/Download/image.xls"//文件的全路径
+//        //读取Excel的内容
+//
+//        try {
+//            // 创建输入流
+//            val stream: InputStream = FileInputStream(filePath)
+//            val book: Workbook = Workbook.getWorkbook(stream)
+//
+//
+//            // 获得第一个工作表对象
+//            val sheet = book.getSheet(0)
+//            val Rows = sheet.rows
+//            for (i in 2 until Rows) { //将每一列的数据读取
+//                val id = sheet.getCell(0, i).contents
+//                val areaCode = sheet.getCell(1, i).contents
+//                val subName = sheet.getCell(2, i).contents
+//                val image = sheet.getDrawing(2) as Drawing
+////                image.imageFile
+////                val wi = WritableImage(
+////                    image,
+////                    toSheet.getWorkbook().getDrawingGroup()
+////                )
+//
+//                LogUtils.i("image==${image}")
+//                LogUtils.i("imageFile==${image.imageFile}")
+//                LogUtils.i("absolutePath==${image.imageFile.absolutePath}")
+//                LogUtils.i("column==${image.column}")
+//                LogUtils.i("width==${image.width}")
+//                LogUtils.i("row==${image.row}")
+//                LogUtils.i("height==${image.height}")
+//                countryList.add(
+//                    PeopleEntity(id, areaCode, image.imageFile)
 //                )
-
-                LogUtils.i("image==${image}")
-                LogUtils.i("imageFile==${image.imageFile}")
-                LogUtils.i("absolutePath==${image.imageFile.absolutePath}")
-                LogUtils.i("column==${image.column}")
-                LogUtils.i("width==${image.width}")
-                LogUtils.i("row==${image.row}")
-                LogUtils.i("height==${image.height}")
-                countryList.add(
-                    PeopleEntity(id, areaCode, image.imageFile)
-                )
-            }
-            book.close()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+//            }
+//            book.close()
+//        } catch (e: Exception) {
+//            e.printStackTrace()
+//        }
         return countryList
     }
 }

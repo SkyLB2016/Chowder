@@ -74,7 +74,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 //        consumerProguardFiles 'consumer-rules.pro'//新的,只用library包有
         // dex突破65535的限制
-//        multiDexEnabled true
+        multiDexEnabled true
 //        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [CHANNEL_VALUE: "umeng"]//默认是umeng的渠道
         ndk {
