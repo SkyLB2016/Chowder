@@ -56,6 +56,8 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
 
 //    implementation 'net.sourceforge.jexcelapi:jxl:2.6.12'
+//    implementation 'org.apache.poi:poi:4.1.2'
+//    implementation 'org.apache.poi:poi-ooxml:4.1.2'
 }
 def keyPass = rootProject.file("local.properties")
 def key = new Properties()
@@ -139,16 +141,8 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-//    relocate 'javax.xml.namespace', 'org.apache.poi.javax.xml.namespace'
-//    relocate 'javax.xml.stream', 'org.apache.poi.javax.xml.stream'
-//    relocate 'javax.xml.XMLConstants', 'org.apache.poi.javax.xml.XMLConstants'
-//
-//   relocate 'javax.xml.namespace', 'aavax.xml.namespace'
-//   relocate 'javax.xml.stream', 'aavax.xml.stream'
-//   relocate 'javax.xml.XMLConstants', 'aavax.xml.XMLConstant'
-//   relocate 'javax.xml.XMLConstants', 'aavax.xml.XMLConstants'
-
 }
+
 def creatName() {
     android.applicationVariants.all { variant ->
         variant.outputs.all {

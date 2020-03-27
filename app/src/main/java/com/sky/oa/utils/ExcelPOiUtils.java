@@ -1,18 +1,34 @@
 package com.sky.oa.utils;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+
+import com.sky.oa.R;
+import com.sky.sdk.utils.BitmapUtils;
+
+import org.apache.poi.POIXMLDocumentPart;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Drawing;
+import org.apache.poi.ss.usermodel.PictureData;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFClientAnchor;
+import org.apache.poi.xssf.usermodel.XSSFDrawing;
+import org.apache.poi.xssf.usermodel.XSSFPicture;
+import org.apache.poi.xssf.usermodel.XSSFShape;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTMarker;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by libin on 2020/03/25 12:49 PM Wednesday.
@@ -25,7 +41,7 @@ public class ExcelPOiUtils {
      * @param sheetName 页签名称
      * @param columName 列名
      */
-    public static void initExcelAndXLSX(String fileName, String sheetName, String[] columName) {
+    public static void initExcelAndXLSX(Context context, String fileName, String sheetName, String[] columName) {
         Workbook wb = new XSSFWorkbook();//创建xlsx格式的excel
         Sheet sheet = wb.createSheet(sheetName);//创建页签sheet
         Row row = sheet.createRow(0);
@@ -34,6 +50,16 @@ public class ExcelPOiUtils {
             cell = row.createCell(i);
             cell.setCellValue(columName[i]);
         }
+
+        //先把读进来的图片放到一个ByteArrayOutputStream中，以便产生ByteArray
+        ByteArrayOutputStream byteArrayOut = new ByteArrayOutputStream();
+        BitmapUtils.getBitmapFromId(context, R.mipmap.ic_banner).compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOut);
+        //读进一个excel模版
+        //创建一个工作薄
+        Drawing patriarch = sheet.createDrawingPatriarch();
+        XSSFClientAnchor anchor = new XSSFClientAnchor(0, 0, 1023, 255, 0, 20, 10, 30);
+        patriarch.createPicture(anchor, wb.addPicture(byteArrayOut.toByteArray(), XSSFWorkbook.PICTURE_TYPE_JPEG));
+
 //        sheet.setDefaultRowHeight((short) 40);
         FileOutputStream fileOut = null;
         try {
@@ -83,393 +109,30 @@ public class ExcelPOiUtils {
         }
     }
 
-    public static void excelColor(String fileName) {
-        // Create a workbook object
-        Workbook workbook = new XSSFWorkbook();
-        // Create sheet
-        Sheet sheet = workbook.createSheet();
-
-        // Create a row and put some cells in it
-        Row row = sheet.createRow(1);
-
-        // Aqua background
-        CellStyle style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.AQUA.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        Cell cell = row.createCell(1);
-        cell.setCellValue("X1");
-        cell.setCellStyle(style);
-
-        // Orange "foreground", foreground being the fill foreground not the
-        // font color.
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.AUTOMATIC.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row.createCell(2);
-        cell.setCellValue("X2");
-        cell.setCellStyle(style);
-
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.BLUE.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row.createCell(3);
-        cell.setCellValue("X3");
-        cell.setCellStyle(style);
-
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.BLUE_GREY.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row.createCell(4);
-        cell.setCellValue("X4");
-        cell.setCellStyle(style);
-
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.BRIGHT_GREEN.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row.createCell(5);
-        cell.setCellValue("X5");
-        cell.setCellStyle(style);
-
-        // Create a row and put some cells in it.
-        Row row2 = sheet.createRow(2);
-
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.BROWN.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row2.createCell(1);
-        cell.setCellValue("X6");
-        cell.setCellStyle(style);
-
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.CORAL.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row2.createCell(2);
-        cell.setCellValue("X7");
-        cell.setCellStyle(style);
-
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.CORNFLOWER_BLUE.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row2.createCell(3);
-        cell.setCellValue("X8");
-        cell.setCellStyle(style);
-
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.DARK_BLUE.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row2.createCell(4);
-        cell.setCellValue("X9");
-        cell.setCellStyle(style);
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.DARK_GREEN.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row2.createCell(5);
-        cell.setCellValue("X10");
-        cell.setCellStyle(style);
-
-        // Create a row and put some cells in it.
-        Row row3 = sheet.createRow(3);
-
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.DARK_RED.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row3.createCell(1);
-        cell.setCellValue("X11");
-        cell.setCellStyle(style);
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.DARK_TEAL.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row3.createCell(2);
-        cell.setCellValue("X12");
-        cell.setCellStyle(style);
-
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.DARK_YELLOW.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row3.createCell(3);
-        cell.setCellValue("X13");
-        cell.setCellStyle(style);
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.GOLD.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row3.createCell(4);
-        cell.setCellValue("X14");
-        cell.setCellStyle(style);
-
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.GREEN.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row3.createCell(5);
-        cell.setCellValue("X15");
-        cell.setCellStyle(style);
-
-        // Create a row and put some cells in it.
-        Row row4 = sheet.createRow(4);
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row4.createCell(1);
-        cell.setCellValue("X16");
-        cell.setCellStyle(style);
-
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.GREY_40_PERCENT.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row4.createCell(2);
-        cell.setCellValue("X17");
-        cell.setCellStyle(style);
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.GREY_50_PERCENT.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row4.createCell(3);
-        cell.setCellValue("X18");
-        cell.setCellStyle(style);
-
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.GREY_80_PERCENT.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row4.createCell(4);
-        cell.setCellValue("X19");
-        cell.setCellStyle(style);
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.INDIGO.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row4.createCell(5);
-        cell.setCellValue("X20");
-        cell.setCellStyle(style);
-
-        // Create a row and put some cells in it.
-        Row row5 = sheet.createRow(5);
-
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.LAVENDER.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row5.createCell(1);
-        cell.setCellValue("X21");
-        cell.setCellStyle(style);
-
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.LEMON_CHIFFON.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row5.createCell(2);
-        cell.setCellValue("X22");
-        cell.setCellStyle(style);
-
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.LIGHT_BLUE.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row5.createCell(3);
-        cell.setCellValue("X23");
-        cell.setCellStyle(style);
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.LEMON_CHIFFON.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row5.createCell(4);
-        cell.setCellValue("X24");
-        cell.setCellStyle(style);
-
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.LIGHT_BLUE.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row5.createCell(5);
-        cell.setCellValue("X25");
-        cell.setCellStyle(style);
-
-        // Create a row and put some cells in it.
-        Row row6 = sheet.createRow(6);
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.LIGHT_CORNFLOWER_BLUE
-                .getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row6.createCell(1);
-        cell.setCellValue("X26");
-        cell.setCellStyle(style);
-
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.LIGHT_GREEN.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row6.createCell(2);
-        cell.setCellValue("X27");
-        cell.setCellStyle(style);
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.LIGHT_ORANGE.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row6.createCell(3);
-        cell.setCellValue("X28");
-        cell.setCellStyle(style);
-
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.LIGHT_TURQUOISE.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row6.createCell(4);
-        cell.setCellValue("X29");
-        cell.setCellStyle(style);
-
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.LIGHT_YELLOW.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row6.createCell(5);
-        cell.setCellValue("X30");
-        cell.setCellStyle(style);
-
-        // Create a row and put some cells in it.
-        Row row7 = sheet.createRow(7);
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.LIME.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row7.createCell(1);
-        cell.setCellValue("X31");
-        cell.setCellStyle(style);
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.MAROON.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row7.createCell(2);
-        cell.setCellValue("X32");
-        cell.setCellStyle(style);
-
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.OLIVE_GREEN.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row7.createCell(3);
-        cell.setCellValue("X33");
-        cell.setCellStyle(style);
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.ORANGE.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row7.createCell(4);
-        cell.setCellValue("X34");
-        cell.setCellStyle(style);
-
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.ORCHID.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row7.createCell(5);
-        cell.setCellValue("X35");
-        cell.setCellStyle(style);
-
-        // Create a row and put some cells in it.
-        Row row8 = sheet.createRow(8);
-
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.PALE_BLUE.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row8.createCell(1);
-        cell.setCellValue("X36");
-        cell.setCellStyle(style);
-
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.PINK.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row8.createCell(2);
-        cell.setCellValue("X37");
-        cell.setCellStyle(style);
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.PLUM.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row8.createCell(3);
-        cell.setCellValue("X38");
-        cell.setCellStyle(style);
-
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.RED.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row8.createCell(4);
-        cell.setCellValue("X39");
-        cell.setCellStyle(style);
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.ROSE.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row8.createCell(5);
-        cell.setCellValue("X40");
-        cell.setCellStyle(style);
-
-        // Create a row and put some cells in it.
-        Row row9 = sheet.createRow(9);
-
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.ROYAL_BLUE.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row9.createCell(1);
-        cell.setCellValue("X41");
-        cell.setCellStyle(style);
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.SEA_GREEN.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row9.createCell(2);
-        cell.setCellValue("X42");
-        cell.setCellStyle(style);
-
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.SKY_BLUE.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row9.createCell(3);
-        cell.setCellValue("X43");
-        cell.setCellStyle(style);
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.TAN.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row9.createCell(4);
-        cell.setCellValue("X44");
-        cell.setCellStyle(style);
-
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.TEAL.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row9.createCell(5);
-        cell.setCellValue("X45");
-        cell.setCellStyle(style);
-
-        // Create a row and put some cells in it.
-        Row row10 = sheet.createRow(10);
-
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.TURQUOISE.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row10.createCell(1);
-        cell.setCellValue("X46");
-        cell.setCellStyle(style);
-
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.VIOLET.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row10.createCell(2);
-        cell.setCellValue("X47");
-        cell.setCellStyle(style);
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.WHITE.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row10.createCell(3);
-        cell.setCellValue("X48");
-        cell.setCellStyle(style);
-
-        style = workbook.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.YELLOW.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row10.createCell(4);
-        cell.setCellValue("X49");
-        cell.setCellStyle(style);
-
-//        style = workbook.createCellStyle();
-//        style.setFillForegroundColor(IndexedColors.YELLOW.getIndex());
-//        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        cell = row10.createCell(5);
-        cell.setCellValue("X50");
-//        cell.setCellStyle(style);
-
-        // Write the output to a file
-        FileOutputStream fileOut = null;
-        try {
-            fileOut = new FileOutputStream(fileName);
-            workbook.write(fileOut);
-            fileOut.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+    /**
+     * 获取图片和位置 (xlsx)
+     *
+     * @param sheet
+     * @return
+     * @throws IOException
+     */
+    public static Map<String, PictureData> getPictures2(XSSFSheet sheet) throws IOException {
+        Map<String, PictureData> map = new HashMap<String, PictureData>();
+        List<POIXMLDocumentPart> list = sheet.getRelations();
+        for (POIXMLDocumentPart part : list) {
+            if (part instanceof XSSFDrawing) {
+                XSSFDrawing drawing = (XSSFDrawing) part;
+                List<XSSFShape> shapes = drawing.getShapes();
+                for (XSSFShape shape : shapes) {
+                    XSSFPicture picture = (XSSFPicture) shape;
+                    XSSFClientAnchor anchor = picture.getPreferredSize();
+                    CTMarker marker = anchor.getFrom();
+                    String key = marker.getRow() + "-" + marker.getCol();
+                    map.put(key, picture.getPictureData());
+                }
+            }
         }
-
+        return map;
     }
-
-
 
 }

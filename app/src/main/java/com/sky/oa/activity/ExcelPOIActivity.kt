@@ -45,8 +45,7 @@ class ExcelPOIActivity : AppCompatActivity() {
         val columnTitles: Array<String> = arrayOf("姓名", "性别", "年龄", "地址")//Excel的列字段
 
         //初始化 Excel的文件、表单名称、列字段
-        ExcelPOiUtils.initExcelAndXLSX(filePath, sheetName, columnTitles)
-//        ExcelPOiUtils.excelColor(filePath)
+        ExcelPOiUtils.initExcelAndXLSX(this,filePath, sheetName, columnTitles)
 
         val list: MutableList<PeopleEntity> = ArrayList()
         list.add(PeopleEntity("张三", "男", "22", "北京"))
