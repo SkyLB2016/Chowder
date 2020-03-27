@@ -32,13 +32,19 @@ android:requestLegacyExternalStorage="true"
 3）自身实现点击事件的接口.
 4）xml中的onclick属性。
 
-●04.Intent：意图，分显式与隐式两种，显式为指定了component属性，明确启动哪个组件；隐式是搜索符合条件的组件，供用户选择。
+●04.Intent：分显式与隐式两种：
+显式为指定了component属性，明确启动哪个组件；
+隐式是搜索符合条件的组件，供用户选择。
 1）构造函数：可以是类名、action、Component（setClass）。
 2）明确启动组件component（setComponent()）：明确需要启动组件，与xml中对应。
 3）操作类型action（setAction()）：Java代码中只能存在一个，存在则必须有一个相同；xml中可存在多个。
 4）类别筛选category（addCategory()）：Java代码中存在几个匹配几个，xml中可存在多个。
 5）数据类型data与type：setDataAndType()，地址有特定规则，要么同时设置，要么单独只设置一个。
-6）启动模式LaunchMode四种（manifest中用）：standard（标准），singleTop（栈顶复用），singleTask（类似于单例，独一份，再次进入后清空在其之上的实例），singleInstance（每次启动都是独立栈中的独一份）
+6）启动模式LaunchMode四种（manifest中用）：
+standard（标准），
+singleTop（栈顶复用），
+singleTask（类似于单例，独一份，再次进入后清空在其之上的实例），
+singleInstance（每次启动都是独立栈中的独一份）
 7）标志也即启动模式（Intent中用）：
 FLAG_ACTIVITY_NEW_TASK(需要搭配FLAG_ACTIVITY_CLEAR_TASK使用)；
 FLAG_ACTIVITY_SINGLE_TOP,FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS(跳转页面后自动finish）；
