@@ -2,13 +2,13 @@ package com.sky.oa.utils;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -57,7 +57,7 @@ public class ExcelPOiUtils {
      */
     public static void writeToExcelXLSX(List<List<String>> datas, String fileName, String sheetName) {
         try {
-            Workbook wb = new XSSFWorkbook(fileName);
+            Workbook wb = new XSSFWorkbook(new FileInputStream(fileName));
             Sheet sheet = wb.getSheet(sheetName);
 
             List<String> data;
@@ -70,7 +70,7 @@ public class ExcelPOiUtils {
                 row = sheet.createRow(i + 1);
                 for (int j = 0; j < data.size(); j++) {
                     content = data.get(j);
-                    cell = row.createCell(i);
+                    cell = row.createCell(j);
                     cell.setCellValue(content);
                 }
             }
@@ -95,7 +95,7 @@ public class ExcelPOiUtils {
         // Aqua background
         CellStyle style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.AQUA.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         Cell cell = row.createCell(1);
         cell.setCellValue("X1");
         cell.setCellStyle(style);
@@ -104,28 +104,28 @@ public class ExcelPOiUtils {
         // font color.
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.AUTOMATIC.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row.createCell(2);
         cell.setCellValue("X2");
         cell.setCellStyle(style);
 
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.BLUE.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row.createCell(3);
         cell.setCellValue("X3");
         cell.setCellStyle(style);
 
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.BLUE_GREY.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row.createCell(4);
         cell.setCellValue("X4");
         cell.setCellStyle(style);
 
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.BRIGHT_GREEN.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row.createCell(5);
         cell.setCellValue("X5");
         cell.setCellStyle(style);
@@ -135,34 +135,34 @@ public class ExcelPOiUtils {
 
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.BROWN.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row2.createCell(1);
         cell.setCellValue("X6");
         cell.setCellStyle(style);
 
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.CORAL.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row2.createCell(2);
         cell.setCellValue("X7");
         cell.setCellStyle(style);
 
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.CORNFLOWER_BLUE.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row2.createCell(3);
         cell.setCellValue("X8");
         cell.setCellStyle(style);
 
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.DARK_BLUE.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row2.createCell(4);
         cell.setCellValue("X9");
         cell.setCellStyle(style);
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.DARK_GREEN.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row2.createCell(5);
         cell.setCellValue("X10");
         cell.setCellStyle(style);
@@ -172,33 +172,33 @@ public class ExcelPOiUtils {
 
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.DARK_RED.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row3.createCell(1);
         cell.setCellValue("X11");
         cell.setCellStyle(style);
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.DARK_TEAL.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row3.createCell(2);
         cell.setCellValue("X12");
         cell.setCellStyle(style);
 
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.DARK_YELLOW.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row3.createCell(3);
         cell.setCellValue("X13");
         cell.setCellStyle(style);
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.GOLD.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row3.createCell(4);
         cell.setCellValue("X14");
         cell.setCellStyle(style);
 
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.GREEN.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row3.createCell(5);
         cell.setCellValue("X15");
         cell.setCellStyle(style);
@@ -207,33 +207,33 @@ public class ExcelPOiUtils {
         Row row4 = sheet.createRow(4);
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row4.createCell(1);
         cell.setCellValue("X16");
         cell.setCellStyle(style);
 
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.GREY_40_PERCENT.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row4.createCell(2);
         cell.setCellValue("X17");
         cell.setCellStyle(style);
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.GREY_50_PERCENT.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row4.createCell(3);
         cell.setCellValue("X18");
         cell.setCellStyle(style);
 
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.GREY_80_PERCENT.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row4.createCell(4);
         cell.setCellValue("X19");
         cell.setCellStyle(style);
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.INDIGO.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row4.createCell(5);
         cell.setCellValue("X20");
         cell.setCellStyle(style);
@@ -243,34 +243,34 @@ public class ExcelPOiUtils {
 
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.LAVENDER.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row5.createCell(1);
         cell.setCellValue("X21");
         cell.setCellStyle(style);
 
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.LEMON_CHIFFON.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row5.createCell(2);
         cell.setCellValue("X22");
         cell.setCellStyle(style);
 
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.LIGHT_BLUE.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row5.createCell(3);
         cell.setCellValue("X23");
         cell.setCellStyle(style);
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.LEMON_CHIFFON.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row5.createCell(4);
         cell.setCellValue("X24");
         cell.setCellStyle(style);
 
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.LIGHT_BLUE.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row5.createCell(5);
         cell.setCellValue("X25");
         cell.setCellStyle(style);
@@ -280,34 +280,34 @@ public class ExcelPOiUtils {
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.LIGHT_CORNFLOWER_BLUE
                 .getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row6.createCell(1);
         cell.setCellValue("X26");
         cell.setCellStyle(style);
 
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.LIGHT_GREEN.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row6.createCell(2);
         cell.setCellValue("X27");
         cell.setCellStyle(style);
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.LIGHT_ORANGE.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row6.createCell(3);
         cell.setCellValue("X28");
         cell.setCellStyle(style);
 
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.LIGHT_TURQUOISE.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row6.createCell(4);
         cell.setCellValue("X29");
         cell.setCellStyle(style);
 
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.LIGHT_YELLOW.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row6.createCell(5);
         cell.setCellValue("X30");
         cell.setCellStyle(style);
@@ -316,33 +316,33 @@ public class ExcelPOiUtils {
         Row row7 = sheet.createRow(7);
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.LIME.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row7.createCell(1);
         cell.setCellValue("X31");
         cell.setCellStyle(style);
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.MAROON.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row7.createCell(2);
         cell.setCellValue("X32");
         cell.setCellStyle(style);
 
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.OLIVE_GREEN.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row7.createCell(3);
         cell.setCellValue("X33");
         cell.setCellStyle(style);
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.ORANGE.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row7.createCell(4);
         cell.setCellValue("X34");
         cell.setCellStyle(style);
 
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.ORCHID.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row7.createCell(5);
         cell.setCellValue("X35");
         cell.setCellStyle(style);
@@ -352,33 +352,33 @@ public class ExcelPOiUtils {
 
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.PALE_BLUE.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row8.createCell(1);
         cell.setCellValue("X36");
         cell.setCellStyle(style);
 
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.PINK.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row8.createCell(2);
         cell.setCellValue("X37");
         cell.setCellStyle(style);
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.PLUM.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row8.createCell(3);
         cell.setCellValue("X38");
         cell.setCellStyle(style);
 
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.RED.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row8.createCell(4);
         cell.setCellValue("X39");
         cell.setCellStyle(style);
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.ROSE.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row8.createCell(5);
         cell.setCellValue("X40");
         cell.setCellStyle(style);
@@ -388,33 +388,33 @@ public class ExcelPOiUtils {
 
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.ROYAL_BLUE.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row9.createCell(1);
         cell.setCellValue("X41");
         cell.setCellStyle(style);
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.SEA_GREEN.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row9.createCell(2);
         cell.setCellValue("X42");
         cell.setCellStyle(style);
 
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.SKY_BLUE.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row9.createCell(3);
         cell.setCellValue("X43");
         cell.setCellStyle(style);
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.TAN.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row9.createCell(4);
         cell.setCellValue("X44");
         cell.setCellStyle(style);
 
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.TEAL.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row9.createCell(5);
         cell.setCellValue("X45");
         cell.setCellStyle(style);
@@ -424,34 +424,34 @@ public class ExcelPOiUtils {
 
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.TURQUOISE.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row10.createCell(1);
         cell.setCellValue("X46");
         cell.setCellStyle(style);
 
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.VIOLET.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row10.createCell(2);
         cell.setCellValue("X47");
         cell.setCellStyle(style);
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.WHITE.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row10.createCell(3);
         cell.setCellValue("X48");
         cell.setCellStyle(style);
 
         style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.YELLOW.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row10.createCell(4);
         cell.setCellValue("X49");
         cell.setCellStyle(style);
 
 //        style = workbook.createCellStyle();
 //        style.setFillForegroundColor(IndexedColors.YELLOW.getIndex());
-//        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+//        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         cell = row10.createCell(5);
         cell.setCellValue("X50");
 //        cell.setCellStyle(style);
