@@ -16,11 +16,13 @@ class DiskCache : ImageCache {
 
     override fun put(url: String?, bitmap: Bitmap?) {
         val pathName = getPath(url)
-        if (!File(pathName).exists()) BitmapUtils.saveBitmapToFile(bitmap, pathName)
+        BitmapUtils.saveBitmapToFile(bitmap, pathName)
     }
 
     //通过MD5来确定唯一名称，hashCode也可以，但是单纯取最后的名称，有可能重名
     private fun getPath(url: String?) =
-            if (url?.startsWith("http")!!) "/storage/emulated/0/image/${MD5Utils.encrypt(url)+url.substring(url.lastIndexOf("."))}" else url
+        if (url?.startsWith("http")!!) "/storage/emulated/0/and/image/${MD5Utils.encrypt(url) + url.substring(
+            url.lastIndexOf(".")
+        )}" else url
 //            if (url?.startsWith("http")!!) "$path${url.substring(url.lastIndexOf("/"))}" else url
 }

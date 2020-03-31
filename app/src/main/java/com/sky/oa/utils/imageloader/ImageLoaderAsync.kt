@@ -7,6 +7,7 @@ import android.os.Message
 import android.view.View
 import android.widget.ImageView
 import com.sky.sdk.utils.BitmapUtils
+import com.sky.sdk.utils.LogUtils
 import java.util.*
 
 /**
@@ -89,6 +90,7 @@ object ImageLoaderAsync {
             if (isCancelled) return null
             url = params[0]
             //publishProgress();
+            LogUtils.i("图片缓存==" + params[0])
             return BitmapUtils.getBitmapUP(params[0])
         }
 
