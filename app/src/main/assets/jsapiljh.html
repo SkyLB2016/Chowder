@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script type="text/javascript">
+            function closeWebView(){
+                var data = '{"msg": {"closeWebView": "0"}}';
+
+                window.jsApi.closeWebView(data);
+            }
+            </script>
+    <style>
+            .tip-img {
+                height: 70px;
+                margin-top: 56px;
+                text-align: center;
+            }
+        
+        .tip-p {
+            height: 24px;
+            font-size: 17px;
+            font-family: PingFangSC-Regular;
+            font-weight: 400;
+            color: rgba(23, 26, 31, 1);
+            line-height: 24px;
+            text-align: center;
+        }
+        .success-button {
+            height: 50px;
+            width: 240px;
+            background: linear-gradient(
+            90deg,
+            rgba(69, 154, 245, 1) 0%,
+            rgba(69, 190, 245, 1) 100%
+            );
+            box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.08);
+            border-radius: 25px;
+            margin-top: 10px;
+            font-size: 18px;
+            color: white;
+            outline:none;
+            border:none;
+        }
+        </style>
+
+    <title>签署完成</title>
+</head>
+<body style="background:#F5F5F5">
+<div style="background:white;height: 310px;" align="center">
+    <img class="tip-img" src="./success.png" />
+    <p class="tip-p">您的操作已完成</p>
+    <button class="success-button" onclick="closeWebView();">完成</button>
+<!--    <button onclick="android.closeWebView()"> 关闭浏览器</button>-->
+
+</div>
+</body>
+</html>

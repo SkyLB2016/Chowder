@@ -1,17 +1,21 @@
 package com.sky.oa.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 
 import com.sky.design.app.BaseActivity;
 import com.sky.oa.R;
 import com.sky.oa.utils.PaxWebChromeClient;
+import com.sky.sdk.utils.LogUtils;
 
 public class WebActivity extends BaseActivity {
     private PaxWebChromeClient chromeClient;
@@ -35,7 +39,6 @@ public class WebActivity extends BaseActivity {
         webView = (WebView) findViewById(R.id.webView);
 //        Intent intent = getIntent();
 
-        mUrl = "https://realnameverify-test.fadada.com/fddAuthenticationService/v1/api/synsAuthentication.action?transaction_no=DC81F39AB1D45052988F95C9076889A90FC28F37FB0ACBD6406E3BB235F400E0ADA0483DC1757F39&sign=NTkxOTA0RUM3RUYwNjcyNzlENzY4RURCMzlGRjQxMzhBMjk5NDkwOQ==&app_id=401952&timestamp=1585200074307";
 
         chromeClient = new PaxWebChromeClient(this);
 
@@ -43,8 +46,24 @@ public class WebActivity extends BaseActivity {
 
         webView.setWebChromeClient(chromeClient);
         webView.setWebViewClient(new MyWebViewClient());
-        webView.loadUrl(mUrl);
+        webView.loadUrl("file:///android_asset/jsapiljh.html");
+//        webView.loadUrl("file:///android_asset/jsapitest.html");
+        //        mUrl = "https://realnameverify-test.fadada.com/fddAuthenticationService/v1/api/synsAuthentication.action?transaction_no=DC81F39AB1D45052988F95C9076889A90FC28F37FB0ACBD6406E3BB235F400E0ADA0483DC1757F39&sign=NTkxOTA0RUM3RUYwNjcyNzlENzY4RURCMzlGRjQxMzhBMjk5NDkwOQ==&app_id=401952&timestamp=1585200074307";
+//        webView.loadUrl(mUrl);
         initChildInfo();
+        Button btn = findViewById(R.id.btn);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                testJS();
+            }
+        });
+    }
+
+    @SuppressLint("SetJavaScriptEnabled")
+    public void testJS() {
+        webView.loadUrl("javascript:test()");
     }
 
     private void initWebViewSettings() {
@@ -81,7 +100,9 @@ public class WebActivity extends BaseActivity {
     }
 
     protected void initChildInfo() {
-        webView.addJavascriptInterface(new onJavaScriptInterface(), "android");
+//        webView.addJavascriptInterface(new onJavaScriptInterface(), "android");
+//        webView.addJavascriptInterface(new onJavaScriptInterface(), "justTest");
+        webView.addJavascriptInterface(new onJavaScriptInterface(), "jsApi");
     }
 
     private class onJavaScriptInterface {
@@ -89,7 +110,19 @@ public class WebActivity extends BaseActivity {
          * 返回上个界面
          */
         @JavascriptInterface
+        public void closeWebView(String data) {
+            LogUtils.i("data=="+data);
+            showToast(data);
+            finish();
+        }
+
+        @JavascriptInterface
         public void closeWebView() {
+            finish();
+        }
+
+        @JavascriptInterface
+        public void hello(String string) {
             webView.post(new Runnable() {
                 @Override
                 public void run() {

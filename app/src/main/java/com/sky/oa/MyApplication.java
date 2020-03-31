@@ -2,6 +2,7 @@ package com.sky.oa;
 
 import android.app.Application;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.sky.sdk.utils.ActivityLifecycle;
 import com.sky.sdk.utils.LogUtils;
 import com.sky.sdk.utils.SPUtils;
@@ -20,6 +21,7 @@ public class MyApplication extends Application {
         SPUtils.init(this);
         registerActivityLifecycleCallbacks(ActivityLifecycle.getInstance());//注册Activity管理器
         LogUtils.setIsDebug(BuildConfig.DEBUG);
+        Fresco.initialize(this);
         //bughd监测崩溃事件
         //        FIR.init(this);
 //        CrashHandler.intance.init(getInstance())

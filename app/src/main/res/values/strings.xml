@@ -58,6 +58,8 @@
 
     <string name="act_excel">00.excel读写</string>
     <string name="act_excel_des">excel读写</string>
+    <string name="act_fresco">00.fresco显示</string>
+    <string name="act_fresco_des">fresco显示</string>
 
 
     <string name="ibu"><i><b><u>下划线加粗斜体</u></b></i></string>
