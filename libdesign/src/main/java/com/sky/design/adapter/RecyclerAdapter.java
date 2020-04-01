@@ -102,24 +102,25 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerHo
     @Override
     public void onBindViewHolder(final RecyclerHolder holder, int position) {
         onAchieveHolder(holder, position);
-        if (itemLongClickListener != null) {
-            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (itemLongClickListener != null) {
                     return itemLongClickListener.onItemLongClick(
                             holder.itemView, holder.getLayoutPosition());
                 }
-            });
-        }
-        if (onItemClickListener != null) {
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+                return false;
+            }
+        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onItemClickListener != null) {
                     onItemClickListener.onItemClick(
                             holder.itemView, holder.getLayoutPosition());
                 }
-            });
-        }
+            }
+        });
     }
 
     /**

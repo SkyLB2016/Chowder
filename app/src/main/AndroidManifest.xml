@@ -311,7 +311,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.FrescoActivity"
+            android:name=".activity.RecyclerActivity"
             android:description="@string/act_fresco_des"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/act_fresco"

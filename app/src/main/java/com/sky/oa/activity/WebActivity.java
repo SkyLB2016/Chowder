@@ -46,10 +46,10 @@ public class WebActivity extends BaseActivity {
 
         webView.setWebChromeClient(chromeClient);
         webView.setWebViewClient(new MyWebViewClient());
-        webView.loadUrl("file:///android_asset/jsapiljh.html");
+//        webView.loadUrl("file:///android_asset/jsapiljh.html");
 //        webView.loadUrl("file:///android_asset/jsapitest.html");
-        //        mUrl = "https://realnameverify-test.fadada.com/fddAuthenticationService/v1/api/synsAuthentication.action?transaction_no=DC81F39AB1D45052988F95C9076889A90FC28F37FB0ACBD6406E3BB235F400E0ADA0483DC1757F39&sign=NTkxOTA0RUM3RUYwNjcyNzlENzY4RURCMzlGRjQxMzhBMjk5NDkwOQ==&app_id=401952&timestamp=1585200074307";
-//        webView.loadUrl(mUrl);
+        mUrl = "https://realnameverify-test.fadada.com/fddAuthenticationService/v1/api/synsAuthentication.action?transaction_no=A52DC1E84D46042820D5472744CB66DAAEFA399926C0D8370CD82B5787F8053AADA0483DC1757F39&sign=MkEwNEJDRDk1MjZFMzQyM0E4MkI4MzE4QTlEMTI1MkVCRDk5NTYyNg==&app_id=401952&timestamp=1585728639796";
+        webView.loadUrl(mUrl);
         initChildInfo();
         Button btn = findViewById(R.id.btn);
 
@@ -111,7 +111,7 @@ public class WebActivity extends BaseActivity {
          */
         @JavascriptInterface
         public void closeWebView(String data) {
-            LogUtils.i("data=="+data);
+            LogUtils.i("data==" + data);
             showToast(data);
             finish();
         }

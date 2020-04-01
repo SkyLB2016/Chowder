@@ -90,7 +90,7 @@ public class PhotoUtils {
         File file = new File(photoPath);
         Uri uri;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            //第二参数是在manifest.xml定义 provider的authorities属性
+            //第二参数是在manifest.xml定义 provider的authorities属    性
             uri = FileProvider.getUriForFile(activity, activity.getPackageName() + ".fileprovider", file);
             //兼容版本处理，因为 intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION) 只在5.0以上的版本有效
             intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
