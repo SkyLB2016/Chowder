@@ -60,7 +60,7 @@ dependencies {
 //    implementation 'org.apache.poi:poi:4.1.2'
 //    implementation 'org.apache.poi:poi-ooxml:4.1.2'
 }
-def keyPass = rootProject.file("local.properties")
+def keyPass = rootProject.file("gradle.properties")
 def key = new Properties()
 key.load(new FileInputStream(keyPass))
 
@@ -87,7 +87,7 @@ android {
     signingConfigs {
         debug {
             keyAlias key['keyAlias']
-            keyPassword key['keyPassword']
+            keyPassword "$keyPassword"
             storeFile file(key['storeFile'])
             storePassword key['storePassword']
             println "未签名"
