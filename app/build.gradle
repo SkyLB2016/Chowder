@@ -86,18 +86,21 @@ android {
     }
     signingConfigs {
         debug {
-            keyAlias key['keyAlias']
+            keyAlias "$keyAlias"
             keyPassword "$keyPassword"
-            storeFile file(key['storeFile'])
-            storePassword key['storePassword']
-            println "未签名"
+            storeFile file("$storeFile")
+            storePassword "$storePassword"
+            println "$storePassword"
+            println key['storePassword']
+            println "debug"
         }
         release {
             keyAlias key['keyAlias']
             keyPassword key['keyPassword']
             storeFile file(key['storeFile'])
             storePassword key['storePassword']
-            println "已签名"
+            println "$keyPassword"
+            println "release"
         }
     }
     buildTypes {
