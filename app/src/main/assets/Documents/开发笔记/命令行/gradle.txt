@@ -1,4 +1,7 @@
 gradle命令行
+java运行失败在.idea/gradle 的GradleProjectSettings下加入
+<option name="delegatedBuild" value="false" />
+
 1、gradle的特性：依赖于groovy
 基于声明和基于约定的构建；为以依赖为基础的编程方式提供语言环境；
 可多项目构建、结构化、易于扩展性、易于移植；
