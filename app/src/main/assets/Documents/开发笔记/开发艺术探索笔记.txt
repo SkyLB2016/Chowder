@@ -305,7 +305,10 @@ mGroupFlags &= ~FLAG_DISALLOW_INTERCEPT; 是尼玛啥个意思？
 直接在父容器的onInterceptTouchEvent中进行拦截，父容器需要此事件就拦截，不需要就放行。需要知道的是
 ACTION_DOWN：必须返回false，否则子view将接收不到事件；
 ACTION_MOVE：根据自身需要拦截事件
-ACTION_UP：必须返回false，否则子view的onclick将不会执行。如果在MOVE已拦截，则不会执行onInterceptTouchEvent的ACTION_UP事件。
+ACTION_UP：只有返回false，否则子view的onclick将不会执行。如果在MOVE已拦截，则不会执行onInterceptTouchEvent的ACTION_UP事件。
+ACTION_CANCEL：事件被上层拦截时触发。
+ACTION_POINTER_DOWN:其他手指按下。
+ACTION_POINTER_UP:其他手指抬起。
 
 2.内部拦截
 父容器不拦截任何事件，所有的都传递个子元素处理，如果子元素也不消耗，就回传到上级父元素处理，（这种方法和Android中的事件分发机制不一致，？？？？哪里不一致，问号？？）。
