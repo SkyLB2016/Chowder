@@ -89,10 +89,10 @@ android {
     }
     signingConfigs {
         debug {
-            keyAlias "$keyAlias"
-            keyPassword "$keyPassword"
-            storeFile file("$storeFile")
-            storePassword "$storePassword"
+            keyAlias key['keyAlias']
+            keyPassword key['keyPassword']
+            storeFile file(key['storeFile'])
+            storePassword key['storePassword']
             println "$storePassword"
             println key['storePassword']
             println "debug"

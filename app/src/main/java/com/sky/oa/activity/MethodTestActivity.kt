@@ -515,36 +515,16 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
         val text = "天行健，君子以自强不息；地势坤，君子以厚德载物。"
 //        val span = SpannableString(text)
         val span = SpannableStringBuilder(text)
-        span.setSpan(
-            AbsoluteSizeSpan(resources.getDimensionPixelSize(R.dimen.text_18)),
-            0,
-            text.length,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-        span.setSpan(
-            ForegroundColorSpan(Color.RED),
-            8,
-            17,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )//字体颜色
-        span.setSpan(
-            BackgroundColorSpan(Color.rgb(55, 155, 200)),
-            17,
-            text.length,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
+        span.setSpan(AbsoluteSizeSpan(resources.getDimensionPixelSize(R.dimen.text_18)), 0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        span.setSpan(ForegroundColorSpan(Color.RED), 8, 17, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//字体颜色
+        span.setSpan(BackgroundColorSpan(Color.rgb(55, 155, 200)), 17, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         span.setSpan(UnderlineSpan(), 0, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//下划线
         span.setSpan(StrikethroughSpan(), 4, 8, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//中划线
         span.setSpan(RelativeSizeSpan(1.2f), 8, 10, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//字号按比例翻倍
         span.setSpan(SuperscriptSpan(), 10, 11, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//上标
         span.setSpan(SubscriptSpan(), 12, 13, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//下标
         span.setSpan(StyleSpan(Typeface.BOLD), 13, 15, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//字体风格
-        span.setSpan(
-            URLSpan("http://www.baidu.com"),
-            17,
-            text.length,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )//超链接
+        span.setSpan(URLSpan("http://www.baidu.com"), 17, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//超链接
         span.append("\n天地玄黄，宇宙洪荒。\n")
         span.append("日月盈仄，辰宿列张。\n")
         span.append(getText(R.string.ibu))
@@ -654,6 +634,7 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
 
     companion object {
         private val collator = Collator.getInstance()
+
         //升序
         private val ascending =
             Comparator<SortModel> { first, second ->
@@ -664,6 +645,7 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
             }
         private val ascending1 =
             Comparator<SortModel> { first, second -> first.className!!.compareTo(second.className!!) }
+
         //降序
         private val descending =
             Comparator<SortModel> { first, second ->

@@ -20,3 +20,58 @@
 聚五聚六死，
 聚七活棋。
 
+sychronied修饰普通方法和静态方法的区别
+
+什么是可见性
+
+应用启动流程 从桌面图标开始
+
+activity的启动流程
+
+activity实例怎么创建的
+Application实例怎么创建的
+Handler原理跟机制，Handler造成内存泄露，最终是谁持有Activity的引用了。
+
+volatile 能否保证线程安全 用DCL上的作用
+
+用哪些手段进行UI优化
+
+LeakCanary内部原理
+
+确认泄露为什么需要两次检测
+
+给定一个二叉树和一个数字n，判断二叉树中是否有一个路径上的数字之和等于给定的数字n 例如: 给定下面一个二叉树，以及一个n为22, 5 /
+4 -8 / /
+11 13 4 / \
+-7 2 1 存在一个从根节点到叶子节点的完整路径 5->4->11->2 ，每个节点加起来正好为 22，则返回ture. 注意：路径必须是根节点到叶子节点,每个节点可以是正数或负数。
+
+Lottie原理 webp动画
+二面
+算法题
+输入一个长度为N的数组，和目标数字，要求在数字中找到两个数字，他们的和等于目标值，要求打印出所有可能结果。
+其他
+RecyclerView 和 ListView的区别
+H5加载的优化
+DsBridge的原理有了解过吗
+Flutter 性能， 为什么用Flutter开发项目。
+CopyWriteList 使用场景跟他的一个结构有什么关系吗
+StringBuilder 和 StringBuffer那个是线程安全
+HashTable 和HashMap那个线程安全
+ConcurrentHashMap 为什么性能好，ConcurrentHashMap 查找一个元素要进行几次hash运算。
+性能优化做过哪些性能优化。SysTrace用过没
+UI预加载
+直播间秒开优化做过哪些优化。
+RxJava线程切换原理，RxJava1和RxJava2的区别有哪些。
+直播项目中视频传输压缩协议，用的什么？对压缩过程做了什么优化。
+Databinding内部的原理
+转岗面
+1、线程池关键核心参数
+2、核心线程、普通线程、任务队列之间的关系。
+3、Activity的各种启动模式，然后深入。
+4、glide的缓存机制
+5、Lru实现分析，讲讲对LinkedHashMap的理解。
+6、各种排序算法的时间空间复杂度分析。
+7、MVP、MVVM之间的区别。
+8、MVVM怎么实现数据绑定的，谈谈DataBining的内部机制。
+9、apt / javapoet
+10、链表合并算法。
