@@ -41,6 +41,13 @@ private CouponBO couponBO; // 券实例
 区分状态时，选中时的状态，添加selected后缀
 区分状态时，不可用时的状态，添加disable后缀
 多种状态的，添加selector后缀（一般为ListView的selector或按钮的selector）
+
+shape corners gradient padding size solid stroke
+
+
+
+
+
 7. 动画文件命名，动画类型_动画方向。
 fade_in，淡入
 fade_out，淡出
