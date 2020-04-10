@@ -19,6 +19,7 @@ import android.provider.ContactsContract
 import android.speech.tts.TextToSpeech
 import android.text.Spannable
 import android.text.SpannableStringBuilder
+import android.text.method.LinkMovementMethod
 import android.text.style.*
 import android.view.LayoutInflater
 import android.view.View
@@ -83,6 +84,7 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
             flow.addView(tvText)
             tvText.setOnClickListener(this)
         }
+        tvDisplay.movementMethod = LinkMovementMethod.getInstance()
         tvDisplay.text = replaceStr()
         val controller = AnimationUtils.loadLayoutAnimation(this, R.anim.anim_layout)
 
@@ -512,21 +514,70 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
     }
 
     private fun changeText(): SpannableStringBuilder {
-        val text = "天行健，君子以自强不息；地势坤，君子以厚德载物。"
+//        val text = "天行健，君子以自强不息；地势坤，君子以厚德载物。"
 //        val span = SpannableString(text)
-        val span = SpannableStringBuilder(text)
-        span.setSpan(AbsoluteSizeSpan(resources.getDimensionPixelSize(R.dimen.text_18)), 0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        span.setSpan(ForegroundColorSpan(Color.RED), 8, 17, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//字体颜色
-        span.setSpan(BackgroundColorSpan(Color.rgb(55, 155, 200)), 17, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        span.setSpan(UnderlineSpan(), 0, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//下划线
-        span.setSpan(StrikethroughSpan(), 4, 8, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//中划线
-        span.setSpan(RelativeSizeSpan(1.2f), 8, 10, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//字号按比例翻倍
-        span.setSpan(SuperscriptSpan(), 10, 11, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//上标
-        span.setSpan(SubscriptSpan(), 12, 13, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//下标
-        span.setSpan(StyleSpan(Typeface.BOLD), 13, 15, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//字体风格
-        span.setSpan(URLSpan("http://www.baidu.com"), 17, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//超链接
-        span.append("\n天地玄黄，宇宙洪荒。\n")
-        span.append("日月盈仄，辰宿列张。\n")
+        val span = SpannableStringBuilder()
+        var start = 0
+        var end = 0
+        span.append("天地玄黄，宇宙洪荒。\n")
+        end = span.length
+        span.setSpan(
+            AbsoluteSizeSpan(resources.getDimensionPixelSize(R.dimen.text_18)),
+            start,
+            end,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        span.setSpan(object : ClickableSpan() {
+            override fun onClick(widget: View) {
+                showToast("始制文字，乃服衣裳。")
+            }
+        }, start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        start = span.length
+        span.append("日月盈昃，辰宿列张。\n")
+        end = span.length
+        span.setSpan(ForegroundColorSpan(getColor(R.color.color_3599f4)), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//字体颜色
+
+        start = span.length
+        span.append("寒来暑往，秋收冬藏。\n")
+        end = span.length
+        span.setSpan(StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//字体风格
+
+        start = span.length
+        span.append("闰余成岁，律吕调阳。\n")
+        end = span.length
+        span.setSpan(BackgroundColorSpan(Color.rgb(55, 155, 200)), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        start = span.length
+        span.append("云腾致雨，露结为霜。\n")
+        end = span.length
+        span.setSpan(UnderlineSpan(), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//下划线
+
+        start = span.length
+        span.append("金生丽水，玉出昆冈。\n")
+        end = span.length
+        span.setSpan(StrikethroughSpan(), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//中划线
+
+        start = span.length
+        span.append("剑号巨阙，珠称夜光。")
+        end = span.length
+        span.setSpan(SuperscriptSpan(), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//上标
+
+        start = span.length
+        span.append("果珍李柰，菜重芥姜。\n")
+        end = span.length
+        span.setSpan(SubscriptSpan(), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//下标
+
+        start = span.length
+        span.append("海咸河淡，鳞潜羽翔。\n")
+        end = span.length
+        span.setSpan(RelativeSizeSpan(1.2f), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//字号按比例翻倍
+
+        start = span.length
+        span.append("龙师火帝，鸟官人皇。\n")
+        end = span.length
+        span.setSpan(URLSpan("http://www.baidu.com"), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//超链接
+
         span.append(getText(R.string.ibu))
         return span
     }
