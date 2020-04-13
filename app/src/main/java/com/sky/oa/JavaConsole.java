@@ -1,7 +1,9 @@
 package com.sky.oa;
 
+import com.sky.oa.model.Employe;
 import com.sky.oa.thread.JoinThread;
 import com.sky.oa.thread.MyThread;
+import com.sky.sdk.utils.LogUtils;
 import com.sky.sdk.utils.RegexUtils;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -21,8 +23,13 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class JavaConsole {
 
@@ -51,10 +58,10 @@ public class JavaConsole {
 //        stringEqualStr();
 //        Executors
 
-        System.out.println(1 << 30);
-        System.out.println((1 << 30) - 1);
-        System.out.println(Math.pow(2, 30));
-        System.out.println(Math.pow(2, 30) - 1);
+//        System.out.println(1 << 30);
+//        System.out.println((1 << 30) - 1);
+//        System.out.println(Math.pow(2, 30));
+//        System.out.println(Math.pow(2, 30) - 1);
         //银黄含化滴丸
         //玉屏风颗粒
         //糠酸莫米松鼻喷雾剂
@@ -62,14 +69,50 @@ public class JavaConsole {
         //氯雷他定片
         //孟鲁司特钠片
 
-        excelColor();
-
+//        excelColor();
+        Employe employe = new Employe("李彬", "001", "dept", "mobile", "date");
+        getValue(employe);
 
 //        String filePath = "/Users/sky/Documents/POIFillAndColorExample.xlsx";
 //        String sheetName = "页签1";
 //        String[] columnTitles = new String[]{"姓名", "性别", "年龄", "地址"};//Excel的列字段
 //        ExcelPOiUtils.initExcelAndXLSX(filePath, sheetName, columnTitles);
 
+    }
+
+    public static void getValue(Object obj) {
+        try {
+            Class cla = Class.forName(obj.getClass().getName());//获取类名
+            Field[] fields = cla.getDeclaredFields();
+            for (int i = 0; i < fields.length; i++) {
+                fields[i].setAccessible(true);
+                String name =fields[i].getName();
+                System.out.println(name+"=="+fields[i].get(obj));
+                System.out.println(name);
+                System.out.println(cla.getDeclaredField(name));
+//                System.out.println(cla.getDeclaredField(name).get(obj));
+            }
+
+            Method[] methods = cla.getMethods();//获取类中的方法
+            for (Method method : methods) {
+                String key = method.getName();//获取方法名称
+                if (!key.startsWith("get") && !key.startsWith("is")) continue;//既不是get也不是is结束此次循环
+                int sub = 3;//默认为get长度
+                if (key.startsWith("is")) sub = 2;//判断是否为is
+                key = key.substring(sub);//去除get或者is
+//                key = key.substring(0, 1).toUpperCase() + key.substring(1);//首字母大写化
+                key = key.substring(0, 1).toLowerCase() + key.substring(1);//首字母小写化
+                System.out.println(key + "==" + method.invoke(obj));
+            }
+        } catch (ClassNotFoundException e) {
+            LogUtils.d(e.toString());
+        } catch (IllegalAccessException e) {
+            LogUtils.d(e.toString());
+        } catch (InvocationTargetException e) {
+            LogUtils.d(e.toString());
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void stringEqualStr() {

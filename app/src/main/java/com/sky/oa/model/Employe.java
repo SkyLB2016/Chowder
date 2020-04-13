@@ -16,6 +16,9 @@ public class Employe {
     private long date;//":1567587143
     private String dateTitle;//":1567587143
 
+    public Employe() {
+    }
+
     public Employe(String name, String sn, String dept, String mobile, String dateTitle) {
         this.name = name;
         this.sn = sn;
