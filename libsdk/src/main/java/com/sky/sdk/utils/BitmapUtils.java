@@ -290,17 +290,23 @@ public class BitmapUtils {
         Cursor cursor = null;
         String column = MediaStore.Images.Media.DATA;
         String[] projection = {column};
+        String path = null;
         try {
             cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs, null);
             if (cursor != null && cursor.moveToFirst()) {
-                int index = cursor.getColumnIndexOrThrow(column);
-                return cursor.getString(index);
+                int num = cursor.getColumnCount();
+                if (num == 0) {
+                    path = uri.getPath();
+                } else {
+                    int index = cursor.getColumnIndexOrThrow(column);
+                    path = cursor.getString(index);
+                }
             }
         } finally {
             if (cursor != null)
                 cursor.close();
         }
-        return null;
+        return path;
     }
 
     /**

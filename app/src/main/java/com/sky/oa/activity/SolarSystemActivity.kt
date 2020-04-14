@@ -1,9 +1,13 @@
 package com.sky.oa.activity
 
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
+import android.text.TextUtils
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.FrameLayout
@@ -12,6 +16,8 @@ import com.sky.design.app.BaseActivity
 import com.sky.design.widget.SolarSystem
 import com.sky.oa.C
 import com.sky.oa.R
+import com.sky.sdk.utils.BitmapUtils
+import com.sky.sdk.utils.LogUtils
 import com.sky.sdk.utils.ScreenUtils
 import kotlinx.android.synthetic.main.activity_solar.*
 
@@ -61,7 +67,10 @@ class SolarSystemActivity : BaseActivity(), Toolbar.OnMenuItemClickListener {
                 "viewpager" -> showToast("position==$position")
                 "recyclerview" -> showToast("position==$position")
                 "bitmap" -> showToast("position==$position")
-                "slidingmenu" -> showToast("position==$position")
+                "slidingmenu" -> {
+                    pickFile()
+                    showToast("position==$position")
+                }
             }
         }
         solar?.toggleMenu(300)
@@ -85,6 +94,51 @@ class SolarSystemActivity : BaseActivity(), Toolbar.OnMenuItemClickListener {
             R.id.action_center_right -> solar?.position = SolarSystem.CENTER_RIGHT
         }
         return false
+    }
+
+    // 打开系统的文件选择器
+    private fun pickFile() {
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.addCategory(Intent.CATEGORY_OPENABLE)
+        intent.type = "*/*"
+        this.startActivityForResult(intent, 1)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val error = "文件获取失败"
+        if (resultCode != Activity.RESULT_OK) return
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            val uri = data!!.data //获取uri
+            if (uri == null) {
+                showToast(error)
+                return
+            }
+
+//                int index = cursor.getColumnIndexOrThrow(column);
+//                return cursor.getString(index);
+            LogUtils.i("columnValue==" + uri.path)
+
+            val path = BitmapUtils.getRealPathFromURI(this, uri) //获取路径
+            if (TextUtils.isEmpty(path)) {
+                showToast(error)
+                return
+            }
+            if (path.endsWith(".xlsx") || path.endsWith(".xls")) {
+                showLoading()
+            } else {
+                showToast("文件不是Excel格式")
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 1212) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_DENIED) {
+                showToast("选择文件需要读写文件权限")
+            }
+        }
     }
 
 }

@@ -109,7 +109,6 @@ public class AppUtils {
      *
      * @param file 要安装的文件
      */
-    //打开相机
     public static void installApp(Context context, File file) {
         Intent install = new Intent(Intent.ACTION_VIEW);
         Uri uri;
@@ -117,6 +116,7 @@ public class AppUtils {
             uri = FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", file);
         else uri = Uri.fromFile(file);
         install.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);//添加这一句表示对目标应用临时授权该Uri所代表的文件
+//        install.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         install.setDataAndType(uri, "application/vnd.android.package-archive");
         context.startActivity(install);
     }

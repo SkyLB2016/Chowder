@@ -62,7 +62,8 @@ class LandingActivity : AppCompatActivity() {
         if (SPUtils.getInstance(AppConstants.ISFIRST).getObject(AppConstants.ISFIRST, true)) {
             JumpAct.jumpActivity(this, SplashActivity::class.java)
         } else {
-            JumpAct.jumpActivity(this, MainActivity::class.java)
+            JumpAct.jumpActivity(this, 
+                MainActivity::class.java)
         }
         finish()
     }
