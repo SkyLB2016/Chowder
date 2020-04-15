@@ -21,6 +21,7 @@ import com.sky.oa.model.ChapterEntity
 import com.sky.oa.model.PoetryEntity
 import com.sky.oa.pop.CatalogPop
 import com.sky.oa.utils.CatalogThread
+import com.sky.sdk.net.http.ApiResponse
 import com.sky.sdk.utils.FileUtils
 import com.sky.sdk.utils.LogUtils
 import com.sky.sdk.utils.ScreenUtils
@@ -134,7 +135,7 @@ class PoetryActivity : BaseActivity() {
             flow.addView(tv)
             tv.setOnClickListener(selectArticle)
         }
-        val text = getDocument("Documents/开发笔记/Android笔记.txt")
+        val text = getDocument("Documents/开发笔记/享学课堂.txt")
         setToolbarTitle(text.lines()[0])
         getCatalog(text)
     }

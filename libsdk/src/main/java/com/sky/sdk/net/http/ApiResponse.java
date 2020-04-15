@@ -34,6 +34,9 @@ public class ApiResponse<T> {
     private List<T> data;
     private int status;    // 返回状态码,"1"代表成功
 
+    public ApiResponse() {
+    }
+
     public ApiResponse(int code, String msg) {
         this.code = code;
         this.msg = msg;
@@ -57,6 +60,14 @@ public class ApiResponse<T> {
 
     public String getMsg() {
         return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public void setObj(T obj) {
+        this.obj = obj;
     }
 
     public T getObj() {

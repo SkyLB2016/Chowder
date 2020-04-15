@@ -33,6 +33,7 @@ import com.sky.oa.adapter.MainAdapter;
 import com.sky.oa.api.view.IMainView;
 import com.sky.oa.model.ActivityModel;
 import com.sky.oa.presenter.MainP;
+import com.sky.sdk.net.http.ApiResponse;
 import com.sky.sdk.utils.AppUtils;
 import com.sky.sdk.utils.FileUtils;
 import com.sky.sdk.utils.JumpAct;
@@ -131,6 +132,12 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
 //                equalPoetry();
 //        requestWriteSettings();
         getEnvironment();
+        ApiResponse<String>[] response = new ApiResponse[2];
+        ApiResponse<String> ap = new ApiResponse<String>();
+        ap.setObj("dddddfdfd====");
+        response[0] = ap;
+        LogUtils.i(response[0].getObj());
+        Integer[] integers = new Integer[2];
     }
 
     private void getEnvironment() {
@@ -163,7 +170,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         ArrayList<String> volumenames = new ArrayList<>(MediaStore.getExternalVolumeNames(this));
         String path1 = volumenames.get(0);
         LogUtils.i("path==" + path1);
-        List<String> lists= new ArrayList<>();
+        List<String> lists = new ArrayList<>();
         lists.add("");
 
     }

@@ -1,6 +1,11 @@
 package com.sky.oa;
 
+import android.util.Pair;
+
+import com.sky.oa.model.A;
+import com.sky.oa.model.AB;
 import com.sky.oa.model.Employe;
+import com.sky.oa.model.Generic;
 import com.sky.oa.thread.JoinThread;
 import com.sky.oa.thread.MyThread;
 import com.sky.sdk.utils.LogUtils;
@@ -78,6 +83,26 @@ public class JavaConsole {
 //        String[] columnTitles = new String[]{"姓名", "性别", "年龄", "地址"};//Excel的列字段
 //        ExcelPOiUtils.initExcelAndXLSX(filePath, sheetName, columnTitles);
 
+
+        Generic<A> a=new Generic<>();
+        Generic<AB> b=new Generic<>();
+//        print(a);
+        print(b);
+        Generic<? extends A> str=new Generic<>();
+//        str.setData(new AB());
+        str.getData();
+
+        List<?> list =new ArrayList<>();
+//        list.add("");
+        list.get(0);
+        Pair<String,String> pair =new Pair<>("头部","尾部");
+
+
+    }
+
+    public static void print(Generic<? extends AB> a) {
+        System.out.println(a.getData().getName());
+
     }
 
     public static void getValue(Object obj) {
@@ -86,8 +111,8 @@ public class JavaConsole {
             Field[] fields = cla.getDeclaredFields();
             for (int i = 0; i < fields.length; i++) {
                 fields[i].setAccessible(true);
-                String name =fields[i].getName();
-                System.out.println(name+"=="+fields[i].get(obj));
+                String name = fields[i].getName();
+                System.out.println(name + "==" + fields[i].get(obj));
                 System.out.println(name);
                 System.out.println(cla.getDeclaredField(name));
 //                System.out.println(cla.getDeclaredField(name).get(obj));
