@@ -40,16 +40,23 @@ ApiResponse<String>[] response = new ApiResponse[2];//可以
 7）不能捕获继承Exception/Throwable的泛型类实例，但是可以抛出，也就是throws T
 8）泛型类实例化时，前后的类型必须统一，即使是继承关系的也不行。
 
-●07.通配符类型，只在方法中使用，不能在类中使用，比较懵逼，可以从是否能安全转型来理解。
-1）? extends XX:主要用于安全的访问数据，可以访问X及其子类型，并且不能写入非空数据
-Generic<? extends A> str=new Generic<>();
-str.setData(new AB());//不能这样设置，传入的子类具体是哪个是不确定的。
-str.getData();//可以获取
-2）？super XX:主要用于安全的写入数据，可以写入X及其子类。
-Generic<? super AB> str=new Generic<>();
-str.setData(new A());//不能这样设置
-str.setData(new AB());//只能是他本身或其子类
-str.getData();//可以获取
+●07.通配符类型，只在方法参数以及成员变量中使用，不能在类中使用，比较懵逼，可以从是否能安全转型来理解。
+1）? extends XX:规定了表示传递个方法的参数，必须是XX的子类，主要用于安全的访问数据，可以访问X及其子类型，并且不能写入非空数据
+public void print(GenericType<? extends XX> type){}//传入的参数只能是XX以及他的子类
+
+GenericType<? extends XX> type=new GenericType<>();
+type.setData(new Child());//不能这样设置，传入的子类具体是哪个是不确定的。
+type.getData();//可以获取
+
+2）？super XX:必须是xx的超类，主要用于安全的写入数据，可以写入X及其子类。
+public void print(GenericType<? supper XX> type)//传入的参数只能是XX以及他的超类
+
+GenericType<? super XX> type=new GenericType<>();
+type.setData(new XXX());//不能设置为XX的父类，和作为参数时，不一样啊，这个，，，没办法，只能记住了。
+type.setData(new AB());//只能是他本身或其子类
+Object data=type.getData();//可以获取，但获取的是object对象
+
+或者可以这么理解，set的时候因为XX及其子类可能存在父类没有的方法，所以父类不能安全转型成XX，所以不让设置没所以取得时候，取出来的是Object对象。
 
 3）无限通配符：?，表示对类型没有限制，当成object理解就行了，调用getFist返回的是object类型，setFist不能被调用。
 

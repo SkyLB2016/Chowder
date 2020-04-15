@@ -5,7 +5,7 @@ import android.util.Pair;
 import com.sky.oa.model.A;
 import com.sky.oa.model.AB;
 import com.sky.oa.model.Employe;
-import com.sky.oa.model.Generic;
+import com.sky.oa.model.GenericType;
 import com.sky.oa.thread.JoinThread;
 import com.sky.oa.thread.MyThread;
 import com.sky.sdk.utils.LogUtils;
@@ -32,9 +32,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class JavaConsole {
 
@@ -84,12 +82,12 @@ public class JavaConsole {
 //        ExcelPOiUtils.initExcelAndXLSX(filePath, sheetName, columnTitles);
 
 
-        Generic<A> a=new Generic<>();
-        Generic<AB> b=new Generic<>();
+        GenericType<A> a=new GenericType<>();
+        GenericType<AB> b=new GenericType<>();
 //        print(a);
         print(b);
-        Generic<? extends A> str=new Generic<>();
-//        str.setData(new AB());
+        GenericType<? super A> str=new GenericType<>();
+        str.setData(new AB());
         str.getData();
 
         List<?> list =new ArrayList<>();
@@ -100,7 +98,7 @@ public class JavaConsole {
 
     }
 
-    public static void print(Generic<? extends AB> a) {
+    public static void print(GenericType<? extends AB> a) {
         System.out.println(a.getData().getName());
 
     }
