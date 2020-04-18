@@ -47,6 +47,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.FutureTask;
 import java.util.concurrent.locks.ReentrantLock;
 
 import butterknife.BindView;
@@ -131,15 +132,20 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
 
     private void testMethod() {
 
+//        FutureTask
+    }
+
+    //获取程序启动时打开的线程数量
+    private void startThreadNum() {
         LogUtils.i("核心数==" + Runtime.getRuntime().availableProcessors());
         LogUtils.i("thread==" + Thread.currentThread().getName());
         Map<Thread, StackTraceElement[]> map = Thread.getAllStackTraces();
         for (Map.Entry<Thread, StackTraceElement[]> entry : map.entrySet()) {
             LogUtils.i("thread==" + entry.getKey().getName());
         }
-
     }
 
+    //获取类的加载器
     private void getCLoader() {
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
         LogUtils.i("classLoader==" + classLoader);
