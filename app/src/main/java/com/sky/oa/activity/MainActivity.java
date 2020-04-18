@@ -46,6 +46,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
 
 import butterknife.BindView;
@@ -114,22 +115,29 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fab.setVisibility(View.GONE);
-                fabLeft.setVisibility(View.VISIBLE);
+//                fab.setVisibility(View.GONE);
+//                fabLeft.setVisibility(View.VISIBLE);
                 testMethod();
             }
         });
-        fabLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fabLeft.setVisibility(View.GONE);
-                fab.setVisibility(View.VISIBLE);
-                testMethod();
-            }
-        });
+//        fabLeft.setOnClickListener(v -> {
+//            fabLeft.setVisibility(View.GONE);
+//            fab.setVisibility(View.VISIBLE);
+//            testMethod();
+//        });
+        fabLeft.setVisibility(View.GONE);
+        testMethod();
     }
 
     private void testMethod() {
+
+        LogUtils.i("核心数==" + Runtime.getRuntime().availableProcessors());
+        LogUtils.i("thread==" + Thread.currentThread().getName());
+        Map<Thread, StackTraceElement[]> map = Thread.getAllStackTraces();
+        for (Map.Entry<Thread, StackTraceElement[]> entry : map.entrySet()) {
+            LogUtils.i("thread==" + entry.getKey().getName());
+        }
+
     }
 
     private void getCLoader() {
