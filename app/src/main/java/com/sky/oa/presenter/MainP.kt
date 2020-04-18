@@ -10,6 +10,7 @@ import com.sky.oa.model.ActivityModel
 import com.sky.oa.model.PoetryEntity
 import com.sky.sdk.utils.FileUtils
 import com.sky.sdk.utils.LogUtils
+import com.sky.sdk.utils.SPUtils
 import java.text.Collator
 import java.util.*
 
@@ -69,6 +70,7 @@ class MainP(context: Context) : BasePresenter<IMainView>(context) {
 //                name = name.substring(index + 1, name.length)
 //                activityInfo.activityName = name
 //            }
+            SPUtils.getInstance().getValue(activityInfos.get(0))
             return activityInfos
         }
     private val comparator = Comparator<ActivityModel> { first, second ->

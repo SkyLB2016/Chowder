@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -45,6 +46,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.locks.ReentrantLock;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -128,16 +130,44 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
     }
 
     private void testMethod() {
-//        handler.sendEmptyMessage(1);
-//                equalPoetry();
-//        requestWriteSettings();
-        getEnvironment();
+    }
+
+    private void getCLoader() {
+        ClassLoader classLoader = ClassLoader.getSystemClassLoader();
+        LogUtils.i("classLoader==" + classLoader);
+        classLoader = classLoader.getParent();
+        LogUtils.i("classLoader==" + classLoader);
+        classLoader = classLoader.getParent();
+        LogUtils.i("classLoader==" + classLoader);
+        classLoader = getClassLoader();
+        LogUtils.i("classLoader==" + classLoader);
+    }
+
+    private void testM() {
         ApiResponse<String>[] response = new ApiResponse[2];
         ApiResponse<String> ap = new ApiResponse<String>();
         ap.setObj("dddddfdfd====");
         response[0] = ap;
         LogUtils.i(response[0].getObj());
         Integer[] integers = new Integer[2];
+        List<Number> list = new ArrayList<>();
+        list.add(1.8);
+
+
+        ReentrantLock lock = new ReentrantLock();
+        lock.newCondition();
+        AsyncTask<String, String, String> task = new AsyncTask<String, String, String>() {
+            @Override
+            protected String doInBackground(String... strings) {
+                return null;
+            }
+        };
+    }
+
+    ApiResponse<? extends Comparable> apiResponse;
+
+    public void aa(ApiResponse<? extends Comparable> apiResponse) {
+
     }
 
     private void getEnvironment() {
@@ -152,7 +182,6 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         if (!file.exists()) {
             LogUtils.i("创建文件==失败");
         }
-
 //        LogUtils.i("lujin==" + Environment.getDataDirectory());
 //        LogUtils.i("lujin==" + Environment.getDownloadCacheDirectory());
 //        LogUtils.i("lujin==" + Environment.getRootDirectory());

@@ -42,6 +42,10 @@ import com.sky.oa.other.factory.abstractfactory.HNFactory
 import com.sky.oa.other.factory.abstractfactory.MCFctory
 import com.sky.oa.other.factory.factory.HairFactory
 import com.sky.oa.other.factory.factory.hair.LeftHair
+import com.sky.oa.proxy.Cuthair
+import com.sky.oa.proxy.DynamicProxy
+import com.sky.oa.proxy.Hair
+import com.sky.oa.proxy.StaticProxy
 import com.sky.oa.utils.EmulatorDetector
 import com.sky.oa.utils.http.HttpUrl
 import com.sky.sdk.net.http.ApiResponse
@@ -73,7 +77,8 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
             , "SVG与Value", "渐变的文字", "音频处理", "字符串转id"
             , "排序算法", "LinkedList使用"
             , "MD5加密", "科学计数法", "虚拟机鉴定", "获取当前方法的名称"
-            , "输出View的位置信息", "URL的结构"
+            , "输出View的位置信息", "URL的结构", "静态代理",
+            "动态代理"
         )
         for (i in method) {
             val tvText =
@@ -113,6 +118,8 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
             "科学计数法" -> format("0")
             "输出View的位置信息" -> outPutViewParameter(v)
             "URL的结构" -> getURL()
+            "静态代理" -> staticProxy()
+            "动态代理" -> dynamicProxy()
             else -> ""
         }
         image.visibility = View.GONE
@@ -128,6 +135,21 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
             "虚拟机鉴定" -> detectEmulatorSimple()
             "获取当前方法的名称" -> getMethodName()
         }
+    }
+
+
+    private fun staticProxy(): String {
+        val hair = Cuthair()
+        val proxy = StaticProxy(hair)
+        return proxy.cutHait(30)
+    }
+
+    private fun dynamicProxy(): String {
+        val hair = Cuthair()
+        val company = DynamicProxy()
+        company.factory = hair
+        val factory = company.proxyInstance as Hair
+        return factory.cutHait(20)
     }
 
     /**
@@ -536,7 +558,12 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
         start = span.length
         span.append("日月盈昃，辰宿列张。\n")
         end = span.length
-        span.setSpan(ForegroundColorSpan(getColor(R.color.color_3599f4)), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//字体颜色
+        span.setSpan(
+            ForegroundColorSpan(getColor(R.color.color_3599f4)),
+            start,
+            end,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )//字体颜色
 
         start = span.length
         span.append("寒来暑往，秋收冬藏。\n")

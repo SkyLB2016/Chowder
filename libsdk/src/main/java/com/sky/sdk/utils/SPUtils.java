@@ -125,7 +125,8 @@ public class SPUtils {
     public Map<String, Object> getValue(Object obj) {
         Map<String, Object> map = new HashMap();
         try {
-            Class cla = Class.forName(obj.getClass().getName());//获取类名
+//            Class cla = Class.forName(obj.getClass().getName());//获取类名
+            Class cla = obj.getClass();//获取类名
 //            Field[] fields = cla.getDeclaredFields();
             Method[] methods = cla.getMethods();//获取类中的方法
             for (Method method : methods) {
@@ -138,8 +139,8 @@ public class SPUtils {
                 key = key.substring(0, 1).toLowerCase() + key.substring(1);//首字母小写化
                 map.put(key, method.invoke(obj));
             }
-        } catch (ClassNotFoundException e) {
-            LogUtils.d(e.toString());
+//        } catch (ClassNotFoundException e) {
+//            LogUtils.d(e.toString());
         } catch (IllegalAccessException e) {
             LogUtils.d(e.toString());
         } catch (InvocationTargetException e) {
