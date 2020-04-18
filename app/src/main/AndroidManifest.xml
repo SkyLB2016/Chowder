@@ -61,7 +61,7 @@
         <!--拍照时使用-->
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.sky.oa.fileprovider"
+            android:authorities="${applicationId}.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
