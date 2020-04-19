@@ -47,6 +47,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -131,7 +132,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
     }
 
     private void testMethod() {
-
+        LogUtils.i("核心数=="+Runtime.getRuntime().availableProcessors());
 //        FutureTask
     }
 
@@ -184,6 +185,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
                 return null;
             }
         };
+        task.execute("");
     }
 
     ApiResponse<? extends Comparable> apiResponse;

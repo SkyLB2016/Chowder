@@ -206,7 +206,7 @@ FutureTask -> RunnableFuture -> Runnable,Future
 而且让出后有可能又会被立刻选中进入执行状态，因为线程切换（上下文切换），其他线程都需要重新加载。
 8）sleep() 让出CPU，进入阻塞状态。不会释放锁。
 
-等待与通知，是线程调用所在对象调用的wait与notify/notifyAll。
+等待与通知，是线程调用所在对象调用的wait与notify/notifyAll。只能在synchronized修饰的方法内使用。
 9）wait()  等待通知或被中断才会返回，让出CPU，释放锁。
 9）wait(long)  等待通知或被中断才会返回，让出CPU，释放锁。超时返回
 9）wait(long,int纳秒)  等待通知或被中断才会返回，让出CPU，释放锁。超时返回，
@@ -265,7 +265,7 @@ ReentrantReadWriteLock 读的时候可以多条线程一起读，但是不能写
 3）await(long,TimeUnit)
 4）awaitNanos(long)
 5）awaitUntil(date)
-5）signal() 通知单个，推荐使用的
+5）signal() 通知单个，推荐使用的，因为可以定点唤醒。
 5）signalAll() 多通知全部
 
 线程池原理
@@ -274,7 +274,7 @@ ReentrantReadWriteLock 读的时候可以多条线程一起读，但是不能写
 2）提高响应速度。因为线程已创建，所以可以立即执行新加入的任务，不过满了，就得等着了。
 3）提高线程的可管理性。线程启动内存缺省一兆大小，启动太多，不仅会消耗系统资源，还降低系统的稳定性，使用线程池进行统一分配、调优和监控。
 
-●02.JDK中的线程池和工作机制
+●02.JDK中的线程池的创建
 public ThreadPoolExecutor(int corePoolSize,int maximumPoolSize,long keepAliveTime,TimeUnit unit,BlockingQueue<Runnable> workQueue,ThreadFactory threadFactory,RejectedExecutionHandler handler)
 1）corePoolSize    默认核心线程的数量，默认是未创建的。但是当线程池执行了prestartAllCoreThreads()方法后，会提前创建并启动所有核心线程。
 2）maximumPoolSize 允许最大线程的数量，当队列workQueue满了之后，继续提交任务，就会创建新的线程。
@@ -284,13 +284,21 @@ public ThreadPoolExecutor(int corePoolSize,int maximumPoolSize,long keepAliveTim
 6）threadFactory   创建线程的工厂
 7）handler         饱和策略，默认是抛出异常。最大线程满载时还提交任务，就会抛出。
 
-●03.什么是队列？
+●03.线程池的工作机制
+1）生产者提交任务，默认最大核心线程为达到最大时，创建新线程执行任务。
+2）默认核心线程达到最大时，就往workQueue阻塞队列中添加。
+3）workQueue也达到最大时，开始创建新的线程，直到最大支持的线程数为止。
+4）如还有任务提交，执行线程池的饱和策略RejectedExecutionHandler，默认的是直接抛出异常。
+
+execute(Runnable)无返回值，需要返回值的话，用submit(Runnable)
+
+●04.什么是队列？
 队列是一种特殊的线性表，特殊之处在于它只允许在标的前端（front）进行删除操作，而在表的后端（rear）进行插入操作，和栈一样，队列是一种操作受限制的线性表。
 进行插入操作的端成为队尾，进行删除操作的端称为队头。队列中没有元素时，称为空队列。
 队列的数据元素又称为队列元素。在队列中插入一个队列元素称为入队，从队列中删除一个队列元素称为出队。因为队列只允许在一段插入，在另一端删除，所以只有最早进入队列的元素才能最先从队列中删除，故队列又称为先进先出线性表。
 FIFO--first in first out
 
-●04.阻塞队列
+●05.阻塞队列
 1）支持阻塞的插入方法：意思是当队列满时，队列额会阻塞插入元素的线程，知道队列不满。
 2）支持阻塞的移除方法：意思是在队列为空时，获取元素的线程会等待队列变为非空。
 
@@ -313,68 +321,93 @@ FIFO--first in first out
 当队列空时，消费者线程take元素，队列会阻塞消费者线程，直到队列不为空。
 
 常用阻塞队列：
-ArrayBlockingQueue：一个有数组结构组成的有界阻塞队列。
-LinkedBlockingQueue：一个由链表结构组成的有界阻塞队列。
+ArrayBlockingQueue：一个有数组结构组成的有界阻塞队列。主要
+LinkedBlockingQueue：一个由链表结构组成的有界阻塞队列。主要
 PriorityBlockingQueue：一个支持优先级排序的无界阻塞队列。
 DelayQueue：一个使用优先级队列实现的无界阻塞队列。
-SynchronousQueue：一个不存储元素的阻塞队列。
+SynchronousQueue：一个内部只包含一个元素的阻塞队列。
 LinkedTransferQueue：一个由链表结构组成的无界阻塞队列。
 LinkedBlockingDeque：一个由链表结构组成的双向阻塞队列。
 
-●05.ThreadFactory 创建线程的工厂
+●06.ThreadFactory 创建线程的工厂
 Executors静态工厂里默认的threadFactory线程的命名规则是：pool-数字-thread-数字
 
-●06.饱和策略 RejectedExcutionHandler
+●07.饱和策略 RejectedExecutionHandler
 阻塞队列满了，工作线程满载，如果继续提交任务，必须采取一种策略处理该任务，线程池提供了四种策略。
 1）AbortPolicy：直接抛出异常，默认策略。
 2）CallerRunsPolicy：用生产者自身线程来执行任务。
 3）DiscardOldestPolicy：丢弃阻塞队列中最靠前的任务，并执行当前任务。
 4）DiscardPolicy：直接丢弃该任务。
-5）自己实现RejectedExcutionHandler接口，自定义饱和策略，如记录日志或持久化存储不能处理的任务。
+5）自己实现RejectedExecutionHandler接口，自定义饱和策略，如记录日志或持久化存储不能处理的任务。
 
-●0.
-1）
-2）
-3）
-4）
-5）
+●08.合理配置线程池
+需要分析任务特性。
+1）任务的性质：CPU密集型（计算相关）；IO密集型（IO流）；混合型
+2）任务的优先级：高中低
+3）任务的执行时间：长中短。
+4）任务的依赖性：是否依赖其他系统资源，如本地文件，数据库。
 
-●0.
-1）
-2）
-3）
-4）
-5）
+CPU密集型：计算相关，所以快，应该配置尽可能少的线程，防止线程切换造成的资源浪费。配置：cpu核心数+1
+IO密集型：涉及io操作，执行时间一般较长，可以多配置一些。通常：2*cpu核心数+1
+混合型：两者执行时间相差不大那就拆分开，变成两个任务去执行，一定比两者串行要快；相差过大，那就无所谓了。
 
-●0.
-1）
-2）
-3）
-4）
-5）
+Runtime.getRuntime().availableProcessors() 当前可有的逻辑核心数
 
-●0.
-1）
-2）
-3）
-4）
-5）
+●09.AsyncTask
+1）onPreExecute()  准备工作，如显示进度条可以在此初始化。
+2）doInBackground(params)  异步任务，只有此方法是执行在子线程中，在onPreExecute之后立即执行。
+3）onProgressUpdate(values)  可在此设置进度条的更新，需要在doInBackground()中调用publishProgress()方法
+4）onPostExecute(result)  异步任务完成后返回的结果。
 
-●0.
-1）
-2）
-3）
-4）
-5）
+AsyncTask创建的其实只是一个任务，然后把这个任务加入到线程池中。内部的线程池都是静态，类加载的时候就已经确定了。
 
-●0.
-1）
-2）
-3）
-4）
-5）
+10.0系统下AsyncTask的实现过程：
+第一步：创建AsyncTask，并把任务加入任务池中；
+new AsyncTask()时，新建了一个Callable，一个FutureTask，在execute("")时放入一个任务池中，其中会执行onPreExecute()方法。
+如下：
+mStatus = Status.RUNNING;//变为运行状态，之前有状态检查，如果已经运行了，会抛出异常，所以execute只能调用一次。
+onPreExecute();//执行准备方法
+mWorker.mParams = params;//为Callable设置参数。
+exec.execute(mFuture);//把FutureTask加入任务池中，开始执行。
 
-●0.
+第二步：放入任务池后，开始轮循取出任务，交给线程池，开始执行；
+private static volatile Executor sDefaultExecutor = SERIAL_EXECUTOR;
+此成员变量是个任务池，内部有一个双端队列ArrayQueue（最大16个元素）；
+在execute()方法中通过offer将任务加入队列中，紧接着调用scheduleNext()方法，通过poll取出任务加入线程池执行。
+
+第三步：开始调用call方法
+然后开始执行Callable中的call方法，其中会调用doInBackground(params)方法。
+完成后返回结果，在FutureTask中的done方法中获取，通过postResultIfNotInvoked(result)方法传递给Handler；
+在handlermessage调用AsyncTask的finish()方法返回result，其中会调用onPostExecute(result)方法。
+
+public static final Executor THREAD_POOL_EXECUTOR;
+此成员变量就是线程池，10.0系统下，此线程池内的队列使用的是SynchronousQueue，一个只有一个元素的阻塞队列，
+一个核心线程，20的最大线程数，一个元素的阻塞队列，加一个容器16的数组一共最大可添加37个任务，之后再添加会执行饱和策略。
+
+10.0系统下的饱和策略是在创建一个线程池，来容纳多出来的任务，此线程池采用了链表LinkedBlockingQueue，默认上限，默认开启5个核心线程，最大也只开5个。
+
+●10.AsyncTask的优缺点
+优点：AsyncTask是一个轻量级的异步任务处理类，轻量级体现在：使用方便，代码简洁，而且整个异步任务可以通过cancel()进行控制
+缺点：不适用于处理长时间的异步任务，一般这个任务过程最好控制在几秒以内，如果超时间的异步任务就需要考虑多线程的控制问题，当处理多个异步任务时，UI更新变得困难。
+
+●11.Handler的优缺点
+优点：代码结构清晰，容易处理多个异步任务。
+缺点：当有多个异步任务时，由于要配合Thread或Runnable，代码可能会稍显冗余。
+
+总结：AsyncTask不失为一个非常好用的异步任务处理类，只要不是频繁对大量UI进行更新，可以考虑使用。
+而Handler在处理大量UI更新时可以考虑使用。
+
+●12.CAS
+什么是原子操作？如何实现原子操作？
+原子操作就是顺序操作，不能交叉，只有执行完A，才执行B，或者反过来。
+锁机制就保证了原子操作。
+
+实现原子操作还可以使用当前处理器支持的CAS()指令;
+每一个CAS操作过程都包含三个运算符，内存地址V，一个期望值A（旧值），新值B，如果内存地址上放的值等于A，则将地址上的值赋为新值B，否则不作操作。
+循环CAS，就是一个循环里不断做CAS操作直到成功。
+加上Volatile变量的特性就可实现基于原子操作的线程安全。
+
+●13.
 1）
 2）
 3）

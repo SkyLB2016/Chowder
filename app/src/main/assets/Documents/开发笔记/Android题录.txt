@@ -230,11 +230,6 @@ init进程：是所有用户（App）进程的父进程（或者父父进程）
 
 5）就算Thread的run方法加上synchronized，但是创建的是两个对象，也就是两个锁，两个锁会交替争抢CPU资源，谁抢到谁执行；没有锁也是一样，所以可以不加锁。
 
-●37.AsyncTask
-1）onPreExecute() 执行后台耗时操作前被调用，完成一些初始化操作
-2）doInBackground(vararg params: String):异步任务，并且asyncTask中只有他是异步任务，其他都不是；必须重写
-3）onProgressUpdate(vararg values: Void):可在此设置进度条更新，在doInBackground()中调用publishProgress()
-4）onPostExecute(bitmap: Bitmap)：完成后，系统自动调用，在此更新UI
 
 ●38.简述TCP,UDP,Socket
 1）TCP是经过3次握手，4次挥手完成遗传数据的传递。
