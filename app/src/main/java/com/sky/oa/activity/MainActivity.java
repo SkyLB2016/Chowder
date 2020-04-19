@@ -47,7 +47,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.FutureTask;
+import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import butterknife.BindView;
@@ -135,6 +135,14 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
 //        FutureTask
     }
 
+    static ThreadLocal<Integer> local = new ThreadLocal<Integer>() {
+        @Nullable
+        @Override
+        protected Integer initialValue() {
+            return super.initialValue();
+        }
+    };
+
     //获取程序启动时打开的线程数量
     private void startThreadNum() {
         LogUtils.i("核心数==" + Runtime.getRuntime().availableProcessors());
@@ -168,7 +176,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         list.add(1.8);
 
 
-        ReentrantLock lock = new ReentrantLock();
+        Lock lock = new ReentrantLock();
         lock.newCondition();
         AsyncTask<String, String, String> task = new AsyncTask<String, String, String>() {
             @Override
