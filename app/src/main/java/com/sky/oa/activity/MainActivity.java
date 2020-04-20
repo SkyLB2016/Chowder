@@ -45,6 +45,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.RejectedExecutionHandler;
@@ -132,8 +133,9 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
     }
 
     private void testMethod() {
-        LogUtils.i("核心数=="+Runtime.getRuntime().availableProcessors());
+//        LogUtils.i("核心数=="+Runtime.getRuntime().availableProcessors());
 //        FutureTask
+
     }
 
     static ThreadLocal<Integer> local = new ThreadLocal<Integer>() {
