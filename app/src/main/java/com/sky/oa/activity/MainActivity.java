@@ -150,6 +150,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
     private void startThreadNum() {
         LogUtils.i("核心数==" + Runtime.getRuntime().availableProcessors());
         LogUtils.i("thread==" + Thread.currentThread().getName());
+        //MainActivity启动完成后，有多少个线程启动了。
         Map<Thread, StackTraceElement[]> map = Thread.getAllStackTraces();
         for (Map.Entry<Thread, StackTraceElement[]> entry : map.entrySet()) {
             LogUtils.i("thread==" + entry.getKey().getName());
