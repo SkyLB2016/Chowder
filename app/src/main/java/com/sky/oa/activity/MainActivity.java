@@ -44,6 +44,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -54,6 +55,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dalvik.system.DexFile;
 
 /**
  * Created by libin on 2018/11/13 4:26 PM.
@@ -135,7 +137,21 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
     private void testMethod() {
 //        LogUtils.i("核心数=="+Runtime.getRuntime().availableProcessors());
 //        FutureTask
-
+//        DexFile
+        int count = 0;
+        SoftReference<List> softReference = new SoftReference<>(new ArrayList());
+        try {
+            while (true) {
+                count++;
+                if (count % 10000000 == 0)
+                    LogUtils.i("count==" + count);
+                softReference.get().add(new Object());
+            }
+        } catch (OutOfMemoryError e) {
+            LogUtils.i("count==" + count);
+//            LogUtils.i("count==" + s
+//            oftReference.isEnqueued());
+        }
     }
 
     static ThreadLocal<Integer> local = new ThreadLocal<Integer>() {
