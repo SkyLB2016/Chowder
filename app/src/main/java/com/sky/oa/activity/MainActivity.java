@@ -131,27 +131,12 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
 //            testMethod();
 //        });
         fabLeft.setVisibility(View.GONE);
-        testMethod();
     }
 
     private void testMethod() {
 //        LogUtils.i("核心数=="+Runtime.getRuntime().availableProcessors());
 //        FutureTask
 //        DexFile
-        int count = 0;
-        SoftReference<List> softReference = new SoftReference<>(new ArrayList());
-        try {
-            while (true) {
-                count++;
-                if (count % 10000000 == 0)
-                    LogUtils.i("count==" + count);
-                softReference.get().add(new Object());
-            }
-        } catch (OutOfMemoryError e) {
-            LogUtils.i("count==" + count);
-//            LogUtils.i("count==" + s
-//            oftReference.isEnqueued());
-        }
     }
 
     static ThreadLocal<Integer> local = new ThreadLocal<Integer>() {
