@@ -343,3 +343,19 @@ Android4.4之前只能重用相同大小的bitmap的内存，而4.4及以后版�
 4）
 5）
 6）
+@所有人
+Android每日一题：v3签名key和v2还有v1有什么区别
+答：在v1版本的签名中，签名以文件的形式存在于apk包中，这个版本的apk包就是一个标准的zip包，V2和V1的差别是V2是对整个zip包进行签名，而且在zip包中增加了一个apk signature block，里面保存签名信息。
+v2版本签名块（APK Signing Block）本身又主要分成三部分:
+SignerData（签名者数据）：主要包括签名者的证书，整个APK完整性校验hash，以及一些必要信息
+Signature（签名）：开发者对SignerData部分数据的签名数据
+PublicKey（公钥）：用于验签的公钥数据
+v3版本签名块也分成同样的三部分，与v2不同的是在SignerData部分，v3新增了attr块，其中是由更小的level块组成。每个level块中可以存储一个证书信息。前一个level块证书验证下一个level证书，以此类推。最后一个level块的证书，要符合SignerData中本身的证书，即用来签名整个APK的公钥所属于的证书
+
+Android4月20日题：isAssignableFrom 与 instanceof 的区别
+参考答案：isAssignableFrom是用来判断一个类Class1和另一个类Class2是否相同或是另一个类的超类或接口。
+
+instanceof是用来判断一个对象实例是否是一个类或接口的或其子类子接口的实例。
+
+今日八点课题：组件路由框架核心原理—APT、Gradle、字节码插桩全都要有
+课程链接：https://ke.qq.com/course/341933

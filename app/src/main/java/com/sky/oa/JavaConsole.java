@@ -65,13 +65,6 @@ public class JavaConsole {
 //        System.out.println((1 << 30) - 1);
 //        System.out.println(Math.pow(2, 30));
 //        System.out.println(Math.pow(2, 30) - 1);
-        //银黄含化滴丸
-        //玉屏风颗粒
-        //糠酸莫米松鼻喷雾剂
-        //安宁藻肠溶软胶囊
-        //氯雷他定片
-        //孟鲁司特钠片
-
 //        excelColor();
         Employe employe = new Employe("李彬", "001", "dept", "mobile", "date");
         getValue(employe);
@@ -82,18 +75,18 @@ public class JavaConsole {
 //        ExcelPOiUtils.initExcelAndXLSX(filePath, sheetName, columnTitles);
 
 
-        GenericType<A> a=new GenericType<>();
-        GenericType<AB> b=new GenericType<>();
+        GenericType<A> a = new GenericType<>();
+        GenericType<AB> b = new GenericType<>();
 //        print(a);
         print(b);
-        GenericType<? super A> str=new GenericType<>();
+        GenericType<? super A> str = new GenericType<>();
         str.setData(new AB());
         str.getData();
 
-        List<?> list =new ArrayList<>();
+        List<?> list = new ArrayList<>();
 //        list.add("");
         list.get(0);
-        Pair<String,String> pair =new Pair<>("头部","尾部");
+        Pair<String, String> pair = new Pair<>("头部", "尾部");
 
 
     }

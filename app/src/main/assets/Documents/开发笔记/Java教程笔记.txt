@@ -98,14 +98,18 @@ Java教程笔记
 5）InputStreamReader将InputStream转化成Reader
 6）OutputStreamWriter将OutputStream转化成Writer
 
-●14.强引用，软引用，弱引用，虚引用
-1）强引用：直接赋值的引用
-2）软引用：直接赋值后，使用SoftReference包装，一般会结合ReferenceQueue（引用队列）来使用，内存不足时回收，软引用被回收后，才会被加载（关联）到引用队列中。
-软引用可用来实现内存敏感的高速缓存，如内存中缓存图片
-3）弱引用：直接赋值后，使用WeakReference包装，一般会结合ReferenceQueue（引用队列）来使用，发现即回收，弱引用被回收后，才会被加载（关联）到引用队列中。
-通常用于debug，内存监视工具等程序中。因为这类程序一般要求即要观察到对象，又不能影响该对象正常的CG过程。
-4）虚引用：直接赋值后，用PhantomReference包装，必须与ReferenceQueue联合使用。随时回收，回收之前就已经被放到了与之关联的引用队列之中。
-5）String  abc = abcWeakRef.get();相当于强引用
+●14.引用方式有几种？四种，分别是
+1）强引用：直接用等号（=）赋值的引用方式。
+
+2）软引用：使用 SoftReference 包装的引用，内存不足时，就会被回收；通常会结合ReferenceQueue（引用队列）来使用，再被内存回收后，会被加载到队列中。
+通常可用来实现内存敏感的高速缓存，如内存中的图片缓存。
+
+3）弱引用：使用 WeakReference 包装的引用，GC发现了就会回收。也会结合ReferenceQueue来使用。
+通常用于debug，内存见识工具等程序中。因为这类程序一般要求纪要观察到对象，又不能影响该对象正常的GC过程。
+
+4）虚引用：使用 PhantomReference 包装，必须与ReferenceQueue联合使用。随时回收，而且他是回收前，就已经被放到关联队列中了。
+
+5）String abc = soft.get(); 相当于强引用
 
 ●15.Java内存优化
 1）释放连接
