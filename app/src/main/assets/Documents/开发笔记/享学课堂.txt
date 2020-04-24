@@ -778,12 +778,39 @@ GC收集器和我们GC条有的目标就是尽可能的减少STW的时间和次�
 1.有色指针（Colored Pointers）
 2.加载屏障（Load Barrier）
 
-●0.
-1）
-2）
-3）
-4）
-5）
+
+ClassLoader
+●01.什么是Dalvik？虚拟机
+Dalvik 是Google公司自己设计用于Android平台的java虚拟机。支持已转换为.dex(Dalvik Executable)格式的Java应用程序的运行。
+.dex 格式是专为Dalvik应用设计的一种压缩格式，适合内存和处理器速度有限的系统。
+
+●02.什么是ART？用来替换Dalvik的虚拟机
+Android Runtime ，4.4中引入的一个ART运行时，5.0以后的就是ART虚拟机。
+在应用安装的时候Ahead-Of-Time(AOT)预编译字节码到机器语言，这一机制叫Ahead-Of-Time(AOT)预编译。
+应用程序安装会变慢（确实很慢），但是执行将更有效率，启动更快。
+
+●03.Dalvik与ART的关系？或者说优缺点？
+1）Dalvik是在4.4之前使用的虚拟机，ART是5.0之后使用的虚拟机。
+2）在Dalvik上，应用启动运行时需要解释运行，常用的热点代码通过即时编译器（JIT）将字节码转换为机器码，运行效率低。
+3）在ART上，应用安装时，字节码预编译（AOT）成机器码，安装慢了，但启动快了。运行效率高。
+4）ART占用的空间比Dalvik大（字节码变为机器码，怪不得那些个App下载的时候那么小，安装后那么大）空间换时间
+5）AOT也可以明显改善电池续航，因为程序不用每次运行时重复编译了，从而减少CPU使用频率，降低了电耗。
+
+●04. .dex files 与 .oat files
+1）dex opt：对dex文件进行验证和优化为 odex（Optimized dex）文件，Dalvik上运行的就是odex文件。
+2）dex AOT：在安装时对dex文件执行dexopt优化之后，再将odex进行AOT预编译操作，便以为 OAT 可执行文件（ELF File 机器码）。
+
+●05.ClassLoader Java类加载器
+1）BootClassLoader：用于加载Android Framework层class文件，例如Activity.class类
+2）PathClassLoader：用于Android应用程序的类加载器，如Activity.class的子类，只要不是framework蹭的都是，Googlejar类的也只这个加载器加载的。
+3）DexClassLoader：加载指定的dex，以及jar、zip、apk中的classes.dex 文件。
+
+●06.双亲委托机制
+某个类加载器在加载类时，首先将加载任务委托给父类加载器，依次递归，如果父类加载器可以完成类加载任务，就成功返回；不能或没有父类，就自己加载。
+
+●07.热修复：尼玛原来这么简单的啊。
+利用的就是反射获取ClassLoader，把指定的 dex 文件插入 DexPathList 中，必须插在有问题的dex之前。类信息是按顺序加载的，且只会获取一次，只有就算有重名的，也不会再加载。
+gradle开发：插桩+自动生成Dex。
 
 ●0.
 1）
@@ -791,42 +818,48 @@ GC收集器和我们GC条有的目标就是尽可能的减少STW的时间和次�
 3）
 4）
 5）
-
 ●0.
 1）
 2）
 3）
 4）
 5）
-
 ●0.
 1）
 2）
 3）
 4）
 5）
-
 ●0.
 1）
 2）
 3）
 4）
 5）
-
 ●0.
 1）
 2）
 3）
 4）
 5）
-
 ●0.
 1）
 2）
 3）
 4）
 5）
-
+●0.
+1）
+2）
+3）
+4）
+5）
+●0.
+1）
+2）
+3）
+4）
+5）
 ●0.
 1）
 2）

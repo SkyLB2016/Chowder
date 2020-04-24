@@ -1,6 +1,7 @@
 package com.sky.oa.activity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
@@ -18,14 +19,18 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.ComponentActivity;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.sky.design.adapter.RecyclerAdapter;
+import com.sky.design.app.BaseActivity;
 import com.sky.design.app.BasePActivity;
 import com.sky.oa.R;
 import com.sky.oa.Solution;
@@ -127,7 +132,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
 //            testMethod();
 //        });
         fabLeft.setVisibility(View.GONE);
-
+        getCLoader();
     }
 
     private void testMethod() {
@@ -161,14 +166,27 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
 
     //获取类的加载器
     private void getCLoader() {
-        ClassLoader classLoader = ClassLoader.getSystemClassLoader();
-        LogUtils.i("classLoader==" + classLoader);
+        ClassLoader classLoader = getClassLoader();
+        LogUtils.i("默认的classLoader==" + classLoader);
+        classLoader = ClassLoader.getSystemClassLoader();
+        LogUtils.i("系统的classLoader==" + classLoader);
         classLoader = classLoader.getParent();
-        LogUtils.i("classLoader==" + classLoader);
+        LogUtils.i("系统父类的classLoader==" + classLoader);
         classLoader = classLoader.getParent();
-        LogUtils.i("classLoader==" + classLoader);
-        classLoader = getClassLoader();
-        LogUtils.i("classLoader==" + classLoader);
+        LogUtils.i("系统父类的父类的classLoader==" + classLoader);
+        classLoader = BaseActivity.class.getClassLoader();
+        LogUtils.i("BaseActivity的classLoader==" + classLoader);
+        classLoader = AppCompatActivity.class.getClassLoader();
+        LogUtils.i("AppCompatActivity的classLoader==" + classLoader);
+        classLoader = FragmentActivity.class.getClassLoader();
+        LogUtils.i("FragmentActivity的classLoader==" + classLoader);
+        classLoader = ComponentActivity.class.getClassLoader();
+        LogUtils.i("ComponentActivity的classLoader==" + classLoader);
+        classLoader = androidx.core.app.ComponentActivity.class.getClassLoader();
+        LogUtils.i("androidx.core.app.ComponentActivity的classLoader==" + classLoader);
+        classLoader = Activity.class.getClassLoader();
+        LogUtils.i("Activity的classLoader==" + classLoader);
+
     }
 
     private void testM() {
