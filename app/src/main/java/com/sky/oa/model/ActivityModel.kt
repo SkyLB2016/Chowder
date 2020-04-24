@@ -27,10 +27,10 @@ class ActivityModel(
      */
     override fun compareTo(model: ActivityModel): Int = activityName!!.compareTo(model.activityName!!)
 
-    override fun toString(): String {
-//        return "{\"activityName\":\"$activityName\",\"describe\":\"$describe\",\"img\":$img,\"componentName\":\"$componentName\"}"
-        return GsonUtils.toJson(this)
-    }
+//    override fun toString(): String {
+////        return "{\"activityName\":\"$activityName\",\"describe\":\"$describe\",\"img\":$img,\"componentName\":\"$componentName\"}"
+//        return GsonUtils.toJson(this)
+//    }
 
     override fun clone(): Any {
         val activity = super.clone() as ActivityModel

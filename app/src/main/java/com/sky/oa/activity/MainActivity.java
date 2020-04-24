@@ -44,18 +44,14 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.ref.SoftReference;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import dalvik.system.DexFile;
 
 /**
  * Created by libin on 2018/11/13 4:26 PM.
@@ -131,13 +127,18 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
 //            testMethod();
 //        });
         fabLeft.setVisibility(View.GONE);
+
     }
 
     private void testMethod() {
-//        LogUtils.i("核心数=="+Runtime.getRuntime().availableProcessors());
-//        FutureTask
-//        DexFile
     }
+
+    private <T> void printIdentity(T model) {
+        LogUtils.i("HashCode地址==" + model.hashCode());//hashcode
+        LogUtils.i("内存地址==" + System.identityHashCode(model));//内存地址
+        LogUtils.i("内存地址==" + model.toString());//内存地址
+    }
+
 
     static ThreadLocal<Integer> local = new ThreadLocal<Integer>() {
         @Nullable
@@ -227,8 +228,6 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         ArrayList<String> volumenames = new ArrayList<>(MediaStore.getExternalVolumeNames(this));
         String path1 = volumenames.get(0);
         LogUtils.i("path==" + path1);
-        List<String> lists = new ArrayList<>();
-        lists.add("");
 
     }
 
