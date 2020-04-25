@@ -65,14 +65,7 @@ orientation：屏幕方向变化
 1）功能复杂的话，MVC的activity或fragment会很庞大，view与model耦合严重
 2）功能复杂的话，MVP会产生很多接口，activity需要很多接口方法来更新UI，model与view不直接进行交互，达到解耦的效果
 
-●11.LRU算法的原理？
-LRU（Least Recently Used）最近最少使用，LRU使用的是LinkedHashMap，get、put、remove，队尾添加，队首移除；
-lru链表的顺序是LinkedHashMap中的accessOrder来控制的；LinkedHashMap中重写了get和afterNodeAccess方法；afterNodeAccess(e)是用来进行重排序的。
-每次调用get、put时，都会在队尾添加，如果put时内存缓存达到设定的最大值，将链表头部的对象移除。
-accessOrder默认为false，LruCache中创建LinkedHashMap时会设为true，此时get方法中会调用afterNodeAccess(e)；
-put方法中是在HashMap中调用的afterNodeAccess(e)；
-
-各版本代码稍有不同，但基本思想就是这样的。
+●11.
 
 ●12.IntentService和Service有什么区别？
 1）Service不是独立的进程，也不是独立的线程，他也是依赖于应用程序的主线程，可以说是没有界面的activity，后台执行，不建议在service中编写耗时的逻辑和操作，否则会ANR。

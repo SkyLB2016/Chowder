@@ -24,6 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.collection.LruCache;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,7 +45,6 @@ import com.sky.sdk.utils.AppUtils;
 import com.sky.sdk.utils.FileUtils;
 import com.sky.sdk.utils.JumpAct;
 import com.sky.sdk.utils.LogUtils;
-import com.sky.sdk.utils.SPUtils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -52,6 +52,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
@@ -137,9 +138,11 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
     }
 
     private void testMethod() {
+        String a = "a", b = a, g = b;
+    }
 
+    private void getArrayListLength() {
         ArrayList<Integer> list = new ArrayList();
-        int count = 1;
         int size = 10;
         for (int i = 0; i < 1500; i++) {
             list.add(i);
