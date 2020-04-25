@@ -44,11 +44,13 @@ import com.sky.sdk.utils.AppUtils;
 import com.sky.sdk.utils.FileUtils;
 import com.sky.sdk.utils.JumpAct;
 import com.sky.sdk.utils.LogUtils;
+import com.sky.sdk.utils.SPUtils;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -132,16 +134,41 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
 //            testMethod();
 //        });
         fabLeft.setVisibility(View.GONE);
-        getCLoader();
     }
 
     private void testMethod() {
+
+        ArrayList<Integer> list = new ArrayList();
+        int count = 1;
+        int size = 10;
+        for (int i = 0; i < 1500; i++) {
+            list.add(i);
+            if (i == size) {
+                size = size + (size >> 1);
+                LogUtils.i("size==" + size);
+                printListMaxLength(list);
+            }
+        }
+        LogUtils.i("数组长度==" + list.toArray().length);
+    }
+
+    private void printListMaxLength(ArrayList<Integer> list) {
+        Class cla = list.getClass();
+        try {
+            Field field = cla.getDeclaredField("elementData");
+            field.setAccessible(true);
+            Object[] array = (Object[]) field.get(list);
+            LogUtils.i("数组长度==" + array.length);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 
     private <T> void printIdentity(T model) {
-        LogUtils.i("HashCode地址==" + model.hashCode());//hashcode
+        LogUtils.i("HashCode==" + model.hashCode());//hashcode
         LogUtils.i("内存地址==" + System.identityHashCode(model));//内存地址
-        LogUtils.i("内存地址==" + model.toString());//内存地址
     }
 
 
