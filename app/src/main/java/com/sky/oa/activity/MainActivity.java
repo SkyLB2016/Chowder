@@ -11,9 +11,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.os.MessageQueue;
 import android.provider.MediaStore;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -52,10 +52,20 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Vector;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.DelayQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -139,19 +149,21 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
     }
 
     private void testMethod() {
-        String a = "a", b = a, g = b;
-//        "Aa的hashCode:${"Aa".hashCode()}==BB的hashCode:${"BB".hashCode()};\n" +
-//                "Bb的hashCode:${"Bb".hashCode()}==CC的hashCode:${"CC".hashCode()};\n" +
-//                "Cc的hashCode:${"Cc".hashCode()}==DD的hashCode:${"DD".hashCode()};\n"
-//
-        printIdentity("Aa".hashCode());
-        printIdentity("BB".hashCode());
-//        printIdentity("Bb".hashCode());
-//        printIdentity("CC".hashCode());
-//        printIdentity("Cc".hashCode());
-//        printIdentity("DD".hashCode());
-//        Map<String, String> map = new HashMap<>();
-//        map.get()
+        Object a = "a", b = "b", g = b;
+        Comparable<Object> comparable = (Comparable<Object>) a;
+        Comparable<Object> comparableb = (Comparable<Object>) b;
+        int flag = comparable.compareTo(b);
+        LogUtils.i("flag=="+flag);
+//        Map<String,String> map =new HashMap<>();
+//        ArrayBlockingQueue arrayQueue= new ArrayBlockingQueue(10);
+//        arrayQueue.isEmpty();
+//        LinkedBlockingQueue linkQueue= new LinkedBlockingQueue();
+//        MessageQueue
+//        PriorityQueue
+//        PriorityBlockingQueue
+//        Object
+        Vector
+
     }
 
     private void getArrayListLength() {
