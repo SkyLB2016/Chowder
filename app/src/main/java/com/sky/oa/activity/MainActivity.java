@@ -153,6 +153,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         Comparable<Object> comparable = (Comparable<Object>) a;
         Comparable<Object> comparableb = (Comparable<Object>) b;
         int flag = comparable.compareTo(b);
+        
         LogUtils.i("flag=="+flag);
 //        Map<String,String> map =new HashMap<>();
 //        ArrayBlockingQueue arrayQueue= new ArrayBlockingQueue(10);
@@ -162,7 +163,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
 //        PriorityQueue
 //        PriorityBlockingQueue
 //        Object
-        Vector
+//        Vector
 
     }
 
