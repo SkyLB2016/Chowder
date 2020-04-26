@@ -295,7 +295,7 @@ wait与synchronized对应
 public ThreadPoolExecutor(int corePoolSize,int maximumPoolSize,long keepAliveTime,TimeUnit unit,BlockingQueue<Runnable> workQueue,ThreadFactory threadFactory,RejectedExecutionHandler handler)
 1）corePoolSize    默认核心线程的数量，默认是未创建的。但是当线程池执行了prestartAllCoreThreads()方法后，会提前创建并启动所有核心线程。
 2）maximumPoolSize 允许最大线程的数量，当队列workQueue满了之后，继续提交任务，就会创建新的线程。
-3）keepAliveTime   默认来说是非核心线程的存活时间。核心线程创建后，一直存活。
+3）keepAliveTime   默认来说是非核心线程的存活时间。核心线程创建后，一直存活。但当 allowCoreThreadTimeOut(true) 设为true时，核心线程也会被回收。
 4）unit            keepAliveTime的时间单位
 5）workQueue       线程队列，它是阻塞队列。核心线程都在执行任务时，继续提交的任务就会进入阻塞队列中等待。通过workQueue，线程池实现了阻塞功能。
 6）threadFactory   创建线程的工厂

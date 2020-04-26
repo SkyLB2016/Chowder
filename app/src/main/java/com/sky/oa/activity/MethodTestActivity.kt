@@ -791,8 +791,15 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
 
     private fun equalHashCode(): String =
         "Aa的hashCode:${"Aa".hashCode()}==BB的hashCode:${"BB".hashCode()};\n" +
+                "内存地址==${System.identityHashCode("Aa")}" +//内存地址
+                "内存地址==${System.identityHashCode("BB")}" +//内存地址
                 "Bb的hashCode:${"Bb".hashCode()}==CC的hashCode:${"CC".hashCode()};\n" +
-                "Cc的hashCode:${"Cc".hashCode()}==DD的hashCode:${"DD".hashCode()};\n"
+                "内存地址==${System.identityHashCode("Bb")}" +//内存地址
+                "内存地址==${System.identityHashCode("CC")}" +//内存地址
+                "Cc的hashCode:${"Cc".hashCode()}==DD的hashCode:${"DD".hashCode()};\n" +
+                "内存地址==${System.identityHashCode("Cc")}" +//内存地址
+                "内存地址==${System.identityHashCode("DD")}" +//内存地址
+                "字符串的hashcode是重写过的"
 
 
     private fun toArray(): String {
