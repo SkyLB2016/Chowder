@@ -56,6 +56,7 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -149,21 +150,67 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
     }
 
     private void testMethod() {
+        getMapLength();
+//        hashIndex();
+    }
+
+    private void testClass() {
         Object a = "a", b = "b", g = b;
+
+        hashIndex();
+        getMapLength();
+
         Comparable<Object> comparable = (Comparable<Object>) a;
         Comparable<Object> comparableb = (Comparable<Object>) b;
         int flag = comparable.compareTo(b);
-        
-        LogUtils.i("flag=="+flag);
-//        Map<String,String> map =new HashMap<>();
-//        ArrayBlockingQueue arrayQueue= new ArrayBlockingQueue(10);
-//        arrayQueue.isEmpty();
-//        LinkedBlockingQueue linkQueue= new LinkedBlockingQueue();
-//        MessageQueue
-//        PriorityQueue
-//        PriorityBlockingQueue
-//        Object
-//        Vector
+
+        LogUtils.i("flag==" + flag);
+        Map<String, String> map = new HashMap<>();
+        ArrayBlockingQueue arrayQueue = new ArrayBlockingQueue(10);
+        arrayQueue.isEmpty();
+        LinkedBlockingQueue linkQueue = new LinkedBlockingQueue();
+//        MessageQueue messageQueue=new MessageQueue();
+        PriorityQueue priority = new PriorityQueue();
+        PriorityBlockingQueue priorityBlockingQueue = new PriorityBlockingQueue();
+        Vector vector = new Vector();
+        LruCache cache = new LruCache(88);
+        LinkedHashMap<String, String> linkedHashMap = new LinkedHashMap<>();
+    }
+
+    private void getMapLength() {
+        Map<String, String> map = new HashMap<>(11);
+        map.put("Aa", "string");
+//        map.put("BB", "string");
+        Class cla = map.getClass();
+        try {
+            Field field = cla.getDeclaredField("table");
+            field.setAccessible(true);
+            Object[] array = (Object[]) field.get(map);
+            LogUtils.i("数组长度==" + array.length);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void hashIndex() {
+        int hash = 1111111;
+        int a = 2;
+        int n = 2;
+
+        int num = (n - 1) & hash;
+        int num1 = hash % n;
+
+        for (int i = 0; i < 17; i++) {
+            n = (int) Math.pow(a, i) + 1;
+            num = (n - 1) & hash;
+            num1 = hash % n;
+
+            LogUtils.i("num==" + n);
+//            LogUtils.i("num1==" + num1);
+            LogUtils.i("equal==" + (num == num1));
+        }
 
     }
 
@@ -197,7 +244,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
 
     private <T> void printIdentity(T model) {
         LogUtils.i("HashCode==" + model.hashCode());//hashcode
-        LogUtils.i("内存地址==" + System.identityHashCode(model));//内存地址
+        LogUtils.i("引用地址==" + System.identityHashCode(model));//内存地址
     }
 
 

@@ -24,12 +24,14 @@ Android题录
 7）哈希查找--复杂度：O(1)
 说明：通过Hash表进行查找。
 
+●02.IntentService和Service有什么区别？
+1）Service不是独立的线程，他也是依赖于应用程序的主线程，可以说是没有界面的activity，所以不建议在service中编写耗时的逻辑和操作，否则会ANR。
+2）IntentService是Service的子类，
+1、可用于执行后台耗时的任务，任务执行后会自动停止。
+2、具有高优先级，适合高优先级的后台任务，且不容易被系统杀死。
+3.可以多次启动，每个耗时操作都会以工作队列的方式在IntentService的onHandleIntent回调方法中执行。
 
-
-
-
-
-
+IntentService在执行onCreate操作的时候，内部开了一个线程，去执行耗时操作。通过Handler Looper Message的方式实现了一个多线程的操作，同时耗时操作也可以被这个线程管理和执行，不会产生ANR。
 
 ●01.java中equal与==的区别
 1）基本数据类型==比较的是值，非基本类型比较的是内存地址
@@ -98,11 +100,7 @@ orientation：屏幕方向变化
 
 ●11.
 
-●12.IntentService和Service有什么区别？
-1）Service不是独立的进程，也不是独立的线程，他也是依赖于应用程序的主线程，可以说是没有界面的activity，后台执行，不建议在service中编写耗时的逻辑和操作，否则会ANR。
-2）IntentService是Service的子类，IntentService在执行onCreate操作的时候，内部开了一个线程，去执行耗时操作。通过Handler Looper Message的方式实现了一个多线程的操作，同时耗时操作也可以被这个线程管理和执行，不会产生ANR。
-3）其实就是IntentService内部单开了一个线程
-
+●12.
 ●13.调用系统界面时，怎么保存当前activity的状态？
 1）为了防止调用系统界面时，当前activity被回收，需要覆写onSaveInstanceState，保存当前的状态变量值。
 
@@ -382,6 +380,3 @@ Android4月20日题：isAssignableFrom 与 instanceof 的区别
 instanceof是用来判断一个对象实例是否是一个类或接口的或其子类子接口的实例。
 
 
-Android4月24日题：弱引用应用场景
-参考答案：1.  如果一个对象是偶尔的使用，并且希望在使用时随时就能获取到，但又不想影响此对象的垃圾收集，那么应该用 Weak Reference 来记住此对象。
-2.  想引用一个对象，但是这个对象有自己的生命周期，你不想介入这个对象的生命周期，这时候就应该用弱引用，这个引用不会在对象的垃圾回收判断中产生任何附加的影响。
