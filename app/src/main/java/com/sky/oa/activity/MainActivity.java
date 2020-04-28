@@ -149,21 +149,34 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         fabLeft.setVisibility(View.GONE);
     }
 
+    String a = "android";
+    final String a1 = "android";
+    static String a2 = "android";
+    static final String a3 = "android";
+    String b = "android";
+    String c = new String("android");
+    String d = new String("android");
+    String e = d.intern();
+
+    static String base = "string";
+
     private void testMethod() {
 //        getMapLength();
 //        hashIndex();
+        List list = new ArrayList();
+        for (int i = 0; i < Integer.MAX_VALUE; i++) {
+            String str = base + base;
+            base = str;
+            list.add(str.intern());
+        }
 
-        String a = "android";
-        String b = "android";
-        String c = new String("android");
-        String d = new String("android");
-        String e = d.intern();
-
+        LogUtils.i("equal==" + (a == a1));//true
+        LogUtils.i("equal==" + (a == a2));//true
+        LogUtils.i("equal==" + (a == a3));//true
         LogUtils.i("equal==" + (a == b));//true
         LogUtils.i("equal==" + (a == c));//false
         LogUtils.i("equal==" + (d == c));//false
         LogUtils.i("equal==" + (a == e));//true
-
     }
 
     int tableSizeFor(int cap) {
@@ -368,9 +381,9 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
 //        LogUtils.i("DIRECTORY_NOTIFICATIONS==" + getExternalFilesDir(Environment.DIRECTORY_NOTIFICATIONS));
 //        LogUtils.i("DIRECTORY_PICTURES==" + getExternalFilesDir(Environment.DIRECTORY_PICTURES));
 //        LogUtils.i("DIRECTORY_MOVIES==" + getExternalFilesDir(Environment.DIRECTORY_MOVIES));
-        ArrayList<String> volumenames = new ArrayList<>(MediaStore.getExternalVolumeNames(this));
-        String path1 = volumenames.get(0);
-        LogUtils.i("path==" + path1);
+//        ArrayList<String> volumenames = new ArrayList<>(MediaStore.getExternalVolumeNames(this));
+//        String path1 = volumenames.get(0);
+//        LogUtils.i("path==" + path1);
 
     }
 

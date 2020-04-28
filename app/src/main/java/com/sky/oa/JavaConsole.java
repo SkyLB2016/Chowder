@@ -66,8 +66,8 @@ public class JavaConsole {
 //        System.out.println(Math.pow(2, 30));
 //        System.out.println(Math.pow(2, 30) - 1);
 //        excelColor();
-        Employe employe = new Employe("李彬", "001", "dept", "mobile", "date");
-        getValue(employe);
+//        Employe employe = new Employe("李彬", "001", "dept", "mobile", "date");
+//        getValue(employe);
 
 //        String filePath = "/Users/sky/Documents/POIFillAndColorExample.xlsx";
 //        String sheetName = "页签1";
@@ -75,21 +75,27 @@ public class JavaConsole {
 //        ExcelPOiUtils.initExcelAndXLSX(filePath, sheetName, columnTitles);
 
 
-        GenericType<A> a = new GenericType<>();
-        GenericType<AB> b = new GenericType<>();
-//        print(a);
-        print(b);
-        GenericType<? super A> str = new GenericType<>();
-        str.setData(new AB());
-        str.getData();
+//        GenericType<A> a = new GenericType<>();
+//        GenericType<AB> b = new GenericType<>();
+////        print(a);
+//        print(b);
+//        GenericType<? super A> str = new GenericType<>();
+//        str.setData(new AB());
+//        str.getData();
+//
+//        List<?> list = new ArrayList<>();
+////        list.add("");
+//        list.get(0);
+//        Pair<String, String> pair = new Pair<>("头部", "尾部");
 
-        List<?> list = new ArrayList<>();
-//        list.add("");
-        list.get(0);
-        Pair<String, String> pair = new Pair<>("头部", "尾部");
-
-
+        List list = new ArrayList();
+        for (int i = 0; i < Integer.MAX_VALUE; i++) {
+            String str = base + base;
+            base = str;
+            list.add(str.intern());
+        }
     }
+    static String base = "string";
 
     public static void print(GenericType<? extends AB> a) {
         System.out.println(a.getData().getName());
