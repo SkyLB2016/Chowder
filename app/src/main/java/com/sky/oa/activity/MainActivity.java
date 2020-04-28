@@ -150,8 +150,30 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
     }
 
     private void testMethod() {
-        getMapLength();
+//        getMapLength();
 //        hashIndex();
+
+        String a = "android";
+        String b = "android";
+        String c = new String("android");
+        String d = new String("android");
+        String e = d.intern();
+
+        LogUtils.i("equal==" + (a == b));//true
+        LogUtils.i("equal==" + (a == c));//false
+        LogUtils.i("equal==" + (d == c));//false
+        LogUtils.i("equal==" + (a == e));//true
+
+    }
+
+    int tableSizeFor(int cap) {
+        int n = cap - 1;
+        n |= n >>> 1;
+        n |= n >>> 2;
+        n |= n >>> 4;
+        n |= n >>> 8;
+        n |= n >>> 16;
+        return n + 1;
     }
 
     private void testClass() {
