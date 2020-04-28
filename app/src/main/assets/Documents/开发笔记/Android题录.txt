@@ -33,6 +33,87 @@ Android题录
 
 IntentService在执行onCreate操作的时候，内部开了一个线程，去执行耗时操作。通过Handler Looper Message的方式实现了一个多线程的操作，同时耗时操作也可以被这个线程管理和执行，不会产生ANR。
 
+●03.Fragment 的生命周期 11个
+onAttach() -> onCreate -> onCreateView -> onActivityCreated -> onStart -> onResume -> onPause -> onStop -> onDestoryView -> onDestory -> onDetach
+
+●04.Fragment 的添加过程
+1）add 添加新的Fragment，需要与 hide 和 show 配合使用。推荐使用
+FragmentManage manager=getSupportFragmentManager()；获取fragment的管理器
+Fragment fragment=manager.findFragmentByTag(tag);//获取已存在Fragment
+FragmentTransaction tran=manager.beginTransaction();//获取Fragment加载器
+if(fragment==null){
+    fragment = new fragment();
+    tran.add(fragment,tag);
+}else{
+    tran.show(fragment);
+}
+tran.commit();
+tran.commitAllowingStateLoss();与activity被回收后，防止异常的提交。
+2）addToBackStack 入栈；popBackStack 出栈。
+3）replace 替换之前的Fragment。
+4）remove
+
+●05.Fragment 搭配 ViewPager
+1）FragmentPagerAdapter 一般用于适配较少页面，因为已加载的Fragment会一直保存在内存中，但也会做相应的回收，会执行onDestoryView方法，之后再次加载时会直接调用onCreateView方法。
+2）FragmentStatePagerAdapter 适配较多页面，会保存当前以及上下两个页面，其他页面会被回收掉。是执行onDetach方法彻底移除，回收内存。
+3）viewPager.offscreenPageLimit = 2 //会缓存两个页面，也就是显示一个，缓存两个，共三个，生命周期都不会改变。最优先。
+
+●06.RecyclerView 与 ListView 的区别？
+1）ListView 只能在垂直方向上滑动；
+RecyclerView 支持水平滑动，垂直滑动，多行多列的瀑布流等方式。
+2）ListView 有几个默认的Adapter，如ArrayAdapter，CursorAdapter 和 SimpleCursorAdapter
+RecyclerView：需要自己实现。
+3）ListView 拥有子item的监听函数，AdapterView.OnItemClickListener。
+RecyclerView 需要自己实现接口，来实现点击事件，麻烦但扩展性好。
+4）ListView 并不强制用ViewHolder，如果要使用，需要自己定义。不使用每次 findViewById 的话，会降低性能，造成卡顿等。
+RecyclerView 有自己的ViewHolder，必须使用。
+5）ListView 两级缓存
+1.mActiveViews 用于屏幕内ItemView快速重用
+2.mScrapViews 用于缓存离开屏幕的ItemView
+
+RecyclerView 四级缓存：
+1.mChangeScrap 与 mAttachedScrap 用于屏幕内 ItemView 快速重用。
+2.mCachedViews 默认上限为2，即缓存屏幕外2个ItemView
+3.mViewCacheExtension 用户自定义缓存，一般不使用，我没用过。
+4.mRecyclerPool:RecycledViewPool 从缓存中被移除后的缓存池，默认上限是5。
+
+6）缓存对象不同：ListView 缓存的是View本身；
+RecyclerView 缓存的是ViewHolder。
+7）ListView具有setEmptyView，addHeaderView，addFooterView
+RecyclerView支持局部刷新
+
+●.RecyclerView嵌套卡顿如何解决？
+1）设置预加载的数量LinearLayoutManager.setInitialPrefetchItemCount(4)，默认加载是2个。
+2）设置子项缓存，设置自带滑动冲突属性setHasFixedSize(true);setNestedScorollingEnabled(false);可以完美解决。
+3）不过Google不推荐RecyclerView嵌套使用，需要嵌套尽量找类似于ExpandableListview第三方控件来解决。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ●01.java中equal与==的区别
 1）基本数据类型==比较的是值，非基本类型比较的是内存地址
 2）Object默认equal比较的是内存地址。可重写其方法，按自己的需求来定义相比较的内容。
@@ -98,9 +179,6 @@ orientation：屏幕方向变化
 1）功能复杂的话，MVC的activity或fragment会很庞大，view与model耦合严重
 2）功能复杂的话，MVP会产生很多接口，activity需要很多接口方法来更新UI，model与view不直接进行交互，达到解耦的效果
 
-●11.
-
-●12.
 ●13.调用系统界面时，怎么保存当前activity的状态？
 1）为了防止调用系统界面时，当前activity被回收，需要覆写onSaveInstanceState，保存当前的状态变量值。
 
@@ -109,28 +187,6 @@ orientation：屏幕方向变化
 2）EventBus（观察者模式）（常用）
 3）Handler（偶尔）
 4）广播broadcast（基本不用）
-
-●15.service和线程的区别，我们为什么不用service代替线程，相应在什么情况下使用？
-1）Service是Android的四大组件之一，对应的service是运行在主线程上的，可以说是一个没有显示页面的activity，由系统进程托管。他们之间的通信类似于client和server，是一种轻量级的IPC通信，这种通信的载体是binder，他是在Linux层交换信息的一种IPC
-2）线程是程序执行的最小单元，是分配CPU的基本操作。耗时操作一般会开启异步线程来执行。
-区别：
-3）线程的运行是独立，要么运行结束，要么主动停止。一般一条线程只会在一个activity内生成以及运行，不能被多个activity进行控制。service可以被共用。
-4）service也是在主线程上运行，耗时操作会ANR。
-5）在应用中，如歌曲播放可以使用service，下载之类的耗时操作使用异步线程。
-
-●16.RecyclerView 和 ListView的区别
-1）RecyclerView的缓存是view+Viewholder+flag，更规范化；listview只是缓存view刷新数据。
-2）RecyclerView可以自定义分割线
-3）RecyclerView可以实现线性布局，网格布局，瀑布流布局效果
-4）RecyclerView支持局部刷新
-5）RecyclerView没有setOnItemClickListener，setOnItemLongClickListener，而是添加了addOnItemTouchListener，可以多次添加事件
-6）RecyclerView轻松实现item动画效果
-7）ListView具有setEmptyView，addHeaderView，addFooterView
-
-●.RecyclerView嵌套卡顿如何解决？
-1）设置预加载的数量LinearLayoutManager.setInitialPrefetchItemCount(4)，默认加载是2个。
-2）设置子项缓存，设置自带滑动冲突属性setHasFixedSize(true);setNestedScorollingEnabled(false);可以完美解决。
-3）不过Google不推荐RecyclerView嵌套使用，需要嵌套尽量找类似于ExpandableListview第三方控件来解决。
 
 ●17.View的绘制流程
 从ViewRoot的performTraversals方法开始依次调用performMeasure、performLayout和performDraw这三个方法。

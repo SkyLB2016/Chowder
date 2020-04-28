@@ -14,10 +14,6 @@ import com.sky.sdk.utils.BitmapUtils
  * 文件夹pop
  */
 class FloderPop(view: View, width: Int, height: Int) : BasePop<ImageFloder>(view, width, height) {
-    //看看pageradapter，FragmentStatePagerAdapter等三个的源码
-    //看看pageradapter，FragmentStatePagerAdapter等三个的源码
-    //看看pageradapter，FragmentStatePagerAdapter等三个的源码
-    //看看pageradapter，FragmentStatePagerAdapter等三个的源码
     private var recycle: RecyclerView? = null
 
     private var adapter: RecyclerAdapter<ImageFloder>? = null

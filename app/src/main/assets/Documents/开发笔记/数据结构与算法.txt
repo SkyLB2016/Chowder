@@ -229,9 +229,9 @@ threshold：阈值，当前map达到这个容量后，就需要重新增大调�
 简单来说先计算key的hash值，然后根据hash值计算对应的下标，再往链表中添加元素。
 详细情况如下：
 1）首先判断table是否为空，为空，开始初始化。因为构造函数还有扩容的问题，所以有三种情况：
-第一种：table 为空，threshold不为空，默认的容量Capacity=16，threshold=12，
-第二种：table 为空，threshold不为空，那就把 threshold 作为初始容量newCapacity=threshold，重新计算threshold。
-第三种：table不为空，也就是要扩容，oldCap 与 threshold 同时 左移一位就好，也就是扩大2倍。
+第一种：table 为空，threshold 不为空，默认的容量Capacity=16，threshold=12，
+第二种：table 为空，threshold 不为空，那就把 threshold 作为初始容量newCapacity=threshold，重新计算threshold。
+第三种：table 不为空，也就是要扩容，oldCap 与 threshold 同时 左移一位就好，也就是扩大2倍。
 2）接着会获取 key 的 hashcode，然后根据 hashcode 计算下标。(length - 1) & hash 等价于 hash % length 只有在 length 是 2的n次幂 时，这个等式才成立。
 检查此下标下是否已存在节点，不存在直接创建新的结点，并加入数组中，计算数据容量，是否需要扩容，返回null。
 3） 已存在，轮询此结点所在的链表，对比hash值和key，一直不相等，最后就是新添加一个结点，跳出循环，之后就是计算容量，检查容量，返回null。
@@ -256,8 +256,7 @@ HashMap结合两者，所以查找快，增删也快。不过要论单个，当�
 根据hash值计算的下标，肯定有重复的时候，这就是hash碰撞。
 
 ●08.为什么需要加载因子？
-容器内数据越少，hash值碰撞的就越少，当达到一定阈值是，hash值会频繁彭转，此时为解决此问题就需要扩容，来解决hash碰撞，loadFactor就是指定容器达到多大的容量时，开始扩容。
-
+容器内数据越少，hash值碰撞的就越少，当达到一定阈值是，hash值会频繁碰撞，此时为解决此问题就需要扩容；loadFactor就是指定容器达到多大的比重时，开始扩容。
 
 第五节
 
