@@ -163,20 +163,10 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
     private void testMethod() {
 //        getMapLength();
 //        hashIndex();
-        List list = new ArrayList();
-        for (int i = 0; i < Integer.MAX_VALUE; i++) {
-            String str = base + base;
-            base = str;
-            list.add(str.intern());
-        }
-
-        LogUtils.i("equal==" + (a == a1));//true
-        LogUtils.i("equal==" + (a == a2));//true
-        LogUtils.i("equal==" + (a == a3));//true
-        LogUtils.i("equal==" + (a == b));//true
-        LogUtils.i("equal==" + (a == c));//false
-        LogUtils.i("equal==" + (d == c));//false
-        LogUtils.i("equal==" + (a == e));//true
+        StringBuilder builder = new StringBuilder("1234567890");
+        LogUtils.i("equal==" + builder);//true
+        builder.deleteCharAt(builder.length() - 1);
+        LogUtils.i("equal==" + builder);//true
     }
 
     int tableSizeFor(int cap) {

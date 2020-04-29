@@ -318,105 +318,335 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
     }
 
     private fun sort(): CharSequence? {
-        val arr = intArrayOf(99, 12, 35, 5, 9, 54, 44)
-        return "原始数据：${getArrayString(arr)}；\n" +
-                "冒泡排序：${bubbleSort(arr.clone())}；\n" +
-                "冒泡排序：${bubbleSort1(arr.clone())}；\n" +
-                "选择排序：${selectSort(arr.clone())}；\n" +
-                "插入排序：${insertSort(arr.clone())}。"
+        val array = intArrayOf(99, 12, 35, 5, 9, 54, 44, 1)
+        return "原始数据：${getArrayString(array)}；\n" +
+                "冒泡排序：${bubbleSorting(array.clone())}；\n" +
+                "冒泡排序：${bubbleSort(array.clone())}；\n" +
+                "选择排序：${selectSort(array.clone())}；\n" +
+                "插入排序：${insertSort(array.clone())}；\n" +
+                "希尔排序：${shellSort(array.clone())}；\n" +
+
+                "归并排序：${mergeSort(array.clone())}；\n" +
+                "堆排序：${heapSort(array.clone())}；\n" +
+                "快速排序：${quickSort(array.clone())}；\n" +
+                "计数排序：${countSort(array.clone())}；\n" +
+                "基数排序：${cardinalitySort(array.clone())}；\n" +
+                "桶排序：${bucketSort(array.clone())}；\n" +
+                "。"
     }
 
-    /**
-     * 插入排序
-     */
-    private fun insertSort(arr: IntArray): String {
-        LogUtils.i("数据==${getArrayString(arr)}")
-        var temp: Int
-        for (i in 0 until arr.size - 1) {
-            for (j in i + 1 downTo 1) {
-//                LogUtils.i("j==$j")
-                if (arr[j] < arr[j - 1]) {
-                    temp = arr[j - 1]
-                    arr[j - 1] = arr[j]
-                    arr[j] = temp
-                } else { //不需要交换
-                    break
-                }
-            }
-        }
-        return getArrayString(arr);
-    }
 
-    private fun getArrayString(arr: IntArray): String {
+    private fun getArrayString(array: IntArray): String {
         var builder = StringBuilder()
-        for (element in arr) builder.append("，$element")
-//        LogUtils.i("text==$builder")
-        builder.replace(0, 1, "")//移除开始的逗号
-//        LogUtils.i("text==$builder")
+        for (element in array) builder.append("，$element")
+//        builder.replace(0, 1, "")//移除开始的逗号
+        builder.deleteCharAt(0)
+        builder.append("；")
         return builder.toString()
-    }
-
-    /**
-     * 选择排序
-     */
-    private fun selectSort(arr: IntArray): String {
-        LogUtils.i("数据==${getArrayString(arr)}")
-        var index: Int//临时变量
-        var temp: Int//临时变量
-        for (i in 0..arr.size - 2) {
-            index = i
-            for (j in i + 1 until arr.size) {
-                if (arr[j] < arr[index]) index = j
-            }
-            if (index === i) continue
-            temp = arr[i]
-            arr[i] = arr[index]
-            arr[index] = temp
-        }
-        return getArrayString(arr);
-    }
-
-    private fun bubbleSort1(arr: IntArray): String {
-        LogUtils.i("数据==${getArrayString(arr)}")
-        if (arr == null) throw IllegalArgumentException("arr 不能为空")
-        if (arr.size < 2) return "";
-        var temp: Int//临时变量
-        var flag: Boolean
-        for (i in arr.size - 1 downTo 1) { //表示趟数，一共arr.length-1次。
-            flag = false
-            for (j in 0 until i) {
-                if (arr[j] < arr[j + 1]) {
-                    temp = arr[j]
-                    arr[j] = arr[j + 1]
-                    arr[j + 1] = temp
-                    flag = true
-                }
-            }
-            if (!flag) break
-        }
-        return getArrayString(arr);
     }
 
     /**
      * 冒泡排序
      */
-    private fun bubbleSort(arr: IntArray): String {
-        LogUtils.i("数据==${getArrayString(arr)}")
+    private fun bubbleSorting(array: IntArray): String {
+//        LogUtils.i("数据==${getArrayString(array)}")
         var temp: Int//临时变量
-        var flag: Boolean
-        for (i in 0 until arr.size - 1) { //表示趟数，一共arr.length-1次。
+        var flag: Boolean//中断标志，如果这次的没有过交换，就证明已经排好序，跳出循环。
+        var count = 0//执行了多少次
+        for (i in array.indices) {
             flag = false
-            for (j in arr.size - 1 downTo i + 1) {//从后往前跑
-                if (arr[j] < arr[j - 1]) {
-                    temp = arr[j]
-                    arr[j] = arr[j - 1]
-                    arr[j - 1] = temp
+            for (j in 0 until array.size - 1 - i) {//减1是因为j会加1，减i是因为队尾的数据就是最终数据，不需要重复比较
+                if (array[j] > array[j + 1]) {//位置1大于位置2，数组就是升序排列，换成小于号就是降序排列了
+                    temp = array[j]
+                    array[j] = array[j + 1]
+                    array[j + 1] = temp
                     flag = true
+                    count++
                 }
             }
             if (!flag) break
         }
-        return getArrayString(arr);
+//        LogUtils.i("count==$count")
+//        LogUtils.i("数据==${getArrayString(array)}")
+        return getArrayString(array) + "${count}次"
+    }
+
+    /**
+     * 冒泡排序
+     */
+    private fun bubbleSort(array: IntArray): String {
+//        LogUtils.i("数据==${getArrayString(array)}")
+        var temp: Int//临时变量
+        var flag: Boolean
+        var count = 0
+        for (i in 0 until array.size - 1) { //表示趟数，一共arr.length-1次。
+            flag = false
+            for (j in array.size - 1 downTo i + 1) {//从后往前跑
+                if (array[j] < array[j - 1]) {
+                    temp = array[j]
+                    array[j] = array[j - 1]
+                    array[j - 1] = temp
+                    flag = true
+                    count++
+                }
+            }
+            if (!flag) break
+        }
+//        LogUtils.i("count==$count")
+//        LogUtils.i("数据==${getArrayString(array)}")
+        return getArrayString(array) + "${count}次"
+    }
+
+    /**
+     * 选择排序
+     */
+    private fun selectSort(array: IntArray): String {
+        var min: Int//临时变量
+        var temp: Int//临时变量
+        var count = 0//执行了多少次
+        for (i in 0..array.size - 2) {//最后就剩一个数了，交换也是自己交换，不需要比了
+            min = i
+            for (j in i + 1 until array.size) {//j加1，因为min=i，j==i，不用比。
+                if (array[min] > array[j]) {
+                    min = j//位置1大于位置2，选的是最小数，数组就是升序排列，换成小于号就是降序排列了
+                    count++
+                }
+            }
+            if (min === i) continue//min没有变化，结束此次循环
+            temp = array[i]
+            array[i] = array[min]
+            array[min] = temp
+        }
+//        LogUtils.i("count==$count")
+//        LogUtils.i("数据==${getArrayString(array)}")
+        return getArrayString(array) + "${count}次"
+    }
+
+    /**
+     * 插入排序 升序排列
+     */
+    private fun insertSort(array: IntArray): String {
+//        LogUtils.i("数据==${getArrayString(array)}")
+        var count = 0//执行了多少次
+        var index: Int
+        var item: Int
+        for (i in 1 until array.size) {//默认第零个就是排好序的，
+            index = i - 1//已排好序的队尾
+            item = array[i]//取得当前元素
+            //升序排列就是当前元素小于之前的元素，之前的元素就向后移动一位；每一次循环前边的数据都是排好序的，所以当item大时，就放在index+1的位置。
+            while (index >= 0 && array[index] > item) {
+                array[index + 1] = array[index]
+                index--
+                count++
+            }
+            array[index + 1] = item
+        }
+//        LogUtils.i("count==$count")
+//        LogUtils.i("数据==${getArrayString(array)}")
+        return getArrayString(array) + "${count}次"
+    }
+
+    /**
+     * 希尔排序 升序排列
+     */
+    private fun shellSort(array: IntArray): String {
+//        LogUtils.i("数据==${getArrayString(array)}")
+        var count = 0//执行了多少次
+        var index: Int
+        var item: Int
+        var gap = array.size / 2
+        while (gap > 0) {
+            for (i in gap until array.size) {//默认第零个就是排好序的，从增量gap开始循环
+                index = i - gap//已排好序的队尾
+                item = array[i]//取得当前元素
+                //升序排列就是当前元素小于之前的元素，之前的元素就向后移动gap位；每一次循环前边的数据都是排好序的，所以当item大时，就放在index+gap的位置。
+                while (index >= 0 && array[index] > item) {
+                    array[index + gap] = array[index]
+                    index -= gap
+                    count++
+                }
+                array[index + gap] = item
+            }
+            gap /= 2
+        }
+
+//        LogUtils.i("count==$count")
+//        LogUtils.i("数据==${getArrayString(array)}")
+        return getArrayString(array) + "${count}次"
+    }
+
+    /**
+     * 归并排序
+     */
+    private fun mergeSort(array: IntArray): String {
+//        LogUtils.i("数据==${getArrayString(array)}")
+        var count = 0//执行了多少次
+        var index: Int
+        var item: Int
+        var gap = array.size / 2
+        while (gap > 0) {
+            for (i in gap until array.size) {//默认第零个就是排好序的，从增量gap开始循环
+                index = i - gap//已排好序的队尾
+                item = array[i]//取得当前元素
+                //升序排列就是当前元素小于之前的元素，之前的元素就向后移动gap位；每一次循环前边的数据都是排好序的，所以当item大时，就放在index+gap的位置。
+                while (index >= 0 && array[index] > item) {
+                    array[index + gap] = array[index]
+                    index -= gap
+                    count++
+                }
+                array[index + gap] = item
+            }
+            gap /= 2
+        }
+
+//        LogUtils.i("count==$count")
+//        LogUtils.i("数据==${getArrayString(array)}")
+        return getArrayString(array) + "${count}次"
+    }
+
+    /**
+     * 堆排序
+     */
+    private fun heapSort(array: IntArray): String {
+//        LogUtils.i("数据==${getArrayString(array)}")
+        var count = 0//执行了多少次
+        var index: Int
+        var item: Int
+        var gap = array.size / 2
+        while (gap > 0) {
+            for (i in gap until array.size) {//默认第零个就是排好序的，从增量gap开始循环
+                index = i - gap//已排好序的队尾
+                item = array[i]//取得当前元素
+                //升序排列就是当前元素小于之前的元素，之前的元素就向后移动gap位；每一次循环前边的数据都是排好序的，所以当item大时，就放在index+gap的位置。
+                while (index >= 0 && array[index] > item) {
+                    array[index + gap] = array[index]
+                    index -= gap
+                    count++
+                }
+                array[index + gap] = item
+            }
+            gap /= 2
+        }
+
+//        LogUtils.i("count==$count")
+//        LogUtils.i("数据==${getArrayString(array)}")
+        return getArrayString(array) + "${count}次"
+    }
+
+    /**
+     * 快速排序
+     */
+    private fun quickSort(array: IntArray): String {
+//        LogUtils.i("数据==${getArrayString(array)}")
+        var count = 0//执行了多少次
+        var index: Int
+        var item: Int
+        var gap = array.size / 2
+        while (gap > 0) {
+            for (i in gap until array.size) {//默认第零个就是排好序的，从增量gap开始循环
+                index = i - gap//已排好序的队尾
+                item = array[i]//取得当前元素
+                //升序排列就是当前元素小于之前的元素，之前的元素就向后移动gap位；每一次循环前边的数据都是排好序的，所以当item大时，就放在index+gap的位置。
+                while (index >= 0 && array[index] > item) {
+                    array[index + gap] = array[index]
+                    index -= gap
+                    count++
+                }
+                array[index + gap] = item
+            }
+            gap /= 2
+        }
+
+//        LogUtils.i("count==$count")
+//        LogUtils.i("数据==${getArrayString(array)}")
+        return getArrayString(array) + "${count}次"
+    }
+
+    /**
+     * 计数排序
+     */
+    private fun countSort(array: IntArray): String {
+//        LogUtils.i("数据==${getArrayString(array)}")
+        var count = 0//执行了多少次
+        var index: Int
+        var item: Int
+        var gap = array.size / 2
+        while (gap > 0) {
+            for (i in gap until array.size) {//默认第零个就是排好序的，从增量gap开始循环
+                index = i - gap//已排好序的队尾
+                item = array[i]//取得当前元素
+                //升序排列就是当前元素小于之前的元素，之前的元素就向后移动gap位；每一次循环前边的数据都是排好序的，所以当item大时，就放在index+gap的位置。
+                while (index >= 0 && array[index] > item) {
+                    array[index + gap] = array[index]
+                    index -= gap
+                    count++
+                }
+                array[index + gap] = item
+            }
+            gap /= 2
+        }
+
+//        LogUtils.i("count==$count")
+//        LogUtils.i("数据==${getArrayString(array)}")
+        return getArrayString(array) + "${count}次"
+    }
+
+    /**
+     * 基数排序
+     */
+    private fun cardinalitySort(array: IntArray): String {
+//        LogUtils.i("数据==${getArrayString(array)}")
+        var count = 0//执行了多少次
+        var index: Int
+        var item: Int
+        var gap = array.size / 2
+        while (gap > 0) {
+            for (i in gap until array.size) {//默认第零个就是排好序的，从增量gap开始循环
+                index = i - gap//已排好序的队尾
+                item = array[i]//取得当前元素
+                //升序排列就是当前元素小于之前的元素，之前的元素就向后移动gap位；每一次循环前边的数据都是排好序的，所以当item大时，就放在index+gap的位置。
+                while (index >= 0 && array[index] > item) {
+                    array[index + gap] = array[index]
+                    index -= gap
+                    count++
+                }
+                array[index + gap] = item
+            }
+            gap /= 2
+        }
+
+//        LogUtils.i("count==$count")
+//        LogUtils.i("数据==${getArrayString(array)}")
+        return getArrayString(array) + "${count}次"
+    }
+
+    /**
+     * 桶排序
+     */
+    private fun bucketSort(array: IntArray): String {
+//        LogUtils.i("数据==${getArrayString(array)}")
+        var count = 0//执行了多少次
+        var index: Int
+        var item: Int
+        var gap = array.size / 2
+        while (gap > 0) {
+            for (i in gap until array.size) {//默认第零个就是排好序的，从增量gap开始循环
+                index = i - gap//已排好序的队尾
+                item = array[i]//取得当前元素
+                //升序排列就是当前元素小于之前的元素，之前的元素就向后移动gap位；每一次循环前边的数据都是排好序的，所以当item大时，就放在index+gap的位置。
+                while (index >= 0 && array[index] > item) {
+                    array[index + gap] = array[index]
+                    index -= gap
+                    count++
+                }
+                array[index + gap] = item
+            }
+            gap /= 2
+        }
+
+//        LogUtils.i("count==$count")
+//        LogUtils.i("数据==${getArrayString(array)}")
+        return getArrayString(array) + "${count}次"
     }
 
     private fun changeStrToId(): CharSequence? {

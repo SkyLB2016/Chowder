@@ -4,3 +4,7 @@ letterSpacing="0.1"：字间距，按字的宽度的比例来算，默认为0；
 lineSpacingMultiplier="1.5"：行间距，按行的高度的比例算，默认为1；0-1之间的，行间距为负数，每行文字会重叠，为0是，所有的文字都会显示在一行。
 lineSpacingExtra="@dimen/wh_20"：行间距，按dp来算
 textIsSelectable="true"：是否可选择文字，默认为false
+
+●02.StringBuilder
+1）deleteCharAt(index) 删除指定位置的字符
+2）replace(start,end,char) 替换start到end位置的字符串为 newchar

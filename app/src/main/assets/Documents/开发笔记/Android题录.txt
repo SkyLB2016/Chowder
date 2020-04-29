@@ -54,8 +54,8 @@ tran.commitAllowingStateLoss();与activity被回收后，防止异常的提交�
 4）remove
 
 ●05.Fragment 搭配 ViewPager
-1）FragmentPagerAdapter 一般用于适配较少页面，因为已加载的Fragment会一直保存在内存中，但也会做相应的回收，会执行onDestoryView方法，之后再次加载时会直接调用onCreateView方法。
-2）FragmentStatePagerAdapter 适配较多页面，会保存当前以及上下两个页面，其他页面会被回收掉。是执行onDetach方法彻底移除，回收内存。
+1）FragmentPagerAdapter 一般用于适配较少页面，默认缓存上下两个页面，之后的fragment会回收view，也就是会执行onDestoryView方法，之后再次加载时会直接调用onCreateView方法。
+2）FragmentStatePagerAdapter 适配较多页面，默认缓存上下两个页面，其他页面会被回收掉，是执行onDetach方法彻底移除，回收内存。
 3）viewPager.offscreenPageLimit = 2 //会缓存两个页面，也就是显示一个，缓存两个，共三个，生命周期都不会改变。最优先。
 
 ●06.RecyclerView 与 ListView 的区别？
@@ -436,3 +436,6 @@ Android4月20日题：isAssignableFrom 与 instanceof 的区别
 instanceof是用来判断一个对象实例是否是一个类或接口的或其子类子接口的实例。
 
 
+参考答案：
+首先我们通过我们 create 出来的 retrofit 实例来调用接口方法。所有的 interface 方法都会在 java 动态代理机制的作用下，调用一个匿名类 new InvocationHandler 中的 invoke。在 invoke 中，会根据我们想调用的方法 method 构造出一个 serviceMethod，然后调用 serviceMethod.callAdapter.adapt(okHttpCall) 作为返回结果。
+构造 serviceMethod 的时候，会根据 interface 中 method 的的返回类型，构造出 converter 和 callAdapter。其中， converter 一般使用 gson converter。gson converter 可以自动将服务器返回的 json 数据转化成 java 中的 model 类的实例。callAdapter 绝大多数的实现方式是在构造函数中接收一个 okHttpCall 实例，然后将 enqueue 和 execute 委托给这个 okHttpCall 实例来执行。okHttpCall 在获取到服务器数据之后，会利用 serviceMethod.toResponse(body) 来对数据进行转化。其中，转化的时候便利用了 converter。数据转化完成后，封装成 Response<R> ，传递给调用方。其中 R 就是我们的数据类。
