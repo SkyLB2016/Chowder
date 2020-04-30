@@ -19,6 +19,7 @@ import android.provider.ContactsContract
 import android.speech.tts.TextToSpeech
 import android.text.Spannable
 import android.text.SpannableStringBuilder
+import android.text.TextUtils.split
 import android.text.method.LinkMovementMethod
 import android.text.style.*
 import android.view.LayoutInflater
@@ -318,7 +319,7 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
     }
 
     private fun sort(): CharSequence? {
-        val array = intArrayOf(99, 12, 35, 5, 9, 54, 44, 1)
+        val array = intArrayOf(99, 12, 35, 5, 9, 54, 44, 1, 66)
         return "原始数据：${getArrayString(array)}；\n" +
                 "冒泡排序：${bubbleSorting(array.clone())}；\n" +
                 "冒泡排序：${bubbleSort(array.clone())}；\n" +
@@ -475,33 +476,46 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
         return getArrayString(array) + "${count}次"
     }
 
+    var mergeCount = 0//执行了多少次
     /**
      * 归并排序
      */
     private fun mergeSort(array: IntArray): String {
-//        LogUtils.i("数据==${getArrayString(array)}")
-        var count = 0//执行了多少次
-        var index: Int
-        var item: Int
-        var gap = array.size / 2
-        while (gap > 0) {
-            for (i in gap until array.size) {//默认第零个就是排好序的，从增量gap开始循环
-                index = i - gap//已排好序的队尾
-                item = array[i]//取得当前元素
-                //升序排列就是当前元素小于之前的元素，之前的元素就向后移动gap位；每一次循环前边的数据都是排好序的，所以当item大时，就放在index+gap的位置。
-                while (index >= 0 && array[index] > item) {
-                    array[index + gap] = array[index]
-                    index -= gap
-                    count++
-                }
-                array[index + gap] = item
-            }
-            gap /= 2
-        }
+        if (array == null || array.size < 2) return ""
+        val result = sortArray(array)
+        return getArrayString(result) + "${mergeCount}次"
+    }
 
-//        LogUtils.i("count==$count")
-//        LogUtils.i("数据==${getArrayString(array)}")
-        return getArrayString(array) + "${count}次"
+    /**
+     * 拆分数组
+     */
+    private fun sortArray(array: IntArray): IntArray {
+        if (array.size < 2) return array //只剩一个数组的时候返回
+        val mid = array.size / 2
+        val left = Arrays.copyOfRange(array, 0, mid)
+        val right = Arrays.copyOfRange(array, mid, array.size)
+        return mergeArray(sortArray(left), sortArray(right))
+    }
+
+    /**
+     * 合并数据，数组内只有一个元素时，两个数组对比后，合并成一个肯定是有序的。
+     */
+    private fun mergeArray(left: IntArray, right: IntArray): IntArray {
+        val result = IntArray(left.size + right.size)
+        var leftIndex = 0;
+        var rightIndex = 0;
+        for (i in result.indices) {
+            mergeCount++
+            when {
+                //当leftIndex大于left数组长度时，左边的肯定已经加载完了，就剩右边的了，左右肯定会有一个先加载完的。
+                leftIndex >= left.size -> result[i] = right[rightIndex++]
+                rightIndex >= right.size -> result[i] = left[leftIndex++]
+                //升序情况下，先加载小的元素。
+                left[leftIndex] > right[rightIndex] -> result[i] = right[rightIndex++]
+                else -> result[i] = left[leftIndex++]
+            }
+        }
+        return result
     }
 
     /**
