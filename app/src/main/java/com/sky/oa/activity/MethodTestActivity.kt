@@ -319,32 +319,44 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
     }
 
     private fun sort(): CharSequence? {
-        val array = intArrayOf(99, 12, 35, 5, 9, 54, 44, 1, 66)
-        return "原始数据：${getArrayString(array)}；\n" +
+        val array = intArrayOf(99, 12, 35, 44, 5, 9, 54, 44, 1, 66)
+//        val array = getArray()
+        return "原始数据：共一千条随机数据；\n" +
+//                "原始数据：${getArrayString(array)}；\n" +
                 "冒泡排序：${bubbleSorting(array.clone())}；\n" +
-                "冒泡排序：${bubbleSort(array.clone())}；\n" +
+//                "冒泡排序：${bubbleSort(array.clone())}；\n" +
                 "选择排序：${selectSort(array.clone())}；\n" +
                 "插入排序：${insertSort(array.clone())}；\n" +
                 "希尔排序：${shellSort(array.clone())}；\n" +
-
                 "归并排序：${mergeSort(array.clone())}；\n" +
-                "堆排序：${heapSort(array.clone())}；\n" +
+
                 "快速排序：${quickSort(array.clone())}；\n" +
+                "堆排序：${heapSort(array.clone())}；\n" +
                 "计数排序：${countSort(array.clone())}；\n" +
                 "基数排序：${cardinalitySort(array.clone())}；\n" +
                 "桶排序：${bucketSort(array.clone())}；\n" +
                 "。"
     }
 
+    private fun getArray(): IntArray {
+        val array = IntArray(1000)
+        val random = Random()
+        for (i in 0..999) {
+            array[i] = random.nextInt()
+        }
+        return array
+    }
 
     private fun getArrayString(array: IntArray): String {
+//        builder.replace(0, 1, "")//移除开始的逗号
         var builder = StringBuilder()
         for (element in array) builder.append("，$element")
-//        builder.replace(0, 1, "")//移除开始的逗号
         builder.deleteCharAt(0)
         builder.append("；")
         return builder.toString()
     }
+
+    private fun getNumberOfTimes(count: Int) = "${count}次"
 
     /**
      * 冒泡排序
@@ -369,7 +381,8 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
         }
 //        LogUtils.i("count==$count")
 //        LogUtils.i("数据==${getArrayString(array)}")
-        return getArrayString(array) + "${count}次"
+//        return getArrayString(array) + "${count}次"
+        return getNumberOfTimes(count)
     }
 
     /**
@@ -395,7 +408,8 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
         }
 //        LogUtils.i("count==$count")
 //        LogUtils.i("数据==${getArrayString(array)}")
-        return getArrayString(array) + "${count}次"
+//        return getArrayString(array) + "${count}次"
+        return getNumberOfTimes(count)
     }
 
     /**
@@ -420,7 +434,8 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
         }
 //        LogUtils.i("count==$count")
 //        LogUtils.i("数据==${getArrayString(array)}")
-        return getArrayString(array) + "${count}次"
+//        return getArrayString(array) + "${count}次"
+        return getNumberOfTimes(count)
     }
 
     /**
@@ -444,7 +459,8 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
         }
 //        LogUtils.i("count==$count")
 //        LogUtils.i("数据==${getArrayString(array)}")
-        return getArrayString(array) + "${count}次"
+//        return getArrayString(array) + "${count}次"
+        return getNumberOfTimes(count)
     }
 
     /**
@@ -473,28 +489,32 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
 
 //        LogUtils.i("count==$count")
 //        LogUtils.i("数据==${getArrayString(array)}")
-        return getArrayString(array) + "${count}次"
+//        return getArrayString(array) + "${count}次"
+        return getNumberOfTimes(count)
     }
 
     var mergeCount = 0//执行了多少次
+
     /**
      * 归并排序
      */
     private fun mergeSort(array: IntArray): String {
+        mergeCount = 0
         if (array == null || array.size < 2) return ""
-        val result = sortArray(array)
-        return getArrayString(result) + "${mergeCount}次"
+        val result = splitArray(array)
+//        return getArrayString(result) + "${mergeCount}次"
+        return getNumberOfTimes(mergeCount)
     }
 
     /**
      * 拆分数组
      */
-    private fun sortArray(array: IntArray): IntArray {
+    private fun splitArray(array: IntArray): IntArray {
         if (array.size < 2) return array //只剩一个数组的时候返回
         val mid = array.size / 2
         val left = Arrays.copyOfRange(array, 0, mid)
         val right = Arrays.copyOfRange(array, mid, array.size)
-        return mergeArray(sortArray(left), sortArray(right))
+        return mergeArray(splitArray(left), splitArray(right))
     }
 
     /**
@@ -518,62 +538,66 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
         return result
     }
 
+    var quickCount = 0//执行了多少次
+
+    /**
+     * 快速排序
+     */
+    private fun quickSort(array: IntArray): String {
+        quickCount = 0
+        quickArray(array, 0, array.size - 1)
+//        LogUtils.i("count==$count")
+//        LogUtils.i("数据==${getArrayString(array)}")
+        return getArrayString(array) + "${quickCount}次"
+//        return getNumberOfTimes(quickCount)
+    }
+
+    private fun quickArray(array: IntArray, start: Int, end: Int) {
+        if (array == null || array.isEmpty() || start < 0 || end > array.size || start >= end) return
+        val index = partionArray(array, start, end)
+        if (index > start) {
+            quickArray(array, start, index - 1)
+        }
+        if (index < end) {
+            quickArray(array, index + 1, end)
+        }
+    }
+
+    private fun partionArray(array: IntArray, start: Int, end: Int): Int {
+//        val pivot = start + (Math.random() * (end - start + 1)).toInt()
+        val pivot = (start + end) / 2
+        swap(array, pivot, end)//基准数移到尾部
+
+        var index = start - 1
+        val endNum = array[end]
+        for (i in start..end) {
+            if (array[i] <= endNum) {
+                index++
+                if (i > index) {
+                    swap(array, index, i)
+                }
+            }
+        }
+        return index
+    }
+
+    private fun swap(array: IntArray, pivot: Int, end: Int) {
+        val temp = array[pivot]
+        array[pivot] = array[end]
+        array[end] = temp
+        quickCount++
+    }
+
     /**
      * 堆排序
      */
     private fun heapSort(array: IntArray): String {
 //        LogUtils.i("数据==${getArrayString(array)}")
         var count = 0//执行了多少次
-        var index: Int
-        var item: Int
-        var gap = array.size / 2
-        while (gap > 0) {
-            for (i in gap until array.size) {//默认第零个就是排好序的，从增量gap开始循环
-                index = i - gap//已排好序的队尾
-                item = array[i]//取得当前元素
-                //升序排列就是当前元素小于之前的元素，之前的元素就向后移动gap位；每一次循环前边的数据都是排好序的，所以当item大时，就放在index+gap的位置。
-                while (index >= 0 && array[index] > item) {
-                    array[index + gap] = array[index]
-                    index -= gap
-                    count++
-                }
-                array[index + gap] = item
-            }
-            gap /= 2
-        }
-
 //        LogUtils.i("count==$count")
 //        LogUtils.i("数据==${getArrayString(array)}")
-        return getArrayString(array) + "${count}次"
-    }
-
-    /**
-     * 快速排序
-     */
-    private fun quickSort(array: IntArray): String {
-//        LogUtils.i("数据==${getArrayString(array)}")
-        var count = 0//执行了多少次
-        var index: Int
-        var item: Int
-        var gap = array.size / 2
-        while (gap > 0) {
-            for (i in gap until array.size) {//默认第零个就是排好序的，从增量gap开始循环
-                index = i - gap//已排好序的队尾
-                item = array[i]//取得当前元素
-                //升序排列就是当前元素小于之前的元素，之前的元素就向后移动gap位；每一次循环前边的数据都是排好序的，所以当item大时，就放在index+gap的位置。
-                while (index >= 0 && array[index] > item) {
-                    array[index + gap] = array[index]
-                    index -= gap
-                    count++
-                }
-                array[index + gap] = item
-            }
-            gap /= 2
-        }
-
-//        LogUtils.i("count==$count")
-//        LogUtils.i("数据==${getArrayString(array)}")
-        return getArrayString(array) + "${count}次"
+//        return getArrayString(array) + "${count}次"
+        return getNumberOfTimes(count)
     }
 
     /**
@@ -582,27 +606,10 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
     private fun countSort(array: IntArray): String {
 //        LogUtils.i("数据==${getArrayString(array)}")
         var count = 0//执行了多少次
-        var index: Int
-        var item: Int
-        var gap = array.size / 2
-        while (gap > 0) {
-            for (i in gap until array.size) {//默认第零个就是排好序的，从增量gap开始循环
-                index = i - gap//已排好序的队尾
-                item = array[i]//取得当前元素
-                //升序排列就是当前元素小于之前的元素，之前的元素就向后移动gap位；每一次循环前边的数据都是排好序的，所以当item大时，就放在index+gap的位置。
-                while (index >= 0 && array[index] > item) {
-                    array[index + gap] = array[index]
-                    index -= gap
-                    count++
-                }
-                array[index + gap] = item
-            }
-            gap /= 2
-        }
-
 //        LogUtils.i("count==$count")
 //        LogUtils.i("数据==${getArrayString(array)}")
-        return getArrayString(array) + "${count}次"
+//        return getArrayString(array) + "${count}次"
+        return getNumberOfTimes(count)
     }
 
     /**
@@ -611,56 +618,21 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
     private fun cardinalitySort(array: IntArray): String {
 //        LogUtils.i("数据==${getArrayString(array)}")
         var count = 0//执行了多少次
-        var index: Int
-        var item: Int
-        var gap = array.size / 2
-        while (gap > 0) {
-            for (i in gap until array.size) {//默认第零个就是排好序的，从增量gap开始循环
-                index = i - gap//已排好序的队尾
-                item = array[i]//取得当前元素
-                //升序排列就是当前元素小于之前的元素，之前的元素就向后移动gap位；每一次循环前边的数据都是排好序的，所以当item大时，就放在index+gap的位置。
-                while (index >= 0 && array[index] > item) {
-                    array[index + gap] = array[index]
-                    index -= gap
-                    count++
-                }
-                array[index + gap] = item
-            }
-            gap /= 2
-        }
-
 //        LogUtils.i("count==$count")
 //        LogUtils.i("数据==${getArrayString(array)}")
-        return getArrayString(array) + "${count}次"
+//        return getArrayString(array) + "${count}次"
+        return getNumberOfTimes(count)
     }
 
     /**
      * 桶排序
      */
     private fun bucketSort(array: IntArray): String {
-//        LogUtils.i("数据==${getArrayString(array)}")
         var count = 0//执行了多少次
-        var index: Int
-        var item: Int
-        var gap = array.size / 2
-        while (gap > 0) {
-            for (i in gap until array.size) {//默认第零个就是排好序的，从增量gap开始循环
-                index = i - gap//已排好序的队尾
-                item = array[i]//取得当前元素
-                //升序排列就是当前元素小于之前的元素，之前的元素就向后移动gap位；每一次循环前边的数据都是排好序的，所以当item大时，就放在index+gap的位置。
-                while (index >= 0 && array[index] > item) {
-                    array[index + gap] = array[index]
-                    index -= gap
-                    count++
-                }
-                array[index + gap] = item
-            }
-            gap /= 2
-        }
-
 //        LogUtils.i("count==$count")
 //        LogUtils.i("数据==${getArrayString(array)}")
-        return getArrayString(array) + "${count}次"
+//        return getArrayString(array) + "${count}次"
+        return getNumberOfTimes(count)
     }
 
     private fun changeStrToId(): CharSequence? {

@@ -163,10 +163,6 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
     private void testMethod() {
 //        getMapLength();
 //        hashIndex();
-        StringBuilder builder = new StringBuilder("1234567890");
-        LogUtils.i("equal==" + builder);//true
-        builder.deleteCharAt(builder.length() - 1);
-        LogUtils.i("equal==" + builder);//true
     }
 
     int tableSizeFor(int cap) {

@@ -95,6 +95,7 @@ public class JavaConsole {
             list.add(str.intern());
         }
     }
+
     static String base = "string";
 
     public static void print(GenericType<? extends AB> a) {
