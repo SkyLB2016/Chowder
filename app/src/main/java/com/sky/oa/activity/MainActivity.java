@@ -163,6 +163,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
     private void testMethod() {
 //        getMapLength();
 //        hashIndex();
+base.contains()
     }
 
     int tableSizeFor(int cap) {
