@@ -358,12 +358,13 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
         return builder.toString()
     }
 
-    private fun getNumberOfTimes(count: Int) = "${count}次"
+    private fun getNumberOfTimes(count: Int, start: Long) = "${count}次；耗时：${System.currentTimeMillis() - start}ms"
 
     /**
      * 冒泡排序
      */
     private fun bubbleSorting(array: IntArray): String {
+        val time = System.currentTimeMillis()
 //        LogUtils.i("数据==${getArrayString(array)}")
         var temp: Int//临时变量
         var flag: Boolean//中断标志，如果这次的没有过交换，就证明已经排好序，跳出循环。
@@ -384,7 +385,7 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
 //        LogUtils.i("count==$count")
 //        LogUtils.i("数据==${getArrayString(array)}")
 //        return getArrayString(array) + "${count}次"
-        return getNumberOfTimes(count)
+        return getNumberOfTimes(count, time)
     }
 
     /**
@@ -392,6 +393,7 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
      */
     private fun bubbleSort(array: IntArray): String {
 //        LogUtils.i("数据==${getArrayString(array)}")
+        val time = System.currentTimeMillis()
         var temp: Int//临时变量
         var flag: Boolean
         var count = 0
@@ -411,13 +413,14 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
 //        LogUtils.i("count==$count")
 //        LogUtils.i("数据==${getArrayString(array)}")
 //        return getArrayString(array) + "${count}次"
-        return getNumberOfTimes(count)
+        return getNumberOfTimes(count, time)
     }
 
     /**
      * 选择排序
      */
     private fun selectSort(array: IntArray): String {
+        val time = System.currentTimeMillis()
         var min: Int//临时变量
         var temp: Int//临时变量
         var count = 0//执行了多少次
@@ -437,7 +440,7 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
 //        LogUtils.i("count==$count")
 //        LogUtils.i("数据==${getArrayString(array)}")
 //        return getArrayString(array) + "${count}次"
-        return getNumberOfTimes(count)
+        return getNumberOfTimes(count, time)
     }
 
     /**
@@ -445,6 +448,7 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
      */
     private fun insertSort(array: IntArray): String {
 //        LogUtils.i("数据==${getArrayString(array)}")
+        val time = System.currentTimeMillis()
         var count = 0//执行了多少次
         var index: Int
         var item: Int
@@ -462,7 +466,7 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
 //        LogUtils.i("count==$count")
 //        LogUtils.i("数据==${getArrayString(array)}")
 //        return getArrayString(array) + "${count}次"
-        return getNumberOfTimes(count)
+        return getNumberOfTimes(count, time)
     }
 
     /**
@@ -470,6 +474,7 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
      */
     private fun shellSort(array: IntArray): String {
 //        LogUtils.i("数据==${getArrayString(array)}")
+        val time = System.currentTimeMillis()
         var count = 0//执行了多少次
         var index: Int
         var item: Int
@@ -492,7 +497,7 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
 //        LogUtils.i("count==$count")
 //        LogUtils.i("数据==${getArrayString(array)}")
 //        return getArrayString(array) + "${count}次"
-        return getNumberOfTimes(count)
+        return getNumberOfTimes(count, time)
     }
 
     /**
@@ -500,10 +505,11 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
      */
     private fun mergeSort(array: IntArray): String {
         sortCount = 0
+        val time = System.currentTimeMillis()
         if (array == null || array.size < 2) return ""
         val result = splitArray(array)
 //        return getArrayString(result) + "${sortCount}次"
-        return getNumberOfTimes(sortCount)
+        return getNumberOfTimes(sortCount, time)
     }
 
     /**
@@ -545,11 +551,12 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
      */
     private fun quickSort(array: IntArray): String {
         sortCount = 0
+        val time = System.currentTimeMillis()
         quickArray(array, 0, array.size - 1)
 //        LogUtils.i("count==$count")
 //        LogUtils.i("数据==${getArrayString(array)}")
 //        return getArrayString(array) + "${sortCount}次"
-        return getNumberOfTimes(sortCount)
+        return getNumberOfTimes(sortCount, time)
     }
 
     private fun quickArray(array: IntArray, start: Int, end: Int) {
@@ -621,6 +628,7 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
      */
     private fun heapSort(array: IntArray): String {
         sortCount = 0
+        val time = System.currentTimeMillis()
         length = array.size
         //首先构建最大堆
         buildMaxHeap(array)
@@ -632,7 +640,7 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
 //        LogUtils.i("count==$sortCount")
 //        LogUtils.i("数据==${getArrayString(array)}")
 //        return getArrayString(array) + "${count}次"
-        return getNumberOfTimes(sortCount)
+        return getNumberOfTimes(sortCount, time)
     }
 
     private fun buildMaxHeap(array: IntArray) {
@@ -665,6 +673,7 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
      */
     private fun counterSort(array: IntArray): String {
 //        LogUtils.i("数据==${getArrayString(array)}")
+        val time = System.currentTimeMillis()
         var count = 0//执行了多少次
         var min = array[0]
         var max = array[0]
@@ -690,9 +699,9 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
             }
         }
 //        LogUtils.i("count==$count")
-        LogUtils.i("数据==${getArrayString(array)}")
+//        LogUtils.i("数据==${getArrayString(array)}")
 //        return getArrayString(array) + "${count}次"
-        return getNumberOfTimes(count)
+        return getNumberOfTimes(count, time)
     }
 
     /**
@@ -700,11 +709,12 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
      */
     private fun bucketSort(array: IntArray): String {
         sortCount = 0
+        val time = System.currentTimeMillis()
         val result = bucketArray(array.toList(), 5)
 //        LogUtils.i("count==$count")
-        LogUtils.i("数据==${result}")
+//        LogUtils.i("数据==${result}")
 //        return getArrayString(array) + "${count}次"
-        return getNumberOfTimes(sortCount)
+        return getNumberOfTimes(sortCount, time)
     }
 
     private fun bucketArray(array: List<Int>, bucketSize: Int): List<Int> {
@@ -759,6 +769,7 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
      */
     private fun cardinalitySort(array: IntArray): String {
 //        LogUtils.i("数据==${getArrayString(array)}")
+        val time = System.currentTimeMillis()
         var count = 0//执行了多少次
         var max = array[0]
         for (i in array) {
@@ -795,9 +806,9 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
         }
 
 //        LogUtils.i("count==$count")
-        LogUtils.i("数据==${getArrayString(array)}")
+//        LogUtils.i("数据==${getArrayString(array)}")
 //        return getArrayString(array) + "${count}次"
-        return getNumberOfTimes(count)
+        return getNumberOfTimes(count, time)
     }
 
     private fun changeStrToId(): CharSequence? {
