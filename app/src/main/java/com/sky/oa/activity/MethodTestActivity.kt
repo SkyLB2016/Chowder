@@ -318,8 +318,8 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
     }
 
     private fun sort(): CharSequence? {
-//        val array = intArrayOf(99, 12, 35, 44, 5, 9, 54, 44, 10, 66)
-        val array = getArray()
+        val array = intArrayOf(99, 12, 35, 44, 5, 9, 54, 44, 10, 66)
+//        val array = getArray()
         return "原始数据：共一千条随机数据；\n" +
 //                "原始数据：${getArrayString(array)}；\n" +
                 "冒泡排序：${bubbleSorting(array.clone())}；\n" +
@@ -555,13 +555,14 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
         quickArray(array, 0, array.size - 1)
 //        LogUtils.i("count==$count")
 //        LogUtils.i("数据==${getArrayString(array)}")
-//        return getArrayString(array) + "${sortCount}次"
-        return getNumberOfTimes(sortCount, time)
+        return getArrayString(array) + "${sortCount}次"
+//        return getNumberOfTimes(sortCount, time)
     }
 
     private fun quickArray(array: IntArray, start: Int, end: Int) {
         //跳出递归的判断
-        if (array == null || array.isEmpty() || start < 0 || end > array.size || start >= end) return
+//        if (array == null || array.isEmpty() || start < 0 || end > array.size || start >= end) return
+        if (array.size < 2 || start >= end) return
         val index = partionArray(array, start, end)//分割指示器
         //当分割指示器大于起始位置的时候，证明左侧元素还未排序完成
         if (index > start) {
@@ -945,7 +946,8 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
             override fun onClick(widget: View) {
                 showToast("始制文字，乃服衣裳。")
             }
-        }, start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }, start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//点击事件
+//        tv.setMovementMethod(LinkMovementMethod.getInstance())//点击事件还需要加入这句
 
         start = span.length
         span.append("日月盈昃，辰宿列张。\n")

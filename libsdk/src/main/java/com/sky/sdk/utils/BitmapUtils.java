@@ -255,6 +255,9 @@ public class BitmapUtils {
                     return Environment.getExternalStorageDirectory() + "/" + split[1];
                 }
             } else if (isDownloadsDocument(uri)) {
+                if (docId.startsWith("raw:")) {
+                    return docId.replaceFirst("raw:", "");
+                }
                 Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), Long.valueOf(docId));
                 return getDataColumn(context, contentUri, null, null);
             } else if (isMediaDocument(uri)) {

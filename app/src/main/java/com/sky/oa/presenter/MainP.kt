@@ -54,7 +54,7 @@ class MainP(context: Context) : BasePresenter<IMainView>(context) {
                 val iconRes = info.activityInfo.icon
                 val icon = if (iconRes == 0) R.mipmap.ic_launcher else iconRes
                 activityInfos.add(ActivityModel(label, describe, icon, info.activityInfo.name))
-//                LogUtils.i("${info.activityInfo.name}")
+                LogUtils.i("${info.activityInfo.name}")
             }
             //排序
             Collections.sort(activityInfos, comparator)

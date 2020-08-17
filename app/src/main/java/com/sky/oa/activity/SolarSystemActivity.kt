@@ -125,6 +125,7 @@ class SolarSystemActivity : BaseActivity(), Toolbar.OnMenuItemClickListener {
                 return
             }
             if (path.endsWith(".xlsx") || path.endsWith(".xls")) {
+                showToast(path)
                 showLoading()
             } else {
                 showToast("文件不是Excel格式")
