@@ -3,8 +3,16 @@ else apply plugin: 'com.android.library'
 
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+//plugins {
+////    if (IS_APP.toBoolean()) id 'com.android.application'
+////    else id 'com.android.library'
+//    id 'com.android.library'
+//    id 'kotlin-android'
+//    id 'kotlin-android-extensions'//kotlin view 注入工具
+//}
 
-apply from:"${rootDir}/buildgradle/basebuild.gradle"
+
+apply from: "${rootDir}/buildgradle/basebuild.gradle"
 android {
     defaultConfig {
         if (IS_APP.toBoolean()) applicationId "com.sky.g2048"

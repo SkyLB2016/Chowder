@@ -1,0 +1,35 @@
+MVVM、MVC、MVP
+
+●01.MVC：
+M（Model）：数据处理（网络，DB）
+V（View）：xml、view
+C（Controller）：activity，fragment
+
+VC层耦合性高，基本可以理解为一层，直接与Model层进行交互。有个优化方案是把C层中的逻辑拆分出来，不过这与MVP也就没什么差别了。
+适合于简单的以后也不会有什么变动的页面。
+
+●02.MVP
+M（Model）：数据处理（网络，DB）
+V（View）：xml、view，activity，fragment
+P（Presenter）：业务逻辑层，相当于把MVC中C层的业务单独剥离出来
+
+M <-> P <-> V
+
+业务逻辑复杂的App，P层会过于臃肿，接口过多。
+
+●03.MVVM：可以理解成加入DataBinding的MVP
+M（Model）：数据处理（网络，DB）
+V（View）：xml、view，activity，fragment
+VM（ViewModel）：业务逻辑层，
+
+M <-> VM <-> V
+
+减少了接口数量，不用再findViewById，实现了数据与视图的双向绑定，极大地简化代码。
+单向绑定（@{}）与双向绑定（@={}），可以动态更新数据。
+
+BaseObservor
+@Bindable
+notifyPropertyChanged(BR.xxx)
+
+DataBinding实现MVVM数据绑定的工具
+liveData解决MVVM的数据通信问题，可以感知组件的生命周期。

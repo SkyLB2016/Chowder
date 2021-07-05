@@ -1,7 +1,11 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'//kotlin view 注入工具
+}
+
 apply from:"${rootDir}/buildgradle/basebuild.gradle"
+
 android {
     defaultConfig {
         consumerProguardFiles 'consumer-rules.pro'

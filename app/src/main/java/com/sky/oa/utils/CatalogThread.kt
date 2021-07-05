@@ -1,6 +1,7 @@
 package com.sky.oa.utils
 
 import android.os.Handler
+import android.os.Looper
 import android.os.Message
 import com.sky.oa.model.ChapterEntity
 import java.util.*
@@ -12,8 +13,8 @@ class CatalogThread {
 
     var cataloglistener: ((MutableList<ChapterEntity>) -> Unit)? = null
 
-    private val handler = object : Handler() {
-        override fun handleMessage(msg: Message?) {
+    private val handler = object : Handler(Looper.getMainLooper()) {
+        override fun handleMessage(msg: Message) {
             cataloglistener?.invoke(msg?.obj as MutableList<ChapterEntity>)
         }
     }

@@ -33,8 +33,8 @@ class Game2048Activity : BaseActivity() {
         KeyEvent.KEYCODE_DPAD_LEFT,
         KeyEvent.KEYCODE_DPAD_RIGHT
     )
-    private val handler = object : Handler() {
-        override fun handleMessage(msg: Message?) {
+    private val handler = object : Handler(mainLooper) {
+        override fun handleMessage(msg: Message) {
             when (msg!!.what) {
                 1009 -> {
                     tvTime.text =

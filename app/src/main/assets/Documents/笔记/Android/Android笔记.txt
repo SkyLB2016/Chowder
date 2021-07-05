@@ -21,7 +21,7 @@ Folder不存在，则需调用mkdir()；
 5）dalvik是运行时编译，ART是安装时就进行编译。目前采用的是ART模式。
 6）multidex参见错误统计表.xlsx。
 7）空白行，或者有注释的的行，Java编译器都会忽略掉
-8）Android Q（系统10）中对于文件读写做了新的心智，无法直接获取除自身缓存外的其他文件，如需要之前的逻辑权限，需要在manifest中设置
+8）Android Q（系统10）中对于文件读写做了新的限制，无法直接获取除自身缓存外的其他文件，如需要之前的逻辑权限，需要在manifest中设置
 android:requestLegacyExternalStorage="true"
 
 另外，还可以通过storageManager来操作。
@@ -289,14 +289,6 @@ public void run(){
 4）application多次创建：新进程代表新的虚拟机的启动。
 通信方式：序列化serializable与parcelable，Binder，Intent，共享文件，Messenger（待深入研究AIDL），ContentProvider，socket网络通信。
 
-●21.数据序列化：Serializable与Parcelable；
-Serializable应用：
-1）FileUtils中serialize(path,value)（序列化）与deserialize(path)（反序列化）运用。
-2）静态成员变量属于类不属于对象，不参与序列化。
-3）用transient关键字标记的成员变量不参与序列化。
-Parcelable，Android独有的数据序列化，在CourseEntity中有应用。
-两者的应用比较：
-在本地保存数据时以及简单的数据通讯可以使用serializable，Parcelable主要用在内存序列化上，建议比较大的数据对象传输时使用。
 
 ●22.Binder（待深入研究）
 实现IBinder接口（aidl快速实现Binder的工具），主要用在Service开发中，AIDL在PairServiceA中有应用。

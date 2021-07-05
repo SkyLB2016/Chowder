@@ -74,19 +74,17 @@ zsh: permission denied: ./gradlew
 
 
 MAC下删除Android开发缓存
-1.AndroidStudio所在目录
-rm -rf /Applications/Android\ Studio.app
-SDK所在目录
-rm -rf ~/Library/Android/sdk
-或者也可以这么写：
-rm -rf ~/Library/Android*
+1.AndroidStudio所在目录：rm -rf /Applications/Android\ Studio.app
+SDK所在目录：rm -rf ~/Library/Android/sdk
+或者也可以这么写：rm -rf ~/Library/Android*
 
-2.AndroidStudio的缓存
-rm -rf ~/Library/Preferences/AndroidStudio*
-rm ~/Library/Preferences/com.google.android.studio.plist
-rm -rf ~/Library/Application\ Support/AndroidStudio*
-rm -rf ~/Library/Logs/AndroidStudio*
-rm -rf ~/Library/Caches/AndroidStudio*
+2.AndroidStudio的缓存，~是根目录：/Users/sky
+rm -rf ~/Library/Application\ Support/Google/AndroidStudio*
+rm -rf ~/Library/Caches/Google/AndroidStudio*
+rm -rf ~/Library/Logs/Google/AndroidStudio*
+rm -rf ~/Library/Preferences/com.google.android.studio.plist
+
+rm -rf ~/Library/Preferences/AndroidStudio*（无）
 
 3.删除gradle关联文件 (caches & wrapper)
 rm -rf ~/.gradle

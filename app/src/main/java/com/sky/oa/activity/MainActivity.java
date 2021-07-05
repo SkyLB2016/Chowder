@@ -129,8 +129,6 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
                 new String[]{Manifest.permission.WRITE_CONTACTS, Manifest.permission.READ_CONTACTS, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
                 1119);
 
-        //昔日古朝讲究德行，以德治天下，不动刀兵，但并非是不修武，而是以武威慑，以德服人。不动干戈，便只是能不动刀兵解决，能有别的方法解决的事情，便不动刀兵，而非是真的不动干戈。
-        //易筋经、五禽戏、六字诀和八段锦
         //Rw2 B2 U2 Lw U2 Rw' U2 Rw U2 F2 Rw F2 Lw' B2 Rw2
         //LogUtils.i("${javaClass.simpleName}==${Throwable().stackTrace[0].methodName}")
         fab.setOnClickListener(new View.OnClickListener() {
@@ -147,6 +145,15 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
 //            testMethod();
 //        });
         fabLeft.setVisibility(View.GONE);
+        Handler h=new Handler(getMainLooper()){
+//            public void handleMessage(@android.annotation.NonNull Message msg) {
+//            }
+
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                super.handleMessage(msg);
+            }
+        };
     }
 
     String a = "android";
@@ -201,6 +208,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
 
     private void getMapLength() {
         Map<String, String> map = new HashMap<>(11);
+
         map.put("Aa", "string");
 //        map.put("BB", "string");
         Class cla = map.getClass();

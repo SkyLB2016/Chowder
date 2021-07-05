@@ -71,7 +71,7 @@ git层级：
     简拼：gd --stat
 (6)git reset 取消全部add到缓存里的内容；
     简拼：grh
-    git reset <file>  取消此文件add到缓存里的内容;
+    git reset <file>  取消此文件add到缓存里的内容";
     简拼：grh file
 (7)git commit -m "注释" 提交到本地库;
     简拼：gcmsg

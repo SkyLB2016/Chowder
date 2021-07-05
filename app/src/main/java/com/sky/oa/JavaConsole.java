@@ -35,8 +35,44 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JavaConsole {
+    static class MyThread extends Thread {
+        String name;
+        MyThread join;
 
-    public static void main(String[] args) {
+        public MyThread(String name) {
+            this.name = name;
+        }
+
+        public void setJoin(MyThread join) {
+            this.join = join;
+        }
+
+        @Override
+        public void run() {
+            while (!interrupted()) {
+                System.out.println(name + "isRunning" + join.name);
+                try {
+                    join.join(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    System.out.println(name + "isRunning");
+                }
+            }
+            System.out.println(name + interrupted());
+        }
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        int available =Runtime.getRuntime().availableProcessors();
+        System.out.println(available);
+//        MyThread t1 = new MyThread("t1");
+//        MyThread t2 = new MyThread("t2");
+//        t1.setJoin(t2);
+//        t2.setJoin(t1);
+//        t1.start();
+//        t2.start();
+//        Thread.sleep(2000);
+//        t1.interrupt();
 //        BigDecimal num2 = new BigDecimal(0.88);
 //        for (int i = 0; i < 0; i++) {
 //            System.out.println("字符串==");
@@ -88,12 +124,12 @@ public class JavaConsole {
 //        list.get(0);
 //        Pair<String, String> pair = new Pair<>("头部", "尾部");
 
-        List list = new ArrayList();
-        for (int i = 0; i < Integer.MAX_VALUE; i++) {
-            String str = base + base;
-            base = str;
-            list.add(str.intern());
-        }
+//        List list = new ArrayList();
+//        for (int i = 0; i < Integer.MAX_VALUE; i++) {
+//            String str = base + base;
+//            base = str;
+//            list.add(str.intern());
+//        }
     }
 
     static String base = "string";

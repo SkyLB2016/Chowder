@@ -1,7 +1,10 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'//kotlin view 注入工具
-apply plugin: 'kotlin-kapt'//kotlin的annotationProcessor
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'//kotlin view 注入工具
+    id 'kotlin-kapt'//kotlin的annotationProcessor
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 //    implementation fileTree(include: ['*.jar'], dir: 'libs')

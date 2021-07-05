@@ -145,8 +145,9 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
     }
 
     private fun dynamicProxy(): String {
-        val hair = Cuthair()
         val company = DynamicProxy()
+
+        val hair = Cuthair()
         company.factory = hair
         val factory = company.proxyInstance as Hair
         return factory.cutHait(20)

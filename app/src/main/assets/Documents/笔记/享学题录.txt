@@ -1,6 +1,5 @@
 Android题录
 
-
 ●01.查找算法的分类
 1）静态查找和动态查找：
 注：静态或者动态都是针对查找表而言的。动态查找指标中有删除和插入操作的表
@@ -34,7 +33,7 @@ Android题录
 IntentService在执行onCreate操作的时候，内部开了一个线程，去执行耗时操作。通过Handler Looper Message的方式实现了一个多线程的操作，同时耗时操作也可以被这个线程管理和执行，不会产生ANR。
 
 ●03.Fragment 的生命周期 11个
-onAttach() -> onCreate -> onCreateView -> onActivityCreated -> onStart -> onResume -> onPause -> onStop -> onDestoryView -> onDestory -> onDetach
+onAttach() -> onCreate -> onCreateView -> onViewCreate -> onActivityCreated -> onStart -> onResume -> onPause -> onStop -> onDestoryView -> onDestory -> onDetach
 
 ●04.Fragment 的添加过程
 1）add 添加新的Fragment，需要与 hide 和 show 配合使用。推荐使用
@@ -68,62 +67,70 @@ RecyclerView 需要自己实现接口，来实现点击事件，麻烦但扩展�
 4）ListView 并不强制用ViewHolder，如果要使用，需要自己定义。不使用每次 findViewById 的话，会降低性能，造成卡顿等。
 RecyclerView 有自己的ViewHolder，必须使用。
 5）ListView 两级缓存
-1.mActiveViews 用于屏幕内ItemView快速重用
-2.mScrapViews 用于缓存离开屏幕的ItemView
+1、mActiveViews 用于屏幕内ItemView快速重用
+2、mScrapViews 用于缓存离开屏幕的ItemView
 
 RecyclerView 四级缓存：
-1.mChangeScrap 与 mAttachedScrap 用于屏幕内 ItemView 快速重用。
-2.mCachedViews 默认上限为2，即缓存屏幕外2个ItemView
-3.mViewCacheExtension 用户自定义缓存，一般不使用，我没用过。
-4.mRecyclerPool:RecycledViewPool 从缓存中被移除后的缓存池，默认上限是5。
+1、mChangeScrap 与 mAttachedScrap 用于屏幕内 ItemView 快速重用。
+2、mCachedViews 默认上限为2，即缓存屏幕外2个ItemView
+3、mViewCacheExtension 用户自定义缓存，一般不使用，我没用过。
+4、mRecyclerPool:RecycledViewPool 从缓存中被移除后的缓存池，默认上限是5。
 
 6）缓存对象不同：ListView 缓存的是View本身；
 RecyclerView 缓存的是ViewHolder。
 7）ListView具有setEmptyView，addHeaderView，addFooterView
 RecyclerView支持局部刷新
 
-●.RecyclerView嵌套卡顿如何解决？
+●07.RecyclerView嵌套卡顿如何解决？
 1）设置预加载的数量LinearLayoutManager.setInitialPrefetchItemCount(4)，默认加载是2个。
 2）设置子项缓存，设置自带滑动冲突属性setHasFixedSize(true);setNestedScorollingEnabled(false);可以完美解决。
 3）不过Google不推荐RecyclerView嵌套使用，需要嵌套尽量找类似于ExpandableListview第三方控件来解决。
 
+●08.为什么要使用ViewHolder？
+ListView的是把ViewHolder缓存在View的tag中，RecyclerView是把View缓存在ViewHolder中。
+ViewHolder中缓存了view的数据，不用多次findViewById。效率更高。
 
+●09.数据序列化：序列化与反序列化，是数据存储与读取的一个过程。
+Serializable 是 JDK提供的原生序列化接口，需要与ObjectOutputStream （输出，序列化）与 ObjectInputStream 配合使用；
+parcelable 是 Android 特有的，只在内存中使用。需要重写一个方法一个接口。
+json数据也是序列化的一种，对象转成json是序列化，json转成对象是反序列化。
+这三者定是对序列化的具体流程走向的规范化。
 
+Serializable应用：
+1）FileUtils中serialize(path,value)（序列化）与deserialize(path)（反序列化）运用。
+2）静态成员变量属于类不属于对象，不参与序列化。
+3）用transient关键字标记的成员变量不参与序列化。
 
+Parcelable，Android独有的数据序列化，在CourseEntity中有应用。
+两者的应用比较：
+在本地保存数据时以及简单的数据通讯可以使用serializable，Parcelable主要用在内存序列化上，建议比较大的数据对象传输时使用。
 
+●10.匿名内部类里使用的形参为什么是final？
+匿名内部类虽然没有名称，但也是一个类 class，所以内部类的局部变量持有的引用变了，外部类的变量不会改变，同理使用过程中外部类的改变了，内部类的也不会改变，为了避免引用值发生改变，加上final，让变量不可变。
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-●01.java中equal与==的区别
+●11.java中equal与==的区别
 1）基本数据类型==比较的是值，非基本类型比较的是内存地址
 2）Object默认equal比较的是内存地址。可重写其方法，按自己的需求来定义相比较的内容。
+
+●12.减少OOM的概率
+1）尽可能少的发生内存泄漏
+2）尽可能不在循环中申请内存。
+3）尽可能不在调用次数多的函数中申请内存。
+
+●12.什么是依赖注入？
+就是成员变量的值是通过构造器，set，接口，注入的。
+
+●13.什么是注解？
+注解就是标签
+
+
+
+
+
 
 ●02.handler机制与RaJava有什么区别：相同都是为了线程间通信
 1）Rxjava线程切换更方便，可以直接切换子线程和UI线程，handler需要在子线程中发送消息，在主线程中去接收消息，才能改变UI。
 2）RxJava是观察者模式，Handler消息队列用的是双向链表，类似于linkedList，是责任链模式。
-
-双向链表是什么？有哪些应用？
-
 
 ●03.广播有几种创建方式，有什么区别？
 两种，动态注册和静态注册（8.0以后不能静态注册广播，官方说法是为了省电）；区别：

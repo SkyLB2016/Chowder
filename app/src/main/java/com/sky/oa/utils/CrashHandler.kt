@@ -63,7 +63,7 @@ class CrashHandler : Thread.UncaughtExceptionHandler {
      */
     private fun sendCrash(ex: Throwable?) {
         val pm = context?.packageManager
-        val pi = pm!!.getPackageInfo(context?.packageName, PackageManager.GET_ACTIVITIES)
+        val pi = pm!!.getPackageInfo(context!!.packageName, PackageManager.GET_ACTIVITIES)
         "App Version：" + pi.versionName + "-" + pi.versionCode
         "OS Version：" + Build.VERSION.RELEASE + "-" + Build.VERSION.SDK_INT
         "Vendor：" + Build.MANUFACTURER
@@ -113,7 +113,7 @@ class CrashHandler : Thread.UncaughtExceptionHandler {
     @Throws(PackageManager.NameNotFoundException::class)
     private fun dumpPhoneInfo(pw: PrintWriter) {
         val pm = context?.packageManager
-        val pi = pm!!.getPackageInfo(context?.packageName, PackageManager.GET_ACTIVITIES)
+        val pi = pm!!.getPackageInfo(context!!.packageName, PackageManager.GET_ACTIVITIES)
         pw.println("App Version：" + pi.versionName + "-" + pi.versionCode)
         pw.println("OS Version：" + Build.VERSION.RELEASE + "-" + Build.VERSION.SDK_INT)
         pw.println("Vendor：" + Build.MANUFACTURER)

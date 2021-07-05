@@ -98,16 +98,16 @@ class ImageUriActivity : RecyclerPActivity<String, ImageUriP>(), ImageUriV<Strin
     }
 
     private fun getMinPositions(firstPositions: IntArray): Int {
-        return (0 until firstPositions.size)
+        return firstPositions.indices
             .map { firstPositions[it] }
-            .min()
-            ?: firstPositions[0]
+            .minOf { it ?: firstPositions[0] }
+
     }
 
     private fun getMaxPositions(lastPositions: IntArray): Int {
         return (lastPositions.indices)
             .map { lastPositions[it] }
-            .max()
+            .maxOf { it }
             ?: lastPositions[0]
     }
 
