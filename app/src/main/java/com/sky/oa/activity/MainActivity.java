@@ -31,6 +31,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.reflect.TypeToken;
 import com.sky.design.adapter.RecyclerAdapter;
 import com.sky.design.app.BaseActivity;
 import com.sky.design.app.BasePActivity;
@@ -40,6 +41,7 @@ import com.sky.oa.TreeNode;
 import com.sky.oa.adapter.MainAdapter;
 import com.sky.oa.api.view.IMainView;
 import com.sky.oa.model.ActivityModel;
+import com.sky.oa.other.annotation.BindId;
 import com.sky.oa.presenter.MainP;
 import com.sky.sdk.net.http.ApiResponse;
 import com.sky.sdk.utils.AppUtils;
@@ -85,7 +87,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
     FloatingActionButton fab;
     @BindView(R.id.fabLeft)
     FloatingActionButton fabLeft;
-
+    @BindId(88)
     private MainAdapter adapter;
     Handler handler = new Handler(new Handler.Callback() {
         @Override
@@ -204,6 +206,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
         Vector vector = new Vector();
         LruCache cache = new LruCache(88);
         LinkedHashMap<String, String> linkedHashMap = new LinkedHashMap<>();
+
     }
 
     private void getMapLength() {

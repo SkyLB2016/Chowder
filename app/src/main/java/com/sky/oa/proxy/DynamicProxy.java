@@ -23,7 +23,10 @@ public class DynamicProxy implements InvocationHandler {
     public Object getProxyInstance() {
         return Proxy.newProxyInstance(
                 factory.getClass().getClassLoader(),
-                factory.getClass().getInterfaces(), this);
+//                DynamicProxy.class.getClassLoader(),
+                factory.getClass().getInterfaces(),
+//                new Class[]{Hair.class},
+                this);
     }
 
     @Override

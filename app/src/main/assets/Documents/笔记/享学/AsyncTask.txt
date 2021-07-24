@@ -1,0 +1,45 @@
+●08.AsyncTask
+1）onPreExecute()  准备工作，如显示进度条可以在此初始化。
+2）doInBackground(params)  异步任务，只有此方法是执行在子线程中，在onPreExecute之后立即执行。
+3）onProgressUpdate(values)  可在此设置进度条的更新，需要在doInBackground()中调用publishProgress()方法
+4）onPostExecute(result)  异步任务完成后返回的结果。
+
+●09.AsyncTask的实现原理：参考版本10.0系统
+AsyncTask是创建一个FutureTask(Callable)的任务，通过execute方法把任务加入到任务池，之后再转到线程池中。
+内部的任务池和线程池可以说都是饿汉模式的单例，类加载的时候就已经确定了。
+
+10.0系统下AsyncTask的实现过程：
+第一步：创建AsyncTask，并把任务加入任务池中；
+new AsyncTask()时，新建了一个Callable，一个FutureTask，在调用execute(params)时，会把状态设为Running，执行执行onPreExecute()方法，设置Callable的参数，把FutureTask放入任务池中。
+具体代码如下：
+mStatus = Status.RUNNING;//变为运行状态，之前有状态检查，如果已经运行了，会抛出异常，所以execute只能调用一次。
+onPreExecute();//执行准备方法
+mWorker.mParams = params;//为Callable设置参数。
+exec.execute(mFuture);//把FutureTask加入任务池中，开始执行。
+
+第二步：放入任务池后，开始轮循取出任务，交给线程池，开始执行；
+private static volatile Executor sDefaultExecutor = SERIAL_EXECUTOR;
+此成员变量是个任务池，内部有一个双端队列ArrayQueue（最大16个元素）；
+在execute()方法中通过offer将任务加入队列尾部中，紧接着调用scheduleNext()方法，通过poll取出队首任务加入线程池执行。
+
+第三步：线程池中的线程开始调用Runnable任务，执行Callable的call方法
+然后开始执行Callable中的call方法，其中会调用doInBackground(params)方法。
+完成后返回的结果，会在在FutureTask中的done方法中调用get获取，通过postResultIfNotInvoked(result)方法传递给Handler；
+在handlermessage方法中调用AsyncTask的finish()方法返回result，其中会调用onPostExecute(result)方法。会在这个方法中检查是否已取消。
+
+public static final Executor THREAD_POOL_EXECUTOR;
+此成员变量就是线程池，10.0系统下，此线程池内的队列使用的是SynchronousQueue，一个只有一个元素的阻塞队列，
+一个核心线程，20的最大线程数，一个元素的阻塞队列，加一个初始容量为16的ArrayQueue（任务池），没有上限；没有上限，那要饱和策略啥用，还真能突破int的最大值？，之后再添加会执行饱和策略。
+
+10.0系统下的饱和策略是再创建一个线程池，来容纳多出来的任务，此线程池采用了链表LinkedBlockingQueue，默认上限，默认开启5个核心线程，最大也只开5个，因为开启了超时机制，所以这五个核心线程之后是会被回收的。
+
+●10.AsyncTask的优缺点
+优点：AsyncTask是一个轻量级的异步任务处理类，使用方便，代码简洁，整个异步任务可以通过cancel()进行控制。
+缺点：不适用于处理长时间的异步任务，一般这个任务过程最好控制在几秒以内，如果长时间的异步任务就需要考虑多线程的控制问题，当处理多个异步任务时，UI更新变得复杂。
+
+●11.Handler的优缺点
+优点：代码结构清晰，容易处理多个异步任务。
+缺点：消息的优先级当有多个异步任务时，由于要配合Thread或Runnable，代码可能会稍显冗余。
+
+总结：AsyncTask不失为一个非常好用的异步任务处理类，只要不是频繁大量对UI进行更新，可以考虑使用。
+而Handler在处理大量UI更新时可以考虑使用。

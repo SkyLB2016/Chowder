@@ -2,12 +2,18 @@ package com.sky.oa;
 
 import android.util.Pair;
 
+import androidx.annotation.Nullable;
+
+import com.google.gson.reflect.TypeToken;
 import com.sky.oa.model.A;
 import com.sky.oa.model.AB;
 import com.sky.oa.model.Employe;
 import com.sky.oa.model.GenericType;
+import com.sky.oa.proxy.Cuthair;
+import com.sky.oa.proxy.Hair;
 import com.sky.oa.thread.JoinThread;
 import com.sky.oa.thread.MyThread;
+import com.sky.sdk.net.http.ApiResponse;
 import com.sky.sdk.utils.LogUtils;
 import com.sky.sdk.utils.RegexUtils;
 
@@ -28,14 +34,30 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+import java.lang.reflect.TypeVariable;
+import java.net.ProxySelector;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
+import java.util.concurrent.BlockingQueue;
 
 public class JavaConsole {
     static class MyThread extends Thread {
+        //        static int count = 0;
+        static ThreadLocal<Integer> count = new ThreadLocal<Integer>() {
+            @Nullable
+            @org.jetbrains.annotations.Nullable
+            @Override
+            protected Integer initialValue() {
+                return 48;
+            }
+        };
         String name;
         MyThread join;
 
@@ -49,29 +71,75 @@ public class JavaConsole {
 
         @Override
         public void run() {
-            while (!interrupted()) {
-                System.out.println(name + "isRunning" + join.name);
+            while (count.get() < 100) {
                 try {
-                    join.join(1);
+                    if (join != null)
+                        join.join(1000, 9999);
+                    if (count.get() > 50 && count.get() < 55) sleep(10000);
+//                    wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                    System.out.println(name + "isRunning");
+                    System.out.println(name + "isRunning异常捕获" + isInterrupted());
                 }
+                System.out.println(name + "isRunning" + "==次数" + count.get());
+                count.set(count.get() + 1);
             }
             System.out.println(name + interrupted());
+//            BlockingQueue
+//            Stack
         }
     }
 
     public static void main(String[] args) throws InterruptedException {
-        int available =Runtime.getRuntime().availableProcessors();
-        System.out.println(available);
+//        int available =Runtime.getRuntime().availableProcessors();
+//        System.out.println(available);
+//        Thread.currentThread()
+        Class<?> a = int.class;
+        Class<Integer> b = Integer.class;
+        Class<Integer> c = Integer.TYPE;
+        System.out.println("a的类名==" + a);
+        System.out.println("b的类名==" + b);
+        System.out.println("c的类名==" + c);
+        String d = "d";
+        Class<? extends String> e = d.getClass();
+        try {
+            Constructor constructor = e.getConstructor(e);
+            String df = (String) constructor.newInstance("dfdf");
+            System.out.println("df的内容==" + df);
+        } catch (NoSuchMethodException noSuchMethodException) {
+            noSuchMethodException.printStackTrace();
+        } catch (IllegalAccessException illegalAccessException) {
+            illegalAccessException.printStackTrace();
+        } catch (InstantiationException instantiationException) {
+            instantiationException.printStackTrace();
+        } catch (InvocationTargetException invocationTargetException) {
+            invocationTargetException.printStackTrace();
+        }
+        System.out.println("e的类的简名==" + e.getSimpleName());
+//        TypeToken<ApiResponse<String>> typeToken = new TypeToken<ApiResponse<String>>() {
+//        };
+//        System.out.println(typeToken.getType());
+//        System.out.println(typeToken.getRawType());
+//        Cuthair hair = new Cuthair();
+//        Hair h = (Hair) Proxy.newProxyInstance(JavaConsole.class.getClassLoader(), new Class[]{Hair.class}, new InvocationHandler() {
+//            @Override
+//            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+//                System.out.println(method.getName()+"=="+args[0]);
+//                return method.invoke(hair, args);
+//            }
+//        });
+//        h.cutHait(99);
 //        MyThread t1 = new MyThread("t1");
 //        MyThread t2 = new MyThread("t2");
 //        t1.setJoin(t2);
 //        t2.setJoin(t1);
-//        t1.start();
 //        t2.start();
-//        Thread.sleep(2000);
+//        t1.start();
+//        t2.join();
+//        System.out.println(t1.isAlive());
+//        Thread.sleep(3000);
+//        System.out.println(t1.isAlive());
+
 //        t1.interrupt();
 //        BigDecimal num2 = new BigDecimal(0.88);
 //        for (int i = 0; i < 0; i++) {

@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
  * @Description: TODO
  * @date 15/12/25 下午2:16
  */
-@Target(ElementType.FIELD)
+@Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface BindId {
     int value();

@@ -1,34 +1,38 @@
 享学课堂
 
 加油学习。
+精气神，精满气足神旺。
+学而不思则罔，思而不学则殆。
 面试其实就是考试，你想拿优秀，还是不及格呢？
 学习效率，有效的时间内学习更多的知识。
-天才不可怕，可怕的是天才逼你更努力。
+天才不可怕，可怕的是天才比你更努力。
 
-专用名词：
-缺省：就是默认
-实参：实际参数，类中定义的，可以是常量，变量，表达式，函数等，还有类型（泛型结构中的T）。
-形参：形式参数，就是方法后边的参数名，用来在方法被调用时，接收传进来的实参具体的值。
-原生类型：就是Object或者泛型限定类型变量的第一个类。之所以不是八种基本类型，是因为基本类型变量不能作为泛型的参数。
-
-变量：基本类型变量和引用类型变量
+名词解释：
+1）实参：实际参数，类中定义的，可以是常量，变量，表达式，函数等，还有类型（泛型结构中的T）。
+2）形参：形式参数，就是方法后边的参数名，用来在方法被调用时，接收传进来的实参具体的值。
+3）变量：基本类型变量和引用类型变量
 基本类型变量：八种基本类型变量，利用八个关键字声明的变量就是基本类型变量，不能是他们的包装类。
 引用类型变量：栈内存中存储的是一个引用，它指向对象在堆内存中的位置（对象的存储地址）。除八个关键字外，其他所有变量均是引用类型变量。
-Reference：引用
 
 String text=new String();
 String 是类型，其class信息在方法区/永久代/全局区。
-text   是引用变量，在当前线程的虚拟机栈上。
+text   是引用变量，作为成员变量时，随所在类的实例对象同在堆上，作为局部变量时，随方法的栈帧在当前线程的虚拟机栈上。
 new String() 是对象，在堆内存上。
 
+javac xxx.java 编译成class文件
+javap -c xxx.class 查看字节码
+javap -v xxx.class 查看详细的字节码
+javac -classpath compiler.jar(自定义的APT) xxx.java(目标文件) yyy.java(注解文件)
+
 第一章 Java中的泛型 Generic
-●01.泛型的好处，或者说为什么需要泛型？
+●01.什么是泛型，有哪些？
+在定义类、接口和方法时,使类型成为参数，分别被称为泛型类、泛型接口、泛型方法，三者互不影响，可以同时存在。
+与方法声明中使用的形式参数非常相似，所以也可以称之为：类型参数。
+
+●02.泛型的好处，或者说为什么需要泛型？
 1）适用于多种数据类型执行相同的代码。
 2）泛型中的类型在使用时指定，不需要强制类型转换。
-
-●02.什么是泛型，有哪些？
-泛型是在定义类、接口和方法时使类型成为参数。分别被称为泛型类、泛型接口、泛型方法，三者互不影响，可以同时存在。
-与方法声明中使用的形式参数非常相似，所以也可以称之为：类型参数。
+3）在编译期，可以进行更强的代码类型检查。
 
 ●知识扩展：
 可以理解成“参数化类型”，将类型作为实参传入，形参接收；
@@ -43,26 +47,29 @@ T,V extends Serializable&Comparable
 T与后边的类和接口没有继承关系
 
 ●04.泛型中的约束和局限性：七种
-1）不能实例化类型变量，也就是不能new T()。
-2）不能用八种基本类型作为实例化参数；必须换成八种类型的包装类才行，因为基本类型不是对象。
+1）无法实例化具有基本类型的泛型类型。必须换成八种类型的包装类才行，因为基本类型不是对象。
+2）无法创建类型参数的实例。也就是不能new T()。
 3）泛型类实例化时，前后的泛型类型必须统一，即使是继承关系也不行。
-4）因为对象通过getclass()方法获取的类名是不带后边类型参数的，所以不能用 instanceof 做比。java中的泛型是伪泛型，包装的时候后边的类型会被擦除，强制转成 原生类型（Object或者继承的超类（第一个））。
-5）不能在静态域或方法中使用，因为泛型是对象创建时才初始化，而静态域与方法是在new之前就创建好的。
+4）无法用 instanceof 做比，因为对象通过getclass()方法获取的类名是不带后边类型参数的。java中的泛型是伪泛型，包装时后边的类型会被擦除，强制转成 原生类型（Object）或者限定类型变量的第一个类。
+5）无法在静态域或方法中使，因为泛型是对象创建时才初始化，而静态域与方法是在new之前就创建好的。
 但是本身就是泛型方法就可以，如：
 private static <T> T getInstance(){};
 因为调用的同时类型就确定了，所以可以使用。
 
-6）不能创建参数化类型的数组，但是不带就行了，不过不推荐，还是用 List 更好。
+6）无法创建参数化类型的数组
+不带虽然可以，但不推荐，还是用 List 更好。
 ApiResponse<String>[] response = new ApiResponse<String>[2]; //不可以
 ApiResponse<String>[] response = new ApiResponse[2];//可以，但不推荐
-7）泛型类不能继承Exception/Throwable，这么写是不行的：A<T> extends Exception;(没啥用)
-可以作为限定类型Exception，例：T extends Exception，但是不能捕获也就是不能catch到继承Exception/Throwable的泛型类实例，但是可以抛出，也就是throws T
+7）无法创建，捕获或抛出参数化类型的对象。
+泛型类不能继承Exception/Throwable。这么写是不行的：class A<T> extends Exception{}
+可以作为限定类型变量，例：T extends Exception，但是不能捕获（catch）到继承Exception/Throwable的泛型类实例，但可以抛出，也就是throws T
 
 ●05.通配符类型，在参数类型中使用
 只在方法参数以及成员变量中使用，不能在类中使用，可以从是否能安全转型来理解。
 1）无限通配符：?，表示对类型没有限制，当成object理解就行了，调用getFist返回的是object类型，setFist不能被调用。
 
-2）? extends X:限定了参数的父类上限，主要用于安全的访问数据，可以访问X及其子类型，并且不能写入非空数据
+2）? extends X:限定了参数的父类上限，主要用于数据的安全访问，可以访问X及其子类型，并且不能写入非空数据
+可以理解为生产者，只往外卖，不往里收。
 分两种情况：
 1、作为参数传递时，传入的参数只能是X以及X的子类，如下
 public void print(GenericType<? extends X> type){}//传入的参数只能是X以及他的子类
@@ -75,7 +82,8 @@ X x=type.getData();//可以获取，返回X
 List<? extends X> list=new List<>();
 list.add(child)//这样也是不行的。
 
-3）？super X:限定了参数的子类下限，必须是X的超类，主要用于安全的写入数据，可以写入X及其子类。
+3）？super X:限定了参数的子类下限，必须是X的超类，主要用于数据的安全写入，可以写入X及其子类。
+可以理解为消费者，只往里买，不往外卖。
 也分两种情况：
 1、作为参数传递时，传入的参数只能是X以及X的超类，如下：
 public void print(GenericType<? supper X> type)//传入的参数只能是X以及他的超类
@@ -102,7 +110,37 @@ Signature是其中最重要的一项属性，他的作用就是存储一个方�
 
 ●知识扩展：是不是同一个方法，jdk是靠返回类型，方法名，参数三者来判断的，但编译工具只判断方法名和参数。
 
-第二章：反射原理以及动态代理模式
+第二章：注解原理，反射原理以及动态代理模式
+注解原理
+●01.注解 Annotation，JDK5.0引入的一种注释机制。使用 @interface 关键字，来表示一个注解类的声明。
+
+●02.元注解：声明注解类的应用范围
+1）@Target：表示注解类可以使用的范围
+ElementType.ANNOTATION_TYPE：可以用于注解类型
+ElementType.CONSTRUCTOR：用于构造函数
+ElementType.FIELD：用于字段或属性
+ElementType.LOCAL_VARIABLE：用于局部变量
+ElementType.METHON：用于方法
+ElementType.PACKAGE：用于包声明
+ElementType.PARAMETER：用于方法参数
+ElementType.TYPE：用于类
+ElementType.TYPE_USE：用于类的任何元素
+ElementType.TYPE_PARAMETER：用于类型参数声明
+2）@Retention：规定注解类存在的范围，三种：
+RetentionPolicy.SOURCE：只在源码中存在，Javac编译成class文件时会被剔除掉，其中会执行APT操作。可以用于生成额外的类或者语法检查（如参数类型限定）。
+RetentionPolicy.CLASS：可以在javac编译后的class文件中存在，代码运行时会被忽略。可以进行插桩操作，对于相同的代码，可以通过注解来同时添加，如埋点操作。
+RetentionPolicy.RUNTIME：可以在代码运行时存在，反射就应用在此，也只能用在此处。
+3）@Documented：被javadoc工具提取成文档
+4）@Inherited：表示允许子类继承父类中定义的注解
+5）参数类型限定的注解类有：@IntDef,@DrawableRes，在androidx.annotation
+
+●03注解类中可以有多个属性，可以有默认值；在只有一个的时候使用value字段，此为默认字段。传值时，只有一个字段value时，可以直接赋值，多个值时需要key-value对应。
+
+●04.Java中Enum（枚举）实际是特殊单例的静态成员变量，在运行期所有枚举类作为单例，加载到内存中，比常量多5到10倍的内存占用。
+
+●05.APT 注解处理器：Annotation Processor Tools，javac自带。EventBus3，tinker，butterknifer中都有应用。
+
+反射原理
 ●01.反射 Reflection
 反射就是在运行时才知道要操作的类是什么，并且可以在运行时获取类的完整构造，并调用对应的方法。
 反射是Java被视为动态语言的关键，反射机制允许程序在执行期借助于Reflection Api取得任何类的内部信息，并能直接操作任意对象的内部属性及方法。
@@ -116,33 +154,40 @@ Signature是其中最重要的一项属性，他的作用就是存储一个方�
 获取class实例的三种方式：
 1）通过类名获取：类名.class
 2）通过对象获取：对象引用名.getclass()
-3）通过全类名获取：Class.ForName(com.sky.study.MainActivity)
+3）通过全类名获取：Class.forName(com.sky.study.MainActivity),classloader.loadClass(全类名)
+4）八种基本类型还能获取type，如：Integer.TYPE
 
 ●03.class常用方法：
 1）static Class forName(String name) 返回指定类名name的class对象
 2）Object newInstance() 调用缺省构造函数，返回该class对象的一个实例
-3）Object newInstance(Object[] args) 调用当前格式构造函数，返回该class对象的一个实例
-4）getName() 返回此Class对象所表示的实体（类、接口、数据类、基本类型或Void）名称
-5）Class getSuperClass() 返回当前Class对象的父类的Class对象
-6）Class[] getInterfaces() 返回当前Class对象所有的接口
-7）ClassLoader getClassLoader() 返回该类的类加载器
-7）Type getGenericSuperclass() 返回该类的泛型类
+3）getName() 返回此Class对象所表示的实体（类、接口、数据类、基本类型或Void）名称
+4）Class getSuperClass() 返回当前Class对象的父类的Class对象
+5）Class[] getInterfaces() 返回当前Class对象所有的接口
+6）ClassLoader getClassLoader() 返回该类的类加载器
+7）Type getGenericSuperclass() 返回该类的泛型类，
+8）setAccessible() 访问私有的，在使用反射时，此属性非常重要。
 
 获取构造器：需要转成指定对应实例
-getConstructors() 全部构造器
-getConstructor(Class<?> params) 单个构造器，以及对应的参数
+getConstructors() 获取公共的构造器，包括父类
+getConstructor(Class<?>... params) 获取对应参数的公共构造器，包括父类。
+getDeclaredConstructors() 获取自身所有构造函数，包含私有。
+getDeclaredConstructor(Class<?>... params) 获取指定的构造函数
 
-获取方法 Method
+获取方法 Method，调用使用 invoke(Object obj,Object... args)实例对象，具体参数数组
 getMethods()  获取所有的public方法，包含父类的
+getMethod(String name,Class<?>... parameterTypes)  获取所有的public方法，包含父类的
 getDeclaredMethods() 获取自身所有的方法，包含私有的。
-getDeclaredMethod() 获取指定方法
+getDeclaredMethod(String name,Class<?>... parameterTypes) 获取指定方法
 
-获取属性 Field
+获取属性 Field，调用使用get/set方法。
 getFields() 获取所有的public属性，包含父类的
-getDeclaredFields() 获取自身的所有属性
-getDeclaredField() 获取指定属性
+getField(String name) 获取指定的公共属性，包含父类的
+getDeclaredFields() 获取自身的所有属性，包含私有
+getDeclaredField(String name) 获取指定属性，包含私有
 
-setAccessible() 访问私有的
+●知识扩展
+Type 类，获取泛型的真实类型，例如gson的TypeToken获取的type类型。
+为什么必须要一个大括号，其实就相当于匿名内部类，他会在class编译时，自动转换成一个class类，会将泛型signature信息记录到class元数据中。
 
 ●04.代理模式，分为静态代理，与动态代理（Proxy InvocationHandler）
 1）静态代理包含：接口，实现类，包含实现类的代理类（同样继承接口，在相同的方法内调用实现类的方法），访问者。
@@ -155,6 +200,11 @@ InvocationHandler是给动态代理类实现的，负责处理调用接口里的
 
 ●知识扩展：
 proxy中的 getProxyClass0() 方法会判断接口长度是否超出65535的限制，会抛出 IllegalArgumentException 异常
+
+Proxy.newProxyInstance()的三个参数
+ClassLoader loader：类加载器
+Class<?>[] interfaces：需要对接的接口，用实现类来获取更好，有些实现类会继承多个接口；也可以用数据直接定死。xx.getClass.getInterfaces() 或者 new Class[]{接口.class}
+InvocationHandler h ：方法的反射操作。method.invoke(实现类的实例，args)
 
 类的完整生命周期：
 java源文件->java字节码->class对象->实例对象->卸载；周而复始。
@@ -179,7 +229,8 @@ RR调度中损耗时间最大的可能就是线程切换（上下文切换），
 ●02.什么是进程和线程
 1）进程是操作系统在运行时进行资源分配的最小单位。系统给进程分配CPU、磁盘io、内存等资源
 2）线程是CPU调度的最小单位，必须依赖于进程而存在。
-3）打个比喻就是进程是个盒子，线程是放进去的物品。启动进程的同时，肯定会创建一个线程。多个线程可以共享进程的资源。
+
+打个比喻就是进程是个盒子，线程是放进去的物品。启动进程的同时，肯定会创建一个线程。多个线程可以共享进程的资源。
 
 ●知识扩展：
 进程和CPU没有直接关系，线程是CPU直接运行的。
@@ -188,7 +239,7 @@ RR调度中损耗时间最大的可能就是线程切换（上下文切换），
 
 ●03.并行和并发
 1）并行是是同时运行，和处理器是几线程的有关，如四核心八线程，就是并行8个线程。
-2）并发是单位时间内能处理的线程数量。举例来说就是一条路每小时通行车辆的最大数量。
+2）并发是单位时间内能处理的线程量。举例来说就是一条路每小时通行车辆的最大数量。
 并发是通过时间片轮转机制来实现并发，一秒钟执行多少个时间片就是这个核心的并发数，超线程的话就是2倍。
 
 ●04.高并发编程的意义，好处和注意事项。
@@ -200,15 +251,15 @@ RR调度中损耗时间最大的可能就是线程切换（上下文切换），
 ●05.Java天生就是多线程的，一个main启动了六个线程
 1）Monitor Ctrl-Break  监控Ctrl-break中断的信号
 2）Attach Listener  内存Dump，线程dump，类信息统计，获取系统属性等
-3）Signal Dispatcher  分发处理发送个JVM信号的线程
+3）Signal Dispatcher  分发处理发送给JVM信号的线程
 4）Finalizer  调用对象finalize方法的线程，可能会被Reference Handler提前杀掉，造成资源回收不了
 5）Reference Handler 清除Reference的线程
 6）main  主线程，程序入口。
 
-●06.线程的新建方法：三种
+●06.线程的新建方法：两种
 1）直接实现Thread。
 2）实现Runnable，交给Thread去执行。
-3）实现Callable，交给FutureTask包装，再交给Thread执行。
+另一种形式是：实现Callable，交给FutureTask包装，再交给Thread执行。FutureTask是Runnable的子类
 
 ●知识扩展：无论Runnable还是Callable都只是一个接口，内中方法也只是一个可以执行的普通方法。线程只有Thread一种。
 
@@ -230,49 +281,60 @@ RR调度中损耗时间最大的可能就是线程切换（上下文切换），
 3）isInterrupted() 对interrupt的检测，是否中断
 4）static interrupted() 也是对interrupt的检测，但是为true时，执行了此方法，会将中断标记重置为false。目前实现为native方法，之前也是在内部调用的本线程的isInterrupted方法。
 5）run()  执行任务，实现业务逻辑的地方，和普通方法无区别。
-6）join() 插队，可以无限插队
-void join(long millis) 插队的时长
-void join(long millis, int nanos) 插队的时长
+6）join() 插队，相当于两个线程同步执行。
+join(long millis)
+join(long millis, int nanos) 1毫秒等于一百万纳秒，所以这到底有啥用
 7）yield() 让出CPU，进入就绪队列（可运行状态，让出时间不确定），等待CPU分配时间片。不会释放锁。
 而且让出后有可能又会被立刻选中进入执行状态，因为线程切换（上下文切换），其他线程都需要重新加载。
 8）sleep() 让出CPU，进入阻塞状态。不会释放锁。
 static void sleep(long millis)
-static void sleep(long millis, int nanos)
+static void sleep(long millis, int nanos) 1毫秒等于一百万纳秒
+
+●start() 与 run()的区别？
+run方法只是函数调用，start执行后才是一个线程的启动。
+
+●继承自runnable的run检测interrupt通过Thread.currentThread().isInterrupted();
 
 ●09.Thread 自己默认的锁机制
 说明：等待与通知，调用synchronized锁定对象的wait与notify/notifyAll，且只能在synchronized修饰的方法内使用。推荐wait 与 notifyAll 搭配使用。
 1）wait()  等待通知或被中断才会返回，让出CPU，释放锁。
-2）wait(long)  等待通知或被中断才会返回，让出CPU，释放锁。超时返回
-3）wait(long,int纳秒)  等待通知或被中断才会返回，让出CPU，释放锁。超时返回，
-4）notify  通知一个在对象上等待的线程，唤醒的是哪条线程不确定，只有一个线程的时候无所谓。
-5）notifyAll  通知所有在对象上等待的线程
+wait(long) 超时返回
+wait(long millis,int nanos)  超时返回。1毫秒等于一百万纳秒
+2）notifyAll  通知所有在对象上等待的线程
+3）notify  通知一个在对象上等待的线程，唤醒的是哪条线程不确定，只有一个线程的时候无所谓。
 
 ●知识扩展： sleep、wait、yield、join的区别？
 1）sleep、wait、join 都会抛出 InterruptException 异常。
 sleep与wait是线程在阻塞状态下，依然会检查中断标记是否改变，变为true时则抛出异常，同时将中断标记重置为false。如要结束线程，需要在catch里执行一次interrupt()方法，通知已有的结束代码，或者直接在catch里结束。
-join会刨除异常是因为当前线程可能在阻塞状态下，插队必然要提前唤醒该线程。
+join，有一个等待机制，其内部执行的是wait方法，所以也会检测中断标记，同时重置为false。
 yield本质是让出CPU，既然是让出，那肯定是在运行时才会有让出，没有阻塞，自然不会有异常抛出。
 2）sleep、yield 不会释放锁，会让出CPU；
 wait释放锁，让出CPU；
 join抢锁，抢CPU；
+3) sleep，睡眠结束后，线程进入就绪状态。
+wait需要notify/notifyAll来唤醒，唤醒后线程进入就绪状态。
+join，直接抢夺当前线程的执行权，相当于同步线程，执行完后，才会之前的线程。
+yield 让出执行权，线程进入等待状态，如有其他空闲CPU，线程又会立即执行。
 
-处于死锁状态下的线程无法被中断。
+处于死锁状态下的线程无法被中断，但可以把进程干掉，单核单线程的干不掉。
 
 ●知识扩展：线程的其他方法：
 static Thread currentThread() 返回对当前正在执行的线程对象的引用。
 long getId() 返回该线程的标识符。
 String getName() 返回该线程的名称。
-int getPriority() 返回线程的优先级。线程的优先级，由于系统原因，不能保证。所以没卵用。
+int getPriority() 返回线程的优先级。
 boolean isAlive() 线程是否处于活动状态。
-void setDaemon(boolean on)将该线程标记为守护线程或用户线程。
-void setPriority(int newPriority)更改线程的优先级，只能在线程开始前设置。
+void setDaemon(boolean on) 将该线程标记为守护线程或用户线程，就是依赖关系。A线程在B线程中启动，A依赖于B，B结束的同时，A也会结束。
+void setPriority(int newPriority)设置线程的优先级，只能在线程开始前设置。线程的优先级，由于系统原因，不能保证。所以没卵用。
 
 ●10.threadLocal
-说明：线程隔离，独有变量设定，需要static final修饰。因为每个线程都是自己独立的虚拟机栈，所以成员变量本身就是独有的，而类变量才是全局的，可以理解为单例的饿汉模式。
+说明：线程隔离，独有变量设定，需要static (final)修饰。因为每个线程都是自己独立的虚拟机栈，所以成员变量本身就是独有的，而类变量才是全局的，可以理解为单例的饿汉模式。
 1）initialValue() 初始化变量，默认为空。
 2）get()
 3）set()  值变化后，需重新设置，否则还是 初始值。
 4）remove() 回收当前线程的局部变量。即使不回收，线程结束后也将自动被垃圾回收。他的作用只是加快了内存回收的速度。
+
+●ThreadLocal本质上是在线程中创建了一个ThreadLocalMap，内部是Entry数组，key就是ThreadLocal对象本身。因为ThreadLocalMap本身就是线程独有的，所以不存在抢占问题，效率更高。
 
 第二节 锁的使用
 ●01.锁的种类：
@@ -371,58 +433,11 @@ Executors创建的ExecutorService，allowCoreThreadTimeOut在ThreadPoolExecutor�
 4）任务的依赖性：是否依赖其他系统资源，如本地文件，数据库。
 
 CPU密集型：计算相关，所以快，应该配置尽可能少的线程，防止线程切换造成的资源浪费。配置：cpu核心数+1
-IO密集型：涉及io操作，执行时间一般较长，可以多配置一些。通常：2*cpu核心数+1
+IO密集型：涉及io操作，执行时间一般较长，可以多配置一些。通常：2*cpu核心数
 混合型：两者执行时间相差不大那就拆分开，变成两个任务去执行，一定比两者串行要快；相差过大，那就无所谓了。
 
-之所以加1，是防止有运行的线程阻塞后，CPU可以立马获取下一个等待线程。
-Runtime.getRuntime().availableProcessors() 当前可用的逻辑核心数
-
-●08.AsyncTask
-1）onPreExecute()  准备工作，如显示进度条可以在此初始化。
-2）doInBackground(params)  异步任务，只有此方法是执行在子线程中，在onPreExecute之后立即执行。
-3）onProgressUpdate(values)  可在此设置进度条的更新，需要在doInBackground()中调用publishProgress()方法
-4）onPostExecute(result)  异步任务完成后返回的结果。
-
-●09.AsyncTask的实现原理：参考版本10.0系统
-AsyncTask是创建一个FutureTask(Callable)的任务，通过execute方法把任务加入到任务池，之后再转到线程池中。
-内部的任务池和线程池可以说都是饿汉模式的单例，类加载的时候就已经确定了。
-
-10.0系统下AsyncTask的实现过程：
-第一步：创建AsyncTask，并把任务加入任务池中；
-new AsyncTask()时，新建了一个Callable，一个FutureTask，在调用execute(params)时，会把状态设为Running，执行执行onPreExecute()方法，设置Callable的参数，把FutureTask放入任务池中。
-具体代码如下：
-mStatus = Status.RUNNING;//变为运行状态，之前有状态检查，如果已经运行了，会抛出异常，所以execute只能调用一次。
-onPreExecute();//执行准备方法
-mWorker.mParams = params;//为Callable设置参数。
-exec.execute(mFuture);//把FutureTask加入任务池中，开始执行。
-
-第二步：放入任务池后，开始轮循取出任务，交给线程池，开始执行；
-private static volatile Executor sDefaultExecutor = SERIAL_EXECUTOR;
-此成员变量是个任务池，内部有一个双端队列ArrayQueue（最大16个元素）；
-在execute()方法中通过offer将任务加入队列尾部中，紧接着调用scheduleNext()方法，通过poll取出队首任务加入线程池执行。
-
-第三步：线程池中的线程开始调用Runnable任务，执行Callable的call方法
-然后开始执行Callable中的call方法，其中会调用doInBackground(params)方法。
-完成后返回的结果，会在在FutureTask中的done方法中调用get获取，通过postResultIfNotInvoked(result)方法传递给Handler；
-在handlermessage方法中调用AsyncTask的finish()方法返回result，其中会调用onPostExecute(result)方法。会在这个方法中检查是否已取消。
-
-public static final Executor THREAD_POOL_EXECUTOR;
-此成员变量就是线程池，10.0系统下，此线程池内的队列使用的是SynchronousQueue，一个只有一个元素的阻塞队列，
-一个核心线程，20的最大线程数，一个元素的阻塞队列，加一个初始容量为16的ArrayQueue（任务池），没有上限；没有上限，那要饱和策略啥用，还真能突破int的最大值？，之后再添加会执行饱和策略。
-
-10.0系统下的饱和策略是再创建一个线程池，来容纳多出来的任务，此线程池采用了链表LinkedBlockingQueue，默认上限，默认开启5个核心线程，最大也只开5个，因为开启了超时机制，所以这五个核心线程之后是会被回收的。
-
-●10.AsyncTask的优缺点
-优点：AsyncTask是一个轻量级的异步任务处理类，使用方便，代码简洁，整个异步任务可以通过cancel()进行控制。
-缺点：不适用于处理长时间的异步任务，一般这个任务过程最好控制在几秒以内，如果长时间的异步任务就需要考虑多线程的控制问题，当处理多个异步任务时，UI更新变得复杂。
-
-●11.Handler的优缺点
-优点：代码结构清晰，容易处理多个异步任务。
-缺点：消息的优先级当有多个异步任务时，由于要配合Thread或Runnable，代码可能会稍显冗余。
-
-总结：AsyncTask不失为一个非常好用的异步任务处理类，只要不是频繁大量对UI进行更新，可以考虑使用。
-而Handler在处理大量UI更新时可以考虑使用。
-
+之所以加1，是防止有页缺失（内存中无数据，需要到虚拟（硬盘）中读取数据）的线程，CPU可以立马获取下一个等待线程。
+Runtime.getRuntime().availableProcessors()  当前可用的逻辑核心数
 
 第四章 JVM虚拟机的原理
 第一节 了解JVM
@@ -439,7 +454,7 @@ jvm不只支持java，也支持scala、kotlin、groovy。
 1）模块化：使用的最多OSGI，应用层面就是微服务，互联网的发展方向。
 2）混合语言：多个语言都可以运行在JVM中。
 3）多核并行CPU从高频次转变为多核心，多核时代，jdk1.7引入了fork/join，JDK1.8提出lambda表达式（函数式编程天生适合并行运行）
-4）丰富与法：JDK5提出自动装箱、泛型、动态注解等于发。JDK7二进制原生支持。try-catch-finally至try-with-resource
+4）丰富与法：JDK5提出自动装箱、泛型、动态注解等语法。JDK7二进制原生支持。try-catch-finally至try-with-resource
 5）64位虽然同样的程序64位内存消耗比32位要多一点，但是支持内存大，所以虚拟机都会完全过渡到64位。
 5）更强的垃圾回收机制：JDK11-ZGC(TB级别内存回收)：有色指针、加载屏障
 
@@ -459,7 +474,7 @@ Stack 与 Heap 都运行在内存上，在内存空间上字节码指令不必�
 ●知识扩展：为什么需要程序计数器？
 java是多线程的，意味着线程切换，程序计数器能确保多线程情况下的程序能正常执行。
 
-●03.虚拟机栈：存储当前线程运行方法所需的数据，指令、返回地址。栈的大小缺省为1M，栈结构。（大小设置 -Xss）
+●03.虚拟机栈：存储当前线程运行方法所需的数据。栈的大小缺省为1M，栈结构。（大小设置 -Xss）
 1）每个线程私有的，线程运行时，在执行每个方法的时候都会打包成一个栈帧。
 2）栈帧包含：局部变量表、操作数栈、动态链接、方法出口（返回地址）、栈上分配的对象（逃逸分析）。
 3）每个时刻正在执行的当前方法就是虚拟机栈顶的栈帧。
@@ -470,10 +485,10 @@ java是多线程的，意味着线程切换，程序计数器能确保多线程�
 
 ●04.栈帧：
 1）局部变量表（Local Variable Table）：
-在编译程序代码的时候就可以去确定栈帧中需要多大的局部变量表，具体大小可以在编译后的class文件中看到。
+在编译程序代码的时候就可以确定栈帧中需要多大的局部变量表，具体大小可以在编译后的class文件中看到。
 局部变量表的容量以 Variable Slot（变量槽）为最小单位，每个变量槽都可以存储32位长度的内存空间，用于存放八大基本数据类型和对象的引用变量（所以引用变量永远是4bytes，对象在堆中）。如果是64位的就用高低位占用两个也可以放下。
 2）操作数栈：在编译期就可以确定大小，栈上分配应该也可以在此阶段确定。
-存放操作数的一块临时空间，是一个栈，操作的元素可以是任意的java数据类型，执行期间会一直运行入栈出栈的操作。
+存放操作数的一块临时空间，是一个栈结构，操作的元素可以是任意的java数据类型，执行期间会一直运行入栈出栈的操作。
 3）动态链接：
 存放编译时不能确定方法入口的方法地址，需要在运行时来保证方法调用的正确性。如动态特性（groovy、JS、动态代理），native方法，常量池。
 4）返回地址：
@@ -549,8 +564,8 @@ JDK8以后大小就只受本机总内存的限制。
 内存溢出是怎么回事？
 因为空闲列表记录的内存块是分隔开的，当其中最大的内存块都不足以容下对象时，就会OOM。一般发生在对象的频繁创建与回收的时候。
 
-选择哪种分配方式有Java堆内存是否规整决定，而堆内存是否规整由所采用的垃圾收集器是否带有压缩整理功能决定。
-这两种情况在分配内存是都会有并发问题：并发安全：
+选择哪种分配方式由Java堆内存是否规整决定，而堆内存是否规整由所采用的垃圾收集器是否带有压缩整理功能决定。
+这两种情况在分配内存时都会有并发问题：并发安全：
 多线程下同时获得了指针，可能出现正在给A对象分配内存，指针还没来得及修改，另一个线程的对象B又同时使用了原来的指针来分配内存的情况。
 
 因为要是使用锁机制的话，效率上会很慢，所以不采用，这里主要有两种解决方案：
@@ -570,14 +585,17 @@ TLAB的目的是为了减少同步开销，但对象所在空间其他线程也�
 5）对象初始化：在完成上面的步骤后，一个对象在虚拟机角度就算创建完成了，接下来就是按照程序猿的设定进行定制化操作（也就是构造器里的参数赋值），这样才算完全创建成功。
 
 ●知识扩展：悲观锁与乐观锁？
-所有的锁又是悲观锁。
+所有的锁都是悲观锁。
 乐观锁，拿到oldVale，执行操作，获得newValue，写回数据是，比较oldValue是否改变，为改变写回；改变了，重新操作。
 
+●CAS机制怎么保证两个线程同时进行比较？
+这个是硬件CPU层面保证的。可以理解为：CPU保证了只有第一个进入的线程看到的是old值，其他线程看到的都是old+1
+
 ●02.对象的内存分布
-在HotSpot虚拟机中，对象在内存中存储的布局可以分为3块区域：对象头（Header）、实例数据（Instance Data）、对其填充（Padding）。
+在HotSpot虚拟机中，对象在内存中存储的布局可以分为3块区域：对象头（Header(markWord)）、实例数据（Instance Data）、对其填充（Padding）。
 1）对象头包括两部分信息，
 第一部分用于存储对象自身的运行时数据，如哈希码（HashCode）、GC分代年龄、锁状态标志、线程持有的锁、偏向线程ID、偏向时间戳，对象地址（引用变量里保存的就是这个地址）等、
-第二部分是对象类型数据指针（对象类型数据是放在方法区的类信息），即对象指向它的类元数据的指针，虚拟机通过这个指针来确定这个对象是哪个类的实例。
+第二部分是对象类型（class）数据指针（对象类型数据是放在方法区的类信息）classPoint，即对象指向它的类元数据的指针，虚拟机通过这个指针来确定这个对象是哪个类的实例。
 2）实例数据就是代码中所定义的各种类型的字段内容。
 3）对其填充起着占位符的作用，这是由于HotSpot VM的自动内存管理系统要求对象的大小必须是8字节的整数倍。不足时，就需要对其填充来补齐。
 

@@ -155,3 +155,99 @@ object..name=""
 8）
 9）
 10）
+Compiled from "GenericType.java"
+public class com.sky.oa.model.GenericType<T> {
+  public com.sky.oa.model.GenericType();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public void setData(T);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: putfield      #2                  // Field data:Ljava/lang/Object;
+       5: return
+
+  public T getData();
+    Code:
+       0: aload_0
+       1: getfield      #2                  // Field data:Ljava/lang/Object;
+       4: areturn
+}
+
+Classfile /Users/sky/Documents/WorkSpace/Chowder/app/src/main/java/com/sky/oa/model/GenericType.class
+  Last modified 2021-7-23; size 527 bytes
+  MD5 checksum 539263212aafbd0c509887c4fe8b631e
+  Compiled from "GenericType.java"
+public class com.sky.oa.model.GenericType<T extends java.lang.Object> extends java.lang.Object
+  minor version: 0
+  major version: 52
+  flags: ACC_PUBLIC, ACC_SUPER
+Constant pool:
+   #1 = Methodref          #4.#22         // java/lang/Object."<init>":()V
+   #2 = Fieldref           #3.#23         // com/sky/oa/model/GenericType.data:Ljava/lang/Object;
+   #3 = Class              #24            // com/sky/oa/model/GenericType
+   #4 = Class              #25            // java/lang/Object
+   #5 = Utf8               data
+   #6 = Utf8               Ljava/lang/Object;
+   #7 = Utf8               Signature
+   #8 = Utf8               TT;
+   #9 = Utf8               <init>
+  #10 = Utf8               ()V
+  #11 = Utf8               Code
+  #12 = Utf8               LineNumberTable
+  #13 = Utf8               setData
+  #14 = Utf8               (Ljava/lang/Object;)V
+  #15 = Utf8               (TT;)V
+  #16 = Utf8               getData
+  #17 = Utf8               ()Ljava/lang/Object;
+  #18 = Utf8               ()TT;
+  #19 = Utf8               <T:Ljava/lang/Object;>Ljava/lang/Object;
+  #20 = Utf8               SourceFile
+  #21 = Utf8               GenericType.java
+  #22 = NameAndType        #9:#10         // "<init>":()V
+  #23 = NameAndType        #5:#6          // data:Ljava/lang/Object;
+  #24 = Utf8               com/sky/oa/model/GenericType
+  #25 = Utf8               java/lang/Object
+{
+  public com.sky.oa.model.GenericType();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+      LineNumberTable:
+        line 6: 0
+
+  public void setData(T);
+    descriptor: (Ljava/lang/Object;)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #2                  // Field data:Ljava/lang/Object;
+         5: return
+      LineNumberTable:
+        line 10: 0
+        line 11: 5
+    Signature: #15                          // (TT;)V
+
+  public T getData();
+    descriptor: ()Ljava/lang/Object;
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #2                  // Field data:Ljava/lang/Object;
+         4: areturn
+      LineNumberTable:
+        line 14: 0
+    Signature: #18                          // ()TT;
+}
+Signature: #19                          // <T:Ljava/lang/Object;>Ljava/lang/Object;
+SourceFile: "GenericType.java"

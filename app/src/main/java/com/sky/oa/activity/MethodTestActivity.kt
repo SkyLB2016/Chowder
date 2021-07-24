@@ -33,6 +33,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.sky.design.app.BaseActivity
 import com.sky.design.app.BasePActivity
+import com.sky.oa.JavaConsole
 import com.sky.oa.R
 import com.sky.oa.fragment.AddressFragment
 import com.sky.oa.fragment.TimeFragment
@@ -55,6 +56,7 @@ import com.sky.sdk.utils.LogUtils
 import com.sky.sdk.utils.MD5Utils
 import kotlinx.android.synthetic.main.activity_method.*
 import java.io.File
+import java.lang.reflect.Proxy
 import java.net.URL
 import java.text.Collator
 import java.text.DecimalFormat
@@ -70,14 +72,33 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val method = arrayListOf(
-            "字符替换与数组化", "hash相同", "字体颜色背景变换"
-            , "系统信息", "获取app信息", "电池电量"
-            , "数组排序", "json转换", "list迭代器", "list筛选lambda"
-            , "Intent测试", "时间选择", "地址选择", "工厂模式"
-            , "SVG与Value", "渐变的文字", "音频处理", "字符串转id"
-            , "排序算法", "LinkedList使用"
-            , "MD5加密", "科学计数法", "虚拟机鉴定", "获取当前方法的名称"
-            , "输出View的位置信息", "URL的结构", "静态代理",
+            "字符替换与数组化",
+            "hash相同",
+            "字体颜色背景变换",
+            "系统信息",
+            "获取app信息",
+            "电池电量",
+            "数组排序",
+            "json转换",
+            "list迭代器",
+            "list筛选lambda",
+            "Intent测试",
+            "时间选择",
+            "地址选择",
+            "工厂模式",
+            "SVG与Value",
+            "渐变的文字",
+            "音频处理",
+            "字符串转id",
+            "排序算法",
+            "LinkedList使用",
+            "MD5加密",
+            "科学计数法",
+            "虚拟机鉴定",
+            "获取当前方法的名称",
+            "输出View的位置信息",
+            "URL的结构",
+            "静态代理",
             "动态代理"
         )
         for (i in method) {
@@ -146,11 +167,21 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
 
     private fun dynamicProxy(): String {
         val company = DynamicProxy()
-
+//
         val hair = Cuthair()
         company.factory = hair
         val factory = company.proxyInstance as Hair
         return factory.cutHait(20)
+//
+//        val hair = Cuthair()
+//        val proxy = Proxy.newProxyInstance(
+//            MethodTestActivity::class.java.classLoader,
+//            arrayOf<Class<*>>(Hair::class.java)
+//        ) { proxy, method, args ->
+//            method?.invoke(hair, *args)
+//        }
+//        val h = proxy as Hair
+//        return h.cutHait(29)
     }
 
     /**
@@ -359,7 +390,8 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
         return builder.toString()
     }
 
-    private fun getNumberOfTimes(count: Int, start: Long) = "${count}次；耗时：${System.currentTimeMillis() - start}ms"
+    private fun getNumberOfTimes(count: Int, start: Long) =
+        "${count}次；耗时：${System.currentTimeMillis() - start}ms"
 
     /**
      * 冒泡排序
@@ -968,7 +1000,12 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
         start = span.length
         span.append("闰余成岁，律吕调阳。\n")
         end = span.length
-        span.setSpan(BackgroundColorSpan(Color.rgb(55, 155, 200)), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        span.setSpan(
+            BackgroundColorSpan(Color.rgb(55, 155, 200)),
+            start,
+            end,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
 
         start = span.length
         span.append("云腾致雨，露结为霜。\n")
@@ -993,12 +1030,22 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
         start = span.length
         span.append("海咸河淡，鳞潜羽翔。\n")
         end = span.length
-        span.setSpan(RelativeSizeSpan(1.2f), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//字号按比例翻倍
+        span.setSpan(
+            RelativeSizeSpan(1.2f),
+            start,
+            end,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )//字号按比例翻倍
 
         start = span.length
         span.append("龙师火帝，鸟官人皇。\n")
         end = span.length
-        span.setSpan(URLSpan("http://www.baidu.com"), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)//超链接
+        span.setSpan(
+            URLSpan("http://www.baidu.com"),
+            start,
+            end,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )//超链接
 
         span.append(getText(R.string.ibu))
         return span
