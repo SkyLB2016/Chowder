@@ -848,11 +848,11 @@ class MethodTestActivity : BaseActivity(), View.OnClickListener, Observer {
     private fun changeStrToId(): CharSequence? {
         val text = StringBuilder()
 
-        //第一种方法
+        //第一种方法：调用resources
         val id1 = resources.getIdentifier("jsonobj", "string", packageName)
         text.append(getString(id1).replace(" ", ""))
 
-        //第二种方法
+        //第二种方法：反射
         //val id = R.string::class.java.getField("jsonobj").getInt(R.string())
         val id = R.string::class.java.getField("jsonobj").getInt("string")
         text.append(getString(id).replace(" ", ""))

@@ -93,9 +93,9 @@ scrollTo/scrollBy：操作简单，适合对View内容的滑动；
   AT_MOST,自适应模式，warp_content,需要用setMeasureDimension(width,height)设置算好的宽高；
   UNSPECIFIED，想要多大即多大，所以可以超过屏幕尺寸，显示不下的在屏幕之外；用于系统内部，目前没用过。
 5）onSizeChanged()：组件大小改变时回调；
-6）onLayout()：控件内的子控件的显示位置，自定义ViewGroup时用
+6）onLayout()：控制内部子控件显示的位置，自定义ViewGroup时用
 7）onDraw()：绘制所需要显示的内容
-8）onWindowFocusChanged()：当包含该组件的窗口失去或的得到焦点时回调
+8）onWindowFocusChanged()：当包含该组件的窗口失去或得到焦点时回调
 退出时的顺序回调onWindowVisibilityChanged->onWindowFocusChanged->onDetachedFromWindow
 
 非顺序回调：

@@ -6,6 +6,7 @@
 
 
     <color name="color_FFC107">#FFC107</color><!--状态栏颜色 -->
+    <color name="color_DDC29F07">#CB03810F</color>
     <color name="color_FF4081">#FF4081</color>
 
     <color name="color_FAC36C">#FAC36c</color>
@@ -71,7 +72,6 @@
     <color name="alpha_00000000">#00000000</color>
     <color name="alpha_66">#66000000</color>
     <color name="alpha_99">#99000000</color>
-    <color name="color_DDC29F07">#DDC29F07</color>
     <color name="red">#F12B2A</color>
     <color name="light_orange">#FFEFAB</color>
     <color name="dark_orange">#FFF6D0</color>

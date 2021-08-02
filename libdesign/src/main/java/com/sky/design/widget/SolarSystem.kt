@@ -45,7 +45,11 @@ class SolarSystem @JvmOverloads constructor(
 
     private var mState = State.CLOSE// 默认状态
     var menuItemOnClick: ((View, Int) -> Unit)? = null
-    var menuState: ((Boolean) -> Unit)? = null
+
+    //    var menuState: ((Boolean) -> Unit)? = null
+//    var menuState: (Boolean) -> Unit = { flag -> flag }
+    var menuState: (Boolean) -> Unit = { flag ->  }
+
     /**
      * @return 判断是打开还是关闭状态
      */
@@ -55,10 +59,12 @@ class SolarSystem @JvmOverloads constructor(
      * 中心按钮是否旋转，默认旋转
      */
     var rotateMenu = true
+
     /**
      * 点击子vew后是否回收,默认回收
      */
     var isRecoverChild = true
+
     /**
      * 是否正在执行动画
      */
@@ -161,8 +167,12 @@ class SolarSystem @JvmOverloads constructor(
      */
     private fun onMenuClick(v: View) {
         if (isRotating) return
-        if (isOpen) menuState?.invoke(false)
-        else menuState?.invoke(true)
+//        if (isOpen) menuState?.invoke(false)
+//        else menuState?.invoke(true)
+
+        if (isOpen) menuState(false)
+        else menuState(true)
+
         if (rotateMenu) ObjectAnimator.ofFloat(v, "rotation", 0f, 720f).setDuration(1000).start()
         toggleMenu(TIME)//子view弹出与收回
     }

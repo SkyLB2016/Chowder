@@ -1,5 +1,6 @@
 package com.sky.oa;
 
+import android.os.Parcelable;
 import android.util.Pair;
 
 import androidx.annotation.Nullable;
@@ -9,6 +10,7 @@ import com.sky.oa.model.A;
 import com.sky.oa.model.AB;
 import com.sky.oa.model.Employe;
 import com.sky.oa.model.GenericType;
+import com.sky.oa.model.IdName;
 import com.sky.oa.proxy.Cuthair;
 import com.sky.oa.proxy.Hair;
 import com.sky.oa.thread.JoinThread;
@@ -27,6 +29,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.Externalizable;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -34,6 +39,9 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
@@ -46,8 +54,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.FutureTask;
 
 public class JavaConsole {
+    static ThreadLocal<Integer> count = new ThreadLocal<Integer>();
+
     static class MyThread extends Thread {
         //        static int count = 0;
         static ThreadLocal<Integer> count = new ThreadLocal<Integer>() {
@@ -91,35 +102,40 @@ public class JavaConsole {
     }
 
     public static void main(String[] args) throws InterruptedException {
+//        System.out.println(count.get());
+//        count.set(8);
+//        serial();
+//        System.out.println(count.get());
+//        long start = System.currentTimeMillis();
+//        List<IdName> list = new ArrayList<>();
+//        IdName idName = null;
+//        for (int i = 0; i < 50000000; i++) {
+////            list.add(new IdName("id", "王大胖 "));
+//            idName = new IdName("id", "王大胖 ");
+//            list.add(idName);
+//        }
+//        System.out.println(System.currentTimeMillis() - start + "ms");
+
+        String a = "abc";
+        String b = "abc";
+        String c = new String("abc");
+        String d = new String("abc").intern();
+        System.out.println(a == b);//true
+        System.out.println(a == c);//false
+        IdName idName = new IdName("id", "王大胖 ");
+        IdName idName1 = new IdName("id", "王大胖 ");
+        System.out.println(idName.getId() == idName1.getId());//true
+        idName.setName("ww");
+        idName1.setName("ww");
+        System.out.println(idName.getName() == idName1.getName());//true`
+        System.out.println(a == b ? "相等" : "不相等");
+//        Thread.sleep(Integer.MAX_VALUE);
 //        int available =Runtime.getRuntime().availableProcessors();
 //        System.out.println(available);
 //        Thread.currentThread()
-        Class<?> a = int.class;
-        Class<Integer> b = Integer.class;
-        Class<Integer> c = Integer.TYPE;
-        System.out.println("a的类名==" + a);
-        System.out.println("b的类名==" + b);
-        System.out.println("c的类名==" + c);
-        String d = "d";
-        Class<? extends String> e = d.getClass();
-        try {
-            Constructor constructor = e.getConstructor(e);
-            String df = (String) constructor.newInstance("dfdf");
-            System.out.println("df的内容==" + df);
-        } catch (NoSuchMethodException noSuchMethodException) {
-            noSuchMethodException.printStackTrace();
-        } catch (IllegalAccessException illegalAccessException) {
-            illegalAccessException.printStackTrace();
-        } catch (InstantiationException instantiationException) {
-            instantiationException.printStackTrace();
-        } catch (InvocationTargetException invocationTargetException) {
-            invocationTargetException.printStackTrace();
-        }
-        System.out.println("e的类的简名==" + e.getSimpleName());
-//        TypeToken<ApiResponse<String>> typeToken = new TypeToken<ApiResponse<String>>() {
-//        };
-//        System.out.println(typeToken.getType());
-//        System.out.println(typeToken.getRawType());
+//        Serializable
+//        Parcelable
+//        Externalizable
 //        Cuthair hair = new Cuthair();
 //        Hair h = (Hair) Proxy.newProxyInstance(JavaConsole.class.getClassLoader(), new Class[]{Hair.class}, new InvocationHandler() {
 //            @Override
@@ -198,6 +214,58 @@ public class JavaConsole {
 //            base = str;
 //            list.add(str.intern());
 //        }
+    }
+
+    private static void clazzloader() {
+        Class<?> a = int.class;
+        Class<Integer> b = Integer.class;
+        Class<Integer> c = Integer.TYPE;
+        System.out.println("a的类名==" + a);
+        System.out.println("b的类名==" + b);
+        System.out.println("c的类名==" + c);
+        String d = "d";
+        Class<? extends String> e = d.getClass();
+        try {
+            Constructor constructor = e.getConstructor(e);
+            String df = (String) constructor.newInstance("dfdf");
+            System.out.println("df的内容==" + df);
+        } catch (NoSuchMethodException noSuchMethodException) {
+            noSuchMethodException.printStackTrace();
+        } catch (IllegalAccessException illegalAccessException) {
+            illegalAccessException.printStackTrace();
+        } catch (InstantiationException instantiationException) {
+            instantiationException.printStackTrace();
+        } catch (InvocationTargetException invocationTargetException) {
+            invocationTargetException.printStackTrace();
+        }
+        System.out.println("e的类的简名==" + e.getSimpleName());
+        TypeToken<ApiResponse<String>> typeToken = new TypeToken<ApiResponse<String>>() {
+        };
+        System.out.println(typeToken.getType());
+        System.out.println(typeToken.getRawType());
+    }
+
+    private static void serial() {
+        IdName idName = new IdName("id", "王大胖 ");
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        try {
+            System.out.println(count.get());
+            count.remove();
+            ObjectOutputStream oos = new ObjectOutputStream(bos);
+            oos.writeObject(idName);
+            oos.writeObject(idName);
+            System.out.println(bos.toByteArray());
+            ByteArrayInputStream bis = new ByteArrayInputStream(bos.toByteArray());
+            ObjectInputStream ois = new ObjectInputStream(bis);
+            IdName idName1 = (IdName) ois.readObject();
+            IdName idName2 = (IdName) ois.readObject();
+            System.out.println(idName.toString());
+            System.out.println(idName1.toString());
+            System.out.println(idName2.toString());
+            System.out.println(idName == idName1);
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     static String base = "string";

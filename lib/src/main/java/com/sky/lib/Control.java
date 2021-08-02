@@ -13,8 +13,13 @@ public class Control {
 //            System.out.println("[" + threadInfo.getThreadId() + "] " + threadInfo.getThreadName());
 //        }
 
-        new LockThread(true).start();
-        new LockThread(false).start();
+//        new LockThread(true).start();
+//        new LockThread(false).start();
+
+        String a=new String("abc");
+        ClassLoader loader = String.class.getClassLoader();
+        System.out.println("classLoader=="+loader.getName());
+        System.out.println("classLoader=="+loader.getParent().getName());
     }
 }
 
