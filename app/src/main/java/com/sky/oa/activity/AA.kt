@@ -1,6 +1,7 @@
 package com.sky.oa.activity
 
 import com.sky.oa.model.Person
+import kotlin.concurrent.thread
 
 fun main() {
 //    val a = "${'$'}999.99"
@@ -13,11 +14,16 @@ fun main() {
     for (i in array) {
 
     }
-    fun a(){
-        val per =Person(10,"person")
+    fun a() {
+        val per = Person(10, "person")
         per.id
 //    per.name
         println(per.id)
     }
-    a()
+    a().let {  }
+    run {
+
+    }
+    thread {  }
+    array?.let {  }
 }

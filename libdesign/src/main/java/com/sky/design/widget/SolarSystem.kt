@@ -48,7 +48,8 @@ class SolarSystem @JvmOverloads constructor(
 
     //    var menuState: ((Boolean) -> Unit)? = null
 //    var menuState: (Boolean) -> Unit = { flag -> flag }
-    var menuState: (Boolean) -> Unit = { flag ->  }
+//    var menuState: (Boolean) -> Unit = { flag ->  }
+    lateinit var menuState:(Boolean) -> Unit
 
     /**
      * @return 判断是打开还是关闭状态
@@ -132,6 +133,7 @@ class SolarSystem @JvmOverloads constructor(
             if (widthMode == MeasureSpec.EXACTLY) layoutWidth else width + paddingLeft + paddingRight,
             if (heightMode == MeasureSpec.EXACTLY) layoutHeight else height + paddingTop + paddingBottom
         )
+        var menuState: (Boolean) -> Unit
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {

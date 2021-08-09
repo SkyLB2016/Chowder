@@ -111,7 +111,7 @@ public class FlowLay extends ViewGroup {
             MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) child.getLayoutParams();
             int childWidth = lp.leftMargin + child.getMeasuredWidth() + lp.rightMargin;
             int childHeight = lp.topMargin + child.getMeasuredHeight() + lp.bottomMargin;
-
+//getChildMeasureSpec()
             //控件的宽度+左右间距大于父容器提供的宽需要换行。
             if (lineWidth + childWidth > realWidth) {
                 //比较此行的宽是否最大

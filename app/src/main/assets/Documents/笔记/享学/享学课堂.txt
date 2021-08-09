@@ -64,7 +64,7 @@ ApiResponse<String>[] response = new ApiResponse[2];//可以，但不推荐
 1）无限通配符：?，表示对类型没有限制，当成object理解就行了，调用getFist返回的是object类型，setFist不能被调用。
 
 2）? extends X:限定了参数的父类上限，主要用于数据的安全访问，可以访问X及其子类型，并且不能写入非空数据
-可以理解为生产者，只往外卖，不往里收。
+可以理解为生产者，只往外卖，不往里收。out
 分两种情况：
 1、作为参数传递时，传入的参数只能是X以及X的子类，如下
 public void print(GenericType<? extends X> type){}//传入的参数只能是X以及他的子类
@@ -78,7 +78,7 @@ List<? extends X> list=new List<>();
 list.add(child)//这样也是不行的。
 
 3）？super X:限定了参数的子类下限，必须是X的超类，主要用于数据的安全写入，可以写入X及其子类。
-可以理解为消费者，只往里买，不往外卖。
+可以理解为消费者，只往里买，不往外卖。in
 也分两种情况：
 1、作为参数传递时，传入的参数只能是X以及X的超类，如下：
 public void print(GenericType<? supper X> type)//传入的参数只能是X以及他的超类

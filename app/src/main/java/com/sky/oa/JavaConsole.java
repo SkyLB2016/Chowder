@@ -101,7 +101,18 @@ public class JavaConsole {
         }
     }
 
+    static String A = "AAAAA";
+
+    {
+        A = "BBBBB";
+        System.out.println(A);
+    }
+
     public static void main(String[] args) throws InterruptedException {
+        IdName idName = new IdName("id", "王大胖 ");
+
+        System.out.println(A);
+        System.out.println(idName.getAge());
 //        System.out.println(count.get());
 //        count.set(8);
 //        serial();
@@ -116,19 +127,7 @@ public class JavaConsole {
 //        }
 //        System.out.println(System.currentTimeMillis() - start + "ms");
 
-        String a = "abc";
-        String b = "abc";
-        String c = new String("abc");
-        String d = new String("abc").intern();
-        System.out.println(a == b);//true
-        System.out.println(a == c);//false
-        IdName idName = new IdName("id", "王大胖 ");
-        IdName idName1 = new IdName("id", "王大胖 ");
-        System.out.println(idName.getId() == idName1.getId());//true
-        idName.setName("ww");
-        idName1.setName("ww");
-        System.out.println(idName.getName() == idName1.getName());//true`
-        System.out.println(a == b ? "相等" : "不相等");
+//        extracted();
 //        Thread.sleep(Integer.MAX_VALUE);
 //        int available =Runtime.getRuntime().availableProcessors();
 //        System.out.println(available);
@@ -214,6 +213,22 @@ public class JavaConsole {
 //            base = str;
 //            list.add(str.intern());
 //        }
+    }
+
+    private static void extracted() {
+        String a = "abc";
+        String b = "abc";
+        String c = new String("abc");
+        String d = new String("abc").intern();
+        System.out.println(a == b);//true
+        System.out.println(a == c);//false
+        IdName idName = new IdName("id", "王大胖 ");
+        IdName idName1 = new IdName("id", "王大胖 ");
+        System.out.println(idName.getId() == idName1.getId());//true
+        idName.setName("ww");
+        idName1.setName("ww");
+        System.out.println(idName.getName() == idName1.getName());//true`
+        System.out.println(a == b ? "相等" : "不相等");
     }
 
     private static void clazzloader() {

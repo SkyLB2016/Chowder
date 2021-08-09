@@ -27,10 +27,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.collection.LruCache;
 import androidx.fragment.app.FragmentActivity;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import com.google.gson.reflect.TypeToken;
 import com.sky.design.adapter.RecyclerAdapter;
 import com.sky.design.app.BaseActivity;
@@ -156,6 +158,7 @@ public class MainActivity extends BasePActivity<MainP> implements Toolbar.OnMenu
                 super.handleMessage(msg);
             }
         };
+//        NavigationUI.setupActionBarWithNavController();
     }
 
     String a = "android";
