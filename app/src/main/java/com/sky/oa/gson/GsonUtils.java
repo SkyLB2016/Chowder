@@ -101,6 +101,7 @@ public class GsonUtils {
         builder.registerTypeHierarchyAdapter(Number.class, new StringNullAdapter());//支持继承，但不支持泛型
         builder.registerTypeAdapter(ActivityEntity.class, new ActivityTypeAdapter());
 
+        
         //TypeAdapterFactory
         builder.registerTypeAdapterFactory(new NullStringToEmptyAdapterFactory<String>());
         builder.registerTypeAdapterFactory(NullStringToEmptyAdapterFactory.getInstance());
